@@ -1,0 +1,809 @@
+{
+  "server": "attio",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.attio.com/mcp",
+    "documentation_url_csv": "https://docs.attio.com/mcp",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://docs.attio.com/mcp/overview",
+      "https://docs.attio.com/mcp/overview.md",
+      "https://attio.com/help/reference/attio-ai/attio-mcp",
+      "https://attio.com/help/reference/how-to-guides/attio-mcp-prompts-and-best-practices",
+      "https://attio.com/changelog/2026/mcp-server",
+      "https://attio.com/platform/mcp",
+      "https://docs.attio.com/mcp",
+      "https://attio.com/pricing",
+      "https://attio.com/legal/privacy"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official public repository or package for the hosted server was found in the prepared evidence. The separate docs.attio.com/mcp endpoint is a documentation search server and is not the product server analyzed here.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://docs.attio.com/mcp is a distinct Attio Docs MCP server. Its manifest describes documentation search and retrieval, a submit_feedback tool, and a documentation skill resource; these are not tools of https://mcp.attio.com/mcp."
+    ],
+    "sources": [
+      "https://docs.attio.com/mcp/overview",
+      "https://docs.attio.com/mcp",
+      "https://docs.attio.com/mcp/overview.md"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Attio says an account on any plan is sufficient and all workspace members can use MCP; no separate MCP fee is listed. The query-particle-sql tool is not available on every billing plan.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Official pricing page lists Free at €0 per user/month, Plus at €39 monthly or €31 annual billing per user/month, Pro at €93 monthly or €74 annual billing per user/month, and Enterprise at a custom annual price.",
+    "pricing_model_details": "The MCP documentation identifies per-workspace rate limits: Read 100 requests/second; Write 25/second; Merge 5/second; Search 300/minute; Semantic search, Reporting, and SQL 2/second each. Calls in each tier share a workspace bucket. SQL access depends on plan.",
+    "other_access_restrictions": "Requires an Attio account, an MCP-compatible AI client, OAuth sign-in, and selection of a workspace during sign-in. An AI-client administrator may need to enable the connector. Client-managed approval settings may restrict which tools can be set to run without approval. SQL is plan-dependent.",
+    "restrictions_controlled_by": "Attio controls account permissions, workspace access, MCP rate limits, and plan availability for SQL. The workspace member authorizes the connection. AI-client administrators and users control connector enablement and client-side approval settings.",
+    "sources": [
+      "https://attio.com/pricing",
+      "https://docs.attio.com/mcp/overview",
+      "https://attio.com/help/reference/how-to-guides/attio-mcp-prompts-and-best-practices"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted-server documentation lists 48 tools for records, activities, lists, comments, notes, tasks, meetings, calls, emails, workspace information, reporting, and SQL. It does not provide their input schemas or individual MCP annotation values.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool outputs and error structures are not specified in the documentation. The docs state that the SQL tool executes a read-only query and that rate-limit errors can occur.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The product-server documentation does not describe resources. The separate Attio Docs MCP manifest lists a skill resource, which is outside this endpoint's scope.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview",
+        "https://docs.attio.com/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The product-server documentation does not state whether the endpoint advertises MCP prompts. The prompt examples on Attio's help page are user-authored examples, not evidence of the MCP Prompts capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview",
+        "https://attio.com/help/reference/how-to-guides/attio-mcp-prompts-and-best-practices"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Attio's MCP documentation claims operations are logged and auditable. It does not state whether the server implements the MCP Logging capability or describe audit log contents or access.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Not described for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Not described for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 without a token and a WWW-Authenticate header pointing to protected-resource metadata. The metadata names https://app.attio.com as authorization server and lists scopes mcp, offline_access, openid. The authorization-server metadata supports authorization_code and refresh_token grants, S256 PKCE, and Dynamic Client Registration at https://app.attio.com/oauth/register. Token endpoint auth methods are none and client_secret_post; bearer tokens are sent in the header. Token lifetime is not stated. Revocation endpoint is https://app.attio.com/oidc/revoke.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated POST response: HTTP 401 with JSON {\"statusCode\":401,\"error\":\"Unauthorized\",\"message\":\"The requesting user did not present an authentication token\",\"status_code\":401}. Protected-resource metadata includes resource_name attio, resource https://mcp.attio.com/mcp, authorization_servers [https://app.attio.com], scopes_supported [mcp, offline_access, openid], resource_signing_alg_values_supported [ES256], bearer_methods_supported [header].",
+      "authorization_mechanism": "OAuth protected-resource metadata; Dynamic Client Registration; authorization code and refresh-token grants; PKCE S256; token endpoint methods none and client_secret_post. Raw endpoint evidence: HTTP 401; WWW-Authenticate: Bearer resource_metadata=\"https://mcp.attio.com/.well-known/oauth-protected-resource\", scope=\"openid offline_access mcp\". Protected-resource JSON: {\"resource_name\":\"attio\",\"resource\":\"https://mcp.attio.com/mcp\",\"authorization_servers\":[\"https://app.attio.com\"],\"scopes_supported\":[\"mcp\",\"offline_access\",\"openid\"],\"resource_signing_alg_values_supported\":[\"ES256\"],\"bearer_methods_supported\":[\"header\"]}. Authorization-server JSON: {\"issuer\":\"https://app.attio.com\",\"authorization_endpoint\":\"https://app.attio.com/oidc/authorize\",\"token_endpoint\":\"https://app.attio.com/oidc/token\",\"revocation_endpoint\":\"https://app.attio.com/oidc/revoke\",\"jwks_uri\":\"https://app.attio.com/.well-known/jwks.json\",\"registration_endpoint\":\"https://app.attio.com/oauth/register\",\"scopes_supported\":[\"mcp\",\"offline_access\",\"openid\"],\"claims_supported\":[\"iss\",\"exp\",\"aud\",\"sub\",\"iat\",\"jti\",\"sid\",\"scope\",\"client_id\",\"workspace_id\"],\"response_types_supported\":[\"code\"],\"response_modes_supported\":[\"query\"],\"grant_types_supported\":[\"authorization_code\",\"refresh_token\"],\"subject_types_supported\":[\"public\"],\"id_token_signing_alg_values_supported\":[\"ES256\"],\"token_endpoint_auth_methods_supported\":[\"none\",\"client_secret_post\"],\"code_challenge_methods_supported\":[\"S256\"]}. Token lifetime not provided.",
+      "authorization_server": "https://app.attio.com",
+      "sources": [
+        "https://mcp.attio.com/mcp",
+        "https://mcp.attio.com/.well-known/oauth-protected-resource",
+        "https://mcp.attio.com/.well-known/oauth-protected-resource/mcp",
+        "https://app.attio.com/.well-known/oauth-authorization-server",
+        "https://app.attio.com/.well-known/openid-configuration",
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Attio documents approval requests as behavior of the AI assistant/client. It does not document MCP Elicitation or a server-enforced elicitation flow.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview",
+        "https://attio.com/help/reference/how-to-guides/attio-mcp-prompts-and-best-practices"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documentation does not describe the MCP Tasks protocol capability. The product tool list includes CRM task-management tools, which are separate from the MCP Tasks capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Setup instructions cover adding the remote server URL and completing OAuth. No MCP server configuration capability, tool filters, or URL parameters are documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documentation mentions rate-limit errors but does not describe an MCP Error Reporting capability or general error schema.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Rate-limit error response structure is not specified.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Not described for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Not described for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Not described for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No initialize instructions, server prompts, or other endpoint-specific context text was found in the product-server documentation. The official docs page and changelog provide human-readable setup guidance and example prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.attio.com/mcp/overview",
+        "https://docs.attio.com/changelog/mcp.md"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Tool classes: docs provide rate-limit tiers for reads, writes, merge, search, semantic search, reporting, and SQL; no per-tool safety-annotation values are published. Writes and deletes are present; merge-records merges two records. 2. The help page says clients request confirmation for writes and auto-approve reads; this is client behavior, not a documented server-enforced confirmation parameter or preview flow. 3. OAuth acts as the user's Attio account; documentation says access follows that account's permissions. User sessions can be revoked in Attio settings. No token lifetime, client allowlist, or admin-side Attio switch is documented. 4. No read-only endpoint, tool filter, or environment mode is documented. SQL is read-only by tool description and plan-dependent. 5. Docs say the server operates within the workspace and permissions. No MCP-specific masking or PII exclusion is described. 6. Per-workspace rate tiers: Read 100/s, Write 25/s, Merge 5/s, Search 300/min, Semantic search 2/s, Reporting 2/s, SQL 2/s. No output truncation or per-call price documented. 7. Tool schemas and server-side coercion/correction behavior are not published. 8. Docs claim all operations are logged and auditable; logging implementation and telemetry details are not disclosed. 9. No feedback, rating, survey, or upsell tool appears in the complete official product tool list. The query-particle-sql tool is a read-only escape hatch for workspace data. 10. Attio help recommendations include unique identifiers, precise object names, and exact attribute names; these are prompt guidance, not documented server enforcement. No server-delivered skill is documented. 11. No MCP-specific memory or state behavior documented. 12. Flat documented tool list at this endpoint; the separate docs search MCP is a different endpoint. 13. query-particle-sql permits read-only SQL queries; no arbitrary write, script, or raw API tool is listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“Read operations: Auto-approved for seamless searching and viewing”",
+      "“Write operations: Request user confirmation before creating or updating data”",
+      "“Include a unique value when creating records. Provide an email address for person records or a domain for companies.”",
+      "“Use attribute names as they appear in Attio. If you're unsure, ask the assistant to list an object's attributes first, then reference the exact names and options.”",
+      "“Ask for a change log. End write requests with ‘list everything you changed, with links to the records.’”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The official product documentation presents one flat tool list for the input endpoint. The separate Attio Docs MCP endpoint is excluded from this server's tool list.",
+    "sources": [
+      "https://docs.attio.com/mcp/overview",
+      "https://attio.com/help/reference/how-to-guides/attio-mcp-prompts-and-best-practices",
+      "https://docs.attio.com/mcp"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "48",
+    "action_count_comment": "Official tool list: https://docs.attio.com/mcp/overview names 48 tools; no total is printed on that page, but the table contains 48 names. No catalogue-only tools were added because the official list is present and complete in the docs. Agent Discoverability reports 48; Skills Playground shows a 23-tool subset; the Claude connector page shows a 23-tool subset; MartechDB reports 42, a discrepancy with the current official list and the six activity tools added in the official 2026-10-14 changelog. Composio's Attio toolkit reports 102 actions for its own integration/API toolkit, not the native MCP endpoint, and was not used as evidence for native tools.",
+    "actions": [
+      {
+        "tool_name": "list-objects",
+        "description": "List all objects in the workspace (e.g. companies, people, deals), with optional fuzzy search by name or API slug",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-records",
+        "description": "Full-text search for records (people, companies, deals, etc.) by name, email, domain, or other indexed attributes",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-records",
+        "description": "List records in a given object with optional filtering and sorting",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-records-by-ids",
+        "description": "Retrieve full details for specific records by their IDs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-record",
+        "description": "Create a new record (person, company, deal, or custom object)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsert-record",
+        "description": "Create or update a record using a matching attribute (e.g., email or domain)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-record",
+        "description": "Update an existing record by `record_id`",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "merge-records",
+        "description": "Merge two records of the same object into one new record. Where both records have a value for the same attribute, the primary record's value takes precedence",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-attribute-definitions",
+        "description": "List all attributes available on an object type, including their types and valid options",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-activities",
+        "description": "List all activities in the workspace, with optional fuzzy search by name or API slug",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-activity-attribute-definitions",
+        "description": "List the attributes available on an activity, including their types and valid options",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-activity-records",
+        "description": "List records of a given activity with optional filtering and sorting",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-activity-record",
+        "description": "Create a new record for an activity",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-activity-record",
+        "description": "Update an existing activity record by `record_id`",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsert-activity-record",
+        "description": "Create or update an activity record using a unique matching attribute, such as an ID from your own system",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-lists",
+        "description": "List all lists in the workspace, with optional filtering by name or slug",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-list",
+        "description": "Create a new list to group and track records of a single object type",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-list-attribute-definitions",
+        "description": "List the available entry attributes for a given list, including their types and options",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-records-in-list",
+        "description": "List entries in a given list with optional filtering and sorting, including their parent records",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add-record-to-list",
+        "description": "Add a record to a list as a new list entry",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-list",
+        "description": "Update a list's name, API slug, or permissions",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-list-entry-by-id",
+        "description": "Update an existing list entry when you already know the `entry_id`",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-list-entry-by-record-id",
+        "description": "Find and update a list entry using its parent record ID. This tool errors if the record has zero or multiple entries in the target list.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-comment",
+        "description": "Create a new comment on a record, list entry, or as a reply to an existing comment thread",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-comments",
+        "description": "List comments on a record or list entry, with paginated top-level comments and inline replies",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-comment-replies",
+        "description": "Fetch additional replies for a top-level comment thread",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete-comment",
+        "description": "Delete a comment that you created. Deleting a parent comment also deletes all of its replies",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-note",
+        "description": "Create a new note attached to a record",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-notes-by-metadata",
+        "description": "Search notes by parent record, author, meeting, or creation time",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "semantic-search-notes",
+        "description": "Find notes by topic using AI-powered semantic search",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-note-body",
+        "description": "Retrieve the full content of a specific note",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-note",
+        "description": "Append or prepend content to a note, or update its title",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-tasks",
+        "description": "List tasks in the workspace with optional filters",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-task",
+        "description": "Create a new task with optional deadline, assignee, and linked record",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-task",
+        "description": "Update a task's deadline, status, assignee, or linked record",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete-task",
+        "description": "Delete a task from the workspace",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-meetings",
+        "description": "Search past and upcoming meetings by participants, related records, or time range",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-call-recordings-by-metadata",
+        "description": "Search call recordings by participants, related records, title, or time range",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "semantic-search-call-recordings",
+        "description": "Find call recordings by topic using AI-powered semantic search",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-call-recording",
+        "description": "Retrieve full details and transcript of a specific call recording",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-emails-by-metadata",
+        "description": "Search emails by participants, domain, or time range",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "semantic-search-emails",
+        "description": "Find emails by topic using AI-powered semantic search",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-email-content",
+        "description": "Retrieve the full body of a specific email",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-workspace-members",
+        "description": "List members in the workspace with their details and team memberships",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-workspace-teams",
+        "description": "List all teams in the workspace",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "whoami",
+        "description": "Get information about the current user's identity and workspace membership",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run-basic-report",
+        "description": "Run aggregate reports on records or list entries, including totals, averages, and grouped breakdowns",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query-particle-sql",
+        "description": "Execute a read-only SQL query against your workspace data",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.attio.com/mcp/overview",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public server code or verbatim tools/list plus initialize instructions were available for the input endpoint; the docs table contains names and summaries only.",
+    "human_can_agent_cannot": "The help article explicitly says Attio MCP does not draft or send email; it provides context for the assistant to draft and the user to review/send, or a separate mailbox integration may place a draft. The official tool list contains no email-send tool. No record-delete tool is listed, although the product has a separate archive/delete model and REST API; the MCP list does include delete-comment and delete-task. Sources: https://attio.com/help/reference/how-to-guides/attio-mcp-prompts-and-best-practices, https://docs.attio.com/mcp/overview, https://docs.attio.com/docs/archiving-vs-deleting.md",
+    "sources": [
+      "https://docs.attio.com/mcp/overview",
+      "https://docs.attio.com/changelog/mcp.md",
+      "https://attio.com/help/reference/how-to-guides/attio-mcp-prompts-and-best-practices",
+      "https://docs.attio.com/docs/archiving-vs-deleting.md",
+      "https://agentdiscoverability.com/track/chatgpt/attio",
+      "https://skillsplayground.com/connectors/attio/",
+      "https://claude.com/connectors/attio",
+      "https://martechdb.com/vendors/attio",
+      "https://composio.dev/toolkits/attio"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Help guidance recommends naming the object, using precise names and unique identifiers, checking exact attribute names/options, and asking the assistant to report changes. It also recommends slowing down or spacing requests after rate-limit errors. These are instructions to the user/client; no matching server enforcement is documented.",
+    "governance_promises": "Attio states: “Access is tied to your Attio user permissions”; “Attio MCP only operates within your workspace”; “All operations are logged and auditable”; and “Sessions can be revoked from your Attio account settings.” Its privacy policy says it may receive “information relating to your connection between Attio and such third-party services” when services are accessed through an MCP.",
+    "promises_to_user": "The help article says the assistant “can only see and change what your own permissions allow.” It also says the MCP does not draft or send email, and that mailbox-synced sent email appears on the record automatically.",
+    "comparison_with_server_logic": "OAuth metadata supports protected access but does not disclose permission enforcement details beyond the official docs. The docs claim workspace/user permission boundaries and auditable operations; the closed hosted implementation cannot be inspected here to verify these claims. Approval before writes is described as client behavior. Rate limits are documented as server-side per-workspace limits.",
+    "sources": [
+      "https://docs.attio.com/mcp/overview",
+      "https://attio.com/help/reference/how-to-guides/attio-mcp-prompts-and-best-practices",
+      "https://attio.com/legal/privacy"
+    ]
+  },
+  "contradictions": [
+    "MartechDB reports 42 tools for the official MCP server, while the current official docs enumerate 48. The official changelog documents six activity tools added on 2026-10-14, accounting for the difference. https://martechdb.com/vendors/attio ; https://docs.attio.com/mcp/overview ; https://docs.attio.com/changelog/mcp.md",
+    "The OAuth metadata lists general scopes mcp, offline_access, and openid; documentation describes access as following the user's workspace permissions. The metadata does not expose separate read/write scopes, so the precise enforcement relationship is undocumented. https://mcp.attio.com/.well-known/oauth-protected-resource ; https://app.attio.com/.well-known/oauth-authorization-server ; https://docs.attio.com/mcp/overview"
+  ],
+  "observations_for_research": [
+    "OAuth metadata advertises a single MCP scope alongside identity and offline-access scopes; the scopes do not distinguish read from write access.",
+    "The documented approval flow relies on AI-client behavior. Attio documents client-side default approval recommendations, while individual server safety annotation values are not published.",
+    "The product server offers a read-only SQL tool, but its availability depends on the customer's billing plan.",
+    "The docs-search MCP at docs.attio.com has its own search, virtual documentation filesystem, feedback tool, and skill resource; these belong to a separate server surface."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, all indexed official pages, the official docs tool table and page scripts/HTML, catalogue pages, and code/GITHUB_COMMITS.txt. No official product-server repository or package was present. The supplied docs URL https://docs.attio.com/mcp resolves to the separate Attio Docs search MCP manifest; it was not treated as the product endpoint. Third-party listings were used to compare counts, not to supplement the official list. The 42-tool MartechDB count differs from the 48 current official names; its snapshot notes an earlier read date. An unofficial Attio skill listing at https://cms.mcpbundles.com/skills/attio was noted but not used as evidence. The exact OAuth responses were supplied as prefetched evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.8
+  }
+}

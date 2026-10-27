@@ -1,0 +1,777 @@
+{
+  "server": "azure-devops",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.dev.azure.com/{organization}",
+    "documentation_url_csv": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+    "addressing": "per customer",
+    "repository_url": "https://github.com/microsoft/azure-devops-mcp",
+    "documentation_urls_used": [
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/mcp-server-overview?view=azure-devops",
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server-troubleshooting?view=azure-devops",
+      "https://learn.microsoft.com/en-us/azure/devops/release-notes/2026/sprint-271-update",
+      "https://learn.microsoft.com/en-us/azure/devops/release-notes/2026/sprint-278-update",
+      "https://learn.microsoft.com/en-us/connectors/adomcpserver/"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The public repository is Microsoft's local stdio server for Azure DevOps. Its README identifies the hosted remote server as the recommended version of the same product, but Microsoft says remote and local versions may differ and that the remote is updated independently. Local tool names and toolsets therefore do not establish the hosted endpoint's exact implementation. Hosted documentation is used for the endpoint's action inventory.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "3ee829cb41536fd29aabfb27954fb6331b5e69ff",
+    "commit_date": "2026-10-22",
+    "implementation_language": "TypeScript (public local variant)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk 1.31.0 (public local variant)",
+    "code_public": "Partially",
+    "license": "MIT (public local variant)",
+    "release_status": "Public preview (remote server; Enterprise Live Migration tools also in preview)",
+    "other_official_servers": [
+      "Local Azure DevOps MCP Server: stdio-based npm server for clients unable to use the hosted remote server; it has its own tool configuration and can use PAT or Azure CLI authentication.",
+      "Microsoft Learn documentation-site MCP, if available to a client, is a docs-search surface and is not the Azure DevOps product endpoint."
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/mcp-server-overview?view=azure-devops",
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server-troubleshooting?view=azure-devops",
+      "https://github.com/microsoft/azure-devops-mcp",
+      "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/README.md#L4-L8",
+      "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/package.json#L1-L25"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Microsoft documentation says the Azure DevOps MCP Server is free to use. Standard Azure DevOps pricing still applies to the organization and its data access; the AI platform may charge separately.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Azure DevOps pricing depends on the organization's plan, users, and services; specific amounts are not reproduced here.",
+    "pricing_model_details": "No MCP-specific per-call charge or MCP plan is stated in the reviewed documentation.",
+    "other_access_restrictions": "Remote access requires Azure DevOps Services backed by Microsoft Entra ID; standalone MSA organizations and Azure DevOps Server on-premises are unsupported. PAT authentication is unsupported on the remote server. The user's Azure DevOps permissions and delegated OAuth permissions both constrain operations. Client support and tenant setup may require configuration.",
+    "restrictions_controlled_by": "Microsoft controls hosted availability and supported authentication; tenant administrators configure enterprise application access, consent, and policies; the signed-in user’s Azure DevOps permissions constrain operations.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/mcp-server-overview?view=azure-devops",
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server-troubleshooting?view=azure-devops",
+      "https://azure.microsoft.com/en-us/pricing/details/devops/overview/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Microsoft documents 48 distinct remote tool names in grouped toolsets. Some tools dispatch multiple operations through an action parameter. Toolsets, exact-tool filtering, read-only filtering, and an insiders header can alter the available list. The documentation notes that its list may not always reflect the most recent updates.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The hosted documentation does not publish complete result schemas or error envelopes. The local variant returns MCP tool results, commonly with JSON serialized as text and some errors marked isError; this does not establish the hosted response format.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/tools.ts#L22-L80"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted resource list or resource support statement was found in the reviewed remote-server documentation. The local repository's exposed resources were not established as part of the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "https://github.com/microsoft/azure-devops-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted prompt support is not documented. The public local repository contains prompt code that is commented out at startup; that local implementation does not prove hosted prompt behavior.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/index.ts#L14-L15",
+        "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/index.ts#L116-L123"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted logging and audit behavior for MCP tool calls is not described in the reviewed documentation. The local server logs startup configuration and supports troubleshooting logs; this is not evidence of hosted logging behavior.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server-troubleshooting?view=azure-devops",
+        "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/index.ts#L81-L101"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted sampling capability was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted roots capability was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The pre-fetched OAuth evidence states that metadata was NOT FETCHED because the input URL is a per-customer template, not a concrete public URL. Microsoft documents Microsoft Entra OAuth for the hosted endpoint. Dynamic client registration is unavailable for the required flow, so some clients need a custom Entra app registration. No public scopes_supported, token lifetime, or revocation values were supplied or found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth-protected endpoint; the supplied endpoint probe reports HTTP 401. Metadata fields are unavailable for the organization-specific URL.",
+      "authorization_mechanism": "Metadata Doc unavailable for the template endpoint. Microsoft Entra OAuth; preregistered/custom client configuration may be required. Dynamic Client Registration is not supported for this flow. Scopes are delegated Azure DevOps permissions selected for client operations; the complete supported scope list, token lifetime, token auth methods, and revocation details are NOT FOUND. Raw prefetch: \"NOT FETCHED: the input endpoint is not a concrete public URL (https://mcp.dev.azure.com/{organization}). It is per customer or not published, so there is no public OAuth metadata to fetch; use the documentation to describe how customers obtain and authorise their endpoint.\"",
+      "authorization_server": "Microsoft Entra ID (Microsoft Learn describes Entra authentication; no endpoint-specific authorization-server metadata was fetched).",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server-troubleshooting?view=azure-devops"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted elicitation is not documented. The public local variant uses MCP input elicitation to ask the user to select a project or team when one is not supplied; this should not be assumed for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Local implementation returns the selected value or a cancellation/no-project response; hosted behavior is unknown.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/shared/elicitations.ts#L12-L49"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted task capability was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Remote clients configure the organization endpoint. Headers can restrict toolsets, select exact tools, request read-only mode, or enable insiders. X-MCP-Toolsets and X-MCP-Tools are mutually exclusive. Toolsets can be combined with read-only filtering.",
+      "pre_interaction_context_verbatim": "\"Specify toolsets to restrict the tools available to the MCP server. Shouldn't be combined with X-MCP-Tools.\"",
+      "post_interaction_context_structure": "Configuration changes the tools exposed by the server; exact behavior follows the documented headers.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server-troubleshooting?view=azure-devops"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Microsoft provides a troubleshooting page and a GitHub issue template for remote-server reports. No MCP error-reporting capability or tool is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server-troubleshooting?view=azure-devops",
+        "https://github.com/microsoft/azure-devops-mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted subscription capability was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted progress-notification behavior was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted cancellation capability was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Microsoft documents streamable HTTP transport for the hosted endpoint and documents an insiders header. Local-only public code also contains response content-safety wrapping and an MCP Apps ping tool; hosted availability of those local features is not established.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The server provides tool results to the connected client; hosted result schema is not published in the reviewed pages.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/tools.ts#L22-L62",
+        "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/tools/mcp-apps.ts#L6-L27"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Remote docs classify operations with a read-only column; this is a documentation classification, not evidence of hosted MCP annotations. Public local code declares readOnlyHint, destructiveHint, idempotentHint, and openWorldHint per tool. 2. Remote docs recommend choosing least-privilege scopes but do not document an MCP confirmation flow. Local code uses elicitation for missing project/team selection; it is not a general confirmation gate. 3. Remote OAuth uses Microsoft Entra ID; user Azure DevOps permissions and delegated scopes both apply. MSA organizations and PAT authentication are unsupported. DCR is unavailable for this flow; custom client registration and admin consent may be needed. 4. Remote supports X-MCP-Toolsets, X-MCP-Tools, X-MCP-Readonly, and X-MCP-Insiders; the first two are mutually exclusive. ELM is preview and enabled by default. No regional variants were found. 5. No hosted PII masking or field-redaction behavior was found. OAuth and product authorization constrain data scope. 6. No hosted rate/quota limits were found in reviewed docs; the work-item attachment upload limit is 20 MB. Docs mention clients may impose a combined 128-tool limit. 7. Hosted parameter validation/correction behavior is not documented. Local code uses Zod schemas and some coercion/defaults, but does not establish hosted behavior. 8. Hosted MCP audit/logging and telemetry details were not found. 9. No feedback/rating/survey tool appears in the official hosted list. Docs direct users to report issues through GitHub; no in-tool upsell was found. 10. Hosted instructions/skills were not published. Local code wraps external tool responses with content-safety handling. 11. Docs note AI clients may cache results within a conversation; they recommend asking for fresh data when needed. No server-side memory behavior is documented. 12. The remote server exposes multiple configurable toolsets and an insiders mode; no sub-server proxy structure was documented. 13. The official remote tool list contains no arbitrary raw API, SQL, script, or generic execution tool.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Use the action parameter to specify the operation.",
+      "For consolidated tools such as wit_work_item, choose the operation by using the tool's action parameter when you call it."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The remote endpoint has configurable toolsets and exact-tool filters, plus read-only and insiders modes; its exposed tool inventory can vary with headers.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server-troubleshooting?view=azure-devops",
+      "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/shared/tool-annotations.ts#L7-L71",
+      "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/shared/elicitations.ts#L12-L88",
+      "https://github.com/microsoft/azure-devops-mcp/blob/3ee829cb41536fd29aabfb27954fb6331b5e69ff/src/tools.ts#L22-L62"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "48 documented remote tool names by default, subject to headers and client support",
+    "action_count_comment": "Microsoft's official Available tools list is at https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops. It documents 48 distinct MCP tool names; action rows within grouped tools are operations, not separate tool names. Two tools are documented as insiders-only; Enterprise Live Migration support is preview and enabled by default. The page warns that its list may not reflect the latest updates. No catalogue-only tools were added. Microsoft's connector catalogue is a separate connector listing and unofficial Glama listings describe community servers, not this endpoint.",
+    "actions": [
+      {
+        "tool_name": "core_list_orgs",
+        "description": "List organizations the authenticated user can access",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "core_list_projects",
+        "description": "List projects in an organization",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "core_list_project_teams",
+        "description": "List teams in a project",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "core_list_group_members",
+        "description": "List direct members and child groups of a group",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "work",
+        "description": "List iterations, team settings, and capacity",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "work_iteration_write",
+        "description": "Create iterations or assign them to teams",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "work_capacity_write",
+        "description": "Update team member capacity for an iteration",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "repo_pull_request",
+        "description": "Get, list, inspect changes, or find PRs by commits",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "repo_pull_request_thread",
+        "description": "List PR comment threads and comments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "repo_repository",
+        "description": "Get or list repositories",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "repo_branch",
+        "description": "Get or list branches, including user branches",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "repo_file",
+        "description": "Read file content or list directory contents",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "repo_search_commits",
+        "description": "Search commits by text, author, dates, and filters",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_code",
+        "description": "Full-text code search",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "repo_pull_request_write",
+        "description": "Create/update PRs, reviewers, or vote",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "repo_pull_request_thread_write",
+        "description": "Create/reply/update PR comment threads",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "repo_create_branch",
+        "description": "Create a branch",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_work_item",
+        "description": "Read work items, comments, revisions, types, or iteration items",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_query",
+        "description": "Get, run, search, or list saved queries",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_query_by_wiql",
+        "description": "Run WIQL and return matching work items",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_backlog",
+        "description": "List backlog levels or backlog work items",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_workitem",
+        "description": "Full-text work item search",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_work_item_write",
+        "description": "Create/update work items, batches, or child items",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_work_item_comment_write",
+        "description": "Add or update a work item comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_work_item_link_write",
+        "description": "Link/unlink work items or artifacts and PRs",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_work_item_attachment",
+        "description": "Download an attachment as base64 content",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_work_item_attachment_upload",
+        "description": "Upload attachment content without linking it",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wit_work_item_attachment_link",
+        "description": "Link a previously uploaded attachment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pipelines_build",
+        "description": "List builds, status, issues, changes, or metadata",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pipelines_build_log",
+        "description": "List build logs or retrieve log content",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pipelines_definition",
+        "description": "List pipeline definitions or revision history",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pipelines_run",
+        "description": "Get or list pipeline runs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pipelines_artifact",
+        "description": "List or download build artifacts",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pipelines_write",
+        "description": "Run/create pipelines or manage in-flight build stages",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wiki",
+        "description": "List wikis/pages or get wiki and page content",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_wiki",
+        "description": "Full-text wiki search",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wiki_upsert_page",
+        "description": "Create or update a wiki page",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "testplan",
+        "description": "List test plans, suites, cases, and build test results",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "testplan_show_test_results_from_build_id",
+        "description": "Get test results for a build",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "testplan_test_run",
+        "description": "Get test run results with filters",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "testplan_test_plan_write",
+        "description": "Create a test plan",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "testplan_test_suite_write",
+        "description": "Create suites or add test cases to a suite",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "testplan_test_case_write",
+        "description": "Create cases or update test steps",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "testplan_test_run_write",
+        "description": "Create runs, update results, or complete/abort runs",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "advsec_alerts",
+        "description": "List or get Advanced Security alerts",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enterprise_live_migration",
+        "description": "List migrations, status, cutover review, device flow, or pipelines",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enterprise_live_migration_write",
+        "description": "Create, pause/resume, cutover, approve, or abandon migration",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enterprise_live_migration_pipelines_write",
+        "description": "Submit, update, or delete migration pipeline clones",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Remote tool definitions and initialize instructions were not published verbatim. The local repository is a related variant and cannot be used to calculate the hosted endpoint's context token count.",
+    "human_can_agent_cannot": "Azure DevOps users can perform operations through the product UI and APIs beyond the 48 documented MCP tools. For example, create/manage organizations and configure project/security/identity settings are not in the remote tool list. The exact human-only boundary was not exhaustively enumerated; the tool inventory and Azure DevOps feature documentation were compared.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+      "https://learn.microsoft.com/en-us/connectors/adomcpserver/",
+      "https://github.com/microsoft/azure-devops-mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Microsoft recommends least privilege: \"Grant read scopes when the client uses only read-only MCP tools.\" Tool descriptions direct agents to supply action values and may prompt for missing project details. Hosted documentation does not establish that such text is server-enforced; the read-only header is the documented server-side restriction.",
+    "governance_promises": "The documentation says user control is maintained over what data the assistant can access, and that OAuth scopes do not override the signed-in user's Azure DevOps permissions. It also describes the server as using secure integration. No hosted MCP-specific retention, training, or audit commitment was found.",
+    "promises_to_user": "Microsoft describes the remote server as hosted and updated by Azure DevOps, requiring no local installation, and free to use. Docs state standard Azure DevOps and AI platform pricing can still apply.",
+    "comparison_with_server_logic": "Permission inheritance and header-based read-only/tool filtering are documented server controls. Least-privilege guidance is an instruction to client administrators. Hosted telemetry, retention, and AI-training handling were not specified in the reviewed server documentation.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops",
+      "https://learn.microsoft.com/en-us/azure/devops/mcp-server/mcp-server-overview?view=azure-devops",
+      "https://privacy.microsoft.com/"
+    ]
+  },
+  "contradictions": [
+    "The remote documentation lists core_list_orgs and core_list_group_members; the public local code at commit 3ee829cb does not declare those names. Conversely, local code includes tools such as core_get_identity_ids, repo_file_write, mcp_apps_ping, and other names not listed in the hosted remote tool table. Microsoft explicitly says remote and local versions can differ and are updated independently.",
+    "The hosted page's note says its tool list might not reflect the most recent updates, so the published 48-name inventory may not equal the live tools/list response."
+  ],
+  "observations_for_research": [
+    "Tool exposure is configurable by request headers, and the remote docs distinguish toolset-level selection, individual-tool selection, read-only filtering, and insiders access.",
+    "The endpoint is organization-specific, while OAuth metadata could not be fetched for the placeholder URL.",
+    "The remote server documentation and public local implementation are related but not identical; names and features should not be transferred between variants without qualification."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Inspected the prepared links.json, links_check.txt, pages, OAuth prefetch, and Microsoft repository pinned at 3ee829cb41536fd29aabfb27954fb6331b5e69ff. The MicrosoftDocs GitHub URL in the evidence folder returned 404 and was not used. npm page returned 403. Reviewed Microsoft Learn remote setup, overview, troubleshooting, and release notes; no endpoint-specific OAuth metadata was supplied because the endpoint is a template. Unofficial Glama pages describe other Azure DevOps servers and were excluded as evidence for this hosted endpoint. The official remote docs publish names and descriptions but not complete schemas, so action parameters are recorded as NOT PUBLISHED.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.5
+  }
+}

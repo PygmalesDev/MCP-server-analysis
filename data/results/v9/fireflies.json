@@ -1,0 +1,536 @@
+{
+  "server": "fireflies",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.fireflies.ai/mcp",
+    "documentation_url_csv": "https://docs.fireflies.ai/getting-started/mcp-configuration",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://docs.fireflies.ai/getting-started/mcp-configuration",
+      "https://docs.fireflies.ai/mcp-tools/overview",
+      "https://docs.fireflies.ai/fundamentals/limits",
+      "https://docs.fireflies.ai/fundamentals/authorization",
+      "https://docs.fireflies.ai/additional-info/change-log",
+      "https://fireflies.ai/blog/fireflies-mcp-server",
+      "https://guide.fireflies.ai/articles/3039542843-learn-about-fireflies-mcp-server-connect-your-ai-tool?lang=en",
+      "https://guide.fireflies.ai/articles/8272956938-learn-about-the-fireflies-mcp-server-model-context-protocol",
+      "https://fireflies.ai/pricing",
+      "https://fireflies.ai/privacy-policy",
+      "https://fireflies.ai/terms-of-service",
+      "https://trust.fireflies.ai/subprocessors"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official server repository or package was found in the prepared evidence folder or listed links. Fireflies documents a hosted meeting-data server at https://api.fireflies.ai/mcp. The separate Fireflies Docs MCP Server is for documentation search, not meeting data.",
+    "mcp_protocol_version": "Official setup docs state Streamable HTTP only and support for MCP revision 2026-07-28 and earlier client revisions. [DOCS] The input endpoint's protocol version was not separately confirmed.",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://api.fireflies.ai/mcp — hosted meeting-data server currently used in Fireflies setup documentation and cited by the official MCP tool reference.",
+      "Fireflies Docs MCP Server — separate documentation-search server; not the meeting-data server analyzed here."
+    ],
+    "sources": [
+      "https://docs.fireflies.ai/getting-started/mcp-configuration",
+      "https://docs.fireflies.ai/mcp-tools/overview",
+      "https://docs.fireflies.ai/getting-started/docs-mcp-server"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP charge or MCP-specific quota was found in the reviewed official pricing and setup pages. Access requires a Fireflies account and authorization. The rule-execution tool is documented as requiring Enterprise tier.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Pricing page lists Free at $0, Pro at $10 per seat/month billed annually (shown alongside $18 monthly), Business at $19 per seat/month billed annually (shown alongside $29 monthly), and Enterprise at $39 per seat/month billed annually.",
+    "pricing_model_details": "Plan features and usage allowances vary. The pricing page lists storage and AI-credit allowances by plan. Fireflies rate-limit help states a Free API limit of 30 requests/minute and 500 requests/day, with new Free API users receiving Pro limits for 14 days. It separately documents transcription-minute limits for paid tiers.",
+    "other_access_restrictions": "An active Fireflies account and OAuth or another supported method are required. The documentation says search and fetch are experimental and may require feature-flag enablement. Rule-execution logs require Enterprise. Meeting management actions require meeting ownership or team-admin status; user access also depends on product role.",
+    "restrictions_controlled_by": "Vendor and Fireflies organization role/admin settings; client support and plan requirements also affect whether MCP can be used.",
+    "sources": [
+      "https://fireflies.ai/pricing",
+      "https://guide.fireflies.ai/articles/1290523833-learn-about-rate-limits",
+      "https://docs.fireflies.ai/mcp-tools/overview",
+      "https://guide.fireflies.ai/articles/3039542843-learn-about-fireflies-mcp-server-connect-your-ai-tool?lang=en"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official MCP tools reference lists 19 meeting-data tools covering transcript search and retrieval, summaries, analytics, active meetings, sharing and meeting updates, channels, soundbites, users, contacts, groups, and automation-rule execution logs. Two tools are marked experimental and may be feature-flagged.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific results include meeting metadata, transcripts or summaries, analytics, confirmation messages, or rule-execution logs. Several tools accept a format parameter with toon (default), json, or text. Exact wire schemas and error envelopes are not published in the reviewed materials.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/mcp-tools/overview"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No resources capability for the meeting-data server was described in the reviewed official tool reference or setup documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration",
+        "https://docs.fireflies.ai/mcp-tools/overview"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt capability for the meeting-data server was described in the reviewed official materials. Setup pages provide example user queries, not evidence of MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration",
+        "https://docs.fireflies.ai/mcp-tools/overview"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP-specific request or tool-call logging behavior was documented. The product pricing page advertises audit logs on Enterprise, but does not specify whether MCP calls are included.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://fireflies.ai/pricing",
+        "https://docs.fireflies.ai/mcp-tools/overview"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP sampling behavior was described in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability was described in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint returned HTTP 401 without an Authorization header and directed clients to OAuth protected-resource metadata. Supplied metadata identifies the resource as https://mcp.fireflies.ai/mcp, authorization server https://mcp.fireflies.ai/, scopes_supported [\"profile\",\"email\"], authorization-code and refresh-token grants, S256 PKCE, token endpoint auth methods client_secret_post and none, dynamic registration at /register, and revocation at /revoke. The metadata does not state token lifetime. Fireflies' current setup docs describe https://api.fireflies.ai/mcp and OAuth with the Fireflies account; the separately documented API-key setup is for a client configuration using a bearer API key.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"Missing Authorization header\", scope=\"email profile\", resource_metadata=\"https://mcp.fireflies.ai/.well-known/oauth-protected-resource/mcp\"",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "Metadata Doc / Dynamic Client Registration / authorization code and refresh token grants / PKCE S256 / token endpoint auth methods client_secret_post and none / scopes_supported: profile, email / revocation endpoint https://mcp.fireflies.ai/revoke (client_secret_post) / token lifetime NOT FOUND. Endpoint POST without Authorization returned HTTP 401, invalid_token, Missing Authorization header. OpenID configuration URL returned HTTP 404.",
+      "authorization_server": "https://mcp.fireflies.ai/",
+      "sources": [
+        "https://mcp.fireflies.ai/.well-known/oauth-protected-resource",
+        "https://mcp.fireflies.ai/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.fireflies.ai/.well-known/oauth-authorization-server",
+        "https://mcp.fireflies.ai/.well-known/openid-configuration",
+        "https://mcp.fireflies.ai/mcp",
+        "https://docs.fireflies.ai/getting-started/mcp-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability or server-enforced client confirmation interaction was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration",
+        "https://docs.fireflies.ai/mcp-tools/overview"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability was described in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Fireflies provides a global hosted URL and setup instructions for MCP-compatible clients. Experimental tools may require feature-flag enablement. No official meeting-server URL parameter or header for selecting toolsets or read-only mode was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration",
+        "https://docs.fireflies.ai/mcp-tools/overview"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official API has a general errors page, but the reviewed documentation does not describe MCP-specific error reporting or error result structures.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/fundamentals/errors",
+        "https://docs.fireflies.ai/mcp-tools/overview"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription or server-initiated notification stream was described.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress-notification behavior was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation behavior was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "2026-07-28 per the setup documentation",
+      "description_what_how": "Setup documentation specifies Streamable HTTP only, says the older HTTP+SSE transport has been retired, and documents client-side configuration notes for mcp-remote and OpenClaw. Separate Docs MCP Server supports documentation search and is a different server.",
+      "pre_interaction_context_verbatim": "The Fireflies MCP server speaks Streamable HTTP only, at `POST https://api.fireflies.ai/mcp`",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.fireflies.ai/getting-started/mcp-configuration",
+        "https://docs.fireflies.ai/getting-started/docs-mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official reference lists read operations and write operations for sharing/revoking access, renaming/moving meetings, and creating soundbites. No MCP tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are published. 2. No required confirmation parameter, preview-confirm flow, elicitation, or approval workflow is documented; the tool reference describes action results as confirmations. 3. OAuth metadata scopes are profile and email. Tool docs describe access tied to the authenticated Fireflies account and owner/admin checks; active-meeting and analytics access differs for admins. No MCP token lifetime or client allowlist was found. 4. No read-only mode, toolset filter, sandbox endpoint, or MCP URL/header restriction was found. Search and fetch are experimental and may be feature-flagged. Docs say the older HTTP+SSE transport is retired; Streamable HTTP is supported. 5. Tool descriptions impose account-role boundaries. No MCP-specific PII masking or field exclusion policy was found; user/contact tools expose emails and profiles, and transcripts expose sentence content. 6. Documented caps include search/transcript query limit max 50; up to 100 sharing emails; up to 5 meeting IDs moved; up to 50 soundbites; rule logs default 10/max 50 with pagination; title length 5–256; soundbite summary max 500. General Fireflies API rate limits are documented separately. 7. Docs specify parameter requirements, enum values, lengths, and maxima in several tools. Runtime unknown-argument rejection, coercion, correction, or operator overrides are NOT FOUND. 8. Enterprise pricing advertises product audit logs; no evidence specifies MCP-call logging or telemetry. 9. No feedback, rating, survey, or vendor-reporting action appears in the official list. No MCP upsell result was documented. 10. The documentation gives search/retrieve and management workflows as suggestions; no server-delivered skill or initialize instructions were found. 11. No MCP memory or behavior-dependent tool availability was documented; experimental availability can depend on feature flags. 12. The meeting-data tools are documented as one hosted server. A separate Docs MCP Server searches documentation and is not part of this endpoint's tool list. 13. No raw API request, SQL, script, or arbitrary execution tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Fireflies documents the input host mcp.fireflies.ai and its OAuth metadata, but the current meeting-server setup and official tool reference point to api.fireflies.ai/mcp. The docs also describe a distinct Docs MCP Server. The input endpoint's exact tool list is not separately published; actions use the vendor's official meeting-server list as best available evidence, plus one catalogue-only tool.",
+    "sources": [
+      "https://docs.fireflies.ai/mcp-tools/overview",
+      "https://docs.fireflies.ai/getting-started/mcp-configuration",
+      "https://docs.fireflies.ai/fundamentals/limits",
+      "https://fireflies.ai/pricing",
+      "https://mcp.fireflies.ai/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "20",
+    "action_count_comment": "The official tool list exists at https://docs.fireflies.ai/mcp-tools/overview and names 19 meeting-server tools. One catalogue-only action, fireflies_update_meeting_privacy, was added from Agent Discoverability (2026-10), which displays 20 tools but its visible list contains only 19 names; this discrepancy is retained as a catalogue count caveat. MartechDB reports 19 tools and reproduces the official 19 names. AgentAtlas displays the official names but does not provide a stated total. mcp.so has no available tool list. Claude's connector listing shows only get_user, get_transcript, and get_transcripts. The official docs mark fireflies_search and fireflies_fetch experimental; their default availability is unknown. See actions.json for the complete array.",
+    "actions": [
+      {
+        "tool_name": "fireflies_search",
+        "description": "Experimental advanced transcript search using mini grammar syntax.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "query: string (required); format: string (optional; enum 3 categories)",
+        "parameter_count": "2",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_transcripts",
+        "description": "Query multiple meetings with structured filters; returns metadata and summaries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "keyword: string (optional); scope: enum (optional; 3 categories); fromDate: string (optional); toDate: string (optional); limit: number (optional); skip: number (optional); organizers: array (optional); participants: array (optional); mine: boolean (optional); channelId: string (optional); format: string (optional; enum 3 categories)",
+        "parameter_count": "11",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_transcript",
+        "description": "Fetch transcript sentences with speaker attribution and timestamps.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "transcriptId: string (required)",
+        "parameter_count": "1",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_fetch",
+        "description": "Experimental retrieval of transcript, summary, analytics, and meeting metadata.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required)",
+        "parameter_count": "1",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_summary",
+        "description": "Fetch summary, action items, keywords, topics, and outline.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "transcriptId: string (required)",
+        "parameter_count": "1",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_active_meetings",
+        "description": "List active or paused meetings; admins may query any user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "email: string (optional); states: array (optional; values active, paused)",
+        "parameter_count": "2",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_analytics",
+        "description": "Retrieve team and per-user meeting and conversation metrics.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startTime: string (optional); endTime: string (optional)",
+        "parameter_count": "2",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_share_meeting",
+        "description": "Share a meeting transcript with email recipients and optional expiry.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "meetingId: string (required); emails: array (required; max 100); expiryDays: number (optional; enum 3 categories)",
+        "parameter_count": "3",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_revoke_meeting_access",
+        "description": "Revoke a specific email address’s access to a shared meeting.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "meetingId: string (required); email: string (required)",
+        "parameter_count": "2",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_update_meeting_title",
+        "description": "Update a meeting title; documented length is 5–256 characters.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "meetingId: string (required); title: string (required; 5–256 characters)",
+        "parameter_count": "2",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_move_meeting",
+        "description": "Move up to five meetings to a specified channel.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "meetingIds: array (required; max 5); channelId: string (required)",
+        "parameter_count": "2",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_list_channels",
+        "description": "List available channels with privacy settings and members.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "0",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_channel",
+        "description": "Retrieve a channel’s title, privacy setting, and members.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "channelId: string (required)",
+        "parameter_count": "1",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_soundbites",
+        "description": "Fetch soundbites filtered by meeting, ownership, or team.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "transcript_id: string (optional); mine: boolean (optional); my_team: boolean (optional); limit: number (optional; max 50); skip: number (optional); format: string (optional; enum 3 categories)",
+        "parameter_count": "6",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_create_soundbite",
+        "description": "Create a shareable audio or video clip from a meeting transcript.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "transcriptId: string (required); startTime: number (required); endTime: number (required); name: string (optional; max 256 characters); mediaType: string (optional); privacies: array (optional; enum 3 categories); summary: string (optional; max 500 characters)",
+        "parameter_count": "7",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_user",
+        "description": "Fetch user profile and account details, defaulting to the authenticated user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "userId: string (optional)",
+        "parameter_count": "1",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_usergroups",
+        "description": "Fetch groups for the authenticated user or team.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "mine: boolean (optional; defaults false)",
+        "parameter_count": "1",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_user_contacts",
+        "description": "Fetch contacts sorted by most recent meeting date.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "format: string (optional; enum 3 categories)",
+        "parameter_count": "1",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_get_rule_executions",
+        "description": "Retrieve paginated automation rule execution logs; Enterprise tier required.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "ruleId: string (optional); meetingId: string (optional); dateFrom: string (optional); dateTo: string (optional); limit: number (optional; default 10, max 50); cursor: string (optional)",
+        "parameter_count": "6",
+        "source": "https://docs.fireflies.ai/mcp-tools/overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fireflies_update_meeting_privacy",
+        "description": "Update a meeting’s privacy setting; owner or team admin required.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/fireflies",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim initialize instructions/tool definitions for the input endpoint were available. The official tool reference gives prose descriptions and parameter documentation, not a complete serialized tools/list response.",
+    "human_can_agent_cannot": "Fireflies' product/pricing pages describe transcription, integrations, meeting management, AI summaries, and collaboration features beyond this MCP tool list. The official GraphQL documentation additionally documents operations such as deleting transcripts, updating privacy, managing user groups, AskFred threads, live action items, and audio uploads; these operations were not in the official MCP list. MCP-specific availability for all product/API functions is not guaranteed.",
+    "sources": [
+      "https://docs.fireflies.ai/mcp-tools/overview",
+      "https://agentdiscoverability.com/track/chatgpt/fireflies",
+      "https://martechdb.com/vendors/fireflies",
+      "https://agentatlas.dev/mcp/fireflies",
+      "https://mcp.so/servers/fireflies",
+      "https://claude.com/connectors/fireflies",
+      "https://fireflies.ai/pricing",
+      "https://docs.fireflies.ai/graphql-api/query/transcripts",
+      "https://docs.fireflies.ai/graphql-api/mutation/delete-transcript",
+      "https://docs.fireflies.ai/graphql-api/mutation/update-meeting-privacy"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The reference presents suggested workflows, including using search tools before retrieving meeting details, and suggests using channels or contact tools to find identifiers before subsequent queries. These are documentation patterns; no enforcement mechanism is documented.",
+    "governance_promises": "Fireflies' support documentation states that Zero-Day Retention applies only to processing within Fireflies; data sent through MCP to an external AI tool is handled under that platform's privacy and retention policies. The setup article says the MCP connection supports OAuth through Google and Microsoft.",
+    "promises_to_user": "The official setup page describes the server as connecting AI tools directly to meeting data; the support article says it makes transcripts, summaries, and key decisions available in supported AI tools.",
+    "comparison_with_server_logic": "The documented role checks and tool-specific limits are reflected in the official tool descriptions. ZDR is explicitly scoped to Fireflies-side processing; the documentation assigns external processing and retention to the connected AI platform. No implementation code was available to independently verify server-side enforcement.",
+    "sources": [
+      "https://docs.fireflies.ai/mcp-tools/overview",
+      "https://docs.fireflies.ai/getting-started/mcp-configuration",
+      "https://guide.fireflies.ai/articles/3039542843-learn-about-fireflies-mcp-server-connect-your-ai-tool?lang=en",
+      "https://guide.fireflies.ai/articles/8272956938-learn-about-the-fireflies-mcp-server-model-context-protocol"
+    ]
+  },
+  "contradictions": [
+    "The input endpoint is https://mcp.fireflies.ai/mcp, while the current official setup page and tool reference identify https://api.fireflies.ai/mcp as the meeting-data server URL. The input host has its own OAuth metadata, but no official input-host tool list was found.",
+    "Agent Discoverability lists fireflies_update_meeting_privacy, which does not appear in the current official MCP tool reference. It is included as a third-party action with unknown default availability; official GraphQL docs separately document a privacy mutation.",
+    "Agent Discoverability states 20 tools but the visible tool names in its saved page copy number 19. MartechDB reports 19 tools and lists the official set.",
+    "The supplied OAuth metadata for mcp.fireflies.ai lists scopes profile and email; reviewed tool documentation describes transcript, analytics, sharing, and meeting-management access but does not map these operations to OAuth scopes."
+  ],
+  "observations_for_research": [
+    "The official tool reference offers a mix of transcript retrieval, organizational analytics, and state-changing meeting operations within one meeting-data server.",
+    "The documented tool descriptions combine account-role rules and input caps with recommendations about multi-step search/retrieval workflows.",
+    "The setup docs and input metadata identify different hostnames; available evidence does not establish whether the two hosted URLs run identical server configurations."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed links.json, links_check.txt, pages/INDEX.txt, official docs and support pages, pricing/legal pages, and available catalogue copies. The code/ folder contains no official repository; GITHUB_COMMITS.txt is empty. The input endpoint root and /mcp returned short pages; /mcp/install returned 404. Official tool actions use the vendor's published meeting-server reference as best available evidence, not an independently observed tools/list from the input endpoint. Third-party tool names were checked against the official 19-tool list; only fireflies_update_meeting_privacy is additional. Unofficial community repositories are listed in links.json but were not used as evidence. Token lifetime, MCP error envelope, transport negotiation details at the input hostname, and implementation behavior not stated in docs are NOT FOUND.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.5
+  }
+}

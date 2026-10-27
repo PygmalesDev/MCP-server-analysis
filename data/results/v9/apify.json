@@ -1,0 +1,815 @@
+{
+  "server": "apify",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.apify.com",
+    "documentation_url_csv": "https://docs.apify.com/platform/integrations/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/apify/apify-mcp-server",
+    "documentation_urls_used": [
+      "https://docs.apify.com/platform/integrations/mcp",
+      "https://docs.apify.com/mcp.md",
+      "https://github.com/apify/apify-mcp-server",
+      "https://apify.com/pricing",
+      "https://agi.apify.com/",
+      "https://mcp.apify.com/.well-known/mcp/server-card.json"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository is the local stdio and hosted server implementation of the same product. Its README documents mcp.apify.com, while the repository says hosted-only features include inferred Actor output schemas; the endpoint's server card is version 0.19.3 and the local checkout is 0.19.4. Hosted OAuth and hosted behavior are documented separately.",
+    "mcp_protocol_version": "2025-11-25 (endpoint server card); source imports the SDK latest protocol version.",
+    "commit_hash": "d3bee2ec2c0569911d379b79ac3d9097c5117723",
+    "commit_date": "2026-10-25",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk 1.30.0 (package manifest); @modelcontextprotocol/node and /server 2.0.0",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "GA (hosted server and public npm package documented; no beta label found)",
+    "other_official_servers": [
+      "Local stdio server: npm package @apify/actors-mcp-server; same product with a different transport and without hosted output-schema inference.",
+      "Legacy https://mcp.apify.com/sse was removed in favor of Streamable HTTP, according to the official repository README."
+    ],
+    "sources": [
+      "https://docs.apify.com/mcp.md",
+      "https://mcp.apify.com/.well-known/mcp/server-card.json",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/package.json",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "No separate MCP server fee was listed. Actor runs and platform services are billed under Apify usage and Actor pricing; agentic payment options can fund runs without an Apify account.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Apify has a Free plan and paid Starter, Scale, and Business plans. The captured pricing page did not reliably expose current price amounts in its text copy.",
+    "pricing_model_details": "Apify plans include prepaid platform usage; excess usage is billed according to the plan. Actor pricing varies by Actor, including free, per-result, monthly rental, and pay-per-event models. The README describes AGI prepaid spend-capped tokens, x402 payments, and Skyfire payments.",
+    "other_access_restrictions": "Default authenticated use requires OAuth or a Bearer API token. Four discovery and documentation tools can be selected for unauthenticated use. Running Actors and accessing run/storage data requires authentication. Documented rate limit: 30 requests per second per user. Full-permission Actors are excluded from search and execution.",
+    "restrictions_controlled_by": "Vendor (server limits and excluded Actor policy); end user (OAuth/token and URL tool selection); Apify account/plan and Actor publisher (permissions and charges).",
+    "sources": [
+      "https://docs.apify.com/mcp.md",
+      "https://apify.com/pricing",
+      "https://agi.apify.com/",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Tools are exposed via MCP; endpoint server card advertises tools capability.",
+      "description_what_how": "Provides helper tools, selected Actor tools and dynamically callable Actors. The default includes actor and docs categories, apify/rag-web-browser, apify/web-fetch, and report-problem, with related run/result helpers injected when Actor execution is available. URL parameter tools selects categories or individual tools.",
+      "pre_interaction_context_verbatim": "Use this tool instead of the \"call-actor\" if user requests this specific Actor.",
+      "post_interaction_context_structure": "Tool results return MCP content and, for Actors, run metadata, storage identifiers, summary and nextStep. Hosted Actor tools can include inferred output schemas. Errors include MCP/JSON-RPC errors and Apify-specific error types.",
+      "authorization_mechanism": "OAuth or Bearer token; see Authorization capability.",
+      "authorization_server": "https://console-backend.apify.com",
+      "sources": [
+        "https://docs.apify.com/mcp.md",
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/tools/actors/actor_tools_factory.ts",
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP resources.",
+      "description_what_how": "The official repository documents on-demand resources/read for Apify API GET URLs, injecting the session token. Resource templates describe dataset items, key-value-store records and keys, run metadata, and run logs. Responses inline up to 256 KB; larger responses return a download URL. Repository says API reads require an Apify token.",
+      "pre_interaction_context_verbatim": "Your Apify data is not enumerated in `resources/list` — reads are on demand: pass any Apify API GET URL (`https://api.apify.com/v2/...`) to `resources/read` and the server injects the session's Apify token and returns the response body.",
+      "post_interaction_context_structure": "Resource contents return the API response body; oversized content is replaced with a short notice and download URL.",
+      "authorization_mechanism": "API reads require an Apify token; payment-only x402 or Skyfire sessions cannot use this resource path, according to the repository README.",
+      "authorization_server": "https://console-backend.apify.com",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/resources/resource_service.ts"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No",
+      "depends_on_mcp_version": "MCP prompts.",
+      "description_what_how": "The repository README says the server advertises the prompts capability but registers no prompts; prompts/list returns an empty list.",
+      "pre_interaction_context_verbatim": "The server advertises the `prompts` capability, but no prompts are currently registered — `prompts/list` returns an empty list.",
+      "post_interaction_context_structure": "Empty prompts/list result.",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "MCP logging capability is not established for the endpoint.",
+      "description_what_how": "The source code comments say the stateless path does not expose logging; the hosted server's current negotiated behavior was not independently observed. Product Actor run logs are available through get-actor-run-log.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Actor run logs are returned by a tool; MCP logging support is not confirmed for the deployed endpoint.",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/mcp/stateless_server.ts",
+        "https://docs.apify.com/mcp.md"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "MCP sampling.",
+      "description_what_how": "No server-side sampling implementation was found in the analyzed public repository.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/tree/d3bee2ec2c0569911d379b79ac3d9097c5117723/src"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "MCP roots.",
+      "description_what_how": "No server-side roots implementation was found in the analyzed public repository.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/tree/d3bee2ec2c0569911d379b79ac3d9097c5117723/src"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth metadata supplied for analysis date; OAuth is also documented for the hosted endpoint.",
+      "description_what_how": "Endpoint protected-resource metadata: resource https://mcp.apify.com; authorization_servers [https://console-backend.apify.com]; scopes_supported [full_api_access]. Authorization-server metadata: issuer https://console-backend.apify.com; authorization_endpoint https://console.apify.com/authorize/oauth; device_authorization_endpoint https://console-backend.apify.com/oauth/apps/devices; token_endpoint https://console-backend.apify.com/oauth/apps/token; registration_endpoint https://console-backend.apify.com/oauth/apps; scopes_supported [full_api_access]; grant_types_supported [authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:device_code]; response_types_supported [code]; code_challenge_methods_supported [S256]; token_endpoint_auth_methods_supported [client_secret_basic, client_secret_post, none, private_key_jwt]; signing algorithms [RS256, RS384, RS512]; client_id_metadata_document_supported true; authorization_response_iss_parameter_supported true. OpenID configuration returned HTTP 404. Endpoint POST test returned HTTP 415, Content-Type must be application/json; separate connection test input states HTTP 401 and OAuth-protected.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth authorization-code flow with PKCE S256, refresh-token and device-code grants are advertised. Dynamic client registration endpoint is advertised.",
+      "authorization_mechanism": "Metadata Doc and Dynamic Client Registration; authorization_code, refresh_token and device_code grants; PKCE S256; full_api_access scope. Bearer Apify API token is also documented. Token lifetime and revocation details not found in supplied metadata or reviewed documentation.",
+      "authorization_server": "https://console-backend.apify.com",
+      "sources": [
+        "https://mcp.apify.com/.well-known/oauth-protected-resource",
+        "https://console-backend.apify.com/.well-known/oauth-authorization-server",
+        "https://console-backend.apify.com/.well-known/openid-configuration",
+        "https://docs.apify.com/mcp.md"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "MCP elicitation.",
+      "description_what_how": "No MCP elicitation mechanism was found in the analyzed public repository. Documentation describes the user approving OAuth in a browser, outside tool execution.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/tree/d3bee2ec2c0569911d379b79ac3d9097c5117723/src",
+        "https://docs.apify.com/mcp.md"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "The repository has task handlers on the stateful path; stateless path comments say tasks methods are unavailable.",
+      "description_what_how": "Apify product tasks are managed by create/get/update/publish/unpublish-actor-task tools. Separately, MCP long-running task support is implemented on the stateful server path; the stateless server explicitly omits tasks/* handlers.",
+      "pre_interaction_context_verbatim": "Deliberately no `tasks` (tasks/* → method-not-found)",
+      "post_interaction_context_structure": "Apify task tools return task data and operation results. MCP task methods use task/status notifications on the stateful path.",
+      "authorization_mechanism": "Apify task tools require account access; OAuth/API token details as above.",
+      "authorization_server": "https://console-backend.apify.com",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/mcp/stateless_server.ts",
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/mcp/legacy_server.ts",
+        "https://docs.apify.com/mcp.md"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Vendor-specific URL configuration.",
+      "description_what_how": "The tools query parameter selects category names, individual helpers or Actor IDs. Explicit selection replaces defaults. UI mode and telemetry opt-out are also documented as URL parameters. The tool configurator generates a client configuration.",
+      "pre_interaction_context_verbatim": "If the tools parameter is specified, only the listed tools or categories will be enabled – no default tools will be included.",
+      "post_interaction_context_structure": "Configuration changes the tools exposed to the MCP client.",
+      "authorization_mechanism": "URL parameters control tool exposure; OAuth or Bearer token controls authenticated operations.",
+      "authorization_server": "https://console-backend.apify.com",
+      "sources": [
+        "https://docs.apify.com/mcp.md",
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Tool-based.",
+      "description_what_how": "report-problem reports problems with the MCP server or an Apify tool/Actor to the Apify team. It is subject to client gating and telemetry settings in the code documentation.",
+      "pre_interaction_context_verbatim": "Report a problem with an Apify tool or Actor to the Apify team.",
+      "post_interaction_context_structure": "Returns a tool result or error; exact hosted response shape not found in the reviewed evidence.",
+      "authorization_mechanism": "Tool availability is gated by configuration/client identity; see server-side logic.",
+      "authorization_server": "https://console-backend.apify.com",
+      "sources": [
+        "https://docs.apify.com/mcp.md",
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/const.ts"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Not applicable.",
+      "description_what_how": "No MCP subscription capability was found in the analyzed public code. Product billing and Actor pricing are separate.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/tree/d3bee2ec2c0569911d379b79ac3d9097c5117723/src"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Tool calls expose bounded wait/poll behavior; MCP task notifications also appear in stateful code.",
+      "description_what_how": "Actor tools accept waitSecs (documented range 0–45, default 30), and can return run status and nextStep polling guidance. The widget tool variant can render interactive run progress.",
+      "pre_interaction_context_verbatim": "Use `waitSecs` (0–45) to control how long to wait. Default 30s returns results for fast actors. Use `waitSecs: 0` to start and return immediately for long-running Actors.",
+      "post_interaction_context_structure": "Run status, storage IDs, summary and nextStep; polling through get-actor-run is supported.",
+      "authorization_mechanism": "Actor execution requires authentication or an applicable agentic payment path.",
+      "authorization_server": "https://console-backend.apify.com",
+      "sources": [
+        "https://docs.apify.com/mcp.md",
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/tools/actors/actor_tools_factory.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP task cancellation on stateful path; Actor run cancellation also exposed as a tool.",
+      "description_what_how": "abort-actor-run stops a running Actor run. The stateful task code bridges tasks/cancel to the running handler; stateless code omits MCP tasks methods.",
+      "pre_interaction_context_verbatim": "Abort a running Actor run, optionally gracefully.",
+      "post_interaction_context_structure": "Tool result reports cancellation/abort outcome; exact response structure depends on the Actor API.",
+      "authorization_mechanism": "Actor run access required.",
+      "authorization_server": "https://console-backend.apify.com",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/mcp/task_execution.ts",
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/tools/runs/abort_actor_run.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP Apps support depends on client capability/mode.",
+      "description_what_how": "The repository includes MCP Apps widgets and client/mode-dependent tool composition. Hosted server documentation also describes inferred Actor output schemas. The remote endpoint's server card advertises Streamable HTTP at / and bearer/OAuth authentication.",
+      "pre_interaction_context_verbatim": "The `ui` parameter enables [MCP Apps](https://mcp.apify.com/) widget rendering in tool responses.",
+      "post_interaction_context_structure": "Some tool responses can include interactive UI resources/content; ordinary tool calls return content and structured Actor results.",
+      "authorization_mechanism": "OAuth or Bearer token for protected operations.",
+      "authorization_server": "https://console-backend.apify.com",
+      "sources": [
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "https://mcp.apify.com/.well-known/mcp/server-card.json",
+        "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/server_card.ts"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official README documents read-only and destructive tool annotations; actor tools are classified based on Apify-maintained status, permissions and accepted inputs. Repository additionally identifies read-only web-crawler inputs and a default robots.txt setting for one Actor. 2. No general confirmation=true mechanism was found. Full-permission Actors are excluded because running them is a decision the user approves personally. Destructive annotations are hints; user/client confirmation behavior is not enforced by that annotation. 3. OAuth scope is full_api_access. Bearer API tokens are supported. Product account permissions govern API operations. Metadata advertises dynamic registration and redirect flows but reviewed evidence does not specify redirect approval, token lifetime or revocation. 4. URL tools parameter selects categories/tools and replaces defaults. ui and telemetry-enabled are documented. No read-only endpoint was found. Stateful/stateless implementation paths differ; production and staging constants exist in code, but no user-facing region choice found. 5. Docs state full-permission Actors are excluded from search/execution. Telemetry docs state conversations, tool arguments, tokens and personal data are not collected. Resource proxy returns API GET bodies; large bodies link out. 6. Docs state 30 requests/second/user. Actor waitSecs is 0–45 (default 30); output/storage caps include 256 KB inline and 50-key cap. Actor run costs vary by Actor; users can set callOptions limits. 7. Source uses Zod/JSON schemas and AJV validation for Actor inputs. Tool descriptions instruct schema lookup; no general hallucinated-alias rewrite found. API write refuses method query parameter; API read blocks method override and synchronous endpoints that start paid runs. 8. Docs describe default-on telemetry, opt-out via telemetry-enabled=false, and tool/client metadata collection. Tool usage calls, success/failure and duration plus client name/version/capabilities are documented. Server code contains telemetry and logging instrumentation. 9. report-problem sends problem reports to Apify. It is normally default-served but code comments describe gating for Anthropic client-name substrings and telemetry; explicit tools selection can bypass client gating. Tool descriptions also steer Store discovery and dedicated Actor tools. No distinct rating/survey tool found. 10. Server supplies behavioral instructions in tool descriptions; separate Apify plugins/skills are distributed outside the server. 11. No evidence that past agent behavior changes future tools or outputs; source includes TTL caching for Actor schemas/details. 12. Dynamic Actor tools are loaded from Store definitions, with helper categories and UI variants; this is a configurable, dynamic tool surface. 13. apify-api-read and apify-api-write provide broad API-path access, with method restrictions; call-actor executes arbitrary eligible Actors, bounded by Actor permission policy.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "IMPORTANT: When the user wants detailed data from a specific platform or is looking for scraping tools, prefer searching the Store first — a relevant Actor often already exists.",
+      "When the user names a specific Actor, look up that Actor directly instead of searching.",
+      "Use this tool instead of the \"call-actor\" if user requests this specific Actor.",
+      "For production use and stable interfaces, always explicitly specify the `tools` parameter to ensure your configuration remains consistent across updates.",
+      "Use `fetch-actor-details` first to get the Actor's input schema.",
+      "Always use dedicated tools when available."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Tools are selected dynamically by category, individual tool name, or Actor ID. Actor tool schemas are sourced from Actor definitions; helper tools may be auto-injected and UI variants depend on client capability/mode.",
+    "sources": [
+      "https://docs.apify.com/mcp.md",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/const.ts",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/tools/api/apify_api_write.ts",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/mcp/stateless_server.ts"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "48 documented helper/Actor tools in the official repository README, plus dynamically selected Actor tools whose number varies by configuration and Store contents.",
+    "action_count_comment": "Official tool list: repository README at https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md, 44 listed tools. Four additional widget variants are defined by the official code constants and included in actions.json; their exposure depends on UI/client mode. The hosted docs page https://docs.apify.com/mcp.md names 30 tools/Actor entries, so it is older or less complete than the current repository list. The endpoint server card https://mcp.apify.com/.well-known/mcp/server-card.json reports version 0.19.3 and lists 8 tools, unlike the 0.19.4 local checkout and current repository README. No catalogue-only tools were added. Dynamic Actor tools make the total configuration-dependent.",
+    "actions": [
+      {
+        "tool_name": "search-actors",
+        "description": "Search for Actors in Apify Store",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch-actor-details",
+        "description": "Retrieve detailed information about a specific Actor, including its input schema, README (summary when available, full otherwise), pricing, and Actor output schema",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "call-actor",
+        "description": "Call an Actor and get its run results. Use fetch-actor-details first to get the Actor's input schema",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-run",
+        "description": "Get detailed information about a specific Actor run",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-dataset-items",
+        "description": "Retrieve items from a dataset with support for filtering and pagination",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-key-value-store-record",
+        "description": "Get the value associated with a specific key in a key-value store",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "abort-actor-run",
+        "description": "Abort a running Actor run, optionally gracefully",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete-actor",
+        "description": "Delete an Actor from your account permanently. Public Actors must be unpublished first",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-apify-docs",
+        "description": "Search the Apify documentation for relevant pages",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch-apify-docs",
+        "description": "Fetch the full content of an Apify documentation page by its URL",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "apify--rag-web-browser",
+        "description": "An Actor tool to browse the web",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "apify--web-fetch",
+        "description": "An Actor tool to fetch a URL and return its content",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "report-problem",
+        "description": "Report a problem with an Apify tool or Actor to the Apify team",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-list",
+        "description": "List the Actors you own and those shared with you, including private ones",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-run-list",
+        "description": "Get a list of Actor runs, filterable by Actor and status",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-run-log",
+        "description": "Retrieve the logs for a specific Actor run",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-dataset",
+        "description": "Get metadata about a specific dataset",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-dataset-schema",
+        "description": "Generate a JSON schema from dataset items",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-key-value-store",
+        "description": "Get metadata about a specific key-value store",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-key-value-store-keys",
+        "description": "List the keys within a specific key-value store",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-dataset-list",
+        "description": "List all available datasets for the user",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-key-value-store-list",
+        "description": "List all available key-value stores for the user",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-actor-task",
+        "description": "Create a saved Actor task (a named, reusable Actor configuration)",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-task",
+        "description": "Get a saved Actor task, its publication state and public display configuration",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-actor-task",
+        "description": "Update a task's input, run options, or public display configuration",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "publish-actor-task",
+        "description": "Publish a task on its public landing page",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unpublish-actor-task",
+        "description": "Unpublish a task from its public landing page",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-schedule",
+        "description": "Create a schedule that runs Actors or tasks on a cron cadence",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-schedule",
+        "description": "Get a schedule, its cron expression, state, and the actions it runs",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-schedule",
+        "description": "Update a schedule: cron expression, time zone, enabled state, or actions",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete-schedule",
+        "description": "Delete a schedule",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-build",
+        "description": "Get an Actor build's status",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-build-log",
+        "description": "Retrieve the logs for a specific Actor build",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-build-list",
+        "description": "List the account's builds, or one Actor's, in every status, newest first",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "build-actor",
+        "description": "Build an Actor version and wait a bounded time for the build to finish",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-version",
+        "description": "Get an Actor version's file listing with hashes and the content of the files you ask for",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-actor",
+        "description": "Create a private Actor in your account from files, optionally starting a build",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-actor-version",
+        "description": "Write, edit, or delete files of an Actor version in one all-or-nothing write",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-actor-version",
+        "description": "Add a version to an Actor, from files or as a copy of another version, optionally starting a build",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete-actor-version",
+        "description": "Delete an Actor version; its builds and their tags stay",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "apify-api-search",
+        "description": "Search the Apify API reference for operations by keywords. Returns each one's method, path, and docs page",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "apify-api-details",
+        "description": "Get the parameters and request body schema of the Apify API operations on a path",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "apify-api-read",
+        "description": "Send a GET request to an Apify API path, such as `actor-runs` or `/v2/actor-runs`, like `apify api` in the Apify CLI. Read-only: it refuses the `method` query parameter and a GET t",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "apify-api-write",
+        "description": "Send a POST, PUT, PATCH, or DELETE request to any Apify API path, with a JSON body, like `apify api` in the Apify CLI. It refuses the `method` query parameter",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED in list; schemas defined in source",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-actors-widget",
+        "description": "Search Actors and render an interactive widget.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (UI/MCP Apps mode variant)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/const.ts#L50-L100",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch-actor-details-widget",
+        "description": "Fetch Actor details and render an interactive widget.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (UI/MCP Apps mode variant)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/const.ts#L50-L100",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "call-actor-widget",
+        "description": "Run an Actor and render an interactive progress widget.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (UI/MCP Apps mode variant)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/const.ts#L50-L100",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-actor-run-widget",
+        "description": "Get run status and render an interactive widget.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (UI/MCP Apps mode variant)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/const.ts#L50-L100",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The available repository source was not serialized into the complete per-session tools/list plus initialize-instructions JSON; the server composes tools dynamically, so a fixed count could not be computed from the captured evidence.",
+    "human_can_agent_cannot": "A user can approve running a full-permission Actor personally, while the MCP server intentionally excludes those Actors from search and execution. Actor tools expose the Actor-defined inputs and limits; other Apify Console functions or API operations not represented by configured MCP tools remain unavailable in that session. Sources: https://docs.apify.com/mcp.md and https://docs.apify.com/actors/running/permissions.md#full-permission-actors",
+    "sources": [
+      "https://docs.apify.com/mcp.md",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+      "https://mcp.apify.com/.well-known/mcp/server-card.json",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/const.ts"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool descriptions recommend looking up Actor details before execution and using dedicated tools when available. Docs recommend explicitly selecting tools for stable production configurations. These are agent-facing recommendations; descriptions alone do not enforce user confirmation.",
+    "governance_promises": "Docs say full-permission Actors are intentionally excluded because execution is a decision the user approves personally. Telemetry documentation says: “We do not collect any sensitive information such as conversations, arguments passed to tools, API tokens, or personal data.” Telemetry is enabled by default with a documented opt-out.",
+    "promises_to_user": "The hosted server supports OAuth and Actor output schema inference. Apify states tools can be configured per URL and that usage telemetry can be disabled.",
+    "comparison_with_server_logic": "The full-permission Actor restriction is documented and reflected in source policy. Telemetry default and opt-out are present in source constants/configuration. Tool selection is implemented through URL configuration. Recommendations to search first or use dedicated tools are descriptive guidance rather than server-enforced conditions.",
+    "sources": [
+      "https://docs.apify.com/mcp.md",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/README.md",
+      "https://github.com/apify/apify-mcp-server/blob/d3bee2ec2c0569911d379b79ac3d9097c5117723/src/const.ts"
+    ]
+  },
+  "contradictions": [
+    "The endpoint server card is version 0.19.3 and lists 8 tools, while the official repository is version 0.19.4 and README lists 44 tools. This suggests server-card data or deployed version may lag the current public code.",
+    "The docs page lists 30 helper/Actor tools, whereas the repository README lists 44 and the code defines additional widget variants. The docs list is therefore incomplete relative to the current public repository.",
+    "Provided endpoint probe reports HTTP 415 for a request without application/json, while the input's connection test reports HTTP 401 for an OAuth-protected endpoint. These probes use different request shapes and do not establish a contradiction about authorization."
+  ],
+  "observations_for_research": [
+    "The tools parameter lets the client/operator constrain the exposed tool set; omitted defaults are replaced when an explicit selection is provided.",
+    "Actor tools are generated from external Actor schemas and may change with selected Actors or Store metadata.",
+    "The server pairs Actor execution with automatically injected run, result, record and abort tools, shaping a follow-up workflow.",
+    "Authentication metadata advertises full_api_access, while tool exposure and product permissions create additional operational boundaries."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ and the pinned official repository copy. The npm page returned HTTP 403 and the provided privacy URL returned HTTP 404; the repository README and docs supplied telemetry statements, but a current official privacy policy page was not verified. The official server card is a stale or differently versioned snapshot relative to repository content. Third-party Composio and MartechDB pages were present but not needed to add actions because official tool lists exist. actions.json uses NOT PUBLISHED for parameter details where the extracted tool list did not publish schemas; dynamic Actor schemas vary by Actor.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.9
+  }
+}

@@ -1,0 +1,470 @@
+{
+  "server": "openrouter",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.openrouter.ai/mcp",
+    "documentation_url_csv": "https://openrouter.ai/docs/mcp",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://openrouter.ai/docs/mcp",
+      "https://openrouter.ai/docs/guides/overview/mcp-server",
+      "https://openrouter.ai/blog/announcements/openrouter-mcp-server/"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official implementation repository for the hosted MCP server was found in the evidence folder. The OpenRouterTeam TypeScript agent and @openrouter/mcp entries were identified as client libraries, not server implementations.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "Released; the announcement describes its release, but no GA or beta label was found.",
+    "other_official_servers": [
+      "https://openrouter.ai/docs/mcp exposes a separate documentation-site MCP with search_open_router_documentation, query_docs_filesystem_open_router_documentation, and submit_feedback. It is scoped to public documentation and is not the product server analyzed here."
+    ],
+    "sources": [
+      "https://mcp.openrouter.ai/mcp",
+      "https://openrouter.ai/docs/mcp",
+      "https://openrouter.ai/docs/guides/overview/mcp-server",
+      "https://openrouter.ai/blog/announcements/openrouter-mcp-server/",
+      "https://github.com/openrouterteam/typescript-agent",
+      "https://www.npmjs.com/package/@openrouter/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "The guide documents no MCP subscription charge. Read-only lookups are described as data access; send-message and generate-image make billable inference calls, while send-feedback writes feedback. OAuth approval mints a dedicated key with a $10 default spend cap, editable during approval. The announcement describes send-message as the billable exception in its then-current tool set.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "OpenRouter inference uses paid credits at model/provider rates; free model endpoints are available subject to account limits. Standard and Business charge platform fees when credits are purchased; Enterprise pricing is by contract.",
+    "pricing_model_details": "Official pricing says inference is billed at provider list price; credit purchase fees are 5.5% on Standard and 8% on Business. The dedicated MCP key starts with a $10 cap. Official pricing lists free-model caps of 20 requests/minute and 50/day, increasing to 1,000/day after at least $10 in credit purchases. The sources do not specify which of these API-wide limits apply to each MCP tool.",
+    "other_access_restrictions": "OAuth authorization is required. The dedicated key has a seven-day lifetime and a default $10 cap, editable at approval; it can be revoked from the dashboard. The guide notes some organizations restrict custom connectors. No MCP-specific role, allowlist, or regional restriction was found.",
+    "restrictions_controlled_by": "Vendor controls OAuth and the dedicated key defaults; the user approves, may edit the cap, and may revoke the key. An organization admin may restrict connector availability in some clients.",
+    "sources": [
+      "https://openrouter.ai/docs/guides/overview/mcp-server",
+      "https://openrouter.ai/blog/announcements/openrouter-mcp-server/",
+      "https://openrouter.ai/pricing",
+      "https://openrouter.ai/terms"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official guide names 17 tools. It describes read-only lookups plus billable inference/image generation and generation feedback. It publishes names and summaries, but not MCP schemas or annotations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The guide documents a generated image as an inline image content block and describes message replies and lookup results, but gives no complete result or error schemas.",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No product-server resources are documented. The separate documentation MCP has a skill resource; that is not evidence for resources on this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "https://openrouter.ai/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt capability or prompt templates are documented for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP-specific request logging and audit behavior are not documented. OpenRouter's general privacy policy discusses automatic collection and service logs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "https://openrouter.ai/privacy/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate pointing to protected-resource metadata. Metadata names https://mcp.openrouter.ai as the authorization server; it supports authorization_code, PKCE S256, and unauthenticated token-endpoint client authentication. DCR is published at /oauth/register. Protected-resource metadata says bearer tokens use the header. No scopes_supported, token lifetime, or revocation metadata is published. Docs say authorization issues a dedicated seven-day OpenRouter API key with a $10 default cap.",
+      "pre_interaction_context_verbatim": "POST https://mcp.openrouter.ai/mcp: HTTP 401; WWW-Authenticate: Bearer resource_metadata=\"https://mcp.openrouter.ai/mcp/.well-known/oauth-protected-resource\"; body: {\"error\":\"invalid_token\",\"error_description\":\"Missing bearer token\"}. Protected-resource documents: {\"resource\":\"https://mcp.openrouter.ai/mcp\",\"authorization_servers\":[\"https://mcp.openrouter.ai\"],\"bearer_methods_supported\":[\"header\"]}. Authorization-server document: {\"issuer\":\"https://mcp.openrouter.ai\",\"authorization_endpoint\":\"https://mcp.openrouter.ai/oauth/authorize\",\"token_endpoint\":\"https://mcp.openrouter.ai/oauth/token\",\"registration_endpoint\":\"https://mcp.openrouter.ai/oauth/register\",\"response_types_supported\":[\"code\"],\"grant_types_supported\":[\"authorization_code\"],\"code_challenge_methods_supported\":[\"S256\"],\"token_endpoint_auth_methods_supported\":[\"none\"]}.",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; authorization_code grant; PKCE S256; token endpoint auth method none; bearer token in header. scopes_supported is absent from both protected-resource documents and the authorization-server metadata. The supplied OpenID configuration URL returned HTTP 404. Official guide says the issued dedicated key expires after 7 days, starts with a $10 spend cap, and can be revoked from the dashboard.",
+      "authorization_server": "https://mcp.openrouter.ai",
+      "sources": [
+        "https://mcp.openrouter.ai/mcp",
+        "https://mcp.openrouter.ai/.well-known/oauth-protected-resource",
+        "https://mcp.openrouter.ai/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.openrouter.ai/.well-known/oauth-authorization-server",
+        "https://mcp.openrouter.ai/.well-known/openid-configuration",
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation flow is documented. OAuth consent is a separate browser authorization step.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability is documented. spawn-ori-eval is a named tool that returns evaluation instructions, not documented evidence of protocol Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The guide documents client setup and OAuth, but no MCP configuration capability or endpoint filters.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No protocol-level error reporting capability is documented. send-feedback is a product tool for reporting a problem with a generation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notification capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The guide documents connection guidance and behavioral recommendations to the agent, but does not publish product-server initialize instructions. It documents live model data, test inference, and model-image generation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://openrouter.ai/docs/guides/overview/mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official guide calls most tools read-only and identifies send-message and generate-image as billable inference calls and send-feedback as a write. It documents no tool annotations. 2. No server-enforced confirmation parameter or preview/approval workflow is documented. OAuth consent is required before use; the guide does not establish per-call confirmation. 3. OAuth metadata has no scopes_supported. Docs describe a dedicated seven-day API key, default $10 spend cap editable on approval, and dashboard revocation. No inherited product role, admin switch, allowlist, or redirect-URI approval details found. 4. No read-only endpoint, toolset filter, query-free mode, or MCP sandbox/production toggle documented. OpenRouter pricing/docs discuss workspaces and regional API hosts generally, but do not document MCP variants. 5. No MCP-specific PII masking or field redaction documented. Docs say no source code is sent unless included in send-message or generate-image; send-feedback also sends data. General privacy policy says inputs go to the selected/routed model provider. 6. Inference/image tools incur model charges from the dedicated key balance. Key cap is $10 by default and editable. API pricing page states free-model request caps; MCP-specific call limits, bulk caps, and result truncation are not documented. 7. Tool schemas are not published, and no MCP validation/correction behavior is documented. 8. MCP-specific logging/telemetry/audit trail details are not documented. General privacy policy describes automatic service logs and collection; this does not establish MCP-specific behavior. 9. send-feedback sends generation feedback to OpenRouter. No upsell result or marketing elicitation documented for this endpoint. 10. No server-delivered skill capability/instructions documented. spawn-ori-eval and install-ori-harness return instructions/recipe; the guide says to follow them. Agent guidance about using live data is documented but not shown to be server-enforced. 11. The guide says there is no local state; no evidence that prior agent behavior changes later outputs/tools/resources. 12. Hosted remote server proxies OpenRouter data/API functions; it is a flat documented tool list. A separate documentation-search MCP exists on the docs site. No nested vendor agent is documented. 13. No raw API request, arbitrary SQL, or script-execution tool is listed in the official guide.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] “For any ‘which model should I use’ question, it defers to the live list-benchmarks, list-daily-model-rankings, and list-models tools.”",
+      "[DOCS] “send-message is grounded so the assistant won’t name a model from memory.”",
+      "[DOCS] “Use this MCP while you build.”",
+      "[DOCS] “To actually run models in your app, keep calling the OpenRouter API directly.”",
+      "[DOCS] “Use the argument-free recipe for installing the Ori harness and follow it”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The product endpoint is documented as one hosted server with a flat tool list. A separate documentation-site MCP is documented at https://openrouter.ai/docs/mcp and is not part of the analyzed endpoint.",
+    "sources": [
+      "https://openrouter.ai/docs/guides/overview/mcp-server",
+      "https://openrouter.ai/blog/announcements/openrouter-mcp-server/",
+      "https://openrouter.ai/pricing",
+      "https://openrouter.ai/privacy/",
+      "https://openrouter.ai/terms",
+      "https://mcp.openrouter.ai/.well-known/oauth-protected-resource",
+      "https://mcp.openrouter.ai/.well-known/oauth-authorization-server",
+      "https://openrouter.ai/docs/mcp"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "17",
+    "action_count_comment": "The official tool list is in https://openrouter.ai/docs/guides/overview/mcp-server and names 17 tools; no total is stated. The earlier official announcement at https://openrouter.ai/blog/announcements/openrouter-mcp-server/ names 11, so it is stale or incomplete relative to the guide. No catalogue tools were added: the catalogue pages did not document the input endpoint's tools/schema as a native list. mcp.so reported no list available; AllMCPs describes a separate Pipeworx server; Composio lists 19 API-toolkit actions, not the input endpoint. Parameters are not published in the official guide.",
+    "actions": [
+      {
+        "tool_name": "send-message",
+        "description": "Send a message to any model and return its reply for prompt testing or comparison.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate-image",
+        "description": "Generate an image from a text prompt and return it inline as an image content block.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-models",
+        "description": "Search the live model catalog with text, sorting, and model, price, capability, benchmark, and policy filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-model",
+        "description": "Return full details for one model by author/slug, including aliases and variant suffixes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-model-endpoints",
+        "description": "List providers serving a model, with price, latency, throughput, and data policy.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-providers",
+        "description": "List available providers for routing preferences.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-daily-model-rankings",
+        "description": "List models most used and trending by token volume.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-app-rankings",
+        "description": "List apps driving the most OpenRouter traffic, filterable by category.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-credits",
+        "description": "Return the authenticated account remaining credit.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-generation",
+        "description": "Return cost, token counts, and serving provider for a generation ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-benchmarks",
+        "description": "Return quality scores from Artificial Analysis and Design Arena.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-task-classifications",
+        "description": "Summarize OpenRouter traffic by task type and show leading models and category aggregates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-docs",
+        "description": "Search the full OpenRouter documentation.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send-feedback",
+        "description": "Send a category and optional comment about one of the users generations to OpenRouter.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "spawn-ori-eval",
+        "description": "Return instructions for running an Ori evaluation with the users agent, prompts, harness, and model.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "install-ori-harness",
+        "description": "Return an argument-free recipe for installing the Ori harness.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ping",
+        "description": "Check the connection health.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://openrouter.ai/docs/guides/overview/mcp-server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public server implementation or verbatim tool definitions/input schemas/initialize instructions were found. The official guide has names and summaries only.",
+    "human_can_agent_cannot": "The guide says the MCP is a development assistant and that production applications should call the OpenRouter API directly. It documents API capabilities beyond this MCP, including embeddings, speech, video generation, and provider/model endpoint configuration; these are not named as tools in the official MCP list. Sources: https://openrouter.ai/docs/guides/overview/mcp-server and https://openrouter.ai/docs.",
+    "sources": [
+      "https://openrouter.ai/docs/guides/overview/mcp-server",
+      "https://openrouter.ai/blog/announcements/openrouter-mcp-server/",
+      "https://mcp.so/servers/openrouter",
+      "https://allmcps.com/mcp/openrouter",
+      "https://composio.dev/toolkits/openrouter"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The guide recommends using live benchmark, ranking, and model-list tools for recommendations, and directs production applications to the API. It says to pin a provider when zero variance is needed for evaluation/reproduction. These are documented recommendations; no server enforcement is evidenced.",
+    "governance_promises": "The guide states: “Nothing is installed locally, and no source code is sent anywhere unless you call send-message, generate-image, or send-feedback.” It also says the dedicated key expires after seven days and can be revoked. OpenRouter privacy policy says it does not use inputs or outputs for model training, but provider data practices vary and inputs may be transmitted to selected providers.",
+    "promises_to_user": "The guide presents live model, pricing, benchmark, ranking, and documentation data; a dedicated key with a seven-day expiry and default $10 cap; and dashboard revocation. It describes send-message and generate-image as billable and send-feedback as writing feedback.",
+    "comparison_with_server_logic": "The documented tool list supports the described lookup, inference, image generation, and feedback functions. No public implementation is available to verify enforcement or actual request handling. OAuth metadata confirms header bearer authorization and dynamic registration but does not expose scopes or token lifetime; the seven-day lifetime and spend cap are documentation claims. The source-code privacy statement is a documented claim, not independently verifiable from server code.",
+    "sources": [
+      "https://openrouter.ai/docs/guides/overview/mcp-server",
+      "https://openrouter.ai/privacy/",
+      "https://openrouter.ai/terms",
+      "https://mcp.openrouter.ai/.well-known/oauth-protected-resource",
+      "https://mcp.openrouter.ai/.well-known/oauth-authorization-server"
+    ]
+  },
+  "contradictions": [
+    "The official announcement lists 11 tools, while the later/current official guide lists 17, adding generate-image, list-task-classifications, send-feedback, spawn-ori-eval, install-ori-harness, and ping.",
+    "The older announcement says all tools except send-message are read-only; the current guide identifies generate-image as a billable inference call and send-feedback as a write.",
+    "The supplied OAuth metadata advertises a seven-day key lifetime only in documentation, while the OAuth metadata itself has no token lifetime field or scopes_supported list."
+  ],
+  "observations_for_research": [
+    "The current official guide shapes recommendations toward live OpenRouter rankings/benchmarks and asks agents to defer to specific data tools for model-choice questions.",
+    "The guide documents agent-directed task recipes (spawn-ori-eval and install-ori-harness), but publishes no arguments, tool schemas, or initialize instructions.",
+    "The OAuth authorization flow creates a dedicated spend-capped key, connecting agent access to account balance and revocation controls."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ including script-extracted text, and code/GITHUB_COMMITS.txt. No official product-server code was supplied or found. The official docs guide was used for the current tool list; the announcement is retained as an earlier official listing. Third-party results include a Pipeworx/Openrouter implementation and Composio's API toolkit, neither established as the input endpoint; their tools were excluded. The separate docs-site MCP manifest was checked and excluded from actions. The supplied OpenID configuration returned 404; authorization metadata has no scopes_supported.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 2.9
+  }
+}

@@ -1,0 +1,413 @@
+{
+  "server": "morningstar",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.morningstar.com/mcp",
+    "documentation_url_csv": "https://developer.morningstar.com/direct-web-services/documentation/morningstar-mcp-server/about",
+    "addressing": "global",
+    "repository_url": "https://github.com/Morningstar/morningstar-mcp-server",
+    "documentation_urls_used": [
+      "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+      "https://developer.morningstar.com/direct-web-services/documentation/morningstar-mcp-server/about",
+      "https://www.morningstar.com/business/products/morningstar-mcp-server",
+      "https://www.morningstar.com/business/insights/blog/mcp-server-deployment-explained",
+      "https://learn.microsoft.com/en-us/connectors/morningstar/",
+      "https://claude.com/connectors/morningstar",
+      "https://labsco.ai/servers/morningstar.com/hosted-mcp",
+      "https://mcp.tc/i/morningstar",
+      "https://docs.merge.dev/merge-agent-handler/connectors/generic/morningstar"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "[LOCAL CODE @ea74ad1] The archived repository contains an earlier stdio implementation with two different tools, per-account endpoint environment variables, and direct downstream HTTP calls. Its README says development moved outside the repository. The hosted endpoint is separately documented with seven tools and OAuth; the available evidence does not establish that this archived code runs there.",
+    "mcp_protocol_version": "2025-06-18 (protected resource metadata)",
+    "commit_hash": "ea74ad125638d30470548dd94365adf215914be4",
+    "commit_date": "2025-09-16",
+    "implementation_language": "Python (archived implementation)",
+    "mcp_sdk_and_version": "FastMCP import present; package/version not found in archived repository",
+    "code_public": "Yes",
+    "license": "MIT (archived repository; hosted endpoint license not identified)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "The archived local stdio implementation in the official GitHub repository is a separate earlier variant with two tools. No other official endpoint for this product was identified in the reviewed sources."
+    ],
+    "sources": [
+      "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+      "https://github.com/Morningstar/morningstar-mcp-server",
+      "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/README.md#L1-L19",
+      "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/src/server.py#L1-L150",
+      "https://mcp.morningstar.com/.well-known/oauth-protected-resource"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "A licensed Morningstar account is required. The MCP product page offers a free-trial request, but no MCP-specific price or free-access terms are published in the reviewed material.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Pricing amounts were not found. Morningstar says access requires a license; its investor Q&A says Morningstar Direct and Direct Advisory Suite license holders can access the connector and it is also licensed standalone for data and research clients.",
+    "pricing_model_details": "Morningstar describes data pricing as depending on the data package, distribution level, and use case. No per-call MCP charge or MCP-specific quota was found.",
+    "other_access_restrictions": "Licensed account required. The official docs describe OAuth authentication and programmatic access with a bearer token. Claude for Enterprise connector setup is performed by an administrator. No hosted endpoint rate limits or role-level MCP settings were found.",
+    "restrictions_controlled_by": "Morningstar controls licensing and access provisioning; enterprise administrators control whether the connector is made available within Claude for Enterprise.",
+    "sources": [
+      "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+      "https://www.morningstar.com/business/products/morningstar-mcp-server",
+      "https://learn.microsoft.com/en-us/connectors/morningstar/",
+      "https://www.morningstar.com/business/insights/blog/mcp-server-deployment-explained",
+      "https://shareholders.morningstar.com/investor-resources/investor-qa/qa-details/2026/How-has-MCP-adoption-of-PitchBook-and-Morningstar-data-trended-since-integration-What-verticals-are-the-biggest-users-of-MORN-data-via-MCP-app-integration-Are-unit-economics-or-pricing-to-MORN-different-in-this-form-of-consumption-I-assume-you-still-/default.aspx",
+      "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001289419/965b6eb5-2f5a-404b-a5a4-16524547a1f3.pdf"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not specified for tool support; endpoint metadata reports protocol version 2025-06-18.",
+      "description_what_how": "The official developer page lists seven hosted tools for analyst research, articles, market data, fund holdings, investment/data-point identification, portfolio X-Ray analysis, and screening. The endpoint returns HTTP 401 without authorization, so its live tool schemas and annotations could not be inspected.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint. The archived local implementation returns answer strings and formats HTTP and network errors as strings.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp",
+        "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/src/server.py#L31-L145"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The hosted documentation does not describe MCP resources, and the endpoint could not be inspected past its authorization challenge.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No hosted MCP prompt templates are documented or visible without authorization.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "Hosted logging and telemetry are not documented in the reviewed sources. The archived local variant configures Python logging and logs submitted questions and responses; this does not establish hosted behavior.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/src/server.py#L11-L28",
+        "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/src/server.py#L46-L81",
+        "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/src/server.py#L98-L142"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No hosted sampling behavior is documented or available for unauthenticated inspection.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No hosted roots behavior is documented or available for unauthenticated inspection.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth protected-resource metadata advertises MCP protocol version 2025-06-18.",
+      "description_what_how": "The supplied endpoint POST returned HTTP 401 with “missing authorization — no claims in any metadata path.” Both protected-resource documents identify https://mcp.morningstar.com/mcp as the resource and https://mcp.morningstar.com/mcp as the authorization server; both advertise bearer tokens in the header and scopes_supported [\"offline_access\", \"openid\", \"email\", \"profile\"]. The authorization-server metadata at /.well-known/oauth-authorization-server/mcp advertises registration_endpoint https://mcp.morningstar.com/oauth-issuer/register (dynamic client registration), PKCE S256, authorization_code and refresh_token grants, response type code, token endpoint authentication methods client_secret_basic, client_secret_post, and none, and require_pushed_authorization_requests=false. client_id_metadata_document_supported=false; resource_indicators_supported=false. Token lifetime and revocation details were not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth bearer token is sent in the Authorization header; token response structure and lifetime are not in the supplied metadata.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration. Raw metadata values: bearer_methods_supported=[\"header\"]; scopes_supported=[\"offline_access\",\"openid\",\"email\",\"profile\"]; registration_endpoint=\"https://mcp.morningstar.com/oauth-issuer/register\"; grant_types_supported=[\"authorization_code\",\"refresh_token\"]; code_challenge_methods_supported=[\"S256\"]; token_endpoint_auth_methods_supported=[\"client_secret_basic\",\"client_secret_post\",\"none\"]; require_pushed_authorization_requests=false; client_id_metadata_document_supported=false. Token lifetime/revocation: NOT FOUND.",
+      "authorization_server": "https://mcp.morningstar.com/mcp (metadata issuer); OAuth endpoints: https://mcp.morningstar.com/oauth-issuer/authorize, /oauth-issuer/token, /oauth-issuer/register, and /oauth-issuer/par.",
+      "sources": [
+        "https://mcp.morningstar.com/mcp",
+        "https://mcp.morningstar.com/.well-known/oauth-protected-resource",
+        "https://mcp.morningstar.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.morningstar.com/.well-known/oauth-authorization-server/mcp",
+        "https://mcp.morningstar.com/.well-known/openid-configuration/mcp",
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No server-side elicitation behavior is described in the hosted documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No hosted task support is documented or available for unauthenticated inspection.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "",
+      "description_what_how": "Official setup documentation gives one global endpoint URL and shows bearer-token programmatic configuration. OAuth sign-in is also documented for supported integrations. No endpoint parameters, tool filters, or read-only configuration modes were found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration is client-side endpoint and authentication setup; no server configuration schema was found.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "Hosted MCP error formats are not documented. The archived local variant catches downstream HTTP and request errors and returns text error messages.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Hosted format unknown; historical local code returns strings prefixed with Error, HTTP Error, or Network Error.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/src/server.py#L75-L82",
+        "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/src/server.py#L135-L145"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The product requires a licensed account, but no MCP subscription-management tool or server-side subscription feature is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No hosted progress notifications are documented or inspectable without authorization.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No hosted cancellation behavior is documented or inspectable without authorization.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "Official docs describe Streamable HTTP transport and bearer-token programmatic access. Initialize instructions and any server-delivered skills or other context were not available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "https://mcp.morningstar.com/mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The seven hosted tools retrieve information according to their official descriptions; official tool annotations such as readOnlyHint, destructiveHint, idempotentHint, and openWorldHint were not published. 2. No write or destructive tool or server-enforced confirmation flow is documented; client approval guidance is advice only. 3. OAuth bearer auth uses the identity scopes offline_access, openid, email, and profile; a licensed account is required. Product-role inheritance, org switches, token lifetime/revocation, and client allowlists were not found. 4. No hosted read-only mode, toolset filter, query-free mode, sandbox, or region-specific MCP endpoint was found. 5. No hosted PII masking, secrets treatment, or scope boundaries were documented. 6. No MCP-specific rate limits, quotas, bulk caps, time-range caps, per-call costs, or truncation were found; a Microsoft Power Automate connector page lists 100 calls per connection per 60 seconds for that integration surface. 7. Hosted validation, correction, and unknown-argument behavior are unknown. 8. Hosted audit logs and telemetry are undocumented. 9. The official seven-tool list contains no feedback, rating, reporting, or survey tool; no upsell result behavior was found. 10. Hosted initialize instructions and skills are unavailable. Tool descriptions give functional guidance; for example, the articles tool is not intended for factual security ratings, prices, fair value, or performance. 11. Persistence of agent history or server-side state is undocumented. 12. The hosted tool surface is documented as one flat list; no sub-server or proxy structure was found. Historical local code calls downstream datapoint and retrieval services, but is not established as the hosted implementation. 13. No raw API, arbitrary query, SQL, or script-execution tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[OFFICIAL DOCS] “Acts as the MCP server’s entity detection layer, identifying the relevant investments and data points to hand off to other tools.”",
+      "[LOCAL CODE @ea74ad1; archived variant] “Use this tool when the question is just a simple datapoint information look up for a security such as a stock or fund.”",
+      "[LOCAL CODE @ea74ad1; archived variant] “This tool is not intended to provide factual information regarding a stock or fund's rating, price, fair value, or performance.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The hosted documentation presents one global endpoint and a flat list of seven tools. The archived local implementation has a different two-tool surface and does not establish the hosted server architecture.",
+    "sources": [
+      "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+      "https://learn.microsoft.com/en-us/connectors/morningstar/",
+      "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/README.md#L1-L19",
+      "https://github.com/Morningstar/morningstar-mcp-server/blob/ea74ad125638d30470548dd94365adf215914be4/src/server.py#L31-L145",
+      "https://mcp.morningstar.com/.well-known/oauth-protected-resource"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "7",
+    "action_count_comment": "An official tool list exists at https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server and names seven tools; the official page gives no separate numeric total. All seven official names are included. No catalogue-only tools were added. Anthropic's Claude connector directory lists six (omitting morningstar-portfolio-analysis-tool); Labsco lists seven; mcp.tc says Morningstar does not show its tools before sign-in; mcp.so has no list to display. The official list takes precedence over the Claude directory's incomplete list.",
+    "actions": [
+      {
+        "tool_name": "morningstar-analyst-research-tool",
+        "description": "Returns relevant portions of Morningstar’s analyst- and quantitative-driven forward-looking investment reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "morningstar-articles-tool",
+        "description": "Returns relevant portions of articles, news, and commentary published on Morningstar.com and other Morningstar products.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "morningstar-data-tool",
+        "description": "Retrieves Morningstar’s AI-ready data for global mutual funds, ETFs, and stocks.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "morningstar-fund-holdings-tool",
+        "description": "Retrieves the top holdings for a list of mutual funds or ETFs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "morningstar-id-lookup-tool",
+        "description": "Identifies relevant investments and data points to hand off to other tools.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "morningstar-portfolio-analysis-tool",
+        "description": "Analyzes portfolio holdings or a fund using Morningstar X-Ray, including allocation, sectors, regions, style, and risk/return.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "morningstar-screener-tool",
+        "description": "Retrieves investments matching given criteria.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted server's tool schemas and initialize instructions are not available without authorization. The archived code is a different implementation and was not used to estimate hosted context.",
+    "human_can_agent_cannot": "Morningstar says its platform provides targeted workflows and certain proprietary IP not available through connectors. The MCP tool list contains research, data retrieval, screening, holdings, and X-Ray analysis tools, but no tools for editing universes or custom data or administering users. Morningstar's Direct Web Services Admin Tool documentation describes interface capabilities to add/remove universe securities, edit/import/export custom data points, and manage user details; these are not documented as MCP actions.",
+    "sources": [
+      "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+      "https://claude.com/connectors/morningstar",
+      "https://labsco.ai/servers/morningstar.com/hosted-mcp",
+      "https://mcp.tc/i/morningstar",
+      "https://docs.merge.dev/merge-agent-handler/connectors/generic/morningstar",
+      "https://shareholders.morningstar.com/investor-resources/investor-qa/qa-details/2026/As-MCP-connectors-expand-your-addressable-market-what-is-the-risk-that-AI-native-interfaces-e-g-Claude-Perplexity-increasingly-disintermediate-Morningstar-in-the-distribution-layer-of-the-value-chain-and-how-are-you-thinking-about-defending-pricing-power-in-that-scenario/default.aspx",
+      "https://developer.morningstar.com/direct-web-services/documentation/documentation/admin-tool-user-guide"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Official documentation directs users to connect through standard MCP clients and authenticate with Morningstar credentials; it does not publish behavioral workflow rules for the hosted tools. A third-party directory recommends client-side approval prompts for any tool that can write, trade, or send, but the official tool list describes read-oriented operations and this recommendation is not a server control.",
+    "governance_promises": "The product page describes access to “governed, AI-ready data and analytics.” No reviewed Morningstar privacy page or MCP-specific terms could be accessed that explain MCP data retention, processing, deletion, AI training, or audit logging.",
+    "promises_to_user": "The official developer page says the server provides access to Morningstar content and requires a licensed account. The product page describes its data and research as trusted and independent. These are product claims, not measured guarantees about an individual response.",
+    "comparison_with_server_logic": "The access requirement is reflected in the OAuth-protected endpoint and licensed-account documentation. No other reviewed governance promise could be compared against hosted implementation because the endpoint requires authorization and server-side governance details are not published in the accessible materials.",
+    "sources": [
+      "https://developer.morningstar.com/direct-web-services/documentation/mcp-server/morningstar-mcp-server",
+      "https://www.morningstar.com/business/products/morningstar-mcp-server",
+      "https://claude.com/connectors/morningstar",
+      "https://www.morningstar.com/about/privacy-policy.html",
+      "https://mcp.morningstar.com/mcp"
+    ]
+  },
+  "contradictions": [
+    "The official developer page lists seven tools, including morningstar-portfolio-analysis-tool; Anthropic's Claude connector listing names six and omits that tool. No other name difference was identified.",
+    "The archived official repository documents two historical local tools, while current hosted Morningstar documentation lists seven differently named tools. The repository README states it is archived and development takes place outside it; it is not evidence of the deployed endpoint's current tools."
+  ],
+  "observations_for_research": [
+    "The protected-resource metadata exposes identity scopes (offline_access, openid, email, profile) rather than tool-specific data scopes; licensing is separately required.",
+    "An official archived implementation has operator-fixed US domicile and exchange filters, disables its screener flag, and passes an authorization token as a tool argument. These are properties of that historical local variant, not established hosted-server behavior.",
+    "The official hosted documentation is JavaScript-rendered and the prepared local page copy contains only the shell; the indexed official page content was accessible through web search and supplied the full seven-tool list."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/INDEX.txt, official page copies and their HTML, available script extracts, the official repository copy, and supplied OAuth metadata. The official developer page's local HTML is a JavaScript shell, but its indexed official content provided the complete tool names and descriptions. Hosted endpoint and /install returned 401 without authorization; no login was attempted. The official privacy policy URL returned 403 in the prepared evidence. No public hosted schemas, parameter lists, annotations, initialize instructions, or exact MCP price were found. Unofficial and third-party directories were used only for list cross-checks and clearly labeled contextual evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.1
+  }
+}

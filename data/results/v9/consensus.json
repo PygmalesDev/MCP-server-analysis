@@ -1,0 +1,387 @@
+{
+  "server": "consensus",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.consensus.app/mcp",
+    "documentation_url_csv": "https://docs.consensus.app/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/Consensus-NLP/consensus-mcp",
+    "documentation_urls_used": [
+      "https://docs.consensus.app/docs/mcp",
+      "https://docs.consensus.app/mcp-plans-and-access",
+      "https://docs.consensus.app/mcp-tools/quickstart",
+      "https://docs.consensus.app/mcp-tools/search",
+      "https://docs.consensus.app/mcp-tools/create-thread",
+      "https://docs.consensus.app/mcp-tools/get-thread",
+      "https://docs.consensus.app/mcp-tools/add-to-thread",
+      "https://docs.consensus.app/mcp-tools/find-threads",
+      "https://consensus.app/pricing/",
+      "https://consensus.app/home/privacy-policy/",
+      "https://consensus.app/home/terms-of-service/",
+      "https://github.com/Consensus-NLP/consensus-mcp"
+    ],
+    "open_code_equals_deployed_server": "Yes",
+    "open_code_note": "The official repository identifies the product as the hosted remote server at the input URL, but contains setup guides, announcements, and issues rather than server implementation code. No request handlers or tool schemas are public there.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "da2d7d353165823241b2717cf5e946aff6ada37f",
+    "commit_date": "2026-08-26",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT (repository license; implementation code is not published)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://api.consensus.app/v1/search — official REST API for academic search; separate API surface, not an MCP endpoint."
+    ],
+    "sources": [
+      "https://docs.consensus.app/docs/mcp",
+      "https://github.com/Consensus-NLP/consensus-mcp",
+      "https://github.com/Consensus-NLP/consensus-mcp/blob/main/LICENSE",
+      "https://github.com/Consensus-NLP/consensus-api"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "Search can be tried without an account, with reduced result limits. Signed-in plans include Free, Pro, Teams, Deep, and Enterprise. Pro, Teams, and Deep can incur $0.05 per additional call when metered API usage is enabled; Enterprise limits are custom. The pricing page did not expose plan prices in the collected page copy.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "The official pricing page lists Individual and Team/Enterprise offerings, but collected page text did not expose price amounts. MCP plan documentation lists Free, Pro, Teams, Deep, and Enterprise.",
+    "pricing_model_details": "No-account use: 3 papers per search, no monthly call limit, shared rate limit of 5 requests/second. Free: 10 papers/search, 30 calls/month, 1 request/second. Pro and Teams: up to 300 papers/search, 500 included calls/month, 3 requests/second. Deep: up to 750 papers/search, 2,000 calls/month, 3 requests/second. Enterprise: custom. A call is counted per 100 papers returned, rounded up, minimum one; MCP and API share the monthly pool. Usage resets on the first of each month.",
+    "other_access_restrictions": "Thread tools require a signed-in account or API key; search works without an account. Deep thread mode requires a paid plan. Organization API keys cannot use account Skills. Organization keys apply the organization plan; personal keys apply the owner's plan. Authenticated rate limits are per user. Certain client platforms require administrator setup.",
+    "restrictions_controlled_by": "Vendor plan and server limits; organization admins control tenant setup in integrations such as Microsoft 365 Copilot. Users control account plan and API key use.",
+    "sources": [
+      "https://docs.consensus.app/mcp-plans-and-access",
+      "https://docs.consensus.app/mcp-tools/search",
+      "https://docs.consensus.app/mcp-tools/create-thread",
+      "https://docs.consensus.app/consensus-mcp",
+      "https://consensus.app/pricing/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official documentation lists five tools: search, create_thread, get_thread, add_to_thread, and find_threads. Search returns ranked papers; thread tools dispatch and retrieve work from the Consensus research agent.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Search returns paper results and metadata. Thread creation/follow-up returns a running status and identifiers; polling returns status, markdown answer, citations, document, statistics, and optionally an agent trace. Errors include invalid or expired API-key messages in the setup documentation.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp",
+        "https://docs.consensus.app/mcp-tools/search",
+        "https://docs.consensus.app/mcp-tools/create-thread",
+        "https://docs.consensus.app/mcp-tools/get-thread",
+        "https://docs.consensus.app/mcp-tools/add-to-thread",
+        "https://docs.consensus.app/mcp-tools/find-threads"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The published MCP guide documents tools but does not describe MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt capability is documented in the reviewed guide.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed MCP documentation does not state whether the server implements MCP logging notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Endpoint returned HTTP 401 and advertised bearer authentication through resource metadata. Protected-resource metadata names https://consensus.app as authorization server and supports bearer tokens in the Authorization header. The authorization-server metadata advertises authorization_code and refresh_token grants, S256 PKCE, client auth methods none/client_secret_basic/client_secret_post, and registration_endpoint. Resource metadata lists scopes_supported search and profile; authorization-server metadata lists search. Docs also describe bearer API keys.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://mcp.consensus.app/.well-known/oauth-protected-resource\", scope=\"search\"",
+      "post_interaction_context_structure": "OAuth-protected endpoint responds with HTTP 401 and JSON error {\"error\":\"unauthorized\",\"error_description\":\"Authentication required\"} when unauthenticated. Docs report OAuth tokens can expire after a few hours and can be revoked by disconnecting/re-authenticating; API keys can be invalid or expired.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration advertised at https://consensus.app/oauth/register/; authorization_code and refresh_token grants; PKCE S256; token endpoint auth methods none, client_secret_basic, client_secret_post; resource metadata scopes_supported: [\"search\", \"profile\"]; authorization-server scopes_supported: [\"search\"]; token lifetime not specified in metadata; revocation endpoint https://consensus.app/oauth/revoke/. Docs separately support bearer API keys.",
+      "authorization_server": "https://consensus.app",
+      "sources": [
+        "https://mcp.consensus.app/.well-known/oauth-protected-resource",
+        "https://mcp.consensus.app/.well-known/oauth-protected-resource/mcp",
+        "https://consensus.app/.well-known/oauth-authorization-server",
+        "https://docs.consensus.app/consensus-mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability is documented. The guide describes external OAuth sign-in and client-level connection steps.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The asynchronous Thread workflow uses create_thread and get_thread tools; the documentation does not identify MCP Tasks protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Thread calls return running/idle/failed statuses and polling guidance. This is documented as the product Thread workflow, not confirmed as MCP Tasks support.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/mcp-tools/create-thread",
+        "https://docs.consensus.app/mcp-tools/get-thread"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Client setup is documented for multiple clients. No server-side URL parameters, headers, or configurable toolset modes are documented in the reviewed MCP guide.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp",
+        "https://docs.consensus.app/mcp-clients/other-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool errors are mentioned in user documentation, but a dedicated MCP error-reporting capability is not described.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Docs mention invalid or expired API keys, usage-limit errors, and rate-limit errors; exact protocol error envelopes are not published.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp",
+        "https://docs.consensus.app/mcp-plans-and-access"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/consensus-mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The product Thread workflow returns status, poll_after_seconds, and max_wait_seconds. Docs do not specify MCP protocol progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "create_thread/add_to_thread return status running and polling guidance; get_thread returns running, idle, or failed.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/mcp-tools/create-thread",
+        "https://docs.consensus.app/mcp-tools/get-thread"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation operation or MCP cancellation support is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/mcp-tools/quickstart"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server delegates multi-step literature research to the Consensus research agent. Documentation says it plans searches, reads full text, follows citations, and produces a cited answer. Account Skills can select named research workflows.",
+      "pre_interaction_context_verbatim": "It doesn't browse the open web and doesn't ask clarifying questions.",
+      "post_interaction_context_structure": "Thread results may include markdown answer, cited papers and grounding quotes, a ready-to-write markdown document, research statistics, step count, and optional agent trace.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.consensus.app/mcp-tools/create-thread",
+        "https://docs.consensus.app/mcp-tools/get-thread"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The five documented tools include read operations (search, get_thread, find_threads) and thread creation/follow-up (create_thread, add_to_thread). No tool annotations are published in the official references. 2. No server-enforced confirmation or approval step is documented; thread tools dispatch research work, and searches return results. 3. OAuth advertises search at the authorization server and search/profile in protected-resource metadata. Threads are restricted to the signed-in user's own threads. API keys use their owner's or organization's plan. OAuth token lifetime is not specified; client guidance says tokens may expire after a few hours. 4. No read-only mode, URL toolset filter, query-free mode, or sandbox endpoint is documented. Plan differences and client-specific tenant setup are documented. 5. No MCP-specific PII masking is documented. Docs state search queries are sent to the Consensus API and results contain publicly available paper metadata; they state no personal data is stored from MCP requests. 6. Limits include per-plan search papers/calls/rates; searches count per 100 papers returned, minimum one. Thread calls are charged by work; create_thread is limited to one call per second, add_to_thread one per second, and get_thread up to three per second. 7. Published parameters include required fields and bounds such as query max 500 characters, thread brief/follow-up max 10,000 characters, and thread list limit 1–100. No behavior for unknown arguments or automatic correction is documented. 8. MCP audit logging and telemetry are not documented. Privacy policy states content is processed to return results, without attaching account identifiers to content sent to model providers. 9. No feedback, rating, survey, or vendor-report tool appears in the official five-tool list. The docs do describe paid additional usage at $0.05/call. 10. Skills are available as an optional named workflow on thread tools when enabled for an account; organization API keys cannot use them. The docs give usage recommendations, but server enforcement of those recommendations is not specified. 11. Threads retain earlier turns and allow follow-ups; the agent can reuse previously found papers. 12. Flat listed tool interface, with thread tools delegating to a vendor research agent. 13. No raw API request, arbitrary SQL, script execution, or comparable escape-hatch tool is listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "It doesn't browse the open web and doesn't ask clarifying questions.",
+      "Filters you pass replace the agent's own filter choices for every search in the run. Include every constraint you want enforced, such as study_types alongside sjr_max. Or leave filters empty and state the constraints in input_message.",
+      "One brief per request. Put the whole request in one create_thread call, including ordered sub-tasks. Splitting it into a chain of Threads gives worse results and adds minutes per step.",
+      "Wait at least 30 seconds (use a sleep/timeout) between each get_thread(thread_id='…') call. Polling faster doesn't speed up the agent."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The MCP-facing interface is one flat list of five tools. The create_thread/add_to_thread tools call the vendor's research agent behind the interface, as a product workflow.",
+    "sources": [
+      "https://docs.consensus.app/mcp-plans-and-access",
+      "https://docs.consensus.app/mcp-tools/search",
+      "https://docs.consensus.app/mcp-tools/create-thread",
+      "https://docs.consensus.app/mcp-tools/get-thread",
+      "https://docs.consensus.app/mcp-tools/add-to-thread",
+      "https://docs.consensus.app/mcp-tools/find-threads",
+      "https://consensus.app/home/privacy-policy/"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "5",
+    "action_count_comment": "The official tool list at https://docs.consensus.app/consensus-mcp names five tools, matching its stated total of five. All five are listed in actions.json. No catalogue-only tools were added. Catalogues were checked for cross-reference; the Claude connector directory is third-party and does not establish additional native tool names.",
+    "actions": [
+      {
+        "tool_name": "search",
+        "description": "Find ranked peer-reviewed papers with academic filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required, max 500 chars); year_min/year_max/month_min/month_max: integer (optional); study_types: string[] (optional, 9 listed categories); sjr_min/sjr_max: integer (optional, 1–4); human/controlled/medical_mode/exclude_preprints/open_access/clinical_guideline: boolean (optional); sample_size_min/citation_min/duration_min/duration_max: integer (optional); country/domain/journal_name/publisher_name: string (optional)",
+        "parameter_count": "21",
+        "source": "https://docs.consensus.app/mcp-tools/search",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_thread",
+        "description": "Start an asynchronous research-agent thread and return a cited answer workflow.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "input_message: string (required, max 10,000 chars); mode: string (optional, pro|deep); filters: object (optional; same filters as search); attachments: object (optional; up to 50 papers and 10 collections); skill: string (optional; 4 documented workflows)",
+        "parameter_count": "5",
+        "source": "https://docs.consensus.app/mcp-tools/create-thread",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_thread",
+        "description": "Poll a thread and retrieve its answer, citations, document, and optional trace.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "thread_id: string (required); interaction_id: string (optional); include_trace: boolean (optional, default false)",
+        "parameter_count": "3",
+        "source": "https://docs.consensus.app/mcp-tools/get-thread",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_to_thread",
+        "description": "Submit a follow-up to an existing thread, reusing its prior context.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "thread_id: string (required); input_message: string (required, max 10,000 chars); mode: string (optional, pro|deep); filters: object (optional); attachments: object (optional); skill: string (optional); title: string (optional)",
+        "parameter_count": "7",
+        "source": "https://docs.consensus.app/mcp-tools/add-to-thread",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_threads",
+        "description": "List account threads or find threads by title.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (optional); limit: integer (optional, 1–100, default 20); offset: integer (optional, default 0)",
+        "parameter_count": "3",
+        "source": "https://docs.consensus.app/mcp-tools/find-threads",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public server code or verbatim tools/list plus initialize payload was available to compute the serialized context token estimate.",
+    "human_can_agent_cannot": "The Consensus web application documents capabilities beyond the five MCP tools, including general chat/search-history and account interfaces; their exact complete MCP parity was not specified. The official REST API exposes API-specific fields/parameters (for example semantic score and licensed full-text chunks) not shown as search tool parameters in the MCP reference; REST parameters should not be assumed available to the agent through MCP.",
+    "sources": [
+      "https://docs.consensus.app/consensus-mcp",
+      "https://docs.consensus.app/mcp-tools/search",
+      "https://docs.consensus.app/core-features/mcp.md",
+      "https://docs.consensus.app/reference/v1_search"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs recommend using one complete brief, and provide guidance on waiting between polls. These are client/agent instructions; public server implementation is unavailable to verify enforcement. Verbatim guidance is quoted in D_server_side_logic.behavioural_instructions_to_ai_verbatim.",
+    "governance_promises": "The MCP guide states: “No personal data is stored from MCP requests.” The privacy policy states: “Your queries, content, and personal information are never used to train AI models — neither our own nor those of any third party.” It also says account identifiers are not attached to content sent to model providers.",
+    "promises_to_user": "The MCP guide says search queries are sent to the Consensus API over HTTPS/TLS and results contain publicly available academic paper metadata. It states no personal data is stored from MCP requests. The broader privacy policy says content may be processed by model providers to return a result and may be briefly retained by those providers under their terms.",
+    "comparison_with_server_logic": "Public implementation code is unavailable, so the storage and processing promises cannot be verified in handlers. The OAuth metadata and docs confirm authentication and account/plan-based access. Documented rate, usage, and parameter limits describe user-facing constraints; the server-side enforcement details are not public.",
+    "sources": [
+      "https://docs.consensus.app/consensus-mcp",
+      "https://consensus.app/home/privacy-policy/"
+    ]
+  },
+  "contradictions": [
+    "Protected-resource metadata lists scopes_supported as [\"search\", \"profile\"], while the authorization-server metadata lists [\"search\"]. The endpoint's WWW-Authenticate challenge requests scope \"search\".",
+    "The MCP guide states a five-tool total, while the public GitHub README describes only the search tool. The separate tool reference pages document the other four thread tools; the README appears less complete.",
+    "The MCP guide says no personal data is stored from MCP requests. The privacy policy describes processing submitted queries and conversation content to produce results and general retention of personal/non-personal information for legitimate business purposes; the policy's statements do not specifically resolve MCP request storage beyond the guide's claim."
+  ],
+  "observations_for_research": [
+    "The same endpoint exposes a direct paper-search tool and asynchronous tools that delegate multi-step research to the vendor's internal research agent.",
+    "Plan selection affects paper counts, response fields, call budgets, and availability of deep mode; the connected AI subscription does not determine those limits.",
+    "Tool documentation supplies agent-facing workflow and waiting instructions, while no server source is public to establish whether or how those behavioral suggestions are enforced."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages/ and code/ evidence, official MCP overview and all five tool reference pages, plan/access documentation, help-center pages, official repository, pricing page, privacy policy, terms, and listed catalogues. The official repository is public but contains no server implementation; the separate consensus-api repository is a REST API, not the MCP server. Pricing page text did not expose price amounts. No MCP protocol version, SDK, annotations, server initialize instructions, public schemas beyond tool reference pages, or implementation handlers were found. Unofficial/community listings were excluded from actions.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 6.3
+  }
+}

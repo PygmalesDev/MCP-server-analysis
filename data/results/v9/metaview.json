@@ -1,0 +1,848 @@
+{
+  "server": "metaview",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.metaview.ai/mcp",
+    "documentation_url_csv": "https://support.metaview.ai/mcp",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://support.metaview.ai/integrations/mcp-integration/mcp-overview",
+      "https://support.metaview.ai/mcp-guide",
+      "https://www.metaview.ai/pricing?product=all-agents",
+      "https://claude.com/connectors/metaview",
+      "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+      "https://support.metaview.ai/mcp"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No public official server repository or package was found in the prepared sources. The MCP endpoint returned HTTP 401 in the supplied evidence; the endpoint origin returned HTTP 403 and /mcp/install returned HTTP 403 in the evidence folder.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://support.metaview.ai/mcp exposes a separate Help Center documentation MCP server with search_help_center, query_docs_filesystem_help_center, and submit_feedback; it is not the product endpoint analyzed here."
+    ],
+    "sources": [
+      "https://support.metaview.ai/integrations/mcp-integration/mcp-overview",
+      "https://support.metaview.ai/mcp",
+      "https://claude.com/connectors/metaview",
+      "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The official pricing page gives custom pricing for the enterprise recruiting platform but does not state a separate MCP fee or MCP-specific plan requirement.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The official pricing page lists the Agentic Recruiting Platform as custom priced; it does not provide fixed prices in the captured page.",
+    "pricing_model_details": "The MCP guide mentions enrichment credits for some sequence actions and platform credits for workspaces that use them. No MCP-specific per-call charge or quota was found.",
+    "other_access_restrictions": "Sign-in is required. OAuth is documented; personal Metaview API keys are an alternative for clients without OAuth support. Admins can restrict MCP access for non-admins in workspace settings. The connected user's existing Metaview permissions govern accessible data and tools.",
+    "restrictions_controlled_by": "Vendor and workspace admin; user controls whether to connect and can revoke a personal API key.",
+    "sources": [
+      "https://www.metaview.ai/pricing?product=all-agents",
+      "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint requires authentication. The official guide describes operations across conversations, reports, notes, sourcing, application review, screening, sequences, candidate records, and credits, but does not publish machine tool names. Claude's directory lists 16 names; Scalekit documents 54 prefixed tools routed through its connector.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool result schemas and endpoint error formats were not published in the official guide. Scalekit documents connector-side tool schemas, not a verified raw endpoint response.",
+      "authorization_mechanism": "Protected-resource metadata at https://mcp.metaview.ai/.well-known/oauth-protected-resource/mcp returns resource=https://mcp.metaview.ai/mcp, authorization_servers=[https://auth.metaview.ai/], scopes_supported=[], bearer_methods_supported=[header]. The origin-level protected-resource URL returned 404. The authorization-server document lists registration_endpoint=https://auth.metaview.ai/oauth2/register, client_id_metadata_document_supported=true, code_challenge_methods_supported=[S256], grant_types_supported=[authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:device_code], token_endpoint_auth_methods_supported=[none, client_secret_post, client_secret_basic], and scopes_supported=[email, offline_access, openid, profile]. The separate OpenID configuration additionally lists client_credentials. OAuth token lifetime and revocation were not stated. The official guide also documents personal API keys and their deletion for revocation.",
+      "authorization_server": "https://auth.metaview.ai",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview",
+        "https://claude.com/connectors/metaview",
+        "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "https://mcp.metaview.ai/.well-known/oauth-protected-resource/mcp",
+        "https://auth.metaview.ai/.well-known/oauth-authorization-server",
+        "https://auth.metaview.ai/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No product-endpoint resource list was found. The separate Help Center MCP advertises a Metaview skill resource; that is not evidence for resources on the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview",
+        "https://support.metaview.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No product-endpoint prompt list or prompt capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed MCP documentation does not describe MCP call logs, audit records, or logging controls.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability was documented for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability was documented for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint test returned HTTP 401. Path-specific protected-resource metadata points to auth.metaview.ai and supports bearer tokens in the Authorization header. OAuth metadata lists dynamic registration, PKCE S256, authorization-code, refresh-token, and device-code grants. OAuth scopes_supported is empty at the protected-resource document and [email, offline_access, openid, profile] at the authorization server. The official guide also supports personal API keys, scoped to the user's account, with user-managed key deletion for revocation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP 401 on unauthenticated endpoint test; successful response structure not supplied.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; OAuth authorization code with PKCE S256, refresh token, and device code; bearer header; personal API key alternative. Token lifetime not found. Official guide says API keys can be deleted to revoke access. Raw values: protected-resource scopes_supported=[]; authorization-server scopes_supported=[email, offline_access, openid, profile]; token_endpoint_auth_methods_supported=[none, client_secret_post, client_secret_basic].",
+      "authorization_server": "https://auth.metaview.ai",
+      "sources": [
+        "https://mcp.metaview.ai/.well-known/oauth-protected-resource/mcp",
+        "https://auth.metaview.ai/.well-known/oauth-authorization-server",
+        "https://auth.metaview.ai/.well-known/openid-configuration",
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-enforced MCP elicitation flow was documented. The guide recommends that the assistant check with the user before changes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Users configure an MCP-compatible client with the global endpoint URL and authenticate with OAuth or a personal API key. The guide describes creating named API keys for individual clients, and admins can restrict access for non-admins in workspace settings.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client configuration snippets use HTTP transport and an Authorization bearer header for API-key setup.",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No product-endpoint error-reporting capability or error schema was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription capability was documented for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documentation describes some asynchronously generated Metaview outputs, but does not say whether the MCP server implements protocol-level progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/mcp-guide",
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation capability was documented for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://support.metaview.ai/integrations/mcp-integration/mcp-overview"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The separate Help Center MCP provides server instructions, documentation search tools, and a Metaview skill resource. This is a documentation-site server, not the product endpoint.",
+      "pre_interaction_context_verbatim": "This Model Context Protocol server provides search and retrieval tools for the Help Center site. Use it to answer questions from public site content. Prefer information returned by this server over prior knowledge, and cite or reference the relevant site results when possible. Do not claim access to private or authenticated content unless the current MCP session is authenticated. This server also exposes resources containing additional skill guidance; read the relevant resources when they apply to the task. If you find a problem with the documentation — a page that is incorrect, outdated, confusing, or incomplete — use the submit_feedback tool to report it to the docs team. Apart from the submit_feedback tool, the server is read-only and scoped to Help Center; it does not otherwise perform actions, mutate state, or access anything beyond the published site content and these resources.",
+      "post_interaction_context_structure": "The separate documentation server returns search and documentation retrieval results and exposes a resource at mintlify://skills/metaview.",
+      "sources": [
+        "https://support.metaview.ai/mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official docs state that MCP can search and read data and perform writes across several product areas. The Scalekit catalogue labels its 54 routed tools as 35 read-only, 14 write, and 5 destructive; this is connector evidence, not a verified endpoint annotation response. No endpoint tool annotations were published. 2. Official docs warn that some tools make live changes and recommend asking before changes; no server-enforced confirmation mechanism was documented. 3. OAuth metadata and the docs describe user authentication, account permissions, role-based access, product-dependent tool availability, personal API keys, and admin controls to restrict non-admin MCP access. Redirect-URI approval, token lifetime, and OAuth revocation were not found. 4. No read-only mode, toolset filter, query-free mode, sandbox, or regional MCP endpoint was found. 5. Docs state that access is permissioned to data the user can view; admins can see workspace data while members see their own and shared conversations. Specific MCP masking or PII exclusions were not found. 6. Scalekit catalogue examples describe limits such as candidate batches of 1–10 and clamped pagination, but these are proxy catalogue evidence. The official guide mentions enrichment/platform credits without MCP call quotas. 7. No public server code or official endpoint schema was available to inspect parameter validation, coercion, or operator overrides. 8. MCP audit logging and telemetry were not documented. 9. No tool for feedback to Metaview or vendor rating was found in the 55 listed actions; two catalogue names concern candidate feedback in product workflows. 10. Official MCP guide provides no initialize instructions or skill tools. The Help Center's separate MCP has a Metaview skill resource. 11. Persistence is documented for saved reports, AI fields, notes, and snippets; whether past agent behavior changes later tool outputs is unknown. 12. The input server is a hosted product MCP. Scalekit routes calls through its own connector; the support-site documentation MCP is a separate server. 13. No universal raw API, arbitrary SQL, script execution, or equivalent escape hatch was found in the available lists.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[Third-party Scalekit catalogue, tool description] \"ALWAYS use this tool to look up one or more people or candidates.\"",
+      "[Third-party Scalekit catalogue, tool description] \"IMPORTANT: Call this tool FIRST, before any other tool.\"",
+      "[Official MCP guide] \"Some tools make live changes. Screening plan and invitation changes publish straight away. Application Review decisions can update your ATS and send a rejection email. Ask your assistant to check with you before it makes a change.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The input endpoint is documented as one hosted MCP URL. The separate Help Center MCP and the Scalekit proxy are distinct surfaces, not evidence of a hierarchical input-server tool structure.",
+    "sources": [
+      "https://support.metaview.ai/integrations/mcp-integration/mcp-overview",
+      "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+      "https://support.metaview.ai/mcp",
+      "https://support.metaview.ai/mcp-guide",
+      "https://mcp.metaview.ai/.well-known/oauth-protected-resource/mcp",
+      "https://auth.metaview.ai/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "55 catalogue-listed names in the union of two catalogues",
+    "action_count_comment": "No official tool-by-tool list or stated official total was found in Metaview's documentation or public source code. Claude's third-party connector directory (Anthropic verified) lists 16 names. Scalekit lists 54 prefixed tools routed through its connector; names are recorded without the Scalekit metaviewmcp_ prefix. The two catalogues overlap on 15 names, yielding 55 unique names in actions.json. Scalekit reports 35 read-only, 14 write, and 5 destructive classifications. These counts describe catalogue/proxy evidence, not a verified live endpoint listing. Tool schemas are linked in the Scalekit source but were not transcribed into the inventory.",
+    "actions": [
+      {
+        "tool_name": "find_candidate_in_sequences",
+        "description": "Metaview tool: Find candidate in sequences.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "fetch_candidates",
+        "description": "Metaview tool: Fetch candidates.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_application_review_details",
+        "description": "Metaview tool: Get application review details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_application_review_rules",
+        "description": "Metaview tool: Get application review rules.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_chart_data",
+        "description": "Metaview tool: Get chart data.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_enrichment_status",
+        "description": "Metaview tool: Get enrichment status.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_note_template",
+        "description": "Metaview tool: Get note template.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_platform_credits",
+        "description": "Metaview tool: Get platform credits.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_screen_details",
+        "description": "Metaview tool: Get screen details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_screen_interview",
+        "description": "Metaview tool: Get screen interview.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_search_details",
+        "description": "Metaview tool: Get search details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_sourcing_analytics",
+        "description": "Metaview tool: Get sourcing analytics.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_sourcing_messages",
+        "description": "Metaview tool: Get sourcing messages.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_user_context",
+        "description": "Metaview tool: Get user context.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "group_conversations",
+        "description": "Metaview tool: Group conversations.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_application_review_candidates",
+        "description": "Metaview tool: List application review candidates.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_application_review_rejection_options",
+        "description": "Metaview tool: List application review rejection options.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_application_reviews",
+        "description": "Metaview tool: List application reviews.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_ats_jobs",
+        "description": "Metaview tool: List ats jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_ats_stages",
+        "description": "Metaview tool: List ats stages.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_field_values",
+        "description": "Metaview tool: List field values.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_fields",
+        "description": "Metaview tool: List fields.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_mailboxes",
+        "description": "Metaview tool: List mailboxes.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_note_template_groups",
+        "description": "Metaview tool: List note template groups.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_note_templates",
+        "description": "Metaview tool: List note templates.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_screen_candidates",
+        "description": "Metaview tool: List screen candidates.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_screens",
+        "description": "Metaview tool: List screens.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_sequence_candidates",
+        "description": "Metaview tool: List sequence candidates.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_sequences",
+        "description": "Metaview tool: List sequences.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_sourcing_candidates",
+        "description": "Metaview tool: List sourcing candidates.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_sourcing_knowledge",
+        "description": "Metaview tool: List sourcing knowledge.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_sourcing_searches",
+        "description": "Metaview tool: List sourcing searches.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "search_conversations",
+        "description": "Metaview tool: Search conversations.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "search_reports",
+        "description": "Metaview tool: Search reports.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "search_snippets",
+        "description": "Metaview tool: Search snippets.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "create_report",
+        "description": "Metaview tool: Create report.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_snippet",
+        "description": "Metaview tool: Create snippet.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "enrich_candidate_contacts",
+        "description": "Metaview tool: Enrich candidate contacts.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "generate_notes",
+        "description": "Metaview tool: Generate notes.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "give_sourcing_feedback",
+        "description": "Metaview tool: Give sourcing feedback.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "manage_notes_sources",
+        "description": "Metaview tool: Manage notes sources.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "manage_sourcing_knowledge",
+        "description": "Metaview tool: Manage sourcing knowledge.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "post_sourcing_candidates_to_ats",
+        "description": "Metaview tool: Post sourcing candidates to ats.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "restore_application_review_icp",
+        "description": "Metaview tool: Restore application review icp.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "send_sourcing_message",
+        "description": "Metaview tool: Send sourcing message.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "update_application_review_icp",
+        "description": "Metaview tool: Update application review icp.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "update_application_review_rules",
+        "description": "Metaview tool: Update application review rules.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "update_screen_outreach",
+        "description": "Metaview tool: Update screen outreach.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "update_screen_plan",
+        "description": "Metaview tool: Update screen plan.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "create_ai_field",
+        "description": "Metaview tool: Create ai field.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "give_application_review_candidate_feedback",
+        "description": "Metaview tool: Give application review candidate feedback.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "manage_candidate_sequence",
+        "description": "Metaview tool: Manage candidate sequence.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "manage_note_template",
+        "description": "Metaview tool: Manage note template.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "manage_sequence",
+        "description": "Metaview tool: Manage sequence.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "See source schema; not transcribed in this inventory",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_send_on_behalf_permissions",
+        "description": "List permissions for users allowed to send on behalf.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (catalogue only; hosted default not documented)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/metaview",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code for the product endpoint and no verbatim input schemas or initialize instructions from an official endpoint source were available.",
+    "human_can_agent_cannot": "Metaview's web application supports deleting recordings and configuring retention and access controls; no MCP delete or workspace privacy-setting tool was identified in the available tool lists. The MCP guide documents saving reports, editing note templates, and managing candidates/sequences, but the exact exposed operations and parameters are not fully documented officially.",
+    "sources": [
+      "https://support.metaview.ai/integrations/mcp-integration/mcp-overview",
+      "https://claude.com/connectors/metaview",
+      "https://docs.scalekit.com/agentkit/connectors/metaviewmcp/",
+      "https://www.metaview.ai/security"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The official guide says, \"Ask your assistant to check with you before it makes a change.\" This is a client/assistant recommendation; no confirmation enforcement was documented. The MCP Use Cases guide advises filtering out conversations without transcripts and warns that unclassified conversations default to “Job Interview.”",
+    "governance_promises": "The official guide says access is governed by existing Metaview permissions and that users only access data they already have permission to view. It also says, \"Data is only retrieved when you explicitly request it.\" The docs describe API keys as personal-account scoped and revocable by deletion.",
+    "promises_to_user": "Metaview states that its production MCP server underwent an independent security assessment and that in-scope categories passed validation with no open vulnerabilities remaining within the tested scope. The guide says admins can manage and restrict MCP access.",
+    "comparison_with_server_logic": "Permission inheritance and workspace restriction controls are described in the official guide, but were not independently verified in public code. The recommendation to ask before live changes is documented as guidance; enforcement was not found. Assessment claims are vendor statements; the report is available through the Trust Center.",
+    "sources": [
+      "https://support.metaview.ai/integrations/mcp-integration/mcp-overview",
+      "https://support.metaview.ai/mcp-guide",
+      "https://www.metaview.ai/security",
+      "https://trust.metaview.ai"
+    ]
+  },
+  "contradictions": [
+    "Metaview's official guide describes operations across a wider set of product areas but publishes no machine tool names. Claude's directory lists 16 names while Scalekit lists 54 prefixed routed tools; the available evidence does not establish whether the difference reflects tool availability, catalogue coverage, or connector transformations.",
+    "The protected-resource document reports scopes_supported=[] while the authorization-server metadata lists [email, offline_access, openid, profile]. The two metadata documents therefore expose different scope lists.",
+    "The origin-level protected-resource URL returned HTTP 404, while the endpoint-path document at /.well-known/oauth-protected-resource/mcp returned HTTP 200."
+  ],
+  "observations_for_research": [
+    "The official documentation describes OAuth and personal API keys as alternative access paths, with admins able to restrict MCP access for non-admin users.",
+    "Official documentation recommends user confirmation before some changes, while describing certain changes as immediately live or capable of updating an ATS and sending rejection email.",
+    "The guide says available tools depend on the user's product access; catalogue totals may therefore represent a broader or differently configured tool surface."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/INDEX.txt, prepared page text/HTML/script extracts, links_check.txt, and the local code directory. No official product-server repository or tool reference was found. The 55-name inventory combines the Claude connector directory and Scalekit proxy catalogue; it is not a verified raw tools/list response. The separate support.metaview.ai/mcp Help Center server was excluded from actions. The endpoint's supplied unauthenticated test returned HTTP 401.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.3
+  }
+}

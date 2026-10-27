@@ -1,0 +1,863 @@
+{
+  "server": "gitlab",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://gitlab.com/api/v4/mcp",
+    "documentation_url_csv": "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+    "addressing": "global",
+    "repository_url": "https://gitlab.com/gitlab-org/gitlab",
+    "documentation_urls_used": [
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server_troubleshooting/",
+      "https://docs.gitlab.com/user/ai-governance/tool-governance/",
+      "https://docs.gitlab.com/user/gitlab_duo/data_usage/",
+      "https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_clients/",
+      "https://docs.gitlab.com/releases/19/gitlab-19-5-released/",
+      "https://about.gitlab.com/blog/mcp-server-ga/",
+      "https://about.gitlab.com/blog/new-mcp-tools-for-automation",
+      "https://about.gitlab.com/pricing/",
+      "https://gitlab.com/api/v4/projects/gitlab-org%2Fgitlab/repository/commits?ref_name=master&per_page=1"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The public GitLab application repository contains the product's Ruby on Rails code and is the closest public implementation for self-managed installations. GitLab.com is hosted SaaS; its deployed revision and configuration were not verified. The prepared code folder contained no repository clone, so tool handlers were not fully analyzed.",
+    "mcp_protocol_version": "2025-03-26, 2025-06-18, and 2025-11-25 supported. 2026-07-28 is accepted in initialize but answered with 2025-11-25; stateless features are not implemented.",
+    "commit_hash": "f0464c0449f14799bb76ffdbf87c271150c3e655",
+    "commit_date": "2026-10-24",
+    "implementation_language": "Ruby (GitLab application repository; endpoint-specific implementation not verified)",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Yes",
+    "license": "MIT (GitLab Community Edition; enterprise components have separate licensing)",
+    "release_status": "Generally available; GitLab documentation identifies the server as GA in GitLab 19.5.",
+    "other_official_servers": [
+      "https://gitlab.com/api/v4/mcp is the GitLab.com endpoint. GitLab documents the same /api/v4/mcp path for Self-Managed and Dedicated instances, each hosted on that customer's instance.",
+      "The opt-in orbit toolset exposes tools defined by GitLab Orbit; names and schemas are set by the Orbit server and are not enumerated in the MCP tool reference."
+    ],
+    "sources": [
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+      "https://gitlab.com/gitlab-org/gitlab",
+      "https://gitlab.com/api/v4/projects/gitlab-org%2Fgitlab/repository/commits?ref_name=master&per_page=1"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "The MCP server is listed on GitLab Free, Premium, and Ultimate. No separate MCP access price is documented. Access to some toolsets or underlying Duo features may require a paid plan, seat, or GitLab Credits.",
+    "linked_software": "Open source + paid cloud",
+    "linked_software_cost": "GitLab.com pricing page lists Free at $0/user/month, Premium at $29/user/month billed annually, and Ultimate at custom pricing. Self-Managed and Dedicated have separate subscription offerings.",
+    "pricing_model_details": "GitLab Credits may apply to Duo Agent Platform features used through Duo flows. The pricing page lists promotional included credits for Premium and Ultimate and on-demand credits at $1/credit after enabling on-demand billing; these are not stated as MCP call charges.",
+    "other_access_restrictions": "GitLab.com MCP requests have documented per-user plan limits of 60/minute and 3,600/hour on Free, and 600/minute and 5,000/hour on Premium and Ultimate. Requests also count against general API limits. Duo tools require eligibility; code_security tools require Ultimate features; wikis, code_security, and orbit are opt-in toolsets.",
+    "restrictions_controlled_by": "GitLab controls plans, feature eligibility, and SaaS rate limits; group owners and instance administrators control access settings, tool governance, and available features; each tool also checks the caller's GitLab permissions.",
+    "sources": [
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+      "https://about.gitlab.com/pricing/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The server exposes named tools for project, repository, merge request, work item, CI, Duo, wiki, and security workflows. Toolsets, user eligibility, licensing, and permissions affect which tools are listed and callable.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results use MCP tool responses. GitLab documents tool errors as results with isError: true; endpoint-level rate limits instead return HTTP 429. Tool-specific result structures are documented in the reference.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_troubleshooting/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The documentation and available evidence identify tools, but do not establish whether this endpoint advertises MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "No endpoint prompt list or prompt capability is documented in the evidence reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Troubleshooting documentation describes mcp.log fields for denials and tool outcomes. GitLab also describes audit trails for Duo Agent Platform sessions; scope and retention for direct GitLab.com MCP calls are not fully specified in the reviewed material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_troubleshooting/",
+        "https://about.gitlab.com/blog/mcp-server-ga/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "No sampling capability is documented in the endpoint material reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "No roots capability is documented in the endpoint material reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The endpoint returns 401 with a Bearer challenge referencing OAuth protected-resource metadata. GitLab documents OAuth 2.0 Dynamic Client Registration and pre-registered OAuth applications. A fine-grained personal access token with the MCP tool resource and Execute permission is also accepted.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "401 Unauthorized response with WWW-Authenticate: Bearer realm=\"GitLab\", scope=\"mcp\", resource_metadata=\"https://gitlab.com/.well-known/oauth-protected-resource/api/v4/mcp\".",
+      "authorization_mechanism": "OAuth protected-resource metadata names https://gitlab.com as authorization server and scope mcp. The authorization-server metadata lists registration_endpoint https://gitlab.com/oauth/register; grants authorization_code, client_credentials, device_code, and refresh_token; PKCE methods plain and S256; client authentication client_secret_basic and client_secret_post; and revocation endpoint https://gitlab.com/oauth/revoke. Its scopes_supported are api, read_api, read_user, create_runner, manage_runner, k8s_proxy, self_rotate, mcp, mcp_orbit, read_repository, write_repository, read_registry, write_registry, read_virtual_registry, write_virtual_registry, read_observability, write_observability, ai_features, sudo, admin_mode, read_service_ping, openid, profile, email, ai_workflows, and user:*. The protected-resource metadata itself lists only mcp. Token lifetime: NOT FOUND in supplied metadata.",
+      "authorization_server": "https://gitlab.com",
+      "sources": [
+        "https://gitlab.com/api/v4/mcp",
+        "https://gitlab.com/.well-known/oauth-protected-resource",
+        "https://gitlab.com/.well-known/oauth-protected-resource/api/v4/mcp",
+        "https://gitlab.com/.well-known/oauth-authorization-server",
+        "https://gitlab.com/.well-known/openid-configuration",
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server/"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Duo sessions can pause for human approval or answers through send_duo_session_input, but the evidence does not describe MCP Elicitation protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The send_duo_session_input tool accepts a workflow ID, approval boolean, and optional message; it is a GitLab tool workflow, not documented as MCP Elicitation.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "https://about.gitlab.com/blog/mcp-server-ga/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "GitLab offers asynchronous Duo sessions through tools, but documentation does not establish MCP Tasks capability support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Duo session tools return workflow identifiers and expose status/results through later calls.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "HTTP headers select toolsets or explicit tool names and can prefix tool names. When both selection headers are used, the server returns their union. Toolset names are case-insensitive; an unrecognized toolset returns 400.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration affects the list of tools returned by the server.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Tool-call failures are represented in MCP results with isError: true and logged with tool_status. A request-level rate-limit rejection is HTTP 429 with rate-limit headers and is not an MCP JSON-RPC response.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool errors use isError: true; rate_limited results may identify limit and retry_after_seconds. Endpoint-level 429 is a separate HTTP response.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_troubleshooting/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "No MCP subscription capability is documented in the evidence reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Duo sessions are asynchronous. start_duo_session returns a workflow ID; get_duo_session reports progress and results, and responses provide a polling-delay hint. This is documented as tool-level flow tracking.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Workflow ID, status/result, and polling-delay hint are exposed by Duo tools.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The reviewed MCP tool reference describes starting and checking Duo sessions and sending input, but does not establish a session-cancellation capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP protocol version negotiation is documented",
+      "description_what_how": "GitLab documents HTTP and stdio-through-mcp-remote transports, protocol version negotiation, tool-name prefixing, and toolset selection. The exact initialize instructions are not published in the reviewed evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.gitlab.com/user/model_context_protocol/mcp_server/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official reference labels tool operations, but the MCP server's annotations are not reproduced there. Tool governance groups tools by their declared annotations. Reads, writes, merges, and deletes are documented across the catalog.\n2. Duo sessions can require a plan/tool-call approval. Always Ask is conveyed through annotations and depends on client behavior for direct MCP clients; GitLab documents Always Deny as server-enforced for supported governance. Product-level Duo sessions can pause for approval.\n3. OAuth uses the mcp scope; a fine-grained PAT with MCP tool resource and Execute permission is also documented. Calls follow the user's GitLab permissions. Group or instance admins enable MCP; Duo/security tool eligibility is plan/feature dependent. DCR or pre-registered OAuth is supported. Token lifetime not found; revocation endpoint is in metadata.\n4. Toolsets can be selected with X-Gitlab-Enabled-Mcp-Server-Toolsets or explicit tool names. Defaults include meta, core, merge_requests, work_items, repository, ci, and eligible duo_agent_platform. wikis, code_security, and orbit are opt-in. Tool-name prefix header supports up to 32 characters. Toolsets plus explicit tools form a union. Self-Managed/Dedicated are separate instance deployments; no read-only mode is documented.\n5. GitLab says permissions are checked per project/namespace. get_repository_file returns text only, rejects binary/LFS files, and respects Duo context exclusions. No general MCP PII masking rule was found. Self-Managed Duo secret redaction documentation is about Duo model processing, not direct MCP response masking.\n6. GitLab.com limits are per user: Free 60/minute and 3,600/hour; Premium/Ultimate 600/minute and 5,000/hour. Calls also count against general API limits. Tool-specific caps include pagination, file line limits, 512 KB job-log pages, and diff limits. Self-Managed MCP rate limiting is admin-configurable and disabled by default. No direct MCP per-call price found.\n7. Tool schemas document parameter requirements, enums, bounds, and mutually exclusive inputs. Invalid toolset names return 400. No general argument coercion or operator override behavior was established from the reviewed sources.\n8. Troubleshooting docs describe mcp.log denial/tool_status details. GitLab's blog describes Duo session audit trail and per-user attribution. The privacy policy's explicit zero-data statement is for Self-Managed MCP; equivalent GitLab.com handling was not established here.\n9. No feedback/rating/report/survey tool was found among the 53 named tools. Docs invite feedback via issue 630189; this is a documentation prompt, not a tool result upsell. No in-tool upsell text identified.\n10. Toolsets shape the list of tools; no server-delivered skill loader was identified. Docs tell clients/users to guard against prompt injection. Tool descriptions can steer selection; those instructions are not server-enforced unless product permissions or governance checks apply.\n11. Duo session state persists through workflow IDs and session listing/status tools. No evidence that prior agent behavior changes the general tool list or future responses.\n12. Orbit is a dynamically exposed toolset: Orbit determines tool names, descriptions, and schemas. Duo sessions also call GitLab's agent platform from a tool. The named catalog does not enumerate Orbit tools.\n13. The 53 named tools include scoped GitLab operations, not a documented arbitrary REST request, SQL, or script execution tool. Orbit command tools are dynamically supplied and their full list was not available in the reference.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“You’re responsible for guarding against prompt injection when you use these tools.”",
+      "“Exercise extreme caution or use MCP tools only on GitLab objects you trust.”",
+      "“For best results, describe the functionality or behavior you’re interested in rather than using generic keywords or specific function or variable names.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The server groups tools into selectable toolsets, including an opt-in Orbit toolset whose tool names and schemas are supplied by the Orbit server. Duo Agent Platform sessions are also started and tracked through MCP tools.",
+    "sources": [
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server_troubleshooting/",
+      "https://docs.gitlab.com/user/ai-governance/tool-governance/",
+      "https://docs.gitlab.com/user/gitlab_duo/data_usage/",
+      "https://about.gitlab.com/blog/mcp-server-ga/"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "53 named tools in the official reference; additional Orbit tools are dynamically defined and not enumerated",
+    "action_count_comment": "The official list is https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/; it provides per-tool descriptions and schemas but no overall total. The 53 entries in actions.json are named tools in the reference after excluding tools explicitly marked unlisted from tools/list (create_issue, get_issue, get_pipeline_jobs). The count combines default, eligible, and opt-in toolsets, so it is not the default count for every account. The reference says Orbit supplies one tool per command, but does not publish a complete Orbit list. Claude's GitLab page is a plugin description, not a tool-name list; Composio's GitLab toolkit describes its own integration surface and was not used to add tools.",
+    "actions": [
+      {
+        "tool_name": "get_mcp_server_version",
+        "description": "Returns the current GitLab MCP server version.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project",
+        "description": "Returns metadata for one project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_commit",
+        "description": "Adds a commit with one or more file actions to a branch.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_merge_request",
+        "description": "Creates or updates a merge request.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_merge_request",
+        "description": "Retrieves a merge request and optionally one associated data facet.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_duo_agents_and_flows",
+        "description": "Lists project-configured Duo agents and flows and whether you can start them.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "start_duo_session",
+        "description": "Starts an asynchronous Duo Agent Platform session for a project goal.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_duo_sessions",
+        "description": "Lists Duo sessions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_duo_session",
+        "description": "Retrieves Duo session status and result.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_duo_session_input",
+        "description": "Provides approval, rejection, or an answer to a paused Duo session.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_merge_requests",
+        "description": "Lists merge requests across a project or group.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_merge_request_commits",
+        "description": "Retrieves commits for a merge request.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_merge_request_diffs",
+        "description": "Retrieves merge request diffs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_merge_request_pipelines",
+        "description": "Retrieves pipelines associated with a merge request.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_merge_request_conflicts",
+        "description": "Retrieves merge request conflicts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_note",
+        "description": "Creates or updates a note or reply on a work item or merge request.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_merge_request_notes",
+        "description": "Retrieves merge request notes and discussions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_merge_request_review",
+        "description": "Posts review comments, replies, resolves discussions, submits or approves a review.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_project_members",
+        "description": "Lists project members and roles.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_user",
+        "description": "Looks up a GitLab user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accept_merge_request",
+        "description": "Merges a merge request, optionally waiting for checks or merge train.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_branch",
+        "description": "Creates a branch in a repository.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fork_repository",
+        "description": "Forks a project repository.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_branches",
+        "description": "Lists repository branches.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_repository_file",
+        "description": "Retrieves a file at a repository ref.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_repository_tree",
+        "description": "Lists repository tree entries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_commit",
+        "description": "Retrieves a commit.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_commits",
+        "description": "Lists repository commits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_releases",
+        "description": "Lists project releases.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_tags",
+        "description": "Lists repository tags.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_pipeline",
+        "description": "Retrieves pipeline details and optionally jobs, downstream pipelines, or artifacts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job",
+        "description": "Retrieves job details and optionally its log.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_artifact_file",
+        "description": "Retrieves a single file from a job artifact.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_pipelines",
+        "description": "Lists project pipelines.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_pipeline",
+        "description": "Runs, retries, cancels, or renames a pipeline.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_pipeline",
+        "description": "Manages pipeline actions.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_work_item",
+        "description": "Retrieves a work item.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_workitem_notes",
+        "description": "Retrieves notes for a work item.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "link_work_items",
+        "description": "Links work items.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_saved_view_work_items",
+        "description": "Lists work items from a saved view.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_vulnerabilities",
+        "description": "Lists project vulnerabilities.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_vulnerability",
+        "description": "Retrieves a vulnerability.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_vulnerability",
+        "description": "Updates vulnerability status or severity, or creates a linked issue.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_work_item",
+        "description": "Creates or updates a work item.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_work_items",
+        "description": "Lists work items in a project or group.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_work_item_types",
+        "description": "Lists supported work item types.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_projects",
+        "description": "Lists projects.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_groups",
+        "description": "Lists groups.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search",
+        "description": "Searches GitLab using a query and selected scope.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_labels",
+        "description": "Searches labels.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_wiki_pages",
+        "description": "Lists wiki pages in a project or group.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "semantic_search",
+        "description": "Searches project code by meaning.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "attach_scan_profile",
+        "description": "Attaches a security scan profile to projects or groups.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "See official tool reference (tool-specific schema)",
+        "parameter_count": "See official tool reference",
+        "source": "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted initialize instructions and full endpoint tool definitions were not available verbatim; the public application repository was not cloned and analyzed. Token count therefore cannot be computed from the supplied tool reference.",
+    "human_can_agent_cannot": "GitLab's MCP surface is a curated subset of GitLab workflows rather than the full GitLab product/API. The official tool reference enumerates available MCP operations; it does not document general access to all REST/GraphQL operations or arbitrary instance administration. Examples outside the documented MCP catalog should be treated as unavailable through this endpoint unless separately listed.",
+    "sources": [
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+      "https://claude.com/plugins/gitlab",
+      "https://composio.dev/toolkits/gitlab"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "GitLab's client setup guide says: “You’re responsible for guarding against prompt injection when you use these tools.” and “Exercise extreme caution or use MCP tools only on GitLab objects you trust.” These are user/client cautions, not documented server checks. Semantic search guidance says: “For best results, describe the functionality or behavior you’re interested in rather than using generic keywords or specific function or variable names.”",
+    "governance_promises": "GitLab states actions run under existing GitLab permissions. Its Self-Managed AI data page says: “GitLab does not transmit, store, retain, or process any data when the GitLab MCP server is used. All communication occurs directly between the MCP client and the GitLab MCP server in your environment.” That statement is explicitly for Self-Managed; it does not establish GitLab.com data handling. GitLab's GA blog says Duo flows use the same context layer, policy checks, and audit trail as other Duo Agent Platform sessions.",
+    "promises_to_user": "GitLab describes the MCP server as generally available on Free, Premium, and Ultimate, and available on GitLab.com, Self-Managed, and Dedicated. It says each action follows existing GitLab permissions and frames tool governance as using existing organization settings.",
+    "comparison_with_server_logic": "Permission checks and toolset eligibility are documented. Always Deny is documented as server-enforced in GitLab tool governance; Always Ask for direct third-party MCP clients is an annotation/client behavior and is not server-enforced. Self-Managed zero-data-retention claims are not established for the GitLab.com endpoint analyzed here. The reviewed sources do not substantiate every broad marketing statement with endpoint-specific implementation evidence.",
+    "sources": [
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+      "https://docs.gitlab.com/user/model_context_protocol/mcp_server_tools/",
+      "https://docs.gitlab.com/user/ai-governance/tool-governance/",
+      "https://docs.gitlab.com/user/gitlab_duo/data_usage/",
+      "https://about.gitlab.com/blog/mcp-server-ga/"
+    ]
+  },
+  "contradictions": [
+    "The supplied protected-resource documents report scopes_supported [\"mcp\"], while GitLab's authorization-server metadata advertises a broader OAuth scope list. The endpoint's Bearer challenge requests mcp; the additional scopes are authorization-server capabilities and are not evidence that this endpoint accepts them.",
+    "GitLab product/blog material describes writes and deletes waiting for a reviewer, but the governance documentation says Always Ask is not enforced by the MCP server for direct third-party MCP clients; behavior depends on client support. Always Deny is server-enforced under the documented governance feature.",
+    "The tool reference includes sections for create_issue, get_issue, and get_pipeline_jobs but marks them unlisted from tools/list and says they remain callable for migration. They were excluded from the 53 listed tools in actions.json.",
+    "The Self-Managed data-usage page says MCP traffic stays within the user's environment, but that scope does not describe the GitLab.com SaaS endpoint in this study."
+  ],
+  "observations_for_research": [
+    "GitLab exposes both toolset-level filtering and explicit tool-name selection. The docs specify that using both returns their union, which affects how reliably a client can narrow the available list.",
+    "The same catalog mixes ordinary GitLab operations with tools that start asynchronous Duo workflows; the latter have separate workflow IDs, status calls, and human-input steps.",
+    "A documented Orbit toolset delegates tool naming and schemas to another GitLab component, so the public reference does not provide a closed, fully enumerable catalog for all configurations."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/INDEX.txt, the saved official docs and tool reference, OAuth values supplied in the prompt, and links_check.txt. The endpoint itself returned HTTP 401 with a Bearer MCP challenge. The prepared code folder contained no repository clone; the public GitLab monorepo and latest master commit were identified, but endpoint handlers and initialize output were not fully inspected. The tool reference does not state a total and includes dynamically supplied Orbit tools. Third-party Claude and Composio pages were inspected only as cross-checks; neither supplied native MCP tool names to add. Unofficial community GitLab MCP repositories were found and excluded.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.8
+  }
+}

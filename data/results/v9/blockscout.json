@@ -1,0 +1,529 @@
+{
+  "server": "blockscout",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.blockscout.com/mcp",
+    "documentation_url_csv": "https://docs.blockscout.com/devs/mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/blockscout/mcp-server",
+    "documentation_urls_used": [
+      "https://docs.blockscout.com/devs/mcp-server",
+      "https://github.com/blockscout/mcp-server",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/SPEC.md",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/API.md",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/MCP-REGISTRY-README.md",
+      "https://claude.com/connectors/blockscout",
+      "https://mcp.so/servers/blockscout",
+      "https://glama.ai/mcp/servers/blockscout/mcp-server",
+      "https://eaas.blockscout.com/privacy-notice",
+      "https://blockscout.com/pro-api",
+      "https://www.blog.blockscout.com/ai-agents-blockchain-apis/"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository identifies the hosted endpoint as its remote Streamable HTTP deployment and documents its tools. Its checked-in server is the same product, but hosted deployment configuration and exact running revision cannot be independently verified.",
+    "mcp_protocol_version": "2025-11-25 reported by MCPI; the supplied endpoint evidence does not include an initialize response.",
+    "commit_hash": "095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6",
+    "commit_date": "2026-09-08",
+    "implementation_language": "Python",
+    "mcp_sdk_and_version": "mcp[cli]==1.26.0",
+    "code_public": "Yes",
+    "license": "LicenseRef-Blockscout (repository license text, version 1.0, effective 2026-05-15)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "The repository documents a local stdio deployment of this product, in addition to the hosted Streamable HTTP endpoint; both expose the official 16-tool set. https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md",
+      "The documentation website is powered by Mintlify and provides its own documentation browsing features; these are not tools of the product endpoint."
+    ],
+    "sources": [
+      "https://docs.blockscout.com/devs/mcp-server",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/server.json",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/pyproject.toml",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/LICENSE"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "The server itself has no separately published price. Official setup instructions require a Blockscout PRO API key for most data tools; the developer portal is described as having a free tier with no credit card requirement. The official connector directory uses a shared key and may have access or capability restrictions.",
+    "linked_software": "Open source + paid cloud",
+    "linked_software_cost": "A free tier for the PRO API is mentioned, but the official pricing page returned HTTP 503 in the prepared evidence. No verified plan prices or quotas found.",
+    "pricing_model_details": "The code reads upstream API credit balances and can add a low-credit advisory; per-call costs vary by endpoint. Exact current prices and plan quotas were not available in the official pricing evidence.",
+    "other_access_restrictions": "Most data tools require a valid PRO API key. The hosted endpoint accepts the documented Blockscout-MCP-Pro-Api-Key header and x-api-key alias. A code-configurable session-gated tier exists but is off by default; official hosted configuration is not public.",
+    "restrictions_controlled_by": "Vendor and server operator; customers provide their own API key where configured.",
+    "sources": [
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/config.py",
+      "https://blockscout.com/pro-api",
+      "https://claude.com/connectors/blockscout"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official code registers 16 tools. Each is annotated read-only, non-destructive, and open-world. The initialization tool and raw API tool have additional behavior described below.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool calls return text plus structuredContent using a ToolResponse envelope. Errors are returned as MCP tool errors; detailed error handling and pagination are documented in the code.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md#L167-L184",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/server.py#L190-L200",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/SPEC.md#L613-L644"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The server exposes a bundled blockscout-analysis skill and reference files as MCP resources. The initialization context points the agent to the skill entry point and explains how to resolve reference URIs.",
+      "pre_interaction_context_verbatim": "When `SKILL.md` mentions a reference path such as `references/foo.md`, resolve it as `blockscout-mcp://skill/` plus that path over MCP resources, or `GET /skill/` plus that path over HTTP.",
+      "post_interaction_context_structure": "Resource reads return the resource content; successful resource reads are logged and sent to configured analytics/telemetry sinks.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/constants.py",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/resources/skill_resources.py",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/server.py"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP prompt registration was found in the analyzed public server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/tree/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Tool invocations and successful resource reads are logged. The code also sends usage events to Mixpanel when configured and emits anonymous community telemetry by default in community-run instances.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Operational logs plus analytics events containing tool name, tool arguments, server version, client metadata where available, and a one-way API-key fingerprint. The session_id argument is masked before transmission.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md#L425-L440",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/observability.py",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/analytics.py"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP sampling requests or sampling handlers were found in the public code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/tree/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP roots capability or roots handlers were found in the public code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/tree/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The provided endpoint POST returned HTTP 400, “Invalid Content-Type header”; no WWW-Authenticate challenge was supplied in the provided evidence. The four provided well-known OAuth/OIDC URLs all returned HTTP 404 Not Found. The product instead documents API-key headers. OAuth metadata supplies no authorization server, registration endpoint, PKCE, grant types, or supported scopes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "API-key authorization is supplied as an HTTP header; OAuth metadata documents were absent.",
+      "authorization_mechanism": "API key; raw evidence: POST https://mcp.blockscout.com/mcp returned HTTP 400, Invalid Content-Type header; /.well-known/oauth-protected-resource, /.well-known/oauth-protected-resource/mcp, /.well-known/oauth-authorization-server, and /.well-known/openid-configuration returned HTTP 404 Not Found. No scopes_supported list is available.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.blockscout.com/mcp",
+        "https://mcp.blockscout.com/.well-known/oauth-protected-resource",
+        "https://mcp.blockscout.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.blockscout.com/.well-known/oauth-authorization-server",
+        "https://mcp.blockscout.com/.well-known/openid-configuration",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md#L34-L47"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP elicitation capability was found in the analyzed public code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/tree/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP task capability was found in the analyzed public code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/tree/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Operators configure API keys, telemetry, HTTP transport, response limits, and optional session metering through environment settings. The MCP endpoint's configuration interface and hosted values are not public.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Operator environment configuration; no public endpoint configuration UI documented.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/config.py",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No dedicated MCP error-reporting capability or feedback tool is registered in the official list. Tool errors are returned to the caller; anonymous usage telemetry is a separate feature.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool errors are returned as MCP errors and described in the repository specification.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md#L167-L184",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/SPEC.md#L613-L634"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No subscription capability was found in the analyzed public code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/tree/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "For long-running multi-step operations, tools can emit periodic progress notifications when requested by the client. The configured default interval is 15 seconds.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP progress notifications during calls; final results use the ToolResponse structure.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.blockscout.com/devs/mcp-server",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/config.py"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The server uses async operations and handles client disconnects; the public specification notes that execution cancellation and session budget accounting are separate. No additional server-specific cancellation tool exists.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client request cancellation follows MCP/SDK behavior; no custom cancellation result structure documented.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/SPEC.md#L865-L872"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The server supplies initialize instructions and an initialization tool that returns server version, a skill pointer, URI resolution guidance, and a session identifier on deployments with session gating.",
+      "pre_interaction_context_verbatim": "Operating rules, execution strategies, and the curated `direct_api_call` endpoint reference for analyzing Blockscout data live in the `blockscout-analysis` skill. If the skill is already loaded in your context, use that copy. If no copy is loaded, fetch the entry point from `blockscout-mcp://skill/SKILL.md` over MCP resources or `GET /skill/SKILL.md` over HTTP.",
+      "post_interaction_context_structure": "Initialization tool returns a ToolResponse with server reference data, skill instructions, and, when session gating is enabled, a session_id.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/constants.py",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/server.py",
+        "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/initialization/unlock_blockchain_analysis.py"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. All official tools are registered readOnlyHint=true, destructiveHint=false, openWorldHint=true; no idempotentHint is set. The generic direct_api_call accepts POST, so its annotation does not itself rule out state-changing upstream paths. 2. No enforced human confirmation flow is documented; direct_api_call validates POST arguments but does not require a human confirmation parameter. Tool annotations are hints, not a confirmation mechanism. 3. API-key headers authorize upstream PRO API requests; no OAuth scopes, user-role inheritance, or redirect approval applies in the provided metadata. Session-gating is configurable, off by default in code, and when enabled issues bounded session IDs. 4. MCP and REST surfaces exist. No read-only mode/tool filter is documented. Session gating can meter MCP and REST separately; deployments can run stdio or HTTP. 5. No general PII masking is specified. Telemetry masks session_id and reports only a one-way key fingerprint; API keys are not transmitted to telemetry. 6. Code sets response-size limits and truncation behavior; pagination and time-bounded transaction queries are used. Config has a 100,000-character direct API response limit; page sizes and call credits vary. 7. Typed Pydantic schemas validate arguments. direct_api_call rejects invalid method/body combinations and rejects a legacy path with a corrective error rather than silently rewriting it. 8. Tool/resource activity is logged; Mixpanel analytics and anonymous community telemetry can receive tool name, arguments, version, client details, and fingerprint. Community telemetry defaults on in code and has an opt-out setting. 9. The official tool list has no feedback, rating, survey, or report tool. The initialization flow steers agents to the Blockscout skill and curated API reference. 10. The bundled blockscout-analysis skill is delivered through MCP resources; a separate official agent-skills repository distributes skills outside MCP. Instructions in descriptions guide behavior but are not all enforced. 11. Session IDs carry call-count and expiry state when metering is enabled. Code defaults to five calls per surface and a 900-second TTL, configurable by operator; no evidence that past agent behavior otherwise changes available tools. 12. Flat 16-tool MCP catalog, with internal API dispatchers and upstream services for Chainscout, ENS, and Blockscout APIs; no nested MCP sub-server is documented. 13. direct_api_call is a broad raw API escape hatch with GET/POST, bounded response handling, and endpoint path supplied by caller; its documented curated scope and code validation constrain but do not eliminate this generality.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Call it once per session, before any other tool.",
+      "When `SKILL.md` mentions a reference path such as `references/foo.md`, resolve it as `blockscout-mcp://skill/` plus that path over MCP resources, or `GET /skill/` plus that path over HTTP."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One MCP endpoint exposes a flat official tool list. The direct API tool uses internal handlers, while requests are proxied to upstream product APIs.",
+    "sources": [
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/server.py",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/config.py",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/session_gate.py",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/telemetry.py",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/SPEC.md",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "19 (16 official-list entries plus 3 catalogue-only names)",
+    "action_count_comment": "The official README tool list exists and names 16 tools; no separate total statement is needed because the list itself has 16 entries. actions.json includes all 16 official names and 3 additional names from the Anthropic connector directory (2026-10), which lists 15 tools total and differs in names from the repository. Glama reports 18 tools; MCP.so reports 16 for this endpoint. The latter catalogues are cross-checks, not replacements for the official list. Anthropic labels the connector verified.",
+    "actions": [
+      {
+        "tool_name": "__unlock_blockchain_analysis__",
+        "description": "Initializes analysis and returns session reference plus skill pointer.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": 0,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/initialization/unlock_blockchain_analysis.py#L25-L25",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_chains_list",
+        "description": "Lists supported chains with optional query filtering.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (optional); session_id: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/chains/get_chains_list.py#L25-L37",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_address_by_ens_name",
+        "description": "Resolves an ENS name to an address.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); session_id: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/ens/get_address_by_ens_name.py#L23-L26",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "lookup_token_by_symbol",
+        "description": "Searches tokens by symbol or name on a chain.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); symbol: string (required); session_id: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/search/lookup_token_by_symbol.py#L28-L32",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_contract_abi",
+        "description": "Retrieves a verified contract ABI.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); address: string (required); session_id: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/contract/get_contract_abi.py#L24-L28",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "inspect_contract_code",
+        "description": "Returns verified contract metadata or a selected source file.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); address: string (required); file_name: string (optional); session_id: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/contract/inspect_contract_code.py#L24-L38",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_address_info",
+        "description": "Returns address balance, ENS, contract, token and public-tag information.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); address: string (required); session_id: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/address/get_address_info.py#L65-L69",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tokens_by_address",
+        "description": "Lists ERC-20 holdings for an address.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); address: string (required); cursor: string (optional); session_id: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/address/get_tokens_by_address.py#L30-L38",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_block_number",
+        "description": "Gets block number at a time or latest block.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); datetime: string (optional); session_id: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/block/get_block_number.py#L38-L50",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_transactions_by_address",
+        "description": "Lists address transactions in a bounded time range.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); address: string (required); age_from: string (required); age_to: string (required); methods: array (optional); cursor: string (optional); session_id: string (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/transaction/get_transactions_by_address.py#L30-L65",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_token_transfers_by_address",
+        "description": "Lists ERC-20 transfers involving an address in a time range.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); address: string (required); age_from: string (required); age_to: string (required); token: string (optional); cursor: string (optional); session_id: string (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/transaction/get_token_transfers_by_address.py#L29-L65",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "nft_tokens_by_address",
+        "description": "Lists NFTs held by an address.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); address: string (required); cursor: string (optional); session_id: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/address/nft_tokens_by_address.py#L46-L54",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_block_info",
+        "description": "Returns block metadata and optionally transaction hashes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); number_or_hash: string (required); include_transactions: boolean (optional); session_id: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/block/get_block_info.py#L25-L32",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_transaction_info",
+        "description": "Returns transaction details with decoded input and transfers.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); transaction_hash: string (required); include_raw_input: boolean (optional); session_id: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/transaction/get_transaction_info.py#L30-L37",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_contract",
+        "description": "Calls a read-only contract function.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); address: string (required); abi: object (required); function_name: string (required); args: array (optional); block: string (optional); session_id: string (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/contract/read_contract.py#L79-L124",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "direct_api_call",
+        "description": "Calls a Blockscout API path, optionally with GET or POST JSON.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "chain_id: string (required); endpoint_path: string (required); query_params: object (optional); cursor: string (optional); method: enum GET/POST (optional); json_body: object (optional); session_id: string (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/blockscout_mcp_server/tools/direct_api/direct_api_call.py#L37-L62",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_latest_block",
+        "description": "Listed by Anthropic connector directory; details and schema not published there.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/blockscout",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "transaction_summary",
+        "description": "Listed by Anthropic connector directory; details and schema not published there.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/blockscout",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_transaction_logs",
+        "description": "Listed by Anthropic connector directory; details and schema not published there.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/blockscout",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "Approximately 2,000",
+    "token_method": "Approximate character-count/4 estimate using the official tool names, descriptions and input parameters, plus composed initialize instructions from public code; hosted initialize output was unavailable, so the estimate represents public-code context rather than a live endpoint capture.",
+    "human_can_agent_cannot": "Humans can use Blockscout explorer UI functions beyond this MCP's read-oriented tool catalog, including account-based UI features and any write or signing functions available in specific explorer deployments. The product MCP docs describe balances, tokens, NFTs, and contract metadata; the public repo does not establish a complete inventory of human UI actions. No MCP tool to submit or sign blockchain transactions is in the official list. https://docs.blockscout.com/devs/mcp-server ; https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md#L167-L184",
+    "sources": [
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md#L167-L184",
+      "https://claude.com/connectors/blockscout",
+      "https://glama.ai/mcp/servers/blockscout/mcp-server",
+      "https://mcp.so/servers/blockscout",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/server.py"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The official README says: “Call it once per session, before any other tool.” Code registers the initialization tool but does not make other tool calls contingent on it in every deployment; session-gated deployments validate session_id. The docs also recommend limiting transaction requests by time and using pagination; tool schemas and code enforce some bounds, but natural-language recommendations remain guidance.",
+    "governance_promises": "The README says community-run instances collect “anonymous usage data by default” and that the PRO API key itself is never transmitted, only a “one-way, non-reversible” fingerprint. It also says session_id is masked. These describe the telemetry implementation and code behavior.",
+    "promises_to_user": "Official docs describe multi-chain blockchain data access, progress updates for long-running queries, and context-aware response pagination/truncation. The public server is described as managed with automatic updates when using the hosted endpoint.",
+    "comparison_with_server_logic": "The public code includes progress reporting, pagination, response limits and truncation, session masking, and API-key fingerprinting. Hosted deployment settings and whether every optional control is enabled on the endpoint are not public. Privacy policy evidence is general product policy, not MCP-specific retention or training terms.",
+    "sources": [
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/README.md#L425-L440",
+      "https://github.com/blockscout/mcp-server/blob/095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6/SPEC.md",
+      "https://docs.blockscout.com/devs/mcp-server",
+      "https://eaas.blockscout.com/privacy-notice"
+    ]
+  },
+  "contradictions": [
+    "The official README and repository code list 16 tool names, whereas Anthropic’s verified connector directory lists 15 and names get_latest_block, transaction_summary, and get_transaction_logs, which do not appear in the current official list. These three are catalogue-only entries in actions.json; hosted endpoint behavior was not captured with tools/list.",
+    "The supplied OAuth metadata probes return 404 for all four OAuth/OIDC well-known documents, while MCP.so labels the endpoint authentication “OAuth.” Official setup instructions instead describe API-key headers. The provided metadata and official docs do not support OAuth authorization for this endpoint.",
+    "Glama reports 18 tools, while the official README and MCP.so report 16. Glama’s count is not used to replace the official names."
+  ],
+  "observations_for_research": [
+    "The initialization tool name and description are designed to make setup salient to the agent; the codebase documentation discusses changing its name from __get_instructions__ to __unlock_blockchain_analysis__ to structurally guide behavior.",
+    "The server pairs a small fixed tool catalog with a generic direct_api_call tool and curated endpoint guidance distributed in a skill resource.",
+    "The same public code supports optional API-key based requests, server-side keys, anonymous telemetry, and configurable session metering; the hosted endpoint’s active settings remain unknown."
+  ],
+  "confidence": "High (open code)",
+  "notes": "Checked links.json, links_check.txt, pages/ including raw and script-extracted content, the official repository at commit 095ef2c03f1aa3325da0baa41c8bf29aa1bbb6e6, and the separate official agent-skills repository. The Blockscout PRO pricing page returned HTTP 503, so plan prices are not reported. The hosted endpoint supplied a JSON-RPC response to the evidence-gathering connection test; no live tools/list or initialize payload was included. Unofficial community servers were found in links.json and excluded. The three catalogue-only tool names are from Anthropic’s directory; their schemas were not published there.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 28.7
+  }
+}

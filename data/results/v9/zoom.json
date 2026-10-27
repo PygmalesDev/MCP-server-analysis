@@ -1,0 +1,548 @@
+{
+  "server": "zoom",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.zoom.us/mcp/zoom/streamable",
+    "documentation_url_csv": "https://developers.zoom.us/docs/mcp/zoom-mcp-server/",
+    "addressing": "global",
+    "repository_url": "https://github.com/zoom/mcp-registry",
+    "documentation_urls_used": [
+      "https://developers.zoom.us/docs/mcp/zoom-mcp-server/",
+      "https://developers.zoom.us/docs/mcp/zoom/",
+      "https://developers.zoom.us/docs/mcp/servers/",
+      "https://developers.zoom.us/docs/mcp/servers/connect-to-zoom-mcp-servers/",
+      "https://developers.zoom.us/docs/mcp/faqs/",
+      "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md",
+      "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/SKILL.md",
+      "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/concepts/oauth-setup.md",
+      "https://github.com/zoom/mcp-registry/blob/25347a5f3d2246fc443ddb19bbd1c10371a96872/zoom-workspace/server.json",
+      "https://developers.zoom.us/docs/api/rate-limits/",
+      "https://www.zoom.us/pricing",
+      "https://explore.zoom.us/en/trust/refer-terms-and-conditions/",
+      "https://explore.zoom.us/docs/en-us/legal/zoom_api_license_and_tou.html"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "Zoom's public repositories contain registry metadata and agent skills/tool references, not the implementation running at this hosted endpoint. The skills repository describes the endpoint, but is not its source code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "25347a5f3d2246fc443ddb19bbd1c10371a96872",
+    "commit_date": "2026-07-08",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "Hosted server: N/A. Zoom's public skills repository is MIT licensed.",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Zoom publishes separate product servers, including Meetings (4 tools), Canvas (18), Chat (20), Tasks (20), Revenue Accelerator (15), Whiteboard (11), Admin (10), AI Productivity Suite (8), and Contact Center User Administration (39); see the Zoom skills server catalog. The official developer docs also list Productivity, Workflows, Room, and Workspace servers.",
+      "Regional MCP gateway roots: https://mcp-au.zoom.us/, https://mcp-ca.zoom.us/, https://mcp-eu.zoom.us/, https://mcp-in.zoom.us/, https://mcp-sa.zoom.us/, https://mcp-sg.zoom.us/, and https://mcp-us.zoom.us/.",
+      "Zoom's FAQ says instances or clusters use shared SSE and streamable URLs; its overview gives a Meetings SSE example at https://zoom.us/mcp/meeting/sse."
+    ],
+    "sources": [
+      "https://developers.zoom.us/docs/mcp/servers/",
+      "https://developers.zoom.us/docs/mcp/servers/connect-to-zoom-mcp-servers/",
+      "https://developers.zoom.us/docs/mcp/faqs/",
+      "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/SKILL.md",
+      "https://github.com/zoom/mcp-registry/blob/25347a5f3d2246fc443ddb19bbd1c10371a96872/zoom-workspace/server.json"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "Zoom does not state a separate MCP access price in the reviewed MCP documentation. Connecting requires a Zoom account and the applicable product licenses.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Zoom Workplace Basic is free. The pricing page lists Pro at $16.99/user/month billed monthly or $14.16/user/month billed annually, and Business at $21.99/user/month monthly or $18.33/user/month annually; Enterprise pricing is by contact.",
+    "pricing_model_details": "MCP calls share Zoom Open API account-level rate limits, which vary by plan and tool. The official server directory labels tools Light, Medium, Canvas-Import, or Canvas-Export; some operations also have user-level or per-resource concurrency limits.",
+    "other_access_restrictions": "Zoom requires an account with admin or developer authorization, OAuth credentials, and licenses for the relevant products. Remote MCP clients use a manually registered Zoom General app and user OAuth; scopes gate operations. Admin feature settings such as Smart Recording and Meeting Summary affect availability or usefulness of some meeting content.",
+    "restrictions_controlled_by": "Zoom controls service availability and account-plan limits; organization admins configure apps, scopes, product licenses, and feature settings; each user authorizes access through OAuth.",
+    "sources": [
+      "https://developers.zoom.us/docs/mcp/servers/connect-to-zoom-mcp-servers/",
+      "https://developers.zoom.us/docs/mcp/servers/",
+      "https://developers.zoom.us/docs/api/rate-limits/",
+      "https://www.zoom.us/pricing",
+      "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/concepts/oauth-setup.md"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint requires a bearer token and has an official server-directory entry listing 20 tools. Zoom's separate endpoint-specific reference and skill guide say the default server exposes nine tools; the discrepancy is recorded below. Tool parameter schemas are published for nine tools in the Zoom skills reference, but not for the other eleven.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reference describes successful tool results for several operations and the official troubleshooting guide describes MCP and upstream API errors. Complete result schemas are not published for all listed tools.",
+      "authorization_mechanism": "The endpoint returned HTTP 401 with `WWW-Authenticate: Bearer resource_metadata=\"https://zoom.us/.well-known/oauth-protected-resource/mcp/zoom/streamable\"` and JSON-RPC error `Access token is required`. Protected-resource metadata advertises `bearer_methods_supported: [\"header\"]`. Zoom docs specify OAuth 2.1 authorization-code flow with PKCE and manual client registration; Dynamic Client Registration is not supported. The endpoint metadata's complete `scopes_supported` list is: `docs:read:export`, `agentic_search:read:search`, `my_notes:read:content`, `meeting:update:in_meeting_controls`, `docs:write:import`, `cloud_recording:read:content`, `docs:read:list_file_collaborators`, `docs:delete:collaborator`, `meeting:write:meeting`, `meeting:read:assets`, `agentic_search:read:ask`, `hub:read:content`, `meeting:read:search`, `meeting:delete:meeting`, `meeting:update:meeting`, `hub:write:content`, `docs:update:collaborator`, `docs:write:collaborator`, `workflow:read:definition`, `workflow:write:definition`, `workflow:read:list_definitions`. Zoom's skills guide estimates access tokens expire in about one hour and documents refresh-token exchange; token revocation details were not found.",
+      "authorization_server": "https://zoom.us",
+      "sources": [
+        "https://mcp.zoom.us/mcp/zoom/streamable",
+        "https://mcp.zoom.us/.well-known/oauth-protected-resource/mcp/zoom/streamable",
+        "https://developers.zoom.us/docs/mcp/servers/connect-to-zoom-mcp-servers/",
+        "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/concepts/oauth-setup.md"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed endpoint tool references describe tools and results but do not establish whether the MCP Resources capability is exposed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/zoom/",
+        "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed materials do not document MCP prompts for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/zoom/",
+        "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific MCP logging or audit-trail behavior was found in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/zoom/",
+        "https://explore.zoom.us/en/trust/refer-terms-and-conditions/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific implementation information was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/zoom/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific implementation information was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/zoom/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint rejects unauthenticated requests with HTTP 401 and requires a bearer token in the Authorization header. The protected-resource metadata points to Zoom as authorization server. Zoom documents authorization-code OAuth with PKCE and manual General-app client registration; its server-connection guide says remote Zoom MCP servers do not support DCR or CIMD.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated request returns JSON-RPC error code -32003 and message `Access token is required`.",
+      "authorization_mechanism": "Protected Resource Metadata; manual client preregistration through a Zoom General app; OAuth 2.1 authorization-code flow with PKCE; bearer token in header. DCR and CIMD are not supported. Metadata advertises the 21 scopes listed under Tools. Token lifetime is described in Zoom's public skill guide as about one hour; refresh flow documented; revocation not found.",
+      "authorization_server": "https://zoom.us",
+      "sources": [
+        "https://mcp.zoom.us/mcp/zoom/streamable",
+        "https://mcp.zoom.us/.well-known/oauth-protected-resource/mcp/zoom/streamable",
+        "https://developers.zoom.us/docs/mcp/servers/connect-to-zoom-mcp-servers/",
+        "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/concepts/oauth-setup.md"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation implementation was documented for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/zoom/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks protocol capability was documented for this endpoint. Zoom separately publishes a product server named Zoom Tasks MCP Server; that is distinct from this protocol capability and endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/servers/",
+        "https://developers.zoom.us/docs/mcp/zoom/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The client configures a manually registered Zoom app, OAuth credentials, scopes, and the endpoint URL. Zoom documents user OAuth and separately discusses S2S discovery, but does not publish endpoint-specific MCP configuration parameters or tool filters.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Manual General-app registration and OAuth configuration.",
+      "authorization_server": "https://zoom.us",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/servers/connect-to-zoom-mcp-servers/",
+        "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/concepts/oauth-setup.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returns a JSON-RPC authentication error when no token is supplied. Zoom's public guide documents MCP protocol and upstream API error patterns, but a complete endpoint error contract is not published.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Observed missing-token response: JSON-RPC error code -32003, message `Access token is required`. Public troubleshooting reference also describes errors for invalid token, missing tool, handler failure, and upstream validation.",
+      "authorization_mechanism": "Bearer token required.",
+      "authorization_server": "https://zoom.us",
+      "sources": [
+        "https://mcp.zoom.us/mcp/zoom/streamable",
+        "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/error-codes.md"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability behavior is documented for the endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/zoom/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific progress notification behavior was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/zoom/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific cancellation behavior was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.zoom.us/docs/mcp/zoom/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Zoom's public skills repository distributes client-side instructions and tool-selection guidance for Zoom MCP. Those skill files are separate from instructions delivered by this endpoint during MCP initialize.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/SKILL.md",
+        "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official directory labels each of 20 tools with scopes/rate-limit classes; the separate nine-tool reference calls search_meetings and search read-only. Tool annotation fields such as readOnlyHint, destructiveHint, idempotentHint, and openWorldHint were not published. 2. No server-enforced confirmation parameter or preview-confirm flow was documented. Zoom's Canvas client skill recommends confirmation before destructive operations, but no enforcement is shown. 3. Protected-resource metadata lists 21 scopes and Zoom as authorization server. Zoom documents manual General-app registration, authorization-code OAuth, PKCE, and user bearer tokens. Skills guidance says tokens last about one hour and can be refreshed. No DCR, CIMD, token revocation, or redirect-URI approval enforcement details were found. Access follows scopes and the authorized Zoom account; product feature settings may affect data availability. 4. No read-only mode, tool filter, or query-free mode was documented for this endpoint. Zoom publishes regional gateways and separate product endpoints. 5. User OAuth and scoped permissions delimit access; no endpoint-specific PII masking, redaction, or secret-field handling was documented. 6. Calls share account-level Zoom API limits; classes vary by tool and plan, with possible user-level and per-resource concurrency limits. Documented search/list caps include 300 results for search_meetings and recordings_list, and 100 for search; search has no pagination cursor. Hub create documentation states a 100 KB maximum. 7. Public guidance describes typed parameters and an upstream invalid-parameter error example; no unknown-argument rejection or automatic correction behavior was documented. 8. Endpoint logging, action audit attribution, and telemetry behavior were not documented. 9. The 20 documented tool names do not include feedback, rating, report, survey, or vendor feedback actions. No upsell tool result or marketing elicitation was documented. 10. The endpoint's nine-tool reference contains agent-facing selection/timezone rules; Zoom also distributes client-side skills. These instructions are guidance, not demonstrated server-enforced rules. 11. No persistent agent-behavior memory or state-dependent tool availability was documented. 12. This endpoint presents a flat tool catalog, though it spans multiple Zoom product areas; Zoom also operates distinct product MCP endpoints and regional gateways. 13. No raw API request, arbitrary SQL, shell, or script-execution tool was listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "The tool description requires knowing the user's current timezone before invoking the tool.",
+      "Convert user-local time references to UTC before sending from and to.",
+      "The tool description strongly prefers explicit user selection when choosing a meeting from search results.",
+      "Do not pass userId to recordings_list on the current default MCP server; it lists recordings for the authorized user and the live schema does not expose userId.",
+      "Confirm destructive operations before deleting files, blocks, or collaborators."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The official directory lists one flat tool catalog at the input endpoint. It spans multiple Zoom product areas, while related Zoom product servers and regional gateways use separate endpoints.",
+    "sources": [
+      "https://developers.zoom.us/docs/mcp/zoom/",
+      "https://developers.zoom.us/docs/mcp/servers/",
+      "https://developers.zoom.us/docs/api/rate-limits/",
+      "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md",
+      "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/canvas/SKILL.md",
+      "https://mcp.zoom.us/.well-known/oauth-protected-resource/mcp/zoom/streamable"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "20",
+    "action_count_comment": "Zoom's official server directory at https://developers.zoom.us/docs/mcp/zoom/ lists 20 tools for the input endpoint; all 20 names are in actions.json. Zoom's official endpoint-specific reference at https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md says nine, and the public Zoom MCP skill repeats nine. The 11 additional directory-listed tools have names and scopes but no parameter schemas in the reviewed Zoom references; these parameters are marked NOT PUBLISHED. No catalogue-only tools were added. API Tracker and AgentAtlas do not enumerate this endpoint's tools. Agent Discoverability reports 20 tools for a ChatGPT plugin integration, not this MCP endpoint; Composio's Zoom API toolkit is a proxy toolkit and was not used as the endpoint list.",
+    "actions": [
+      {
+        "tool_name": "ask",
+        "description": "Return an AI-synthesized answer over accessible Zoom workspace sources.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_add_file_collaborators",
+        "description": "Add collaborators to a Zoom Canvas file.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_list_file_collaborators",
+        "description": "List collaborators on a Zoom Canvas file.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_modify_file_collaborator_role",
+        "description": "Change a Canvas collaborator's role.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_remove_file_collaborator",
+        "description": "Remove a collaborator from a Zoom Canvas file.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_new_file_with_markdown",
+        "description": "Create a Zoom Canvas file from Markdown content.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "content: string (required); file_name: string (optional); parent_id: string (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md#L43-L59",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_file_content",
+        "description": "Read a Zoom Canvas or My Notes file as Markdown.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fileId: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md#L61-L73",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_meeting_assets",
+        "description": "Retrieve meeting summaries, recordings, whiteboards, Canvas files, and related artifacts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "meetingId: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md#L175-L188",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_recording_resource",
+        "description": "Retrieve recording-related assets, transcript-like, summary-like, and playback resources.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "meetingId: string (required); types: string (optional); clip_num: integer (optional); play_time: integer (optional); raw_passcode: string (optional); encode_passcode: string (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md#L209-L223",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hub_create_file_from_content",
+        "description": "Create a Zoom Hub file from plain-text content.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hub_get_file_content",
+        "description": "Retrieve Zoom Hub file content in a format supported by its file type.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "in_meeting_control",
+        "description": "Apply an in-meeting control operation.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "meeting_create",
+        "description": "Create a Zoom meeting.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "meeting_delete",
+        "description": "Delete a Zoom meeting.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "meeting_update",
+        "description": "Update a Zoom meeting.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "my_notes_get_note_content",
+        "description": "Retrieve the content of a Zoom My Notes item.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "recordings_list",
+        "description": "List cloud recordings for the authorized user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "from: string (optional); to: string (optional); meeting_id: integer (optional); trash: boolean (optional); trash_type: string (optional); mc: string (optional); page_size: integer (optional); next_page_token: string (optional)",
+        "parameter_count": "8",
+        "source": "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md#L192-L207",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search",
+        "description": "Search Team Chat messages and Zoom Canvas/My Notes with keyword and semantic queries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "search_entities: array (required; entity_type chat or zoom_doc); query: string (optional); page_size: integer (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md#L128-L173",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_describe_capabilities",
+        "description": "Describe searchable data sources, fields, types, and supported filter values.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.zoom.us/docs/mcp/zoom/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_meetings",
+        "description": "Search Zoom meetings semantically, optionally within a UTC date range.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "q: string (optional); from: string (optional); to: string (optional); include_zoom_my_notes: boolean (optional); page_size: integer (optional); next_page_token: string (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md#L106-L126",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted server implementation and initialize response are not public, and complete verbatim tool definitions are unavailable for the 20-tool directory. The public reference is not sufficient to compute the endpoint's full pre-interaction context.",
+    "human_can_agent_cannot": "Zoom's broader APIs document retrieval and updates for users, phone settings, calendars, mail, workspaces, account configuration, and scheduled jobs; these operations are not all present in this endpoint's directory catalog. Zoom also offers separate MCP endpoints for product areas such as Chat, Tasks, Whiteboard, and Canvas. The general Zoom MCP overview names Calendar, Clips, and Email use cases, but those are not listed in the input endpoint's directory catalog.",
+    "sources": [
+      "https://developers.zoom.us/docs/mcp/zoom/",
+      "https://developers.zoom.us/docs/mcp/zoom/",
+      "https://developers.zoom.us/docs/mcp/servers/",
+      "https://developers.zoom.us/docs/mcp/zoom-mcp-server/",
+      "https://developers.zoom.us/docs/mcp/apis-vs-mcp",
+      "https://developers.zoom.us/docs/api/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The Zoom reference tells agents to obtain the user's timezone before search_meetings, convert local date references to UTC, and prefer explicit user selection of a meeting. It also says not to pass userId to recordings_list. These appear as documentation guidance; no server implementation was available to confirm enforcement.",
+    "governance_promises": "Zoom describes built-in governance through OAuth, scoped permissions, and admin controls. Zoom's Terms of Service say it does not use communications-like Customer Content to train Zoom or third-party AI models. Zoom's API terms restrict use of API-accessed Customer Content for AI training absent Zoom's express written permission, with a limited customer-consented exception.",
+    "promises_to_user": "Zoom says data is protected under its Terms of Service and Privacy Policy. Its MCP documentation describes OAuth scopes and admin controls as governance for access.",
+    "comparison_with_server_logic": "OAuth bearer authentication and scopes are evidenced by the endpoint's 401 response and protected-resource metadata. Plan-based rate limits are documented. Privacy, training, retention, and audit claims are contractual or product documentation; no public hosted implementation was available to verify corresponding MCP-specific enforcement, masking, logging, or retention behavior.",
+    "sources": [
+      "https://github.com/zoom/skills/blob/9a18f14b5cebd3aa022ef1565e1dbdc5d315b193/skills/zoom-mcp/references/tools.md",
+      "https://developers.zoom.us/docs/mcp/",
+      "https://developers.zoom.us/docs/mcp/faqs/",
+      "https://explore.zoom.us/en/trust/refer-terms-and-conditions/",
+      "https://explore.zoom.us/docs/en-us/legal/zoom_api_license_and_tou.html",
+      "https://mcp.zoom.us/.well-known/oauth-protected-resource/mcp/zoom/streamable"
+    ]
+  },
+  "contradictions": [
+    "Zoom's official endpoint directory lists 20 tools for https://mcp.zoom.us/mcp/zoom/streamable, while Zoom's official endpoint-specific tool reference and skill guide report nine. The 11 additional directory entries are ask, four Canvas collaborator tools, in_meeting_control, meeting_create, meeting_delete, meeting_update, my_notes_get_note_content, and search_describe_capabilities.",
+    "Zoom's official server-directory listing includes meeting_create, meeting_update, and meeting_delete, while the public Zoom MCP skill says the current default endpoint does not expose deterministic meeting create, update, or delete tools.",
+    "The protected-resource metadata advertises workflow:read:definition, workflow:write:definition, and workflow:read:list_definitions scopes, but the 20-tool directory does not list workflow tools.",
+    "Zoom's general MCP page describes broad Calendar, Email, Clips, and workspace-management use cases; those capabilities are not present in the 20-tool catalog for the input endpoint."
+  ],
+  "observations_for_research": [
+    "The official endpoint directory and the endpoint-specific reference disagree on the tool inventory, although both are published by Zoom.",
+    "The endpoint publishes a flat tool list that combines meeting, recording, search, Canvas, Hub, and My Notes operations; Zoom also publishes dedicated product-specific MCP servers.",
+    "Zoom's protected-resource metadata exposes scopes for capabilities beyond the documented tool list, including Workflow scopes."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/INDEX.txt and the supplied page copies before browsing. The endpoint returned the supplied HTTP 401 response; its protected-resource metadata was used as supplied. The root OAuth metadata URL returned 404, and the provided authorization-server well-known URLs were malformed/no-host, so no authorization-server configuration, registration endpoint, or token revocation data was available. Zoom's public GitHub repositories contain documentation, skills, and registry metadata rather than hosted-server code. Third-party Agent Discoverability's 20-tool listing describes a ChatGPT plugin, not this endpoint; Composio's Zoom toolkit is a proxy/API toolkit. No unofficial server was used as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 8.6
+  }
+}

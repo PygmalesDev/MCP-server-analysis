@@ -1,0 +1,935 @@
+{
+  "server": "local-falcon",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.localfalcon.com/mcp",
+    "documentation_url_csv": "https://docs.localfalcon.com/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/local-falcon/mcp",
+    "documentation_urls_used": [
+      "https://www.localfalcon.com/features/mcp",
+      "https://www.localfalcon.com/answers/233-what-can-i-do-with-the-local-falcon-mcp",
+      "https://www.localfalcon.com/answers/164-can-i-control-what-data-the-ai-tools-can-access-through-the-mcp",
+      "https://www.localfalcon.com/answers/165-is-my-data-safe-with-the-mcp",
+      "https://www.localfalcon.com/answers/167-does-mcp-cost-extra",
+      "https://www.localfalcon.com/answers/169-can-i-run-new-scans-through-ai-once-mcp-is-connected",
+      "https://www.localfalcon.com/pricing",
+      "https://www.localfalcon.com/privacy-policy",
+      "https://www.localfalcon.com/terms-of-use",
+      "https://docs.localfalcon.com/mcp",
+      "https://github.com/local-falcon/mcp"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The vendor’s repository describes the hosted remote server at the same /mcp URL and contains HTTP server code and deployment profiles. The available evidence does not independently attest that the running deployment is exactly commit 4ca6831b96dbb845e688938a54548a4bed5138ee.",
+    "mcp_protocol_version": "2025-03-26 referenced in repository client initialization; MCP SDK 1.31.0",
+    "commit_hash": "4ca6831b96dbb845e688938a54548a4bed5138ee",
+    "commit_date": "2026-10-06",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.31.0; @modelcontextprotocol/ext-apps ~1.2.2",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.localfalcon.com/sse — legacy SSE transport; repository says to use /mcp instead.",
+      "Local MCP via @local-falcon/mcp — self-hosted/stdio option using the Local Falcon API key.",
+      "https://docs.localfalcon.com/mcp — documentation-site search MCP, not the Local Falcon product server."
+    ],
+    "sources": [
+      "https://github.com/local-falcon/mcp",
+      "https://www.localfalcon.com/features/mcp",
+      "https://docs.localfalcon.com/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "MCP access is included with every Local Falcon plan, starting with Starter. Scans and some searches consume account credits; reading reports and account data does not.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Starter: $24.99/month or $299.88/year, with higher priced plans and enterprise packages. The pricing page lists credits and plan features; MCP is included.",
+    "pricing_model_details": "Scan costs draw from existing credits; credits represent scan grid points. A 5×5 scan uses 25 credits. The vendor also documents pay-as-you-go credits at $0.05 each. A successful searchForLocalFalconBusinessLocation uses 2 existing credits in the repository’s tool documentation.",
+    "other_access_restrictions": "Requires a Local Falcon account and authorization. Product account permissions apply. Scans and certain searches consume credits. The hosted repository documents OAuth, API-key Bearer authentication and an API-key query parameter option. No MCP-specific rate limit or plan-specific tool gate was found in the reviewed public docs.",
+    "restrictions_controlled_by": "Vendor controls service, plan and credit rules; account owner controls account authorization and can disconnect the connector; connected Google permissions govern GBP access.",
+    "sources": [
+      "https://www.localfalcon.com/pricing",
+      "https://www.localfalcon.com/answers/167-does-mcp-cost-extra",
+      "https://www.localfalcon.com/answers/164-can-i-control-what-data-the-ai-tools-can-access-through-the-mcp",
+      "https://github.com/local-falcon/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP tools API",
+      "description_what_how": "The hosted /mcp server exposes client-dependent tool profiles. Repository documentation states 60 tools for other MCP clients and 57 for ChatGPT. The non-ChatGPT profile is represented in actions.json.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool calls return text content containing JSON for most results; some failures use isError. getLocalFalconReport also returns widget data in _meta for an MCP App.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp",
+        "https://www.localfalcon.com/features/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP resources; MCP Apps UI extension",
+      "description_what_how": "Public code registers a geo-grid heatmap UI resource and uses it with getLocalFalconReport. The widget renders report data in compatible clients.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The report tool returns textual JSON plus widget payload in metadata; resource URI is ui://reports/geogrid-heatmap/v1.4.17 in the reviewed source.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed public server registers tools and resources; no MCP prompts capability was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Repository code logs operational errors and stamps outgoing Local Falcon API calls with request_source for integration attribution. The reviewed sources do not establish the hosted service’s retention or audit-log policy.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp",
+        "https://www.localfalcon.com/privacy-policy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling capability was found in the public server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability was found in the public server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth authorization; MCP HTTP transport",
+      "description_what_how": "Provided endpoint POST returned HTTP 401 with WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"Missing Authorization header\", scope=\"api\", resource_metadata=\"https://mcp.localfalcon.com/.well-known/oauth-protected-resource\". Protected-resource metadata: resource https://mcp.localfalcon.com; authorization_servers [https://mcp.localfalcon.com]; bearer_methods_supported [header]; scopes_supported [api, offline_access]. The path-suffixed protected-resource document returned the same values. Authorization-server metadata: issuer https://mcp.localfalcon.com; authorization_endpoint https://mcp.localfalcon.com/oauth/authorize; token_endpoint https://mcp.localfalcon.com/oauth/token; registration_endpoint https://mcp.localfalcon.com/register; revocation_endpoint https://mcp.localfalcon.com/oauth/revoke; response_types_supported [code]; grant_types_supported [authorization_code, refresh_token]; scopes_supported [api, offline_access]; code_challenge_methods_supported [S256]; token_endpoint_auth_methods_supported [none]; revocation_endpoint_auth_methods_supported [none].",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated endpoint response is JSON error with HTTP 401. Successful tool response structure is tool-specific.",
+      "authorization_mechanism": "OAuth protected-resource metadata and authorization-server metadata; Dynamic Client Registration at https://mcp.localfalcon.com/register; authorization_code and refresh_token grants; PKCE S256; token endpoint client authentication none; scopes_supported [api, offline_access]. Endpoint WWW-Authenticate scope is api. Token lifetime was not present in supplied metadata. Revocation endpoint is https://mcp.localfalcon.com/oauth/revoke; metadata says revocation-endpoint auth method none. Repository README also documents API-key Bearer authentication and query-string API key.",
+      "authorization_server": "https://mcp.localfalcon.com",
+      "sources": [
+        "https://mcp.localfalcon.com/mcp",
+        "https://mcp.localfalcon.com/.well-known/oauth-protected-resource",
+        "https://mcp.localfalcon.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.localfalcon.com/.well-known/oauth-authorization-server",
+        "https://mcp.localfalcon.com/.well-known/openid-configuration",
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation mechanism was found. Repository instructions recommend that the agent obtain confirmation for credit-consuming operations and public/destructive GBP writes; those instructions are not a server-enforced elicitation flow.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability was found in the reviewed server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Repository code selects a 57-tool ChatGPT profile or 60-tool profile for other clients on the same endpoint, based on request-source attribution. No user-facing URL toolset or read-only filter was found in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool availability depends on the authenticated session’s assigned profile.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public code returns error text or MCP isError responses for failed operations; repository code also normalizes selected failures in the ChatGPT profile.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Errors are returned as text content and, for some paths, isError: true. Exact formats vary by handler.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was found. The account-information tool can return account and subscription details, but subscription management is not an MCP tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp",
+        "https://www.localfalcon.com/pricing"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications were found in the reviewed code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability was found in the reviewed code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP initialize instructions; MCP Apps extension",
+      "description_what_how": "The server provides initialize-time instructions describing concepts, metrics, fieldmask use, pagination, credit awareness and operating rules. The repository also includes external skill files and an interactive geo-grid MCP App; availability and delivery of those skills through the hosted endpoint were not established.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Initialize returns server metadata and instructions; report tool may include UI metadata for the geo-grid widget.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/local-falcon/mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The repository declares readOnlyHint, destructiveHint and openWorldHint for tools. Reads and writes are mixed; campaign, scan and GBP mutation operations include writes. No idempotentHint declaration was found in the reviewed tool documentation. 2. No user-confirmation mechanism is enforced for tool calls. Initialize instructions and tool descriptions recommend confirmation. GBP handlers supply required confirmation tokens in their API calls; the user confirmation itself is not enforced by MCP. 3. OAuth metadata supports scopes api and offline_access, authorization_code and refresh_token, DCR and PKCE S256. Vendor states account permissions apply and access can be disconnected. Token lifetime was not found. 4. Same /mcp endpoint selects profiles: 60 tools for other clients, 57 for ChatGPT; three separately billable on-demand tools are omitted from ChatGPT. /sse is documented as legacy. No configurable toolsets or read-only query mode found. 5. Vendor says agents see only data the Local Falcon account can see; connected GBP data requires linked Google account authorization. No general PII masking was documented. 6. Scans spend credits; searchForLocalFalconBusinessLocation costs 2 credits per successful search per repository docs. Listing calls are paginated; fieldmasks are recommended because report payloads can be large. Public docs describe no MCP-specific rate limit. 7. Zod schemas define input types, enums and constraints. API client normalizes nullish values and skips empty parameters. No general alias rewriting found. 8. Repository stamps outgoing Local Falcon API calls with request_source attribution. Privacy policy describes Microsoft Clarity session recordings for website interactions; no MCP-call audit retention details were found. 9. No feedback, rating, report-to-vendor or survey tools appear in the official list. Normal-profile account responses can include subscription information; repository describes sanitizing transactional copy/links in ChatGPT responses. No evidence that an MCP tool itself injects an upsell message was established. 10. Initialize instructions and detailed tool descriptions steer agent behavior. External skill files exist in the repository, but delivery via hosted endpoint was not established. 11. Server retains sessions and profile state in memory; repository documents session recovery and bounded session retention. No evidence that past user behavior changes tool definitions or results. 12. One endpoint supports dynamically selected client profiles and an MCP Apps widget; it is not a flat invariant tool list. No nested MCP sub-server was found. 13. No arbitrary raw API request, SQL, shell or script execution tool was found.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Always check for existing data before running new scans. Use listLocalFalconScanReports first. Scans cost credits.",
+      "Make settings and existing-credit use clear before scans, campaigns, AI Analysis, or business searches. Obtain confirmation if the user has not already explicitly approved the operation and settings; do not require a redundant second confirmation. Public/destructive GBP write confirmation requirements still apply.",
+      "Always use fieldmasks on get* and list* tools. Start narrow, expand only if needed.",
+      "Don't chain excessive tool calls.",
+      "Use the Knowledge Base tools (searchLocalFalconKnowledgeBase, getLocalFalconKnowledgeBaseArticle) for questions about Local Falcon features, settings, and how-to guidance."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The same hosted URL selects between 57-tool and 60-tool session profiles based on client attribution; getLocalFalconReport can also return a separate interactive MCP App payload.",
+    "sources": [
+      "https://github.com/local-falcon/mcp",
+      "https://www.localfalcon.com/features/mcp",
+      "https://www.localfalcon.com/answers/164-can-i-control-what-data-the-ai-tools-can-access-through-the-mcp",
+      "https://www.localfalcon.com/pricing",
+      "https://www.localfalcon.com/privacy-policy"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "60 default for other MCP clients; 57 for ChatGPT",
+    "action_count_comment": "The vendor’s feature page describes the hosted MCP and says 60+ tools. The official public repository documents 60 tools for other clients and 57 for ChatGPT; actions.json lists the 60-tool profile. No catalogue-only tools were added. Third-party listings show smaller/older subsets: Claude connector directory 37 (Anthropic labels the connector verified); Manufact 37; Glama and mcp.so each describe 21 tools. The repository is the official tool-name source. These third-party counts do not match the current repository profiles.",
+    "actions": [
+      {
+        "tool_name": "listLocalFalconScanReports",
+        "description": "List Scan Reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "nextToken: string (optional); startDate: string (optional); endDate: string (optional); placeId: string (optional); keyword: string (optional); gridSize: enum 10 (optional); campaignKey: string (optional); platform: enum 7 (optional); fieldmask: string (optional)",
+        "parameter_count": "9",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L434-L458",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconReport",
+        "description": "Get Scan Report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "reportKey: string (required); fieldmask: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L462-L517",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listAllLocalFalconLocations",
+        "description": "List Saved Locations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L523-L538",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconLocationGroups",
+        "description": "List Location Groups.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (optional); nextToken: string (optional); fieldmask: string (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L541-L559",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGoogleBusinessLocations",
+        "description": "Search Google Business Listings.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "nextToken: string (optional); query: string (required); near: string (optional); fieldmask: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L562-L580",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "runLocalFalconScan",
+        "description": "Run Ranking Scan.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); keyword: string (required); gridSize: enum 7 (required); measurement: enum 2 (required); platform: enum 6 (required); aiAnalysis: boolean (required)",
+        "parameter_count": "6",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L583-L606",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconCampaignReports",
+        "description": "List Campaign Reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (required); endDate: string (required); placeId: string (optional); runDate: string (required); nextToken: string (optional); fieldmask: string (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L609-L630",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconCampaignReport",
+        "description": "Get Campaign Report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "reportKey: string (required); run: string (optional); fieldmask: string (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L633-L650",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createLocalFalconCampaign",
+        "description": "Create Campaign.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); measurement: enum 2 (required); gridSize: enum 10 (required); frequency: enum 5 (required); placeId: string (required); keyword: string (required); startDate: string (required); startTime: string (required); aiAnalysis: boolean (optional); notify: boolean (optional); emailRecipients: string (optional); emailSubject: string (optional); emailBody: string (optional)",
+        "parameter_count": "13",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L653-L702",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateLocalFalconCampaign",
+        "description": "Update Campaign.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "campaignKey: string (required); action: enum 7 (required); placeId: string (optional); keyword: string (optional); name: string (optional); gridSize: enum 10 (optional); measurement: enum 2 (optional); platforms: string (optional); keywordType: enum 3 (optional); aiAnalysis: boolean (optional); date: string (optional); time: string (optional); frequency: enum 5 (optional); notify: boolean (optional); recipients: string (optional); emailName: string (optional); emailReplyTo: string (optional); emailSubject: string (optional); emailBody: string (optional); emailSendAi: boolean (optional)",
+        "parameter_count": "20",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L705-L781",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "runLocalFalconCampaign",
+        "description": "Run Campaign.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "campaignKey: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L784-L799",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pauseLocalFalconCampaign",
+        "description": "Pause Campaign.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "campaignKey: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L802-L817",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resumeLocalFalconCampaign",
+        "description": "Resume Campaign.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "campaignKey: string (required); startDate: string (optional); startTime: string (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L820-L837",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reactivateLocalFalconCampaign",
+        "description": "Reactivate Campaign.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "campaignKey: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L840-L855",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconReviewsAnalysisReports",
+        "description": "List Reviews Analysis Reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "reviewsKey: string (optional); placeId: string (optional); frequency: enum 7 (optional); limit: number (required); nextToken: string (optional); fieldmask: string (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L858-L886",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconReviewsAnalysisReport",
+        "description": "Get Reviews Analysis Report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "reportKey: string (required); fieldmask: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L889-L905",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconGuardReports",
+        "description": "List Falcon Guard Reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (required); endDate: string (required); status: enum 2 (optional); nextToken: string (optional); fieldmask: string (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L908-L928",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGuardReport",
+        "description": "Get Falcon Guard Report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); startDate: string (optional); endDate: string (optional); fieldmask: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L931-L949",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "addLocationsToFalconGuard",
+        "description": "Add Locations to Falcon Guard.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L952-L967",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pauseFalconGuardProtection",
+        "description": "Pause Falcon Guard Protection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "guardKey: string (optional); placeId: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L970-L989",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resumeFalconGuardProtection",
+        "description": "Resume Falcon Guard Protection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "guardKey: string (optional); placeId: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L992-L1011",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "removeFalconGuardProtection",
+        "description": "Remove Falcon Guard Protection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "guardKey: string (optional); placeId: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1014-L1033",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconTrendReports",
+        "description": "List Trend Reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "nextToken: string (optional); placeId: string (optional); keyword: string (optional); startDate: string (optional); endDate: string (optional); platform: enum 7 (optional); fieldmask: string (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1036-L1058",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconTrendReport",
+        "description": "Get Trend Report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "reportKey: string (required); fieldmask: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1061-L1085",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconAutoScans",
+        "description": "List Scheduled Auto-Scans.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "nextToken: string (optional); placeId: string (optional); keyword: string (optional); gridSize: enum 10 (optional); frequency: enum 5 (optional); status: enum 2 (optional); platform: enum 7 (optional); fieldmask: string (optional)",
+        "parameter_count": "8",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1089-L1111",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconLocationReports",
+        "description": "List Location Reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (optional); keyword: string (optional); startDate: string (optional); endDate: string (optional); nextToken: string (optional); fieldmask: string (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1114-L1135",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconLocationReport",
+        "description": "Get Location Report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "reportKey: string (required); fieldmask: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1138-L1154",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconKeywordReports",
+        "description": "List Keyword Reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "nextToken: string (optional); keyword: string (optional); startDate: string (optional); endDate: string (optional); fieldmask: string (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1157-L1177",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconKeywordReport",
+        "description": "Get Keyword Report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "reportKey: string (required); fieldmask: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1180-L1196",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconCompetitorReports",
+        "description": "List Competitor Reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (required); endDate: string (required); placeId: string (optional); keyword: string (optional); gridSize: enum 7 (optional); nextToken: string (optional); fieldmask: string (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1199-L1221",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconCompetitorReport",
+        "description": "Get Competitor Report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "reportKey: string (required); fieldmask: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1224-L1246",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGrid",
+        "description": "Generate Grid Coordinates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "gridSize: string (required); measurement: enum 2 (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1249-L1268",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconRankingAtCoordinate",
+        "description": "Check Ranking at Coordinate.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "keyword: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1271-L1289",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconKeywordAtCoordinate",
+        "description": "Check Keyword at Coordinate.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "keyword: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1293-L1311",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchForLocalFalconBusinessLocation",
+        "description": "Search Business Locations.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "term: string (required); platform: enum 2 (required); proximity: string (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1314-L1331",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "saveLocalFalconBusinessLocationToAccount",
+        "description": "Save Business Location.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "platform: enum 2 (required); placeId: string (required); name: string (required)",
+        "parameter_count": "3",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1334-L1381",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "viewLocalFalconAccountInformation",
+        "description": "View Account Information.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "returnField: enum 4 (optional); fieldmask: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1384-L1491",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchLocalFalconKnowledgeBase",
+        "description": "Search Knowledge Base.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "q: string (optional); categoryId: string (optional); nextToken: string (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1425-L1443",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconKnowledgeBaseArticle",
+        "description": "Get Knowledge Base Article.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "articleId: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1446-L1464",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGbpProfile",
+        "description": "Get GBP Profile.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1476-L1487",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGbpGoogleUpdates",
+        "description": "Get GBP Google Updates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); fieldsMask: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1489-L1503",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGbpVerificationStatus",
+        "description": "Get GBP Verification Status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1505-L1516",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGbpAttributes",
+        "description": "Get GBP Attributes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1518-L1529",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconGbpServices",
+        "description": "List GBP Services.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1531-L1542",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGbpPerformanceMetrics",
+        "description": "Get GBP Performance Metrics.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); metrics: string (optional); startDate: string (optional); endDate: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1544-L1560",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconGbpPosts",
+        "description": "List GBP Posts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); postId: string (optional); limit: number (required); nextToken: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1562-L1578",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconGbpMedia",
+        "description": "List GBP Media.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); mediaId: string (optional); category: string (optional); limit: number (required); nextToken: string (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1580-L1597",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconGbpCustomerMedia",
+        "description": "List GBP Customer Media.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); mediaId: string (optional); limit: number (required); nextToken: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1599-L1615",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconGbpReviews",
+        "description": "List GBP Reviews.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); reviewId: string (optional); limit: number (required); unanswered: boolean (optional); rating: string (optional); nextToken: string (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1617-L1635",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLocalFalconGbpActionLinks",
+        "description": "List GBP Action Links.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); linkId: string (optional); limit: number (required); nextToken: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1637-L1653",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchLocalFalconGbpCategories",
+        "description": "Search GBP Categories.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); query: string (optional); regionCode: string (optional); language: string (optional); names: string (optional); limit: number (required); nextToken: string (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1655-L1674",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchLocalFalconGbpChains",
+        "description": "Search GBP Chains.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); query: string (optional); chainId: string (optional); limit: number (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1676-L1692",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGbpAvailableAttributes",
+        "description": "Get GBP Available Attributes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); category: string (optional); regionCode: string (optional); language: string (optional); showAll: boolean (optional); limit: number (required); nextToken: string (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1694-L1713",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getLocalFalconGbpAvailableActionTypes",
+        "description": "Get GBP Available Action Types.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "placeId: string (required); language: string (optional); limit: number (required); nextToken: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1715-L1731",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manageLocalFalconGbpPosts",
+        "description": "Manage GBP Posts.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "action: enum 3 (required); placeId: string (required); postId: string (optional); summary: string (required); topicType: enum 4 (optional); callToAction: object (required); url: string (optional); media: array (required); source_url: string (required); event: object (required); offer: object (required); language: string (optional); replace: string (optional)",
+        "parameter_count": "13",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1747-L1801",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manageLocalFalconGbpMedia",
+        "description": "Manage GBP Media.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "action: enum 3 (required); placeId: string (required); mediaId: string (optional); mediaFormat: enum 2 (optional); sourceUrl: string (optional); category: string (optional); description: string (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1803-L1838",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manageLocalFalconGbpReviewReplies",
+        "description": "Manage GBP Review Replies.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "action: enum 2 (required); placeId: string (optional); reviewId: string (optional); reply: string (optional); replies: array (required); review_id: string (required); reply: string (required)",
+        "parameter_count": "7",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1840-L1878",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manageLocalFalconGbpActionLinks",
+        "description": "Manage GBP Action Links.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "action: enum 3 (required); placeId: string (required); linkId: string (optional); actionType: string (optional); uri: string (optional); isPreferred: boolean (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1880-L1911",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manageLocalFalconGbpServices",
+        "description": "Manage GBP Services.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "action: enum 3 (required); placeId: string (required); services: array (optional); service_type_id: string (optional); description: string (optional); price: object (required); names: array (required)",
+        "parameter_count": "7",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1913-L1953",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateLocalFalconGbpProfile",
+        "description": "Update GBP Profile.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "action: enum 4 (required); placeId: string (required); updates: object (required); regular: array (required); open_time: string (required); close_day: string (required); close_time: string (required); special: array (required); status: enum 3 (optional); openingDate: string (optional); attributes: array (required); values: array (required); set_values: array (required); unset_values: array (required); uris: array (required); clear: string (optional); replace: string (optional)",
+        "parameter_count": "17",
+        "source": "https://github.com/local-falcon/mcp/blob/4ca6831b96dbb845e688938a54548a4bed5138ee/code/local-falcon__mcp/server.ts#L1955-L2025",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "approximately 23,500",
+    "token_method": "Approximate character count of public-code tool descriptions and input schema declarations plus initialize instructions, divided by four; profile definitions vary by client. Source text includes formatting overhead, so this is an estimate.",
+    "human_can_agent_cannot": "The MCP tool list provides account information but no tool to buy credits, change a subscription or perform billing checkout; the Local Falcon pricing page describes credit packages and the terms describe subscription payments. The ChatGPT profile excludes three separately billable on-demand tools that are present in the normal profile: getLocalFalconGoogleBusinessLocations, getLocalFalconRankingAtCoordinate and getLocalFalconKeywordAtCoordinate.",
+    "sources": [
+      "https://github.com/local-falcon/mcp",
+      "https://www.localfalcon.com/features/mcp",
+      "https://www.localfalcon.com/pricing",
+      "https://www.localfalcon.com/terms-of-use",
+      "https://claude.com/connectors/local-falcon",
+      "https://manufact.com/mcp-catalog/local-falcon",
+      "https://glama.ai/mcp/servers/local-falcon/mcp",
+      "https://mcp.so/servers/local-falcon"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Repository initialize instructions recommend checking existing reports before running scans, using fieldmasks, and obtaining confirmation before credit-consuming operations and public GBP writes. These are agent-facing instructions; confirmation is not enforced by the MCP server.",
+    "governance_promises": "The vendor says: “Your AI sees only what your Local Falcon account can see”; “Your data is never shared with other users”; and “nothing is stored or used outside of your session unless you explicitly request it.” The privacy policy also says third-party AI platforms process transmitted data under their own privacy policies and that account permissions govern access.",
+    "promises_to_user": "The vendor states MCP is included on every plan and that reading reports/account data does not use credits; scans use credits as in the app. It says users can disconnect from Claude or ChatGPT settings.",
+    "comparison_with_server_logic": "Account-scoped access is consistent with API-key resolution and account API calls in public code. The repository keeps per-session server/profile state in memory and sends request_source attribution to Local Falcon’s API; the broad “nothing is stored or used outside of your session” statement is not fully specified for server-side logs, session state or downstream AI services. Credit use is described in docs and instructions, but user confirmation is not enforced by the server.",
+    "sources": [
+      "https://www.localfalcon.com/answers/164-can-i-control-what-data-the-ai-tools-can-access-through-the-mcp",
+      "https://www.localfalcon.com/answers/165-is-my-data-safe-with-the-mcp",
+      "https://www.localfalcon.com/answers/167-does-mcp-cost-extra",
+      "https://www.localfalcon.com/privacy-policy",
+      "https://github.com/local-falcon/mcp"
+    ]
+  },
+  "contradictions": [
+    "The vendor feature page and repository describe 60+ tools / 60 other-client tools and 57 ChatGPT tools, while the Claude directory and Manufact list 37 and Glama and mcp.so list 21; these appear to be smaller or older listings, not the current official repository count.",
+    "The repository says its ChatGPT profile excludes three separately billable tools; the vendor feature page broadly describes the same hosted server as having 60+ tools without detailing this profile-specific exclusion."
+  ],
+  "observations_for_research": [
+    "Client identity affects the available action set at one global endpoint: recognized ChatGPT sessions receive fewer tools than other MCP clients.",
+    "The server sends agent-facing operating rules in initialize instructions, including confirmation recommendations, fieldmask use and limits on unnecessary calls; the code separately enforces schemas and API-level confirmation tokens for some GBP mutations.",
+    "The same scan-report tool can return an interactive visualization in compatible clients, alongside ordinary tool text output."
+  ],
+  "confidence": "High (open code)",
+  "notes": "Inspected links.json, links_check.txt, pages/ and the official repository copy. The repository link had an incomplete HTTP fetch warning in the collection log, but its local copy and commit metadata were available and analyzed; the npm page returned 403 and was not used. The docs.localfalcon.com/mcp page is a documentation-search MCP, not the product endpoint. No hosted production build attestation was available. actions.json contains all 60 tools found in the official repository’s normal profile; catalogue listings were cross-checks.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 7.7
+  }
+}

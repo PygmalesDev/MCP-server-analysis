@@ -1,0 +1,2840 @@
+{
+  "server": "vercel",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.vercel.com/",
+    "documentation_url_csv": "https://vercel.com/docs/mcp/vercel-mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/vercel/vercel-mcp-overview",
+    "documentation_urls_used": [
+      "https://vercel.com/docs/mcp/vercel-mcp",
+      "https://vercel.com/docs/agent-resources/vercel-mcp",
+      "https://vercel.com/docs/agent-resources/vercel-mcp/tools",
+      "https://vercel.com/changelog/vercels-mcp",
+      "https://vercel.com/changelog/vercel-mcp-now-supports-the-2026-07-28-mcp-specification",
+      "https://vercel.com/changelog/vercel-mcp-can-now-deploy-code",
+      "https://vercel.com/changelog/vercel-mcp-now-supports-purchases",
+      "https://vercel.com/changelog/send-feedback-from-vercel-mcp",
+      "https://vercel.com/pricing",
+      "https://vercel.com/legal/ai-product-terms",
+      "https://vercel.com/legal/privacy-policy",
+      "https://github.com/vercel/vercel-mcp-overview"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official repository is an overview/README, not server implementation. The public vercel/mcp-adapter repository is a general framework adapter, not code identified as the hosted Vercel MCP implementation. Neither establishes deployed server internals.",
+    "mcp_protocol_version": "The documentation describes 2025-06-18 Authorization and Streamable HTTP; a 2026-07-31 changelog says the hosted server supports the 2026-07-28 specification and serves both protocol versions at one endpoint.",
+    "commit_hash": "d11a21fb4bf8d7cec9582ffe6ea618bfd24f9c11",
+    "commit_date": "2026-01-14",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND for the hosted Vercel MCP implementation. The 2026-07-31 changelog mentions official MCP SDK v2 and mcp-handler 2.x as the implementation used for the protocol update.",
+    "code_public": "Partially",
+    "license": "N/A for the overview repository; no hosted server implementation/license identified.",
+    "release_status": "Public beta",
+    "other_official_servers": [
+      "https://mcp.vercel.com/<teamSlug>/<projectSlug> — documented project-specific endpoint addressing; the tools reference says tool availability can vary by server configuration and team/project scope.",
+      "Vercel's general MCP adapter and documentation-site MCP examples are separate products/frameworks, not the hosted Vercel platform server."
+    ],
+    "sources": [
+      "https://github.com/vercel/vercel-mcp-overview",
+      "https://github.com/vercel/mcp-adapter",
+      "https://vercel.com/docs/mcp/vercel-mcp",
+      "https://vercel.com/docs/agent-resources/vercel-mcp/tools",
+      "https://vercel.com/changelog/vercels-mcp",
+      "https://vercel.com/changelog/vercel-mcp-now-supports-the-2026-07-28-mcp-specification"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Vercel says the MCP server is available on all plans. Access to individual product operations may require a paid plan, billing role, or payment method.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Vercel offers Hobby, Pro, and Enterprise plans; consult the current official pricing page for plan prices and included usage. The MCP documentation does not charge separately for MCP access.",
+    "pricing_model_details": "MCP access is documented as available on all plans. Some actions purchase paid Vercel products or add-ons; the purchase announcement says MCP quotes price and whether a charge is one-time or recurring and completes purchase only after confirmation.",
+    "other_access_restrictions": "Requires Vercel OAuth sign-in, consent for each client connection, team access grants, and the user's existing Vercel permissions. Some operations require billing access, a valid payment method, a paid v0 plan, or Enterprise. Vercel says it supports reviewed/approved clients; actual tool visibility varies by configuration, client support, OAuth grant, and team/project scope.",
+    "restrictions_controlled_by": "Vercel controls supported clients and server configuration; users authorize client connections; organization/team administrators control membership and role permissions; product plans and billing requirements are Vercel-controlled.",
+    "sources": [
+      "https://vercel.com/docs/agent-resources/vercel-mcp",
+      "https://vercel.com/docs/agent-resources/vercel-mcp/tools",
+      "https://vercel.com/changelog/vercel-mcp-now-supports-purchases",
+      "https://vercel.com/pricing",
+      "https://vercel.com/legal/ai-product-terms"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Hosted docs describe 2025 protocol behavior; changelog reports support for 2026-07-28 and 2025 clients.",
+      "description_what_how": "The official tool reference documents 217 catalog tools and 31 workflow/widget tools across 27 categories. It states actual availability and schemas can vary by connection, server configuration, client support, OAuth grant, and team/project scope. The parsed official category pages expose 248 tool names; see action_count_comment and actions.json.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results depend on the operation; individual reference pages document result formats. The public hosted endpoint requires OAuth, so no authenticated tools/list output was available in the evidence set.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp/tools",
+        "https://vercel.com/docs/agent-resources/vercel-mcp",
+        "https://mcp.vercel.com/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No resource listing or resource-specific behavior for the hosted platform server was found in the reviewed official material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp/tools"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted prompt listing or prompt-specific behavior was found in the reviewed official material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp/tools"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Tool catalog includes read operations for logs and observability data. Documentation reviewed did not establish MCP request logging, its contents, retention, or opt-out.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp/tools/observability"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted sampling capability was documented in the reviewed official sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted roots capability was documented in the reviewed official sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "The endpoint presents OAuth protected-resource metadata; hosted docs describe OAuth and MCP Authorization.",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate Bearer error=\"invalid_token\", error_description=\"No authorization provided\", resource_metadata=\"https://mcp.vercel.com/.well-known/oauth-protected-resource\". Protected-resource metadata: resource https://mcp.vercel.com/; authorization server https://vercel.com; scopes_supported [\"openid\"]. Authorization-server metadata lists DCR registration endpoint, authorization-code and device-code endpoints, PKCE S256, grant types authorization_code, client_credentials, refresh_token, urn:vercel:params:oauth:grant-type:device_code; token auth methods client_secret_basic, client_secret_post, client_secret_jwt, private_key_jwt, urn:vercel:params:oauth:client-assertion-type:oidc-bearer, none; revocation endpoint present. Token lifetime not stated. Server docs say users consent per client and grant team access; existing Vercel permissions apply.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated endpoint response is JSON {\"error\":\"invalid_token\",\"error_description\":\"No authorization provided\"}. OAuth metadata is JSON. Tool responses are operation-specific.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration supported (registration_endpoint https://api.vercel.com/login/oauth/register); grant types authorization_code, client_credentials, refresh_token, urn:vercel:params:oauth:grant-type:device_code; PKCE S256; token endpoint https://api.vercel.com/login/oauth/token; token auth methods client_secret_basic, client_secret_post, client_secret_jwt, private_key_jwt, urn:vercel:params:oauth:client-assertion-type:oidc-bearer, none; revocation endpoint https://api.vercel.com/login/oauth/token/revoke; scopes_supported at protected resource: [\"openid\"]; authorization server advertises scopes [\"openid\",\"email\",\"profile\",\"offline_access\"]; token lifetime NOT FOUND.",
+      "authorization_server": "https://vercel.com",
+      "sources": [
+        "https://mcp.vercel.com/.well-known/oauth-protected-resource",
+        "https://vercel.com/.well-known/oauth-authorization-server",
+        "https://vercel.com/.well-known/openid-configuration",
+        "https://mcp.vercel.com/",
+        "https://vercel.com/docs/agent-resources/vercel-mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Purchase changelog describes a confirmation before purchase, but does not specify MCP Elicitation; implementation details are not publicly documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/changelog/vercel-mcp-now-supports-purchases"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Tasks capability was documented for the hosted server. Deployment changelog says builds continue in the background and return a URL, without identifying MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/changelog/vercel-mcp-can-now-deploy-code"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Official reference states tool availability depends on server configuration, client support, and team/project scope; client tool lists show current parameters. Project-specific endpoint paths are documented. Detailed server-side configuration controls were not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool list/schema varies by connection.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp/tools",
+        "https://mcp.vercel.com/<teamSlug>/<projectSlug>"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The `submit_feedback` tool sends bug reports, friction reports, and feature requests to the Vercel team. Vercel says it requires sign-in and sends feedback only when the user asks the agent to share it.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Feedback includes a message and may attach structured context describing task, expected behavior, actual result, and type.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/changelog/send-feedback-from-vercel-mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription capability was documented. Purchases and billing-related tools are listed, but do not establish subscription protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp/tools/billing"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Deployment announcement says builds continue in the background; no MCP progress notification mechanism was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/changelog/vercel-mcp-can-now-deploy-code"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP cancellation capability was documented for the hosted server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "2026-07-28 changelog says one endpoint supports both newer stateless requests and 2025-era clients.",
+      "description_what_how": "Vercel documents server instructions as client-facing security guidance and exposes deployment, purchase, and feedback workflows. This evidence does not establish an initialize-time instructions payload.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://vercel.com/docs/agent-resources/vercel-mcp",
+        "https://vercel.com/changelog/vercel-mcp-now-supports-the-2026-07-28-mcp-specification"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official catalog contains read operations and many create, update, purchase, deployment, and delete operations. The reference does not publish MCP tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint). 2. Purchase announcement says price/recurrence are explained and purchase completes only after confirmation; confirmation enforcement is reported for purchases. General docs recommend human confirmation, not server-enforced for all writes. 3. OAuth authorizes each client connection; users grant team access and existing Vercel permissions apply. Consent per connection is claimed as confused-deputy protection. Protected-resource scopes list only openid; authorization server advertises openid, email, profile, offline_access. Token lifetime not found. 4. Docs describe project-specific paths and configuration/client/team/project-dependent tool visibility. No documented readonly query parameter, tool filter, or sandbox endpoint found. 5. Permission inheritance follows Vercel account/team access. Specific MCP masking or PII exclusion not found. 6. No MCP-specific rate limits, quotas, bulk caps, or per-call fees documented. Individual products may have plan/billing constraints. 7. Hosted validation/correction and unknown-argument handling not documented. 8. MCP request telemetry, audit trail, and opt-out not documented. General Vercel privacy policy applies to Services and AI product information; it is not specific to MCP handling. 9. `submit_feedback` sends user-requested feedback; it is not described as automatic. Tool reference includes no rate/report/survey/feedback names in its enumerated catalog, but separate changelog documents `submit_feedback`. No tool descriptions push upgrades beyond purchase capabilities. 10. Reviewed sources do not document initialize instructions or server-delivered skills. Security and confirmation recommendations are client-facing guidance. 11. Stateful memory affecting later outputs/tools not documented. 12. Standard single global endpoint is documented, with project-specific paths; no sub-server proxy hierarchy found. 13. Catalog includes tools for narrowly scoped platform operations; no documented raw arbitrary API/SQL/script escape hatch found.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "\"After an uncertain write, inspect the resource before retrying.\" — tools reference.",
+      "\"Your assistant needs access to the team that owns a project before it can work with that project's deployments or logs.\" — tools reference.",
+      "\"Vercel MCP quotes the price, explains whether the charge is one-time or recurring, and completes the purchase only after you confirm.\" — purchase changelog.",
+      "\"Always enable human confirmation in your workflows to maintain control and prevent unauthorized changes\" — security guidance; recommendation to the client/user."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One global hosted MCP endpoint is documented, with project-specific URL paths and variable tool availability; no hierarchy of proxied sub-servers was found.",
+    "sources": [
+      "https://vercel.com/docs/agent-resources/vercel-mcp/tools",
+      "https://vercel.com/docs/agent-resources/vercel-mcp",
+      "https://vercel.com/changelog/vercel-mcp-now-supports-purchases",
+      "https://vercel.com/changelog/send-feedback-from-vercel-mcp",
+      "https://vercel.com/legal/privacy-policy",
+      "https://mcp.vercel.com/.well-known/oauth-protected-resource"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "248 official names in category pages; documentation states 217 catalog tools plus 31 workflow/widget tools (248 total). Actual per-connection availability varies.",
+    "action_count_comment": "An official tool reference exists at https://vercel.com/docs/agent-resources/vercel-mcp/tools and states 217 catalog tools plus 31 workflow/widget tools. Parsed official category pages contain 248 named tools, matching that stated total. actions.json contains those official names plus 2 catalogue-only names (MartechDB and Claude connector directory, 2026-10); their inclusion is marked third-party and their identity as native endpoint tools is unverified. Agent Discoverability reports 204 tools; the Claude connector page provides its own listing; mcp.tc says it cannot inspect tools behind sign-in; other catalogue counts vary or are not directly comparable. The 248 official list combines catalog and workflow/widget names, while the endpoint's per-client list can differ. The official docs have no full parameter schemas in the top-level listing, but category pages provide parameters.",
+    "actions": [
+      {
+        "tool_name": "list_access_group_members",
+        "description": "List members of an access group.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); limit: integer (optional); next: string (optional); search: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/access-groups",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_access_group_projects",
+        "description": "List projects of an access group.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); limit: integer (optional); next: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/access-groups",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_access_groups",
+        "description": "List access groups",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (optional); search: string (optional); membersLimit: integer (optional); projectsLimit: integer (optional); limit: integer (optional); next: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/access-groups",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_access_group",
+        "description": "Reads an access group.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/access-groups",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_access_group_project",
+        "description": "Reads an access group project.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "accessGroupIdOrName: string (required); projectId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/access-groups",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_run",
+        "description": "Use this tool with agents built with eve. Get detailed metadata for a single eve Agent Run, including events, workflow…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (required); projectId: string (required); runId: string (required); environment: string (optional); period: string (optional; enum 11 categories); from: string (optional); to: string (optional)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/agent-runs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_run_trace",
+        "description": "Use this tool with agents built with eve. Read one page of an eve Agent Run trace, including turns, messages,…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (required); projectId: string (required); runId: string (required); environment: string (optional); period: string (optional; enum 11 categories); from: string (optional); to: string (optional); maxFieldLength: number (optional); traceStreamId: string (optional); traceAfterCursor: string (optional); traceBeforeChunk: integer (optional)",
+        "parameter_count": 11,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/agent-runs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_agent_run_projects",
+        "description": "Use this tool with agents built with eve. List projects in a Vercel team that have Agent Runs observability data…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (required); environment: string (optional); period: string (optional; enum 11 categories); from: string (optional); to: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/agent-runs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_agent_runs",
+        "description": "Use this tool with agents built with eve. List Agent Runs for a Vercel project. The response includes summaries, status,…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (required); projectId: string (required); environment: string (optional); period: string (optional; enum 11 categories); from: string (optional); to: string (optional); page: number (optional); pageSize: number (optional); search: string (optional)",
+        "parameter_count": 9,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/agent-runs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "buy_domain",
+        "description": "Register (purchase) a single domain for a team. The quote (`get_purchase_quote` with `product: domain`) checks availability and returns the live…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); years: integer (optional); autoRenew: boolean (optional); expectedPrice: number (optional); contact: object (optional); teamId: string (required); confirm: boolean (optional); idempotencyKey: string (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/billing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domain_order",
+        "description": "Get the status of a domain purchase order returned by `buy_domain`, to confirm whether the asynchronous registration completed. It is…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "orderId: string (required); teamId: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/billing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_purchase_quote",
+        "description": "Get a read-only domain registration quote for the selected team. Checks availability and pricing and returns disclosures and a signed…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "product: string (required); teamId: string (required); domain: string (required); years: integer (optional); autoRenew: boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/billing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_billing_charges",
+        "description": "List FOCUS billing charges.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "from: string (required); to: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/billing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_contract_commitments",
+        "description": "List FOCUS contract commitments.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/billing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "artifact_query",
+        "description": "Query information about an artifact.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/caching",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_remote_cache_status",
+        "description": "Get the status of Remote Caching for this principal.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/caching",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "invalidate_by_src_images",
+        "description": "Invalidate by source image.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/caching",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "invalidate_by_tags",
+        "description": "Invalidate by tag.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/caching",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "record_events",
+        "description": "Record an artifacts cache usage event.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "xArtifactClientCi: string (optional); xArtifactClientInteractive: integer (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/caching",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_artifact",
+        "description": "Upload a cache artifact.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "contentLength: number (required); xArtifactDuration: number (optional); xArtifactClientCi: string (optional); xArtifactClientInteractive: integer (optional); xArtifactTag: string (optional); xArtifactSha: string (optional); xArtifactDirtyHash: string (optional); hash: string (required); teamId: string (optional); slug: string (optional); requestBody: string (required)",
+        "parameter_count": 11,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/caching",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "rerequest_check",
+        "description": "Rerequest a check.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "deploymentId: string (required); checkId: string (required); autoUpdate: boolean (optional); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/checks",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cancel_deployment",
+        "description": "Cancel a deployment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_deployment",
+        "description": "Create a deployment from a Git source or files. Put `name`, `project`, `gitSource` or `files`, and `projectSettings` inside `requestBody`. Use…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "forceNew: string (optional; enum 2 categories); skipAutoDetectionConfirmation: string (optional; enum 2 categories); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deploy_to_vercel",
+        "description": "Deploy a small, simple project from inline file contents only when the Vercel CLI is unavailable and no usable remote…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "target: string (required; enum 2 categories); name: string (required); teamId: string (optional); projectSettings: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_access_to_vercel_url",
+        "description": "Create a temporary shareable link that grants access to protected Vercel deployments.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); url: string (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_deployment",
+        "description": "Get a deployment by ID or hostname.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrUrl: string (required); withGitRepoInfo: string (optional); teamId: string (optional); slug: string (optional); idOrUrl: string (required); teamId: string (required)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_deployment_build_logs",
+        "description": "Get the build logs for a deployment by ID or URL, to investigate why a build failed. Returns the most…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrUrl: string (required); direction: string (optional; enum 2 categories); errorsOnly: boolean (optional); limit: number (optional); since: string (optional); until: string (optional); buildId: string (optional); teamId: string (required)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_deployment_feature_flags",
+        "description": "Retrieve the feature flags of a deployment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "deploymentId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_deployment_file_contents",
+        "description": "Get Deployment File Contents.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); fileId: string (required); path: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_git_deployment_context",
+        "description": "List your teams, their plans, linked Git projects, and connected Cursor Origin workspaces. This tool takes no parameters and is…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "None",
+        "parameter_count": 0,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "import-claude-design-from-url",
+        "description": "Import a self-contained HTML bundle from Claude Design and deploy it to Vercel. The bundle must use a public HTTPS…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "url: string (required); title: string (optional); claude_design_project_id: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_deployment_events",
+        "description": "Get deployment events, including build output. Use `direction: \"backward\"` for recent events and numeric timestamps for `since` and `until`.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrUrl: string (required); direction: string (optional; enum 2 categories); follow: number (optional; enum 2 categories); limit: number (optional); name: string (optional); since: number (optional); until: number (optional); delimiter: number (optional; enum 2 categories); builds: number (optional; enum 2 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 11,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_deployment_files",
+        "description": "List Deployment Files.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_deployments",
+        "description": "List deployments, optionally filtered by project.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "app: string (optional); from: number (optional); limit: number (optional); projectId: string (optional); target: string (optional); to: number (optional); users: string (optional); since: number (optional); until: number (optional); state: string (optional); rollbackCandidate: boolean (optional); branch: string (optional); sha: string (optional); teamId: string (optional); slug: string (optional); projectId: string (required); teamId: string (required); since: number (optional); until: number (optional)",
+        "parameter_count": 19,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "open_deployments",
+        "description": "Show deployments in a live card with expandable build logs. In clients without app support, receive the deployment state, preview…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "view: string (optional); teamId: string (optional); projectId: string (optional); branch: string (optional); sha: string (optional); repo: string (optional); target: string (optional; enum 2 categories)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ui_get_build_log_excerpt",
+        "description": "The deployments card uses this app-only tool to read its latest build-log lines. App-capable clients expose it to the card.…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (required); idOrUrl: string (required); limit: integer (optional); since: number (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_file",
+        "description": "Upload Deployment Files.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "contentLength: number (optional); xVercelDigest: string (optional); xNowDigest: string (optional); xNowSize: number (optional); teamId: string (optional); slug: string (optional); requestBody: string (optional)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "web_fetch_vercel_url",
+        "description": "Fetch content directly from a Vercel deployment URL (with authentication if required).",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "url: string (required)",
+        "parameter_count": 1,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_vercel_documentation",
+        "description": "Search Vercel documentation for specific topics and information.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "topic: string (required); tokens: number (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/documentation",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "use_vercel_cli",
+        "description": "This tool is available through the `https://mcp.vercel.com/cli/mcp` connection. Instructs the LLM to use Vercel CLI commands with --help flag for…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "command: string (optional); action: string (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/documentation",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_feedback",
+        "description": "Send feedback to Vercel when you want to report a problem or suggest an improvement. This tool requires sign-in and…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "message: string (required); context: object (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/documentation",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "buy_domains",
+        "description": "Register domains individually with `get_purchase_quote` and `buy_domain`. This tool does not execute purchases.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "buy_single_domain",
+        "description": "To register a domain, use `get_purchase_quote` followed by `buy_domain`. This tool does not execute purchases.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "check_domain_availability_and_price",
+        "description": "Check if domain names are available for purchase and get pricing information",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_transfer_domain",
+        "description": "Add an existing domain to the Vercel platform.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_record",
+        "description": "Creates a DNS record for a domain.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_availability",
+        "description": "Get availability for multiple domains.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); requestBody: object (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_price",
+        "description": "Get price data for multiple domains in a single request.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); requestBody: object (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_cert_by_id",
+        "description": "Read certificate metadata by its ID. The response does not include the private key.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_contact_info_schema",
+        "description": "Get contact info schema.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); teamId: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domain",
+        "description": "Get information for a single domain in an account or team.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domain_availability",
+        "description": "Check whether a domain is available to register.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); teamId: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domain_config",
+        "description": "Get a Domain's configuration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); projectIdOrName: string (optional); strict: string (optional; enum 2 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domain_contact_verification",
+        "description": "Get contact verification status for a domain.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); teamId: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domain_price",
+        "description": "Get current domain pricing. For a purchase, use `get_purchase_quote` to obtain the price and confirmation details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); years: string (optional); teamId: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domain_project_domains",
+        "description": "List all project domains associated with an apex domain owned by the authenticated account.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); limit: number (optional); since: number (optional); until: number (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domain_verification_record",
+        "description": "Get the TXT verification record needed to claim ownership of a domain for the authenticated team. The caller must add…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domains_records_by_record_id",
+        "description": "Get a DNS record by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "recordId: string (required); teamId: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_order",
+        "description": "Get a domain order.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "orderId: string (required); teamId: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_records",
+        "description": "Retrieves a list of DNS records created for a domain name. By default it returns 20 records if no limit…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); limit: string (optional); since: string (optional); until: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tld",
+        "description": "Get TLD.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "tld: string (required); teamId: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tld_price",
+        "description": "Get TLD price data.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "tld: string (required); years: string (optional); teamId: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "issue_cert",
+        "description": "Issue a new cert.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_certs",
+        "description": "Get certs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_domains",
+        "description": "List all the domains.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "limit: number (optional); since: number (optional); until: number (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_supported_tlds",
+        "description": "Get supported TLDs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional)",
+        "parameter_count": 1,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "replace_domain_dns_records",
+        "description": "Replace DNS records for a domain.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "domain: string (required); teamId: string (optional); requestBody: string (required)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_domains",
+        "description": "Check availability and registration and renewal prices for one to 200 exact domain names. This lookup does not reserve or…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); requestBody: object (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_record",
+        "description": "Update an existing DNS record.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "recordId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_drain",
+        "description": "Create a new Drain.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/drains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_drain",
+        "description": "Find a Drain by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/drains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_drains",
+        "description": "Retrieve a list of all Drains.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (optional); includeMetadata: boolean (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/drains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "test_drain",
+        "description": "Validate Drain delivery configuration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/drains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_drain",
+        "description": "Update an existing Drain.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/drains",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project_env",
+        "description": "Create one or more environment variables.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); upsert: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/environment-variables",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "edit_project_env",
+        "description": "Edit an environment variable.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); id: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/environment-variables",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "filter_project_envs",
+        "description": "Retrieve the environment variables of a project by id or name.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); gitBranch: string (optional); decrypt: string (optional; enum 2 categories); source: string (optional); customEnvironmentId: string (optional); customEnvironmentSlug: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/environment-variables",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_custom_environment",
+        "description": "Retrieve a custom environment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); environmentSlugOrId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/environment-variables",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_env",
+        "description": "Retrieve the decrypted value of an environment variable of a project by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); id: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/environment-variables",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_shared_env_var",
+        "description": "Retrieve the decrypted value of a Shared Environment Variable by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/environment-variables",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_project_custom_environments",
+        "description": "Retrieve custom environments.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); gitBranch: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/environment-variables",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_flag",
+        "description": "Create a flag.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_sdk_key",
+        "description": "Create an SDK key.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flag",
+        "description": "Get a flag.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); flagIdOrSlug: string (required); ifMatch: string (optional); withMetadata: boolean (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flag_segment",
+        "description": "Retrieve a feature flag segment by ID or slug.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); segmentIdOrSlug: string (required); withMetadata: boolean (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flag_settings",
+        "description": "Get project flag settings.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_feature_flag_sdk_keys",
+        "description": "Get all SDK keys.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_flag_segments",
+        "description": "List all feature flag segments for a project.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); withMetadata: boolean (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_flag_versions",
+        "description": "Lists flag versions for a given flag.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); flagIdOrSlug: string (required); limit: number (optional); cursor: string (optional); environment: string (optional); withMetadata: boolean (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_flags",
+        "description": "List flags.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); state: string (optional; enum 2 categories); withMetadata: boolean (optional); limit: integer (optional); cursor: string (optional); search: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_flags_v2",
+        "description": "List flags.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); state: string (optional; enum 2 categories); limit: integer (optional); cursor: string (optional); search: string (optional); createdBy: string (optional); includeMarketplaceFlags: boolean (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 9,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_team_flag_settings",
+        "description": "Retrieve feature flag settings for projects in a team.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "limit: integer (optional); cursor: string (optional); teamId: string (required); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_team_flags",
+        "description": "Retrieve all feature flags for a team across all projects. The list can be filtered by state and supports pagination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "state: string (optional; enum 2 categories); withMetadata: boolean (optional); limit: integer (optional); cursor: string (optional); search: string (optional); kind: string (optional; enum 4 categories); teamId: string (required); slug: string (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_team_flags_v2",
+        "description": "Retrieve all feature flags for a team across all projects. Returns an opaque cursor for pagination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "state: string (optional; enum 2 categories); limit: integer (optional); cursor: string (optional); search: string (optional); kind: string (optional; enum 4 categories); createdBy: string (optional); includeMarketplaceFlags: boolean (optional); teamId: string (required); slug: string (optional)",
+        "parameter_count": 9,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_flag",
+        "description": "Update a flag.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); flagIdOrSlug: string (required); ifMatch: string (optional); withMetadata: boolean (optional); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_flag_segment",
+        "description": "Update an existing feature flag segment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); segmentIdOrSlug: string (required); withMetadata: boolean (optional); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_flag_settings",
+        "description": "Update project flag settings.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/feature-flags",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_active_attack_status",
+        "description": "Read active attack data.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); since: number (optional); teamId: string (required); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/firewall",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bypass_ip",
+        "description": "Read System Bypass.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); limit: number (optional); sourceIp: string (optional); domain: string (optional); projectScope: boolean (optional); offset: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/firewall",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_firewall_config",
+        "description": "Read Firewall Configuration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); configVersion: string (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/firewall",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "put_firewall_config",
+        "description": "Put Firewall Configuration.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/firewall",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_attack_challenge_mode",
+        "description": "Update Attack Challenge mode.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/firewall",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_firewall_config",
+        "description": "Update Firewall Configuration.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/firewall",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_edge_config",
+        "description": "Creates a Global Config.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_edge_config_token",
+        "description": "Adds a token to an existing Global Config.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edge_config",
+        "description": "Returns a Global Config.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edge_config_backup",
+        "description": "Retrieves a specific version of a Global Config from backup storage.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); edgeConfigBackupVersionId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edge_config_backups",
+        "description": "Returns backups of a Global Config.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); next: string (optional); limit: number (optional); metadata: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edge_config_item",
+        "description": "Returns a specific Global Config Item.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); edgeConfigItemKey: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edge_config_items",
+        "description": "Returns all items of a Global Config.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edge_config_token",
+        "description": "Return meta data about a Global Config token.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); token: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edge_config_tokens",
+        "description": "Returns all tokens of a Global Config.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edge_configs",
+        "description": "Returns all Global Configs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "patch_edge_config_items",
+        "description": "Update multiple Global Config Items in batch.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "restore_edge_config_backup",
+        "description": "Restores a Global Config backup.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); edgeConfigBackupVersionId: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_edge_config",
+        "description": "Updates a Global Config.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "edgeConfigId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_configuration",
+        "description": "Retrieve an integration configuration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/integrations",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_webhooks",
+        "description": "Get a list of webhooks",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/integrations",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_integration_billing_plans",
+        "description": "List integration billing plans.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "integrationIdOrSlug: string (required); integrationConfigurationId: string (optional); productIdOrSlug: string (required); metadata: string (optional); source: string (optional; enum 10 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/integrations",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_integration_configuration_products",
+        "description": "Returns products available for an integration configuration. Each product includes a `metadataSchema` field with the JSON Schema for required and…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/integrations",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_integration_configurations",
+        "description": "Get configurations for the authenticated user or team.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "view: string (required; enum 2 categories); installationType: string (optional; enum 3 categories); integrationIdOrSlug: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/integrations",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_repo",
+        "description": "List git repositories linked to namespace by provider.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "query: string (optional); provider: string (optional; enum 6 categories); installationId: string (optional); host: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/integrations",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "activate_kms_signing_key",
+        "description": "Activate a signing key.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "issuerId: string (required); keyId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_kms_issuer",
+        "description": "Create a KMS issuer with server-generated signing keys for your team. Configure its name, signing algorithm, claims schema, and initial…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_kms_issuer_policy",
+        "description": "Create an issuer policy.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "issuerId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_kms_signing_key",
+        "description": "Create a signing key.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "issuerId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_kms_issuer",
+        "description": "Get an issuer.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "issuerId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_kms_issuers",
+        "description": "Retrieve the list of KMS issuers that belong to the authenticated team. The results are paginated.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "limit: integer (optional); next: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "revoke_kms_signing_key",
+        "description": "Revoke a signing key.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "issuerId: string (required); keyId: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_kms_issuer",
+        "description": "Update an issuer.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "issuerId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_kms_issuer_policy",
+        "description": "Update an issuer policy.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "issuerId: string (required); kind: string (required); policyKey: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_microfrontends_config",
+        "description": "Get microfrontends config for a deployment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "deploymentId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/microfrontends",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_microfrontends_config_for_project",
+        "description": "Get microfrontends config for a project.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectIdOrName: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/microfrontends",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_connector",
+        "description": "Get the connector by ID. Accepts a dashboard/team requester or a deployment's project OIDC token. Project requesters may only read…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "connector: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/networking",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_connector_project_connection",
+        "description": "Get the configuration that connects a connector to a project.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "connector: string (required); projectId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/networking",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_connector_project_connections",
+        "description": "List the projects connected to a connector and the environments where each connection is available.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "connector: string (required); limit: integer (optional); cursor: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/networking",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_connectors",
+        "description": "List connectors that belong to a team.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "limit: integer (optional); cursor: string (optional); projectId: string (optional); search: string (optional); type: string (optional); service: string (optional); sort: string (optional; enum 3 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 9,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/networking",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_project_connector_connections",
+        "description": "List the connectors connected to a project and the environments where each connection is available.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); limit: integer (optional); cursor: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/networking",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_connector",
+        "description": "Update a connector and return the connector with any service-side update signals that the caller must handle.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "connector: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/networking",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsert_connector_project_connection",
+        "description": "Connect a connector to a project, or replace the environments on an existing project connection.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "connector: string (required); projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/networking",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_observability_query",
+        "description": "Query observability data.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); requestBody: object (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/observability",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_trace_session",
+        "description": "Mints a short-lived HS256 JWT scoped to a deployment hostname. The Vercel CLI presents this JWT to the Vercel proxy…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/observability",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_observability_configuration_projects",
+        "description": "Lists the projects that are currently configured as disabled for Observability Plus on a team.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/observability",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_observability_schema",
+        "description": "Get the observability query schema.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/observability",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_trace",
+        "description": "Get a project trace by request ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); requestId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/observability",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_runtime_errors",
+        "description": "Get grouped runtime error clusters for a project. Each cluster includes the error name, occurrence count, affected routes, sample messages,…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (required); since: string (optional); until: string (optional); routes: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/observability",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_runtime_logs",
+        "description": "Get runtime logs for a project or deployment. Runtime logs include application output such as console.log messages, errors, and other…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (required); deploymentId: string (optional); environment: string (optional; enum 2 categories); since: string (optional); until: string (optional); limit: integer (optional); query: string (optional); requestId: string (optional); group_by: string (optional; enum 5 categories)",
+        "parameter_count": 10,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/observability",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accept_project_transfer_request",
+        "description": "Accept project transfer request.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "code: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_project_domain",
+        "description": "Add a domain to a project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_git_project",
+        "description": "Create or reuse a Vercel project linked to an accessible Git repository. By default, it creates a preview deployment from…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "repo: string (required); teamId: string (required); provider: string (optional; enum 4 categories); projectName: string (optional); rootDirectory: string (optional); deploy: boolean (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project",
+        "description": "Create a new project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project",
+        "description": "Get a project by ID or name, including its configuration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional); projectId: string (required); teamId: string (required)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_deletion_link",
+        "description": "Get a link to the Delete Project section in the Vercel dashboard. This tool verifies project ownership and returns `requires_user_action`.…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_deployment_protection",
+        "description": "Get the effective password protection, Vercel Authentication, and Trusted IP settings for a Vercel project. Password values are never returned.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_domain",
+        "description": "Get project domain by project id/name and domain name.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); domain: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "git_namespaces",
+        "description": "Lists git namespaces for a supported provider. Supported providers are `github`, `gitlab` and `bitbucket`. If the provider is not provided,…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "host: string (optional); provider: string (optional; enum 5 categories); viewerMetadata: boolean (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_project_domains",
+        "description": "Retrieve project domains by project by id or name.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); production: string (optional; enum 2 categories); target: string (optional; enum 2 categories); customEnvironmentId: string (optional); gitBranch: string (optional); redirects: string (optional; enum 2 categories); redirect: string (optional); verified: string (optional; enum 2 categories); limit: number (optional); since: number (optional); until: number (optional); order: string (optional; enum 2 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 14,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_projects",
+        "description": "List projects in your account or selected team. The tool also supports repository and project-setting filters.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "from: string (optional); gitForkProtection: string (optional; enum 2 categories); limit: string (optional); search: string (optional); repo: string (optional); repoId: string (optional); repoUrl: string (optional); excludeRepos: string (optional); edgeConfigId: string (optional); edgeConfigTokenId: string (optional); deprecated: boolean (optional); elasticConcurrencyEnabled: string (optional; enum 2 categories); staticIpsEnabled: string (optional; enum 2 categories); buildMachineTypes: string (optional); buildQueueConfiguration: string (optional; enum 2 categories); teamId: string (optional); slug: string (optional); teamId: string (required)",
+        "parameter_count": 18,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pause_project",
+        "description": "Pause a project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional); projectId: string (required); teamId: string (required)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unpause_project",
+        "description": "Unpause a project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional); projectId: string (required); teamId: string (required)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_project",
+        "description": "Update an existing project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_project_deployment_protection",
+        "description": "Partially update password protection, Vercel Authentication, and Trusted IPs for a Vercel project. Can replace passwords or IP allowlists, restrict…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (required); passwordProtection: object (optional); ssoProtection: object (optional); trustedIps: object (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_project_protection_bypass",
+        "description": "Update Protection Bypass for Automation.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "verify_project_domain",
+        "description": "Attempts to verify a project domain with `verified = false` by checking the correctness of the project domain's `verification` challenge.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); domain: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "approve_rolling_release_stage",
+        "description": "Update the active rolling release to the next stage for a project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "complete_rolling_release",
+        "description": "Complete the rolling release for the project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_rolling_release",
+        "description": "Get the active rolling release information for a project.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); state: string (optional; enum 3 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_rolling_release_billing_status",
+        "description": "Get rolling release billing status.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_rolling_release_config",
+        "description": "Get rolling release configuration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_promote_aliases",
+        "description": "Gets a list of aliases with status for the current promote.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); limit: number (optional); since: number (optional); until: number (optional); failedOnly: boolean (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "request_promote",
+        "description": "Point production traffic to a given deployment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); deploymentId: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "request_rollback",
+        "description": "Point production traffic to a previous production deployment by ID.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); deploymentId: string (required); description: string (optional); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "start_rolling_release",
+        "description": "Start a rolling release for the project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_rolling_release_config",
+        "description": "Update the rolling release settings for the project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "idOrName: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_route",
+        "description": "Add a routing rule.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "assign_alias",
+        "description": "Assign an Alias.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "edit_route",
+        "description": "Edit a routing rule.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); routeId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate_route",
+        "description": "Generate a routing rule from natural language.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_alias",
+        "description": "Retrieves an Alias for the given host name or alias ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "from: number (optional); idOrAlias: string (required); projectId: string (optional); since: number (optional); until: number (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_aliases",
+        "description": "List aliases.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "from: number (optional); limit: number (optional); projectId: string (optional); since: number (optional); until: number (optional); rollbackDeploymentId: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_bulk_redirect_versions",
+        "description": "Get the version history for a project's redirects.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_bulk_redirects",
+        "description": "Gets project-level redirects.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); versionId: string (optional); q: string (optional); page: integer (optional); perPage: integer (optional); sortBy: string (optional; enum 3 categories); sortOrder: string (optional; enum 2 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 9,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_deployment_aliases",
+        "description": "List Deployment Aliases.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_project_route_versions",
+        "description": "Get routing rule version history.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_project_routes",
+        "description": "Get project routing rules.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); versionId: string (optional); q: string (optional); filter: string (optional; enum 4 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "patch_url_protection_bypass",
+        "description": "Update the protection bypass for a URL.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "restore_redirects",
+        "description": "Restores the provided redirects in the staging version to the value in the production version. If no production version exists,…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "stage_redirects",
+        "description": "Stages new redirects for a project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "stage_routes",
+        "description": "Stage routing rules.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_bulk_redirect_version",
+        "description": "Promote a staging version to production or restore a previous production version.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_route_versions",
+        "description": "Promote, restore, or discard a routing rule version.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_sandboxes_sessions_by_session_id_snapshot_v2",
+        "description": "Create a snapshot.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_sandboxes_sessions_by_session_id_snapshot_v3",
+        "description": "Create a snapshot.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_sandboxes_v2",
+        "description": "Create a named sandbox.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_sandboxes_v3",
+        "description": "Create a named sandbox.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_sandboxes_v4",
+        "description": "Create a named sandbox.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_session_directory",
+        "description": "Create a directory.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extend_session_timeout",
+        "description": "Extend session timeout.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_named_sandbox",
+        "description": "Get a named sandbox.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "name: string (required); projectId: string (optional); resume: boolean (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_session",
+        "description": "Get a session.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_session_command",
+        "description": "Get a command.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); cmdId: string (required); wait: string (optional; enum 2 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_session_command_logs",
+        "description": "Stream command logs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); cmdId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_session_snapshot",
+        "description": "Get a snapshot.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "snapshotId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "kill_session_command",
+        "description": "Kill a command.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "cmdId: string (required); sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_named_sandboxes",
+        "description": "List named sandboxes for a project. This tool corresponds to the `listNamedSandboxes` catalog operation. Use `list_sessions` to list Sandbox sessions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "project: string (required); limit: number (optional); sortBy: string (optional; enum 4 categories); namePrefix: string (optional); cursor: string (optional); sortOrder: string (optional; enum 2 categories); status: string (optional; enum 3 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 9,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_session_commands",
+        "description": "List commands.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_session_snapshots",
+        "description": "List snapshots.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "project: string (required); name: string (optional); limit: number (optional); cursor: string (optional); sortOrder: string (optional; enum 2 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_sessions",
+        "description": "List sessions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "project: string (required); name: string (optional); limit: number (optional); cursor: string (optional); sortOrder: string (optional; enum 2 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_session_file",
+        "description": "Read a file.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_session_command",
+        "description": "Execute a command.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "stop_session",
+        "description": "Stop a session.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_sandbox",
+        "description": "Update a sandbox.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "name: string (required); projectId: string (optional); resume: boolean (optional); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_session_network_policy",
+        "description": "Update network policy.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: object (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "write_session_files",
+        "description": "Write files.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "xCwd: string (optional); sessionId: string (required); teamId: string (optional); slug: string (optional); requestBody: string (required)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_storage_stores_blob",
+        "description": "Create a Blob store.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); requestBody: object (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/storage",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_storage_stores_by_id",
+        "description": "Get a store.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); skipMetadata: boolean (optional); includeGuides: boolean (optional); teamId: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/storage",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_auth_user",
+        "description": "Get the User.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/teams",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_team",
+        "description": "Get a Team.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "slug: string (optional); teamId: string (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/teams",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_event_types",
+        "description": "List Event Types.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); slug: string (optional)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/teams",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_team_members",
+        "description": "List team members.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "limit: number (optional); since: number (optional); until: number (optional); search: string (optional); role: string (optional; enum 8 categories); excludeProject: string (optional); eligibleMembersForProjectId: string (optional); teamId: string (required); slug: string (optional)",
+        "parameter_count": 9,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/teams",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_teams",
+        "description": "List the teams you belong to.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "limit: number (optional); since: number (optional); until: number (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/teams",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_user_events",
+        "description": "List User Events.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "limit: number (optional); since: string (optional); until: string (optional); types: string (optional); userId: string (optional); principalId: string (optional); projectIds: string (optional); entityId: string (optional); withPayload: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 11,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/teams",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_toolbar_reaction",
+        "description": "Add an emoji reaction to a message in a toolbar thread.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "threadId: string (required); messageId: string (required); teamId: string (required); emoji: string (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/toolbar",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "change_toolbar_thread_resolve_status",
+        "description": "Change the resolve status of a toolbar thread. Use this to mark a thread as resolved or unresolve a previously…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "threadId: string (required); teamId: string (required); resolved: boolean (required)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/toolbar",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "edit_toolbar_message",
+        "description": "Edit an existing message in a toolbar thread.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "threadId: string (required); messageId: string (required); teamId: string (required); markdown: string (required)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/toolbar",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_toolbar_thread",
+        "description": "Get a specific toolbar thread by ID, including all messages and context.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "threadId: string (required); teamId: string (required)",
+        "parameter_count": 2,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/toolbar",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_toolbar_threads",
+        "description": "List Vercel Toolbar comment threads for a team. Returns unresolved threads by default.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (required); projectId: string (optional); branch: string (optional); status: string (optional; enum 2 categories); page: string (optional); search: string (optional); limit: number (optional); offset: number (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/toolbar",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reply_to_toolbar_thread",
+        "description": "Add a reply message to an existing toolbar thread.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "threadId: string (required); teamId: string (required); markdown: string (required)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/toolbar",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_vercel_ci_invocation",
+        "description": "Inspect a Vercel CI invocation attempt, including its status and conclusion.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_vercel_ci_invocation_logs",
+        "description": "Read logs for a Vercel CI invocation attempt.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_vercel_ci_invocation_tree",
+        "description": "Returns an invocation attempt together with every job definition, its latest job run, and the task definitions and active task…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (optional); follow: number (optional; enum 2 categories); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_vercel_ci_job_definition",
+        "description": "Inspect a job definition within a Vercel CI invocation attempt.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); jobDefinitionId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_vercel_ci_job_run",
+        "description": "Inspect a job run within a Vercel CI invocation attempt.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); jobDefinitionId: string (required); runAttempt: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_vercel_ci_job_run_logs",
+        "description": "Read logs for a Vercel CI job run.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); jobDefinitionId: string (required); runAttempt: string (required); follow: number (optional; enum 2 categories); since: number (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 8,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_vercel_ci_task_logs",
+        "description": "Returns log lines for the tasks of an invocation attempt in a single request, grouped by task. Tasks can be…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); limit: number (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_vercel_ci_task_run_logs",
+        "description": "Get Task Run Logs With `follow=1` the response is a newline-delimited JSON stream of log lines that ends once the…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); jobDefinitionId: string (required); runAttempt: string (required); taskDefinitionId: string (required); taskRunAttempt: string (required); follow: number (optional; enum 2 categories); since: number (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 10,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_vercel_ci_invocation_attempts",
+        "description": "List the attempts for a Vercel CI invocation.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 3,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_vercel_ci_invocations",
+        "description": "List Vercel CI invocations for your team. Filter by repository, branch, status, or conclusion.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "provider: string (optional; enum 4 categories); repository: string (optional); branchName: string (optional); snapshot: string (optional); authorGitHubId: string (optional); author: string (optional); createdAfter: number (optional); createdBefore: number (optional); limit: number (optional); cursor: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 12,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_vercel_ci_job_definitions",
+        "description": "List job definitions for a Vercel CI invocation attempt.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_vercel_ci_job_runs",
+        "description": "List runs of a job definition within a Vercel CI invocation attempt.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); jobDefinitionId: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_vercel_ci_task_definitions",
+        "description": "List Task Definitions",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); jobDefinitionId: string (required); runAttempt: string (required); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_vercel_ci_task_runs",
+        "description": "List task runs within a Vercel CI job run.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); jobDefinitionId: string (required); runAttempt: string (required); taskRunAttempt: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 7,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "retry_vercel_ci_invocation",
+        "description": "Retry a terminal Vercel CI invocation attempt identified by invocationId and attempt. Starts another attempt. inspect its state to determine…",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "invocationId: string (required); attempt: string (required); teamId: string (optional); slug: string (optional); requestBody: unknown (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/vercel-ci",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "aggregate_events",
+        "description": "Aggregates custom events. Enable Web Analytics for your project before querying its data.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); limit: integer (optional); filter: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/web-analytics",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "aggregate_pageviews",
+        "description": "Aggregates page views. Enable Web Analytics for your project before querying its data.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); limit: integer (optional); filter: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 5,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/web-analytics",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "count_events",
+        "description": "Counts custom events. Enable Web Analytics for your project before querying its data.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); filter: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/web-analytics",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "count_pageviews",
+        "description": "Counts page views. Enable Web Analytics for your project before querying its data.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "projectId: string (required); filter: string (optional); teamId: string (optional); slug: string (optional)",
+        "parameter_count": 4,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/web-analytics",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_web_analytics",
+        "description": "Query Web Analytics for a Vercel project. Count mode returns total visitors and pageviews (or custom event count). Aggregate mode…",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "teamId: string (optional); projectId: string (required); dataset: string (optional; enum 2 categories); mode: string (optional; enum 2 categories); filter: string (optional); limit: integer (optional)",
+        "parameter_count": 6,
+        "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/web-analytics",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "status",
+        "description": "Get status of Remote Caching for this principal.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://martechdb.com/vendors/vercel",
+        "source_type": "Third-party (MartechDB, 2026-10)"
+      },
+      {
+        "tool_name": "get_deployment_events",
+        "description": "Listed by the publisher-verified Claude connector directory; description not provided.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/vercel",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No hosted server source or verbatim complete tools/list and initialize output was available. The public overview README is not the implementation.",
+    "human_can_agent_cannot": "Vercel dashboard and CLI offer operations beyond the audited MCP catalog; documentation explicitly excludes creating AI Gateway API keys, exchanging SSO tokens, importing KMS private keys, and signing KMS messages or tokens. Use the dashboard or CLI for these operations. Exact additional REST/CLI operations outside the catalog were not exhaustively enumerated.",
+    "sources": [
+      "https://vercel.com/docs/agent-resources/vercel-mcp/tools",
+      "https://vercel.com/docs/agent-resources/vercel-mcp",
+      "https://vercel.com/docs/cli",
+      "https://martechdb.com/vendors/vercel",
+      "https://claude.com/connectors/vercel"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Vercel advises users to review permissions, guard against prompt injection, and enable human confirmation in workflows. These are recommendations to clients/users except the purchase-specific confirmation statement. It also advises inspecting a resource after uncertain writes before retrying.",
+    "governance_promises": "Vercel says OAuth connections require explicit user consent per client and that existing Vercel permissions apply. Its AI Product Terms and Privacy Policy govern AI products/services generally; the reviewed terms do not specifically describe Vercel MCP tool-call retention or training. The Privacy Policy states certain de-identified AI Product Information may be disclosed for product improvement and model training subject to team data preferences for Hobby and Pro users.",
+    "promises_to_user": "Vercel describes the server as providing secure access to Vercel projects; MCP access is available on all plans. The purchase changelog states purchases are confirmed after the price and recurring/one-time nature are explained.",
+    "comparison_with_server_logic": "OAuth metadata verifies the authorization server, registration support, PKCE, grant types, and advertised scopes. Official pages document team permissions and per-connection consent but hosted implementation code was unavailable for independent verification. Purchase confirmation is a documented workflow claim; general human confirmation is user/client guidance. Privacy promises/policies are not shown to be enforced by MCP-specific code.",
+    "sources": [
+      "https://vercel.com/docs/agent-resources/vercel-mcp",
+      "https://vercel.com/docs/agent-resources/vercel-mcp/tools",
+      "https://vercel.com/changelog/vercel-mcp-now-supports-purchases",
+      "https://vercel.com/legal/ai-product-terms",
+      "https://vercel.com/legal/privacy-policy"
+    ]
+  },
+  "contradictions": [
+    "The 2025 documentation describes MCP Authorization and Streamable HTTP for the 2025-06-18 specification; a 2026-07-31 changelog reports support for 2026-07-28 as well, stating both versions share the endpoint.",
+    "Protected-resource metadata advertises only the `openid` scope, while the authorization-server metadata advertises `openid`, `email`, `profile`, and `offline_access`; docs describe access to teams/projects without detailing resource scopes.",
+    "The reference states 217 catalog tools and 31 workflow/widget tools; extracted category pages yield 248 names, matching their combined total, while some external catalogues report other counts, including Agent Discoverability's 204.",
+    "The Claude connector directory and MartechDB list additional names not found in the official category pages; their status as native tools on this endpoint is not established, so they are separated as third-party in actions.json."
+  ],
+  "observations_for_research": [
+    "Official documentation exposes a large catalog plus a separate workflow/widget tool set and says each client connection may receive a smaller or different tool list.",
+    "The OAuth resource metadata has only the `openid` protected-resource scope even though the authorization server lists additional identity/offline scopes.",
+    "Purchase confirmation is presented as part of the purchase flow; the general confirmation guidance is phrased as advice for client workflows.",
+    "A dedicated feedback tool permits user-requested transmission of structured interaction context to the vendor."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/ and local repository copies first. The official repository is documentation/overview rather than the hosted server implementation; the local mcp-adapter repository is a general adapter. The endpoint's `/install` returned 404 and its root returned 401 without credentials, so no authenticated tools/list or initialize instructions were obtained. Official tool-reference category pages were parsed; external catalogue warnings were not relied on for the 248 official entries. Two catalogue-only names are included in actions.json as unverified additions. Pricing page was consulted for plan context; no MCP-specific paid access price was found. OAuth data is taken from the supplied pre-fetched responses.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.1
+  }
+}

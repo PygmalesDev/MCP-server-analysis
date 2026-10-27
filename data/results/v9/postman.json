@@ -1,0 +1,2690 @@
+{
+  "server": "postman",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.postman.com/mcp",
+    "documentation_url_csv": "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/overview",
+    "addressing": "global",
+    "repository_url": "https://github.com/postmanlabs/postman-mcp-server",
+    "documentation_urls_used": [
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/overview",
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-remote-server",
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-local-server",
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-server-tips",
+      "https://www.postman.com/product/mcp-server/",
+      "https://www.postman.com/pricing/",
+      "https://www.postman.com/legal/terms/",
+      "https://www.postman.com/legal/postman-product-terms/",
+      "https://github.com/postmanlabs/postman-mcp-server"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The public repository is Postman’s local STDIO server. Official docs say local and remote servers offer the same tool configurations; the repository therefore serves as the direct local equivalent, but does not establish that its exact commit runs at the hosted endpoint.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "a56d18bd98b8dc57b07562c43717890175563e88",
+    "commit_date": "2026-10-16",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.27.1",
+    "code_public": "Yes",
+    "license": "Apache-2.0",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.postman.com/minimal — US Minimal tool configuration.",
+      "https://mcp.postman.com/code — US Code tool configuration.",
+      "https://mcp.postman.com/learn — US Learning Center search configuration.",
+      "https://mcp.postman.com/context-graph — US Context Graph configuration; requires Context Graph enabled for the team.",
+      "EU counterparts exist at https://mcp.eu.postman.com/minimal, /code, /mcp, /learn, and /context-graph; docs state these support API-key authentication only."
+    ],
+    "sources": [
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/overview",
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-remote-server",
+      "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/package.json",
+      "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/enabledResources.ts"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP fee is stated. A Postman account is required; MCP calls count toward the plan’s monthly Postman API call limits. The endpoint’s unauthenticated response says “API key required,” while US remote documentation describes OAuth access without a key.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Free: $0/month; Solo: $9/month billed annually; Team: $19/user/month billed annually; Enterprise: contact sales.",
+    "pricing_model_details": "MCP tool calls count toward plan API-call limits. The reviewed pricing materials did not specify the applicable monthly API-call quotas.",
+    "other_access_restrictions": "US remote supports OAuth and Postman API-key authentication. EU remote and local STDIO require an API key. Context Graph configuration requires the feature enabled for the team. Product permissions and plan limits apply.",
+    "restrictions_controlled_by": "Postman controls authentication, hosted endpoint configurations, and plan limits; organization/team administrators control access and feature availability through Postman settings and roles.",
+    "sources": [
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/overview",
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-remote-server",
+      "https://www.postman.com/pricing/",
+      "https://www.postman.com/product/mcp-server/",
+      "https://mcp.postman.com/.well-known/oauth-protected-resource/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The input /mcp endpoint is the Full configuration. The public local equivalent defines 234 Full tools; the hosted docs describe Full as all available API tools (100+).",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results are returned as text content; upstream API responses are JSON-stringified. Errors are raised as MCP errors and may include rendered upstream error details.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/overview",
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/enabledResources.ts",
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public local equivalent registers a text/markdown resource at postman://instructions. Hosted endpoint resource availability was not independently observed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The resource returns a text/markdown contents array with the resource URI and instruction text.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts",
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/resources/Instructions.md"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No prompt registration is present in the analyzed public local server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local equivalent logs server and tool events to stderr and attempts to send MCP logging notifications. Hosted telemetry is described separately in the remote-server docs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Log messages contain levels and text; telemetry records structured session and tool-call events.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts",
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/telemetry/types.ts",
+        "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-remote-server"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling implementation was found in the public local server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots implementation was found in the public local server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP Authorization specification (version not declared in metadata)",
+      "description_what_how": "The supplied endpoint probe returned HTTP 401, WWW-Authenticate: Bearer resource_metadata=\"https://mcp.postman.com/.well-known/oauth-protected-resource/mcp\", and JSON-RPC error “Invalid Request: API key required”. Protected-resource metadata identifies https://mcp.postman.com as authorization server. Authorization metadata declares code flow, authorization_code and refresh_token grants, S256 PKCE, DCR at /register, token endpoint auth methods none/client_secret_basic/client_secret_post, and revocation at /revoke. scopes_supported is absent. Token lifetime is not stated. The probe’s key-required message differs from US remote docs describing OAuth without a key.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated endpoint response: HTTP 401 and JSON-RPC error object with code -32600, message “Invalid Request: API key required”, id null.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; API key. Raw endpoint response: HTTP 401; WWW-Authenticate: Bearer resource_metadata=\"https://mcp.postman.com/.well-known/oauth-protected-resource/mcp\"; JSON: {\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request: API key required\"},\"id\":null}. Protected-resource documents name resource https://mcp.postman.com/mcp and authorization_servers [\"https://mcp.postman.com\"], bearer_methods_supported [\"header\"]. Authorization metadata: issuer https://mcp.postman.com; authorization_endpoint /authorize; token_endpoint /token; registration_endpoint /register; response_types_supported [\"code\"]; grant_types_supported [\"authorization_code\",\"refresh_token\"]; token_endpoint_auth_methods_supported [\"none\",\"client_secret_basic\",\"client_secret_post\"]; revocation_endpoint /revoke; code_challenge_methods_supported [\"S256\"]. scopes_supported and token lifetime are not supplied.",
+      "authorization_server": "https://mcp.postman.com",
+      "sources": [
+        "https://mcp.postman.com/mcp",
+        "https://mcp.postman.com/.well-known/oauth-protected-resource",
+        "https://mcp.postman.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.postman.com/.well-known/oauth-authorization-server",
+        "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-remote-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation implementation was found in the public local server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tools use asynchronous Postman API jobs and status-polling workflows, including collection/spec generation and Context Graph asks. This is application-level task handling; the public code does not establish MCP Tasks primitive support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Task status and results are returned by separate tools; some tools return polling links or ask identifiers.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/enabledResources.ts",
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getContextGraphAsk.ts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Remote URL path selects Minimal, Code, Full, Learn, or Context Graph. Local server uses corresponding command-line flags. The input path /mcp selects Full.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Each configuration exposes its own tool set; Full is the broadest.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-remote-server",
+        "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-local-server",
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/enabledResources.ts"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local equivalent converts failures to MCP errors, logs them, and renders structured upstream error information in tool responses where available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP errors with error code/message/data; tool failures may include upstream status and response details.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts",
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/clients/postman.ts"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription capability implementation was found in the public local server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local equivalent creates progress reporters bound to client progress tokens and forwards progress notifications where the handler reports progress.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP progress notifications with progress token and progress metadata.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts",
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/utils/progress.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local equivalent passes the request AbortSignal to tool handlers and progress reporting.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Handlers receive AbortSignal; specific cancellation effects depend on each handler and upstream request.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local equivalent supplies initialization instructions directing agents to fetch postman://instructions. Full also includes instruction-focused tools and Context Graph operations.",
+      "pre_interaction_context_verbatim": "Before answering any API-related questions, fetch the MCP resource at URI `postman://instructions` using FetchMcpResource from this MCP server, and follow the usage instructions contained within.",
+      "post_interaction_context_structure": "Markdown resource with workflow guidance; selected tools return structured or text results.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/index.ts",
+        "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/resources/Instructions.md"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Full tools include read and write operations. The local-equivalent modules declare MCP annotations including readOnlyHint, destructiveHint, idempotentHint, and openWorldHint; these are hints, not a server confirmation gate. 2. Hosted docs recommend reviewing changes, but no universal server-enforced confirmation step was found. 3. OAuth metadata has no scopes_supported field; docs say US OAuth and API-key access, with API-key-only EU/local modes. Postman account permissions and team feature settings govern access; token lifetime is not documented. 4. Toolsets are selected by endpoint path; US/EU endpoints differ, and Context Graph requires team enablement. 5. No general MCP-level masking policy was found. Tool schemas/instructions caution against including sensitive variables; product permissions still apply. 6. Calls count toward Postman plan API-call limits. Several tools expose pagination and explicit caps; no universal hosted MCP result cap was found. 7. The local equivalent uses Zod input schemas and converts upstream errors; tool-specific defaults and limits exist. No general hallucinated-argument alias rewriting was found. 8. Hosted telemetry is documented as anonymous and enabled by default. The local code records tool names, argument keys (not values), argument/result sizes, latency, status/error fields, auth method and client-supplied metadata; local telemetry is opt-in. 9. No tool name/description requests feedback, ratings, surveys, or reports. No tool-result upsell mechanism was found in the analyzed public code. 10. Initialization instructions require fetching postman://instructions; additional instruction tools provide API/code guidance. These behavioral rules are agent guidance, not universal server-side enforcement. 11. Local telemetry keeps per-process session data; operations also use Postman resources and asynchronous API tasks. No persistent agent behavior memory was found. 12. Non-flat structure: toolsets are selected by URL/configuration, with US/EU endpoint variants; Context Graph uses submit-and-poll tools and Learning Center search is a separate toolset. 13. No general raw API request, arbitrary SQL, or script-execution escape-hatch tool appears in the Full tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Before answering any API-related questions, fetch the MCP resource at URI `postman://instructions` using FetchMcpResource from this MCP server, and follow the usage instructions contained within.",
+      "Do NOT rely on your own knowledge of available tools or APIs to answer questions like \"is there an API for X?\" or \"find me an API that does Y.\"",
+      "When in doubt, use `ownership: \"organization\"` first.",
+      "Always review and confirm operations. When performing operations that make changes or are destructive, such as updating or deleting resources, always validate responses before you accept them from the agent."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The service has distinct URL-selected toolsets (Minimal, Code, Full, Learn, Context Graph) and US/EU endpoint variants. The input /mcp path selects Full. Context Graph also uses a submit/poll workflow.",
+    "sources": [
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/overview",
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-remote-server",
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-server-tips",
+      "https://www.postman.com/product/mcp-server/",
+      "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/enabledResources.ts",
+      "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/telemetry/types.ts"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "234",
+    "action_count_comment": "The official overview points to the Postman public-workspace MCP collection as the complete tool list, but its collected page rendered as an empty SPA. The official repository’s Full configuration lists 234 tool names, used here as the direct local-equivalent inventory; official product materials state “100+” with no exact total. No catalogue-only tools were added. Docker MCP Catalog and Ext Ops Panel each report 42 tools, matching the Minimal configuration rather than Full. MCPBundles requires connection to inspect its live list and publishes no count. Claude’s connector page is marked Anthropic verified but gives no tool count. Agent Discoverability reports 231 for a Postman plugin, not this MCP endpoint; Composio’s Postman toolkit is a separate proxy/API surface and was not used.",
+    "actions": [
+      {
+        "tool_name": "createCollection",
+        "description": "Create a collection",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: string (required); collection: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createCollection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteCollection",
+        "description": "Delete a collection",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteCollection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generateCollection",
+        "description": "Generate a collection from spec",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); elementType: string (required); name: string (required); options: object (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/generateCollection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollection",
+        "description": "Gets information about a collection.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); access_key: string (optional); model: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollection/getCollection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollections",
+        "description": "Get all collections",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: string (required); name: string (optional); limit: number (optional); offset: number (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollections.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "patchCollection",
+        "description": "Update part of a collection",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); collection: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/patchCollection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "putCollection",
+        "description": "Replace a collection's data",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); Prefer: string (optional); collection: object (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/putCollection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionTags",
+        "description": "Get a collection's tags",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionTags.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateCollectionTags",
+        "description": "Update a collection's tags",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); tags: array (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateCollectionTags.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionUpdatesTasks",
+        "description": "Get status of a collection update task",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] taskId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionUpdatesTasks.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "syncCollectionWithSpec",
+        "description": "Sync collection with spec",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionUid: string (required); specId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/syncCollectionWithSpec.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "syncSpecWithCollection",
+        "description": "Sync spec with collection",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); collectionUid: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/syncSpecWithCollection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generateSpecFromCollection",
+        "description": "Generate spec from collection",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionUid: string (required); elementType: string (required); name: string (required); type: enum 3 categories (required); format: enum 2 categories (required)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/generateSpecFromCollection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getGeneratedCollectionSpecs",
+        "description": "Get a collection's generated specs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionUid: string (required); elementType: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getGeneratedCollectionSpecs.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSpecCollections",
+        "description": "Get a spec's generated collections",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); elementType: string (required); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSpecCollections.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionForks",
+        "description": "Get a collection's forks",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); cursor: string (optional); limit: number (optional); direction: enum 2 categories (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionForks.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSourceCollectionStatus",
+        "description": "Get source collection's status",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSourceCollectionStatus.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionsForkedByUser",
+        "description": "Get all forked collections",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] cursor: string (optional); limit: number (optional); direction: enum 2 categories (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionsForkedByUser.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pullCollectionChanges",
+        "description": "Pull changes from a collection's source",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/pullCollectionChanges.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createCollectionFork",
+        "description": "Create a collection fork",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); workspace: string (required); label: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createCollectionFork.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "mergeCollectionFork",
+        "description": "Merge a collection fork",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] destination: string (required); source: string (required); strategy: enum 2 categories (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/mergeCollectionFork.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "asyncMergePullCollectionFork",
+        "description": "Merge or pull a collection fork asynchronously",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] strategy: enum 3 categories (required); source: string (required); destination: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/asyncMergePullCollectionFork.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "asyncMergePullCollectionTaskStatus",
+        "description": "Get status of a collection merge or pull task",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] taskId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/asyncMergePullCollectionTaskStatus.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionRoles",
+        "description": "Get a collection's roles",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionRoles.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateCollectionRoles",
+        "description": "Update a collection's roles",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); roles: array (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateCollectionRoles.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionPullRequests",
+        "description": "Get a collection's pull requests",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionPullRequests.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createCollectionPullRequest",
+        "description": "Create a collection pull request",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); title: string (required); description: string (optional); reviewers: array (required); destinationId: string (required)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createCollectionPullRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getPullRequest",
+        "description": "Get a collection pull request",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] pullRequestId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getPullRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updatePullRequest",
+        "description": "Update a collection pull request",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] pullRequestId: string (required); title: string (required); description: string (optional); reviewers: array (required)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updatePullRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reviewPullRequest",
+        "description": "Review a collection pull request",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] pullRequestId: string (required); action: enum 4 categories (required); comment: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/reviewPullRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createCollectionFolder",
+        "description": "Create a collection folder",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); name: string (optional); folder: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createCollectionFolder.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteCollectionFolder",
+        "description": "Delete a collection folder",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] folderId: string (required); collectionId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteCollectionFolder.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionFolder",
+        "description": "Get a collection folder",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] folderId: string (required); collectionId: string (required); ids: boolean (optional); uid: boolean (optional); populate: boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionFolder.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateCollectionFolder",
+        "description": "Update a collection folder",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] folderId: string (required); collectionId: string (required); name: string (optional); description: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateCollectionFolder.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transferCollectionFolders",
+        "description": "Transfer collection folders",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] ids: array (required); mode: enum 2 categories (required); target: object (required); location: object (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/transferCollectionFolders.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createCollectionRequest",
+        "description": "Create a collection request",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); folder: string (optional); name: string (optional); description: string (optional); method: enum 15 categories (optional); url: string (optional); headerData: array (optional); queryParams: array (optional); dataMode: enum 5 categories (optional); data: array (optional); rawModeData: string (optional); graphqlModeData: object (optional); dataOptions: object (optional); auth: object (optional); events: array (optional)",
+        "parameter_count": 15,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createCollectionRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteCollectionRequest",
+        "description": "Delete a collection request",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] requestId: string (required); collectionId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteCollectionRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionRequest",
+        "description": "Get a collection request",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] requestId: string (required); collectionId: string (required); ids: boolean (optional); uid: boolean (optional); populate: boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateCollectionRequest",
+        "description": "Update a collection request",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] requestId: string (required); collectionId: string (required); name: string (optional); description: string (optional); method: enum 15 categories (optional); url: string (optional); headerData: array (optional); queryParams: array (optional); dataMode: enum 5 categories (optional); data: array (optional); rawModeData: string (optional); graphqlModeData: object (optional); dataOptions: object (optional); auth: object (optional); events: array (optional)",
+        "parameter_count": 15,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateCollectionRequest.ts#L11-L46",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transferCollectionRequests",
+        "description": "Transfer collection requests",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] ids: array (required); mode: enum 2 categories (required); target: object (required); location: object (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/transferCollectionRequests.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createCollectionResponse",
+        "description": "Create a collection response",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); request: string (required); name: string (optional); description: string (optional); url: string (optional); method: enum 15 categories (optional); headers: array (optional); dataMode: enum 5 categories (optional); rawModeData: string (optional); dataOptions: object (optional); responseCode: object (optional); status: string (optional); time: string (optional); cookies: string (optional); mime: string (optional); text: string (optional); language: string (optional); rawDataType: string (optional); requestObject: string (optional)",
+        "parameter_count": 19,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createCollectionResponse.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteCollectionResponse",
+        "description": "Delete a collection response",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] responseId: string (required); collectionId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteCollectionResponse.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionResponse",
+        "description": "Get a collection response",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] responseId: string (required); collectionId: string (required); ids: boolean (optional); uid: boolean (optional); populate: boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionResponse.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateCollectionResponse",
+        "description": "Update a collection response",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] responseId: string (required); collectionId: string (required); name: string (optional); description: string (optional); url: string (optional); method: enum 15 categories (optional); headers: array (optional); dataMode: enum 5 categories (optional); rawModeData: string (optional); dataOptions: object (optional); responseCode: object (optional); status: string (optional); time: string (optional); cookies: string (optional); mime: string (optional); text: string (optional); language: string (optional); rawDataType: string (optional); requestObject: string (optional)",
+        "parameter_count": 19,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateCollectionResponse.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transferCollectionResponses",
+        "description": "Transfer collection responses",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] ids: array (required); mode: enum 2 categories (required); target: object (required); location: object (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/transferCollectionResponses.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "runCollection",
+        "description": "Run a collection",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); environmentId: string (optional); stopOnError: boolean (optional); stopOnFailure: boolean (optional); abortOnError: boolean (optional); abortOnFailure: boolean (optional); iterationCount: number (optional); requestTimeout: number (optional); scriptTimeout: number (optional)",
+        "parameter_count": 9,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/runCollection.ts#L13-L48",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createCollectionComment",
+        "description": "Create a collection comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); body: string (required); threadId: number (optional); tags: object (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createCollectionComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteCollectionComment",
+        "description": "Delete a collection's comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); commentId: number (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteCollectionComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCollectionComments",
+        "description": "Get a collection's comments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCollectionComments.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateCollectionComment",
+        "description": "Update a collection's comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); commentId: number (required); body: string (required); tags: object (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateCollectionComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createFolderComment",
+        "description": "Create a folder comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); folderId: string (required); body: string (required); threadId: number (optional); tags: object (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createFolderComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteFolderComment",
+        "description": "Delete a folder's comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); folderId: string (required); commentId: number (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteFolderComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getFolderComments",
+        "description": "Get a folder's comments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); folderId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getFolderComments.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateFolderComment",
+        "description": "Update a folder's comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); folderId: string (required); commentId: number (required); body: string (required); tags: object (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateFolderComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createRequestComment",
+        "description": "Create a request comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); requestId: string (required); body: string (required); threadId: number (optional); tags: object (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createRequestComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteRequestComment",
+        "description": "Delete a request's comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); requestId: string (required); commentId: number (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteRequestComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getRequestComments",
+        "description": "Get a request's comments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); requestId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getRequestComments.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateRequestComment",
+        "description": "Update a request's comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); requestId: string (required); commentId: number (required); body: string (required); tags: object (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateRequestComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createResponseComment",
+        "description": "Create a response comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); responseId: string (required); body: string (required); threadId: number (optional); tags: object (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createResponseComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteResponseComment",
+        "description": "Delete a response's comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); responseId: string (required); commentId: number (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteResponseComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getResponseComments",
+        "description": "Get a response's comments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); responseId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getResponseComments.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateResponseComment",
+        "description": "Update a response's comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); responseId: string (required); commentId: number (required); body: string (required); tags: object (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateResponseComment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resolveCommentThread",
+        "description": "Resolve a comment thread",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] threadId: number (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/resolveCommentThread.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createEnvironment",
+        "description": "Create an environment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: string (required); environment: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteEnvironment",
+        "description": "Delete an environment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] environmentId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getEnvironment",
+        "description": "Get an environment",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] environmentId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getEnvironments",
+        "description": "Get all environments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: string (optional)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getEnvironments.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "patchEnvironment",
+        "description": "Update an environment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] environmentId: string (required); body: union (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/patchEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "putEnvironment",
+        "description": "Replace an environment's data",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] environmentId: string (required); environment: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/putEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getEnvironmentForks",
+        "description": "Get an environment's forks",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] environmentId: string (required); cursor: string (optional); direction: enum 2 categories (optional); limit: number (optional); sort: string (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getEnvironmentForks.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "forkEnvironment",
+        "description": "Fork an environment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] environmentId: string (required); workspaceId: string (required); forkName: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/forkEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "mergeEnvironmentFork",
+        "description": "Merge an environment fork",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] environmentId: string (required); source: string (required); deleteSource: boolean (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/mergeEnvironmentFork.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pullEnvironment",
+        "description": "Pull changes into an environment fork",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] environmentUid: string (required); source: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/pullEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createMock",
+        "description": "Create a mock server (provide collection UID)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: string (required); mock: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createMock.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteMock",
+        "description": "Delete a mock server",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteMock.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getMock",
+        "description": "Get a mock server",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getMock.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getMocks",
+        "description": "Get mock servers (filter by workspace or team)",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] teamId: string (optional); workspace: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getMocks.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateMock",
+        "description": "Update a mock server",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required); mock: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateMock.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "publishMock",
+        "description": "Publish a mock server",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/publishMock.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unpublishMock",
+        "description": "Unpublish a mock server",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/unpublishMock.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createMockServerResponse",
+        "description": "Create a server response for a mock",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required); serverResponse: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createMockServerResponse.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteMockServerResponse",
+        "description": "Delete a server response for a mock",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required); serverResponseId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteMockServerResponse.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getMockServerResponse",
+        "description": "Get a server response for a mock",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required); serverResponseId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getMockServerResponse.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getMockServerResponses",
+        "description": "List server responses for a mock",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getMockServerResponses.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateMockServerResponse",
+        "description": "Update a server response for a mock",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] mockId: string (required); serverResponseId: string (required); serverResponse: object (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateMockServerResponse.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createMonitor",
+        "description": "Create a monitor",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: string (required); monitor: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createMonitor.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteMonitor",
+        "description": "Delete a monitor",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] monitorId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteMonitor.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getMonitor",
+        "description": "Get a monitor",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] monitorId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getMonitor.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getMonitors",
+        "description": "Get all monitors",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: string (optional); active: boolean (optional); owner: number (optional); collectionUid: string (optional); environmentUid: string (optional); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getMonitors.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateMonitor",
+        "description": "Update a monitor",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] monitorId: string (required); monitor: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateMonitor.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "runMonitor",
+        "description": "Run a monitor",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] monitorId: string (required); async: boolean (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/runMonitor.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listMonitorExecutions",
+        "description": "List monitor executions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] monitorId: string (required); cursor: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/listMonitorExecutions.ts#L11-L46",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listRunsForExecution",
+        "description": "List runs for a monitor execution",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] monitorId: string (required); executionId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/listRunsForExecution.ts#L11-L46",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getMonitorRunResults",
+        "description": "Get monitor run results",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] monitorId: string (required); runId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getMonitorRunResults.ts#L11-L46",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createPackage",
+        "description": "Create a package",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: string (required); name: string (required); description: string (optional); script: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createPackage.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deletePackage",
+        "description": "Delete a package",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] packageId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deletePackage.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getPackage",
+        "description": "Get a package",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] packageId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getPackage.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getPackages",
+        "description": "Get all packages",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] limit: number (optional); cursor: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getPackages.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updatePackage",
+        "description": "Update a package",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] packageId: string (required); description: string (optional); script: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updatePackage.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogDiscoveryServices",
+        "description": "Get discovered API Catalog services",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] discoverySource: enum 4 categories (optional); status: string (optional); search: string (optional); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogDiscoveryServices.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "postApiCatalogDiscoveryServices",
+        "description": "Add discovered services to the API Catalog",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] discoveredServices: array (optional)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/postApiCatalogDiscoveryServices.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogDiscoveryService",
+        "description": "Get a discovered API Catalog service",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] serviceId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogDiscoveryService.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogServices",
+        "description": "Get all API Catalog services",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] systemEnvironmentId: string (required); name: string (optional); tags: string (optional); governanceGroupId: string (optional); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 6,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogServices.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogService",
+        "description": "Get an API Catalog service",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] serviceId: string (required); systemEnvironmentId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogService.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogServiceEndpoints",
+        "description": "Get an API Catalog service's endpoints",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] serviceId: string (required); systemEnvironmentId: string (required); httpMethods: string (optional); hosts: string (optional); responseCodes: string (optional); search: string (optional); sort: string (optional); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 9,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogServiceEndpoints.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogServiceMonitorRuns",
+        "description": "Get an API Catalog service's monitor runs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] serviceId: string (required); systemEnvironmentId: string (required); collectionId: string (optional); sort: string (optional); environmentId: string (optional); status: enum 2 categories (optional); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 8,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogServiceMonitorRuns.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogServiceSpecificationLints",
+        "description": "Get an API Catalog service's specification lints",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] serviceId: string (required); specId: string (optional); severity: enum 3 categories (optional); status: enum 2 categories (optional); sort: string (optional); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogServiceSpecificationLints.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogServiceCiRuns",
+        "description": "Get an API Catalog service's CI runs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] serviceId: string (required); systemEnvironmentId: string (required); collectionId: string (optional); environmentId: string (optional); status: enum 2 categories (optional); branch: string (optional); workflowName: string (optional); actor: string (optional); repoName: string (optional); repoOwner: string (optional); sort: string (optional); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 13,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogServiceCiRuns.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogSystemEnvironments",
+        "description": "Get all API Catalog system environments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] isProduction: boolean (optional); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogSystemEnvironments.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createApiCatalogSystemEnvironment",
+        "description": "Create an API Catalog system environment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] name: string (required); label: string (optional); description: string (optional); color: string (required); isProduction: boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createApiCatalogSystemEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogSystemEnvironment",
+        "description": "Get an API Catalog system environment",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] systemEnvironmentId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogSystemEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateApiCatalogSystemEnvironment",
+        "description": "Update an API Catalog system environment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] systemEnvironmentId: string (required); name: string (optional); description: string (optional); color: string (optional); isProduction: boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateApiCatalogSystemEnvironment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiCatalogSystemEnvironmentAssociations",
+        "description": "Get an API Catalog system environment's associations",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] systemEnvironmentId: string (required); workspaceId: string (optional); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiCatalogSystemEnvironmentAssociations.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "addApiCatalogSystemEnvironmentAssociations",
+        "description": "Add API Catalog system environment associations",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] systemEnvironmentId: string (required); allowPartial: boolean (optional); workspaceEnvironmentIds: array (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/addApiCatalogSystemEnvironmentAssociations.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "removeApiCatalogSystemEnvironmentAssociations",
+        "description": "Remove API Catalog system environment associations",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] systemEnvironmentId: string (required); workspaceEnvironmentIds: array (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/removeApiCatalogSystemEnvironmentAssociations.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAllRulesets",
+        "description": "Get all rulesets",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] cursor: string (optional); limit: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAllRulesets.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createRuleset",
+        "description": "Create a ruleset",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] name: string (required); description: string (required); engine: string (required); format: enum 2 categories (required); content: string (required)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createRuleset.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getRuleset",
+        "description": "Get a ruleset",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] rulesetId: string (required); include: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getRuleset.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateRuleset",
+        "description": "Update a ruleset",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] rulesetId: string (required); name: string (optional); description: string (optional); content: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateRuleset.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteRuleset",
+        "description": "Delete a ruleset",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] rulesetId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteRuleset.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getRulesetAssignments",
+        "description": "Get a ruleset's governance group assignments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] rulesetId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getRulesetAssignments.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createRulesetAssignment",
+        "description": "Assign a ruleset to a governance group",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] rulesetId: string (required); targetType: string (required); targetId: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createRulesetAssignment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteRulesetAssignment",
+        "description": "Unassign a ruleset from a governance group",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] rulesetId: string (required); targetType: string (required); targetId: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteRulesetAssignment.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAllGovernanceGroups",
+        "description": "Get all governance groups",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] cursor: string (optional); limit: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAllGovernanceGroups.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createGovernanceGroup",
+        "description": "Create a governance group",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] name: string (required); description: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createGovernanceGroup.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateGovernanceGroup",
+        "description": "Update a governance group",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] groupId: string (required); name: string (optional); description: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateGovernanceGroup.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteGovernanceGroup",
+        "description": "Delete a governance group",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] groupId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteGovernanceGroup.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getGovernanceGroupAssignments",
+        "description": "Get a governance group's ruleset assignments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] groupId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getGovernanceGroupAssignments.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getGovernanceGroupWorkspaces",
+        "description": "Get a governance group's workspaces",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] groupId: string (required); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getGovernanceGroupWorkspaces.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateGovernanceGroupWorkspaces",
+        "description": "Update a governance group's workspaces",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] groupId: string (required); create: array (optional); delete: array (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateGovernanceGroupWorkspaces.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAllCustomFunctions",
+        "description": "Get all custom functions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] cursor: string (optional); limit: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAllCustomFunctions.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createCustomFunction",
+        "description": "Create a custom function",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] path: string (required); description: string (optional); content: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createCustomFunction.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCustomFunction",
+        "description": "Get a custom function",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] customFunctionId: string (required); include: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCustomFunction.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateCustomFunction",
+        "description": "Update a custom function",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] customFunctionId: string (required); path: string (optional); description: string (optional); content: string (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateCustomFunction.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteCustomFunction",
+        "description": "Delete a custom function",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] customFunctionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteCustomFunction.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createComponent",
+        "description": "Create a component",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] name: string (required); type: enum 3 categories (required); content: string (required); format: enum 2 categories (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createComponent.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAllComponents",
+        "description": "Get all components",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] type: enum 3 categories (optional); status: enum 2 categories (optional); hasVersions: union (optional); include: string (optional); expand: string (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAllComponents.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getComponent",
+        "description": "Get a component",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] componentId: string (required); include: string (optional); expand: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getComponent.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateComponent",
+        "description": "Update a component",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] componentId: string (required); name: string (optional); status: enum 2 categories (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateComponent.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getComponentDraft",
+        "description": "Get a component draft",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] componentId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getComponentDraft.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateComponentDraft",
+        "description": "Update a component draft",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] componentId: string (required); content: string (optional); format: enum 2 categories (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateComponentDraft.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createComponentVersion",
+        "description": "Create a component version",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] componentId: string (required); label: string (required); source: object (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createComponentVersion.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getComponentVersions",
+        "description": "Get all component versions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] componentId: string (required); include: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getComponentVersions.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getComponentVersion",
+        "description": "Get a component version",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] componentId: string (required); versionId: string (required); include: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getComponentVersion.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSpec",
+        "description": "Create a spec",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); name: string (required); type: enum 9 categories (required); files: array (required)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createSpec.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteSpec",
+        "description": "Delete a spec",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteSpec.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSpec",
+        "description": "Get a spec",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSpec.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAllSpecs",
+        "description": "Get all specs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAllSpecs.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSpecDefinition",
+        "description": "Get a spec's definition",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSpecDefinition.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateSpecProperties",
+        "description": "Update a spec's properties",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); name: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateSpecProperties.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSpecFile",
+        "description": "Create a spec file",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); path: string (required); content: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createSpecFile.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSpecFile",
+        "description": "Get a spec file",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); filePath: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSpecFile.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSpecFiles",
+        "description": "Get a spec's files",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSpecFiles.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateSpecFile",
+        "description": "Update a spec file",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); filePath: string (required); name: string (optional); type: enum 2 categories (optional); content: string (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateSpecFile.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateSpecSyncOptions",
+        "description": "Update spec sync options",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); collectionId: string (required); syncOptions: object (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateSpecSyncOptions.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSpecVersionTags",
+        "description": "Get a specification's version tags",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSpecVersionTags.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSpecVersionTag",
+        "description": "Create a version tag",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); name: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createSpecVersionTag.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSpecVersionTag",
+        "description": "Get a version tag",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); tagId: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSpecVersionTag.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createWorkspace",
+        "description": "Create a workspace",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: object (optional)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createWorkspace.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteWorkspace",
+        "description": "Delete a workspace",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteWorkspace.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWorkspace",
+        "description": "Get a workspace",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); include: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getWorkspace.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWorkspaces",
+        "description": "Get workspaces (filtered and user-scoped)",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] type: enum 5 categories (optional); createdBy: number (optional); include: enum 2 categories (optional); elementType: enum 2 categories (optional); elementId: string (optional); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getWorkspaces.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateWorkspace",
+        "description": "Update a workspace",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); workspace: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateWorkspace.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWorkspaceGlobalVariables",
+        "description": "Get a workspace's global variables",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getWorkspaceGlobalVariables.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateWorkspaceGlobalVariables",
+        "description": "Update a workspace's global variables",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); values: array (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateWorkspaceGlobalVariables.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWorkspaceTags",
+        "description": "Get a workspace's tags",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getWorkspaceTags.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateWorkspaceTags",
+        "description": "Update a workspace's tags",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); tags: array (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateWorkspaceTags.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWorkspaceActivityFeed",
+        "description": "Get a workspace's activity feed",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); userId: number (optional); elementType: enum 5 categories (optional); limit: number (optional); cursor: string (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getWorkspaceActivityFeed.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transferWorkspaceElement",
+        "description": "Transfer element to a workspace",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); id: union (required); type: enum 6 categories (required); to: string (required)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/transferWorkspaceElement.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transferWorkspaceToTeam",
+        "description": "Transfer workspace to a team",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); destination: string (required); source: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/transferWorkspaceToTeam.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "managePartnerWorkspaceInvites",
+        "description": "Manage Partner Workspace invites",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/managePartnerWorkspaceInvites.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAllWorkspaceRoles",
+        "description": "Get available workspace roles",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAllWorkspaceRoles.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWorkspaceRoles",
+        "description": "Get a workspace's roles",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); include: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getWorkspaceRoles.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateWorkspaceRoles",
+        "description": "Update workspace roles",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); identifierType: string (optional); roles: array (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateWorkspaceRoles.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWorkspaceUpdates",
+        "description": "Get all workspace updates",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); cursor: string (optional); category: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getWorkspaceUpdates.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createWorkspaceUpdate",
+        "description": "Create a workspace update",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); description: string (required); topic: string (required); category: enum 5 categories (required); relatedResources: array (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createWorkspaceUpdate.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWorkspaceUpdate",
+        "description": "Get a workspace update",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); updateId: number (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getWorkspaceUpdate.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "patchWorkspaceUpdate",
+        "description": "Update a workspace update",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); updateId: number (required); description: string (required); topic: string (required); category: enum 5 categories (required); isPinned: boolean (optional); relatedResources: array (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/patchWorkspaceUpdate.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteWorkspaceUpdate",
+        "description": "Delete a workspace update",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); updateId: number (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteWorkspaceUpdate.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listPrivateNetworkWorkspaces",
+        "description": "Get Private API Network workspaces",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] type: string (optional); name: string (optional); summary: string (optional); description: string (optional); since: string (optional); until: string (optional); addedBy: number (optional); sort: enum 2 categories (optional); direction: enum 2 categories (optional); createdBy: number (optional); offset: number (optional); limit: number (optional); parentFolderId: number (optional)",
+        "parameter_count": 13,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/listPrivateNetworkWorkspaces.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listPrivateNetworkAddRequests",
+        "description": "Get Private API Network add requests",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] since: string (optional); until: string (optional); requestedBy: number (optional); type: string (optional); status: enum 2 categories (optional); name: string (optional); sort: enum 2 categories (optional); direction: enum 2 categories (optional); offset: number (optional); limit: number (optional)",
+        "parameter_count": 10,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/listPrivateNetworkAddRequests.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "removeWorkspaceFromPrivateNetwork",
+        "description": "Remove a workspace from the Private API Network",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/removeWorkspaceFromPrivateNetwork.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "addWorkspaceToPrivateNetwork",
+        "description": "Add a workspace to the Private API Network",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspace: object (optional)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/addWorkspaceToPrivateNetwork.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "respondPrivateNetworkAddRequest",
+        "description": "Respond to a Private API Network add request",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] requestId: number (required); status: enum 2 categories (required); response: object (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/respondPrivateNetworkAddRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "publishDocumentation",
+        "description": "Publish a collection's documentation",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); environmentUid: string (optional); customColor: object (optional); documentationLayout: enum 2 categories (optional); customization: object (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/publishDocumentation.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unpublishDocumentation",
+        "description": "Unpublish a collection's documentation",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/unpublishDocumentation.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAsyncSpecTaskStatus",
+        "description": "Get status of an async spec task",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] elementType: enum 2 categories (required); elementId: union (required); taskId: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAsyncSpecTaskStatus.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getStatusOfAnAsyncApiTask",
+        "description": "Get status of an async API task",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] apiId: string (required); taskId: string (required); Accept: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getStatusOfAnAsyncApiTask.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "detectedSecretsQueries",
+        "description": "Search detected secrets",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] limit: number (optional); cursor: string (optional); include: string (optional); since: string (optional); until: string (optional); resolved: boolean (optional); secretTypes: array (optional); statuses: array (optional); resources: array (optional); workspaceIds: array (optional); workspaceVisibilities: array (optional)",
+        "parameter_count": 11,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/detectedSecretsQueries.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getDetectedSecretsLocations",
+        "description": "Get detected secrets locations",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] secretId: string (required); limit: number (optional); cursor: string (optional); workspaceId: string (required); since: string (optional); until: string (optional); resourceType: enum 12 categories (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getDetectedSecretsLocations.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateDetectedSecretResolutions",
+        "description": "Update detected secret resolution status",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] secretId: string (required); resolution: enum 4 categories (required); workspaceId: string (required)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateDetectedSecretResolutions.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSecretTypes",
+        "description": "Get secret types",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSecretTypes.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAuditLogs",
+        "description": "Get team audit logs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] userId: number (optional); action: string (optional); since: string (optional); until: string (optional); limit: number (optional); cursor: string (optional); orderBy: enum 2 categories (optional); order_by: enum 2 categories (optional)",
+        "parameter_count": 8,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAuditLogs.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAuditLogEventActions",
+        "description": "Get all audit log event actions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAuditLogEventActions.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSdks",
+        "description": "Get all SDKs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); sdkIds: array (optional); buildStatus: enum 4 categories (optional); language: enum 10 categories (optional); sourceId: string (optional); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSdks.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSdk",
+        "description": "Generate an SDK",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] source: object (required); language: enum 10 categories (required); sdkVersion: string (optional); authors: array (optional); retry: object (optional); typescriptOptions: object (optional); pythonOptions: object (optional); goOptions: object (optional); javaOptions: object (optional); csharpOptions: object (optional); rubyOptions: object (optional); phpOptions: object (optional); kotlinOptions: object (optional); rustOptions: object (optional); cliOptions: object (optional)",
+        "parameter_count": 15,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createSdk.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSdk",
+        "description": "Get an SDK",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] sdkId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSdk.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteSdk",
+        "description": "Delete an SDK",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] sdkId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteSdk.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSdkDownloadUrl",
+        "description": "Get an SDK's download URL",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] sdkId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSdkDownloadUrl.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSdkGitConnections",
+        "description": "Get all SDK Git connections",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] workspaceId: string (required); sourceId: string (optional); language: enum 10 categories (optional); status: enum 3 categories (optional); repositoryUrl: string (optional); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSdkGitConnections.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSdkGitConnection",
+        "description": "Connect a Git repository to an SDK",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] source: object (required); language: enum 10 categories (required); repositoryUrl: string (required); targetBranch: string (optional); autoUpdatePullRequestsEnabled: boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createSdkGitConnection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSdkGitConnection",
+        "description": "Get an SDK Git connection",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] sdkGitConnectionId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSdkGitConnection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateSdkGitConnection",
+        "description": "Update an SDK Git connection",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] sdkGitConnectionId: string (required); status: enum 2 categories (required); autoUpdatePullRequestsEnabled: boolean (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateSdkGitConnection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSdkGitConnectionPullRequests",
+        "description": "Get an SDK Git connection's pull requests",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] sdkGitConnectionId: string (required); status: enum 3 categories (optional); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getSdkGitConnectionPullRequests.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTeams",
+        "description": "Get all teams",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] identifierType: string (optional); cursor: string (optional); limit: number (optional); settings: boolean (optional); userRoles: boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getTeams.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTeam",
+        "description": "Get a team",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] teamId: number (required); identifierType: string (optional); include: enum 2 categories (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getTeam.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createTeam",
+        "description": "Create a team",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] identifierType: string (optional); name: string (optional); description: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createTeam.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTeamSettings",
+        "description": "Get a team's settings",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] teamId: number (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getTeamSettings.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateTeamSettings",
+        "description": "Update team settings",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] teamId: number (required); settings: object (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/updateTeamSettings.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTeamAccessRequests",
+        "description": "Get a team's access requests",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] teamId: number (required); identifierType: string (optional); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getTeamAccessRequests.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createAccessRequest",
+        "description": "Create an access request",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] teamId: number (required); identifierType: string (optional); entityList: array (required); role: enum 9 categories (required); reason: string (required); requestType: enum 3 categories (required)",
+        "parameter_count": 6,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/createAccessRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "approveDenyAccessRequest",
+        "description": "Approve or deny an access request",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] identifierType: string (optional); teamId: number (required); requestId: number (required); action: enum 2 categories (required)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/approveDenyAccessRequest.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manageTeamMemberRoles",
+        "description": "Manage team member roles",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] teamId: number (required); identifierType: string (optional); add: object (optional); remove: object (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/manageTeamMemberRoles.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "removeTeamMembers",
+        "description": "Remove team members",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] teamId: number (required); identifierType: string (optional); entities: array (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/removeTeamMembers.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAuthenticatedUser",
+        "description": "Get authenticated user (current user context)",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAuthenticatedUser.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTeamUsers",
+        "description": "Get all team users",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] groupId: number (optional)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getTeamUsers.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTeamUser",
+        "description": "Get a team user",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] userId: number (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getTeamUser.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTaggedEntities",
+        "description": "Get elements by tag",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] slug: string (required); limit: number (optional); direction: enum 2 categories (optional); cursor: string (optional); entityType: enum 3 categories (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getTaggedEntities.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getGroups",
+        "description": "Get all team groups",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getGroups.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getGroup",
+        "description": "Get a team group",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] groupId: number (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getGroup.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCodeGenerationInstructions",
+        "description": "Get code generation instructions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getCodeGenerationInstructions.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getPostmanContextOverview",
+        "description": "Get Postman context overview",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getPostmanContextOverview.ts#L11-L45",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getApiDiscoveryInstructions",
+        "description": "Get API discovery instructions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getApiDiscoveryInstructions.ts#L11-L45",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getInstalledApiMaintenanceInstructions",
+        "description": "Get installed API maintenance instructions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getInstalledApiMaintenanceInstructions.ts#L11-L45",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "duplicateCollection",
+        "description": "Duplicate a collection",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] collectionId: string (required); workspace: string (required); suffix: string (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/duplicateCollection.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getDuplicateCollectionTaskStatus",
+        "description": "Get status of a collection duplication task",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] taskId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getDuplicateCollectionTaskStatus.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteSpecFile",
+        "description": "Delete a spec file",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] specId: string (required); filePath: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/deleteSpecFile.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getEnabledTools",
+        "description": "Get enabled tools",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] none",
+        "parameter_count": 0,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getEnabledTools.ts#L12-L47",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchPostmanElements",
+        "description": "Search Postman elements",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] entityType: enum 8 categories (optional); q: string (optional); ownership: enum 3 categories (optional); filters: string (optional); cursor: string (optional); limit: number (optional)",
+        "parameter_count": 6,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/searchPostmanElements.ts#L11-L46",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchLearningCenter",
+        "description": "Search the Postman Learning Center",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] query: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/searchLearningCenter.ts#L12-L47",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAnalyticsData",
+        "description": "Get analytics data",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] resource: enum 9 categories (required); metrics: enum 44 categories (required); view: enum 3 categories (optional); workspaceType: string (optional); userId: string (optional); duration: enum 6 categories (optional); requestId: string (optional); responseStatus: string (optional); attentionType: string (optional); period: string (optional); userType: enum 2 categories (optional); entityType: enum 6 categories (optional); limit: number (optional); offset: number (optional)",
+        "parameter_count": 14,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAnalyticsData.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAnalyticsMetadata",
+        "description": "Get analytics metadata",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] include: string (optional); resources: string (optional); metrics: enum 44 categories (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getAnalyticsMetadata.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submitContextGraphAsk",
+        "description": "Submit a Context Graph ask",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] query: string (required); includeAnswer: boolean (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/submitContextGraphAsk.ts#L6-L41",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getContextGraphAsk",
+        "description": "Get a Context Graph ask",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE] askId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/tools/getContextGraphAsk.ts#L6-L41",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "129620 (approx.)",
+    "token_method": "[LOCAL CODE] Approximate estimate: serialize tool names, descriptions, source parameter declarations, annotation declarations, and initialize instructions into JSON-like records; divide the resulting JavaScript character count by four. The parameter declarations are source representations, not a live tools/list capture.",
+    "human_can_agent_cannot": "The user can create or manage Postman API keys and manage subscription/billing through account and plan interfaces; the analyzed Full tool inventory contains no API-key creation or billing-management tool. The MCP connection itself requires an existing account/key or supported OAuth authorization.",
+    "sources": [
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/overview",
+      "https://www.postman.com/postman/postman-public-workspace/collection/681dc649440b35935978b8b7",
+      "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/enabledResources.ts",
+      "https://hub.docker.com/mcp/server/postman/tools",
+      "https://extops.dev/plugins/mcp/com.postman/postman-mcp-server",
+      "https://mcpbundles.com/skills/postman-mcp",
+      "https://claude.com/connectors/postman",
+      "https://agentdiscoverability.com/track/chatgpt/postman",
+      "https://composio.dev/toolkits/postman",
+      "https://www.postman.com/pricing/",
+      "https://learning.postman.com/docs/reference/postman-api/authentication/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The tips page advises: “Always review and confirm operations.” It also says: “Pass resource IDs to reduce API calls.” These are client/agent recommendations; the public code does not impose a general confirmation gate. The initialize instruction tells the agent to fetch and follow the instruction resource.",
+    "governance_promises": "The product page states: “All communication with the MCP Server happens over HTTPS” and “Postman does not store AI agent prompts or responses.” Remote-server docs say telemetry is anonymous and enabled by default. Public local telemetry code records argument keys rather than argument values, plus call sizes, results sizes, timing, error/auth fields and client-supplied metadata.",
+    "promises_to_user": "The overview describes the remote server as hosted over streamable HTTPS and says remote and local servers provide the same tool configurations. Product materials describe OAuth or API keys as access controls and say MCP calls count against plan API-call limits.",
+    "comparison_with_server_logic": "HTTPS and authentication are consistent with hosted docs and OAuth metadata. The prompt/response non-storage claim is not directly verified by the public local-equivalent code; its telemetry omits argument values but includes metadata fields and result size. The local code’s opt-in telemetry differs from hosted docs’ default-on remote telemetry. Confirmation is recommended in docs but is not a universal server-enforced flow in the local equivalent.",
+    "sources": [
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-server-tips",
+      "https://learning.postman.com/docs/reference/postman-api/postman-mcp-server/postman-mcp-remote-server",
+      "https://www.postman.com/product/mcp-server/",
+      "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/telemetry/types.ts",
+      "https://github.com/postmanlabs/postman-mcp-server/blob/a56d18bd98b8dc57b07562c43717890175563e88/src/telemetry/client.ts"
+    ]
+  },
+  "contradictions": [
+    "The unauthenticated input endpoint returns “API key required,” while Postman’s US remote-server docs describe OAuth without an API key. The same endpoint supplies OAuth protected-resource metadata and advertises an authorization server.",
+    "The Postman overview links its public collection as the complete official tool list, but the collected collection pages rendered blank. The repository inventory lists 234 Full tools; product materials only state “100+,” without a conflicting exact count.",
+    "Docker MCP Catalog and Ext Ops Panel each show 42 tools for the server; this matches the official Minimal tool configuration and does not represent the input Full endpoint’s tool count.",
+    "Agent Discoverability lists 231 tools for a Postman plugin, not the MCP endpoint; it was excluded from actions."
+  ],
+  "observations_for_research": [
+    "One hostname exposes materially different tool configurations through URL paths, so the selected endpoint path determines the agent’s available actions.",
+    "Hosted US OAuth and EU API-key-only access create region-specific authorization behavior.",
+    "Remote telemetry defaults on while local-equivalent telemetry defaults off, according to official setup documentation and public code.",
+    "The included instruction resource shapes API discovery behavior by directing agents to search Postman before answering API-availability questions."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages and local code copies first. The official collection URL was collected but its SPA page contained no readable tool list; the official repository at the recorded commit supplies the Full inventory and schemas. Repository code is the local STDIO variant and is treated as a direct equivalent because Postman documents identical tool configurations; exact deployed commit equivalence is unverified. No endpoint tool-list response was available because the supplied probe was unauthenticated. OAuth metadata was supplied in the research input and used without re-fetching; scopes_supported and token lifetime were absent. Unofficial/community entries were not used as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 8.7
+  }
+}

@@ -1,0 +1,1127 @@
+{
+  "server": "day-ai",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://day.ai/api/mcp",
+    "documentation_url_csv": "https://day.ai/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/day-ai/day-ai-sdk",
+    "documentation_urls_used": [
+      "https://day.ai/mcp",
+      "https://day.ai/pricing",
+      "https://day.ai/privacy",
+      "https://day.ai/dpa",
+      "https://day.ai/trust",
+      "https://day.ai/trust/subprocessors",
+      "https://github.com/day-ai/day-ai-sdk",
+      "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+      "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/SCHEMA.md",
+      "https://claude.com/connectors/day-ai",
+      "https://martechdb.com/vendors/day",
+      "https://agentman.ai/agentskills/connections/mcp-server/day-ai"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repository is a TypeScript SDK/client and example apps for the hosted platform. It documents the remote server but does not contain its implementation. The separate local GTM Brain repository was not treated as server code.",
+    "mcp_protocol_version": "2025-06-18 (official tool reference generated 2026-10-07); OAuth metadata reports x-mcp-version 2024-11-05.",
+    "commit_hash": "ae4b0f22d8a6bbca83be02c359470e117fdeb51a",
+    "commit_date": "2026-10-08",
+    "implementation_language": "Hosted server: NOT FOUND. Public SDK: TypeScript.",
+    "mcp_sdk_and_version": "Hosted server: NOT FOUND. SDK describes its own OAuth and MCP JSON-RPC client; no server-side MCP SDK/version was identified.",
+    "code_public": "Partially",
+    "license": "MIT (public SDK; hosted server license not found)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "No other official product MCP endpoint was identified in the reviewed Day AI sources."
+    ],
+    "sources": [
+      "https://day.ai/mcp",
+      "https://github.com/day-ai/day-ai-sdk",
+      "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+      "https://github.com/day-ai/day-ai-sdk/blob/master/LICENSE"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "Day AI says MCP requires a paid Agent tier; its product update says MCP is available from Turbo upward, with no usage-based MCP pricing. No separate MCP fee was found.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Pricing page lists Free at $0/month; Turbo at $24/month, Professional at $60/month, Executive at $200/month and Super at $800/month on annual billing. It also gives higher monthly prices and volume discounts for some plans.",
+    "pricing_model_details": "Pricing is per deployed agent, not per seat or MCP call. The pricing page states annual prices are paid upfront and describes volume discounts. Tool availability depends on workspace plan and the selected agent; Free users in qualifying workspaces do not thereby gain MCP access.",
+    "other_access_restrictions": "The selected agent tier controls available tools, models, and limits; data access follows workspace permissions. Day AI documents OAuth and workspace/assistant selection. Claude Team may require an administrator to enable the connector. The vendor states tier rate limits and quotas apply, without publishing specific MCP rate values on the reviewed pages.",
+    "restrictions_controlled_by": "Vendor (plan and tier limits); workspace role/admin (data permissions and connector enablement); end user (OAuth consent and selected workspace/agent).",
+    "sources": [
+      "https://day.ai/mcp",
+      "https://day.ai/pricing",
+      "https://day.ai/resources/emails-in-opportunity-timelines-mcp-clients-can-create-pages",
+      "https://github.com/day-ai/day-ai-sdk"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "2025-06-18 in the official reference generated from the input endpoint.",
+      "description_what_how": "The official reference lists 78 tools for a Professional-plan agent, generated from https://day.ai/api/mcp on 2026-10-07. It says the list varies by workspace plan and selected agent and that tools/list is authoritative. Tool kinds are documented as read-only or writes, sometimes with overwrite behavior.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "SDK documentation says results are usually a single text block, usually JSON; its raw call method returns the MCP result. Hosted endpoint result and error formats were not independently inspected.",
+      "authorization_mechanism": "Protected-resource metadata names resource https://day.ai/api/mcp, authorization server https://day.ai, and bearer method header. Authorization-server metadata advertises authorization_code and refresh_token grants; response type code; PKCE S256; client_secret_post and client_secret_basic token authentication; revocation endpoint https://day.ai/api/oauth/revoke with client_secret_post, client_secret_basic, or none; and unauthenticated dynamic registration at https://day.ai/api/oauth/register. scopes_supported is exactly [\"assistant:*:use\", \"sandboxes\"]. Token lifetime is not stated in the metadata; SDK documentation says access tokens last about an hour.",
+      "authorization_server": "https://day.ai",
+      "sources": [
+        "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "https://day.ai/.well-known/oauth-protected-resource",
+        "https://day.ai/.well-known/oauth-protected-resource/api/mcp",
+        "https://day.ai/.well-known/oauth-authorization-server",
+        "https://github.com/day-ai/day-ai-sdk"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No",
+      "depends_on_mcp_version": "OAuth metadata advertises resources=false.",
+      "description_what_how": "The authorization-server metadata declares the MCP feature resources as false.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not applicable; resources are declared unavailable.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://day.ai/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No",
+      "depends_on_mcp_version": "OAuth metadata advertises prompts=false.",
+      "description_what_how": "The authorization-server metadata declares the MCP feature prompts as false.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not applicable; prompts are declared unavailable.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://day.ai/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "No",
+      "depends_on_mcp_version": "OAuth metadata advertises logging=false.",
+      "description_what_how": "The authorization-server metadata declares the MCP feature logging as false. This describes the MCP capability declaration, not the vendor’s general security logging.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not applicable; MCP logging is declared unavailable.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://day.ai/.well-known/oauth-authorization-server",
+        "https://day.ai/privacy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Not declared in the supplied OAuth feature metadata or reviewed documentation. Hosted server code was not public.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://day.ai/.well-known/oauth-authorization-server",
+        "https://day.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Not declared in the supplied OAuth feature metadata or reviewed documentation. Hosted server code was not public.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://day.ai/.well-known/oauth-authorization-server",
+        "https://day.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth metadata declares the server and endpoint.",
+      "description_what_how": "The protected-resource metadata identifies Day AI as the authorization server and says bearer tokens are sent in the header. The authorization-server metadata advertises authorization code and refresh-token grants, PKCE S256, dynamic registration, and revocation. It does not state token lifetime.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth discovery metadata is JSON. SDK documentation describes browser sign-in and token refresh.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; authorization_code and refresh_token grants; PKCE S256; token client authentication client_secret_post and client_secret_basic; scopes_supported [\"assistant:*:use\", \"sandboxes\"]; revocation endpoint https://day.ai/api/oauth/revoke; token lifetime not in metadata (SDK docs say about one hour).",
+      "authorization_server": "https://day.ai",
+      "sources": [
+        "https://day.ai/.well-known/oauth-protected-resource",
+        "https://day.ai/.well-known/oauth-protected-resource/api/mcp",
+        "https://day.ai/.well-known/oauth-authorization-server",
+        "https://github.com/day-ai/day-ai-sdk",
+        "https://day.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP elicitation mechanism was found in reviewed documentation; hosted server code was unavailable.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://day.ai/mcp",
+        "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tool reference includes product import and delegation operations, but does not establish MCP Tasks protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed sources show client connection configuration and tier-dependent tool access, but do not document MCP Configuration capability support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://day.ai/mcp",
+        "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted endpoint's authenticated tool error formats were not available. The public SDK handles JSON-RPC and retries but is not the server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "SDK documentation says raw calls return MCP results; server error structure unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/day-ai/day-ai-sdk",
+        "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was identified in the reviewed documentation or metadata.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://day.ai/.well-known/oauth-authorization-server",
+        "https://day.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tool list has product-level import progress and asynchronous enrichment operations, but MCP protocol progress notifications were not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Product import progress is exposed through tools; MCP progress notification structure unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "A cancel_delegation product tool is listed, but MCP protocol cancellation support was not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Tool descriptions are included in the official tool reference.",
+      "description_what_how": "The official reference provides tool descriptions with prescriptive agent guidance. A separate initialize instructions string was not found in available evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results are generally described in SDK documentation as text blocks, usually JSON.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "https://github.com/day-ai/day-ai-sdk"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official reference labels tools read-only or writes, sometimes “can overwrite”; it does not expose MCP annotation fields such as readOnlyHint or destructiveHint. 2. Documented server-side guards include duplicate-opportunity checks, a `confirm` parameter for bulk draft regeneration, and `confirmMajorContentReduction` for major page reductions. Other guidance is tool-description text. 3. OAuth scopes are `assistant:*:use` and `sandboxes`; docs say tools follow the selected agent tier and records follow the user's workspace role. Claude Team may require admin enablement. Metadata does not state token lifetime; SDK docs say about one hour and describe refresh. Revocation endpoint is advertised. 4. Tool inventory varies by plan and selected agent. No URL filter, readonly mode, or separate production/sandbox endpoint was found. A sandbox scope and sandbox file utilities are documented. 5. Day AI documents per-user email/calendar sharing controls and workspace permissions; no MCP-specific PII masking or field redaction was identified. 6. Tier API limits and quotas apply, but no concrete rate values were found. Tool-specific bounds include 1–25 person/org batch operations, up to 15 opportunity operations, search cursor pages up to 1,000 rows, and date enumeration capped at 400 days. 7. Tool schemas define expected inputs; docs describe safeguards and exact-match requirements. General unknown-argument rejection or systematic coercion was not found. 8. Vendor privacy materials promise continuous monitoring/logging and audit controls; MCP-specific call logging was not established. The tool list includes record/property history. 9. No rating/report/survey-to-vendor tool was found. `refine_campaign_drafting` accepts owner feedback to update drafting instructions; no vendor feedback purpose is stated. No MCP upsell response was verified. 10. `activate_skill`, `deactivate_skill`, and `manage_skills` expose persistent skill prompts and modes; instructions can shape agent behavior. `resolve_dates` says “ALWAYS use this tool instead of mental arithmetic”; search guidance directs schema lookup before non-trivial queries. 11. Workspace context, skills, campaign drafting settings and assistant instructions can persist and affect future agent behavior. 12. The documented inventory is a flat tool list, but tool access varies with the authorized agent/tier and skills can restrict available tools. 13. No arbitrary API, SQL, script, or code execution tool appears in the 78-tool official list. Sandbox export/upload helpers are listed, but they do not themselves execute code.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "ALWAYS use this tool instead of mental arithmetic for ANY weekday, relative-date, or timezone question",
+      "Before first querying an object type in a conversation, call read_crm_schema for that type",
+      "Only pass allowDuplicate: true after the user confirms this is a separate deal.",
+      "Pass true ONLY after the user has seen the exact draft count from a previous call of this tool and explicitly confirmed the regeneration.",
+      "The MCP server will handle OAuth authentication automatically when your client connects for the first time."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The reference describes one endpoint whose available tool inventory depends on the workspace plan and selected agent; skill activation can also switch modes with restricted tools and a specific prompt.",
+    "sources": [
+      "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+      "https://day.ai/mcp",
+      "https://day.ai/.well-known/oauth-authorization-server",
+      "https://day.ai/privacy",
+      "https://day.ai/pricing",
+      "https://github.com/day-ai/day-ai-sdk"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "78 in the official Professional-plan reference; other plan/agent inventories vary.",
+    "action_count_comment": "The official Day AI SDK tool reference at https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md names 78 tools and says it was generated from the input endpoint on 2026-10-07 for a Professional agent; it says tools/list is authoritative and tool access depends on plan and chosen agent. The official reference includes tool schemas. No catalogue-only tools were added because the official reference supplies a current inventory. Third-party snapshots differ: MartechDB reports 42 tools on 2026-10-27; Claude's directory shows 25; Agentman describes an older 42-tool list. These snapshots are not substituted for the official list. The action file contains all 78 official names; its parameter field points to the official schema rather than duplicating every schema.",
+    "actions": [
+      {
+        "tool_name": "search_objects",
+        "description": "Search CRM objects.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_crm_schema",
+        "description": "Get CRM object fields, relationships, and search recipes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_object_history",
+        "description": "View a record's change history.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_property_history",
+        "description": "View one property's history across records.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resolve_dates",
+        "description": "Resolve dates, ranges, weekdays, and time zones deterministically.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "whoami",
+        "description": "Get current user, agent, and workspace context.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_share_url",
+        "description": "Get a shareable URL for a CRM object.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_person_organization",
+        "description": "Create or update a person or organization.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "batch_create_or_update_people_organizations",
+        "description": "Batch create or update people and organizations.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enrich_people",
+        "description": "Queue enrichment for people.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_relationship",
+        "description": "Create or update CRM relationships.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_opportunity",
+        "description": "Create or update an opportunity; optional batch capped at 15.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "batch_create_or_update_opportunities",
+        "description": "Batch create or update opportunities.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "migrate_opportunity",
+        "description": "Move an opportunity to another pipeline.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_action",
+        "description": "Create or update an action item.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_meeting_recording_context",
+        "description": "Read meeting metadata, summary, notes, and transcript.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_context_for_meeting_recording_citations",
+        "description": "Retrieve relevant transcript passages with citations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_meeting_recording_clip",
+        "description": "Create a shareable meeting clip.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_meeting_comment",
+        "description": "Start or reply to a meeting comment thread.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_meeting_comments",
+        "description": "List meeting comment threads and statuses.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_meeting_comment",
+        "description": "Edit own comment or resolve/reopen a thread.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_page",
+        "description": "Create a longer-form page.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_page",
+        "description": "Read a page in paginated HTML chunks.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_page",
+        "description": "Update page content, metadata, or settings.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "attach_page_image",
+        "description": "Attach an uploaded image to a page.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_page_image_upload_url",
+        "description": "Get a presigned page image upload URL.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_page_comment",
+        "description": "Start or reply to a page comment thread.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_page_comments",
+        "description": "List page comment threads and statuses.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_page_comment",
+        "description": "Edit own page comment or resolve/reopen a thread.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_workspace_context",
+        "description": "Create or update contextual notes for CRM objects or properties.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_email_draft",
+        "description": "Create or update an email draft.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "open_email_sharing_rules",
+        "description": "Open email sharing settings or add an exclusion.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_campaigns",
+        "description": "List workspace campaigns.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_details",
+        "description": "Read campaign configuration and status details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_members_due_to_draft",
+        "description": "Select campaign members currently due for drafting.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_drafts_in_flight",
+        "description": "Read campaign drafts already in review or send queues.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_draft_reasoning",
+        "description": "Read campaign draft rationale and allowed source receipts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_import_result",
+        "description": "Read the latest campaign CSV import disposition.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "draft_campaign_outreach",
+        "description": "Trigger AI email drafting for undrafted campaign members.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "refine_campaign_drafting",
+        "description": "Apply drafting feedback and regenerate samples.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "regenerate_campaign_drafts",
+        "description": "Regenerate unapproved drafts after preview and confirmation.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_campaign_member_statuses",
+        "description": "Add, update, or remove campaign statuses.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_campaign_member",
+        "description": "Update a campaign member's status, notes, or assignment.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_campaign_member",
+        "description": "Remove a person from a campaign.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_view",
+        "description": "Create a CRM view with filters and columns.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_view",
+        "description": "Update view filters, sorting, columns, or settings.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_chart",
+        "description": "Create a frozen chart visualization.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_widget",
+        "description": "Create a live dashboard widget.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_table_widget",
+        "description": "Create a live dashboard table widget.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_list",
+        "description": "Create a list or change its members.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_folder",
+        "description": "Create, edit, or delete a folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move_to_folder",
+        "description": "Move pages or folders.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_folder",
+        "description": "List folder children.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_file",
+        "description": "Read an uploaded file.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_csv_file",
+        "description": "Read CSV or Excel rows.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "analyze_csv",
+        "description": "Analyze CSV structure and data quality.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transform_csv",
+        "description": "Apply structured transformations to a CSV.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export_to_sandbox",
+        "description": "Export CRM data to CSV for code execution.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_file_to_sandbox",
+        "description": "Copy an uploaded file into the code sandbox.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "validate_import_file",
+        "description": "Dry-run CSV validation without writing.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_import_from_file",
+        "description": "Create an import job from a CSV.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_import_mapping",
+        "description": "Save an import field mapping.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "start_import",
+        "description": "Start processing an import.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_import_progress",
+        "description": "Check import status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_import_errors",
+        "description": "Read failed import rows.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_import_members",
+        "description": "List resolved imported objects, paginated.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_imports_by_object_type",
+        "description": "List recent imports by object type.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_custom_property",
+        "description": "Create, retrieve, or update custom property definitions.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "backfill_custom_property",
+        "description": "Start a custom property backfill job.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "activate_skill",
+        "description": "Activate a specialized skill mode.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deactivate_skill",
+        "description": "Deactivate the active skill.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_skills",
+        "description": "Manage agent skills and workspace Skill Library items.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "respond_to_delegation",
+        "description": "Relay answers to resume a delegated task.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cancel_delegation",
+        "description": "Cancel a delegated task.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "assistant_settings",
+        "description": "Read or update an agent's identity and style.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_workspace_instructions",
+        "description": "Update general workspace AI instructions.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_workspace_members",
+        "description": "Manage workspace members and invitations.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "connect_slack",
+        "description": "Open Slack integration settings.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "See official tool schema; parameter names and requiredness are published in the cited reference.",
+        "parameter_count": "Unknown",
+        "source": "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Could not compute from an initialize response: no exact initialize instructions/tool-definition payload was available locally. The official tool reference is available as a web page but the complete serialized payload could not be measured from the supplied evidence.",
+    "human_can_agent_cannot": "The documented MCP email tool creates or updates drafts; the reviewed official tool list does not include a tool to send email through a mail thread. Day AI's software privacy policy describes connected Gmail capabilities that include sending mail, so this is a difference between the documented MCP tool surface and the broader product. The product also offers UI settings and workflows beyond the listed MCP operations; no full UI-to-tool parity inventory was found.",
+    "sources": [
+      "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md",
+      "https://github.com/day-ai/day-ai-sdk",
+      "https://day.ai/mcp",
+      "https://day.ai/privacy",
+      "https://martechdb.com/vendors/day",
+      "https://claude.com/connectors/day-ai",
+      "https://agentman.ai/agentskills/connections/mcp-server/day-ai"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The tool reference advises agents to call `read_crm_schema` before non-trivial queries and to use `resolve_dates` for date reasoning. Descriptions also prescribe pagination, source-date anchoring, and user confirmation. These are text instructions except where a specific tool parameter or server validation is documented.",
+    "governance_promises": "Day AI says MCP access follows agent-tier and workspace-role permissions and that changes are tracked and audited. Its privacy policy says it does not use Customer Platform Data to train models, does not share that data with advertising partners, and promises notice of qualifying security incidents within 72 hours. It describes customer data retention during subscription and deletion timelines after request or termination.",
+    "promises_to_user": "The MCP page describes OAuth authentication, token refresh, and user revocation from workspace settings. It says tokens are stored locally and not transmitted to third parties. The privacy policy describes encryption at rest and in transit, role-based access controls, and subprocessors bound by data-protection terms.",
+    "comparison_with_server_logic": "OAuth metadata supports the advertised protected-resource authorization flow and exposes scopes, registration, PKCE, and revocation. Tool descriptions document some explicit guards, but the public hosted-server implementation is unavailable, so most permission, audit, retention, and data-protection statements could not be verified as MCP request-handler behavior. The general privacy-policy promises apply to the service and customer data, not specifically to a particular MCP call.",
+    "sources": [
+      "https://day.ai/mcp",
+      "https://day.ai/privacy",
+      "https://day.ai/dpa",
+      "https://day.ai/trust",
+      "https://day.ai/trust/subprocessors",
+      "https://raw.githubusercontent.com/day-ai/day-ai-sdk/master/TOOLS.md"
+    ]
+  },
+  "contradictions": [
+    "The supplied endpoint prefetch reports an unauthenticated POST to https://day.ai/api/mcp returning HTTP 200 with `Invalid Request: Request body is missing`; the input's connection-test evidence says HTTP 401. The available evidence therefore shows different request/response conditions, and the supplied POST response has no WWW-Authenticate header.",
+    "The official tool reference generated 2026-10-07 names 78 tools for a Professional agent. MartechDB reports 42 tools on 2026-10-27, and Anthropic's directory lists 25. These third-party inventories differ from the newer official reference and from one another.",
+    "Day AI's MCP page says a paid Agent tier is required, while product updates state MCP is available from Turbo upward. No Free-tier MCP access was established from the official current tool reference."
+  ],
+  "observations_for_research": [
+    "The official tool reference itself is generated from the hosted endpoint and identifies a dated plan-specific inventory, while noting that tools/list is authoritative for each authorized client.",
+    "The authorization server's broad assistant-use scope does not expose separate scopes for reading, writing, email, campaigns, or other tool categories.",
+    "Some tool descriptions contain detailed safeguards and procedural instructions, while explicit server-enforced controls are only documented for particular operations and parameters.",
+    "The server exposes persistent agent behavior controls through workspace instructions, assistant settings, and skill management tools."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/, and available local code first. The public day-ai-sdk repository is an MIT TypeScript client with examples, not the hosted endpoint implementation; the SDK local copy was unavailable because the repository fetch was incomplete, so a commit hash could not be verified. The separate gtm-brain repository was not treated as endpoint code. Checked official MCP, pricing, update, legal, privacy, trust, SDK, generated tool-reference, and schema pages, plus Claude, MartechDB, MCP.so, and Agentman listings. MCP.so had no tool list. Agentman/Claude/MartechDB are third-party snapshots and were not used to replace official tool names. The complete 78-name official inventory is in actions.json; published parameter schemas are linked there but not duplicated in that file.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 21.7
+  }
+}

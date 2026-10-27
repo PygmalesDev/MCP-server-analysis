@@ -1,0 +1,648 @@
+{
+  "server": "honeycomb",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.honeycomb.io/mcp",
+    "documentation_url_csv": "https://docs.honeycomb.io/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/honeycombio/honeycomb-mcp",
+    "documentation_urls_used": [
+      "https://docs.honeycomb.io/integrations/mcp/tools.md",
+      "https://docs.honeycomb.io/integrations/mcp/concepts.md",
+      "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md",
+      "https://docs.honeycomb.io/integrations/mcp/prompts.md",
+      "https://docs.honeycomb.io/integrations/mcp/use-cases.md",
+      "https://docs.honeycomb.io/integrations/mcp/troubleshooting.md",
+      "https://docs.honeycomb.io/llms.txt",
+      "https://changelog.honeycomb.io/new-hosted-mcp-server-now-in-beta-319975",
+      "https://www.honeycomb.io/pricing",
+      "https://www.honeycomb.io/ai-terms",
+      "https://www.honeycomb.io/privacy",
+      "https://www.honeycomb.io/dpa"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public honeycomb-mcp repository is an archived, deprecated self-hosted stdio server requiring a local process and API key. Honeycomb directs users to the separate hosted server analyzed here. The public agent-skill repository supplies optional skills and setup files, not hosted-server implementation code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "cb3a233634eaa55111765b6ebfed074388555f77",
+    "commit_date": "2025-08-21",
+    "implementation_language": "NOT FOUND for hosted server; prior self-hosted server is TypeScript",
+    "mcp_sdk_and_version": "NOT FOUND for hosted server",
+    "code_public": "Partially",
+    "license": "Proprietary hosted service; the separate archived self-hosted repository is MIT licensed.",
+    "release_status": "NOT FOUND; the hosted-server launch announcement called it beta, and current documentation does not state a release status.",
+    "other_official_servers": [
+      "https://mcp.eu1.honeycomb.io/mcp — official EU-region hosted endpoint; setup documentation provides a separate endpoint for EU teams."
+    ],
+    "sources": [
+      "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md",
+      "https://github.com/honeycombio/honeycomb-mcp",
+      "https://github.com/honeycombio/honeycomb-mcp/blob/main/README.md",
+      "https://github.com/honeycombio/agent-skill",
+      "https://changelog.honeycomb.io/new-hosted-mcp-server-now-in-beta-319975"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Honeycomb announced hosted MCP access for all Honeycomb teams at no additional charge. The team must enable Honeycomb Intelligence.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Free plan: up to 20 million events and 100 million metric data points per month. Pro starts at $150 per month. Enterprise pricing is quote-based.",
+    "pricing_model_details": "MCP is included in the listed Free, Pro, and Enterprise plans; plan event and metric-volume allowances apply to the Honeycomb software.",
+    "other_access_restrictions": "Honeycomb Intelligence must be enabled for the team. OAuth or a Management API key is required. Team Owners create API keys. Read access is required for operations; writes require mcp:write. get_service_map is Enterprise-only. Tool loading can be narrowed with X-MCP-Toolset: all (default), query, or canvas. API-key rate limits are per key; OAuth limits are shared per user. MCP agent sessions may time out after 24 hours.",
+    "restrictions_controlled_by": "Honeycomb controls plan availability, endpoint behavior, and per-tool limits; team owners control team enablement and API-key creation and permissions; users grant OAuth permissions and select client configuration.",
+    "sources": [
+      "https://changelog.honeycomb.io/new-hosted-mcp-server-now-in-beta-319975",
+      "https://www.honeycomb.io/pricing",
+      "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md",
+      "https://docs.honeycomb.io/integrations/mcp/tools.md",
+      "https://docs.honeycomb.io/integrations/mcp/troubleshooting.md"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference lists 34 tools across workspace discovery, querying, traces, service maps, semantic conventions, Boards, Triggers, SLOs, recipients, Canvas investigations, AI-conversation analysis, Refinery documentation, and feedback. The page labels tools read or write.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool descriptions document query results, metadata, traces, resource configurations, and feedback submission. Exact wire result and error schemas are not published in the reference.",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public documentation describes tools and prompts but does not establish whether the hosted server exposes MCP Resources. refinery_docs is documented as a tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "https://docs.honeycomb.io/integrations/mcp/prompts.md"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server provides prewritten multi-step workflows, commonly displayed by clients as slash commands. Documentation says prompts require no additional scopes and are available with or without the Honeycomb plugin.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Prewritten instructions for agent workflows; exact prompt text is documented on the prompts reference page.",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/prompts.md",
+        "https://docs.honeycomb.io/integrations/mcp/concepts.md"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted-server documentation reviewed does not specify server-side MCP request logging or its contents. Product query history and Activity Log access are described separately from MCP protocol logging.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/concepts.md",
+        "https://docs.honeycomb.io/integrations/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted-server documentation does not describe MCP Sampling. run_query documentation does discuss Honeycomb telemetry sampling and a usage_mode option, which is product query behavior rather than MCP Sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server documentation reviewed describes MCP Roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/concepts.md",
+        "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with a Bearer resource_metadata pointer. Supplied protected-resource metadata reports resource https://mcp.honeycomb.io/mcp, authorization server https://ui.honeycomb.io, scopes_supported [mcp:read, mcp:write], and bearer_methods_supported [header]. The supplied authorization-server metadata reports code response, authorization_code and refresh_token grants, S256 PKCE, token auth methods none/client_secret_basic/client_secret_post, registration_endpoint https://ui.honeycomb.io/oauth/register, and client_id_metadata_document_supported true. Token lifetime is not published in that metadata; troubleshooting docs state agent sessions may time out after 24 hours.",
+      "pre_interaction_context_verbatim": "HTTP 401\nWWW-Authenticate: Bearer resource_metadata=\"https://mcp.honeycomb.io/.well-known/oauth-protected-resource\"\n\n{\"resource\":\"https://mcp.honeycomb.io/mcp\",\"authorization_servers\":[\"https://ui.honeycomb.io\"],\"scopes_supported\":[\"mcp:read\",\"mcp:write\"],\"bearer_methods_supported\":[\"header\"]}\n\n{\"issuer\":\"https://ui.honeycomb.io\",\"authorization_endpoint\":\"https://ui.honeycomb.io/oauth/authorize\",\"token_endpoint\":\"https://ui.honeycomb.io/oauth/token\",\"registration_endpoint\":\"https://ui.honeycomb.io/oauth/register\",\"introspection_endpoint\":\"https://ui.honeycomb.io/oauth/introspect\",\"response_types_supported\":[\"code\"],\"grant_types_supported\":[\"authorization_code\",\"refresh_token\"],\"token_endpoint_auth_methods_supported\":[\"none\",\"client_secret_basic\",\"client_secret_post\"],\"scopes_supported\":[\"mcp:read\",\"mcp:write\"],\"code_challenge_methods_supported\":[\"S256\"],\"introspection_endpoint_auth_methods_supported\":[\"client_secret_basic\",\"client_secret_post\"],\"client_id_metadata_document_supported\":true}",
+      "post_interaction_context_structure": "Bearer token in the Authorization header; API-key setup documentation also describes a Bearer key in the form KEY_ID:SECRET_KEY.",
+      "authorization_mechanism": "Metadata Doc; OAuth authorization code with refresh tokens and S256 PKCE; dynamic client registration is advertised at https://ui.honeycomb.io/oauth/register; bearer token via header; scopes_supported: mcp:read, mcp:write. The endpoint's 401 points to https://mcp.honeycomb.io/.well-known/oauth-protected-resource. The supplied path-suffixed protected-resource document repeats the same resource, authorization server, scopes, and bearer method. Supplied authorization-server metadata: issuer https://ui.honeycomb.io; authorization endpoint https://ui.honeycomb.io/oauth/authorize; token endpoint https://ui.honeycomb.io/oauth/token; introspection endpoint https://ui.honeycomb.io/oauth/introspect; registration endpoint https://ui.honeycomb.io/oauth/register; response_types_supported code; grant_types_supported authorization_code and refresh_token; token_endpoint_auth_methods_supported none, client_secret_basic, client_secret_post; code_challenge_methods_supported S256; introspection_endpoint_auth_methods_supported client_secret_basic and client_secret_post; client_id_metadata_document_supported true. Token lifetime and revocation details not found in supplied metadata or reviewed docs. API-key alternative uses a Honeycomb Management API key.",
+      "authorization_server": "https://ui.honeycomb.io",
+      "sources": [
+        "https://mcp.honeycomb.io/mcp",
+        "https://mcp.honeycomb.io/.well-known/oauth-protected-resource",
+        "https://mcp.honeycomb.io/.well-known/oauth-protected-resource/mcp",
+        "https://ui.honeycomb.io/.well-known/oauth-authorization-server",
+        "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md",
+        "https://docs.honeycomb.io/integrations/mcp/troubleshooting.md"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No documentation reviewed describes MCP Elicitation. OAuth consent is documented as an authorization flow, not MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Canvas provides separate invoke and poll tools for asynchronous investigation responses. The documentation does not identify these as the MCP Tasks capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Canvas invoke and poll workflow is documented as tools, not as the MCP Tasks protocol feature.",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Clients can narrow loaded tools and prompts with X-MCP-Toolset values all, query, or canvas; all is the default. The header narrows loading but does not grant access. Team enablement, OAuth consent, API-key scopes, and client-side endpoint configuration are also documented.",
+      "pre_interaction_context_verbatim": "\"all\"\nEvery tool and prompt available to you. This is the default.\n\"query\"\nTools for querying and managing your telemetry, including Boards, Triggers, and SLOs. Includes prompts.\n\"canvas\"\nOnly the tools for working with Canvas. Doesn’t include prompts or query tools.",
+      "post_interaction_context_structure": "Tool and prompt inventories vary according to toolset header, scopes, plan, and team configuration.",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The troubleshooting page documents authentication, permissions, missing tools, rate limits, and session timeouts, but does not identify a separate MCP Error Reporting capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Troubleshooting documentation gives example authorization and rate-limit error conditions; exact protocol error schemas are not specified.",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/troubleshooting.md",
+        "https://docs.honeycomb.io/integrations/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server documentation reviewed describes MCP Subscription support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/concepts.md"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server documentation reviewed describes MCP Progress Tracking.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/concepts.md"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server documentation reviewed describes MCP request cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/concepts.md"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server supplies prompts in addition to tools. Public docs describe tool descriptions and prompt workflows but do not publish initialize instructions or the hosted server's exact pre-interaction payload.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool and prompt definitions are discoverable by clients; initialize instructions are not published in the reviewed documentation.",
+      "sources": [
+        "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "https://docs.honeycomb.io/integrations/mcp/prompts.md",
+        "https://docs.honeycomb.io/integrations/mcp/concepts.md"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official reference labels 25 tools read and 9 write; it does not say whether MCP readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations are sent. No delete tool appears in the documented list. 2. Write tools require mcp:write; docs describe permissions and OAuth consent, but no per-call confirmation parameter or server-enforced preview/approval flow is documented. 3. OAuth scopes are mcp:read and mcp:write. API keys require read access for all operations and write for mutations, plus environment access; only Team Owners can create keys. Honeycomb Intelligence must be enabled. Team role affects Activity Log Environment exposure: only Team Owners see it through MCP. Redirect-URI approval, token lifetime, and revocation details are not found; troubleshooting says MCP agent sessions may time out after 24 hours. 4. X-MCP-Toolset supports all (default), query, and canvas; it narrows loaded tools/prompts but does not grant access. Unknown or empty values cause requests that include the header to be rejected. US and EU endpoints are documented. No separate read-only endpoint or sandbox endpoint is documented. 5. The docs describe environment permissions and access limits but do not specify MCP-specific PII masking or field redaction. AI terms prohibit processing sensitive personal data and certain heightened-regulation data through Honeycomb Intelligence. 6. Published per-minute limits: 300 for semantic-convention tools and canvas_agent_poll_response; 200 for get_workspace_context, get_dataset, get_environment, list_boards, list_recipients, find_columns, refinery_docs; 150 for get_triggers, get_anomaly_service_profiles, find_queries, get_query_results; 100 for run_query, get_trace, get_dataset_columns, get_slos, feedback; 30 for update_trigger/update_slo; 20 for create_trigger/create_slo/create_recipient/canvas_agent_invoke; 10 for get_service_map; 50 default otherwise. Limits may change. Query docs describe sampling metadata and usage_mode; no general result truncation or call cost is stated. 7. Input schemas, unknown-argument rejection, coercion, parameter correction, and operator overrides are not described for the hosted server. 8. The reviewed MCP docs do not describe MCP request audit records or telemetry collection. The concepts page says the Activity Log Environment is exposed to MCP only for Team Owners; this does not establish what MCP calls are logged. 9. The tool list includes feedback, described as submitting server-experience feedback to Honeycomb; no other feedback, rating, survey, or report tool appears. No documented result upsell. 10. Optional agent skills and setup commands are distributed in honeycombio/agent-skill; they are separate from the server. Server tool descriptions include workflow guidance, but the hosted server's enforcement of those instructions is not documented. 11. No memory feature that changes future outputs or tool availability is documented. 12. US and EU hosted endpoints are documented. Canvas invocation can route to a user's agent in an existing investigation or create a new investigation, then be polled. The docs do not describe this as a proxy hierarchy. 13. The official list contains no raw API request, arbitrary SQL, or script-execution tool.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] \"Agents call this tool first to orient themselves before doing anything else.\"",
+      "[DOCS] \"Use this before update_board to inspect existing panels and IDs.\"",
+      "[DOCS] \"Ask your agent to “submit feedback to Honeycomb” with your message.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The documented server exposes a tool list with optional toolset filtering. It has separate US and EU regional endpoints; no hierarchical sub-server structure is documented.",
+    "sources": [
+      "https://docs.honeycomb.io/integrations/mcp/tools.md",
+      "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md",
+      "https://docs.honeycomb.io/integrations/mcp/concepts.md",
+      "https://docs.honeycomb.io/integrations/mcp/troubleshooting.md",
+      "https://docs.honeycomb.io/integrations/agent-skills.md",
+      "https://www.honeycomb.io/ai-terms",
+      "https://github.com/honeycombio/agent-skill"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "34",
+    "action_count_comment": "An official complete tool reference exists at https://docs.honeycomb.io/integrations/mcp/tools.md; it names 34 tools in 12 groups and does not state a separate total. actions.json contains all 34 official names. No catalogue-only tools were added. AnchorTerminal and Oodle independently report 34 tools; the official count is consistent with them. Tool input schemas are not published in the official reference, so parameters are NOT PUBLISHED. The official reference labels read/write; get_service_map is identified as Enterprise-only.",
+    "actions": [
+      {
+        "tool_name": "get_workspace_context",
+        "description": "Returns team name, current time, and environment slugs and dataset counts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_environment",
+        "description": "Returns environment details, datasets, and calculated fields.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_dataset",
+        "description": "Returns dataset metadata and column schema.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_dataset_columns",
+        "description": "Returns dataset columns and optional sample values.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_query",
+        "description": "Runs a time-series aggregation query against a dataset.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_query_results",
+        "description": "Retrieves results and metadata for a prior query.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_queries",
+        "description": "Searches query history and saved queries by intent.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_columns",
+        "description": "Searches columns and calculated fields by intent.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_bubbleup",
+        "description": "Analyzes an existing query result for outlier differences.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_trace",
+        "description": "Retrieves spans for a trace ID as a waterfall.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_spans",
+        "description": "Lists span names ranked by count and dataset.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_span_details",
+        "description": "Summarizes attributes and common values for a span name.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_service_map",
+        "description": "Returns service-to-service dependencies for a time range.",
+        "type": "Read",
+        "enabled_by_default": "Yes (Enterprise only)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_anomaly_service_profiles",
+        "description": "Returns anomaly detection profiles for the current team.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_semconv",
+        "description": "Searches semantic convention attributes matching a query.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_semconv_attribute",
+        "description": "Returns definitions for semantic convention attributes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_semconv_namespaces",
+        "description": "Lists top-level semantic convention namespaces.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_boards",
+        "description": "Lists Boards or returns one Board contents.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_board",
+        "description": "Creates a Board with query, SLO, and Markdown panels.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_board",
+        "description": "Renames or edits panels, filters, and tags on a Board.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_triggers",
+        "description": "Lists Triggers or returns a Trigger configuration.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_trigger",
+        "description": "Creates a Trigger for query threshold alerts.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_trigger",
+        "description": "Updates an existing Trigger.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_slos",
+        "description": "Lists SLOs or returns status and graphs for one SLO.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_slo",
+        "description": "Creates an SLO and derived SLI column when needed.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_slo",
+        "description": "Updates an existing SLO.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_recipients",
+        "description": "Lists pre-registered notification recipients.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_recipient",
+        "description": "Creates a notification recipient.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_agent_invoke",
+        "description": "Sends a message to Canvas agent; creates investigation if omitted.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_agent_poll_response",
+        "description": "Polls for a prior Canvas agent response.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_aiconversations",
+        "description": "Lists recent AI conversations and usage summaries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_aiconversation",
+        "description": "Returns event timeline and aggregate summary for an AI conversation.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "refinery_docs",
+        "description": "Reads Honeycomb Refinery documentation.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "feedback",
+        "description": "Submits MCP experience feedback to the Honeycomb team.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.honeycomb.io/integrations/mcp/tools.md",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted server's tool definitions and initialize instructions are not publicly available verbatim; the public tool reference provides descriptions but not complete schemas.",
+    "human_can_agent_cannot": "The documented MCP tool list contains no telemetry-ingest or instrumentation tool; Honeycomb directs users to separate Send Data with AI workflows for getting data into Honeycomb. No delete tool appears in the official 34-tool list. This compares the published MCP surface, not every UI or REST API operation.",
+    "sources": [
+      "https://docs.honeycomb.io/integrations/mcp/tools.md",
+      "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md",
+      "https://www.anchorterminal.com/tools/honeycomb-mcp",
+      "https://www.oodle.ai/guides/mcp/honeycomb"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The tool reference says agents call get_workspace_context first and recommends list_boards before update_board. Troubleshooting recommends priming context with team, environment, and dataset information. These are documented agent-use recommendations; public evidence does not show server enforcement.",
+    "governance_promises": "Honeycomb Intelligence terms state: “Customer grants Honeycomb a worldwide, fully paid-up, royalty-free, and non-exclusive license to use, reproduce, adapt, modify, host, maintain, compile, translate, share and distribute such Input and Output for the purpose of providing Honeycomb Intelligence to Customer, creating and improving Honeycomb Intelligence features, and collecting and using aggregated, anonymized usage and performance statistics”. The terms prohibit use of Honeycomb Intelligence to process sensitive personal data and specified heightened-regulation data, including PHI and GDPR special-category data. Personal-information processing is subject to the applicable DPA and listed subprocessors.",
+    "promises_to_user": "Honeycomb says MCP write tools require mcp:write, which is granted explicitly during OAuth consent or configured on an API key. The toolset header narrows which tools load but does not grant access. The AI terms assign any rights Honeycomb has in Output to the customer.",
+    "comparison_with_server_logic": "The write-scope and toolset restrictions are described for the hosted server, but public code for that server is unavailable. Data-use terms are contractual statements; the reviewed MCP docs do not describe MCP-specific masking, retention, or request logging logic. Tool-use recommendations are documentation text, not demonstrated server-enforced rules.",
+    "sources": [
+      "https://www.honeycomb.io/ai-terms",
+      "https://www.honeycomb.io/dpa",
+      "https://docs.honeycomb.io/integrations/mcp/tools.md",
+      "https://docs.honeycomb.io/integrations/mcp/configuration-guide.md",
+      "https://docs.honeycomb.io/integrations/mcp/concepts.md"
+    ]
+  },
+  "contradictions": [],
+  "observations_for_research": [
+    "The hosted service is closed-source, while an archived MIT-licensed self-hosted stdio server exists as a distinct deprecated variant.",
+    "The public tool reference exposes descriptions, read/write labels, and rate limits but not input schemas or MCP annotations.",
+    "The server supports toolset filtering through a request header; the docs say this affects loading, not authorization.",
+    "The official server exposes a feedback submission tool, and its documentation gives a natural-language instruction for using it."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the supplied links.json, links_check.txt, pages/ bundle, local code copies, and OAuth metadata. The official tools page and linked docs were read; the local agent-skill code was treated as an optional plugin, not deployed-server code. The official honeycomb-mcp repository was checked in GitHub: it is archived and its README calls it deprecated and self-hosted/stdio, so its tools were not added to the hosted endpoint action list. Tool schemas, initialization instructions, hosted implementation language/SDK, protocol version, token lifetime, revocation behavior, and MCP-specific logging details were not found. Catalogues are secondary cross-checks only. actions.json contains the 34 names from the official tools reference.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 9.2
+  }
+}

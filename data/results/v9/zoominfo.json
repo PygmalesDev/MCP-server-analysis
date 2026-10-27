@@ -1,0 +1,594 @@
+{
+  "server": "zoominfo",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.zoominfo.com/mcp",
+    "documentation_url_csv": "https://gtm.ai/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/Zoominfo/zoominfo-mcp-plugin",
+    "documentation_urls_used": [
+      "https://gtm.ai/docs/mcp",
+      "https://gtm.ai/docs/mcp/getting-started",
+      "https://gtm.ai/docs/mcp/clients",
+      "https://gtm.ai/docs/mcp/tools",
+      "https://gtm.ai/docs/mcp/credits",
+      "https://gtm.ai/docs/mcp/security",
+      "https://gtm.ai/docs/mcp/faq",
+      "https://gtm.ai/docs/mcp/tools/lookup",
+      "https://gtm.ai/docs/mcp/tools/gtm-context",
+      "https://gtm.ai/docs/mcp/tools/update-gtm-context",
+      "https://gtm.ai/docs/mcp/tools/search-companies",
+      "https://gtm.ai/docs/mcp/tools/search-contacts",
+      "https://gtm.ai/docs/mcp/tools/enrich-companies",
+      "https://gtm.ai/docs/mcp/tools/enrich-contacts",
+      "https://gtm.ai/docs/mcp/tools/find-similar-companies",
+      "https://gtm.ai/docs/mcp/tools/find-similar-contacts",
+      "https://gtm.ai/docs/mcp/tools/find-recommended-contacts",
+      "https://gtm.ai/docs/mcp/tools/search-intent",
+      "https://gtm.ai/docs/mcp/tools/enrich-company-signals",
+      "https://gtm.ai/docs/mcp/tools/search-scoops",
+      "https://gtm.ai/docs/mcp/tools/browse-audiences",
+      "https://gtm.ai/docs/mcp/tools/get-audience",
+      "https://gtm.ai/docs/mcp/tools/upsert-audience",
+      "https://gtm.ai/docs/mcp/tools/manage-audience-columns",
+      "https://gtm.ai/docs/mcp/tools/manage-audience-rows",
+      "https://gtm.ai/docs/mcp/tools/audience-analysis",
+      "https://gtm.ai/docs/mcp/tools/account-research",
+      "https://gtm.ai/docs/mcp/tools/contact-research",
+      "https://gtm.ai/docs/mcp/tools/conversation-intelligence",
+      "https://gtm.ai/docs/mcp/tools/browse-engagements",
+      "https://gtm.ai/docs/mcp/tools/enrich-intent",
+      "https://gtm.ai/docs/mcp/tools/enrich-news",
+      "https://gtm.ai/docs/mcp/tools/enrich-scoops",
+      "https://gtm.ai/guides/oauth-vs-client-credentials-zoominfo-mcp",
+      "https://gtm.ai/pricing",
+      "https://www.zoominfo.com/legal/privacy-policy",
+      "https://www.zoominfo.com/legal/terms-of-use"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository packages the hosted endpoint registration and client-specific plugin metadata and skills. Its README identifies https://mcp.zoominfo.com/mcp as the hosted server. It contains no server implementation or tool schemas, so it is not the deployed server code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "31a1ec506078e0aaf4e14e098e39865f32777d8a",
+    "commit_date": "2026-09-30",
+    "implementation_language": "NOT FOUND (the repository contains plugin metadata, Markdown skills, and a JavaScript validation script, not server implementation)",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT (plugin repository)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "The documentation describes user-level OAuth and app-level Client Credentials authentication to the same MCP endpoint, not separate server endpoints: https://gtm.ai/guides/oauth-vs-client-credentials-zoominfo-mcp."
+    ],
+    "sources": [
+      "https://mcp.zoominfo.com/mcp",
+      "https://gtm.ai/docs/mcp/clients",
+      "https://github.com/Zoominfo/zoominfo-mcp-plugin",
+      "https://github.com/Zoominfo/zoominfo-mcp-plugin/blob/31a1ec506078e0aaf4e14e098e39865f32777d8a/README.md",
+      "https://github.com/Zoominfo/zoominfo-mcp-plugin/blob/31a1ec506078e0aaf4e14e098e39865f32777d8a/server.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "MCP platform access is included at no extra cost. Free signup includes 1,000 data credits and 1,000 AI credits. The pricing page lists data credits at $0.38 each at the $1,000 spend tier and AI credits at $0.05 each; top-ups start at $20. Pricing page also advertises a limited 70% discount on a first data-credit purchase.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Free account available; Enterprise pricing is custom. The official pricing page lists Free and Enterprise tiers.",
+    "pricing_model_details": "Data credits fund enrichment and record ingestion; AI credits fund research and analysis. The pricing page advertises 1,000 signup credits of each type. It also lists no extra MCP platform fee, standard API limits, and credit top-ups. Credits are shared across MCP, API, CLI, and web app. Pricing describes its own credit terms; the credits documentation notes that older subscriptions with only recurring monthly credits cannot be used by MCP.",
+    "other_access_restrictions": "Requires ZoomInfo login or app authentication and applicable package entitlements. Admin-only seats and accounts with only recurring monthly credits cannot use MCP. User-level results follow that user's entitlements; client-credentials calls use the integration user's identity. Per-user data and AI credit limits can be set by an admin. Pricing page lists 5 requests/second and 5 apps for the free tier.",
+    "restrictions_controlled_by": "Vendor and organization admin; client operators choose the OAuth flow and clients may disable individual tools.",
+    "sources": [
+      "https://gtm.ai/pricing",
+      "https://gtm.ai/docs/mcp/credits",
+      "https://gtm.ai/docs/mcp/security",
+      "https://gtm.ai/docs/mcp/faq",
+      "https://gtm.ai/docs/mcp/clients",
+      "https://gtm.ai/guides/oauth-vs-client-credentials-zoominfo-mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool reference names 26 tools, including three deprecated entries that their individual pages say are no longer exposed. It describes the remaining tools and their use; the FAQ separately references Submit Feedback. Available tools refresh at the start of a new session.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool pages describe returned records, briefings, audience data, and errors at a conceptual level; no verbatim tools/list schema or common response envelope was found.",
+      "sources": [
+        "https://gtm.ai/docs/mcp/tools",
+        "https://gtm.ai/docs/mcp/faq",
+        "https://gtm.ai/docs/mcp/tools/enrich-intent",
+        "https://gtm.ai/docs/mcp/tools/enrich-news",
+        "https://gtm.ai/docs/mcp/tools/enrich-scoops"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No product-specific MCP resources or resource templates are documented in the reviewed material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp",
+        "https://github.com/Zoominfo/zoominfo-mcp-plugin"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Documentation supplies client-side starter prompts, but does not establish that the server implements MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp/clients"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The security page says ZoomInfo processes tool parameters and results, but does not describe server logs, audit trails, or opt-out controls.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp/security"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP sampling support is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Provided endpoint probe returned HTTP 401 and WWW-Authenticate Bearer resource_metadata=\"https://mcp.zoominfo.com/.well-known/oauth-protected-resource/mcp\"; body says an Authorization token is required. Pre-fetched protected-resource metadata for both the origin and /mcp identifies resource https://mcp.zoominfo.com/mcp, authorization server https://mcp.zoominfo.com, header bearer method, and scopes_supported [openid, profile, zi_api, email, offline_access, zi_mcp, api:data:mcp]. Pre-fetched authorization-server metadata lists authorization_code and refresh_token grants, S256 PKCE, query response mode, code response type, registration endpoint, token endpoint, revocation endpoint, and client_secret_basic/client_secret_post token authentication. Docs additionally describe user-level authorization-code-with-PKCE and app-level Client Credentials. Metadata does not state token lifetime.",
+      "pre_interaction_context_verbatim": "HTTP 401; WWW-Authenticate: Bearer resource_metadata=\"https://mcp.zoominfo.com/.well-known/oauth-protected-resource/mcp\"",
+      "post_interaction_context_structure": "Unauthenticated response was JSON with detail, title, errors array and HTTP 401 status.",
+      "authorization_mechanism": "OAuth 2.0 Bearer in Authorization header. Prefetched resource metadata: authorization_servers=[\"https://mcp.zoominfo.com\"]; scopes_supported=[\"openid\",\"profile\",\"zi_api\",\"email\",\"offline_access\",\"zi_mcp\",\"api:data:mcp\"]; bearer_methods_supported=[\"header\"]. Authorization-server metadata: grant_types_supported=[\"authorization_code\",\"refresh_token\"]; code_challenge_methods_supported=[\"S256\"]; registration_endpoint=https://mcp.zoominfo.com/oauth/register; token_endpoint=https://okta-login.zoominfo.com/oauth2/default/v1/token; token_endpoint_auth_methods_supported=[\"client_secret_basic\",\"client_secret_post\"]; revocation_endpoint=https://okta-login.zoominfo.com/oauth2/default/v1/revoke. Documentation also describes Client Credentials for service accounts. Token lifetime NOT FOUND.",
+      "authorization_server": "https://mcp.zoominfo.com (issuer); token endpoint https://okta-login.zoominfo.com/oauth2/default/v1/token",
+      "sources": [
+        "https://mcp.zoominfo.com/mcp",
+        "https://mcp.zoominfo.com/.well-known/oauth-protected-resource",
+        "https://mcp.zoominfo.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.zoominfo.com/.well-known/oauth-authorization-server",
+        "https://mcp.zoominfo.com/.well-known/openid-configuration",
+        "https://gtm.ai/docs/mcp/clients",
+        "https://gtm.ai/guides/oauth-vs-client-credentials-zoominfo-mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Documentation recommends that the AI ask the user before paid research, but does not document server-enforced MCP elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp/credits",
+        "https://gtm.ai/docs/mcp/clients"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Some audience operations describe background jobs, but the docs do not say these use MCP Tasks.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp/tools/upsert-audience"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed material documents OAuth setup and client-side tool toggles, not an MCP configuration capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp/clients",
+        "https://gtm.ai/docs/mcp/faq"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "FAQ describes troubleshooting authentication, permission, and credit errors; a server capability for MCP error reporting is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The endpoint's unauthenticated JSON error contains detail, title, and errors fields; other error formats are not specified.",
+      "sources": [
+        "https://gtm.ai/docs/mcp/faq",
+        "https://mcp.zoominfo.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented. Product access and billing are described through account plans and shared credit pools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp/credits",
+        "https://gtm.ai/pricing"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Audience ingestion may run as a job, but progress notifications through MCP are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp/tools/upsert-audience"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP request or task cancellation behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://gtm.ai/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "An official plugin repository distributes client-side GTM workflow skills alongside the hosted endpoint registration. The tools reference says new tools are available at the next session start. The endpoint uses Streamable HTTP per client setup docs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/Zoominfo/zoominfo-mcp-plugin",
+        "https://gtm.ai/docs/mcp/clients",
+        "https://gtm.ai/docs/mcp/tools"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The tools reference identifies search, lookup, browse, and research actions as read-oriented and audience/context writes as write actions; no MCP tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are published. 2. No server-enforced confirmation flow is documented. The credits page says the starter prompt asks the AI to estimate costs and check with the user before paid research; this is client guidance. Upsert Audience has structured fields that override conflicting agentInstruction text. 3. OAuth metadata lists scopes [openid, profile, zi_api, email, offline_access, zi_mcp, api:data:mcp]. Docs say calls use the signed-in user's entitlements; Client Credentials uses one integration identity and its permissions. Admins can cap per-user credits. Registration/redirect approval and token lifetime are not specified. 4. No documented read-only endpoint, toolset filter, or URL/header restriction mode found. Clients can enable/disable tools; user-sign-in and Client Credentials are documented modes. 5. Docs state package entitlements bound accessible data and fields; connected CRM/conversation sources and user permissions bound context. No field masking or PII exclusion policy specific to MCP found. 6. Credits: enrich Companies/Contacts up to 10 records per call; signals up to 10 companies; Manage Audience Rows up to 50 records per call; Browse Engagements up to 50 items and 90-day span. Data credits charge per new record/signal; AI research costs vary by work. Credit limits can be set per user. 7. Public server code and MCP input schemas unavailable. Docs state immutable audience type/searchQuery and column dataType values are silently ignored on updates; structured fields supersede conflicting agentInstruction. 8. ZoomInfo processes tool parameters and results; docs say it cannot see the rest of the AI conversation and server keeps no chat history between calls. Audit logging, telemetry, and opt-out are not documented. 9. FAQ names Submit Feedback; submitted requests feed directly into the tool roadmap. No vendor upsell response or tool-selection instruction is documented. 10. Server-provided initialize instructions not available. Official repository distributes external client skills; these guide task workflows but are not proven server-enforced. Docs contain tool-selection recommendations, including describing a task in natural language and asking before paid research. 11. Docs state the server retains no chat history between calls; user/context sources affect individual results. No learned agent behavior or persistent MCP memory documented. 12. Context/research tools use sub-agents to gather/synthesize connected data; this is tool-internal agent processing. The server otherwise presents a flat documented tool list and shared endpoint. 13. No raw API, SQL, script, or arbitrary execution tool found in the official active tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“You rarely need to name a tool. Describe what you want and your AI client picks the right ZoomInfo tool, or chains several: building a list usually runs Lookup → Search → Enrich.”",
+      "“New tools published by ZoomInfo are available automatically at the start of each new session.”",
+      "“If the instruction text conflicts with a structured field like name or type, the structured field wins.”",
+      "“The starter prompt asks your AI to estimate credits and check with you before it runs paid research, and you can ask for the same in any prompt.”",
+      "“If the tool call comes back \"No approval received\" or a similar permission response, say so plainly, name the tool, and continue with the remaining steps. Don't retry the same call hoping for a different result, and don't invent an approval that didn't happen.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One shared hosted endpoint and a flat documented tool list. Some research tools internally run sub-agents, but that alone does not create a hierarchical MCP server.",
+    "sources": [
+      "https://gtm.ai/docs/mcp/tools",
+      "https://gtm.ai/docs/mcp/credits",
+      "https://gtm.ai/docs/mcp/security",
+      "https://gtm.ai/docs/mcp/faq",
+      "https://gtm.ai/docs/mcp/clients",
+      "https://gtm.ai/docs/mcp/tools/upsert-audience",
+      "https://gtm.ai/docs/mcp/tools/manage-audience-columns",
+      "https://gtm.ai/docs/mcp/tools/manage-audience-rows",
+      "https://gtm.ai/docs/mcp/tools/browse-engagements",
+      "https://gtm.ai/docs/mcp/tools/conversation-intelligence",
+      "https://github.com/Zoominfo/zoominfo-mcp-plugin"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "24 documented active or separately referenced tool names",
+    "action_count_comment": "The official ZoomInfo-branded tool reference at https://gtm.ai/docs/mcp/tools names 26 tools, including Enrich Intent, Enrich News, and Enrich Scoops. Each deprecated tool page states that the hosted MCP server no longer exposes that tool, leaving 23 active names from that list. The FAQ separately names Submit Feedback as a tool; it is included as Official but absent from the 26-tool reference, so its default availability is Unknown. No catalogue-only tools were added. MartechDB describes the server's tools without machine names; AgentAtlas lists no additional native names; Claude connector directory is a third-party listing, not the source of this inventory.",
+    "actions": [
+      {
+        "tool_name": "lookup",
+        "description": "Returns valid filter values for industries, regions, job functions, and other search fields.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/lookup",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_gtm_context",
+        "description": "Returns the user role and organization GTM context.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/gtm-context",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_gtm_context",
+        "description": "Creates or updates organization GTM context from structured or unstructured content.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/update-gtm-context",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_companies",
+        "description": "Searches companies by firmographic criteria.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/search-companies",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_contacts",
+        "description": "Searches contacts by role, company, or signal.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/search-contacts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enrich_companies",
+        "description": "Returns detailed company profiles for up to 10 companies.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/enrich-companies",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enrich_contacts",
+        "description": "Returns detailed contact profiles for up to 10 contacts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/enrich-contacts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_similar_companies",
+        "description": "Finds companies similar to a specified company.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/find-similar-companies",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_similar_contacts",
+        "description": "Finds contacts similar to a specified contact.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/find-similar-contacts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_recommended_contacts",
+        "description": "Recommends outreach-ready contacts for an account.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/find-recommended-contacts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_intent",
+        "description": "Discovers companies matching buyer intent signals.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/search-intent",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enrich_company_signals",
+        "description": "Returns intent, news, and scoops for known companies.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/enrich-company-signals",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_scoops",
+        "description": "Discovers companies based on business events.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/search-scoops",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "browse_audiences",
+        "description": "Lists and searches audiences.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/browse-audiences",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_audience",
+        "description": "Returns audience columns and a preview of rows.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/get-audience",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsert_audience",
+        "description": "Creates an audience or updates its name, folder, description, or notes.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/upsert-audience",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_audience_columns",
+        "description": "Defines audience columns, including AI research columns.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/manage-audience-columns",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_audience_rows",
+        "description": "Loads records into an audience and sets cell values.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/manage-audience-rows",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "audience_analysis",
+        "description": "Answers questions about structured and free-text audience contents.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/audience-analysis",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "account_research",
+        "description": "Generates a company intelligence briefing using connected context.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/account-research",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "contact_research",
+        "description": "Generates a contact intelligence briefing using connected context.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/contact-research",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "conversation_intelligence",
+        "description": "Answers questions about calls, meetings, and emails with citations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/conversation-intelligence",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "browse_engagements",
+        "description": "Builds a timeline of connected meetings and emails.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/tools/browse-engagements",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_feedback",
+        "description": "Submits feedback about missing capabilities to ZoomInfo.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://gtm.ai/docs/mcp/faq",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Public code of the server implementation and verbatim tools/list definitions or initialize instructions were unavailable. The official repository is a client plugin and skills package.",
+    "human_can_agent_cannot": "The vendor says MCP does not write to CRM, perform bulk exports, or run batch-enrichment pipelines; those workflows use the web app, REST API, CLI, or other integrations. Audience AI-column enrichment must be run in the ZoomInfo web app; MCP can define columns but the documented agent tool does not execute them. Sources: https://gtm.ai/docs/mcp/faq and https://gtm.ai/docs/mcp/tools/manage-audience-columns.",
+    "sources": [
+      "https://gtm.ai/docs/mcp/tools",
+      "https://gtm.ai/docs/mcp/faq",
+      "https://gtm.ai/docs/mcp/tools/manage-audience-columns",
+      "https://gtm.ai/docs/mcp/tools/enrich-intent",
+      "https://gtm.ai/docs/mcp/tools/enrich-news",
+      "https://gtm.ai/docs/mcp/tools/enrich-scoops",
+      "https://martechdb.com/vendors/zoominfo",
+      "https://agentatlas.dev/mcp/zoominfo",
+      "https://claude.com/connectors/zoominfo"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Docs recommend natural-language requests and automatic tool chaining. The credits page says the starter prompt asks for estimated cost and user approval before paid research; the server documentation does not establish that this confirmation is enforced. Tool pages advise passing exact search parameters to Upsert Audience and asking rather than guessing when audience intent is unclear.",
+    "governance_promises": "Security page: “MCP doesn't grant access to any data beyond what your ZoomInfo package already includes.” It says tool calls run as the signed-in user, respect organization entitlements, and the server keeps no chat history between calls. It also says data passes through the AI provider, whose agreement governs retention and use, and recommends reviewing provider retention settings and turning off training where possible.",
+    "promises_to_user": "Docs state that ZoomInfo cannot see the rest of the AI conversation or context held by the AI client. The pricing page claims platform access is included at no extra cost and search/lookup are free. The FAQ says the product does not write to CRM or run bulk exports and batch enrichment pipelines.",
+    "comparison_with_server_logic": "Entitlement checks and per-user credit limits are described as enforced. The no-chat-history statement is a vendor claim without public server code for verification. Cost approval and tool-choice guidance are prompts/recommendations, not documented server-side enforcement. Pricing and workflow exclusions are documented product behavior; data handling promises are not independently verifiable from the public plugin repository.",
+    "sources": [
+      "https://gtm.ai/docs/mcp/security",
+      "https://gtm.ai/docs/mcp/credits",
+      "https://gtm.ai/docs/mcp/faq",
+      "https://gtm.ai/pricing",
+      "https://www.zoominfo.com/legal/privacy-policy",
+      "https://www.zoominfo.com/legal/terms-of-use"
+    ]
+  },
+  "contradictions": [
+    "Official tool reference says it lists 26 tools, while three deprecated tool pages state those tools are no longer exposed; the FAQ separately references Submit Feedback, which is not in that 26-tool list.",
+    "The pre-fetched OAuth authorization-server metadata lists authorization_code and refresh_token grants, while ZoomInfo's OAuth guide also documents Client Credentials for service accounts. The metadata supplied does not list client_credentials in grant_types_supported.",
+    "The security documentation emphasizes sign-in by each user, while the OAuth guide describes a service-account Client Credentials option that runs calls as one shared integration identity.",
+    "Pricing page says Records Under Management is an Enterprise benefit and does not apply to Free, while the Credits & Billing page describes 12-month RUM treatment without that plan distinction. The pages may reflect different plan scopes or updated terms."
+  ],
+  "observations_for_research": [
+    "The hosted server combines firmographic data access with organization-specific CRM and conversation context when connected; OAuth flow determines whether that context is user-specific or shared.",
+    "Client-side starter prompts recommend cost estimates and approval, while credit charging is based on tool operations and variable work, with no documented server-side pre-call cost preview.",
+    "Audience tools allow writes within ZoomInfo but intentionally leave some operations, including executing AI-column runs, to the web application."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed links.json, links_check.txt, pages/ and the local official repository. The official GTM AI documentation is branded “GTM AI by ZoomInfo” and identifies the same hosted endpoint. Public code reviewed is a plugin/skills bundle, not the server. All official tool reference sub-pages were checked; individual pages generally explain purpose and usage but do not publish machine input schemas. Pricing and legal pages were reviewed; legal pages were not used to infer MCP-specific retention beyond the security documentation. MartechDB and AgentAtlas were used as cross-checks only; the unofficial community server listed in links.json was excluded. actions.json contains 23 active names from the official list plus the FAQ's separately named Submit Feedback tool.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.2
+  }
+}

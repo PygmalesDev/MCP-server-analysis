@@ -1,0 +1,415 @@
+{
+  "server": "optimizely",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.optimizely.com/mcp",
+    "documentation_url_csv": "https://support.optimizely.com/hc/en-us/articles/45321030398349-Optimizely-Experimentation-MCP-server-quickstart",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-quickstart",
+      "https://docs.optimizely.com/experimentation-strategy/docs/install-optimizely-experimentation-mcp-server",
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-example-prompts",
+      "https://www.optimizely.com/field-notes/articles/experimentation-mcp-server",
+      "https://www.optimizely.com/plans",
+      "https://www.optimizely.com/legal/privacy-notice",
+      "https://www.optimizely.com/contentassets/8258092236bc46feaa7ee6165b0802a4/optimizely-product-use-terms-version-2026-01-published-2026-jan-062.pdf",
+      "https://www.optimizely.com/trust-center/ai-ethics-policy"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official public repository was found in the prepared evidence or official documentation. The supplied endpoint differs from the Experimentation endpoint named in Optimizely documentation; no evidence establishes whether they share implementation or tools.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "Publicly documented and available to Optimizely Experimentation customers; an explicit GA/beta designation was not found.",
+    "other_official_servers": [
+      "https://exp.mcp.opal.optimizely.com/mcp — officially documented Experimentation server; documentation lists eight exp_ tools.",
+      "https://analytics.mcp.opal.optimizely.com/mcp — officially documented Analytics MCP server.",
+      "https://cms.mcp.opal.optimizely.com/mcp — identified by Optimizely’s 2026 privacy notice? NOT FOUND. A third-party directory reports this endpoint; official confirmation was not established in the prepared evidence."
+    ],
+    "sources": [
+      "https://mcp.optimizely.com/mcp",
+      "https://mcp.optimizely.com/.well-known/oauth-protected-resource",
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+      "https://docs.optimizely.com/experimentation-strategy/docs/install-optimizely-experimentation-mcp-server",
+      "https://www.optimizely.com/field-notes/articles/experimentation-mcp-server",
+      "https://docs.optimizely.com/analytics/docs/optimizely-analytics-mcp-server-quickstart"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "Official Experimentation setup documentation says use of that server does not consume Mark credits. No MCP-specific charge or price for the supplied endpoint was found. The endpoints differ, so the Experimentation price detail may not apply to the input endpoint.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Optimizely says plans are individually packaged and pricing varies by customer, product selection, traffic, and implementation; no public price amount was found.",
+    "pricing_model_details": "No MCP per-call charge, quota, or specific MCP plan price was found. The Experimentation server documentation says it does not consume Mark credits.",
+    "other_access_restrictions": "Official Experimentation server prerequisites include an Opti ID, an Optimizely account with Agent Platform enabled, and a connected Feature or Web Experimentation instance. The server uses OAuth through the user’s Mark instance. Applicability of these requirements to the supplied endpoint is unverified.",
+    "restrictions_controlled_by": "Optimizely controls account and product access; organization administrators control Agent Platform availability. Details for the supplied endpoint are not documented.",
+    "sources": [
+      "https://docs.optimizely.com/experimentation-strategy/docs/install-optimizely-experimentation-mcp-server",
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+      "https://support.optimizely.com/hc/en-us/articles/4410289753485-Learn-about-plan-options-and-costs",
+      "https://www.optimizely.com/plans"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint returns HTTP 401 on unauthenticated POST and advertises scopes mcp:query, mcp:manage, and mcp:implement. Optimizely documents eight tools for its separately named Experimentation endpoint. No tool list for the supplied endpoint was found; the eight documented tools are best-available product evidence, not confirmed input-endpoint tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The unauthenticated endpoint returned JSON-RPC error code -401 with message \"Authentication required: OAuth authorization needed.\" Authenticated tool result formats were not found.",
+      "authorization_mechanism": "OAuth-protected resource metadata: bearer token in header; scopes_supported are exactly [\"mcp:query\", \"mcp:manage\", \"mcp:implement\"]. Endpoint POST returned HTTP 401 and WWW-Authenticate referenced the resource metadata URL. Official Experimentation setup documents an OAuth 2.0 browser flow. The authorization server metadata could not be fetched in the provided evidence (DNS lookup failure), so registration endpoint, PKCE, grant types, token authentication methods, token lifetime, and revocation are NOT FOUND.",
+      "authorization_server": "https://event-watch.optimizely.com",
+      "sources": [
+        "https://mcp.optimizely.com/mcp",
+        "https://mcp.optimizely.com/.well-known/oauth-protected-resource",
+        "https://event-watch.optimizely.com/.well-known/oauth-authorization-server",
+        "https://event-watch.optimizely.com/.well-known/openid-configuration",
+        "https://docs.optimizely.com/experimentation-strategy/docs/install-optimizely-experimentation-mcp-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No resource listing or resource support statement was found for the supplied endpoint or in the Experimentation tool reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official documentation gives example natural-language requests but does not establish MCP prompts/list support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-example-prompts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP-call logging, audit trail, or telemetry behavior was documented for the supplied endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling support statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots support statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint challenges unauthenticated requests with HTTP 401 and links OAuth protected-resource metadata. Metadata identifies https://event-watch.optimizely.com as authorization server and supports bearer tokens in the header. Authorization-server metadata was not retrievable in the pre-fetched evidence.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://mcp.optimizely.com/.well-known/oauth-protected-resource\"\n{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-401,\"message\":\"Authentication required: OAuth authorization needed.\"},\"id\":null}",
+      "post_interaction_context_structure": "Unauthenticated request returns a JSON-RPC error object with code -401, an authentication-required message, and null id.",
+      "authorization_mechanism": "Metadata Doc. Raw protected-resource values: resource=https://mcp.optimizely.com/mcp; authorization_servers=[https://event-watch.optimizely.com]; bearer_methods_supported=[header]; scopes_supported=[mcp:query, mcp:manage, mcp:implement]. OAuth server metadata endpoints failed DNS lookup in supplied evidence; DCR, PKCE, grant types, token lifetime, and revocation are NOT FOUND.",
+      "authorization_server": "https://event-watch.optimizely.com",
+      "sources": [
+        "https://mcp.optimizely.com/mcp",
+        "https://mcp.optimizely.com/.well-known/oauth-protected-resource",
+        "https://event-watch.optimizely.com/.well-known/oauth-authorization-server",
+        "https://event-watch.optimizely.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Optimizely says the agent confirms project, environment, and change details before committing changes, but does not identify MCP Elicitation or show that the server enforces this flow.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No asynchronous task support statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint URL parameters, headers, tool filters, or configuration modes were found for the supplied endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/install-optimizely-experimentation-mcp-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Only the unauthenticated JSON-RPC error response is observable in supplied evidence. Authenticated tool error formats are not published there.",
+      "pre_interaction_context_verbatim": "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-401,\"message\":\"Authentication required: OAuth authorization needed.\"},\"id\":null}",
+      "post_interaction_context_structure": "JSON-RPC error object; authenticated error schemas are unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.optimizely.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscriptions support statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress notifications or progress-token support statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation support statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No initialize instructions or server-provided behavioral context were found for the supplied endpoint. Official Experimentation documentation describes natural-language tool use, but does not reproduce initialize output.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+        "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-example-prompts"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Read/write: official Experimentation docs list query/reporting/SDK lookup and entity lifecycle tools; lifecycle supports create, update, and archive. No annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) were published. 2. Docs say the agent confirms target project, environment, and details before committing; this is described as agent behavior, with no published server-enforced confirmation parameter or flow. 3. Supplied endpoint metadata lists mcp:query, mcp:manage, mcp:implement and header bearer auth. Official Experimentation docs say it uses the user’s Optimizely identity and existing permissions. Admin enablement and connected instance requirements are documented for that other endpoint; token lifetime is described as time-limited, exact duration NOT FOUND. 4. No read-only mode, tool filter, query-free mode, or environment endpoint option documented; docs mention querying/comparing environments. Separate Experimentation and Analytics endpoints are documented. 5. Official docs say the MCP server sees the same projects, experiments, and data accessible in the UI; MCP-specific masking or PII exclusion NOT FOUND. 6. MCP-specific rate limits, quotas, bulk caps, truncation, and per-call costs NOT FOUND; Experimentation setup says MCP use does not consume Mark credits. 7. Input validation, unknown-argument behavior, coercion, corrections, and operator overrides NOT FOUND. 8. MCP-call logging, audit trails, and telemetry NOT FOUND. 9. No feedback, rating, survey, report-to-vendor, or upsell tool identified in the eight official names/descriptions; no input-endpoint tool list exists to inspect. 10. Official examples recommend specifying project scope and describe the agent confirming target and details; confirmation is not shown as server-enforced. Examples also say an editor agent may search local code, and that code is not sent to Optimizely. 11. Documentation says the agent maintains context within a conversation; no evidence that prior behavior changes server outputs or persists across conversations. 12. No architecture for the supplied endpoint is published. Officially documented sibling Experimentation and Analytics servers use separate URLs. 13. No raw API request, arbitrary SQL, script execution, or universal escape-hatch tool appears in the published eight-tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS, Experimentation overview] \"The agent always confirms the target project, environment, and details before committing any changes. Review the agent's confirmation carefully before approving.\"",
+      "[DOCS, example prompts] \"Be specific about scope\"",
+      "[DOCS, example prompts] \"You do not need to know tool names or API parameters. Which flags are different between staging and production? is a valid query.\"",
+      "[DOCS, example prompts] \"Your agent remembers context. After getting a list of experiments, you can ask about a specific one without repeating the full context.\""
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Optimizely documents separate hosted endpoints for Experimentation and Analytics, with product-specific tool prefixes. The supplied endpoint is a third host and no official documentation links it to either sibling, so its own structure is unknown.",
+    "sources": [
+      "https://mcp.optimizely.com/.well-known/oauth-protected-resource",
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-example-prompts",
+      "https://docs.optimizely.com/experimentation-strategy/docs/install-optimizely-experimentation-mcp-server",
+      "https://docs.optimizely.com/analytics/docs/optimizely-analytics-mcp-server-quickstart"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "8 documented for the official Experimentation endpoint; the supplied endpoint’s count is unknown",
+    "action_count_comment": "An official tool list exists at https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview and names eight tools; no total beyond the listed eight is stated. They are included as best-available Experimentation product evidence because no tool list for the supplied endpoint was found. Catalogue-only tools added: 0. APIs.io lists the supplied host under “Episerver” but provides no tools; its separate Experimentation listing names no tool count. Gamut describes the documented exp.mcp.opal.optimizely.com endpoint without listing tools. MartechDB does not provide an MCP tool list. The endpoint mismatch means these eight tools cannot be confirmed for https://mcp.optimizely.com/mcp.",
+    "actions": [
+      {
+        "tool_name": "exp_get_schemas",
+        "description": "Retrieve schemas for experimentation entities such as projects, flags, and experiments.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "exp_execute_query",
+        "description": "Run structured queries against experimentation data.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "exp_summarize_test_result",
+        "description": "Retrieve and analyze results for an individual experiment.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "exp_program_reporting_top_experiments",
+        "description": "Surface top-performing experiments; reporting data is most relevant to paused and concluded experiments.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "exp_program_reporting_execute_query",
+        "description": "Query reporting data for paused, concluded, and archived experiments, including lift and significance.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "exp_search_fx_sdk_docs",
+        "description": "Search Feature Experimentation SDK documentation across supported languages and frameworks.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "exp_manage_entity_lifecycle",
+        "description": "Create, update, and archive flags, experiments, audiences, and other entities.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "exp_get_entity_templates",
+        "description": "Retrieve templates and required fields for creating or updating entities.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim tools/list and initialize output was found for the supplied endpoint. Documentation gives names and descriptions but not full JSON tool definitions or initialize instructions.",
+    "human_can_agent_cannot": "For Web Experimentation, variation-level custom HTML, CSS, and JavaScript changes are not supported through the documented MCP; Optimizely directs users to the Visual Editor. The MCP tool list also does not document direct UI operations outside its listed entities and queries. The former does not establish the limitation of the supplied endpoint.",
+    "sources": [
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-example-prompts",
+      "https://apis.io/servers/episerver/episerver/",
+      "https://apis.io/apis/optimizely/mcp-experimentation/",
+      "https://www.gamut.so/mcp/analytics-marketing/optimizely",
+      "https://martechdb.com/vendors/optimizely"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Official Experimentation docs recommend confirming project, environment, and details before changes. The documentation does not show this as a server-enforced rule. The examples also advise naming the project to reduce ambiguity.",
+    "governance_promises": "Official Experimentation documentation says the server sees the same projects, experiments, and data the user can access in the UI, and that permissions carry over. Product Use Terms state customer data will not be used to train, develop, or improve GenAI features for the benefit of others. These statements are not specific to the supplied endpoint.",
+    "promises_to_user": "Optimizely says MCP access uses the user’s Optimizely identity and existing permissions. Its product terms state customer data is not used to train or improve GenAI features for others. The Experimentation server is described as available to Experimentation customers without separate sign-up or waitlist.",
+    "comparison_with_server_logic": "The endpoint’s OAuth metadata provides evidence of authentication and scopes. No public code or operational documentation establishes that the input endpoint enforces the documentation’s permission, confirmation, data-use, or retention statements. Confirmation is described as agent behavior; no server-side enforcement mechanism is documented.",
+    "sources": [
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-overview",
+      "https://docs.optimizely.com/experimentation-strategy/docs/optimizely-experimentation-mcp-server-example-prompts",
+      "https://www.optimizely.com/contentassets/8258092236bc46feaa7ee6165b0802a4/optimizely-product-use-terms-version-2026-01-published-2026-jan-062.pdf",
+      "https://www.optimizely.com/field-notes/articles/experimentation-mcp-server",
+      "https://mcp.optimizely.com/.well-known/oauth-protected-resource"
+    ]
+  },
+  "contradictions": [
+    "The supplied endpoint is https://mcp.optimizely.com/mcp, while official Experimentation setup and overview documentation direct clients to https://exp.mcp.opal.optimizely.com/mcp. The supplied endpoint has its own OAuth protected-resource metadata and scopes, but no official source found here identifies its product or tools.",
+    "The supplied endpoint advertises scopes mcp:query, mcp:manage, and mcp:implement. The official Experimentation endpoint documentation groups capabilities as Query, Manage, and Implement but does not publish these scopes or establish that it is the same endpoint.",
+    "APIs.io labels the supplied endpoint “Episerver”; the official Experimentation documentation instead identifies the exp.mcp.opal.optimizely.com endpoint. The APIs.io listing provides no tool list and is not used to establish official tools."
+  ],
+  "observations_for_research": [
+    "The scope names on the supplied endpoint map closely to the three categories documented for the Experimentation MCP, but endpoint identity is not established.",
+    "The official Experimentation tool list separates reporting queries from ordinary experimentation queries and SDK documentation lookup, alongside an entity lifecycle tool that can create, update, and archive.",
+    "The official documentation describes confirmation as an agent step, but does not specify a server-enforced approval mechanism.",
+    "Official setup documentation states MCP use does not consume Mark credits; product plans and pricing are individually packaged."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Prepared evidence checked first: links.json, links_check.txt, pages/INDEX.txt, official page text/scripts, and code/. No repository was present. The supplied endpoint’s root returned 404, its /mcp endpoint was listed as HTTP 405 in the prepared page capture, /mcp/install returned 404, and the provided POST/OAuth evidence shows a protected resource. OAuth authorization-server metadata lookups failed DNS resolution in the supplied evidence. Searched official Experimentation docs, official pricing pages, legal/AI terms, and available catalogues. APIs.io’s “Episerver” listing is third-party and not evidence of tool names. No official docs were found for the supplied host’s tool list, pricing, implementation, error schema beyond unauthenticated 401, or endpoint-specific safeguards. Official tools listed in actions.json come from the documented Experimentation endpoint, not a verified list for the input endpoint.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.1
+  }
+}

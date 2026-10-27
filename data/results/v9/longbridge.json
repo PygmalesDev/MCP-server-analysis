@@ -1,0 +1,2284 @@
+{
+  "server": "longbridge",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.longbridge.com/mcp",
+    "documentation_url_csv": "https://open.longbridge.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/longbridge/longbridge-mcp",
+    "documentation_urls_used": [
+      "https://open.longbridge.com/docs/mcp",
+      "https://open.longbridge.com/docs/agent-auth",
+      "https://open.longbridge.com/docs/getting-started",
+      "https://open.longbridge.com/docs/changelog",
+      "https://open.longbridge.com/skill/install",
+      "https://longbridge.com/us/en/support/articles/14864729940111",
+      "https://longbridge.com/us/en/support/articles/17853211477775",
+      "https://longbridge.com/us/en/support/articles/15016098154767"
+    ],
+    "open_code_equals_deployed_server": "Yes",
+    "open_code_note": "The official Rust repository identifies the hosted OAuth 2.1 endpoint and registers it as a remote server. The same implementation also supports local stdio mode. Its main endpoint exposes the authenticated tool set; /agent is a separate authorization fallback.",
+    "mcp_protocol_version": "2025-03-26 is present in a public-code protocol test fixture; deployed negotiated version not found.",
+    "commit_hash": "dd838502fd6ffc38cc689e5c9d596af2a798a57c",
+    "commit_date": "2026-10-26",
+    "implementation_language": "Rust",
+    "mcp_sdk_and_version": "rmcp 1.4 (Cargo.toml version constraint)",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "[DOCS] https://mcp.longbridge.com/agent — temporary agent-auth-code endpoint; unauthenticated sessions expose only authenticate, then the client reconnects to the main endpoint with a Bearer token.",
+      "[DOCS] https://mcp.longbridge.cn — regional access point for AP accounts; US accounts use the global .com endpoint.",
+      "[LOCAL CODE @dd83850] The repository also implements a restricted read-only /v2 endpoint."
+    ],
+    "sources": [
+      "https://open.longbridge.com/docs/mcp",
+      "https://open.longbridge.com/docs/agent-auth",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/README.md#L22-L40",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/server.json#L1-L28",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/Cargo.toml#L1-L23",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L1735-L1758"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The MCP docs require an active Longbridge account or eligible paper-trading account. No separate MCP fee is stated; a distinct MCP charge or usage limit was not found.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "The US fee schedule lists Starter AI at $0, Plus at $19.99/month, Pro at $49.99/month, and Max at $99.99/month. These are Longbridge AI subscription tiers; the sources do not establish that they are required for MCP. Brokerage services are available without a subscription; trading and other pass-through fees may apply.",
+    "pricing_model_details": "The fee schedule lists $0 commission for US stocks and ETFs, $0 equity-option commission, and $0.50 per index-option contract, alongside regulatory and other fees. AI subscriptions have monthly tiers. MCP-specific billing was not stated.",
+    "other_access_restrictions": "An account and OAuth approval are required. Tool availability varies by region, account level, and granted scopes. US accounts use .com; .cn serves AP accounts. ChatGPT App excludes order placement and other trading tools.",
+    "restrictions_controlled_by": "Longbridge controls regional and account eligibility; the user chooses OAuth scopes; client platform policy can limit the available tool set.",
+    "sources": [
+      "https://open.longbridge.com/docs/mcp",
+      "https://open.longbridge.com/docs/getting-started",
+      "https://longbridge.com/us/en/support/articles/15016098154767",
+      "https://longbridge.com/us/en/support/articles/17853211477775"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The authenticated main endpoint exposes tools dynamically. The hosted docs enumerate the tool reference; public code implements 195 registered methods including authenticate, which is excluded from the main endpoint. Availability can vary by region, account level, OAuth scopes, and client integration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results are JSON or text; public code defines JSON error envelopes with error_code and recoverable fields. Successful serialized responses have a 36,000-byte cap with truncation handling.",
+      "authorization_mechanism": "OAuth-protected endpoint; bearer authorization is required.",
+      "authorization_server": "https://mcp.longbridge.com",
+      "sources": [
+        "https://open.longbridge.com/docs/mcp",
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L1735-L1758",
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5d9c596af2a798a57c/src/tools/support/response_limit.rs#L20-L83"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server declares resources and exposes typed output schemas at lb://tools/{tool-name}/output-schema for tools with schema-backed responses.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Schema resources use application/schema+json.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/README.md#L73-L83",
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6564-L6588"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No prompt capability is declared in the public server capabilities.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6571-L6588"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Public code includes request/tool metrics and error logging. The hosted operator's metric storage, access, and retention settings are not documented in the inspected material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Server-side metrics include tool-call counts, latency, errors, and response sizes.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L93-L148",
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/metrics.rs#L1-L20"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability is declared in the public server capabilities.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6571-L6588"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is declared in the public server capabilities.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6571-L6588"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint returned HTTP 401 and a Bearer challenge pointing to protected-resource metadata. Metadata identifies issuer https://mcp.longbridge.com and scopes_supported [\"4\",\"6\",\"10\",\"11\"]. The authorization-server metadata advertises authorization_code and refresh_token grants, public-client token auth (none), PKCE methods S256 and plain, and a registration endpoint. Longbridge docs map these environment-specific scope IDs to watchlist, account.read, trade.read, and trade.write. Docs say authorizations can be revoked to stop renewal; already issued tokens remain valid until expiration. Token lifetime was not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Bearer tokens authorize the main endpoint. The /agent fallback exchanges a one-time code, returns a token, and directs the client to reconnect to the main endpoint.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://openapi.longbridge.com/oauth2/register; authorization_code and refresh_token grants; token_endpoint_auth_methods_supported [\"none\"]; code_challenge_methods_supported [\"S256\",\"plain\"]; scopes_supported [\"4\",\"6\",\"10\",\"11\"] (mapped in docs to watchlist, account.read, trade.read, trade.write). Token lifetime NOT FOUND; revocation endpoint https://mcp.longbridge.com/oauth2/revoke. Supplied protected-resource path-suffix request returned HTTP 401; supplied root metadata returned HTTP 200.",
+      "authorization_server": "https://mcp.longbridge.com (issuer); authorization endpoint https://openapi.longbridge.com/oauth2/authorize; token endpoint https://mcp.longbridge.com/oauth2/token.",
+      "sources": [
+        "https://mcp.longbridge.com/.well-known/oauth-protected-resource",
+        "https://mcp.longbridge.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.longbridge.com/.well-known/oauth-authorization-server",
+        "https://open.longbridge.com/docs/mcp",
+        "https://open.longbridge.com/docs/agent-auth",
+        "https://open.longbridge.com/docs/getting-started"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability is declared. Write confirmations are implemented through tool parameters and server-side dry-run logic instead.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6571-L6588",
+        "https://open.longbridge.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No task capability is declared in the public server capabilities.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6571-L6588"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Users configure the endpoint and OAuth in their client. Tool visibility is shaped by endpoint, authentication state, region, account eligibility, and granted scopes. No official user-facing toolset URL parameter or read-only switch for the input endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://open.longbridge.com/docs/mcp",
+        "https://open.longbridge.com/docs/agent-auth",
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L1735-L1758"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool errors are returned in JSON envelopes with error_code and recoverable classifications such as reauth, backoff, fix_params, or none.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The public code formats errors as JSON and distinguishes tool errors from successful results.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L231-L285",
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6564-L6568"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is declared in the public server capabilities.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6571-L6588"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress-notification capability or progress reporting mechanism was found in the public server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6571-L6588"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability was found in the public server implementation. Business tools that cancel brokerage or fund orders are separate actions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6571-L6588",
+        "https://open.longbridge.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server sends initialize instructions and supports a common _jq response-filter argument on tools. Region-specific initialize text can advise that a tool's result shape differs by account region.",
+      "pre_interaction_context_verbatim": "Longbridge OpenAPI MCP — market data, trading, analysis. Order writes (submit_order, cancel_order, replace_order, grid_*, fund_submit_order, fund_cancel_order) are two-step: call once without execute to get a confirmation_code, show the preview, then re-call with execute=code after the user confirms. On failure, tools return a JSON envelope with an `error_code` and a `recoverable` field: `reauth` (re-authenticate then retry), `backoff` (wait then retry), `fix_params` (fix arguments then retry), or `none` (do not retry; tell the user).",
+      "post_interaction_context_structure": "Optional _jq filtering operates on serialized tool responses; filtered output may have a different shape. Errors and permission/no-data explanations remain unfiltered.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6564-L6645",
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/jq.rs#L21-L31",
+        "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/README.md#L53-L83"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The public code annotates tools with read-only, destructive, idempotent, and open-world hints; writes are identified as such in actions.json. 2. Order and selected fund/grid writes have enforced dry-run then confirmation-code execution; other writes may not use that mechanism. Docs separately recommend human confirmation. 3. OAuth scope IDs 4/6/10/11 map to watchlist/account.read/trade.read/trade.write; account-level permissions also apply. DCR is advertised. Redirect approval policy, token lifetime, and admin switches were not found. Revocation prevents renewal; issued tokens remain valid until expiry. 4. Main endpoint is authenticated; /agent exposes authenticate only before auth, and /v2 is read-only. .cn is region-limited. No MCP toolset/query-free parameter was found. 5. Some returned account identifiers are masked (e.g. bank-card account numbers). General data masking rules were not found. 6. Public code caps successful responses at 36,000 bytes with truncation handling; _jq output is capped at 10,000 values and 8 MiB. Individual tools enforce input/time-range caps. No global hosted rate quota or MCP per-call cost was found. 7. Typed schemas and validation are used. Code can return fix_params errors; no general alias rewriting or operator argument override was found. 8. Code includes tool-call metrics, latency, response-size and error logging. Hosted metric transmission, retention, and opt-out were not found. 9. Complete official tool-name/description search found no vendor feedback, rating, survey, or upsell tool/instruction. 10. Initialize instructions steer agents on confirmations, error retries, and _jq usage. Longbridge distributes separate skills outside MCP. Instructions are guidance except where tool handlers enforce confirmation. 11. Public README describes stateless operation; no user-specific agent memory or behavior-dependent tool availability was found. 12. The architecture has separate /agent and /v2 endpoints with different tool sets, plus region-dependent results; it is non-flat. 13. quant_run accepts a script for Longbridge's quant API. No arbitrary shell, SQL, or local script execution was found.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“TWO-STEP CONFIRMATION IS MANDATORY: this tool is a DRY RUN unless you pass the confirmation_code its own dry run returned. Call it first without execute, show the returned preview to the user, and only call it again with execute=\"<confirmation_code>\" after the user has explicitly confirmed that exact order.” [Official tool description; representative of gated write descriptions]",
+      "“If you are not authenticated and the user has not provided a code, direct them to https://open.longbridge.com/connect to generate one.” [Official authenticate tool description; /agent only]",
+      "“Use .data[:5] to take the first five entries of a data array” [Official repository README, _jq guidance]",
+      "“For any order placement prompt, explicitly instruct the AI to ask for human confirmation before executing” [Official MCP docs]"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The public implementation defines distinct main, temporary authorization, and restricted read-only /v2 endpoint modes with different visible tool sets. Region and account scopes also affect availability.",
+    "sources": [
+      "https://open.longbridge.com/docs/mcp",
+      "https://open.longbridge.com/docs/agent-auth",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L1215-L1255",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L1735-L1758",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/support/response_limit.rs#L20-L83",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/jq.rs#L21-L31",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/metrics.rs#L1-L20",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/quant.rs#L54-L105",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/mod.rs#L6564-L6645"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "194",
+    "action_count_comment": "The official reference at https://open.longbridge.com/docs/mcp documents the native tool list, including the separate /agent authenticate tool; the main /mcp endpoint excludes authenticate. The pinned official implementation has 195 registered tools including authenticate, so 194 are listed for this endpoint in actions.json. The code names the handler fx_rate, while the docs list a filter entry for a fund-filter object; the code-native fx_rate is used. No catalogue-only actions were added. Glama listed 161 humanized entries; Composio page was not a tool list. Repository README says 164 and server.json says 192, both differing from the pinned implementation count.",
+    "actions": [
+      {
+        "tool_name": "account_balance",
+        "description": "Get account cash balance and asset summary. Returns a top-level array of {currency, total_cash, net_assets, buy_power, max_finance_amount, remaining_finance_amount, risk_level, margin_call, init_margin, maintenance_margin, cash_infos[]{currency, available_cash, withdraw_cash,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "currency: string (optional); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ah_premium",
+        "description": "Get A/H share premium history for a dual-listed HK symbol (e.g. 939.HK). Returns {klines[]{timestamp, aprice, apreclose, hprice, hpreclose, currency_rate, ahpremium_rate}}; ahpremium_rate is a ratio (-0.27",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); period: string (optional); count: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ah_premium_intraday",
+        "description": "Get today's minute-by-minute A/H share premium for a dual-listed HK symbol (e.g. 939.HK). Returns {klines[]{timestamp, aprice, hprice, ahpremium_rate, currency_rate}, apreclose, hpreclose}; ahpremium_rate is a ratio.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_add",
+        "description": "Add a price alert. condition: price_rise/price_fall (absolute price) or percent_rise/percent_fall (relative %). frequency: once/daily/every. Returns created alert object.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); condition: string (required); price: string (required); frequency: string (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_delete",
+        "description": "Delete a price alert by alert_id (numeric string from alert_list). Returns upstream API response on success; errors if alert_id is invalid.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "alert_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_disable",
+        "description": "Disable a price alert by alert_id. Returns {alert_id, enabled: false} on success. Use alert_list to find the numeric alert_id.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "alert_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_enable",
+        "description": "Enable a price alert by alert_id. Returns {alert_id, enabled: true} on success. Use alert_list to find the numeric alert_id.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "alert_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_list",
+        "description": "Get all configured price alerts. Returns {lists[]{symbol, name, market, price, chg, indicators[]{id, indicator_id, text (the condition, e.g. \"价格涨到 250\"), value_map{price}, frequency, enabled, state}}}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "anomaly",
+        "description": "Get market anomaly alerts (unusual price/volume changes). market: HK/US/CN/SG. symbol: optional, filter to a specific stock. count: results per page (default 50, max 100). Returns",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "market: string (required); symbol: string (optional); count: integer (optional); _jq: string (optional); auth_code: string (required)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bank_cards",
+        "description": "List linked withdrawal bank cards for the current account. Returns cards[]{id, bank_name, account_number (masked), currency, status}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "broker_holding",
+        "description": "Get top broker holding changes for a symbol (HK stocks only; sourced from HKEX CCASS participant disclosure). The period argument picks the window: last 1",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); period: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "broker_holding_daily",
+        "description": "Get daily holding history for a specific broker (by broker_id) in a symbol (HK stocks only; sourced from HKEX CCASS participant disclosure). Returns {list[]{date (e.g.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); broker_id: string (required); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "broker_holding_detail",
+        "description": "Get the broker holding list for a symbol, largest holding first (50 brokers by default; set count for more; HK stocks only; sourced from HKEX",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); count: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "brokers",
+        "description": "Get broker queue (HK stocks only). Returns {bid_brokers[], ask_brokers[]}, best price first, each level {position (1-based), broker_ids[]}. Arrays can be empty. Map broker IDs to",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "business_segments",
+        "description": "Get current-period business segment revenue breakdown for a symbol. Returns {total, currency, report_txt, fp_start, fp_end, rpt_date, business: [{id, name, value, percent, yoy}], regionals: [same shape;",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "business_segments_history",
+        "description": "Get historical business segment revenue trends (by period and category). Returns historical[].{date, total, currency, business[{name,percent,value}], regionals[{name,percent,value}]}",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); report: string (optional); cate: string (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "calc_indexes",
+        "description": "Calculate financial indexes for symbols. Pass symbols, and optionally indexes (e.g. [\"PeTtmRatio\",\"PbRatio\",\"LastDone\",\"TurnoverRate\"]). When indexes is omitted or empty, defaults to [\"LastDone\",\"ChangeValue\",\"ChangeRate\",\"Volume\",\"PeTtmRatio\",\"PbRatio\",\"DividendRatioTtm\",\"TurnoverRate\",\"TotalMarketValue\"]. Returns per-symbol index values.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbols: array (required); indexes: array (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cancel_order",
+        "description": "Cancel an open order by order_id. Returns plain text \"order cancelled\" on success; errors if the order is already filled or cancelled. TWO-STEP CONFIRMATION IS",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); is_attached: boolean (optional); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "candlesticks",
+        "description": "Get candlestick data (OHLCV). Only symbol is required; period defaults to day, count to 100 (max 1000), forward_adjust to false, trade_sessions to all. period: 1m/5m/15m/30m/60m/day/week/month/year.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); period: string (optional); count: integer (optional); forward_adjust: boolean (optional); trade_sessions: string (optional); _jq: string (optional)",
+        "parameter_count": 6,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "capital_distribution",
+        "description": "Get capital distribution for a symbol. Returns {timestamp, capital_in{large, medium, small}, capital_out{large, medium, small}, data_available} (decimal strings in settlement currency). data_available is false for symbols",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "capital_flow",
+        "description": "Get capital inflow time series for the symbol (same-day data). Returns a top-level array of {timestamp, inflow}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cash_flow",
+        "description": "Get cash flow records (deposits, withdrawals, dividends). Returns a top-level array of {transaction_flow_name, direction (In/Out), business_type, balance (the amount moved), currency, business_time, symbol, description}. start_at/end_at:",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "start_at: string (required); end_at: string (required); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "company",
+        "description": "Get company overview. Returns a flat object of strings: name, company_name, ticker, market, sector, category, region, founded, listing_date, employees, chairman, manager, website, address, profile, …",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "consensus",
+        "description": "Get financial consensus estimates for upcoming periods. Returns {currency, current_period, opt_periods, current_index, list: [{fiscal_year, fiscal_period, period_text, details: [{key (revenue/ebit/net_income/normalized_net_income/eps/normalized_eps), estimate, actual, is_released, comp, comp_value, comp_desc}]}],",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "constituent",
+        "description": "Get the constituents of an index or the asset allocation of an ETF. For an index (e.g. HSI.HK, .DJI.US) returns {total, rise_num, fall_num, flat_num, stocks[]{symbol,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "corp_action",
+        "description": "Get corporate events for a symbol: earnings dates, dividends, splits, buybacks, name changes, etc. Returns items[]{id, date (YYYYMMDD), date_type, act_type, act_desc, action (kind code, e.g.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_watchlist_group",
+        "description": "Create a new watchlist group. Returns the created group {id, name}. Optionally pass securities (e.g. [\"AAPL.US\", \"700.HK\"]) to pre-populate.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); securities: array (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dca_check",
+        "description": "Check whether given symbols support DCA recurring investment. Returns {infos[]{symbol, support_regular_saving (bool), regular_saving_plan_type}}, one entry per queried symbol.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbols: array (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dca_create",
+        "description": "Create a DCA recurring investment plan. frequency: Daily/Weekly/Monthly. day_of_week (Weekly): Mon/Tue/Wed/Thu/Fri. day_of_month (Monthly): 1-28.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); amount: string (required); frequency: string (required); day_of_week: string (optional); day_of_month: integer (optional); allow_margin: boolean (optional); _jq: string (optional)",
+        "parameter_count": 7,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dca_history",
+        "description": "Get execution history records for a DCA plan by plan_id. Returns executions[]{date, quantity, amount, price, status, order_id}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "plan_id: string (required); page: integer (optional); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dca_list",
+        "description": "List DCA recurring investment plans. Filter by status (Active/Suspended/Finished) or symbol. Returns plans[]{plan_id, symbol, stock_name, market, status, per_invest_amount, invest_frequency, invest_day_of_week, invest_day_of_month, next_trd_date, cum_amount, cum_profit, average_cost,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "status: string (optional); symbol: string (optional); page: integer (optional); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dca_pause",
+        "description": "Pause (suspend) a DCA plan by plan_id. The plan stops executing until resumed. Returns upstream API response. Use dca_resume to restart.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "plan_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dca_resume",
+        "description": "Resume a suspended DCA plan by plan_id. Resumes automated execution on the configured schedule. Returns upstream API response.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "plan_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dca_stats",
+        "description": "Get DCA investment statistics. Returns {total_amount, total_profit, active_count, suspended_count, finished_count, rest_days (days until the next scheduled investment), nearest_plans[] (plans with the nearest upcoming execution, same",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (optional); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dca_stop",
+        "description": "Permanently stop a DCA plan by plan_id. This cannot be undone. To temporarily pause, use dca_pause instead. Returns upstream API response.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "plan_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dca_update",
+        "description": "Update an existing DCA plan by plan_id. Can change amount, frequency (Daily/Weekly/Monthly), day_of_week (Mon-Fri), or day_of_month (1-28). Returns updated plan.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "plan_id: string (required); amount: string (optional); frequency: string (optional); day_of_week: string (optional); day_of_month: integer (optional); allow_margin: boolean (optional); _jq: string (optional)",
+        "parameter_count": 7,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_watchlist_group",
+        "description": "Delete a watchlist group by id (numeric). Set purge=true to also remove its securities from all other groups. Returns upstream API response.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: integer (required); purge: boolean (required); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deposits",
+        "description": "List deposit history for the current account. Returns items[]{id, amount, currency, status, created_at, updated_at}. states: comma-separated (Pending/Finished/Failed). currencies: comma-separated codes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: integer (optional); size: integer (optional); states: string (optional); currencies: string (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "depth",
+        "description": "Get order book depth for a symbol. Returns {bids[]{position, price, volume, order_num}, asks[]{position, price, volume, order_num}}. Up to 10 price levels.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dividend",
+        "description": "Get dividend history for the symbol. Returns {total, list: [{id, desc, counter_id, record_date, ex_date, payment_date}]}; the amount is only in the desc text. US accounts",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dividend_detail",
+        "description": "Get detailed dividend distribution schemes. Returns list[]{desc, record_date, ex_date, payment_date}, newest first. desc is the localized human-readable scheme (amount and currency in text, may contain",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "estimate_max_purchase_quantity",
+        "description": "Estimate maximum buy/sell quantity for a symbol. Returns {cash_max_qty, margin_max_qty} (decimal strings). Only symbol is required; side (case-insensitive Buy/Sell) defaults to Buy, order_type (case-insensitive) defaults",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); side: string (optional); order_type: string (optional); price: string (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "etf_docs",
+        "description": "Get regulatory/prospectus documents (etf-files) for a US ETF. Returns {files: [{file_name, file_path, update_date, code, format}]}. US accounts only; errors with DcRegionRestricted for AP accounts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "exchange_rate",
+        "description": "Get exchange rates for all supported currencies. Returns {exchanges[]{base_currency, other_currency, average_rate}}: average_rate is the value of 1 other_currency in base_currency (e.g. base USD, other HKD,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "executive",
+        "description": "Get company executive and board member information. Returns professional_list[] (one entry per symbol) {symbol, total, forward_url, professionals[]{id, name, title, biography, wiki_url}}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "filings",
+        "description": "Get regulatory filings (8-K, 10-Q, 10-K, etc.) for the symbol. Returns a top-level array of {id, title, description, file_name, file_urls[], publish_at}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "finance_calendar",
+        "description": "Finance calendar by category: report (earnings) / dividend / split / ipo / macrodata (CPI, NFP, rates) / closed (holidays). start and end (YYYY-MM-DD) are",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "category: string (required); start: string (optional); end: string (optional); market: string (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "financial_report",
+        "description": "Get financial reports (income statement, balance sheet, cash flow). kind: IS/BS/CF/ALL. report_type: af (annual), saf (semi-annual), q1/q2/q3, qf (quarterly full). Each line item carries its",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); kind: string (optional); report_type: string (optional); periods: integer (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "financial_report_key_metrics",
+        "description": "Get key financial metrics (fin-keyfactor) for a US symbol. report: af (annual, default), saf, qf, q1/q2/q3. Returns {currency, report, empty_fields, list: [{ff_year, ff_period, fp_end, report_txt,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); report: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "financial_report_latest",
+        "description": "Get the latest financial report summary for a security. Returns {report (period code, e.g. \"2026.H1\"), report_txt (period label), currency, indicators[]{field_name, indicator_name, indicator_value, yoy}}, one indicator",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "financial_report_snapshot",
+        "description": "Get financial report snapshot: report_desc (text summary), fo_revenue/fo_ebit/fo_eps (actual vs forecast with yoy/cmp), fr_* financial ratios (ROE, margins, assets, cash flow). report: qf/saf/af. Returns a",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); report: string (optional); fiscal_year: integer (optional); fiscal_period: string (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "financial_statement",
+        "description": "Get financial statements (income statement, balance sheet, or cash flow) for a security. kind: IS/BS/CF/ALL. report: af (annual, default), saf (semi-annual), qf (quarterly full), q1/q2/q3.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); kind: string (optional); report: string (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "forecast_eps",
+        "description": "Get EPS forecast history. Returns items[], one analyst consensus snapshot per forecast window: {forecast_start_date, forecast_end_date, forecast_eps_mean, forecast_eps_median, forecast_eps_lowest, forecast_eps_highest, institution_total, institution_up, institution_down}. Forecasts only, no",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_analysis",
+        "description": "Get a fund's top-level analysis (risk/return summary). counter_id from fund_hot / fund_list; optional period selector. Returns {visible, actual_period, updated_at, return_ability, risk_ability, cost_level, value_for_money}, each dimension",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); period: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_analysis_detail",
+        "description": "Get a fund's detailed analysis (deeper metrics behind fund_analysis). counter_id from fund_hot / fund_list; optional period selector. Returns the fund_analysis shape plus available_periods, and each",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); period: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_annual_returns",
+        "description": "Get a fund's per-year returns (paged). counter_id from fund_hot / fund_list; optional page / size.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_cancel_order",
+        "description": "Cancel a fund order by order_id. DRY RUN unless execute is the confirmation_code from its own dry run: call once without execute, show the returned",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: integer (required); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_detail",
+        "description": "Get a single fund's profile and key figures. counter_id (e.g. UT/FD/HK0000384492) comes from fund_hot / fund_list. Returns a flat object: name, code, isin, currency, manager,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_filters",
+        "description": "Get the filter options (filter object shape and quick-filter ids) accepted by fund_list. No parameters. Returns {asset_class, company, currency, industry_category_name, risk_level}, each a list of",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_holder",
+        "description": "Get funds and ETFs that hold a given symbol. Returns lists[]{symbol (the fund's symbol), name, currency, position_ratio (weight of the queried stock in the fund,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_holdings",
+        "description": "Get a fund's top-10 holdings. counter_id from fund_hot / fund_list; optional scene selector. Returns {report_date, weighting, holdings: [{name, holding_type, weighting, shares, market_value, share_change, share_change_percent, industry_name,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); scene: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_hot",
+        "description": "List hot-selling funds in the Longbridge fund channel. Each row carries the fund counter_id (e.g. UT/FD/HK0000384492) used by every other fund_* tool. No parameters. Returns",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_list",
+        "description": "Browse/screen funds. Optional filter (object from fund_filters), quick_ids, and time_interval. Each row carries the fund counter_id used by other fund_* tools. Returns a top-level array",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "quick_ids: array (optional); time_interval: array (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_nav",
+        "description": "Get a fund's latest net asset value (NAV). counter_id from fund_hot / fund_list. Returns a top-level array of {counter_id, counter_name, isin, currency, value, change, change_percent,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_nav_history",
+        "description": "Get a fund's historical NAV series, paged. counter_id from fund_hot / fund_list; optional page / size. Returns a top-level array of {value, change, change_percent, date_format,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_nav_range",
+        "description": "Get a fund's historical NAV over a relative window. counter_id from fund_hot / fund_list; set month_before or year_before. Returns a top-level array of {value, change,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); month_before: integer (optional); year_before: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_order",
+        "description": "Get one fund order's detail by order_id (from fund_orders). Requires auth. Returns {order: {id, counter_id, fund_name, action, state, state_desc, amount, units, net_worth, fee, currency, created_at,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: integer (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_orders",
+        "description": "List the user's fund orders / execution records. Requires auth. Optional counter_ids, actions, states, currency, start / end (unix seconds), page / size. Returns a",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_ids: array (optional); actions: string (optional); states: string (optional); currency: string (optional); start: integer (optional); end: integer (optional); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 9,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_performance",
+        "description": "Get a fund's daily performance figures. counter_id from fund_hot / fund_list. Returns a top-level array of {counter_id, fund_name, performance_return_<period>, performance_rank_<period>, performance_total_<period> (period: one_day … ten_years,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_performance_comparison",
+        "description": "Compare a fund's performance against its benchmark/peers. counter_id from fund_hot / fund_list; optional period selector. Returns {fund_performances: [ … ], contrast_performances: [{name, performances: [ …",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); period: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_position",
+        "description": "Get one held fund's position detail. Requires auth. counter_id from fund_position_overview / fund_hot / fund_list; optional start / end (YYYY-MM-DD). Returns {detail_values: {currency, holding_units, holding_value,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); start: string (optional); end: string (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_position_dividends",
+        "description": "Get a held fund's dividend records (paged). Requires auth. counter_id from fund_position_overview; optional currency, start / end (unix seconds), page / size. Returns {currency, total_div_cash,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); currency: string (optional); start: integer (optional); end: integer (optional); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 7,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_position_nav",
+        "description": "Get a held fund's NAV history over a relative window. Requires auth. counter_id from fund_position_overview; set month_before or year_before. Returns a top-level array of {counter_id,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); month_before: integer (optional); year_before: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_position_overview",
+        "description": "Get the signed-in user's fund positions overview (all held funds). Requires an authenticated token. No parameters. Returns {account_channel, recent_trading_day, pending_buy_orders, sold_pending_credit_orders, list: [{counter_id, name, currency,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_position_performance",
+        "description": "Get a held fund's performance figures. Requires auth. counter_id from fund_position_overview / fund_hot / fund_list. Returns a top-level array of {counter_id, fund_name, performance_return_<period> (one_day …",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_position_profits",
+        "description": "Get a held fund's cumulative-profit detail (paged). Requires auth. counter_id from fund_position_overview; optional start / end (YYYY-MM-DD), page / size. Returns {currency, sum_profit, last_update_time, history_value:",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); start: string (optional); end: string (optional); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 6,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_positions",
+        "description": "Get current fund positions. Returns list[].fund_info[]{counter_id, symbol_name, currency, holding_units, current_net_asset_value, cost_net_asset_value, net_asset_value_day}. counter_id is the fund id (e.g. UT/FD/HK0000384492); its last /-separated segment is the",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_quarterly_returns",
+        "description": "Get a fund's per-quarter returns (paged). counter_id from fund_hot / fund_list; optional page / size.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_stock_holdings",
+        "description": "Reverse-lookup the individual stocks a fund holds. counter_id from fund_hot / fund_list; optional limit. Returns a top-level array of {counter_id, code, name, currency, position_ratio, report_date}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_submit_order",
+        "description": "Submit a fund buy/sell order. DRY RUN unless execute is the confirmation_code from its own dry run: call once without execute, show the preview to",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); action: string (required); currency: string (required); amount: string (optional); units: string (optional); dividend_option: integer (optional); fee: string (optional); is_sell_all: boolean (optional); remark: string (optional); trade_method: integer (optional); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 12,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_transactions",
+        "description": "List the user's fund cash-flow records. Requires auth. Optional business_type, category, currencies, start / end (unix seconds), page / size. Returns a top-level array of",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "business_type: string (optional); category: string (optional); currencies: string (optional); start: integer (optional); end: integer (optional); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 8,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_trend",
+        "description": "Get a fund's trend chart series. counter_id from fund_hot / fund_list; optional period selector. Returns {actual_period, available_periods, fund_performances: [ … ], category_average_performances: [ … ],",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); period: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fund_validate_order",
+        "description": "Pre-trade validation for a fund buy/sell order. Places NO order — it only checks the request against the fund channel and returns the validation result",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "counter_id: string (required); action: string (required); currency: string (required); amount: string (optional); units: string (optional); dividend_option: integer (optional); fund_source: integer (optional); account_channel: string (optional); _jq: string (optional)",
+        "parameter_count": 9,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_cancel",
+        "description": "Cancel (terminate) a grid order by order_id. TWO-STEP CONFIRMATION IS MANDATORY: this tool is a DRY RUN unless you pass the confirmation_code its own dry",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_detail",
+        "description": "Full detail for one grid order: rule parameters, status, embedded child orders (grid_sub_orders) and lifecycle history (grid_order_history). Supports history_id cursor + limit paging. Returns {order_id,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); history_id: string (optional); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_list",
+        "description": "List grid trading orders. Filter by symbol or comma-joined status (e.g. \"Performing,Suspended\"); supports page/limit and sort_by/sort_order. Returns grid_order[] summaries + has_more.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (optional); status: string (optional); page: integer (optional); limit: integer (optional); sort_by: string (optional); sort_order: string (optional); _jq: string (optional)",
+        "parameter_count": 7,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_list_by_ids",
+        "description": "Fetch specific grid orders by their IDs. Returns grid_orders[] summaries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "order_ids: array (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_replace",
+        "description": "Replace an existing grid order's rule by order_id. Accepts the same grid rule fields as grid_submit. Overwrites the order's entire rule. TWO-STEP CONFIRMATION IS MANDATORY:",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); submitted_base_price: string (optional); upper_limit_price: string (optional); lower_limit_price: string (optional); trigger_price_type: integer (optional); trigger_spread_up: string (optional); trigger_spread_down: string (optional); trigger_percent_up: string (optional); trigger_percent_down: string (optional); multiple_trigger: boolean (optional); time_in_force: integer (optional); upper_limit_quantity: string (optional); lower_limit_quantity: string (optional); expire_time: integer (optional); upper_limit_event: integer (optional); lower_limit_event: integer (optional); trigger_sell_depth: integer (optional); trigger_buy_depth: integer (optional); trigger_quantity: string (optional); support_shortsell: boolean (optional); rth: integer (optional); grid_order_type_up: string (optional); grid_order_type_down: string (optional); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 25,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_restart",
+        "description": "Restart (resume) a suspended grid order by order_id. TWO-STEP CONFIRMATION IS MANDATORY: this tool is a DRY RUN unless you pass the confirmation_code its own",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_submit",
+        "description": "Submit a grid trading order. DRY RUN unless execute is the confirmation_code from its own dry run: call once without execute, show the preview, then",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); settlement_currency: string (required); submitted_base_price: string (optional); upper_limit_price: string (optional); lower_limit_price: string (optional); trigger_price_type: integer (optional); trigger_spread_up: string (optional); trigger_spread_down: string (optional); trigger_percent_up: string (optional); trigger_percent_down: string (optional); multiple_trigger: boolean (optional); time_in_force: integer (optional); upper_limit_quantity: string (optional); lower_limit_quantity: string (optional); expire_time: integer (optional); upper_limit_event: integer (optional); lower_limit_event: integer (optional); trigger_sell_depth: integer (optional); trigger_buy_depth: integer (optional); trigger_quantity: string (optional); support_shortsell: boolean (optional); rth: integer (optional); grid_order_type_up: string (optional); grid_order_type_down: string (optional); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 26,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_suspend",
+        "description": "Suspend (pause) a running grid order by order_id. Resume with grid_restart. TWO-STEP CONFIRMATION IS MANDATORY: this tool is a DRY RUN unless you pass the",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_symbol_info",
+        "description": "Pre-trade grid setup info for a security (takes a symbol, not an order_id): security name, last price, board lot sizes (buy/sell), price-step (bid_size) table, and",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grid_trigger_history",
+        "description": "Trigger history for one grid order: each triggered child order with price, quantity, executed price/qty, and trigger time. Supports page/limit. Returns {trigger_orders: [{id, symbol, status,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); page: integer (optional); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "history_candlesticks_by_date",
+        "description": "Get historical candlestick data by date range. Only symbol is required (with no start/end, the most recent 100 bars are returned — pass start/end for",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); period: string (optional); forward_adjust: boolean (optional); start: string (optional); end: string (optional); trade_sessions: string (optional); _jq: string (optional)",
+        "parameter_count": 7,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "history_candlesticks_by_offset",
+        "description": "Get historical candlestick data by offset from a reference time. Only symbol is required; period defaults to day (1m/5m/15m/30m/60m/day/week/month/year), count to 100, forward_adjust/forward to false,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); period: string (optional); forward_adjust: boolean (optional); forward: boolean (optional); time: string (optional); count: integer (optional); trade_sessions: string (optional); _jq: string (optional)",
+        "parameter_count": 8,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "history_executions",
+        "description": "Get every trade execution (fill) in a date range, filtered by execution time (trade_done_at) and auto-paginated to return the complete set (never truncated at the",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (optional); start_at: string (required); end_at: string (required); us_page: integer (optional); us_limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 6,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "history_market_temperature",
+        "description": "Get historical market temperature time series for a market and date range (at most 3 years per call). Returns {type, list[]{temperature, valuation, sentiment, timestamp}}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "market: string (required); start: string (required); end: string (required); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "history_orders",
+        "description": "Get historical orders between dates (excludes today). Returns orders[]{order_id, symbol, side, status, quantity, price, submitted_at}. start_at/end_at in RFC3339. US accounts only: us_page, us_limit paginate via",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (optional); start_at: string (required); end_at: string (required); us_page: integer (optional); us_limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 6,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "industry_peers",
+        "description": "Hierarchical sub-sector tree for an industry group. Accepts an industry symbol from industry_rank (e.g. IN00258.US). Returns chain{name, symbol, code, industry_id, sharelist_id, stock_num, chg, ytd_chg, next[{...}]}",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "industry_rank",
+        "description": "Industry ranking list by market (US/HK/CN/SG) and indicator (0=领涨/1=今日走势/2=人气/3=市值/4=营收/5=营收增长率/6=净利润/7=净利润增长率). sort_type: 0=单级 1=多层. Returns items[]{symbol(IN00258.US), name, chg, lists[]}. Pass a row's symbol directly to industry_peers.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "market: string (required); indicator: string (optional); limit: string (optional); sort_type: string (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "industry_valuation",
+        "description": "Get industry valuation comparison for peers in the same industry. Returns list[]{symbol, name, market, currency, price_close, market_value, pe, pb, ps, div_yld (dividend yield, %), roe,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "industry_valuation_dist",
+        "description": "Get industry PE/PB/PS valuation distribution to see where the stock sits in its sector. Returns {pe, pb, ps}, each {low, median, high, value (the stock's",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "institution_rating",
+        "description": "Get institution rating summary. Returns analyst{evaluate{buy, over, hold, under, sell, no_opinion, total}, target{highest_price, lowest_price, prev_close}, industry_name, industry_rank, industry_total} and instratings{recommend (consensus recommendation), target (consensus mean",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "institution_rating_detail",
+        "description": "Get historical rating distribution and consensus target price history. Returns evaluate.list[]{date, strong_buy, buy, hold, under, sell} (rating counts per snapshot), target{updated_at, prediction_accuracy, list[]{date, timestamp, price,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "institution_rating_history",
+        "description": "Get institution rating history. Returns target_history[]{timestamp, close, high_target_price, low_target_price} (analyst target range vs. close) and evaluate_history[]{start_date, end_date, buy, over, hold, under, sell, no_opinion} (rating counts;",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "institution_rating_industry_rank",
+        "description": "Get peers ranked by institution analyst ratings in the same industry. Returns {industry_name, industry_rank (the queried stock's rank), industry_total, industry_mean, industry_median, items[]{rank, symbol, name, buy,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "institutional_views",
+        "description": "Get monthly institutional rating distribution timeline. Returns {elist[]{date, buy, over (outperform), hold, under (underperform), sell, no_opinion, total}, tlist[]{date, close, high_price, low_price}}, oldest first, for trend",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "intraday",
+        "description": "Get intraday minute-by-minute price/volume data. trade_sessions: \"intraday\" (default, regular hours) or \"all\" (include pre-market and post-market). Returns a top-level array of {timestamp, price, avg_price, volume,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); trade_sessions: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "invest_relation",
+        "description": "Get the listed companies that a symbol's company holds stakes in (investment relationships, not investor-relations events). Returns invest_securities[]{company_name, symbol, currency, percent_of_shares (stake, %), shares_value (market",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ipo_calendar",
+        "description": "Show the IPO calendar. Returns {sub_num, win_num, preipo_num, ipo_num, timestamp, list[]{symbol, code, name, sub_date, sub_end_date, result_date, ipo_date, mart_date, state, state_stage, tags}} for upcoming and recent",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ipo_detail",
+        "description": "Show IPO detail for a symbol. Returns profile (business overview), timeline[]{event, date}, subscription eligibility, pricing_range, lot_size, allotment_rules.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); market: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ipo_listed",
+        "description": "List recently listed IPO stocks (HK+US). Returns {hk, us}, each {total, list[]{symbol, code, name, description, ipo_date, listed_day, issue_price, prev_close, last_done, ipo_change, amount, …}}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ipo_order_detail",
+        "description": "Show detailed information for a specific IPO order by order_id. Returns {order_id, symbol, market, quantity, allotted_quantity, total_amount, status, submitted_at}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ipo_orders",
+        "description": "List IPO orders (active+history). Returns orders[]{order_id, symbol, market, quantity, total_amount, status, submitted_at}. Filter by symbol, market, or status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (optional); market: string (optional); status: string (optional); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 6,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ipo_profit_loss",
+        "description": "Show IPO profit/loss summary and per-stock breakdown. Returns {total_cost, total_value, total_return, items[]{symbol, cost, current_value, return_rate}}. period: all/ytd/1y/3y.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "period: string (optional); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ipo_subscriptions",
+        "description": "List IPO stocks in subscription/pre-filing stage (HK+US). Returns {hk, us}, each {list[]{symbol, code, name, issue_price, entrance_fee, min_sub_num, sub_end_date, remaining_day, share_planned, state, …}}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "macrodata",
+        "description": "Get historical observations for one macro-economic indicator. Use indicator_code from macrodata_indicators; start_date/end_date accept YYYY-MM-DD. Supports offset/limit pagination. Returns {info: {indicator_code, name, country, describe, importance, periodicity},",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "indicator_code: string (required); start_date: string (optional); end_date: string (optional); offset: integer (optional); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 6,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "macrodata_indicators",
+        "description": "List macro-economic indicators. Filter by keyword and country (US/CN/HK/EU/JP/SG). Use the returned indicator_code with macrodata. Supports offset/limit pagination. Returns {list: [{indicator_code, name, country, importance, periodicity}],",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "keyword: string (optional); country: string (optional); offset: integer (optional); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "margin_ratio",
+        "description": "Get margin ratio for a symbol. Returns {im_factor (initial margin), mm_factor (maintenance margin), fm_factor (forced liquidation)} as decimal strings.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "market_status",
+        "description": "Get current market trading status for all markets. Returns market_time[]{market, trade_status (Trading/Closed/Mid-Day Break/Pre-Market/Post-Market/Overnight), timestamp}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "market_temperature",
+        "description": "Get current market sentiment temperature. Returns {temperature (0-100), description, valuation (0-100), sentiment (0-100), timestamp}. market: HK/US/CN/SG.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "market: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "news",
+        "description": "Get latest news articles for a symbol, newest first (20 by default; set count for more). Returns a top-level array (no wrapper object) of {id,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); count: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "news_detail",
+        "description": "Get one news article's full detail by id (from news/news_search). Returns {id, title, description, body (Markdown), url, author{member_id, name}, images[], comments_count, likes_count, shares_count, published_at, tickers[]}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "news_search",
+        "description": "Search news articles by keyword. Returns an array of {id, title, excerpt, source_name, time (RFC3339), url}, most relevant first.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "keyword: string (required); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "now",
+        "description": "Get current UTC time as an RFC3339 string (e.g. \"2025-01-15T08:30:00Z\"). Use to determine current date/time before making date-based queries. Returns a bare JSON string, not",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "operating",
+        "description": "Get company operating reviews by reporting period (HK stocks only; other markets return an empty list). Returns list[], newest first (8 reports by default; set",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); count: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "option_chain_expiry_date_list",
+        "description": "Get option chain expiry dates for a symbol (e.g. AAPL.US). Returns a top-level array of \"yyyy-mm-dd\" strings. Use with option_chain_info_by_date to get the contracts for",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "option_chain_info_by_date",
+        "description": "Get the option contract list for one expiry date. Returns one entry per contract (calls and puts are NOT paired): {symbol, expiry_date, strike_price, direction (Call/Put),",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); date: string (required); standard_only: boolean (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "option_quote",
+        "description": "Get option quotes (max 500 symbols). Symbols must be option contract symbols (e.g. \"AAPL230317P160000.US\"), NOT plain stock symbols — obtain valid ones from the symbol",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbols: array (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "option_volume",
+        "description": "Get real-time option call/put volume stats for a US stock. Returns {c, p}: today's total call (c) and put (p) contract volume, as strings.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "option_volume_daily",
+        "description": "Get daily historical option stats for a US stock. Returns {stats[]{symbol, timestamp, total_volume, total_call_volume, total_put_volume, put_call_volume_ratio, total_open_interest, total_call_open_interest, total_put_open_interest, put_call_open_interest_ratio}}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); count: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "order_detail",
+        "description": "Get detailed information about a specific order. Returns {order_id, symbol, status, side, order_type, quantity, price, executed_quantity, executed_price, submitted_at, time_in_force, msg, attached_orders[]}, where attached_orders[] holds the",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); is_attached: boolean (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "participants",
+        "description": "Get HK market participant broker information. Returns a top-level array of {broker_ids[], name_en, name_cn}. Use broker_ids to interpret broker queue data.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "profit_analysis",
+        "description": "Get portfolio profit and loss analysis summary. start/end: optional date range in yyyy-mm-dd format. Both must be provided together — passing only one returns empty",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "start: string (optional); end: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "profit_analysis_detail",
+        "description": "Get detailed profit and loss analysis for a specific symbol. start/end: optional date range in yyyy-mm-dd format. Both must be provided together — passing only",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); start: string (optional); end: string (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "profit_analysis_realized",
+        "description": "Get realized P&L for a US account, broken down by category (stock/option/crypto) and period. Returns {realized_pl_list: [{category, currency, metrics: [{period, amount, rate, rate_unit}]}]}; rate is",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "currency: string (optional); category: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "quant_run",
+        "description": "Run a quant indicator script against historical K-line data on the server. Executes the script server-side and returns the computed indicator/plot values as JSON. Periods:",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); period: string (optional); start: string (required); end: string (required); script: string (optional); input: string (optional); _jq: string (optional)",
+        "parameter_count": 7,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "quote",
+        "description": "Get latest price quotes. Returns a top-level array, one entry per symbol: symbol, last_done, prev_close, open, high, low, volume, turnover, trade_status, timestamp, plus pre_market /",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbols: array (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "rank_categories",
+        "description": "Get rank tab category configurations for the popularity leaderboard. Returns first_tags[]{key, name, second_tags[]{key, name, market}}. Pass a second_tags key (e.g. `hot_all-us`) to rank_list.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "rank_list",
+        "description": "Get ranked stock list by leaderboard tab key. key: from rank_categories second_tags[].key (e.g. \"hot_all-us\", \"hot_up-hk\", \"trade_heat-us\"). market: inferred from key suffix (-us/-hk) or pass explicitly.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "key: string (required); market: string (optional); size: integer (optional); need_article: boolean (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "replace_order",
+        "description": "Modify an open order's quantity, price, trigger_price, or trailing params. Returns \"order replaced\" on success. Only open/pending orders can be modified. TWO-STEP CONFIRMATION IS MANDATORY:",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "order_id: string (required); quantity: string (required); price: string (optional); trigger_price: string (optional); limit_offset: string (optional); trailing_amount: string (optional); trailing_percent: string (optional); attached_cancel_all: boolean (optional); attached_order_type: string (optional); attached_profit_taker_id: string (optional); attached_stop_loss_id: string (optional); attached_profit_taker_price: string (optional); attached_stop_loss_price: string (optional); attached_profit_taker_submit_price: string (optional); attached_stop_loss_submit_price: string (optional); attached_time_in_force: string (optional); attached_expire_time: string (optional); attached_activate_order_type: string (optional); attached_outside_rth: string (optional); attached_main_id: string (optional); attached_quantity: string (optional); attached_market_price: string (optional); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 24,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "screener_indicators",
+        "description": "Get all available screener indicator keys with their units. Technical indicators carry tech_values {tech_key: [{value, label}]} listing the accepted values (e.g. macd_day: period [day], category",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (optional); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "screener_recommend_strategies",
+        "description": "List platform-preset screener strategies. market: US|HK|CN|SG (default: US). Returns strategys[]{id, name, description, market, three_months_chg, risk}. Pass id to screener_search strategy_id to run, or screener_strategy to",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "market: string (optional); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "screener_search",
+        "description": "Screen stocks. market: US|HK|CN|SG (Mode B required; Mode A uses strategy's market). Mode A: strategy_id from screener_recommend_strategies — auto-runs saved strategy. Mode B: conditions=[{\"key\":\"KEY\",\"min\":\"10\",\"max\":\"50\",\"tech_values\":{}},...]. extra_returns=[\"key\",...]",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "market: string (optional); strategy_id: string (optional); conditions: array (optional); extra_returns: array (optional); sort_by_key: string (optional); sort_order: string (optional); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 9,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "screener_strategy",
+        "description": "Inspect a screener strategy's filter conditions before running it. Returns market, filter{filters[]{key, min, max, tech_values}}. Use screener_search strategy_id to execute the strategy.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "screener_user_strategies",
+        "description": "List the current user's saved screener strategies. market: US|HK|CN|SG (default: US). Returns strategys[]{id, name, description, market, three_months_chg, risk}. Pass id to screener_search strategy_id to run,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "market: string (optional); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "security_facts",
+        "description": "List a security's fact (catalyst) events — anomaly detections, factor readings, data sources and natural-language summaries — filtered by time range and count. Facts are",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); begin_time: string (optional); end_time: string (optional); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "security_list",
+        "description": "Get security list for a market. Supports market: US, HK, CN, SG. category: \"Overnight\" (default). page: 1-based page number (default 1). count: records per page",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "market: string (required); category: string (optional); page: integer (optional); count: integer (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "shareholder",
+        "description": "Get major shareholders of a symbol with their latest reported holding change. Returns shareholder_list[]{shareholder_name, percent_of_shares, shares_changed (negative = reduced), report_date, stocks[]{symbol, market, code, chg}}; stocks[]",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "shareholder_detail",
+        "description": "Get a single shareholder's holding and trade history. Requires object_id from shareholder_top. Returns name, owner_source (Company/Institution/Person/Insider), tradings[]{period, accum_buy, accum_sell, net_buy, trading_details[]{trading_date, trading_type, trading_shares, trading_price, security_type,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); object_id: integer (required); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "shareholder_top",
+        "description": "Get Top 20 major shareholders (institutions, individuals, insiders) across reporting periods, newest first (4 periods by default; set periods for more). Returns info[]{period, share_holders[]{object_id, name,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); periods: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sharelist_add",
+        "description": "Add securities to a community sharelist by id. Provide symbols (e.g. [\"AAPL.US\", \"700.HK\"]) to add. Returns upstream API response.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); symbols: array (required); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sharelist_create",
+        "description": "Create a new community sharelist with a name and optional description. Returns the created sharelist object including its id, name, and description.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); description: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sharelist_delete",
+        "description": "Delete a community sharelist by id (own lists only; subscribed lists cannot be deleted). Returns upstream API response on success.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sharelist_detail",
+        "description": "Get community sharelist detail by id. Returns {sharelist{id, name, description, stocks_count, subscribers_count, chg, this_year_chg, creator, stocks[]{symbol, name, market, code, intro, …}}, scopes{self, subscription, official, industry},",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sharelist_list",
+        "description": "List user's own and subscribed community sharelists. Returns {sharelists[] (the user's own lists), subscribed_sharelists[] (lists the user subscribes to)}, each item {id, name, description, stocks_count,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "count: integer (optional); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sharelist_popular",
+        "description": "Get popular/trending community sharelists. Returns {sharelists[]{id, name, description, stocks_count, subscribers_count, chg, this_year_chg, creator{id, name, …}, stocks, …}} sorted by popularity.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "count: integer (optional); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sharelist_remove",
+        "description": "Remove securities from a community sharelist by id. Provide symbols to remove. Returns upstream API response on success.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); symbols: array (required); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sharelist_sort",
+        "description": "Reorder securities in a community sharelist by id. Provide symbols in the desired new order. Returns upstream API response on success.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); symbols: array (required); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "short_margin",
+        "description": "Get short margin deposit details for the current account. Returns short positions with margin_amount, margin_rate, interest_rate, symbol, quantity per position.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "short_positions",
+        "description": "Get short interest history (open short positions) for HK or US stocks. Market inferred from symbol suffix. count: 1–100 (default 20). Unified data[]{timestamp(RFC3339), short_shares(open short",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); count: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "short_trades",
+        "description": "Get daily short-sale volume history for HK or US stocks. Market inferred from symbol suffix. last_timestamp: unix seconds (omit for latest). page_size: 1–100 (default 20).",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); last_timestamp: string (required); page_size: string (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signal_detail",
+        "description": "Get one signal by ID (from `signals`). Same fields as the list, plus `analysis` — the full strategy analysis: fit scores, valuation scenarios, evidence sources",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "signal_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signals",
+        "description": "Query strategy signals — a strategy's take on a security, triggered by a catalyst. Filter by symbol, strategy, catalyst and time range; page with limit/offset.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol_name: string (optional); strategy_id: string (optional); strategy_name: string (optional); catalyst_name: string (optional); catalyst_type: string (optional); start_time: string (optional); end_time: string (optional); limit: integer (optional); offset: integer (optional); _jq: string (optional)",
+        "parameter_count": 10,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "statement_export",
+        "description": "Get a pre-signed download URL for a statement data file (obtained from statement_list). Returns {url}; fetch that URL to get the statement JSON.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "file_key: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "statement_list",
+        "description": "List available account statements (daily/monthly). Returns {list[]{dt (statement date, yyyymmdd), file_key}}. Pass file_key to statement_export to download.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "statement_type: string (optional); start_date: string (optional); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "static_info",
+        "description": "Get static info for securities. Returns a top-level array, one entry per symbol: symbol, name_cn, name_en, name_hk, exchange (e.g. NASD), currency, lot_size, total_shares, circulating_shares, hk_shares,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbols: array (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "stock_positions",
+        "description": "Get current stock positions across all channels. Returns list[].stock_info[]{symbol, symbol_name, quantity, available_quantity, currency, cost_price, market}. US accounts only: an additional us_asset_overview field {cash_list, stock_list, option_list,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_multileg_order",
+        "description": "Submit a multi-leg option combination order; all legs fill or rest together as one strategy order. strategy: CoveredCall / CoveredPut / VerticalCallSpread / VerticalPutSpread /",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "strategy: string (required); side: string (required); order_type: string (required); submitted_quantity: string (required); legs: array (required); submitted_price: string (optional); remark: string (optional); client_request_id: string (optional); _jq: string (optional)",
+        "parameter_count": 9,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_order",
+        "description": "Submit a buy/sell order. DRY RUN unless execute is the confirmation_code from its own dry run: call once without execute, show the preview to the",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); order_type: string (required); side: string (required); submitted_quantity: string (required); time_in_force: string (required); submitted_price: string (optional); trigger_price: string (optional); limit_offset: string (optional); trailing_amount: string (optional); trailing_percent: string (optional); expire_date: string (optional); outside_rth: string (optional); remark: string (optional); client_request_id: string (optional); attached_order_type: string (optional); attached_profit_taker_price: string (optional); attached_stop_loss_price: string (optional); attached_profit_taker_submit_price: string (optional); attached_stop_loss_submit_price: string (optional); attached_time_in_force: string (optional); attached_expire_time: string (optional); attached_activate_order_type: string (optional); attached_outside_rth: string (optional); execute: string (optional); _jq: string (optional)",
+        "parameter_count": 25,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "today_executions",
+        "description": "Get today's trade executions (fills). Returns a top-level array of {order_id, trade_id, symbol, side, quantity, price, trade_done_at}. Pass symbol or order_id to filter.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (optional); order_id: string (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "today_orders",
+        "description": "Get orders placed today. Returns a top-level array of orders {order_id, symbol, stock_name, side, order_type, status, quantity, executed_quantity, price, currency, time_in_force, submitted_at, updated_at, msg, …,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (optional); order_id: string (optional); is_attached: boolean (optional); us_action: string (optional); us_page: integer (optional); us_limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 7,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "top_movers",
+        "description": "Get stocks whose price fluctuation exceeds the 20-trading-day standard deviation, with correlated news reasons. markets: comma-separated HK/US/CN/SG (omit=all). sort: 0=time 1=change-magnitude 2=popularity/heat (default). limit: results",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "markets: string (optional); sort: string (optional); date: string (optional); limit: integer (optional); next_params: object (optional); _jq: string (optional)",
+        "parameter_count": 6,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "topic",
+        "description": "Get discussion topics for a symbol. Returns a top-level array of {id, title, description, url, published_at, comments_count, likes_count, shares_count}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "topic_create",
+        "description": "Create a new discussion topic. topic_type=\"post\" (default) is plain text; \"article\" requires a non-empty title and accepts Markdown body.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "title: string (required); body: string (required); symbols: array (optional); topic_type: string (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "topic_create_reply",
+        "description": "Create a reply to a discussion topic. Pass reply_to_id to nest under another reply; omit for a top-level reply.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "topic_id: string (required); body: string (required); reply_to_id: string (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "topic_detail",
+        "description": "Get discussion topic detail by topic_id. Returns {id, title, description, body, author{member_id, name, avatar}, tickers[], hashtags, images[], likes_count, comments_count, shares_count, views_count, created_at, updated_at, detail_url, topic_type}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "topic_id: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "topic_replies",
+        "description": "Get replies to a discussion topic, paginated (page default 1, size default 20, range 1-50). Returns a top-level array of {id, topic_id, body, reply_to_id, author:",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "topic_id: string (required); page: integer (optional); size: integer (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "topic_search",
+        "description": "Search community topics/posts by keyword. Returns id, author, time, and excerpt.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "keyword: string (required); limit: integer (optional); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "trade_stats",
+        "description": "Get trade statistics (buy/sell/neutral distribution by price) for a price-volume profile. Returns {trades[]{price, buy_amount, sell_amount, neutral_amount}, statistics{avgprice, trades_count, total_amount, buy, sell, neutral, preclose, timestamp, trade_date[]}}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "trades",
+        "description": "Get recent trades (max 1000). Returns a top-level array of {price, volume, timestamp, trade_type, direction, trade_session} for the symbol.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); count: integer (required); _jq: string (optional)",
+        "parameter_count": 3,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "trading_days",
+        "description": "Get trading days for a market between dates. market: HK/US/CN/SG. Ranges up to 400 days are fetched in one call; split longer ones. Returns {trade_days:",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "market: string (required); start: string (required); end: string (required); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "trading_session",
+        "description": "Get trading session schedule for all markets. Returns a top-level array of {market, trade_sessions[]{begin_time, end_time, trade_session}}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_watchlist_group",
+        "description": "Update a watchlist group by id. Can rename (name param) or modify securities (securities + mode: add/remove/replace). Returns upstream API response.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: integer (required); name: string (optional); securities: array (optional); mode: string (optional); _jq: string (optional)",
+        "parameter_count": 5,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "valuation",
+        "description": "Get the PE valuation overview: historical low/median/high and the PE series. Returns {range (years), metrics: {pe: {low, median, high, desc, list: [{timestamp, value}]}}}. US accounts",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "valuation_comparison",
+        "description": "Stock valuation comparison. Mode A (single): pass only symbol — server returns stock + auto-selected industry peers. Mode B (multi): pass symbol as primary +",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); currency: string (required); comparison_symbols: string (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "valuation_history",
+        "description": "Get PE valuation history for long-term percentile analysis. Returns overview{indicator, metrics.pe{metric, desc, industry_median}, range, date, ccy_symbol}, history{range, metrics.pe{low, median, high, desc, list[]{timestamp, value}}}, peers.pe{industry_median, list[]{symbol,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "valuation_rank",
+        "description": "Get daily valuation rank (PE/PB/PS/dividend yield industry percentile) for a security over a date range. start/end in yyyymmdd format; defaults to the last 30 days.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); start: string (optional); end: string (optional); _jq: string (optional)",
+        "parameter_count": 4,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "warrant_issuers",
+        "description": "Get HK warrant issuer information. Returns a top-level array of {issuer_id, name_en, name_cn}. Pass issuer_id in warrant_list's issuer filter.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "warrant_list",
+        "description": "Get filtered warrant list for an underlying symbol. Returns a top-level array of {symbol, name, warrant_type, status, last_done, change_rate, volume, expiry_date (yyyymmdd), strike_price, implied_volatility, delta,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbol: string (required); sort_by: string (optional); sort_order: string (optional); warrant_type: array (optional); issuer: array (optional); expiry_date: array (optional); price_type: array (optional); status: array (optional); _jq: string (optional)",
+        "parameter_count": 9,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "warrant_quote",
+        "description": "Get warrant quotes. Returns a top-level array, one entry per symbol: last_done, prev_close, open, high, low, volume, turnover, trade_status, timestamp, implied_volatility, category, strike_price, expiry_date, conversion_ratio,",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "symbols: array (required); _jq: string (optional)",
+        "parameter_count": 2,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "watchlist",
+        "description": "Get all watchlist groups and their securities. Returns a top-level array of groups {id, name, securities[]{symbol, name, watched_price, watched_at, is_pinned}}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "withdrawals",
+        "description": "List withdrawal history for the current account. Returns items[]{id, amount, currency, status, created_at, bank_name, account_number (masked)}.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "_jq: string (optional)",
+        "parameter_count": 1,
+        "source": "https://open.longbridge.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fx_rate",
+        "description": "Get public ECB foreign-exchange reference rates; latest, historical date, or daily series.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "base: string (optional); currencies: array (optional); date: string (optional); start: string (optional); end: string (optional); _jq: string (optional)",
+        "parameter_count": 6,
+        "source": "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/src/tools/fx.rs#L186-L198",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "~18,757",
+    "token_method": "Approximate character-count method: serialize each main-endpoint tool name, description, parameter names/types/requiredness, and read-only annotation plus initialize instructions from the official docs and pinned public code; divide serialized characters by four. Reconstructed from those definitions, not a third-party estimate.",
+    "human_can_agent_cannot": "The hosted MCP reference states that the ChatGPT App omits order-placement and other trading tools due to platform policy; those tools are available via other supported MCP clients. The account API also exposes operations and configuration outside MCP; this study did not map every REST endpoint. Longbridge docs describe broader OpenAPI authentication and APIs beyond the MCP tool list.",
+    "sources": [
+      "https://open.longbridge.com/docs/mcp",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/README.md#L20-L40",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/server.json#L1-L28",
+      "https://glama.ai/mcp/servers/longbridge/longbridge-mcp",
+      "https://open.longbridge.com/docs/getting-started"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs advise least privilege and say to ask for human confirmation before order placement. These are client/user instructions; the code enforces a confirmation-code dry-run flow only for specified write tools. Docs also recommend periodic authorization review; revoking stops renewal, while already-issued tokens remain valid until expiry.",
+    "governance_promises": "The Longbridge privacy policy says AI interaction data can include queries, prompts, and conversation logs, and describes AI data uses including model improvement, compliance, fraud detection, analytics, and product development. The supplemental account agreement says customers may opt out of AI-data use for model training/improvement; logging and retention for listed regulatory and operational purposes continue. Applicability of these Longbridge AI-agent terms specifically to hosted MCP sessions is not established by the inspected pages.",
+    "promises_to_user": "The MCP docs say users do not need to manage API keys manually and that credentials refresh automatically under OAuth policy. The public repo describes the server as stateless and says it does not store sessions or a database. The account privacy policy says customer information is not sold.",
+    "comparison_with_server_logic": "OAuth authorization and scopes are implemented. Public code implements the dry-run confirmation flow, response-size bounds, error classifications, and metrics. The privacy-policy processing and retention statements are vendor-level governance terms, not controls verified in MCP code. The human-confirmation guidance is not enforced for every write tool.",
+    "sources": [
+      "https://open.longbridge.com/docs/mcp",
+      "https://open.longbridge.com/docs/agent-auth",
+      "https://github.com/longbridge/longbridge-mcp/blob/dd838502fd6ffc38cc689e5c9d596af2a798a57c/README.md#L38-L55",
+      "https://longbridge.com/us/en/support/articles/14864729940111",
+      "https://longbridge.com/us/en/support/articles/17853211477775"
+    ]
+  },
+  "contradictions": [
+    "The official MCP docs state “160+ tools” without an exact total; the pinned code registers 195 tools including agent-only authenticate, and exposes 194 on the main endpoint. Repository README says 164 and server.json says 192, so these published counts conflict with the pinned source count.",
+    "The official docs reference includes a `filter` tool entry describing a fund-filter object, while the pinned code has no `filter` handler and names the relevant exchange-rate tool `fx_rate`; actions.json uses the code-native name.",
+    "Glama lists 161 humanized tool entries, fewer than the official main-endpoint code list; its names are not used to replace or supplement the complete official list."
+  ],
+  "observations_for_research": [
+    "The same codebase has endpoint-specific tool discovery: /agent starts with a single authentication tool, while /v2 is a restricted read-only surface.",
+    "Write confirmation combines a server-enforced preview/code parameter flow for selected actions with broader documentation-only advice to request human confirmation.",
+    "Initialize instructions provide common response-filtering and retry guidance, while _jq gives the agent a universal response-shaping parameter across tools."
+  ],
+  "confidence": "High (open code)",
+  "notes": "Checked links.json, links_check.txt, the complete official docs copies and scripts/HTML, the pinned official longbridge-mcp repository, the official skills repository, Glama, Composio, Agent Discoverability, and supplied OAuth responses. PyPI longbridge-mcp is a community stdio server and is excluded as evidence. No MCP-specific privacy terms, token lifetime, hosted rate quota, release-status label, or exact deployed protocol negotiation was found. actions.json contains 194 unique main-endpoint names, matching the pinned tool-handler set after excluding authenticate; it was parsed and checked for missing/extra handlers.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 15.6
+  }
+}

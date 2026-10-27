@@ -1,0 +1,574 @@
+{
+  "server": "adobe-analytics",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://aa-mcp.adobe.io/mcp",
+    "documentation_url_csv": "https://developer.adobe.com/analytics-mcp/docs/",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://developer.adobe.com/analytics-mcp/docs/",
+      "https://developer.adobe.com/analytics-mcp/docs/aa/",
+      "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+      "https://developer.adobe.com/analytics-mcp/docs/aa/changelog",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/permissions",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/oauth",
+      "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+      "https://developer.adobe.com/analytics-mcp/docs/aa/skills",
+      "https://github.com/AdobeDocs/analytics-mcp",
+      "https://github.com/adobe/skills"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "No server implementation was found in the public repositories. AdobeDocs/analytics-mcp contains documentation; adobe/skills contains client-distributed Analytics skills, not the endpoint runtime. The endpoint is hosted by Adobe, so its implementation and handlers could not be inspected.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "N/A for the unavailable server implementation",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://cja-mcp.adobe.io/mcp — separate Adobe-hosted Customer Journey Analytics MCP server, documented with its own tool reference at https://developer.adobe.com/analytics-mcp/docs/cja/reference."
+    ],
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/aa/",
+      "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+      "https://developer.adobe.com/analytics-mcp/docs/servers/",
+      "https://github.com/AdobeDocs/analytics-mcp",
+      "https://github.com/adobe/skills",
+      "https://cja-mcp.adobe.io/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Adobe says the Analytics MCP servers are available at no extra cost for Adobe Analytics customers. MCP report calls count toward the customer's existing monthly report request allowance; Adobe says the organization can contact its Account Team to increase that allowance.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Adobe Analytics is sold in packages including Select, Prime, and Ultimate. The official pricing page directs customers to request pricing; it does not publish amounts.",
+    "pricing_model_details": "MCP access has no additional charge. Report calls consume the existing monthly report request allowance. Adobe's pricing page identifies server calls, events or data rows, features, users, integrations, customization, and contract terms as pricing considerations, but gives no public price.",
+    "other_access_restrictions": "A user needs MCP Read-only Access or MCP Full Access and the relevant Adobe Analytics permissions. Product administrators automatically receive full MCP access. Permissions combine across product profiles. The server documentation says access is available in all regions and URLs route to the nearest region based on the IMS organization.",
+    "restrictions_controlled_by": "Adobe controls product permissions and service access; organization administrators assign product profile permissions; the user's existing Adobe Analytics permissions also apply.",
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/permissions",
+      "https://business.adobe.com/products/adobe-analytics/pricing.html",
+      "https://helpx.adobe.com/legal/product-descriptions/adobe-analytics.html"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official Adobe Analytics reference lists 23 tools for discovery, reporting, component inspection, session defaults, and component creation or updates. The endpoint returned HTTP 401 without authorization; this is consistent with the supplied OAuth-protected endpoint evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reference describes report, component, and guide results, but does not specify a complete wire-level result or error schema. The FAQ states that runReport returns up to 100 rows per call and has no pagination parameter.",
+      "authorization_mechanism": "OAuth protected-resource metadata advertises bearer tokens in the Authorization header; scopes_supported: [\"openid\", \"AdobeID\", \"additional_info.projectedProductContext\"]; authorization_servers: [\"https://aa-mcp.adobe.io\"]. Authorization-server metadata advertises grant_types_supported: [\"authorization_code\"], response_types_supported: [\"code\"], code_challenge_methods_supported: [\"S256\"], token_endpoint_auth_methods_supported: [\"none\"], and registration_endpoint: https://aa-mcp.adobe.io/register. Adobe's docs say supported LLM clients use OAuth DCR and describe programmatic server-to-server client_credentials tokens. Token lifetime is determined by expires_in; a revocation endpoint is advertised.",
+      "authorization_server": "https://aa-mcp.adobe.io",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+        "https://developer.adobe.com/analytics-mcp/docs/guides/oauth",
+        "https://aa-mcp.adobe.io/.well-known/oauth-protected-resource",
+        "https://aa-mcp.adobe.io/.well-known/oauth-protected-resource/mcp",
+        "https://aa-mcp.adobe.io/.well-known/oauth-authorization-server",
+        "https://aa-mcp.adobe.io/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The published reference documents tools and their returned data, but does not establish whether the endpoint exposes MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-provided MCP prompts are documented. Client setup guides include example questions, but do not establish that the endpoint implements the prompts capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "https://developer.adobe.com/analytics-mcp/docs/guides/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed endpoint documentation does not describe MCP logging notifications or server-side audit logging for tool calls.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "https://developer.adobe.com/analytics-mcp/docs/support/faq"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The FAQ says the server does not make LLM calls on its own. It does not establish whether MCP sampling is implemented for other purposes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/support/faq"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No root capability or root handling is documented for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint response is HTTP 401 and advertises protected-resource metadata. Metadata advertises bearer header transport, the three scopes listed in Tools, Adobe IMS as authorization server, authorization-code grant, S256 PKCE, unauthenticated token-endpoint client authentication, DCR registration endpoint, and revocation endpoint. Adobe's client documentation also describes OAuth DCR and server-to-server client_credentials access. The access token's expires_in value controls its lifetime; no fixed duration is stated here.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthorized requests receive HTTP 401 with a WWW-Authenticate Bearer resource_metadata challenge, according to the supplied endpoint evidence.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; OAuth authorization_code with PKCE S256; Bearer token via header; scopes_supported: [\"openid\", \"AdobeID\", \"additional_info.projectedProductContext\"]. Adobe docs additionally describe server-to-server client_credentials. Token endpoint auth methods: [\"none\"]. Registration: https://aa-mcp.adobe.io/register. Revocation: https://ims-na1.adobelogin.com/ims/revoke. Token lifetime is the token response expires_in value; fixed lifetime not stated.",
+      "authorization_server": "https://aa-mcp.adobe.io; token and authorization endpoints are hosted by Adobe IMS at https://ims-na1.adobelogin.com/ims/token/v3 and https://ims-na1.adobelogin.com/ims/authorize/v2.",
+      "sources": [
+        "https://aa-mcp.adobe.io/mcp",
+        "https://aa-mcp.adobe.io/.well-known/oauth-protected-resource",
+        "https://aa-mcp.adobe.io/.well-known/oauth-protected-resource/mcp",
+        "https://aa-mcp.adobe.io/.well-known/oauth-authorization-server",
+        "https://developer.adobe.com/analytics-mcp/docs/guides/oauth",
+        "https://developer.adobe.com/analytics-mcp/docs/support/faq"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability is documented. Adobe tool descriptions recommend prerequisite guide calls for some writes; the docs do not identify that behavior as server-enforced confirmation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability is documented for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The setSessionDefaults and clearDefaultSessionReportSuiteId tools configure session report suite and company defaults. Documentation says the defaults persist for up to eight hours.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reference describes returned current-default report suite information; it does not specify a full wire-level result schema.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The changelog reports clearer, more actionable tool error responses. The troubleshooting guide covers authorization and permission errors. The reviewed material does not provide a complete error schema.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Error response format is not fully published. The endpoint returns HTTP 401 for the unauthenticated probe; Adobe docs describe 401 handling for expired OAuth tokens.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/changelog",
+        "https://developer.adobe.com/analytics-mcp/docs/support/troubleshooting",
+        "https://developer.adobe.com/analytics-mcp/docs/guides/oauth",
+        "https://aa-mcp.adobe.io/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription capability is documented for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress notifications or progress-tracking behavior is documented for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No request cancellation behavior is documented for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/reference"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Adobe distributes separate Adobe Analytics skills through its public skills repository for supported clients. The documentation describes them as reusable agent instructions that operate on top of the MCP server; they are not tools implemented by the endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Skills provide client-side instructions and call MCP tools; their runtime output structure is not specified as an endpoint capability.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/aa/skills",
+        "https://github.com/adobe/skills"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list contains read tools, session-default changes, and four component creation/update tools. Tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are not published. 2. No server-enforced confirmation or elicitation is documented; guide calls before certain writes are recommendations in descriptions. 3. OAuth scopes are openid, AdobeID, additional_info.projectedProductContext; product-profile MCP permissions and existing Analytics permissions also gate access. Product administrators receive full access. Docs describe client allowlists, redirect URI approval, and token lifetime details only generally or not at all; expiry comes from expires_in and revocation is advertised in metadata. 4. Read-only/full-access permission modes exist; no URL tool filter, read-only endpoint, or sandbox mode is documented. Adobe says endpoints route to the nearest region based on IMS org. 5. Access is bounded by the user's product permissions; no field masking or PII exclusion is described. 6. MCP report calls use the existing monthly report request allowance. FAQ says runReport returns up to 100 rows per call and has no pagination parameter; no cost per call or rate limit is published. Tool reference parameters document listing limits, including max 1000 for several list tools. 7. Public parameter-validation and correction behavior is undocumented. 8. MCP-specific audit logging and telemetry behavior is undocumented. 9. No feedback/rating/report tool appears in the 23-tool reference. Changelog says in-session feedback was opened to all IMS orgs, but does not identify it as a tool. No tool-result upsell is documented. 10. Adobe publishes client-side skills separately; tool descriptions recommend guide calls before writes, but enforcement is not described. 11. Session defaults persist up to eight hours; dimension/metric ordering uses personal and organizational usage history. 12. AA and CJA are separate hosted endpoints with separate tool references; this endpoint's reference is one flat list. 13. No raw API, arbitrary SQL, script execution, or generic request tool is listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Call this tool before creating segments, calculated metrics, or workspace projects to learn the required structures.",
+      "When a user asks for \"metrics\", return only standard metrics.",
+      "When a user specifically mentions \"calculated metrics\", return only calculated metrics.",
+      "When a user asks for \"any\" or \"all\" metrics, return everything including calculated metrics.",
+      "Before calling this tool, call describeAa(SEGMENT_DEFINITION_GUIDE) to learn the required segment body structure.",
+      "Before calling this tool, call describeAa(CALCULATED_METRIC_DEFINITION_GUIDE) to learn the required metric body structure."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The input endpoint is documented with one flat list of 23 tools. Adobe documents Customer Journey Analytics as a separate product server at another endpoint.",
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+      "https://developer.adobe.com/analytics-mcp/docs/aa/changelog",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/permissions",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/oauth",
+      "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+      "https://developer.adobe.com/analytics-mcp/docs/aa/skills",
+      "https://developer.adobe.com/analytics-mcp/docs/servers/",
+      "https://aa-mcp.adobe.io/.well-known/oauth-protected-resource",
+      "https://aa-mcp.adobe.io/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "23",
+    "action_count_comment": "The official Adobe tool reference exists at https://developer.adobe.com/analytics-mcp/docs/aa/reference and names 23 tools; its public page does not state a numeric total. All 23 names from the complete reference are in actions.json. No catalogue-only tools were added. The prepared third-party catalogue URLs returned errors or did not provide a verified tool list; none had a usable count.",
+    "actions": [
+      {
+        "tool_name": "describeAa",
+        "description": "Returns focused Adobe Analytics usage, data, and project guides.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "guideType: string enum (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "setSessionDefaults",
+        "description": "Sets session defaults for report suite and company IDs.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "reportSuiteId: string (optional); globalCompanyId: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getDefaultSessionReportSuiteId",
+        "description": "Returns the current default report suite ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "none",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "clearDefaultSessionReportSuiteId",
+        "description": "Clears the default report suite ID.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "none",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findCompanies",
+        "description": "Lists login companies accessible to the current user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "none",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findReportSuites",
+        "description": "Lists report suites accessible within a company.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (required); page: integer (required); limit: integer (required); expansions: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findDimensions",
+        "description": "Lists dimensions available for a report suite.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); page: integer (required); limit: integer (required); includeHidden: boolean (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findMetrics",
+        "description": "Lists standard and calculated metrics for a report suite.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); page: integer (optional); limit: integer (optional); expansions: string (optional); includeHidden: boolean (optional); includeType: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findSegments",
+        "description": "Lists segments accessible to the user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); page: integer (required); limit: integer (required); expansions: string (optional); includeType: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findDateRanges",
+        "description": "Lists saved date range components.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); page: integer (required); limit: integer (required); expansions: string (optional); includeType: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findProjects",
+        "description": "Lists workspace projects accessible to the user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); page: integer (required); limit: integer (required); expansions: string (optional); includeType: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "runReport",
+        "description": "Runs a ranked report using a dimension, metrics, dates, and filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); dimensionId: string (required); metricIds: string (required); startDate: string (required); endDate: string (required); segmentIds: string (optional); limit: integer (optional); allocationModel: string enum (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchDimensionItems",
+        "description": "Returns top dimension items for a dimension and report period.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); dimensionId: string (required); startDate: string (required); endDate: string (required); page: integer (required); limit: integer (required); searchAnd: string (optional); searchOr: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describeSegment",
+        "description": "Returns metadata and definition for a segment.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); id: string (required); expansions: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describeCalculatedMetric",
+        "description": "Returns a calculated metric formula and base metrics.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); id: string (required); expansions: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describeProject",
+        "description": "Returns workspace project details and definition.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); id: string (required); expansions: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listComponentUsage",
+        "description": "Lists components of a specified type by report usage frequency.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); componentType: string enum (required)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listFrequentlyUsedWith",
+        "description": "Lists components frequently used alongside a specified component.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); componentId: string (required); componentType: string enum (required)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listSimilarTo",
+        "description": "Lists components similar to a specified component.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); componentId: string (required); componentType: string enum (required)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsertSegment",
+        "description": "Creates a segment or updates the specified segment.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); segmentId: string (optional); segmentBody: object (required); expansions: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsertCalculatedMetric",
+        "description": "Creates a calculated metric or updates the specified metric.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); calculatedMetricId: string (optional); metricBody: object (required); expansions: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createDateRange",
+        "description": "Creates a reusable date range component.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); dateRangeBody: object (required); expansions: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsertProject",
+        "description": "Creates a workspace project or updates the specified project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "globalCompanyId: string (optional); reportSuiteId: string (optional); projectId: string (optional); projectBody: object (required); expansions: string (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public implementation or initialize/tools-list payload was available to serialize. The official reference provides documentation, not a complete verbatim initialize context and wire-level tool definitions.",
+    "human_can_agent_cannot": "Adobe states that admin changes such as editing data views or managing report suites are not currently available through MCP. Scheduling reports is not supported through MCP; Adobe recommends its Analytics UI for scheduled delivery. The MCP runReport tool is documented as returning at most 100 rows per call without a pagination parameter, although the FAQ describes reporting API feature parity as mostly comparable. Sources: https://developer.adobe.com/analytics-mcp/docs/support/faq ; https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/aa/reference",
+      "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+      "https://developer.adobe.com/analytics-mcp/docs/aa/changelog"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool descriptions recommend calling describeAa with the relevant guide before creating segments, calculated metrics, or projects. The published material does not establish server-side enforcement of those recommendations. Adobe also advises: \"Validate all MCP-initiated actions and responses before acting on them.\"",
+    "governance_promises": "Adobe says users' existing product permissions are enforced and administrators control MCP access. It warns that connecting an external LLM can expose the same data the user is authorized to see, and recommends reviewing the provider's data handling policies. Adobe says the MCP servers do not make LLM calls on their own. The FAQ directs users to the LLM provider's terms for model training practices.",
+    "promises_to_user": "Adobe describes MCP access as having no additional cost for existing Analytics customers, with report calls charged against the existing monthly request allowance. Documentation says endpoint URLs route requests to the nearest region based on the IMS organization.",
+    "comparison_with_server_logic": "Permission controls and request allowances are documented as product/server access rules, but their implementation could not be inspected in public server code. Tool-reference guidance about prerequisite calls is documented behavior guidance; enforcement is not stated. No MCP-specific privacy, retention, telemetry, or audit implementation details were found in the reviewed endpoint documentation.",
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/permissions",
+      "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+      "https://developer.adobe.com/analytics-mcp/docs/aa/reference"
+    ]
+  },
+  "contradictions": [
+    "The supplied OAuth authorization-server metadata lists grant_types_supported as [\"authorization_code\"], while Adobe's OAuth guide documents server-to-server access tokens generated with the client_credentials grant. The metadata may describe the interactive DCR flow only; the published sources do not resolve this difference.",
+    "The supplied authorization metadata lists scopes_supported as openid, AdobeID, and additional_info.projectedProductContext. Adobe's permission guide separately describes MCP Read-only Access/MCP Full Access and inherited Analytics permissions; it does not map those product permission items to OAuth scopes."
+  ],
+  "observations_for_research": [
+    "The reference includes guide-returning tools and behavioral directives within tool descriptions, while Adobe also distributes client-side skills as a separate artifact.",
+    "Session defaults provide cross-call state for report suite and company IDs and are documented as lasting up to eight hours.",
+    "Adobe documents user and organization usage history as a factor in the ordering of dimension and metric discovery results.",
+    "Read-only and full-access modes are expressed through product-profile permission items; product administrator status bypasses the need for explicit MCP permission items."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared links.json, pages, links_check.txt, and local copies of AdobeDocs/analytics-mcp and adobe/skills. The docs repository is documentation, and the skills repository contains client-side skills; neither exposes the hosted endpoint implementation. The endpoint probe and OAuth values were supplied as pre-fetched evidence and were not re-fetched. Pricing, policy, and third-party catalogue URLs were checked through prepared evidence and official web sources; no verified third-party tool list or MCP-specific pricing was found. The Adobe privacy policy is general and was not used to infer MCP-specific handling.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 18.3
+  }
+}

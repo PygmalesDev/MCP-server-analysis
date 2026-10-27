@@ -1,0 +1,798 @@
+{
+  "server": "canva",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.canva.com/mcp",
+    "documentation_url_csv": "https://www.canva.dev/docs/mcp/",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://www.canva.dev/docs/apps/mcp/",
+      "https://www.canva.dev/docs/apps/mcp/access/",
+      "https://www.canva.dev/docs/apps/mcp/tools/",
+      "https://www.canva.dev/docs/apps/mcp/verify-app/",
+      "https://www.canva.dev/docs/apps/mcp/best-practices/",
+      "https://www.canva.dev/docs/apps/mcp/workflows/design-edit/",
+      "https://www.canva.dev/docs/apps/mcp/usage-policy/",
+      "https://www.canva.dev/docs/apps/mcp/prohibited-use/",
+      "https://www.canva.com/help/mcp-agent-setup/",
+      "https://www.canva.com/help/mcp-canva-usage/",
+      "https://claude.com/connectors/canva",
+      "https://agentatlas.dev/mcp/canva",
+      "https://www.canva.com/pricing/?external_link=true",
+      "https://www.canva.com/policies/privacy-policy/"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "No public source for the hosted design server was found. Canva documents a separate local stdio Dev MCP server for developer documentation; it is not the input endpoint.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "GA; Canva announced general availability on 2026-10-07.",
+    "other_official_servers": [
+      "https://api.canva.com/connect/v1/mcp — Canva developer MCP integration; its verification documentation lists this URL and the current official tool reference covers 45 tools.",
+      "Local stdio Canva Dev MCP server, run with @canva/cli mcp; provides developer documentation assistance, not design operations."
+    ],
+    "sources": [
+      "https://mcp.canva.com/mcp",
+      "https://www.canva.dev/docs/apps/mcp/",
+      "https://www.canva.dev/docs/apps/mcp/verify-app/",
+      "https://www.canva.dev/docs/apps/dev-mcp-server/",
+      "https://community.canva.dev/t/the-wait-list-is-over-canva-mcp-server-is-now-generally-available/8942",
+      "https://agentatlas.dev/mcp/canva"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "No separate MCP fee was found. The Canva AI Connector is available on Canva plans; AI actions may consume Canva AI credits. Some features require paid plans.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Canva Free is available; paid plan prices were not retrievable from the official pricing page in the evidence set.",
+    "pricing_model_details": "Official documentation states some tools are available on all plans while resizing, autofill, brand kits, and brand templates have plan restrictions. Tool calls may consume Canva AI credits; no MCP-specific per-call charge was found.",
+    "other_access_restrictions": "Per-user Canva account authentication and product permissions apply. Team administrators can disable the AI Connector. Canva documents per-tool request limits and a default cap of 300 requests per minute per user for tools without a specific limit. The input endpoint's client-ID metadata route is described by AgentAtlas as allowlisted; this detail is third-party evidence.",
+    "restrictions_controlled_by": "Canva controls plan availability and server-side limits; organization administrators control team enablement; the user controls authorization and their product permissions.",
+    "sources": [
+      "https://www.canva.com/help/mcp-agent-setup/",
+      "https://www.canva.com/help/mcp-canva-usage/",
+      "https://www.canva.dev/docs/apps/mcp/access/",
+      "https://www.canva.dev/docs/apps/mcp/tools/",
+      "https://agentatlas.dev/mcp/canva",
+      "https://www.canva.com/pricing/?external_link=true"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint is an OAuth-protected remote MCP server. The input endpoint's 33-name inventory is documented by AgentAtlas as Canva documentation names; the official developer tool reference currently lists 45 tools for its documented integration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Individual tool result schemas were not available for the input endpoint. Official tool pages describe tool-specific outputs and asynchronous job flows.",
+      "sources": [
+        "https://mcp.canva.com/mcp",
+        "https://www.canva.dev/docs/apps/mcp/tools/",
+        "https://agentatlas.dev/mcp/canva"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No resources/list evidence or resource documentation for the input endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.canva.com/mcp",
+        "https://www.canva.dev/docs/apps/mcp/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No prompts/list evidence or prompt catalogue for the input endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.canva.com/mcp",
+        "https://www.canva.dev/docs/apps/mcp/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Canva policy describes platform health and error monitoring, but endpoint-specific MCP logging behavior, fields, and retention were not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/usage-policy/",
+        "https://www.canva.dev/docs/apps/mcp/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability for the hosted endpoint was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability for the hosted endpoint was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate identifying a protected resource metadata URL. The supplied OAuth metadata declares authorization-code, refresh-token, and JWT-bearer grants; code response type; query response mode; PKCE methods plain and S256; client_secret_basic, client_secret_post, and none token authentication; a registration endpoint; and client ID metadata document support. Supported scopes: profile:read, design:meta:read, design:content:write, design:content:read, folder:read, folder:write, brandtemplate:content:read, brandtemplate:meta:read, brandtemplate:content:write, comment:write, comment:read, asset:read, asset:write, brandkit:read, help:answers:read, help:answers:write. Token lifetime was not supplied. Revocation endpoint is https://mcp.canva.com/token.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.canva.com/.well-known/oauth-protected-resource/mcp\", error=\"invalid_token\", error_description=\"Missing or invalid access token\"",
+      "post_interaction_context_structure": "The unauthenticated request returned JSON: {\"error\":\"invalid_token\",\"error_description\":\"Missing or invalid access token\"}.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration endpoint declared; client ID metadata document support declared. Authorization server metadata: grant_types_supported=[authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer], response_types_supported=[code], response_modes_supported=[query], code_challenge_methods_supported=[plain,S256], token_endpoint_auth_methods_supported=[client_secret_basic,client_secret_post,none], registration_endpoint=https://mcp.canva.com/register, revocation_endpoint=https://mcp.canva.com/token. The protected-resource metadata at both the origin and endpoint-path URLs declares bearer_methods_supported=[header] and the 16 scopes listed in description_what_how. Token lifetime not provided.",
+      "authorization_server": "https://mcp.canva.com",
+      "sources": [
+        "https://mcp.canva.com/mcp",
+        "https://mcp.canva.com/.well-known/oauth-protected-resource",
+        "https://mcp.canva.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.canva.com/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation exchange or server-enforced confirmation flow was documented for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Several design operations expose job-status tools, but MCP Tasks protocol support was not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The official tool documentation describes asynchronous job status results for applicable operations.",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/tools/",
+        "https://www.canva.dev/docs/apps/mcp/tools/generate-design/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Canva documents Developer Portal app credentials and redirect URL configuration, and team administrators can enable or disable the AI Connector. No endpoint URL query parameter or header-based tool filtering was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/access/",
+        "https://www.canva.com/help/mcp-agent-setup/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The unauthenticated endpoint reports an invalid-token error in JSON. Canva's verification guide documents checking error.code on job objects where present; a general hosted-endpoint error schema was not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Observed unauthenticated error JSON uses error and error_description fields.",
+      "sources": [
+        "https://mcp.canva.com/mcp",
+        "https://www.canva.dev/docs/apps/mcp/verify-app/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tool inventory contains job-status operations for asynchronous work. This is tool-level progress retrieval; MCP progress notifications were not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Job tools return operation status according to their individual documentation.",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/tools/",
+        "https://www.canva.dev/docs/apps/mcp/verify-app/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documented tool list includes cancel-editing-transaction. Support for MCP request cancellation was not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The editing transaction cancellation tool is separate from MCP protocol cancellation.",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/tools/cancel-editing-transaction/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No initialize instructions text for the input endpoint was available. The separate Canva Dev MCP server is a local documentation assistant and is not this server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.canva.com/mcp",
+        "https://www.canva.dev/docs/apps/dev-mcp-server/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The listed actions include reads and writes. The official tool reference pages do not show MCP annotations such as readOnlyHint, destructiveHint, idempotentHint, or openWorldHint. 2. No server-enforced confirmation parameter or preview approval requirement was found. Editing is described as a transaction flow; the verification guide says edits stay in draft until commit. 3. OAuth scopes are listed in Authorization. Canva says each user authenticates individually and operations match that user's access; editing requires edit permission. Team administrators can disable the AI Connector. AgentAtlas reports input-endpoint CIMD redirect URI allowlisting; this is third-party evidence. 4. No read-only mode, toolset filter, query-free mode, or sandbox endpoint was found for the input endpoint. The separate Developer MCP URL is documented. 5. Canva policy requires respecting privacy preferences, data minimization, and user permission boundaries; MCP-specific field masking was not documented. Brand Kit data has use restrictions. 6. Official tool docs give per-tool request rates and a default cap of 300 requests/minute/user for tools with no specific limit; plan availability varies. No result truncation limit or per-call MCP fee was found. 7. Public server code is unavailable; hosted parameter correction or unknown-argument behavior is undocumented. 8. Canva policy states platform health and error monitoring and says partners must monitor integration health. MCP event fields, retention, and telemetry opt-out were not found. 9. No feedback/rating action appears in the 33-name inventory. Canva's developer community asks for feedback on new tools; no in-tool feedback or upsell response was found. 10. No server-delivered skills or initialize instructions were found. Official best practices and workflow pages provide client-facing guidance. 11. No evidence that past agent behavior changes later outputs or available tools. 12. AgentAtlas describes a distinct developer integration URL and the input endpoint; no nested server delegation is documented. The separate local Dev MCP server is not part of this endpoint. 13. No raw API, arbitrary SQL, script execution, or equivalent escape-hatch tool appears in the 33-name inventory.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "List tools from your client rather than assuming a fixed set.",
+      "Edits stay in draft until commit."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Canva documents multiple server surfaces: the hosted design MCP endpoint, a different hosted developer integration URL, and a separate local stdio Dev MCP server. The input endpoint's tool availability also varies by AI assistant according to Canva Help.",
+    "sources": [
+      "https://www.canva.dev/docs/apps/mcp/tools/",
+      "https://www.canva.dev/docs/apps/mcp/access/",
+      "https://www.canva.dev/docs/apps/mcp/verify-app/",
+      "https://www.canva.dev/docs/apps/mcp/best-practices/",
+      "https://www.canva.dev/docs/apps/mcp/workflows/design-edit/",
+      "https://www.canva.dev/docs/apps/mcp/usage-policy/",
+      "https://www.canva.com/help/mcp-agent-setup/",
+      "https://www.canva.com/help/mcp-canva-usage/",
+      "https://agentatlas.dev/mcp/canva"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "46",
+    "action_count_comment": "Official tool list: https://www.canva.dev/docs/apps/mcp/tools/ names 46 tools (with rate limits and plan availability). The reference is written for https://api.canva.com/connect/v1/mcp (Developer Portal apps); https://mcp.canva.com/mcp is the entry of the same Canva MCP server for public/CIMD clients: its OAuth metadata advertises client_id_metadata_document_supported and the same scopes these tools need (incl. help:answers, brandtemplate:content:write, asset:write). The Claude connector directory still shows 17 older names (listing added November 2025, before the September 2026 tool update that replaced generate-design with create-design). v9 had recorded only 33 of the 46 names; 13 were added from the official reference.",
+    "actions": [
+      {
+        "tool_name": "upload-asset-from-url",
+        "description": "Upload an asset from a URL.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-assets",
+        "description": "Find or retrieve Canva assets.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-upload-url",
+        "description": "Create a URL for uploading an asset.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "autofill-design",
+        "description": "Fill a design template with supplied data. [Canva Pro and above]",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-brand-template-dataset",
+        "description": "Read the fields in a Brand Template. [Canva Pro and above]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-design-dataset",
+        "description": "Get the dataset schema for a design. [Canva Pro and above]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-brand-templates",
+        "description": "Search Brand Templates available to the user. [Canva Pro and above]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-brand-kits",
+        "description": "List accessible Brand Kits. [Canva Pro and above]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-design-from-brand-template",
+        "description": "Create a design from a Brand Template. [Canva Pro and above]",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-brand-template-draft",
+        "description": "Create a brand-template draft. [Canva Pro and above]",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "publish-brand-template",
+        "description": "Publish a brand template. [Canva Pro and above]",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "comment-on-design",
+        "description": "Add a comment to a design.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reply-to-comment",
+        "description": "Reply to a design comment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-comments",
+        "description": "List comments on a design.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-replies",
+        "description": "List replies to a comment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-designs",
+        "description": "Search the user's designs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-design",
+        "description": "Retrieve design metadata.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-design-pages",
+        "description": "List pages in a design.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-design-content",
+        "description": "Read design content.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-presenter-notes",
+        "description": "Read presenter notes.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-export-formats",
+        "description": "List available export formats.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate-design",
+        "description": "Generate design candidates from a prompt.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-design-from-candidate",
+        "description": "Create an editable design from a candidate.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-design",
+        "description": "Create an editable design from a written brief.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "brief: string (required); format: string (optional); outline: object (optional)",
+        "parameter_count": "3 documented",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-create-design-async-job",
+        "description": "Retrieve an asynchronous create-design job result.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "copy-design",
+        "description": "Create a copy of a design.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "merge-designs",
+        "description": "Merge designs.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "import-design-from-url",
+        "description": "Import a design or file from a URL.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resolve-shortlink",
+        "description": "Resolve a Canva short link.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export-design",
+        "description": "Export a design to a file.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate-image",
+        "description": "Generate a standalone image.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-generate-image-job",
+        "description": "Retrieve an image-generation job result.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove-background",
+        "description": "Remove an image background.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "separate-image-layers",
+        "description": "Separate image into editable layers.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-separate-image-layers-job",
+        "description": "Retrieve a layer-separation job result.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-folder",
+        "description": "Create a folder.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-folder-items",
+        "description": "List items in a folder.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-folders",
+        "description": "Search folders.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move-item-to-folder",
+        "description": "Move an item to another folder.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resize-design",
+        "description": "Resize a design. [Canva Pro and above]",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "start-editing-transaction",
+        "description": "Start a design editing transaction.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "perform-editing-operations",
+        "description": "Apply operations within an editing transaction.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "commit-editing-transaction",
+        "description": "Commit an editing transaction.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cancel-editing-transaction",
+        "description": "Cancel an editing transaction.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-design-thumbnail",
+        "description": "Retrieve a design page thumbnail.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "help",
+        "description": "Get help about Canva MCP.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.canva.dev/docs/apps/mcp/tools/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public implementation of the hosted server or verbatim complete tools/list and initialize payload was available.",
+    "human_can_agent_cannot": "Canva Help says available actions vary by AI assistant and directs users to open a design in Canva for actions unavailable in their assistant. The official developer docs describe additional documented MCP operations beyond the 33-name endpoint inventory, including image tools and editing utilities; availability on the input endpoint is not established. Canva's software also includes other design and collaboration features not documented as MCP actions; a complete human-versus-MCP feature comparison was not found.",
+    "sources": [
+      "https://www.canva.dev/docs/apps/mcp/tools/",
+      "https://www.canva.com/help/mcp-canva-usage/",
+      "https://www.canva.com/help/mcp-agent-setup/",
+      "https://agentatlas.dev/mcp/canva",
+      "https://martechdb.com/vendors/canva",
+      "https://claude.com/connectors/canva",
+      "https://agentdiscoverability.com/track/chatgpt/canva",
+      "https://www.canva.dev/docs/apps/mcp/",
+      "https://mcp.canva.com/.well-known/oauth-authorization-server",
+      "https://community.canva.dev/t/new-canva-mcp-tools-are-here/8924"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The verification guide recommends that clients “List tools from your client rather than assuming a fixed set.” It describes read-before-edit and transaction workflows; the workflow guide says “Edits stay in draft until commit.” These are documented integration instructions; hosted enforcement beyond the documented transaction behavior could not be checked.",
+    "governance_promises": "Canva's usage policy says agents must “Execute strictly within the authenticated user’s permission scope” and must not use Canva-sourced data, prompts, outputs, Brand Kit elements, or design structures to train, fine-tune, evaluate, or improve external AI models. It also prohibits crawling or indexing user content without explicit user action, subject to stated opt-in controls for background access.",
+    "promises_to_user": "Canva states that each user authenticates individually and operations match their Canva access. Its AI Connector help page says the connector uses the same permissions as the Canva Connect API and can be disabled by a team administrator.",
+    "comparison_with_server_logic": "User-level authentication and permission inheritance are described in official access documentation. The usage policy also imposes data minimization, training, and user-content access requirements, but public hosted code was unavailable to verify enforcement. Draft editing followed by commit is documented as a transaction workflow; no separate user approval mechanism was found.",
+    "sources": [
+      "https://www.canva.dev/docs/apps/mcp/verify-app/",
+      "https://www.canva.dev/docs/apps/mcp/workflows/design-edit/",
+      "https://www.canva.dev/docs/apps/mcp/usage-policy/",
+      "https://www.canva.com/help/mcp-agent-setup/",
+      "https://www.canva.dev/docs/apps/mcp/access/"
+    ]
+  },
+  "contradictions": [
+    "Tool inventories differ by source and surface: AgentAtlas reports 33 names for the input endpoint; the Claude connector directory lists 17 for the same URL; Agent Discoverability reports 45. Canva's official developer tool reference lists 45 for its documented MCP integration. The 33-name input-endpoint list is third-party reporting of names attributed to Canva docs, not an endpoint tools/list response.",
+    "Canva's current developer verification guide identifies https://api.canva.com/connect/v1/mcp, while the input endpoint is https://mcp.canva.com/mcp. AgentAtlas says the former is used by Developer Portal clients and the latter by CIMD clients; the official documentation does not clearly reconcile the difference.",
+    "OAuth metadata lists write scopes for designs, folders, brand templates, comments, assets, and help answers, while the Claude connector directory's 17-tool list contains no explicit folder search, asset upload, brand-kit, or editing-transaction tools. Other sources list broader inventories.",
+    "The Claude connector directory lists 17 older tool names for https://mcp.canva.com/mcp (e.g. search, fetch, get-design-generation-job), while the official reference names 46 current tools."
+  ],
+  "observations_for_research": [
+    "The OAuth scope catalogue is broader than at least one assistant's published tool list, so authorization capability and client-exposed action availability are distinct.",
+    "Canva states that available actions vary by assistant; a single global endpoint URL does not imply one stable, universally exposed tool inventory.",
+    "The 33-name endpoint inventory, 17-name Claude listing, 45-tool developer reference, and assistant-level Help action list are different representations with differing dates and granularity."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "[MANUAL CORRECTION 2026-10-27: actions set to the 46 tools of the official Canva MCP tool reference (v9 had 33); api.canva.com/connect/v1/mcp and mcp.canva.com/mcp treated as two entry URLs of one Canva MCP server (OAuth scopes match)] Checked links.json, pages/INDEX.txt, all captured official tool pages and scripts, endpoint and OAuth snapshots, and local code snapshots. No public code for the hosted design server was found; the captured repositories are starter kits rather than its implementation. The official pricing page and some legal pages returned HTTP 403 in the evidence folder; the privacy policy was available. Unofficial/community server listings were excluded as evidence. Third-party tool counts are reported as such; the 33-name inventory is attributed to Canva documentation by AgentAtlas and MartechDB, but was not verified against authenticated endpoint tools/list output.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 23.7
+  },
+  "_manual_corrections": [
+    {
+      "date": "2026-10-27",
+      "by": "manual check (Claude)",
+      "change": "actions set to the 46 tools of the official Canva MCP tool reference (v9 had 33); api.canva.com/connect/v1/mcp and mcp.canva.com/mcp treated as two entry URLs of one Canva MCP server (OAuth scopes match)",
+      "sources": [
+        "https://www.canva.dev/docs/apps/mcp/tools/",
+        "https://www.canva.dev/docs/apps/mcp/",
+        "https://mcp.canva.com/.well-known/oauth-authorization-server",
+        "https://community.canva.dev/t/new-canva-mcp-tools-are-here/8924",
+        "https://agentatlas.dev/mcp/canva"
+      ]
+    }
+  ]
+}

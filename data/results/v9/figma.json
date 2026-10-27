@@ -1,0 +1,765 @@
+{
+  "server": "figma",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.figma.com/mcp",
+    "documentation_url_csv": "https://developers.figma.com/docs/figma-mcp-server/",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://developers.figma.com/docs/figma-mcp-server/",
+      "https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/",
+      "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/",
+      "https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/",
+      "https://developers.figma.com/docs/figma-mcp-server/write-to-canvas/",
+      "https://developers.figma.com/docs/figma-mcp-server/code-to-canvas/",
+      "https://developers.figma.com/docs/figma-mcp-server/create-skills/",
+      "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+      "https://help.figma.com/hc/en-us/articles/39252411778583-Figma-MCP-server-FAQs",
+      "https://help.figma.com/hc/en-us/articles/39216419318551-Get-started-with-the-Figma-MCP-server",
+      "https://github.com/figma/mcp-server-guide"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "Figma publishes a guide and client skills, not the hosted server implementation. The desktop server is a separate local variant at http://127.0.0.1:3845/mcp; its code was not found in the supplied repositories.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "N/A",
+    "release_status": "Write-to-canvas is beta; the overall server release status is NOT FOUND.",
+    "other_official_servers": [
+      "Figma desktop MCP server: http://127.0.0.1:3845/mcp. Runs through the desktop app; official docs say it lacks write-to-canvas and send-UI-to-Figma features. Its tools differ from the remote server."
+    ],
+    "sources": [
+      "https://developers.figma.com/docs/figma-mcp-server/",
+      "https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/",
+      "https://help.figma.com/hc/en-us/articles/39216419318551-Get-started-with-the-Figma-MCP-server",
+      "https://github.com/figma/mcp-server-guide"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "No separate MCP subscription price was found. Use is subject to plan, seat, and rate limits. Write-to-canvas is free during beta and Figma says it will eventually become usage-based paid. Image generation uses Figma AI credits; Weave actions use Weave credits.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Figma offers Starter, Professional, Education, Organization, Government, and Enterprise plans; prices vary by plan, region, and seat. See the official pricing page for current amounts.",
+    "pricing_model_details": "Read-tool allowances: View/Collab seats receive up to 20 calls per month on listed paid plans; Full/Dev seats receive up to 200 per day on Professional/Education and Organization, and up to 600 per day on Enterprise, with plan-specific per-minute limits. Weave requires a paid standalone account. AI-credit costs vary by model.",
+    "other_access_restrictions": "Only clients listed in the Figma MCP catalog can connect. Users can access files only where their Figma account has permission. Full seat required to write outside drafts; Dev seats can write in drafts. Tool availability varies by remote/desktop server and client; some tools are rolling out or available only to select clients.",
+    "restrictions_controlled_by": "Vendor and organization administrators control plan, seat, client eligibility, and file permissions; the user/client chooses which server endpoint and calls to use.",
+    "sources": [
+      "https://www.figma.com/pricing/",
+      "https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/",
+      "https://help.figma.com/hc/en-us/articles/39252411778583-Figma-MCP-server-FAQs",
+      "https://help.figma.com/hc/en-us/articles/39216419318551-Get-started-with-the-Figma-MCP-server",
+      "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official reference lists 41 remote-server tools across design context, writing, design systems, plugins and shaders, account information, and Figma Weave. Individual availability can vary by client, rollout, seat, and endpoint variant.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific results include structured design data, code, XML, images or URLs, resources, status, and errors; the general response envelope is not published in the reviewed materials.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Figma Make integration exposes project resources for clients that support MCP resources. Plugin and shader tools also return resource URIs for source files.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Documentation describes file lists and resource URIs; clients may read the referenced contents.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/bringing-make-context-to-your-agent/",
+        "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference says the server provides one MCP prompt, create_design_system_rules. Its prompt content was not available in the reviewed local copy.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool and skill docs describe some logging parameters and user-facing session behavior, but do not establish server-wide logging, retention, or audit-log implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/create-skills/",
+        "https://www.figma.com/legal/privacy/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP sampling support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Endpoint OAuth metadata: protected resource is https://mcp.figma.com/mcp; authorization server is https://api.figma.com; bearer method is header; supported scope is mcp:connect. Authorization-server metadata advertises authorization_code, refresh_token, and urn:ietf:params:oauth:grant-type:jwt-bearer; authorization grant profile id-jag; response type code; PKCE S256; DCR at https://api.figma.com/v1/oauth/mcp/register; token endpoint https://api.figma.com/v1/oauth/token; client authentication client_secret_basic and client_secret_post; state required; authorization response iss parameter supported. Token lifetime and revocation details were not supplied.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth bearer token is sent in the HTTP header.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration advertised. Raw values: protected-resource authorization_servers=[\"https://api.figma.com\"], bearer_methods_supported=[\"header\"], scopes_supported=[\"mcp:connect\"]; authorization-server grant_types_supported=[\"authorization_code\",\"refresh_token\",\"urn:ietf:params:oauth:grant-type:jwt-bearer\"], authorization_grant_profiles_supported=[\"urn:ietf:params:oauth:grant-profile:id-jag\"], response_types_supported=[\"code\"], registration_endpoint=\"https://api.figma.com/v1/oauth/mcp/register\", code_challenge_methods_supported=[\"S256\"], token_endpoint_auth_methods_supported=[\"client_secret_basic\",\"client_secret_post\"], require_state_parameter=true, authorization_response_iss_parameter_supported=true. Token lifetime/revocation NOT FOUND.",
+      "authorization_server": "https://api.figma.com",
+      "sources": [
+        "https://mcp.figma.com/.well-known/oauth-protected-resource",
+        "https://mcp.figma.com/.well-known/oauth-protected-resource/mcp",
+        "https://api.figma.com/.well-known/oauth-authorization-server",
+        "https://mcp.figma.com/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability documented. Some Weave tools return cost-confirmation requirements and official docs instruct the agent to show costs and obtain approval; whether the server enforces MCP Elicitation is not stated.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Weave run tools can return cost_confirmation_required or inputs_required states.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/",
+        "https://help.figma.com/hc/en-us/articles/39252411778583-Figma-MCP-server-FAQs"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Weave run tools have asynchronous run and polling workflows, but MCP Tasks support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Weave tools return run or prediction identifiers and status/output through separate tools.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Users configure the remote or desktop endpoint in their MCP client. The reviewed official docs describe no endpoint query parameter for selecting toolsets or read-only mode.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client configuration uses a URL and HTTP transport.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/",
+        "https://developers.figma.com/docs/figma-mcp-server/local-server-installation/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Docs describe troubleshooting and support channels, but no MCP-specific error-reporting protocol capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Some individual tools document errors, compiler output, or run status; general MCP error shape is not published.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/tools-not-loading/",
+        "https://help.figma.com/hc/en-us/articles/39252411778583-Figma-MCP-server-FAQs"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability documented. Access quotas and Weave credits are product-plan controls.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/",
+        "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Weave tools expose progress and status through polling tools; official docs do not establish MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific status values and outputs are returned by Weave polling tools.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The Weave tool group includes weave_cancel_tool_run. This is a product action, not documented MCP request-cancellation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The tool returns confirmation of cancelled runs; cancellation cannot be undone.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Figma publishes client skills and guidance, separate from server capabilities, to steer agents through workflows. The remote and desktop endpoints expose different feature sets.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Skills are Markdown instruction files installed in supported clients.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.figma.com/docs/figma-mcp-server/create-skills/",
+        "https://help.figma.com/hc/en-us/articles/39216419318551-Get-started-with-the-Figma-MCP-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official tool reference labels actions Read or Write; no MCP tool annotations were found. use_figma can inspect, create, edit, and delete, so it is broad write capability. 2. Weave cost gates return cost_confirmation_required, but docs assign showing the cost and obtaining approval to the agent; no general enforced confirmation workflow documented. 3. OAuth scope is mcp:connect. File access inherits the user's Figma permissions; whoami reports identity, plans, and seats. Full seat is needed to write outside drafts. Client catalog eligibility is restricted. 4. Remote and desktop endpoints differ; no documented read-only mode or toolset filter. Desktop lacks writing and code-to-canvas. No sandbox endpoint documented. 5. Docs state file/resource access is limited to what the signed-in user can access; no MCP PII masking rules found. 6. Read calls have plan/seat quotas and per-minute limits. Tool output limit is 20 KB; asset exports document node/file caps; HTML input max is 50 MB. generate_image and Weave can consume credits. 7. Tool-specific required inputs are described for some tools; general unknown-argument rejection/coercion behavior not documented. 8. MCP-wide audit logging, telemetry, retention, and opt-out were not documented. 9. No feedback/rating tool in the official list; Weave calls can present credit cost. 10. Skills are external Markdown instructions. Guidance says load matching skills for selected operations; enforcement by server is not documented. 11. No persistent agent-behavior memory documented; Weave runs and plugin/shader versions create product state. 12. The endpoint includes a separate Weave tool family with its own workflow/model run and polling tools. 13. No raw API, SQL, or script-execution escape-hatch tool documented; use_figma runs Plugin API JavaScript against Figma files.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "You don't need to name a tool in your prompt. Your agent chooses the right tools based on what you ask.",
+      "You don't need to call them directly.",
+      "Your agent checks your design system and existing file content before creating anything from scratch.",
+      "Your agent must load figma-generative-plugins before creating or updating plugins, and figma-shaders before creating or updating shaders.",
+      "Before a paid run, your agent shows you the cost and asks you to confirm."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The flat remote endpoint documents a Figma tool group plus a separate Weave tool/model workflow group, including run, polling, and cancellation actions. A separate desktop endpoint exposes a different tool set.",
+    "sources": [
+      "https://developers.figma.com/docs/figma-mcp-server/tools-and-prompts/",
+      "https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/",
+      "https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/",
+      "https://help.figma.com/hc/en-us/articles/39252411778583-Figma-MCP-server-FAQs",
+      "https://www.figma.com/legal/privacy/"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "43",
+    "action_count_comment": "Current official Figma tool reference: https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts names 41 tools; it states there is one MCP prompt but gives no total. Added 2 catalogue-only names from Agent Discoverability (2026-10): export_video and generate_deck; both are absent from the official tool list and marked third-party. Agent Discoverability reports 46 ChatGPT tools; its listing also contains app navigation/authorization helpers not treated as server tools. Composio's Figma page is a proxy catalogue and did not establish additional native names.",
+    "actions": [
+      {
+        "tool_name": "get_design_context",
+        "description": "Gets design context and code for a Figma layer or selection",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_metadata",
+        "description": "Returns a lightweight XML outline of a selection",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_screenshot",
+        "description": "Takes a screenshot of a selection",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "download_assets",
+        "description": "Downloads exports and original source images",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_variable_defs",
+        "description": "Lists variables and styles used in a selection",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_motion_context",
+        "description": "Returns keyframe animation data and code snippets",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_figjam",
+        "description": "Converts FigJam diagrams to XML",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "use_figma",
+        "description": "Creates, edits, and inspects content in Figma files",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate_figma_design",
+        "description": "Turns live web UI into design layers",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_new_file",
+        "description": "Creates a blank Figma Design, FigJam, or Figma Slides file",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_assets",
+        "description": "Uploads images and SVGs into a Figma file",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate_diagram",
+        "description": "Generates a FigJam diagram from a description or Mermaid syntax",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "html_to_figma",
+        "description": "Converts self-contained HTML into design layers",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate_image",
+        "description": "Generates an image from a text prompt",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_libraries",
+        "description": "Lists subscribed and available libraries",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_design_system",
+        "description": "Searches libraries for components, variables, and styles",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_code_connect_map",
+        "description": "Gets Code Connect mappings for selected instances",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_code_connect_map",
+        "description": "Maps a Figma component to a code component",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_code_connect_suggestions",
+        "description": "Suggests Code Connect mappings (Figma-prompted)",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_context_for_code_connect",
+        "description": "Gets component metadata for Code Connect templates",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_code_connect_mappings",
+        "description": "Confirms suggested Code Connect mappings",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_generative_plugins",
+        "description": "Lists generative plugins in your library",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_generative_plugin",
+        "description": "Reads a generative plugin source",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_generative_plugin",
+        "description": "Creates a generative plugin starter",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_generative_plugin",
+        "description": "Updates a generative plugin source",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_shaders",
+        "description": "Lists shader effects and fills in your library",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_shader",
+        "description": "Reads a shader source",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_shader",
+        "description": "Creates a shader effect or fill starter",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_shader",
+        "description": "Updates a shader source",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_file_shaders",
+        "description": "Lists shaders used in a specific file",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "import_codebase",
+        "description": "Imports a local project into Figma as a Make file or code layer",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "whoami",
+        "description": "Gets your identity, plans, and seats",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "weave_list_tools",
+        "description": "Lists Weave tools you can run",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "weave_get_tool_inputs",
+        "description": "Gets the inputs a Weave tool needs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "weave_upload_asset",
+        "description": "Uploads a file to use as a Weave input",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "weave_run_tool",
+        "description": "Runs a Weave tool",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "weave_get_tool_run_output",
+        "description": "Gets status and output of Weave runs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "weave_cancel_tool_run",
+        "description": "Cancels in-progress Weave runs",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "weave_find_model",
+        "description": "Finds a Weave model by name",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "weave_run_model",
+        "description": "Runs a Weave model directly",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "weave_get_model_run_output",
+        "description": "Gets status and output of model runs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export_video",
+        "description": "Exports a Figma timeline node as MP4 video",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/figma",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "generate_deck",
+        "description": "Generates editable presentation decks in Figma Slides",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/figma",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public source for the hosted server's complete serialized tool definitions or initialize instructions; the public GitHub repository contains documentation and skills, not deployed server code.",
+    "human_can_agent_cannot": "Human users can open Figma's full interface and perform product operations not represented by this MCP tool list. Docs specifically note that the desktop server cannot write to canvas or send UI to Figma; the remote server adds those capabilities. No complete comparison of all manual Figma operations against MCP was published in the reviewed evidence.",
+    "sources": [
+      "https://help.figma.com/hc/en-us/articles/42495147242903-Tools-and-example-prompts",
+      "https://agentdiscoverability.com/track/chatgpt/figma",
+      "https://composio.dev/toolkits/figma",
+      "https://developers.figma.com/docs/figma-mcp-server/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Figma recommends using skills, smaller selections, design-system components, variables, and clear prompts. For example: “For more reliable results, use Figma’s skills, which guide your agent through common workflows.” The reviewed docs do not establish server enforcement for these workflow recommendations.",
+    "governance_promises": "File access is constrained by the signed-in user's existing permissions. Docs say write-to-canvas requires a Full seat to write outside drafts and note that beta output may require manual review. Privacy policy and Developer Terms apply, but no MCP-specific retention or training promise was located.",
+    "promises_to_user": "Figma describes the remote server as connecting directly to Figma and providing design context and native write operations. It says write-to-canvas is free during beta and may later become usage-based paid.",
+    "comparison_with_server_logic": "The permission and seat restrictions are described in product documentation and reflected in documented feature behavior, but implementation code is closed. Cost confirmation is described as an agent workflow; docs do not show a universal server-enforced approval mechanism. Skill instructions are client-side guidance.",
+    "sources": [
+      "https://developers.figma.com/docs/figma-mcp-server/",
+      "https://developers.figma.com/docs/figma-mcp-server/write-to-canvas/",
+      "https://developers.figma.com/docs/figma-mcp-server/create-skills/",
+      "https://www.figma.com/legal/developer-terms/",
+      "https://www.figma.com/legal/privacy/"
+    ]
+  },
+  "contradictions": [
+    "The supplied endpoint evidence says an HTTP 401 OAuth-protected endpoint, while the supplied raw POST to https://mcp.figma.com/mcp returned HTTP 400 with “Bad Request: the request body is not a valid JSON-RPC message.” OAuth well-known metadata independently identifies the endpoint and authorization server.",
+    "The supplied local copy of the official docs lists send_code_to_figma, while the current official Help Center tool table names import_codebase for the code import action. The current Help Center list was used for actions.json.",
+    "Agent Discoverability reports 46 ChatGPT tools and includes export_video and generate_deck, absent from the official Figma tool list. These are marked third-party and not confirmed as tools at the input endpoint."
+  ],
+  "observations_for_research": [
+    "Figma publishes agent workflow skills outside MCP; documentation says these skills guide tool choice and sequencing.",
+    "Some run costs use separate credit systems: Figma AI credits for image generation and Weave credits for Weave operations.",
+    "The same vendor documents a hosted remote endpoint and a local desktop endpoint with distinct tool availability."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ and local GitHub copies. Figma's mcp-server-guide repository is documentation/skills rather than server implementation; community-resources is also not deployed server code. Local official page copy lists tools and prompt; current official Help Center tool table was checked for updates. The MCP Registry GitHub entry points to the guide and remote endpoint. Unofficial server sources were not used. No server code was available to inspect handlers, annotations, parameter validation, token limits beyond docs, or initialize instructions. actions.json includes all 41 tools in the current official tool table plus 2 catalogue-only candidates.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 7.5
+  }
+}

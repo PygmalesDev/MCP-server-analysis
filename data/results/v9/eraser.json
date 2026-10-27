@@ -1,0 +1,755 @@
+{
+  "server": "eraser",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://app.eraser.io/api/mcp",
+    "documentation_url_csv": "https://docs.eraser.io/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/eraserlabs/eraser-io",
+    "documentation_urls_used": [
+      "https://docs.eraser.io/mcp",
+      "https://docs.eraser.io/using-ai-agent-integrations",
+      "https://www.eraser.io/pricing",
+      "https://docs.eraser.io/plans",
+      "https://docs.eraser.io/usage-based-pricing",
+      "https://www.eraser.io/privacy",
+      "https://www.eraser.io/terms"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The public @eraserlabs/eraser-mcp package is a local stdio adapter that proxies initialize, tools/list, and tools/call to this same remote endpoint; the remote endpoint remains the source of tool definitions. The adapter does not contain the hosted server's tool schemas or implementation.",
+    "mcp_protocol_version": "2025-11-25 is sent by the local adapter during initialize; the hosted endpoint's negotiated protocol version was not established from the provided endpoint response.",
+    "commit_hash": "30d6f3679f597eeae67bacab5ee733c863686177",
+    "commit_date": "2026-04-07",
+    "implementation_language": "TypeScript (public local adapter)",
+    "mcp_sdk_and_version": "No MCP SDK dependency found in the public package; adapter implements JSON-RPC forwarding directly.",
+    "code_public": "Partially",
+    "license": "MIT (public package)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Local stdio package @eraserlabs/eraser-mcp: a client-side adapter to the hosted endpoint, using OAuth or an API token; it is not a separately documented hosted endpoint.",
+      "Eraser Agent Skills provide diagram-generation guidance outside the MCP server."
+    ],
+    "sources": [
+      "https://docs.eraser.io/mcp",
+      "https://docs.eraser.io/using-ai-agent-integrations",
+      "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/README.md#L26-L26",
+      "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L306-L362"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "The vendor says the MCP server is free and subject to the same free-tier limits as in-app use. AI-generation calls consume account AI credits. Paid plans can enable usage-based charges; API calls require usage-based pricing to be enabled.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Free: $0/member/month, 3 files and 3 AI credits. Business: $45/member/month billed annually or $60 monthly, 100 AI credits/month. Business Plus: $42/member/month, annual billing, minimum 10 seats, 250 AI credits/month. Enterprise: custom pricing and unlimited AI credits.",
+    "pricing_model_details": "On paid plans, usage-based pricing lists $60 per 100 extra AI credits, $80 per 100 /render/prompt API calls, and $20 per 100 /render/elements API calls. Monthly spend limits can be set; extra usage and API calls are blocked when the limit is reached.",
+    "other_access_restrictions": "An Eraser account and OAuth sign-in or bearer API key are required. OAuth requests use the signed-in user's credits and attribution; API-key requests use team-level credits and attribution. Organization API tokens require teamId on each tool call. Paid-plan usage-based pricing must be enabled for API calls.",
+    "restrictions_controlled_by": "Vendor and team admins: Eraser defines plan limits; team admins enable usage-based pricing and set spend limits.",
+    "sources": [
+      "https://docs.eraser.io/mcp",
+      "https://www.eraser.io/pricing",
+      "https://docs.eraser.io/plans",
+      "https://docs.eraser.io/usage-based-pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP tool support; hosted negotiated version not established.",
+      "description_what_how": "The official hosted tool reference names 42 tools covering diagrams, documents, files, folders, search and export, presets, templates/references, and account/team operations. Descriptions are published, but schemas and annotations are not.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The endpoint's result format was not available in the supplied endpoint response. The local adapter forwards tools/list and tools/call JSON-RPC responses; it may add a localPath to a parsed result containing imageUrl.",
+      "authorization_mechanism": "OAuth or bearer API key according to vendor docs. Public OAuth metadata advertises authorization_code and refresh_token grants, PKCE S256, token endpoint auth method none, client registration, revocation endpoint, and scopes_supported [\"*\"]. Bearer tokens are supported in the header. Token lifetime is not published in the supplied metadata.",
+      "authorization_server": "https://app.eraser.io",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L306-L362"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool reference does not document MCP resources. The public adapter declares tools capability only and does not implement resource handlers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L86-L89"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No prompt capability or prompt request handler is declared in the public adapter. Hosted docs do not describe MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L86-L89"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted MCP-specific logging behavior is not documented. The vendor's pricing page lists SIEM logging as an Enterprise plan feature, without specifying MCP call logging.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://www.eraser.io/pricing",
+        "https://docs.eraser.io/mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability or handler is declared in the public adapter. Hosted docs do not describe sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L86-L89"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability or handler is declared in the public adapter. Hosted docs do not describe roots.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L86-L89"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Provided OAuth metadata identifies https://app.eraser.io as authorization server; protected-resource metadata is available at the endpoint-path well-known URL. Root protected-resource and OpenID configuration URLs returned 404 in the supplied evidence. Vendor docs also support bearer API keys.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Metadata: resource https://app.eraser.io/api/mcp; authorization_servers [\"https://app.eraser.io\"]; scopes_supported [\"*\"]; bearer_methods_supported [\"header\"]. Authorization-server metadata: authorization, token, registration, and revocation endpoints under https://app.eraser.io/api/oauth/; response_types_supported [\"code\"]; grant_types_supported [\"authorization_code\",\"refresh_token\"]; code_challenge_methods_supported [\"S256\"]; token_endpoint_auth_methods_supported [\"none\"]; scopes_supported [\"*\"]; client_id_metadata_document_supported true.",
+      "authorization_mechanism": "OAuth metadata, Dynamic Client Registration, authorization_code and refresh_token grants, PKCE S256, token auth method none, revocation endpoint, wildcard scope [\"*\"], bearer header method. Vendor additionally documents bearer API keys. Token lifetime not stated. Supplied POST to endpoint returned HTTP 200 with JSON-RPC error -32600 Invalid Request; it had no WWW-Authenticate header in the provided response.",
+      "authorization_server": "https://app.eraser.io",
+      "sources": [
+        "https://app.eraser.io/.well-known/oauth-protected-resource/api/mcp",
+        "https://app.eraser.io/.well-known/oauth-authorization-server",
+        "https://app.eraser.io/api/mcp",
+        "https://docs.eraser.io/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe browser-based OAuth authorization, but do not document MCP Elicitation or a server-enforced confirmation flow. The public adapter does not declare elicitation capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L86-L89"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks behavior is described in hosted docs. The public adapter declares tools capability only and forwards tool calls to the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L86-L89"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Clients configure the endpoint URL and may use OAuth or an Authorization bearer API key. The local adapter supports ERASER_API_URL, ERASER_API_TOKEN, and ERASER_OUTPUT_DIR environment variables.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration is client/environment based; no hosted MCP configuration API is documented.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L40-L44"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted MCP error formats are not published in the tool reference. The local adapter wraps HTTP and forwarding failures as JSON-RPC errors; see its source for adapter-specific handling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Adapter errors use JSON-RPC error objects with codes such as -32000 and -32601, and a message; this describes the local adapter, not necessarily hosted errors.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L100-L110",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L306-L420"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription behavior is documented. Hosted docs do describe files and diagrams saved to the user's Eraser workspace, but not MCP resource subscriptions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Progress notifications are not described by the hosted tool reference or the public adapter.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L86-L89"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Cancellation behavior is not documented by the hosted tool reference or the public adapter.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L86-L89"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tool reference distinguishes manual tools that use supplied code/markdown from their natural-language counterparts. The local adapter can download an imageUrl result to its configured scratchpad and return localPath; this is adapter behavior.",
+      "pre_interaction_context_verbatim": "“Tools that start with manually_ write the code or markdown you pass as-is, with no AI. Their counterparts without the prefix take a natural language instruction instead.”",
+      "post_interaction_context_structure": "The adapter can add localPath to the first text content item when it parses a JSON result containing imageUrl.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.eraser.io/mcp",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L116-L138",
+        "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L440-L456"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list includes read operations and write operations, including delete/archive/clear actions. Tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are not published. 2. No server-enforced confirmation or approval flow is documented; no confirmation parameters are published. 3. OAuth metadata advertises wildcard scope [\"*\"]; vendor docs say OAuth actions are attributed to the signed-in user and API-key actions to the team. API-key docs mention organization tokens and teamId. Token lifetime, role inheritance details, admin switches, allowlists, and redirect-URI approval are Unknown. 4. No read-only endpoint, toolset filter, or sandbox endpoint is documented. A local adapter supports a configurable endpoint URL; vendor docs mention staging/self-hosted configuration. 5. Privacy policy describes personal-data processing and service providers generally; MCP-specific field masking, PII exclusion, and data boundaries are Unknown. OAuth-created files are private by default; link sharing can be changed with update_file or in the app. 6. MCP is subject to plan AI-credit limits. Paid plans can enable usage-based AI credit and API-call charges with spend limits; no per-tool rate limit, bulk cap, or result-size limit is published. 7. Hosted parameter validation and correction are Unknown; schemas are not published. 8. MCP-specific action audit logging and telemetry are Unknown; Enterprise pricing lists SIEM logging without MCP-specific detail. 9. The complete official list contains no feedback, rating, survey, or report tools; no MCP upsell result is documented. 10. The server's manual-tool distinction is documented as behavior guidance; external Eraser Agent Skills are available. No tool descriptions/instructions beyond the official short descriptions are published. 11. select_team changes the active team; persistence scope and effects across future sessions are not specified. 12. One hosted endpoint exposes a flat documented list. The public stdio package is a proxy to that endpoint. 13. No raw API, arbitrary SQL, script, or execute tool is listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“Tools that start with manually_ write the code or markdown you pass as-is, with no AI. Their counterparts without the prefix take a natural language instruction instead.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The documented hosted endpoint presents one flat tool list. A separate local stdio adapter proxies to it; no dynamically loaded toolsets or nested sub-servers are documented.",
+    "sources": [
+      "https://docs.eraser.io/mcp",
+      "https://docs.eraser.io/using-ai-agent-integrations",
+      "https://www.eraser.io/privacy",
+      "https://www.eraser.io/pricing",
+      "https://docs.eraser.io/usage-based-pricing",
+      "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L306-L362"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "42",
+    "action_count_comment": "The official tool list exists at https://docs.eraser.io/mcp and names 42 tools; it states no separate total, and all named tools are included in actions.json. No catalogue-only tools were added. The Claude connector directory is Anthropic verified but does not provide a readable complete tool-name list in the collected page text. APIs.io, mcp.so, mcp.tc, Smithery, Composio, and Agent Discoverability pages were checked; collected catalogue content did not establish additional native tool names or comparable counts. Parameters and annotations are not published by the official reference.",
+    "actions": [
+      {
+        "tool_name": "list_diagrams",
+        "description": "List the diagrams in a file",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_diagram",
+        "description": "Get a diagram’s code",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_diagram",
+        "description": "Generate a diagram from a prompt",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manually_create_diagram",
+        "description": "Add a diagram from your own code",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_diagram",
+        "description": "Edit a diagram with an instruction",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manually_update_diagram",
+        "description": "Replace a diagram’s code",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_diagram",
+        "description": "Delete a diagram",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_document",
+        "description": "Get a file’s document as markdown",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_document",
+        "description": "Generate a document from a prompt",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manually_create_document",
+        "description": "Fill an empty document with your own markdown",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_document",
+        "description": "Edit a document with an instruction",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manually_update_document",
+        "description": "Replace a document’s markdown",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_document",
+        "description": "Clear a document",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_files",
+        "description": "List files, optionally in a folder",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_file",
+        "description": "Get a file’s outline and diagram list",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_file",
+        "description": "Create an empty file or duplicate one",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_file",
+        "description": "Rename, move, share, or fill a file from a template",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manually_update_file",
+        "description": "Replace a file’s document and diagram code",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_file",
+        "description": "Archive a file",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_folders",
+        "description": "List folders or find one by name",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_folder",
+        "description": "Get a folder",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_folder",
+        "description": "Create a folder",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_folder",
+        "description": "Rename or move a folder, or share its files",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_folder",
+        "description": "Delete an empty folder",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search",
+        "description": "Search file contents, file names, or diagrams",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export_diagram",
+        "description": "Export a diagram as PNG, JPEG, or draw.io",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export_document",
+        "description": "Export a document as markdown",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export_file",
+        "description": "Get a link to export a file as PDF in the app",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_presets",
+        "description": "List presets or find one by name",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_preset",
+        "description": "Get a preset’s rules, templates, and references",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_preset",
+        "description": "Create an empty preset",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_preset",
+        "description": "Rename a preset or make it the default",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_rules",
+        "description": "Add, edit, or remove a preset’s rules",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_preset",
+        "description": "Delete an empty preset",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_template_or_reference",
+        "description": "Get a template or reference file",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_template_or_reference",
+        "description": "Create a template or reference and attach it to a preset",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_template_or_reference",
+        "description": "Rename a template or reference",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_or_remove_template_or_reference",
+        "description": "Attach an existing file to a preset, or detach it",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "publish_template_or_reference",
+        "description": "Publish a new version of a template or reference",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_me",
+        "description": "Get the current user and team",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_teams",
+        "description": "List your teams",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "select_team",
+        "description": "Set the active team",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.eraser.io/mcp",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted endpoint's tool schemas and initialize instructions are not available as verbatim definitions. The public package forwards remote definitions and contains no copy from which to calculate a hosted-server context token count.",
+    "human_can_agent_cannot": "The REST API documents operations not named in the MCP tool list, including diagram generation directly from Eraser DSL, team usage reports, audit-log queries, AI-request history, embed-token creation, and direct REST CRUD endpoints. This describes documented API surface, not proof that each operation is unavailable through undocumented MCP tools. Sources: https://docs.eraser.io/mcp and the REST API index at https://docs.eraser.io/reference/getting-started.",
+    "sources": [
+      "https://docs.eraser.io/mcp",
+      "https://www.eraser.io/pricing",
+      "https://docs.eraser.io/usage-based-pricing",
+      "https://claude.com/connectors/eraser",
+      "https://mcp.tc/i/eraser",
+      "https://apis.io/servers/eraser/eraser/",
+      "https://github.com/eraserlabs/eraser-io"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs state: “Tools that start with manually_ write the code or markdown you pass as-is, with no AI. Their counterparts without the prefix take a natural language instruction instead.” This explains the intended distinction; no enforcement details or parameter schemas are published.",
+    "governance_promises": "The docs say OAuth-created files are “private by default” and access/link-sharing can be changed. Terms say the content license is “solely for the purpose of providing the Service to you” and that content will not be used for another purpose or distributed to third parties without permission. The privacy policy describes security measures but says absolute security cannot be guaranteed.",
+    "promises_to_user": "The vendor says the remote MCP server uses OAuth and can also accept bearer API keys; OAuth and API-key requests are attributed and billed to different account levels. It states AI-generation calls consume AI credits.",
+    "comparison_with_server_logic": "The public adapter implements authentication forwarding, retries after 401, and local image saving, but does not implement the hosted tool operations or authorization policy. The privacy and content-use statements are policy text; the public adapter does not establish enforcement or hosted retention behavior.",
+    "sources": [
+      "https://docs.eraser.io/mcp",
+      "https://www.eraser.io/terms",
+      "https://www.eraser.io/privacy",
+      "https://github.com/eraserlabs/eraser-io/blob/30d6f3679f597eeae67bacab5ee733c863686177/packages/eraser-mcp/src/stdio.ts#L343-L420"
+    ]
+  },
+  "contradictions": [
+    "The MCP documentation says the local @eraserlabs/eraser-mcp package has a smaller tool set, while the public README and implementation describe it as a proxy to the same remote endpoint and forward tools/list to the remote server as the source of truth. The public code does not publish a separate smaller tool list.",
+    "The supplied endpoint response is HTTP 200 with JSON-RPC error -32600 Invalid Request, while the automatic plausibility check records HTTP 405 for the endpoint. This may reflect different request methods or fetch conditions; the supplied OAuth evidence and endpoint existence evidence were retained."
+  ],
+  "observations_for_research": [
+    "The official documentation distinguishes natural-language generation/editing tools from manually supplied code/markdown tools, making two interaction styles visible in tool names.",
+    "OAuth and API-key authentication change credit attribution: individual user credits for OAuth and team-level credits for API keys."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ and the complete local official repository copy at commit 30d6f3679f597eeae67bacab5ee733c863686177. The public code is an adapter, not the hosted tool implementation; tool schemas, annotations, hosted instructions, negotiated protocol version, result limits, and hosted logging were not published in the examined evidence. Root OAuth protected-resource and OpenID configuration URLs returned 404 in the supplied metadata, while the endpoint-path protected-resource document and authorization-server metadata were available. The npm page returned HTTP 403. An unofficial community repository was listed in links.json and excluded as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.3
+  }
+}

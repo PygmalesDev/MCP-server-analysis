@@ -1,0 +1,708 @@
+{
+  "server": "asana",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.asana.com/mcp",
+    "documentation_url_csv": "https://developers.asana.com/docs/using-asanas-mcp-server",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://developers.asana.com/docs/using-asanas-mcp-server",
+      "https://developers.asana.com/docs/integrating-with-asanas-mcp-server",
+      "https://developers.asana.com/docs/connecting-mcp-clients-to-asanas-v2-server",
+      "https://developers.asana.com/docs/mcp-tools-reference",
+      "https://forum.asana.com/t/new-v2-mcp-server-now-generally-available/1122647",
+      "https://asana.com/pricing",
+      "https://asana.com/terms/privacy-statement",
+      "https://asana.com/terms/developer-terms",
+      "https://www.hookmcp.com/tools/asana-official-remote/",
+      "https://agentdiscoverability.com/track/chatgpt/asana",
+      "https://claude.com/connectors/asana"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official repository was listed in the collected evidence; the local code folder contains no repository copies. The official docs describe a hosted V2 service.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "GA for V2; the documented V1 beta endpoint is deprecated.",
+    "other_official_servers": [
+      "https://mcp.asana.com/v2/mcp — documented Asana V2 Work Graph server, Streamable HTTP.",
+      "https://mcp.asana.com/v2/command/mcp — separate Asana Command MCP server with a different tool set.",
+      "https://mcp.asana.com/sse — V1 beta server; documentation says it is deprecated and was scheduled to shut down on 2026-08-05."
+    ],
+    "sources": [
+      "https://developers.asana.com/docs/using-asanas-mcp-server",
+      "https://developers.asana.com/docs/integrating-with-asanas-mcp-server",
+      "https://forum.asana.com/t/new-v2-mcp-server-now-generally-available/1122647"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP access price is stated in the reviewed official materials. The `search_tasks` tool is documented as available on Premium accounts only.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Asana Personal: $0. Starter: $10.99 per user/month billed annually or $13.49 monthly. Advanced: $24.99 per user/month billed annually or $30.49 monthly. Enterprise pricing is not listed.",
+    "pricing_model_details": "The official pricing page describes plan pricing per user; it does not state a separate MCP per-call charge.",
+    "other_access_restrictions": "V2 requires a pre-registered OAuth client and user authorization. App distribution can be limited to selected workspaces. Enterprise+ and Legacy Enterprise customers can use App Management to allow or block V2 clients. Access follows the user's Asana permissions and is scoped to one selected workspace per session.",
+    "restrictions_controlled_by": "Asana, organization administrators, and the authorizing user",
+    "sources": [
+      "https://asana.com/pricing",
+      "https://developers.asana.com/docs/mcp-tools-reference",
+      "https://developers.asana.com/docs/integrating-with-asanas-mcp-server",
+      "https://developers.asana.com/docs/using-asanas-mcp-server"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official V2 reference lists 27 tools in read, write, and interactive categories. It directs clients to tools/list for current schemas. The supplied /mcp path has no collected tool list; this list is from the documented V2 endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reference describes returned data for individual tools but does not provide a general MCP result or error schema.",
+      "authorization_mechanism": "OAuth-protected endpoint; the supplied endpoint returned HTTP 401 with `invalid_token` and a Bearer challenge. See Authorization entry for metadata.",
+      "authorization_server": "https://mcp.asana.com (metadata for the supplied /mcp endpoint); V2 integration documentation describes OAuth app pre-registration.",
+      "sources": [
+        "https://developers.asana.com/docs/mcp-tools-reference",
+        "https://developers.asana.com/docs/using-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed Asana MCP documentation describes tools and interactive tools, but does not document MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/mcp-tools-reference",
+        "https://developers.asana.com/docs/using-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt definitions are documented in the reviewed Asana MCP materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/mcp-tools-reference",
+        "https://developers.asana.com/docs/using-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed MCP materials do not specify MCP request logging or logging controls. Asana's general privacy statement discusses processing information, but does not specify MCP-specific logs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://asana.com/terms/privacy-statement",
+        "https://developers.asana.com/docs/integrating-with-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling behavior is documented in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/using-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots behavior is documented in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/using-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Supplied metadata for /mcp: HTTP 401; Bearer realm OAuth; resource metadata at https://mcp.asana.com/.well-known/oauth-protected-resource. That document reports resource https://mcp.asana.com, authorization server https://mcp.asana.com, `scopes_supported: [\"default\"]`, bearer method `header`, and resource name `Asana MCP`. Authorization-server metadata reports code response, authorization_code and refresh_token grants, token auth methods client_secret_basic, client_secret_post, none, PKCE plain and S256, and registration endpoint https://mcp.asana.com/register. V2 docs instead say clients must pre-register and dynamic registration is unsupported. The supplied metadata is for the input /mcp path, while the docs describe /v2/mcp.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The supplied endpoint returned JSON `{ \"error\": \"invalid_token\", \"error_description\": \"Missing or invalid access token\" }` with HTTP 401.",
+      "authorization_mechanism": "Metadata Doc / Preregistration / Dynamic Client Registration: supplied /mcp authorization metadata advertises a registration endpoint, code flow, refresh tokens, and PKCE; official V2 documentation says pre-registration is required and DCR is unsupported. Supplied metadata has `scopes_supported: [\"default\"]`; V2 docs say MCP apps do not require specific scopes and users authorize access to all available MCP tools. The supplied metadata did not report token lifetime or revocation; V2 docs state access tokens expire after one hour and instruct clients to revoke tokens when no longer needed.",
+      "authorization_server": "https://mcp.asana.com per supplied /mcp OAuth metadata; V2 documentation refers to Asana's OAuth authorization server and pre-registered MCP apps.",
+      "sources": [
+        "https://mcp.asana.com/.well-known/oauth-protected-resource",
+        "https://mcp.asana.com/.well-known/oauth-authorization-server",
+        "https://developers.asana.com/docs/integrating-with-asanas-mcp-server",
+        "https://developers.asana.com/docs/connecting-mcp-clients-to-asanas-v2-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official docs describe interactive tools that render a confirmation UI in Claude and ChatGPT, but do not identify this as MCP Elicitation. Other clients use standard write tools directly.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Interactive tools render a confirmation UI before committing; the docs do not specify the MCP protocol mechanism.",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed materials do not document MCP Tasks protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/using-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Users configure an OAuth client, redirect URL, workspace distribution, and MCP client endpoint. V2 sessions select one workspace at authorization.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration produces an OAuth-authorized session against the chosen server URL.",
+      "authorization_mechanism": "OAuth app pre-registration for V2; the supplied /mcp metadata separately advertises DCR.",
+      "authorization_server": "See Authorization entry.",
+      "sources": [
+        "https://developers.asana.com/docs/integrating-with-asanas-mcp-server",
+        "https://developers.asana.com/docs/connecting-mcp-clients-to-asanas-v2-server",
+        "https://forum.asana.com/t/new-v2-mcp-server-now-generally-available/1122647"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied unauthenticated endpoint returns an invalid-token error. The reviewed documentation does not specify a general MCP error format.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "For the supplied endpoint's missing or invalid token, JSON includes `error` and `error_description` fields.",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://mcp.asana.com/mcp",
+        "https://developers.asana.com/docs/integrating-with-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/using-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notification behavior is documented in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/using-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation behavior is documented in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/using-asanas-mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "V2 uses Streamable HTTP. The documented server groups tools into read, write, and interactive categories, with interactive confirmation UIs currently available in Claude and ChatGPT.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown beyond the tool-specific return descriptions in the reference.",
+      "authorization_mechanism": "Unknown",
+      "authorization_server": "Unknown",
+      "sources": [
+        "https://developers.asana.com/docs/using-asanas-mcp-server",
+        "https://developers.asana.com/docs/mcp-tools-reference"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official V2 list divides tools into read, write, and interactive categories; it does not publish readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations. `delete_task` is described as permanent and irreversible.\n2. Interactive preview tools render a confirmation UI in Claude and ChatGPT; standard write tools act immediately. The docs say other MCP clients use standard write tools directly, so confirmation is not generally server-enforced.\n3. V2 access follows the authenticated user's Asana permissions; sessions are scoped to one selected workspace. App pre-registration and optional workspace distribution apply. Enterprise+ and Legacy Enterprise admins can allow or block specific clients. Docs say one-hour access tokens; supplied /mcp metadata separately advertises DCR and `default` scope.\n4. No read-only mode or toolset/filter URL parameter is documented. V2 is workspace-scoped; a separate Command endpoint has a different tool set. The V1 /sse endpoint is deprecated.\n5. No MCP-specific PII masking or field redaction is documented. User access boundaries and workspace scope are documented; `get_attachments` returns file names and URLs.\n6. `create_tasks` and `update_tasks` support up to 50 tasks per call. `search_tasks` is Premium-only. Other MCP-specific rate, quota, result-truncation, or cost-per-call limits were not found.\n7. The docs direct clients to tools/list for current schemas but do not document unknown-argument rejection, coercion, or automatic correction. Tool-specific required filters are described for some tools.\n8. MCP-specific logging, audit attribution, telemetry, and opt-out behavior were not found. The general privacy statement describes broader Asana information processing but not MCP call logging.\n9. No dedicated vendor rating, reporting, or survey tool was found in the reviewed lists. `add_comment` is for task discussion/context, not vendor feedback.\n10. No server-delivered skill tool or initialize instructions were found. Tool descriptions include behavioral guidance; the reference says `get_status_overview` handles its search internally and should not be preceded by other search tools. Such text is client guidance; server enforcement is not documented.\n11. No MCP memory feature is documented. Session workspace selection fixes the workspace context for that session.\n12. The documented Asana V2 server is a flat tool set; the separate Command server is a distinct endpoint with a different tool set. No nested server proxy is documented.\n13. No raw API request, arbitrary SQL, script execution, or equivalent unrestricted tool appears in the official V2 list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[Official docs] “This tool handles its own search internally — do not chain other search tools before calling it.”",
+      "[Official docs] “Use create_task_preview in Claude or ChatGPT when you want to review before creating.”",
+      "[Official docs] “Use create_project_preview in Claude or ChatGPT when you want to review before creating.”",
+      "[Official docs] “Other MCP clients use the standard write tools directly.”",
+      "[Third-party Agent Discoverability, 2026-10] “After calling this tool, do not summarize, list, or mention specific task names in your response.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Asana documents separate V2 Work Graph and Command MCP endpoints with different tool sets; the supplied /mcp endpoint is not the documented V2 path.",
+    "sources": [
+      "https://developers.asana.com/docs/mcp-tools-reference",
+      "https://developers.asana.com/docs/using-asanas-mcp-server",
+      "https://developers.asana.com/docs/integrating-with-asanas-mcp-server",
+      "https://asana.com/terms/privacy-statement",
+      "https://agentdiscoverability.com/track/chatgpt/asana"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "37",
+    "action_count_comment": "The official tool reference lists 27 tools and calls its list every available tool: https://developers.asana.com/docs/mcp-tools-reference. It does not state a numeric total. This yields 27 official actions. Added 10 catalogue-only names from Agent Discoverability's ChatGPT integration listing (2026-10): eight deprecated connector/widget helpers and two versioned preview-tool names. That catalogue reports 35 tools total; its list overlaps the official actions and does not include the generic official preview names. Claude's connector directory lists 15 names, while HookMCP reports 27 names matching the official total. Catalogue-only entries are not confirmed as tools on the remote endpoint.",
+    "actions": [
+      {
+        "tool_name": "search_objects",
+        "description": "Search across Asana resource types; use first when object GID is unknown.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_task",
+        "description": "Return details for one task, including fields, memberships, dependencies, subtasks, and comments.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tasks",
+        "description": "List tasks using at least one context filter; optionally filter completion or modification date.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_my_tasks",
+        "description": "Return tasks assigned to the authenticated user, optionally filtered by completion.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_tasks",
+        "description": "Search task names, descriptions, and comments with advanced filters; Premium accounts only.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project",
+        "description": "Return project details, members, task counts, and optionally sections.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_projects",
+        "description": "List workspace projects, optionally filtered by team or archived status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_portfolio",
+        "description": "Return one portfolio and its associated projects.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_portfolios",
+        "description": "List portfolios owned by the authenticated user in the current workspace.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_items_for_portfolio",
+        "description": "List portfolio items, including projects and goals.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_status_overview",
+        "description": "Aggregate status details, updates, task summaries, and blockers for matching projects or portfolios.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_attachments",
+        "description": "List attachments for a task, project, or project brief.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_user",
+        "description": "Return user details by GID, email, or “me”; defaults to the authenticated user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_me",
+        "description": "Return authenticated user name, email, and workspace memberships.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_users",
+        "description": "List workspace users, optionally filtered by team; supports pagination.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_teams",
+        "description": "List workspace teams, optionally filtered by user membership.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent",
+        "description": "Return details and behavior guidance for one AI Teammate.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_workspace_agents",
+        "description": "List AI Teammates configured in the workspace.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_tasks",
+        "description": "Create one or more tasks immediately; supports up to 50 per call.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project",
+        "description": "Create a project immediately, optionally with sections and tasks.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_tasks",
+        "description": "Update one or more tasks in one operation; supports up to 50 per call.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_task",
+        "description": "Permanently delete a task and eligible subtasks; cannot be undone.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_comment",
+        "description": "Add plain-text or HTML comment to a task, with optional mentions or pinning.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project_status_update",
+        "description": "Post a status update to a project or portfolio.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_task_preview",
+        "description": "Draft one task and render a review UI before creating it.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project_preview",
+        "description": "Draft a project plan and render a review UI before creating it.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_tasks_preview",
+        "description": "Search tasks and render results in an interactive UI.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.asana.com/docs/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project_confirm",
+        "description": "Deprecated connector-internal confirmation tool; page says not to call directly.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "create_task_confirm",
+        "description": "Deprecated connector-internal confirmation tool; page says not to call directly.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "get_project_internal",
+        "description": "Deprecated connector-internal project lookup for widget UI.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "log_widget_event",
+        "description": "Deprecated connector-internal widget event logging tool.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "create_project_confirm_populate",
+        "description": "Deprecated connector-internal project confirmation population tool.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "save_project_changes_confirm",
+        "description": "Deprecated connector-internal project changes confirmation tool.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "save_task_changes_confirm",
+        "description": "Deprecated connector-internal task changes confirmation tool.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "search_objects_internal",
+        "description": "Deprecated connector-internal search tool for widget UI.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "create_project_preview_v3",
+        "description": "Connector variant that previews a project structure before creation.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      },
+      {
+        "tool_name": "create_task_preview_v4",
+        "description": "Connector variant that previews one task and requests confirmation before creation.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://agentdiscoverability.com/track/chatgpt/asana",
+        "source_type": "Third-party (Agent Discoverability, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public server code or verbatim complete tools/list output and initialize instructions were available; the official reference points clients to tools/list for current schemas.",
+    "human_can_agent_cannot": "The MCP reference documents a selected tool set, while Asana publishes a separate REST API reference with endpoints not represented by dedicated MCP tools, including direct operations for workspaces, custom fields, webhooks, memberships, sections, and other resource types. The MCP tools reference specifically says there is no dedicated V2 goals tool; search_objects can search goals, but the listed MCP tools do not document goal creation or updates.",
+    "sources": [
+      "https://developers.asana.com/docs/mcp-tools-reference",
+      "https://developers.asana.com/reference",
+      "https://agentdiscoverability.com/track/chatgpt/asana",
+      "https://claude.com/connectors/asana",
+      "https://www.hookmcp.com/tools/asana-official-remote/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs recommend using tools/list for current schemas and suggest preview tools when users want review before a change. Confirmation is available through interactive UIs in Claude and ChatGPT; standard write calls are used directly by other MCP clients. Guidance in tool descriptions is not shown to be server-enforced.",
+    "governance_promises": "Asana says MCP access is user-based and actions appear as the authorizing user; the token grants no permissions beyond that user's existing Asana access. V2 access is scoped to one selected workspace. MCP app tokens are separate from API tokens. The privacy statement describes general Asana data processing, but the reviewed pages do not make MCP-specific retention, training, or logging commitments.",
+    "promises_to_user": "Asana describes V2 as generally available, supports Streamable HTTP, and says app management lets eligible organizations allow or block specific clients.",
+    "comparison_with_server_logic": "Workspace selection and user permissions are documented access boundaries. Confirmation is limited to client-rendered interactive tools and does not protect ordinary writes across clients. MCP-specific logging, retention, PII masking, telemetry, and training controls were not found in the reviewed documentation.",
+    "sources": [
+      "https://developers.asana.com/docs/mcp-tools-reference",
+      "https://developers.asana.com/docs/integrating-with-asanas-mcp-server",
+      "https://developers.asana.com/docs/using-asanas-mcp-server",
+      "https://forum.asana.com/t/new-v2-mcp-server-now-generally-available/1122647",
+      "https://asana.com/terms/privacy-statement",
+      "https://asana.com/terms/developer-terms"
+    ]
+  },
+  "contradictions": [
+    "The input endpoint is https://mcp.asana.com/mcp, while Asana's current MCP guide documents https://mcp.asana.com/v2/mcp. The input path returned HTTP 401 and has its own supplied OAuth metadata, but no tool list was available for that path; actions therefore use the documented V2 list as best available evidence.",
+    "Supplied OAuth metadata for /mcp advertises https://mcp.asana.com/register and `scopes_supported: [\"default\"]`; V2 documentation says clients must pre-register and dynamic client registration is not supported, and says MCP apps do not require specific scopes.",
+    "Agent Discoverability reports 35 ChatGPT integration tools and lists versioned preview names plus eight deprecated/internal widget tools not in the official 27-tool reference. Their availability on the remote V2 endpoint is unconfirmed; they are marked third-party in actions.json.",
+    "The Claude connector directory lists 15 tools, a subset of the official 27-tool list, and describes the connector as having “30+ tools.” HookMCP reports 27 tools matching the official list."
+  ],
+  "observations_for_research": [
+    "Asana's V2 documentation distinguishes immediate write tools from client-rendered preview tools; confirmation coverage depends on the MCP client.",
+    "V2 authorization binds a session to one selected workspace, described by Asana as reducing workspace lookup calls and creating a security boundary.",
+    "The documented V2 tool set uses consolidated plural names for bulk task creation and updates, while the historical V1 changelog discussion shows earlier tools with different names."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, the complete collected official documentation pages and scripts, catalogue pages, OAuth metadata supplied in the prompt, and the local code directory. The local code directory contains no official repository and no commit record. Official docs state that tools/list is the authority for current schemas; no complete schema output was collected, so parameters are NOT PUBLISHED in actions.json. The supplied /mcp OAuth metadata and the V2 documentation refer to different endpoint paths. Community forum reports were used only as supplementary evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.6
+  }
+}

@@ -1,0 +1,636 @@
+{
+  "server": "coros",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.coros.com/mcp",
+    "documentation_url_csv": "https://support.coros.com/hc/en-us/articles/50841795180948-COROS-MCP-A-Guide-to-Connecting-Your-Training-Data-to-AI",
+    "addressing": "global",
+    "repository_url": "https://github.com/coroslab/COROS-MCP",
+    "documentation_urls_used": [
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/getting-started.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/faq.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/README.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/changelog/CHANGELOG.md",
+      "https://support.coros.com/hc/en-us/articles/50841795180948-Connect-Your-COROS-to-AI",
+      "https://www.coros.com/stories/coros-metrics/c/mcp-testing",
+      "https://coros.com/privacy",
+      "https://www.coros.com/terms"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public COROS-MCP repository contains documentation and a Python login/setup Skill helper for OpenClaw, not the hosted server implementation. The helper dynamically discovers and calls the hosted MCP; it is a separate client-side integration.",
+    "mcp_protocol_version": "NOT FOUND for the hosted endpoint. The public Skill's tests use protocolVersion 2025-06-18 in mock responses, not evidence of the deployed server's version.",
+    "commit_hash": "d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474",
+    "commit_date": "2026-10-26",
+    "implementation_language": "Hosted server: NOT FOUND. Public Skill helper: Python.",
+    "mcp_sdk_and_version": "NOT FOUND for hosted server; public repository manifests do not identify an MCP SDK dependency.",
+    "code_public": "Partially",
+    "license": "NOT FOUND in the inspected public repository files.",
+    "release_status": "Official materials describe an initial launch on 2026-05-05 and current service, but do not label the hosted service GA, beta, or early access.",
+    "other_official_servers": [
+      "https://mcpcn.coros.com/mcp — standalone mainland China routing endpoint.",
+      "https://mcpeu.coros.com/mcp — standalone Europe routing endpoint.",
+      "https://mcpus.coros.com/mcp — standalone United States and other regions routing endpoint.",
+      "COROS's public repository also provides a local Skill helper that connects to the hosted global or regional MCP; it is not another hosted MCP server."
+    ],
+    "sources": [
+      "https://github.com/coroslab/COROS-MCP",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/getting-started.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/skill/coros_mcp_login_gateway/SKILL.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/changelog/CHANGELOG.md"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "COROS states that COROS MCP itself is free. The AI platform may charge separately or impose subscription and usage limits.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "COROS account required; no MCP-specific COROS subscription price is stated. Some AI platforms may require a paid plan for connectors or MCP access.",
+    "pricing_model_details": "No MCP fee or per-call charge is documented by COROS. The public setup guide recommends paid ChatGPT Plus or Claude Pro, while noting platform policies vary.",
+    "other_access_restrictions": "A COROS account and explicit OAuth authorization are required. Data must be synced to the COROS app/cloud. Account region determines routing. FIT retrieval has a shared allowance of 50 file/download-URL requests per connected platform user per fixed 24-hour window. AI client access and approval settings vary by platform.",
+    "restrictions_controlled_by": "COROS controls account access, regional routing, MCP service, and documented FIT quota; the user authorizes the account connection; the AI platform controls its subscription, tool access, and approval settings.",
+    "sources": [
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/README.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/faq.md",
+      "https://support.coros.com/hc/en-us/articles/50841795180948-Connect-Your-COROS-to-AI"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool guide documents 33 named tools for querying activities, health, fitness, training plans, workouts, profile, and devices. It documents inputs and usage limits but does not reproduce the hosted tools/list schemas or annotations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The guide describes formatted activity/health/training results, JSON lap data, FIT file entities, download URLs, and creation/update summaries. Exact MCP content blocks and error structure are not published.",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool guide and available public Skill documentation describe tools, but do not establish whether the hosted server exposes MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md",
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/skill/coros_mcp_login_gateway/SKILL.md"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP prompts capability is documented in the inspected official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md",
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/getting-started.md"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public Skill helper maintains local token and tool-catalog cache files, but that does not establish hosted server logging or audit behavior.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/skill/coros_mcp_login_gateway/SKILL.md",
+        "https://coros.com/privacy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP sampling capability is documented in the inspected official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP roots capability is documented in the inspected official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint probe returned HTTP 401 with WWW-Authenticate: Bearer resource_metadata=\"https://mcpeu.coros.com/.well-known/oauth-protected-resource/mcp\". Supplied protected-resource metadata advertises header bearer tokens, scopes openid, mcp.tools, offline_access, and authorization server https://mcpeu.coros.com. Supplied authorization-server metadata advertises DCR at /connect/register, PKCE S256, authorization-code, client-credentials, refresh-token, device-code, and token-exchange grants, plus a revocation endpoint. Token lifetime is not stated. Metadata advertises TLS client certificate-bound access tokens.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth 2.0/OIDC metadata is supplied as JSON. Runtime authorization failures beyond the initial 401 are not documented here.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://mcpeu.coros.com/connect/register. Raw supplied values: endpoint response HTTP 401; WWW-Authenticate: Bearer resource_metadata=\"https://mcpeu.coros.com/.well-known/oauth-protected-resource/mcp\". Protected-resource document for /mcp: resource https://mcpeu.coros.com/mcp; authorization_servers [https://mcpeu.coros.com]; scopes_supported [openid, mcp.tools, offline_access]; bearer_methods_supported [header]. Authorization server: issuer https://mcpeu.coros.com; authorization_endpoint /oauth2/authorize; device_authorization_endpoint /oauth2/device_authorization; token_endpoint /oauth2/token; token_endpoint_auth_methods_supported [none, client_secret_basic, client_secret_post, client_secret_jwt, private_key_jwt, tls_client_auth, self_signed_tls_client_auth]; response_types_supported [code]; grant_types_supported [authorization_code, client_credentials, refresh_token, urn:ietf:params:oauth:grant-type:device_code, urn:ietf:params:oauth:grant-type:token-exchange]; revocation_endpoint /oauth2/revoke; revocation_endpoint_auth_methods_supported [none, client_secret_basic, client_secret_post, client_secret_jwt, private_key_jwt, tls_client_auth, self_signed_tls_client_auth]; introspection_endpoint /oauth2/introspect; introspection_endpoint_auth_methods_supported [client_secret_basic, client_secret_post, client_secret_jwt, private_key_jwt, tls_client_auth, self_signed_tls_client_auth]; code_challenge_methods_supported [S256]; tls_client_certificate_bound_access_tokens true; registration_endpoint /connect/register. Token lifetime NOT FOUND.",
+      "authorization_server": "https://mcpeu.coros.com",
+      "sources": [
+        "https://mcp.coros.com/mcp",
+        "https://mcp.coros.com/.well-known/oauth-protected-resource",
+        "https://mcp.coros.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcpeu.coros.com/.well-known/oauth-authorization-server",
+        "https://mcpeu.coros.com/.well-known/openid-configuration",
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/getting-started.md"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-enforced MCP elicitation or approval workflow is documented. The public Skill contains client-side guidance to obtain user confirmation for plan creation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/skill/coros_mcp_login_gateway/SKILL.md"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP tasks capability is documented in the inspected official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint accepts account authorization; the inspected docs do not describe server-side MCP configuration negotiation or client-provided filters.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/getting-started.md",
+        "https://mcp.coros.com/.well-known/oauth-protected-resource/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public Skill sanitizes its own errors, but hosted MCP error response formats and server error-reporting capability are not published.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/skill/coros_mcp_login_gateway/SKILL.md",
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented. COROS states the MCP itself is free; AI platform subscriptions and quotas may apply.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/README.md",
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/faq.md"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP progress notifications are documented in the inspected official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP cancellation behavior is documented in the inspected official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "COROS distributes a separate Agent Skill for login, regional routing, live tool discovery, and calls through OpenClaw. It advises clients to refresh tools and inspect unfamiliar write schemas.",
+      "pre_interaction_context_verbatim": "Use the actual tool names and schemas returned by the connected server.",
+      "post_interaction_context_structure": "The Skill dynamically retrieves tools and tool descriptions, and caches a local tool catalog briefly. These are Skill/client behaviors, not documented hosted MCP resources or prompts.",
+      "sources": [
+        "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/skill/coros_mcp_login_gateway/SKILL.md"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official materials list query/read tools and tools that create, update, or schedule plans/workouts. No hosted tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are published. 2. No server-enforced confirmation parameter or elicitation is documented. COROS docs advise confirmation in example prompts; public Skill directs client operators to obtain confirmation before plan creation. 3. OAuth scopes are openid, mcp.tools, offline_access. COROS states MCP reads only the authorized user's own activity data and uses existing coach/athlete visibility rules. DCR, PKCE S256, multiple grants, revocation, and TLS-bound access tokens appear in supplied metadata; token lifetime, admin switches, allowlists, and redirect approval are NOT FOUND. 4. Global URL routes by account region; standalone CN, EU, and US/other-region URLs are documented. Clients may control individual tool access/approval/blocking; no server read-only mode, toolset filter, or query-free mode is documented. 5. The server exposes health, menstrual-cycle, activity, profile, and device data. Docs describe account and permission boundaries but no field masking or PII exclusion. 6. FIT file and link calls share a 50-file per-user per-24-hour quota; per-tool date windows, record limits, page sizes, and caps are in the official tool guide. General rate limits and per-call cost are NOT FOUND. 7. Tool guide documents required fields, expected formats, constraints, and some corrections (reversed schedule date bounds are swapped). No general unknown-argument policy or server-side argument override behavior is documented. 8. Hosted logging, audit trails, and MCP telemetry are NOT FOUND. COROS's general privacy policy describes app/device processing and diagnostic logs, not MCP call logging specifics. 9. No feedback/rating/survey/report tool appears in the official 33-tool list. README directs users to GitHub Issues for feedback outside MCP. No tool-result upsell documented. 10. COROS publishes a separate login gateway Skill with workflow guidance; the Skill's behavioral instructions are not hosted server instructions. Tool descriptions advise reading details before edits and constrain editable record types; no hosted initialize instructions are published. 11. Hosted memory/state behavior is NOT FOUND. The separate Skill stores a short-lived local tool catalog and local auth state. 12. Standard flat documented tool list for the input host, with region-specific endpoints for routing. The separate local Skill is not a sub-server. 13. No raw API, arbitrary SQL, script execution, or general-purpose request tool is listed in the official tool guide.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[OFFICIAL TOOL GUIDE] \"Check existing schedules before creating a plan. Use `updateTrainingPlan` to change an existing plan.\"",
+      "[OFFICIAL TOOL GUIDE] \"Read the latest details and preserve training content that should not change.\"",
+      "[OFFICIAL TOOL GUIDE] \"Read the details before changing a library workout. Use `queryScheduledWorkoutDetails` for a workout on a specific date.\"",
+      "[OFFICIAL SKILL] \"Before each unfamiliar write tool, use `describe-tool` to inspect its full description and nested arguments.\"",
+      "[OFFICIAL SKILL] \"Check existing plans first; explain overlapping in-progress plans and obtain confirmation before creation.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The documented hosted MCP exposes a flat tool set; the separate regional URLs route to the service by account region. The public Skill is a client-side helper, not a hosted sub-server.",
+    "sources": [
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/getting-started.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/skill/coros_mcp_login_gateway/SKILL.md",
+      "https://support.coros.com/hc/en-us/articles/50841795180948-Connect-Your-COROS-to-AI",
+      "https://coros.com/privacy"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "33",
+    "action_count_comment": "The official tool guide at https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md names 33 tools; all 33 are listed in actions.json. No official total is stated separately. No catalogue-only tools were added. Manufact reported 22 tools but includes analyzeActivityDetail, which COROS's 2026-10-23 changelog says was removed; Odel lists no tools. The official tool guide is the source of action names and parameter descriptions.",
+    "actions": [
+      {
+        "tool_name": "querySportRecords",
+        "description": "Find activities by date, sport, distance, duration, average pace, and location for detail queries, segment analysis, or FIT downloads.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (optional); endDate: string (optional); sportTypeCodes: integer[] (optional); minDistanceKm: number (optional); maxDistanceKm: number (optional); minDurationMinutes: integer (optional); maxDurationMinutes: integer (optional); maxAveragePace: string (optional); locationKeyword: string (optional); limit: integer (optional)",
+        "parameter_count": "10",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L16-L53",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getActivityDetail",
+        "description": "View detailed data for one completed activity.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "labelId: string (required); sportType: integer (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L54-L84",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryActivityLapData",
+        "description": "Query the recorded laps or segments of an activity.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "labelId: string (required); sportType: integer (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L85-L141",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryCustomActivityLapData",
+        "description": "Query data for a selected time window within one activity, such as the last five minutes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "labelId: string (required); sportType: integer (required); startTimestamp: integer (required); endTimestamp: integer (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L142-L162",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "downloadActivityFitFiles",
+        "description": "Download FIT files for one or more activities for analysis in clients that can receive and parse files.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "labelId: string (conditional); sportType: integer (conditional); startDate: string (optional); endDate: string (optional); limit: integer (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L163-L187",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryActivityFitFileDownloadUrls",
+        "description": "Get original FIT file download links when the client cannot receive FIT files directly.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "labelId: string (conditional); sportType: integer (conditional); startDate: string (optional); endDate: string (optional); limit: integer (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L188-L215",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryDailyHealthData",
+        "description": "Query overall daily health data for recent days.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "days: integer (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L216-L233",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "querySleepOverview",
+        "description": "Query sleep scores, main sleep, and naps.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (optional); endDate: string (optional); days: integer (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L234-L271",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "querySleepHrv",
+        "description": "View heart rate variability (HRV) during sleep and its COROS assessment.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (optional); endDate: string (optional); days: integer (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L272-L292",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryAvgHeartRate",
+        "description": "Query daily average heart rate and trends.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (optional); endDate: string (optional); days: integer (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L293-L312",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryRestingHeartRate",
+        "description": "Query resting heart rate for recent days.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "days: integer (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L313-L330",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryStressLevel",
+        "description": "Query daily average stress trends.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "days: integer (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L331-L348",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryHealthCheckTimeSeries",
+        "description": "Find the latest available complete wellness check.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (optional); endDate: string (optional); days: integer (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L349-L370",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryStressTimeSeries",
+        "description": "View stress changes over time for the selected dates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (optional); endDate: string (optional); days: integer (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L371-L390",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryRecoveryStatus",
+        "description": "Query the current recovery level.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L391-L406",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryMenstruationCycles",
+        "description": "Query menstrual status, phases, cycle ranges, and notes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDay: integer (optional); endDay: integer (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L407-L425",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryFitnessAssessmentOverview",
+        "description": "View current fitness and running ability assessments.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L426-L437",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryTrainingLoadAssessment",
+        "description": "Review whether recent training load is appropriate.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "days: integer (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L438-L451",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryTrainingSchedule",
+        "description": "Query workouts scheduled for a day, the current week, or a date range.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string (optional); endDate: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L452-L471",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryTrainingPlanLibrary",
+        "description": "Find existing training plans by execution status, source, and length.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "statusList: integer[] (optional); planType: string (optional); weeks: integer (optional); cursor: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L472-L493",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryTrainingPlanDetails",
+        "description": "View the plan summary, all training phases, and workouts within selected dates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "planId: string (required); startDay: string (optional); endDay: string (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L494-L514",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createTrainingPlan",
+        "description": "Save a designed multi-week training plan to COROS and execute it from the specified start date.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "planInfo: object (required); phaseInfo: object (required); courseList: object[] (required)",
+        "parameter_count": "3",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L515-L536",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateTrainingPlan",
+        "description": "Adjust workouts, phases, or the length of an existing training plan.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "planInfo: object (required); courseList: object[] (conditional); phaseInfo: object (conditional)",
+        "parameter_count": "3",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L537-L558",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryWorkoutLibrary",
+        "description": "Find workouts saved in the workout library.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "sportType: integer (optional); courseType: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L559-L578",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryWorkoutDetails",
+        "description": "View the content of a workout in the library.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "workoutId: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L579-L596",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSingleWorkout",
+        "description": "Create a workout and save it to the library.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "course: object (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L597-L615",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateWorkoutDetails",
+        "description": "Edit a supported workout in the library.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "workoutId: string (required); course: object (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L616-L635",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "scheduleWorkout",
+        "description": "Schedule an existing library workout on a selected date.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "workoutId: string (required); date: string (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L636-L656",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createScheduledWorkout",
+        "description": "Create a new standalone workout directly on a selected date.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "date: string (required); course: object (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L657-L676",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryScheduledWorkoutDetails",
+        "description": "Read one standalone workout already scheduled on a date.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "date: string (required); idInPlan: string (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L677-L696",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateScheduledWorkout",
+        "description": "Edit a supported workout scheduled separately on a date.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "date: string (required); idInPlan: string (required); course: object (required)",
+        "parameter_count": "3",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L697-L722",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryUserInfo",
+        "description": "Query the currently authorized account’s profile.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L723-L734",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryDevices",
+        "description": "View COROS devices bound to the currently authorized account.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md#L735-L743",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted tool definitions and initialize instructions are not available verbatim. The public code is a client-side Skill helper, not the server implementation.",
+    "human_can_agent_cannot": "COROS explicitly says plans/workouts cannot be deleted with AI; deletion must be done manually in the COROS app. Rescheduling/removing calendar workouts and exiting plans are also directed to the app. The support article says the MCP cannot query data belonging to another athlete or an athlete the user coaches. The support article describes GPS route, terrain/elevation-profile, split-trend, cycling power-curve, and FTP analysis as requiring raw FIT files or unavailable through basic query; it notes manual FIT export/upload as a workaround.",
+    "sources": [
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/changelog/CHANGELOG.md",
+      "https://support.coros.com/hc/en-us/articles/50841795180948-Connect-Your-COROS-to-AI",
+      "https://manufact.com/mcp-catalog/coros",
+      "https://odel.app/modules/coroslab/coros-mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "COROS's tool guide recommends checking existing schedules before plan creation and reading details before edits; these are guidance in documentation. Tool guide constraints include 4–16-week plans, supported sports, editable-plan checks, and date windows, but server enforcement cannot be verified without hosted code. The separate Skill instructs clients to obtain user confirmation before plan creation; no server enforcement is documented.",
+    "governance_promises": "COROS states: \"Access is only granted through explicit user authorization.\" It says the MCP only queries the user's own activity data and applies existing coach/athlete visibility. It also says AI conversation retention is governed by the AI platform's policies. The COROS privacy policy covers health/training data processing in the app and wearables; it does not specify MCP-specific retention or logging.",
+    "promises_to_user": "COROS describes MCP as a permission-based connection layer using existing account authentication and privacy controls. It says users choose whether to connect and which AI platform to authorize, and that the MCP itself is free.",
+    "comparison_with_server_logic": "OAuth metadata verifies protected access and advertised scopes. Official docs describe user and data boundaries and tool-level limits, but hosted implementation is closed, so detailed enforcement, logging, and retention claims cannot be independently checked. Tool usage guidance and Skill confirmation instructions are not shown to be server-enforced.",
+    "sources": [
+      "https://support.coros.com/hc/en-us/articles/50841795180948-Connect-Your-COROS-to-AI",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/docs/en/tools.md",
+      "https://github.com/coroslab/COROS-MCP/blob/d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474/skill/coros_mcp_login_gateway/SKILL.md",
+      "https://coros.com/privacy",
+      "https://mcp.coros.com/.well-known/oauth-protected-resource/mcp"
+    ]
+  },
+  "contradictions": [
+    "Manufact's listing reports 22 tools and includes analyzeActivityDetail, while the official changelog says analyzeActivityDetail was removed on 2026-10-23 and the current official guide names 33 tools. The catalogue appears stale.",
+    "Odel's listing says the publisher's server requires no sign-in, but its own text reports an OAuth sign-in at mcpus.coros.com; supplied endpoint evidence and OAuth metadata confirm protected OAuth access."
+  ],
+  "observations_for_research": [
+    "The public repository distributes client-side Skill guidance and a login helper that dynamically discovers hosted tools, while the hosted server implementation remains closed.",
+    "COROS documents both read and write tools but leaves deletion, plan exit, and calendar rescheduling to the app.",
+    "Account authorization exposes the broad documented tool set through a single mcp.tools scope; tool-level allow, approval, and block controls are described as AI-platform features."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Prepared links.json, links_check.txt, pages/, oauth_metadata.txt, and the local repository were inspected. The supplied long-form support URL returned HTTP 403 in the evidence capture; the same article was available at the canonical support URL cited above. The repository was inspected at commit d7fdc7c7b75c7bfcfde167dfe362ad44a90bf474, but it contains no hosted server implementation, so runtime annotations, exact protocol version, initialize instructions, and MCP response schemas could not be verified. Catalogue cross-checks were Manufact (stale 22-tool list) and Odel (no tools listed). Unofficial repositories found in links.json were excluded from evidence and actions.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 9.3
+  }
+}

@@ -1,0 +1,1024 @@
+{
+  "server": "make",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.make.com/",
+    "documentation_url_csv": "https://developers.make.com/mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/integromat/make-mcp-server",
+    "documentation_urls_used": [
+      "https://developers.make.com/mcp-server",
+      "https://developers.make.com/mcp-server/connect-using-oauth",
+      "https://developers.make.com/mcp-server/connect-using-api-key",
+      "https://developers.make.com/mcp-server/connect-using-api-key/scenarios-as-tools-access-control",
+      "https://help.make.com/make-mcp-server",
+      "https://help.make.com/introduction-to-mcp",
+      "https://help.make.com/mcp-toolboxes",
+      "https://www.make.com/en/pricing",
+      "https://www.make.com/terms-and-conditions"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "Official legacy local stdio server: Make documents \"Make Local MCP Server (legacy)\" as npm package @makehq/mcp-server (https://developers.make.com/mcp-server/make-local-mcp-server-legacy.md); its source is github.com/integromat/make-mcp-server (Integromat is Make's former company name). It exposes on-demand scenarios as tools and is not the hosted server at mcp.make.com; its tools are not added to actions. The hosted server code is not public.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "f436799ef010276c18ea98ed0ed0a45dc748608b",
+    "commit_date": "2026-06-10",
+    "implementation_language": "TypeScript (legacy local server)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.6.1 (legacy local server)",
+    "code_public": "Partially",
+    "license": "MIT (legacy local server)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "MCP toolboxes: dedicated Make-hosted servers with selected scenario tools, unique URLs, API-key access, configurable labels/descriptions and read/read-write annotations; a distinct product from the global endpoint. https://help.make.com/mcp-toolboxes",
+      "Legacy Make Cloud MCP server documentation describes regional SSE endpoints; the current Make MCP server documentation describes stateless Streamable HTTP. https://developers.make.com/mcp-server/make-cloud-mcp-server.md"
+    ],
+    "sources": [
+      "https://developers.make.com/mcp-server",
+      "https://help.make.com/mcp-toolboxes",
+      "https://developers.make.com/mcp-server/make-cloud-mcp-server.md",
+      "https://github.com/integromat/make-mcp-server",
+      "https://developers.make.com/mcp-server/make-local-mcp-server-legacy.md"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "Scenario-run tools are available on all Make plans. Management tools require a paid plan. No separate MCP fee or per-call MCP price was found. https://developers.make.com/mcp-server",
+    "linked_software": "Paid",
+    "linked_software_cost": "Official pricing page lists Free at $0/month with up to 1,000 credits/month; Core at $12/month, Pro at $21/month, and Teams at $38/month for 10,000 credits/month; Enterprise is custom priced. https://www.make.com/en/pricing",
+    "pricing_model_details": "Make charges by credits: each module action in a scenario generally counts as a credit, with AI-related exceptions. MCP scenario executions invoke the configured scenario and its modules; no separate MCP-call charge was identified. https://www.make.com/en/pricing ; https://help.make.com/credits",
+    "other_access_restrictions": "Scenario-run tools expose active, on-demand scenarios. OAuth scopes determine available tools; API-key scenario access can be narrowed by organization, team, or scenario query parameters (those levels cannot be combined). OAuth connects to one selected organization; API-key scenario access defaults to active, on-demand scenarios across organizations. Management tools require a paid plan. https://developers.make.com/mcp-server ; https://developers.make.com/mcp-server/connect-using-api-key/scenarios-as-tools-access-control",
+    "restrictions_controlled_by": "Make controls plan-based availability and server behavior; the user selects OAuth scopes or API-key scopes, and API-key users can set documented scenario filters. Organization/team access also depends on Make permissions. https://developers.make.com/mcp-server/connect-using-oauth ; https://developers.make.com/mcp-server/connect-using-api-key/scenarios-as-tools-access-control",
+    "sources": [
+      "https://developers.make.com/mcp-server",
+      "https://developers.make.com/mcp-server/connect-using-oauth",
+      "https://developers.make.com/mcp-server/connect-using-api-key/scenarios-as-tools-access-control",
+      "https://www.make.com/en/pricing",
+      "https://help.make.com/credits"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Exposes scenario-run tools and account-management tools. The available tool set depends on granted scopes, plan, organization access, and configured scenarios. Official documentation directs clients to tools/list or client settings to discover actual names, descriptions, and schemas; it publishes no fixed official tool-name list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Scenario tools use scenario inputs as parameters and return configured scenario outputs. Timed-out scenario calls can return an executionId for later result retrieval. Management tool result schemas are not published in the reviewed documentation.",
+      "authorization_mechanism": "See Authorization entry.",
+      "authorization_server": "See Authorization entry.",
+      "sources": [
+        "https://developers.make.com/mcp-server",
+        "https://developers.make.com/mcp-server/connect-using-oauth"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official Make docs describe Make account resources and scenario outputs, but do not establish whether the input MCP endpoint implements the MCP resources capability. A third-party live inspection reports one resource, but its identity and relevance to this endpoint were not verified.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server",
+        "https://manufact.com/mcp-catalog/make"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official documentation does not describe MCP prompts on the server. A third-party inspection says the server declares prompts, but no prompt definitions were available to review.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server",
+        "https://manufact.com/mcp-catalog/make"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Make says tool runs are visible in Make. The reviewed material does not specify what MCP request details are logged, how long MCP-specific logs are retained, or whether logging can be disabled.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://help.make.com/introduction-to-mcp",
+        "https://www.make.com/en/pricing"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP sampling support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint response is HTTP 401 and advertises Bearer resource metadata at https://mcp.make.com/.well-known/oauth-protected-resource. That document names https://www.make.com/mcp as the authorization server and supports the bearer header. The supplied authorization-server metadata advertises authorization_code and refresh_token grants, S256 PKCE, DCR at https://www.make.com/oauth/v2/register/mcp, token and revocation endpoints, and client_secret_post authentication at token/revocation endpoints. No scopes_supported or token-lifetime values appear in the supplied metadata. OIDC discovery returned 404. Make docs also describe API-key connection methods.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://mcp.make.com/.well-known/oauth-protected-resource\"",
+      "post_interaction_context_structure": "Unauthorized probe returned HTTP 401 with {\"code\":\"SC401\",\"name\":\"Access denied\",\"message\":\"Unauthorized.\",\"details\":[]}.",
+      "authorization_mechanism": "Metadata Doc / Dynamic Client Registration / OAuth / API key. Supplied metadata: bearer_methods_supported=[\"header\"]; authorization_servers=[\"https://www.make.com/mcp\"]; grant_types_supported=[\"authorization_code\",\"refresh_token\"]; code_challenge_methods_supported=[\"S256\"]; registration_endpoint=\"https://www.make.com/oauth/v2/register/mcp\"; token_endpoint_auth_methods_supported=[\"client_secret_post\"]; revocation_endpoint_auth_methods_supported=[\"client_secret_post\"]. scopes_supported is absent from the supplied metadata. Token lifetime not stated. Revocation endpoint: https://www.make.com/oauth/v2/revoke.",
+      "authorization_server": "https://www.make.com/mcp",
+      "sources": [
+        "https://mcp.make.com/",
+        "https://mcp.make.com/.well-known/oauth-protected-resource",
+        "https://www.make.com/.well-known/oauth-authorization-server/mcp",
+        "https://www.make.com/.well-known/openid-configuration/mcp",
+        "https://developers.make.com/mcp-server/connect-using-oauth",
+        "https://developers.make.com/mcp-server/connect-using-api-key"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP Elicitation. The OAuth consent screen and client-side tool permission prompts are documented, but are not evidence of server-enforced MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server/connect-using-oauth",
+        "https://help.make.com/get-started-with-make-mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Documentation describes a scenario timeout and a way to retrieve a completed run by executionId; it does not identify MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "A timed-out scenario can continue running for up to 40 minutes; the timeout response includes an executionId for later output retrieval using a corresponding tool.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "API-key scenario tools can be filtered by organizationId, teamId, or scenarioId; multiple values are supported for a given filter, but filter levels cannot be combined. maxToolNameLength can be set from 32 to 160 characters; default is 56. OAuth users select organization and scopes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server",
+        "https://developers.make.com/mcp-server/connect-using-oauth",
+        "https://developers.make.com/mcp-server/connect-using-api-key/scenarios-as-tools-access-control"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed sources describe timeout behavior but do not specify MCP error object formats, error reporting tools, or a server-side error reporting capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Timeouts may return an executionId and instruction text; other error structures not published.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP subscription notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Scenario runs can continue after the client-facing call times out and later be retrieved by executionId; official docs do not identify MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "See the documented timeout response and executionId workflow under Tasks.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP request cancellation mechanism is documented. Scenario deactivation appears in a third-party tool listing but does not establish cancellation of a running MCP request.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server",
+        "https://claude.com/marketplace/connectors/make"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official docs specify stateless Streamable HTTP. They also document generated tool-name length configuration and separately distributed Make Skills that provide setup and Make-specific instructions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.make.com/mcp-server",
+        "https://skills.make.com/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Read/write: official docs describe scenario execution and account management that can modify scenarios, connections, webhooks, data stores, teams, and organizations. No official fixed tool list or annotations for this endpoint were found. Toolboxes separately allow read-only/read-write annotations; default is read/write. https://developers.make.com/mcp-server ; https://help.make.com/mcp-toolboxes\n2. Server-enforced confirmation: no MCP-side confirmation workflow was found in official docs. Client consent and client permission prompts are described; they are not shown to be server-enforced confirmation. https://developers.make.com/mcp-server/connect-using-oauth ; https://help.make.com/get-started-with-make-mcp-server\n3. OAuth scopes govern tool access; OAuth connects to a selected organization. Scenario-run scope includes active on-demand scenarios; management scopes provide account management and are paid-plan only. API-key scenario tools can be filtered by organization, team, or scenario. Role inheritance, token lifetime, redirect URI approvals, and allowlists: Unknown. Supplied OAuth metadata has DCR and S256 PKCE, but no scopes_supported. https://developers.make.com/mcp-server ; https://developers.make.com/mcp-server/connect-using-api-key/scenarios-as-tools-access-control\n4. Restrictions: API-key scenario filters and maxToolNameLength are documented. OAuth permits selection of one organization. No read-only mode or general tools/toolsets filter is documented for the global endpoint. Scenario tools require active scenarios with on-demand scheduling. Make toolboxes are separate servers for selected toolsets. https://developers.make.com/mcp-server ; https://help.make.com/mcp-toolboxes\n5. Data protection: no MCP-specific PII masking, field exclusion, or secret redaction behavior found. Scenario inputs and outputs determine exchanged data. https://developers.make.com/mcp-server\n6. Limits: OAuth scenario-run timeout 25 s and management timeout 30 s; API-key scenario-run timeout 40 s and management timeout 60 s. Timed-out scenarios may continue up to 40 minutes and return executionId. Scenario plan execution limits and credit consumption apply. https://developers.make.com/mcp-server ; https://www.make.com/en/pricing\n7. Validation/correction: scenario input/output definitions supply parameters; no MCP-specific unknown-argument handling, coercion, alias rewriting, or operator-overrides documented. https://developers.make.com/mcp-server\n8. Monitoring/logging: Make says tool runs are visible in Make. MCP-specific audit fields, retention, telemetry, and opt-out: Unknown. https://help.make.com/introduction-to-mcp\n9. Vendor-interest mechanisms: no feedback/rating/survey tool is apparent in the 67 names published by Claude's third-party connector listing. Docs recommend Make scenario descriptions to improve agent reliability; no upsell result or marketing elicitation found. https://claude.com/marketplace/connectors/make ; https://developers.make.com/mcp-server\n10. Behaviour shaping: Make Skills are Markdown instructions installable in MCP clients; docs recommend detailed scenario descriptions for more reliable calls. No server-provided initialize instructions were found. https://developers.make.com/mcp-server ; https://skills.make.com/\n11. Memory/state: no agent-history-dependent behavior documented. Scenarios and Make account configuration define available tools and effects. https://developers.make.com/mcp-server\n12. Structure: global server exposes scenario-run and management capabilities; tool set varies by scopes, plan, organization, and scenarios. Separate toolboxes offer dedicated scenario sets. https://developers.make.com/mcp-server ; https://help.make.com/mcp-toolboxes\n13. Escape hatch: the third-party listing includes rpc_execute, but provides no schema or description sufficient to establish whether it is a general raw API escape hatch. https://claude.com/marketplace/connectors/make",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] “Write detailed scenario descriptions to help MCP clients understand what each scenario does and get more reliable results.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The server exposes tools dynamically from the user's active on-demand scenarios in addition to scope- and plan-dependent management tools; its available toolset is not a single fixed list. Separate MCP toolboxes provide scenario-specific servers but are distinct from this endpoint.",
+    "sources": [
+      "https://developers.make.com/mcp-server",
+      "https://developers.make.com/mcp-server/connect-using-oauth",
+      "https://developers.make.com/mcp-server/connect-using-api-key/scenarios-as-tools-access-control",
+      "https://help.make.com/introduction-to-mcp",
+      "https://help.make.com/mcp-toolboxes",
+      "https://claude.com/marketplace/connectors/make",
+      "https://www.make.com/en/pricing",
+      "https://skills.make.com/"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "67 listed tools in Claude's connector directory; the live count is configuration-dependent and not fixed in official docs.",
+    "action_count_comment": "No fixed official tool-name list or stated total was found in official Make docs; they direct clients to tools/list. Claude's third-party connector directory lists 67 exact names for the Make connector and says it is Anthropic verified. Manufact reported 133 tools in its live inspection, a different count that could not be enumerated from the available evidence. Actions contains the 67 names visible in Claude's directory; it does not claim that every configuration exposes all of them. No catalogue-only names could be added with sufficient evidence.",
+    "actions": [
+      {
+        "tool_name": "scenarios_list",
+        "description": "Scenarios list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "scenarios_get",
+        "description": "Scenarios get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "scenarios_create",
+        "description": "Scenarios create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "scenarios_update",
+        "description": "Scenarios update in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "scenarios_delete",
+        "description": "Scenarios delete in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "scenarios_activate",
+        "description": "Scenarios activate in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "scenarios_deactivate",
+        "description": "Scenarios deactivate in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "scenarios_run",
+        "description": "Scenarios run in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "scenarios_interface",
+        "description": "Scenarios interface in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "scenarios_set_interface",
+        "description": "Scenarios set interface in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "connections_list",
+        "description": "Connections list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "connections_get",
+        "description": "Connections get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-stores_list",
+        "description": "Data stores list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-stores_get",
+        "description": "Data stores get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-stores_create",
+        "description": "Data stores create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-stores_update",
+        "description": "Data stores update in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-stores_delete",
+        "description": "Data stores delete in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-store-records_list",
+        "description": "Data store records list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-store-records_create",
+        "description": "Data store records create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-store-records_update",
+        "description": "Data store records update in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-store-records_replace",
+        "description": "Data store records replace in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-store-records_delete",
+        "description": "Data store records delete in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "teams_list",
+        "description": "Teams list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "teams_get",
+        "description": "Teams get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "teams_create",
+        "description": "Teams create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "teams_delete",
+        "description": "Teams delete in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "organizations_list",
+        "description": "Organizations list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "organizations_get",
+        "description": "Organizations get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "organizations_create",
+        "description": "Organizations create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "organizations_update",
+        "description": "Organizations update in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "organizations_delete",
+        "description": "Organizations delete in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "users_me",
+        "description": "Users me in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "executions_list",
+        "description": "Executions list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "executions_get_detail",
+        "description": "Executions get detail in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "executions_get",
+        "description": "Executions get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "hooks_list",
+        "description": "Hooks list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "hooks_get",
+        "description": "Hooks get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "hooks_create",
+        "description": "Hooks create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "hooks_update",
+        "description": "Hooks update in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "hooks_delete",
+        "description": "Hooks delete in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "keys_list",
+        "description": "Keys list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "keys_get",
+        "description": "Keys get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "keys_create",
+        "description": "Keys create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "keys_update",
+        "description": "Keys update in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "keys_delete",
+        "description": "Keys delete in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "folders_list",
+        "description": "Folders list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "folders_create",
+        "description": "Folders create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "folders_update",
+        "description": "Folders update in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "folders_delete",
+        "description": "Folders delete in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-structures_list",
+        "description": "Data structures list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-structures_get",
+        "description": "Data structures get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-structures_create",
+        "description": "Data structures create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-structures_update",
+        "description": "Data structures update in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data-structures_delete",
+        "description": "Data structures delete in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "enums_countries",
+        "description": "Enums countries in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "enums_regions",
+        "description": "Enums regions in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "enums_timezones",
+        "description": "Enums timezones in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "app-modules_list",
+        "description": "App modules list in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "app-module_get",
+        "description": "App module get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "rpc_execute",
+        "description": "Rpc execute in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "apps_recommend",
+        "description": "Apps recommend in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "tools_create",
+        "description": "Tools create in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "tools_get",
+        "description": "Tools get in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "tools_update",
+        "description": "Tools update in Make.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "validate_module_configuration",
+        "description": "Validate module configuration in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "validate_blueprint_schema",
+        "description": "Validate blueprint schema in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "validate_scheduling_schema",
+        "description": "Validate scheduling schema in Make.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/make",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim initialize instructions and tool definitions for this endpoint were available. Names alone and a third-party listing are insufficient to calculate the requested context token count.",
+    "human_can_agent_cannot": "Make's visual scenario builder can configure modules, connections, inputs, outputs, schedules, and workflow logic; MCP docs describe scenarios as callable tools but do not establish that every visual-builder operation is exposed through MCP. Toolboxes can be created and configured through Make's interface as a separate server product. No complete official comparison of UI/API actions against this endpoint's tools was found. https://help.make.com/get-started-with-make-mcp-server ; https://help.make.com/mcp-toolboxes",
+    "sources": [
+      "https://developers.make.com/mcp-server",
+      "https://claude.com/marketplace/connectors/make",
+      "https://manufact.com/mcp-catalog/make",
+      "https://help.make.com/get-started-with-make-mcp-server",
+      "https://help.make.com/mcp-toolboxes",
+      "https://developers.make.com/mcp-server/make-local-mcp-server-legacy.md",
+      "https://github.com/integromat/make-mcp-server"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Make advises: “Write detailed scenario descriptions to help MCP clients understand what each scenario does and get more reliable results.” The docs present this as guidance for scenario authors; no enforcement is described. Make Skills are optional client-installed Markdown instructions. https://developers.make.com/mcp-server ; https://skills.make.com/",
+    "governance_promises": "Make describes MCP as enabling “safe interactions” and says the server connects to Make resources so clients can perform actions. Docs describe scope selection and scenario-level API-key filters; no MCP-specific promises about PII masking, AI training, data retention, or reversibility were found. https://developers.make.com/mcp-server ; https://developers.make.com/mcp-server/connect-using-api-key/scenarios-as-tools-access-control",
+    "promises_to_user": "Make states that tool runs are visible in Make and that scenario/tool outputs are defined by the scenario author. https://help.make.com/introduction-to-mcp ; https://developers.make.com/mcp-server",
+    "comparison_with_server_logic": "Scope selection and API-key filters are documented access controls; scenario timeouts and deferred result retrieval are documented runtime behavior. Visibility of tool runs is claimed, but logging details and retention were not specified. Guidance about detailed scenario descriptions is not described as enforced by the server. No source establishes initialize instructions or MCP-side confirmation.",
+    "sources": [
+      "https://developers.make.com/mcp-server",
+      "https://developers.make.com/mcp-server/connect-using-api-key/scenarios-as-tools-access-control",
+      "https://help.make.com/introduction-to-mcp",
+      "https://www.make.com/terms-and-conditions"
+    ]
+  },
+  "contradictions": [
+    "The official Make docs state tool names and schemas depend on scopes and scenarios and instruct users to inspect tools/list; Claude's third-party connector page lists 67 names, while Manufact reports 133 tools in its live inspection. These may reflect different configurations, client views, or inventory methods; no official fixed total resolves the discrepancy.",
+    "The input URL is the root https://mcp.make.com/ and its pre-fetched probe returns HTTP 401. Official Make docs specify https://mcp.make.com/v2 as the OAuth connection URL. The root probe establishes authorization metadata but does not establish that the root path itself serves MCP requests.",
+    "The provided protected-resource metadata has no scopes_supported value, while Make docs describe scope-selected tools and name scenario scopes such as scenarios:read. The supplied metadata therefore does not enumerate scopes or directly document the full permission set.",
+    "The official docs describe stateless Streamable HTTP for the current server; the older Make Cloud MCP server page describes SSE and older regional endpoint paths. The older page identifies itself as outdated.",
+    "The OAuth authorization server metadata names issuer https://www.make.com/mcp, while the endpoint's protected-resource metadata names that same authorization server; OIDC discovery at the supplied path returned 404."
+  ],
+  "observations_for_research": [
+    "The server's tool inventory is partly user-authored: scenarios become tools when active, configured for on-demand scheduling, and supplied with scenario inputs/outputs.",
+    "Tool availability combines OAuth scope or API-key scope with plan eligibility and scenario configuration; management tools require a paid Make plan while scenario-run tools are offered on all plans.",
+    "The API-key method documents URL-level organization/team/scenario scoping; OAuth documentation describes organization and scopes, but not equivalent scenario-level OAuth filtering.",
+    "Make separates unrestricted account MCP access from MCP toolboxes, which expose selected scenarios through distinct endpoints and keys.",
+    "A scenario can continue running after the client-facing tool call times out, with later output retrieval via executionId."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "[MANUAL CORRECTION 2026-10-27: repository restored: integromat/make-mcp-server is Make's official legacy local server (npm @makehq/mcp-server, documented by Make); the link collector had wrongly marked it unofficial because the GitHub organisation carries the former company name] Inspected the prepared links.json, pages/INDEX.txt, links_check.txt, official docs and subpages, hosted endpoint response, pricing/legal pages, and available catalogues. Official pricing pages were blocked in the local fetch, so current official pricing search results were used. No official repository was listed; an unofficial community repository was found and excluded. Claude connector directory was used as third-party tool-name evidence; Manufact's live report of 133 tools was not independently verified. No names were published by official docs, so action descriptions and read/write types are concise interpretations of catalogue tool names; parameter schemas were unavailable. Privacy details are not summarized because the reviewed legal page only linked the DPA and Privacy Notice.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.1
+  },
+  "_manual_corrections": [
+    {
+      "date": "2026-10-27",
+      "by": "manual check (Claude)",
+      "change": "repository restored: integromat/make-mcp-server is Make's official legacy local server (npm @makehq/mcp-server, documented by Make); the link collector had wrongly marked it unofficial because the GitHub organisation carries the former company name",
+      "sources": [
+        "https://developers.make.com/mcp-server/make-local-mcp-server-legacy.md",
+        "https://github.com/integromat/make-mcp-server"
+      ]
+    }
+  ]
+}

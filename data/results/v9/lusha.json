@@ -1,0 +1,946 @@
+{
+  "server": "lusha",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.lusha.com/mcp",
+    "documentation_url_csv": "https://docs.lusha.com/mcp-docs",
+    "addressing": "global",
+    "repository_url": "https://github.com/lusha-oss/lusha-public-api-mcp",
+    "documentation_urls_used": [
+      "https://docs.lusha.com/mcp/overview.md",
+      "https://docs.lusha.com/mcp/setup.md",
+      "https://docs.lusha.com/mcp/tools.md",
+      "https://docs.lusha.com/mcp/examples.md",
+      "https://docs.lusha.com/faq/mcp.md",
+      "https://docs.lusha.com/user-guide/mcp/lusha-model-context-protocol-mcp-server.md",
+      "https://www.lusha.com/pricing/",
+      "https://www.lusha.com/legal/privacy-notice/",
+      "https://www.lusha.com/legal/terms_and_conditions-2/",
+      "https://github.com/lusha-oss/lusha-public-api-mcp",
+      "https://github.com/lusha-oss/lusha-mcp-plugin",
+      "https://github.com/lusha-oss/lusha-mcp-talent-sourcing-plugin"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "Lusha documents the public @lusha-org/mcp package as a stdio connection option. It is an official local MCP server for the product, but its 8 camelCase tool definitions differ from the hosted server's 50 documented snake_case tools. A separate official plugin repository points clients to client-specific hosted paths and distributes skills; it does not contain the hosted server implementation.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "10dc2953e264cc108672b24e144547a92ae8f3cc",
+    "commit_date": "2025-08-24",
+    "implementation_language": "TypeScript (public local server)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.12.1 (public local server package)",
+    "code_public": "Partially",
+    "license": "ISC (public local package; hosted server license not found)",
+    "release_status": "GA",
+    "other_official_servers": [
+      "Lusha's official plugin repository documents client-specific hosted variants at mcp.lusha.com/mcp/codex, /mcp/claude, /mcp/cursor, /mcp/copilot, and /mcp/gemini. It describes them as the same Lusha MCP server with shared logical tool names and client-specific manifests.",
+      "The separate recruiting plugin documents mcp-hr.lusha.com/mcp/{claude,cursor,codex,copilot,gemini} for a recruiting server with 26 tools; it is a different product surface and is not included in actions."
+    ],
+    "sources": [
+      "https://docs.lusha.com/mcp/overview.md",
+      "https://docs.lusha.com/mcp/setup.md",
+      "https://docs.lusha.com/mcp/tools.md",
+      "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/README.md",
+      "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/package.json",
+      "https://github.com/lusha-oss/lusha-mcp-plugin/blob/50bf1a06230a7a5f553f2aa2d294153a37c5998f/README.md",
+      "https://github.com/lusha-oss/lusha-mcp-talent-sourcing-plugin/blob/50bf1a06230a7a5f553f2aa2d294153a37c5998f/README.md"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "No separate MCP fee is documented. MCP calls use the same API access entitlement and credit pool as REST API calls; any plan with API access can use MCP. Credit-consuming calls are charged under the account's plan.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "The official pricing page describes a Free plan with up to 40 credits per month. It lists credit examples of 1 credit per verified email reveal and 5 credits per phone reveal. Other plan prices are not stated in the collected page text.",
+    "pricing_model_details": "Credits are shared with REST API usage. Search and lookup generally charge for successful matched results; filter-discovery tools and account_usage are free. CRM export charges per record actually written. Plan-based rate limits apply.",
+    "other_access_restrictions": "Recommendations tools are OAuth-only and return 403 for API-key sessions. CRM connection is admin-only. An MCP access permission is documented as on by default; if disabled, only Admins and Managers can connect. API-key sessions follow account API-key permission settings. Credit availability and plan rate limits apply.",
+    "restrictions_controlled_by": "Vendor and organization admin; account roles and API-key permission settings also apply.",
+    "sources": [
+      "https://docs.lusha.com/faq/mcp.md",
+      "https://docs.lusha.com/mcp/tools.md",
+      "https://docs.lusha.com/user-guide/mcp/lusha-model-context-protocol-mcp-server.md",
+      "https://www.lusha.com/pricing/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tools reference names 50 hosted tools in categories including enrichment, prospecting, signals, recommendations, tables, CRM, conversations, and account usage. It cautions that availability can vary by client. The official local package defines 8 older tools with different names; their schemas and handlers are in public code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Hosted response structure not published in the collected documentation. The local package returns JSON serialized as MCP text content, with success/data/metadata or error/metadata fields.",
+      "authorization_mechanism": "OAuth bearer token for OAuth clients; API-key header for other clients. The pre-fetched endpoint response is HTTP 401 with WWW-Authenticate: Bearer error=\"invalid_request\", error_description=\"missing Authorization header\", scope=\"mcp\", resource_metadata=\"https://mcp.lusha.com/.well-known/oauth-protected-resource/mcp\". Protected-resource metadata: scopes_supported=[\"mcp\"], bearer_methods_supported=[\"header\"], response_types_supported=[\"code\"], authorization_servers=[\"https://auth.lusha.com\"]. Authorization-server metadata: scopes_supported=[\"mcp\",\"api_access\"], grant_types_supported=[\"authorization_code\",\"refresh_token\"], response_types_supported=[\"code\"], code_challenge_methods_supported=[\"S256\"], token_endpoint_auth_methods_supported=[\"client_secret_post\",\"client_secret_basic\"], registration_endpoint=\"https://auth.lusha.com/oauth/register\", revocation_endpoint=\"https://auth.lusha.com/oauth/revoke\". Token lifetime not found. OpenID configuration returned HTTP 401.",
+      "authorization_server": "https://auth.lusha.com",
+      "sources": [
+        "https://docs.lusha.com/mcp/tools.md",
+        "https://docs.lusha.com/mcp/setup.md",
+        "https://docs.lusha.com/faq/mcp.md",
+        "https://mcp.lusha.com/.well-known/oauth-protected-resource",
+        "https://mcp.lusha.com/.well-known/oauth-protected-resource/mcp",
+        "https://auth.lusha.com/.well-known/oauth-authorization-server",
+        "https://auth.lusha.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted reference documents tools but does not describe MCP resources. A third-party inventory reports zero resources, but this is not sufficient to verify their absence on the endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/tools.md",
+        "https://tedix.dev/apps/lusha/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Lusha documents a starter prompt on the client's consent screen. The documentation does not establish that it is an MCP prompts/list capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/overview.md",
+        "https://docs.lusha.com/mcp/setup.md"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted-server logging and audit behavior were not found in the public documentation. The separate public local server logs tool arguments, outcomes, errors, and API request context to console; this does not establish hosted behavior.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/index.ts#L35-L64",
+        "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/utils/api.ts#L33-L74"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted sampling behavior was found in the collected documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/overview.md",
+        "https://docs.lusha.com/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted roots behavior was found in the collected documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/overview.md",
+        "https://docs.lusha.com/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint evidence shows HTTP 401 when Authorization is missing. Its protected-resource metadata advertises the mcp scope and auth.lusha.com. The authorization server supports authorization_code and refresh_token, S256 PKCE, dynamic registration, and revocation. Separately, setup documentation describes API-key header authentication for several clients.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Missing authorization returns HTTP 401; the supplied WWW-Authenticate challenge identifies missing Authorization header and the protected-resource metadata URL.",
+      "authorization_mechanism": "Metadata Doc and Dynamic Client Registration; authorization-code and refresh-token grants; S256 PKCE; scopes_supported at resource=[\"mcp\"] and authorization server=[\"mcp\",\"api_access\"]; token endpoint client auth methods client_secret_post and client_secret_basic; registration and revocation endpoints published. Token lifetime not found. The supplied OpenID configuration request returned HTTP 401.",
+      "authorization_server": "https://auth.lusha.com",
+      "sources": [
+        "https://mcp.lusha.com/.well-known/oauth-protected-resource",
+        "https://mcp.lusha.com/.well-known/oauth-protected-resource/mcp",
+        "https://auth.lusha.com/.well-known/oauth-authorization-server",
+        "https://auth.lusha.com/.well-known/openid-configuration",
+        "https://docs.lusha.com/mcp/setup.md"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability was found in hosted documentation. Some tool descriptions recommend that the client ask the user before credit-consuming actions; the docs do not say this is server-enforced elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted list includes tools to list, check, and retrieve bulk enrichment jobs, but documentation does not identify these as MCP Tasks protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Client setup documentation specifies connection URLs and authentication headers. Hosted MCP configuration capability, tool filtering parameters, and server-side configuration operations were not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/setup.md",
+        "https://docs.lusha.com/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Documentation identifies HTTP 403 for API-key access to recommendations, HTTP 402 for insufficient credit in a documented table operation, and HTTP 429 for rate limits. Hosted MCP error payload shape is not documented. The public local package serializes tool errors as structured JSON text with status, category, severity, requestId, timestamp, and optional retryAfter.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Hosted format unknown; local package returns content[0].text containing JSON with success=false, error object, and metadata.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/faq/mcp.md",
+        "https://docs.lusha.com/mcp/tools.md",
+        "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/utils/mcp.ts#L1-L68"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documentation describes asynchronous bulk enrichment jobs and synchronous CRM export. It does not establish MCP subscription capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/tools.md",
+        "https://docs.lusha.com/faq/mcp.md"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Bulk enrichment job status tools provide product-level job status. MCP protocol progress notifications are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP request cancellation behavior was found in hosted documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/overview.md",
+        "https://docs.lusha.com/mcp/tools.md"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Lusha describes a starter prompt shown on the client's consent screen. Its official plugin repository distributes skills alongside client-specific manifests and MCP URLs; these skills are client-side materials, not evidence that the hosted MCP server injects them at initialize.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client consent-screen starter prompt; plugin clients load repository skill files. Exact hosted initialize instructions were not found.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.lusha.com/mcp/overview.md",
+        "https://docs.lusha.com/mcp/setup.md",
+        "https://github.com/lusha-oss/lusha-mcp-plugin/blob/50bf1a06230a7a5f553f2aa2d294153a37c5998f/README.md"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The hosted tool list contains reads/lookups and writes such as table creation/update/delete, row/column changes, column execution, CRM connection and export. Hosted tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are not published. 2. The hosted docs recommend asking the user before some credit-consuming actions, but do not document server-enforced confirmation or MCP Elicitation. CRM connection is admin-only. 3. Resource metadata advertises scope mcp; authorization-server metadata lists mcp and api_access. Docs say recommendations require OAuth; API-key sessions get 403. An MCP access permission is on by default; disabling it limits connection to Admins and Managers. Token lifetime and redirect-URI approval policy not found; revocation endpoint is published. 4. No read-only mode, toolsets filter, query-free mode, or URL/header tool filter found. Client-specific hosted paths are documented. No sandbox endpoint found. 5. Hosted PII masking and field-exclusion logic not found. User/account IDs for recommendations are inferred from session rather than passed as inputs. 6. Plan-based API rate limits and credit charges apply. Lookup/search generally charge successful matches; filters and account_usage are free. CRM export is synchronous with per-CRM caps (examples: Salesforce 150, HubSpot 100 per run); async large-batch export is planned. Hosted truncation limits not otherwise found. 7. Hosted parameter validation/correction behavior not documented. The public local package uses Zod schemas and has per-tool constraints including 100-contact/company bulk caps and 50-company enrichment cap; its tool descriptions set some defaults and workflow recommendations. 8. Hosted logging/audit/telemetry and opt-out not found. The public local package logs tool arguments and outcomes locally to console. 9. No hosted feedback/rating/survey/report tool appears in the official 50-tool list; `purchase_options` exposes plan/credit-pack information. No upsell result text was found. 10. Hosted docs describe a consent-screen starter prompt; official plugin skills are distributed outside the server. Local code includes behavioral instructions to the model, including asking before certain enrichments and showing only 25 rows at a time. These are descriptions, not server-side enforcement. 11. Recommendations depend on authenticated user's Target Profiles and shared account profiles; they refresh daily and recalculate after ICP changes. Other agent-history-dependent behavior not found. 12. The general hosted server has client-specific paths. Separate recruiting server at mcp-hr.lusha.com is a distinct product surface. The Lusha docs site also has documentation-search functionality, which is not the product server. 13. No raw API request, arbitrary SQL, script execution, or general escape-hatch tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] “Available tools may vary depending on the client used to connect. Tool names and behavior can also change as Lusha ships new capabilities - ask your MCP client to list its available Lusha tools for the exact, current set.”",
+      "[DOCS] “If you haven't set up a Target Profile in ICP Hub yet, you'll be nudged to do so with each recommendations request.”",
+      "[LOCAL CODE @10dc295] “After returning search results, ALWAYS ask the user if they want to enrich specific contacts”",
+      "[LOCAL CODE @10dc295] “ALWAYS ask the user which specific contacts they want to enrich before proceeding”",
+      "[LOCAL CODE @10dc295] “If any list contains more than 25 items, show only the first 25 rows in the table”",
+      "[LOCAL CODE @10dc295] “After the 25-row preview, ask whether to show the remaining items”",
+      "[LOCAL CODE @10dc295] “Make sure to mention Lusha as the provider in the response”",
+      "[LOCAL CODE @10dc295] “WARNING: CHARGES CREDITS - always ask user first!”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The official plugin repository documents client-specific hosted paths for the same logical tool surface. The separate recruiting server uses another host and a distinct 26-tool surface; it is listed separately and its tools are excluded from actions.",
+    "sources": [
+      "https://docs.lusha.com/mcp/tools.md",
+      "https://docs.lusha.com/mcp/setup.md",
+      "https://docs.lusha.com/faq/mcp.md",
+      "https://docs.lusha.com/user-guide/mcp/lusha-model-context-protocol-mcp-server.md",
+      "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L20-L168",
+      "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/schemas.ts#L1-L267",
+      "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/index.ts#L35-L114",
+      "https://github.com/lusha-oss/lusha-mcp-plugin/blob/50bf1a06230a7a5f553f2aa2d294153a37c5998f/README.md",
+      "https://github.com/lusha-oss/lusha-mcp-talent-sourcing-plugin/blob/50bf1a06230a7a5f553f2aa2d294153a37c5998f/README.md"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "58",
+    "action_count_comment": "The official hosted tool reference at https://docs.lusha.com/mcp/tools.md names 50 tools and states a total of 50; all 50 names are included first. Lusha notes tool availability can vary by client. The official local stdio package is documented as another connection option; its public code defines 8 additional, differently named tools, included after the hosted list and marked Unknown (not in hosted docs). No catalogue-only tools were added because the vendor publishes a complete, explicitly counted official list. Third-party listings show differing client inventories, including a 17-tool Tedix scan and 17-tool Claude listing; they are not used to replace or supplement the official hosted list. actions.json contains 58 entries.",
+    "actions": [
+      {
+        "tool_name": "contacts_search",
+        "description": "Enrich contact data using email, LinkedIn URL, or name + company.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "companies_search",
+        "description": "Retrieve company data using domain or company name.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "prospecting_contact_filters",
+        "description": "Get available filter values for contact prospecting.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "prospecting_contact_search",
+        "description": "Search contacts by job title, seniority, location, department, and more.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "prospecting_contact_enrich",
+        "description": "Enrich contacts by ID to reveal emails and phones.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "prospecting_company_filters",
+        "description": "Get available filter values for company prospecting.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "prospecting_company_search",
+        "description": "Search companies by firmographic and technographic filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "prospecting_company_enrich",
+        "description": "Enrich companies by ID for detailed firmographic data.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "buying_group_search",
+        "description": "Find the buying committee at a target account.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "decision_makers_buying_group_search",
+        "description": "Identify decision makers within that committee.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "contacts_enrich_job_list",
+        "description": "List background bulk contact enrichment jobs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "contacts_enrich_job_status",
+        "description": "Check the status of a bulk enrichment job.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "contacts_enrich_job_results",
+        "description": "Retrieve results of a completed bulk enrichment job.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "lookalike_contacts",
+        "description": "Find contacts similar to a seed contact.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "lookalike_companies",
+        "description": "Find companies similar to a seed company.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signals_contact_filters",
+        "description": "Get available filter values for contact signals.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signals_contacts_search",
+        "description": "Find people by trigger events such as promotions and job changes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signals_contacts_get",
+        "description": "Get signals for known contacts by ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signals_company_filters",
+        "description": "Get available filter values for company signals.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signals_companies_search",
+        "description": "Find accounts by trigger events such as funding, hiring surges, and headcount growth.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signals_companies_get",
+        "description": "Get signals for known companies by ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signal_score_contacts",
+        "description": "Score contacts by signal strength.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "signal_score_companies",
+        "description": "Score companies by signal strength.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "website_visits_search",
+        "description": "See which companies are visiting your website.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "recommendations_contacts",
+        "description": "Get paginated scored contact recommendations with signals and Target Profile attribution.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "recommendations_companies",
+        "description": "Get paginated scored company recommendations with signals and Target Profile attribution.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "recommendations_contacts_filters",
+        "description": "Get valid signal types and Target Profiles for contact recommendations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "recommendations_companies_filters",
+        "description": "Get valid signal types and Target Profiles for company recommendations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "predictive_score_companies",
+        "description": "Score companies by fit with your Target Profile.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_create",
+        "description": "Create a workspace table.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_list",
+        "description": "List workspace tables.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_update",
+        "description": "Rename a table or change its settings.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_delete",
+        "description": "Delete a table.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_status",
+        "description": "Check whether table columns have finished running.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_add_entities",
+        "description": "Add contacts or companies as table rows.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_get_entities",
+        "description": "Read table rows.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_remove_entities",
+        "description": "Remove rows from a table.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_columns_catalog",
+        "description": "List columns available to add.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_add_columns",
+        "description": "Add enrichment or AI columns to a table.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_list_columns",
+        "description": "List columns currently on a table.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_remove_column",
+        "description": "Remove a column from a table.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_run_column",
+        "description": "Run a column across every row in the table.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_supported_integrations",
+        "description": "List supported CRMs, connection state, and export limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "connect_crm",
+        "description": "Generate a secure OAuth link to connect or reconnect a CRM.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export_contacts_to_crm",
+        "description": "Export selected or enriched contacts to connected CRM.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export_companies_to_crm",
+        "description": "Export selected or enriched companies where supported.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "conversations_search",
+        "description": "Search call recordings.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "conversations_transcript_get",
+        "description": "Retrieve a transcript for a specific call.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "account_usage",
+        "description": "Check credit balance, rate-limit status, and plan information.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "purchase_options",
+        "description": "View available plans and credit packs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.lusha.com/mcp/tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "personBulkLookup",
+        "description": "Look up one or more people using contact identifiers.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "[LOCAL CODE] contacts: array (required; 1–100; contactId plus optional fullName, email, linkedinUrl, companies, location); metadata: object (optional; filterBy, revealEmails, revealPhones)",
+        "parameter_count": "See parameter summary",
+        "source": "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L38-L170",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "companyBulkLookup",
+        "description": "Look up one or more companies using company identifiers.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "[LOCAL CODE] companies: array (required; 1–100; id plus name, domain, fqdn, companyId); metadata: object (optional; filterBy)",
+        "parameter_count": "See parameter summary",
+        "source": "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L38-L170",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "contactSearch",
+        "description": "Search contacts using filters and pagination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "[LOCAL CODE] pages: object (optional; page, size); offset: object (optional; index, size); filters: object (optional; nested contacts/companies include/exclude criteria)",
+        "parameter_count": "See parameter summary",
+        "source": "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L38-L170",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "contactEnrich",
+        "description": "Enrich selected contacts from prospecting results.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "[LOCAL CODE] requestId: string (required; UUID); contactIds: string[] (required; 1–100); revealEmails: boolean (optional); revealPhones: boolean (optional)",
+        "parameter_count": "See parameter summary",
+        "source": "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L38-L170",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "contactFilters",
+        "description": "Get available contact search filter values.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "[LOCAL CODE] filterType: enum (required; 4 categories); locationSearchText: string (optional)",
+        "parameter_count": "See parameter summary",
+        "source": "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L38-L170",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "companySearch",
+        "description": "Search companies using prospecting filters.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "[LOCAL CODE] filters: object (required; companies include/exclude criteria); pages: object (optional; page, size)",
+        "parameter_count": "See parameter summary",
+        "source": "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L38-L170",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "companyEnrich",
+        "description": "Get detailed information for selected companies.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "[LOCAL CODE] requestId: string (required); companiesIds: string[] (required; 1–50)",
+        "parameter_count": "See parameter summary",
+        "source": "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L38-L170",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "companyFilters",
+        "description": "Get available company prospecting filter values.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "[LOCAL CODE] filterType: enum (optional; 8 categories; default sizes)",
+        "parameter_count": "See parameter summary",
+        "source": "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L38-L170",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted server's exact tools/list and initialize payloads are not public. The local code has source-level definitions and Zod schemas, but the package's exact serialized MCP tool definitions and initialize instructions could not be reconstructed from the prepared evidence; no token estimate is inferred from a catalogue.",
+    "human_can_agent_cannot": "MCP's documented 50 tools do not expose account and subscription administration such as changing billing details, canceling a plan, managing API keys, or changing team roles/permissions. `purchase_options` lists plans and credit packs but no purchase operation is listed. The REST API reference documents further API endpoints beyond MCP, but REST-only parameters and operations are not counted as MCP capabilities.",
+    "sources": [
+      "https://docs.lusha.com/mcp/tools.md",
+      "https://docs.lusha.com/mcp/setup.md",
+      "https://docs.lusha.com/faq/mcp.md",
+      "https://docs.lusha.com/api-reference/overview.md",
+      "https://www.lusha.com/pricing/",
+      "https://tedix.dev/apps/lusha/",
+      "https://claude.com/connectors/lusha",
+      "https://github.com/lusha-oss/lusha-public-api-mcp/blob/10dc2953e264cc108672b24e144547a92ae8f3cc/src/config/tools.ts#L38-L170"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Lusha tells clients to check the live tool menu because availability may vary. Some local-package descriptions direct the agent to ask the user before enrichment and show a 25-row preview before offering more. These are model-facing descriptions; the local handlers do not implement a confirmation workflow. Hosted enforcement was not established.",
+    "governance_promises": "Lusha states that recommendations use the authenticated user's own Target Profiles plus shared account-level profiles, with user/account IDs inferred from the session. CRM exports return per-row outcomes and charge credits only for records actually written; duplicates and unchanged records cost nothing. The privacy notice and terms address personal/customer data generally but do not specify MCP-specific retention or model-training treatment in the collected pages.",
+    "promises_to_user": "Lusha describes the server as generally available, states that it uses the same API key and credit pool as REST API, and advertises a starter prompt on the client's consent screen. It describes OAuth as requiring no API key handling for supported chat clients.",
+    "comparison_with_server_logic": "Public endpoint metadata confirms OAuth protection and scopes. Public hosted docs describe credit charges, role/access rules, recommendation profile scoping, and export caps, but do not expose the deployed handlers or tool annotations. Local-code validation, logging, response formatting, and confirmation language are evidenced only for the separate stdio package and should not be treated as verified hosted enforcement.",
+    "sources": [
+      "https://docs.lusha.com/mcp/overview.md",
+      "https://docs.lusha.com/mcp/setup.md",
+      "https://docs.lusha.com/mcp/tools.md",
+      "https://docs.lusha.com/faq/mcp.md",
+      "https://docs.lusha.com/user-guide/mcp/lusha-model-context-protocol-mcp-server.md",
+      "https://www.lusha.com/legal/privacy-notice/",
+      "https://www.lusha.com/legal/terms_and_conditions-2/",
+      "https://mcp.lusha.com/.well-known/oauth-protected-resource/mcp",
+      "https://auth.lusha.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "contradictions": [
+    "The general hosted docs describe OAuth and API-key connection methods, while the supplied protected-resource metadata advertises bearer authorization with the mcp scope. These can represent different client/auth flows; the metadata does not describe the API-key path.",
+    "The authorization server advertises scopes mcp and api_access, while the protected-resource documents advertise only mcp.",
+    "The older official local stdio package defines 8 tools with camelCase names that do not match the hosted docs' 50 snake_case tool names; this is a local-server variant and is not represented as the hosted endpoint's default inventory.",
+    "Lusha's overview says the server has 50 tools, but also says available tools may vary by client. Its official plugin repo documents client-specific endpoint paths; exact per-path inventories were not publicly enumerated in the collected docs."
+  ],
+  "observations_for_research": [
+    "The hosted documentation combines credit costs, plan-based rate limits, and non-billable filter and account tools with actions that modify workspace tables and export records to CRMs.",
+    "The docs describe user-scoped Target Profile selection and CRM export billing at the record level, while the older local code contains explicit agent-facing preview and confirmation instructions.",
+    "Lusha distributes skills in an official plugin repository alongside its hosted MCP connection configuration; the skills prescribe multi-call workflows and credit-handling steps outside the tool server."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, all collected page text and relevant HTML/script captures, and local public repository copies. The official hosted tool reference is complete by its own wording and stated count; the 50 hosted names were checked against actions.json. The endpoint itself returned HTTP 401 without authorization; no login or data-changing calls were made. npm page returned HTTP 403, so package identity and version were taken from the official local repository/package manifest. The official public stdio code is older than the hosted documentation and documents a distinct eight-tool naming/schema surface. Third-party catalogs were consulted for cross-check only. Lusha's docs-search MCP is documentation-site functionality, not the product endpoint.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.8
+  }
+}

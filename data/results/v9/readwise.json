@@ -1,0 +1,561 @@
+{
+  "server": "readwise",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp2.readwise.io/mcp",
+    "documentation_url_csv": "https://docs.readwise.io/tools/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/readwiseio/readwise-mcp",
+    "documentation_urls_used": [
+      "https://docs.readwise.io/tools/mcp",
+      "https://readwise.io/mcp",
+      "https://github.com/readwiseio/readwise-skills/blob/master/skills/readwise-mcp/SKILL.md",
+      "https://readwise.io/pricing",
+      "https://readwise.io/pricing/reader",
+      "https://readwise.io/privacy",
+      "https://readwise.io/tos",
+      "https://docs.readwise.io/changelog"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public readwise-mcp repository is a deprecated local stdio server, not the hosted OAuth server analyzed here. Its code exposes one legacy highlight-search tool and calls Readwise API endpoints. The current hosted server's official tool list names 22 tools. The repository is analyzed as a separate variant and its tool is not added to this endpoint's actions.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "5ceffc18aa8c44d7a52a24f165cb47e3d48497d8",
+    "commit_date": "2026-03-14",
+    "implementation_language": "TypeScript (deprecated local variant)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.9.0 (deprecated local variant)",
+    "code_public": "Yes",
+    "license": "MIT (deprecated local variant)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://highlights-mcp.readwise.io/mcp — another official host; the available evidence verifies an OAuth-protected MCP endpoint but does not establish its purpose or tool set.",
+      "https://readwise.io/mcp — official setup page for the hosted server at mcp2.readwise.io/mcp."
+    ],
+    "sources": [
+      "https://docs.readwise.io/tools/mcp",
+      "https://readwise.io/mcp",
+      "https://github.com/readwiseio/readwise-mcp",
+      "https://github.com/readwiseio/readwise-skills/blob/master/skills/readwise-mcp/SKILL.md",
+      "https://mcp2.readwise.io/.well-known/oauth-protected-resource/mcp",
+      "https://readwise.io/.well-known/oauth-authorization-server/o"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The vendor documents MCP access and OAuth connection but does not state a separate MCP fee. Product access requires a Readwise subscription after the 30-day trial; current page lists annual-billing prices of $9.99/month for Full Readwise, $7.99/month for Reader, and $7.99/month for Highlights.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The vendor advertises a 30-day trial and no ongoing free plan. Listed annual-billing prices: Full Readwise $9.99/month; Reader-only $7.99/month; Highlights-only $7.99/month. Monthly billing is selectable; the cited pricing pages do not expose its amount in the captured text.",
+    "pricing_model_details": "Subscription billing is monthly or annual. The FAQ says there is no free plan after the trial. Pricing pages advertise the MCP alongside product access; no MCP-specific per-call price or quota is stated.",
+    "other_access_restrictions": "OAuth authorization is required. The vendor's setup page documents connecting through compatible clients; it does not state an org-admin switch or client allowlist. Perplexity custom connectors require Pro, Max, or Enterprise according to the setup page.",
+    "restrictions_controlled_by": "Vendor controls subscription and OAuth service; user authorizes the account and chooses a compatible client. Perplexity connector plan eligibility is controlled by the client platform.",
+    "sources": [
+      "https://readwise.io/mcp",
+      "https://readwise.io/pricing",
+      "https://readwise.io/pricing/reader",
+      "https://docs.readwise.io/faqs/subscription",
+      "https://mcp2.readwise.io/.well-known/oauth-protected-resource/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official hosted-server page lists 22 stable tool names across Readwise highlights, Reader documents, Reader tags, and Reader highlights. The tool inventory includes searches, reads, writes, moves, exports, and deletion. The public deprecated local server is a distinct one-tool implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Official tool page gives names and brief descriptions, but not result schemas. The official skills reference describes JSON-style tool calls and examples. The endpoint's exact result envelope was not available without authorization.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.readwise.io/tools/mcp",
+        "https://github.com/readwiseio/readwise-skills/blob/master/skills/readwise-mcp/SKILL.md"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation does not describe MCP resources. No current-endpoint resource listing was available in the evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.readwise.io/tools/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation does not document MCP prompts. The setup page provides example user requests, which are not evidence of server-provided MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.readwise.io/tools/mcp",
+        "https://readwise.io/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server MCP logging or audit behavior is described. The privacy policy separately describes ordinary service monitoring and product analytics.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://readwise.io/privacy",
+        "https://docs.readwise.io/tools/mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server sampling capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.readwise.io/tools/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.readwise.io/tools/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint response is HTTP 401 with WWW-Authenticate Bearer error=\"invalid_token\" and resource_metadata=\"https://mcp2.readwise.io/.well-known/oauth-protected-resource/mcp\". That protected-resource document returns resource https://mcp2.readwise.io/mcp, authorization_servers [\"https://readwise.io/o/\"], scopes_supported [\"openid\",\"read\",\"write\"], and bearer_methods_supported [\"header\"]. The authorization-server metadata returns issuer https://readwise.io/o/, authorization_endpoint https://readwise.io/o/authorize/, token_endpoint https://readwise.io/o/token/, revocation_endpoint https://readwise.io/o/revoke-token/, registration_endpoint https://readwise.io/o/register/, response_types_supported [\"code\"], grant_types_supported [\"authorization_code\",\"implicit\",\"refresh_token\"], response_modes_supported [\"query\"], code_challenge_methods_supported [\"S256\"], token_endpoint_auth_methods_supported [\"none\",\"client_secret_basic\",\"client_secret_post\"], id_token_signing_alg_values_supported [\"HS256\"], scopes_supported [\"openid\",\"read\",\"write\"]. Token lifetime is not specified in these documents.",
+      "pre_interaction_context_verbatim": "Bearer error=\"invalid_token\", error_description=\"Authentication failed. The provided bearer token is invalid, expired, or no longer recognized by the server. To resolve: clear authentication tokens in your MCP client and reconnect. Your client should automatically re-register and obtain new tokens.\", resource_metadata=\"https://mcp2.readwise.io/.well-known/oauth-protected-resource/mcp\"",
+      "post_interaction_context_structure": "OAuth-protected endpoint returns the supplied JSON error object for the invalid bearer token. Successful tool response structure not available.",
+      "authorization_mechanism": "Metadata Doc / Dynamic Client Registration / OAuth. Protected-resource metadata points to https://readwise.io/o/. Registration endpoint is https://readwise.io/o/register/. Authorization-code and implicit grant are declared, as well as refresh_token; PKCE S256 is declared. Token endpoint authentication methods: none, client_secret_basic, client_secret_post. Supported scopes: openid, read, write. Bearer tokens are sent in the header. Revocation endpoint: https://readwise.io/o/revoke-token/. Token lifetime: NOT FOUND.",
+      "authorization_server": "https://readwise.io/o/",
+      "sources": [
+        "https://mcp2.readwise.io/.well-known/oauth-protected-resource/mcp",
+        "https://readwise.io/.well-known/oauth-authorization-server/o",
+        "https://mcp2.readwise.io/mcp",
+        "https://docs.readwise.io/tools/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation mechanism is documented. The setup page's example asks the AI to ask the user before making library changes; this is a user-facing example, not evidence of server-enforced elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://readwise.io/mcp",
+        "https://docs.readwise.io/tools/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The skill reference describes asynchronous document export followed by status polling, but does not identify it as MCP Tasks. It is represented by the export and status tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The skill describes export returning an export_id, then a status tool returning processing/completed state and a download URL.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.readwise.io/tools/mcp",
+        "https://github.com/readwiseio/readwise-skills/blob/master/skills/readwise-mcp/SKILL.md"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server toolset, read-only, or configuration parameter is documented. Clients are instructed to connect to a fixed remote URL.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://readwise.io/mcp",
+        "https://docs.readwise.io/tools/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP error-reporting capability is described. The expired/invalid token response supplies a JSON error and reconnection guidance.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP 401 with JSON keys error and error_description for the supplied invalid-token request.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp2.readwise.io/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented. Subscription plans are described separately on Readwise's pricing and FAQ pages.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://readwise.io/pricing",
+        "https://docs.readwise.io/faqs/subscription"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The export-status tool exposes export status and progress counts according to a third-party directory, but MCP progress notifications are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Third-party inventory describes export status as processing or completed, with progress counts and a download URL when complete.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://agentdiscoverability.com/track/chatgpt/readwise",
+        "https://docs.readwise.io/tools/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation capability is documented for MCP requests or exports.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.readwise.io/tools/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The vendor publishes separate reusable agent workflows as Readwise Skills. The skill reference recommends how agents should combine searches and use filters, but these are external instructions, not evidence of initialize-time MCP server instructions.",
+      "pre_interaction_context_verbatim": "Use the Readwise MCP tools to access the user's Readwise highlights and Reader documents.",
+      "post_interaction_context_structure": "Skills are Markdown workflow instructions distributed through the vendor's public GitHub repository.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/readwiseio/readwise-skills/blob/master/skills/readwise-mcp/SKILL.md",
+        "https://github.com/readwiseio/readwise-skills"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official tool inventory includes reads, writes, and deletion. It does not publish tool annotations such as readOnlyHint, destructiveHint, idempotentHint, or openWorldHint. 2. No server-enforced confirmation parameter or approval flow is documented. The setup page gives the example instruction “Ask me before making changes”; that is agent guidance. 3. OAuth scopes are openid, read, write; tools include writes and a delete tool, consistent with the write scope. The vendor's skill says users are prompted to authorize on first use. Role inheritance, admin switches, allowlists, token lifetime, and revocation behavior beyond the metadata revocation endpoint are not documented. 4. No read-only mode, tool filters, query-free mode, or sandbox/production switch is documented for this endpoint. Separate official host highlights-mcp.readwise.io exists; its purpose and tool set are not established. 5. The public privacy policy describes categories of account and reading data collected and service providers, but the MCP documentation does not describe MCP-specific masking or field restrictions. The list-documents tool can accept response_fields; the skill recommends using it to reduce returned fields. 6. The skill documents a maximum search limit of 100, a maximum of 50 documents per move or bulk metadata call, and a shared 20 calls/minute limit for reader_move_documents and reader_bulk_edit_document_metadata. Export is asynchronous. 7. Public hosted schemas are not published in the official tool table. The skill documents examples and selected argument constraints; exact server-side validation and correction behavior is Unknown. The deprecated local implementation uses Zod schemas but is not the hosted endpoint. 8. Privacy policy states ordinary error monitoring and product analytics; MCP-specific request logging, action audit trails, telemetry fields, and opt-out are Unknown. 9. The 22-tool inventory contains no feedback, rating, survey, or report tool. No MCP upsell result or marketing elicitation is documented. 10. Skills are distributed separately on GitHub; their workflow rules are not shown to be enforced by the hosted server. 11. No documentation says that prior agent behavior changes future outputs, tools, resources, or prompts. 12. The input is one hosted endpoint with a flat 22-tool list. Another official host is listed separately; no evidence establishes a proxy or subserver architecture. 13. No raw API request, SQL, script execution, or other universal escape-hatch tool appears in the official 22-tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Use the Readwise MCP tools to access the user's Readwise highlights and Reader documents.",
+      "Use response_fields to limit returned data and save tokens.",
+      "When the user says \"inbox\", use `new`. Only use `feed` when the user explicitly asks about RSS/feeds.",
+      "Search across everything: Find all content on a topic — run both in parallel.",
+      "Ask me before making changes."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The documented input endpoint is presented as one hosted server with a flat list of 22 tools. Readwise Skills are distributed separately and do not establish server-side subservers or dynamic tool loading.",
+    "sources": [
+      "https://docs.readwise.io/tools/mcp",
+      "https://readwise.io/mcp",
+      "https://github.com/readwiseio/readwise-skills/blob/master/skills/readwise-mcp/SKILL.md",
+      "https://readwise.io/privacy",
+      "https://mcp2.readwise.io/.well-known/oauth-protected-resource/mcp",
+      "https://readwise.io/.well-known/oauth-authorization-server/o",
+      "https://agentdiscoverability.com/track/chatgpt/readwise"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "22",
+    "action_count_comment": "The official hosted-server tool list exists at https://docs.readwise.io/tools/mcp and names 22 tools; no stated numeric total appears on that page, but all 22 listed tools are included in actions.json. No catalogue-only tools were added. Cross-checks: Claude connector directory lists the same 22; Agent Discoverability reports 22; Manufact reports 22; Tedix reports zero live tools because it could not authenticate; Glama shows one legacy search tool and appears to describe the deprecated local repository rather than this hosted endpoint.",
+    "actions": [
+      {
+        "tool_name": "readwise_search_highlights",
+        "description": "Search highlights using hybrid vector and full-text search.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "vector_search_term: string (required); full_text_queries: array (optional; max 8; each field_name enum 5 categories and search_term string)",
+        "parameter_count": "2",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "readwise_list_highlights",
+        "description": "List highlights newest-first with optional filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page_size: integer (optional); book_id: integer (optional); highlighted_at_gt: datetime (optional); page: integer (optional); response_fields: array (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "readwise_create_highlights",
+        "description": "Create one or more Readwise highlights.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "highlights: array of objects (required; object fields include text, title, author, note)",
+        "parameter_count": "Unknown",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "readwise_update_highlight",
+        "description": "Update a highlight’s text, note, location, or tags.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "highlight_id: integer (required); note, add_tags, color: optional (colors include yellow, blue, pink, orange, green, purple)",
+        "parameter_count": "Unknown",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "readwise_delete_highlight",
+        "description": "Delete a Readwise highlight.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "highlight_id: integer (required)",
+        "parameter_count": "1",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "readwise_get_daily_review",
+        "description": "Get today’s highlights selected for spaced-repetition review.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_search_documents",
+        "description": "Search Reader library with hybrid search across document text.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required); category_in, location_in, tags_in: arrays (optional); author_search, title_search, summary_search, note_search, url_search, source_search: strings (optional); published_date_gt: date (optional); document_id: string (optional); limit: integer (optional; default 20, max 100)",
+        "parameter_count": "Unknown",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_list_documents",
+        "description": "List Reader documents newest-first, filtered by location, category, or tag.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "location, tag, category, seen, id, page_cursor: optional; limit: integer (optional); response_fields: array (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_create_document",
+        "description": "Save a URL or HTML/text document to Reader.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "url, title, tags, notes, markdown, html, language: optional (examples show url required for URL saves; fields vary by content type)",
+        "parameter_count": "Unknown",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_get_document_details",
+        "description": "Fetch document metadata and full Markdown content.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "document_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_move_documents",
+        "description": "Move up to 50 documents between Reader locations.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "document_ids: array of strings (required; max 50); location: string (required; new, later, shortlist, archive, feed)",
+        "parameter_count": "2",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_bulk_edit_document_metadata",
+        "description": "Edit metadata for up to 50 Reader documents at once.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "documents: array of objects (required; max 50; document_id and editable metadata fields)",
+        "parameter_count": "1",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_export_documents",
+        "description": "Trigger a full or delta export of Reader documents as a Markdown ZIP.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "since_updated: datetime (optional)",
+        "parameter_count": "1",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_get_export_documents_status",
+        "description": "Poll export status and retrieve a download URL when complete.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "export_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_list_tags",
+        "description": "List all tags in the Reader library.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_add_tags_to_document",
+        "description": "Add one or more tags to a Reader document.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "document_id: string (required); tag_names: array of strings (required)",
+        "parameter_count": "2",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_remove_tags_from_document",
+        "description": "Remove tags from a Reader document.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "document_id: string (required); tag_names: array of strings (required)",
+        "parameter_count": "2",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_get_document_highlights",
+        "description": "Get all highlights for a Reader document.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "document_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_create_highlight",
+        "description": "Create a Reader highlight by specifying the exact passage text.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "document_id: string (required); html_content: string (required; exact document HTML text); note: string (optional); tags: array of strings (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_add_tags_to_highlight",
+        "description": "Add tags to a Reader document highlight.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "document_id: string (required); highlight_document_id: string (required); tag_names: array of strings (required)",
+        "parameter_count": "3",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_remove_tags_from_highlight",
+        "description": "Remove tags from a Reader document highlight.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "document_id: string (required); highlight_document_id: string (required); tag_names: array of strings (required)",
+        "parameter_count": "3",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reader_set_highlight_notes",
+        "description": "Set or clear notes on a Reader document highlight.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "document_id: string (required); highlight_document_id: string (required); notes: string or null (required)",
+        "parameter_count": "3",
+        "source": "https://docs.readwise.io/tools/mcp",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code for the hosted endpoint or verbatim complete hosted tool definitions/initialize instructions were available. The deprecated local implementation is a different server variant and was not used to estimate hosted context tokens.",
+    "human_can_agent_cannot": "The official MCP inventory does not document account or subscription management, subscription cancellation, importing/synchronizing source integrations, or the full Reader/Highlights product feature set. These are described on the vendor's pricing and subscription pages, while the MCP list focuses on highlights and Reader documents. No claim is made that every undocumented UI feature is unavailable through all APIs.",
+    "sources": [
+      "https://docs.readwise.io/tools/mcp",
+      "https://www.claude.com/connectors/readwise",
+      "https://agentdiscoverability.com/track/chatgpt/readwise",
+      "https://manufact.com/mcp-catalog/readwise",
+      "https://tedix.dev/apps/readwise/",
+      "https://glama.ai/mcp/servers/readwiseio/readwise-mcp/schema",
+      "https://readwise.io/pricing",
+      "https://docs.readwise.io/faqs/subscription"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The vendor's external skill instructs agents to limit returned document fields to save tokens, to use `new` for inbox requests, and to use the feed only when explicitly requested. It documents batching and recommends checking success flags for bulk operations. These instructions are not documented as server-enforced controls. The example workflow says: “Ask me before making changes.”",
+    "governance_promises": "The vendor privacy policy says, “Our business model has never been to sell data and it never will.” It describes collecting account information, saved content and ordinary error monitoring/product analytics. It provides mechanisms to access, correct, or request deletion of personal information. No MCP-specific AI-training, retention, masking, or audit promise was found.",
+    "promises_to_user": "The vendor presents the MCP as access to Readwise highlights and Reader documents, including full document text, and advertises searching, saving, organizing, and changing library data. It states that OAuth authorization is required by the connection instructions.",
+    "comparison_with_server_logic": "The official tool list supports the advertised search and library operations, including writes and deletion. OAuth metadata confirms protected-resource access and read/write scopes. The user-confirmation example and field-minimization tips are external agent instructions; no server enforcement is documented. Privacy and analytics statements are general service policy, not endpoint-specific technical controls.",
+    "sources": [
+      "https://readwise.io/privacy",
+      "https://readwise.io/mcp",
+      "https://docs.readwise.io/tools/mcp",
+      "https://github.com/readwiseio/readwise-skills/blob/master/skills/readwise-mcp/SKILL.md",
+      "https://mcp2.readwise.io/.well-known/oauth-protected-resource/mcp",
+      "https://readwise.io/.well-known/oauth-authorization-server/o"
+    ]
+  },
+  "contradictions": [
+    "Glama lists one `search_readwise_highlights` tool and says the server publishes no instructions; the official hosted endpoint documentation lists 22 tools. The local official repository is explicitly deprecated and describes the older one-tool local variant, so Glama's inventory is not evidence for the hosted endpoint's tool set.",
+    "The `write` OAuth scope permits write-capable authorization, and the official inventory includes write tools and `readwise_delete_highlight`; the server documentation does not describe a read-only scope or a confirmation gate."
+  ],
+  "observations_for_research": [
+    "The official server documentation supplies stable tool names and short descriptions, while detailed usage examples and several workflow rules are distributed separately in a vendor-authored GitHub skill.",
+    "The hosted endpoint uses OAuth metadata that advertises Dynamic Client Registration and multiple scopes, while the deprecated local variant uses a Readwise access token in an X-Access-Token header."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages, links_check.txt, OAuth responses, and local public repositories. Official hosted tool list and official skill reference were used; third-party inventories were cross-checks only. The public readwise-mcp code is deprecated, local stdio code and does not match the analyzed endpoint. The npm package page returned HTTP 403 and was not used. The endpoint's successful tool schemas/results, initialize instructions, exact annotations, request logging, and token lifetime were not available. Unofficial community servers were found in the supplied links but excluded from evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.6
+  }
+}

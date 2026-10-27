@@ -1,0 +1,506 @@
+{
+  "server": "courtlistener",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.courtlistener.com/",
+    "documentation_url_csv": "https://wiki.free.law/c/courtlistener/help/api/mcp/using-the-courtlistener-mcp-in-claude-chatgpt-and-other-ai-assistants",
+    "addressing": "global",
+    "repository_url": "https://github.com/freelawproject/courtlistener-api-client",
+    "documentation_urls_used": [
+      "https://wiki.free.law/c/courtlistener/help/api/mcp/using-the-courtlistener-mcp-in-claude-chatgpt-and-other-ai-assistants",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/main/MCP_README.md",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/main/courtlistener/mcp/server.py",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/main/courtlistener/mcp/prompts.py",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/main/pyproject.toml",
+      "https://www.courtlistener.com/help/api/",
+      "https://wiki.free.law/c/terms/courtlistener/courtlistenercom-terms-of-service-and-policies",
+      "https://claude.com/connectors/courtlistener",
+      "https://resoluteaim.com/tools/courtlistener/",
+      "https://mcp.so/servers/courtlistener"
+    ],
+    "open_code_equals_deployed_server": "Yes",
+    "open_code_note": "The official README identifies this repository as the hosted server's source and says local HTTP mode matches the hosted deployment. It also includes a stdio mode for local use. Repository snapshot: f29d0f905cfd907cede9d1886db561d4b61a5fd2.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "f29d0f905cfd907cede9d1886db561d4b61a5fd2",
+    "commit_date": "2026-10-23",
+    "implementation_language": "Python",
+    "mcp_sdk_and_version": "FastMCP 4.1.3; MCP protocol library version NOT FOUND",
+    "code_public": "Yes",
+    "license": "BSD-2-Clause (repository package license)",
+    "release_status": "Production/Stable (repository package classifier; hosted MCP launch announced in May 2026)",
+    "other_official_servers": [
+      "The same repository offers a local stdio server, `courtlistener-mcp`, using an API token; it is a deployment mode of the same product, not a separate hosted endpoint."
+    ],
+    "sources": [
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L1-L12",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/server.py#L45-L81",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/pyproject.toml#L1-L18",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/pyproject.toml#L48-L74",
+      "https://mcp.courtlistener.com/health"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "The official launch documentation describes the MCP connector as free. A free CourtListener account is required. Higher API access is available through Free Law Project membership or commercial agreement; exact MCP-specific prices were not found.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "CourtListener accounts and standard API access are free; elevated access is offered through membership or commercial agreements. Specific membership amounts were not located in the collected evidence.",
+    "pricing_model_details": "Usage follows CourtListener API rate limits and account access level. Membership may increase limits. The server README says requests are subject to the API limits and refers users to the API documentation for current values; no MCP-specific per-call fee or credit price was found.",
+    "other_access_restrictions": "Requires CourtListener sign-in and OAuth consent, or a CourtListener API token for clients unable to use interactive OAuth. Higher limits require membership or a commercial agreement. No client allowlist, admin switch, or regional endpoint restriction was found.",
+    "restrictions_controlled_by": "Vendor controls authentication and API limits; the user controls account credentials and consent; membership/commercial access is arranged with Free Law Project.",
+    "sources": [
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L43-L58",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L199-L212",
+      "https://wiki.free.law/c/courtlistener/help/api/mcp/using-the-courtlistener-mcp-in-claude-chatgpt-and-other-ai-assistants",
+      "https://wiki.free.law/c/courtlistener/help/api",
+      "https://www.courtlistener.com/help/api/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted server exposes 19 tools, registered in the server implementation. They cover search and retrieval, document reading, citation extraction and verification, API access, usage checks, alerts, docket subscriptions, and document requests. The server applies input-schema validation and translates upstream errors.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results are JSON serialized into text content. Tool errors may be translated to validation, authorization, rate-limit, connection, or upstream API errors.",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/__init__.py",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/mcp_tool.py#L178-L309",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L134-L200"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The inspected server code registers tools and HTTP routes; no MCP resources are registered or documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/server.py#L45-L81",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/__init__.py"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt registrations were found. The server does send global initialize instructions; those are described under Other.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/server.py#L45-L81"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documentation describes standard request logs containing timestamps, IP addresses, and response codes, retained for operational debugging. Tool-call metrics count outcomes and credential types; deployed metrics are not publicly reachable.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L239-L250",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/metrics.py#L176-L206"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling capability or use of sampling was found in the inspected server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/server.py"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability or root-dependent behavior was found in the inspected server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/server.py"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied protected-resource metadata returns HTTP 200 and identifies the same host as authorization server. The authorization-server metadata advertises Dynamic Client Registration, authorization-code and refresh-token grants, S256 PKCE, response type `code`, token auth methods `none` and `private_key_jwt`, plus a revocation endpoint. The endpoint challenge returns HTTP 401 with `Bearer scope=\"api\"` and a protected-resource metadata URL. Supported scopes are `openid`, `api`, `wiki`, `email`, and `profile`. The README says OAuth tokens are short-lived but gives no lifetime; it documents a separate non-expiring API-token option.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthorized requests return HTTP 401 with a `WWW-Authenticate` header. README states expired or revoked OAuth tokens trigger a 401 and clients should refresh or repeat OAuth.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://mcp.courtlistener.com/register; authorization-code and refresh-token grants; S256 PKCE; token endpoint auth `none` or `private_key_jwt`; scopes_supported: `openid`, `api`, `wiki`, `email`, `profile`; revocation endpoint https://mcp.courtlistener.com/revoke; token lifetime: short-lived, exact duration NOT FOUND. API-token alternative uses `Authorization: Token <token>` and does not expire.",
+      "authorization_server": "https://mcp.courtlistener.com/",
+      "sources": [
+        "https://mcp.courtlistener.com/.well-known/oauth-protected-resource",
+        "https://mcp.courtlistener.com/.well-known/oauth-authorization-server",
+        "https://mcp.courtlistener.com/.well-known/openid-configuration",
+        "https://mcp.courtlistener.com/",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L99-L130"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation flow was found in the inspected server code. Confirmation for account-changing actions is advised in documentation but delegated to the client.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/server.py",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L182-L198"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability was found. Citation analysis that exceeds its batch limit uses application-level job IDs and a resume tool; this is not documented as MCP Tasks.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Citation analysis may return a `job_id`; `resume_citation_analysis` continues that application-level job.",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/analyze_citations_tool.py#L30-L66",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/resume_citation_analysis_tool.py"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The deployment supports environment-variable configuration for OAuth, upstream API base URL, storage, caching, and metrics. No MCP-facing runtime toolset or per-request configuration interface was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L254-L290"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool errors are translated into structured MCP tool errors for invalid arguments, unauthorized requests, rate limits, connection failures, and upstream API errors. The README advises reporting issues with the deployed Git SHA, tool call, error, and client/version.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Errors are returned as tool errors; messages include validation details or upstream status information. A 429 response may include membership-upgrade information.",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/mcp_tool.py#L178-L309",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L214-L235"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was found. Docket alert subscriptions are ordinary tools that update the user's CourtListener account.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/server.py",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L182-L198"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress-notification feature was found. Long citation analyses expose a `job_id` and require explicit resumption through a second tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Application-level citation job IDs and batch results.",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/analyze_citations_tool.py#L30-L66",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/resume_citation_analysis_tool.py"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability or cancellation tool was found in the inspected code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/server.py"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "FastMCP server initialization supplies global instructions covering dataset scope, tool choice, semantic versus keyword search, field filtering, document retrieval, and URL construction. The code also serves an HTTP health endpoint and exposes non-public hosted metrics.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Health route returns JSON status, deployed version, service health, and configuration checks.",
+      "sources": [
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/server.py#L45-L81",
+        "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/prompts.py",
+        "https://mcp.courtlistener.com/health"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The 19-tool code list includes read-only research and account-changing tools. Tool annotations are set in code: read-only, destructive, idempotent, and open-world hints are present; the generic `call_endpoint` is marked read-only even though it proxies multiple API endpoints.\\n2. No server-enforced confirmation parameter or approval flow was found. Documentation says the client should ask confirmation before account-changing tools.\\n3. OAuth metadata scopes are `openid`, `api`, `wiki`, `email`, `profile`; tool access is based on CourtListener account credentials and API permissions. API tokens grant the account's full API access. Exact token lifetime is not published; OAuth tokens are described as short-lived. Revocation and refresh are supported.\\n4. No read-only mode, toolset filter, query-free mode, sandbox, or regional hosted variant was found. Local stdio and hosted HTTP modes are documented. `call_endpoint` can access the endpoints in its schema, including alert and prayer endpoints.\\n5. The README says no other tool inputs or outputs are persisted; exceptions are short-lived per-user pagination/citation state and a shared 24-hour document-text cache. API tokens are forwarded upstream; OAuth token storage/handling is described in the README. No field masking or PII exclusion was found.\\n6. API rate limits apply; search/list tools return up to 100 items per call (default 20); citation analysis verifies about 250 unique citations per call before returning a job ID; document reading chunks by default at 8,000 characters, with up to 10 chunks per call; document search supports up to 10 IDs and returns up to 20 matches per document. Pray requests have a daily per-user cap. Rate-limit errors may point to membership upgrades.\\n7. Code validates inputs against JSON schemas, rejects additional arguments where schemas disallow them, decodes JSON-encoded values, coerces integral floats to integers, and supports argument aliases (for example `query` to `q` in search). No operator defaults that override user-supplied values were found.\\n8. Documentation says request logs contain timestamps, IP addresses, and response codes for operational debugging. Tool-call outcome and credential-type metrics exist; hosted `/metrics` is not public.\\n9. No feedback, rating, survey, or report tool appears in the official tool list. Rate-limit errors include a membership-upgrade URL, a vendor-interest mechanism in results.\\n10. Global server instructions and tool descriptions shape agent behavior but are not enforcement. No skill-loading tool was found.\\n11. Redis-backed session state includes pagination cursors and citation jobs, keyed per user and expiring after one hour of inactivity. Document text cache is shared across users for 24 hours.\\n12. The hosted endpoint is a single server with a flat tool list. `call_endpoint` is a broad API proxy; citation analysis also calls CourtListener APIs.\\n13. `call_endpoint` is a generic API access tool, bounded by its endpoint enum and query schema. No arbitrary SQL, shell, or script execution tool was found.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[LOCAL CODE @f29d0f9] “For open-ended research questions, start with one semantic query in plain language rather than many keyword variations, then use keyword search to narrow.”",
+      "[LOCAL CODE @f29d0f9] “Default to requesting only the fields you actually need.”",
+      "[LOCAL CODE @f29d0f9] “To read the text of an opinion or RECAP document, use the dedicated `read_document` and `search_document` tools rather than fetching raw text fields from the endpoints directly.”",
+      "[LOCAL CODE @f29d0f9] “Check that list before treating a case as fully read: the holding is in the main opinion, but its scope is often qualified by a concurrence or contested by a dissent.”",
+      "[LOCAL CODE @f29d0f9] “Avoid trying to fetch PDFs directly, as the courtlistener storages urls are not fetchable for AI agents.”",
+      "[LOCAL CODE @f29d0f9] “Use `call_endpoint` with endpoint_id `prayers` to list the user's pending prayers.”",
+      "[LOCAL CODE @f29d0f9] “The `user` scope is the one that matters: it is the main API quota and governs nearly every endpoint and tool.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted endpoint exposes one registered tool list. A generic API proxy exists as one tool within that list; this does not create a nested or dynamically loaded server structure.",
+    "sources": [
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/__init__.py",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/mcp_tool.py",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/call_endpoint_tool.py",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/session.py",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/metrics.py",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L182-L250",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/prompts.py"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "19",
+    "action_count_comment": "The official tool list is in the repository MCP README and the registered tool list in code. Both identify 19 tools; the code is treated as the complete list for this hosted endpoint. No catalogue-only tools were added. Anthropic's connector listing shows 14 tools, omitting five tools that are in the official list. Resolute AIM also reports 14 tools. MCP.so currently has no tool list available. The full official action array is in actions.json.",
+    "actions": [
+      {
+        "tool_name": "search",
+        "description": "Search legal cases, dockets, judges, and oral arguments.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fields: array[string]|string (optional); num_results: integer (optional); type: string (optional); court: string|array[string] (optional); q: string (optional); semantic: boolean (optional); available_only: boolean (optional); case_name: string (optional); description: string (optional); docket_number: string (optional); nature_of_suit: string (optional); cause: string (optional); filed_before: string (optional); filed_after: string (optional); entry_date_filed_before: string (optional); entry_date_filed_after: string (optional); document_number: integer (optional); attachment_number: integer (optional); assigned_to: string (optional); referred_to: string (optional); party_name: string (optional); atty_name: string (optional); judge: string (optional); citation: string (optional); neutral_cite: string (optional); stat_Published: boolean (optional); stat_Unpublished: boolean (optional); stat_Errata: boolean (optional); stat_Separate: boolean (optional); stat_In-chambers: boolean (optional); stat_Relating-to: boolean (optional); stat_Unknown: boolean (optional); cited_gt: integer (optional); cited_lt: integer (optional); name: string (optional); born_before: string (optional); born_after: string (optional); dob_city: string (optional); dob_state: string (optional); school: string (optional); appointer: string (optional); selection_method: string (optional); political_affiliation: string (optional); argued_before: string (optional); argued_after: string (optional); order_by: string (optional)",
+        "parameter_count": "46",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/search.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_endpoint_schema",
+        "description": "Retrieve API endpoint filters and response fields.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "endpoint_id: string (enum 41 categories) (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/get_endpoint_schema.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "call_endpoint",
+        "description": "Call a CourtListener REST endpoint with query parameters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "endpoint_id: string (enum 41 categories) (required); query: object (optional); num_results: integer (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/call_endpoint.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_endpoint_item",
+        "description": "Fetch one API record by endpoint and ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "endpoint_id: string (enum 41 categories) (required); item_id: string|integer (required); fields: array[string]|string (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/get_endpoint_item.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_choices",
+        "description": "List valid values for a supported field.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "field_name: string (enum 6 categories) (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/get_choices.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_counts",
+        "description": "Get the result count for a prior query.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/get_counts.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_more_results",
+        "description": "Fetch another page from a prior query.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query_id: string (required); num_results: integer (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/get_more_results.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_document",
+        "description": "Read opinion or RECAP document text, optionally chunked.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "opinion_id: integer (optional); recap_document_id: integer (optional); cluster_id: integer (optional); chunk_index: integer|array[integer] (optional); chunk_size: integer (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/read_document.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_document",
+        "description": "Find literal phrases in opinions or RECAP documents.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "opinion_id: integer|array[integer] (optional); recap_document_id: integer|array[integer] (optional); cluster_id: integer (optional); query: string (required); snippet_size: integer (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/search_document.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extract_citations",
+        "description": "Extract citations from supplied text.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "text: string (required); resolve: boolean (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/extract_citations.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "analyze_citations",
+        "description": "Extract and verify case citations against CourtListener.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "text: string (optional); opinion_id: integer (optional); cluster_id: integer (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/analyze_citations.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resume_citation_analysis",
+        "description": "Continue a citation verification job.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "job_id: string (required); wait: boolean (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/resume_citation_analysis.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_search_alert",
+        "description": "Create a recurring search alert.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); query: string|object (required); rate: string (enum 5 categories) (required); alert_type: string (enum 4 categories) (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/create_search_alert.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_search_alert",
+        "description": "Delete a search alert by ID.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: integer (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/delete_search_alert.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "subscribe_to_docket_alert",
+        "description": "Subscribe to docket updates.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "docket: integer (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/subscribe_to_docket_alert.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unsubscribe_from_docket_alert",
+        "description": "Unsubscribe from docket updates.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "docket: integer (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/unsubscribe_from_docket_alert.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pray_for_document",
+        "description": "Request acquisition of a missing RECAP document.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "recap_document_id: integer (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/pray_for_document.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "withdraw_prayer",
+        "description": "Withdraw a pending document request.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "recap_document_id: integer (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/withdraw_prayer.inputs.json",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_api_usage",
+        "description": "Check API usage, limits, and membership status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/get_api_usage.inputs.json",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "15803",
+    "token_method": "[LOCAL CODE @f29d0f9] Serialized initialize instructions and all 19 tool names, descriptions, input schemas, and annotations as JSON; character count divided by four (63,210 / 4, rounded).",
+    "human_can_agent_cannot": "CourtListener's website and REST API also support data services and operations not exposed as dedicated MCP tools, including database replication with SQL, bulk-data downloads, webhooks, and REST endpoints not covered by the `call_endpoint` endpoint enum or its query interface. The MCP generic tool covers many API endpoints but is not documented as a complete replacement for every REST function. Sources: https://wiki.free.law/c/courtlistener/help/api and https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/docs/mcp_tools/call_endpoint.inputs.json",
+    "sources": [
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L134-L200",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/tools/__init__.py",
+      "https://claude.com/connectors/courtlistener",
+      "https://resoluteaim.com/tools/courtlistener/",
+      "https://mcp.so/servers/courtlistener"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "For alert, subscription, and Pray and Pay tools, the README says: “Your client should prompt you for confirmation before calling them; if it doesn't, you can manage alerts at [courtlistener.com/profile/alerts/](https://www.courtlistener.com/profile/alerts/).” This is client guidance, not server-enforced confirmation. The global initialize instructions also recommend tool sequencing and data-selection practices; see D.",
+    "governance_promises": "The README states that only necessary account data is read or written; tool inputs and outputs are not persisted except described session state and document caching; and request logs are retained for operational debugging. The terms say agent calls using a user's credentials are treated as the user's requests and warn users to review account-changing actions. The policy also explains that data sent to the server passes through the AI provider and is subject to that provider's policy.",
+    "promises_to_user": "The documentation describes the MCP as free to use with a CourtListener account, provides access to legal research records and API tools, and says Pray and Pay requests do not charge the user but are neither immediate nor guaranteed. The terms warn that outputs are not legal advice and may be inaccurate or incomplete.",
+    "comparison_with_server_logic": "Code supports argument validation, quota/error handling, session-state expiry, document caching, and metrics. Confirmation recommendations are text-only. Privacy and retention statements are documented; implementation code supports the stated state/cache behavior, while request-log retention and deletion promises are not fully verifiable from the public server code alone.",
+    "sources": [
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/MCP_README.md#L182-L250",
+      "https://wiki.free.law/c/terms/courtlistener/courtlistenercom-terms-of-service-and-policies",
+      "https://wiki.free.law/c/courtlistener/help/api/mcp/using-the-courtlistener-mcp-in-claude-chatgpt-and-other-ai-assistants",
+      "https://github.com/freelawproject/courtlistener-api-client/blob/f29d0f905cfd907cede9d1886db561d4b61a5fd2/courtlistener/mcp/session.py"
+    ]
+  },
+  "contradictions": [
+    "The official README and code expose 19 tools. Anthropic's connector listing enumerates 14 and omits `read_document`, `search_document`, `pray_for_document`, `withdraw_prayer`, and `get_api_usage`. Resolute AIM also reports 14, while the official list is 19.",
+    "The OAuth protected-resource metadata advertises `api`, `wiki`, `email`, and `profile` scopes in addition to `openid`; the README's client setup instructions say users approve `openid` and `api`. The metadata list is broader than the scopes called out in that setup step.",
+    "The server code marks `call_endpoint` read-only, while its endpoint enum includes `alerts`, `docket-alerts`, and `prayers`; the README separately identifies dedicated tools that modify account state. This makes the annotation narrower in implication than the breadth of the generic endpoint proxy."
+  ],
+  "observations_for_research": [
+    "The official initialize instructions include numerous workflow preferences, including semantic-search strategy and preferred document-reading tools.",
+    "The API proxy is marked read-only in its MCP annotation but accepts endpoint selection and query parameters for multiple API surfaces.",
+    "The server's rate-limit error message can include a direct membership-upgrade link.",
+    "Document text caching is shared across users and keyed by document ID, whereas pagination and citation-job state is user-keyed and expires after inactivity."
+  ],
+  "confidence": "High (open code)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/, OAuth evidence, and pinned local code copy. Official code matches the hosted endpoint per its README and documents the 19 registered tools. Third-party counts differ; MCP.so has no tool list available. The local code snapshot is pinned to commit f29d0f905cfd907cede9d1886db561d4b61a5fd2. Pricing page gives general membership/commercial access context but no exact amounts in collected evidence. Unofficial community server repositories were present in links.json and excluded from evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 18.3
+  }
+}

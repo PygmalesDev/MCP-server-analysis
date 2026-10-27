@@ -1,0 +1,1227 @@
+{
+  "server": "era-context",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.era.app/mcp",
+    "documentation_url_csv": "https://era.app/help/mcp-server-era-context",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://era.app/help/mcp-server-era-context/",
+      "https://era.app/context/mcp-server",
+      "https://era.app/.well-known/mcp/server-card.json",
+      "https://era.app/articles/how-to-connect-ai-to-your-bank-account/",
+      "https://era.app/articles/how-to-connect-chatgpt-to-your-bank-account/",
+      "https://new.era.app/pricing/",
+      "https://era.app/privacy/",
+      "https://new.era.app/terms/"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official public repository was found in the prepared repository list or official documentation. The documented Era Context endpoint uses context.era.app; the supplied mcp.era.app host has separate OAuth metadata but no accessible tool list.",
+    "mcp_protocol_version": "2024-11-05 (server card for context.era.app; supplied host version not found)",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND; money movement is described as private beta",
+    "other_official_servers": [
+      "https://context.era.app and https://context.era.app/mcp — Era's official documentation identifies these as the Era Context Streamable HTTP server. Its server card declares tools and resources supported and prompts unsupported."
+    ],
+    "sources": [
+      "https://era.app/help/mcp-server-era-context/",
+      "https://era.app/.well-known/mcp/server-card.json",
+      "https://mcp.era.app/.well-known/oauth-protected-resource",
+      "https://mcp.era.app/.well-known/oauth-authorization-server"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "No separate MCP price is stated. Era's Basic plan is free and lists 100 MCP tool calls per day; paid plans list 250, 1,000, and 10,000 daily calls, with an add-on for extra MCP calls.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Basic: free. Organize: $6.99/month billed yearly at $83.88. Automate: $17.49/month billed yearly at $209.88. Operate: $69.99/month per seat billed yearly at $839.88. Listed prices are in USD.",
+    "pricing_model_details": "Plan-based access and quotas. Pricing page also lists add-ons: extra MCP calls $2.79/month billed yearly; other account, rules/category, and sync add-ons are separately priced. Paid tiers may offer a trial or paid introductory offer.",
+    "other_access_restrictions": "Tools vary by plan, approved OAuth scopes, connected accounts, and MCP client. Billing changes require mcp:billing-write, which docs say is outside the default scopes. Some tools are marked plan-required. Money movement is described as private beta and off by default for every API key; transfers require approval.",
+    "restrictions_controlled_by": "Era controls plan entitlements, server-side scope checks, and tool availability; the user approves OAuth scopes or configures an API key; the client controls whether it surfaces safety labels and asks for confirmation.",
+    "sources": [
+      "https://new.era.app/pricing/",
+      "https://era.app/help/mcp-server-era-context/",
+      "https://era.app/articles/how-to-connect-ai-to-your-bank-account/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "2024-11-05 for the documented context.era.app server card; supplied host not independently confirmed",
+      "description_what_how": "The official help page lists 89 tools across knowledge and memory, accounts, holdings, connections, transactions and automation, insights and analysis, documents, billing, referrals, and help. It says the live MCP metadata supplies the tool list. The list is for context.era.app; the supplied host's tool list was not available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Documentation describes structured financial data and structured errors but does not publish the supplied endpoint's result schemas.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/help/mcp-server-era-context/",
+        "https://era.app/.well-known/mcp/server-card.json"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "2024-11-05 for the documented context.era.app server card",
+      "description_what_how": "The server card declares resources supported. The help page describes structured Era data available through tools but does not enumerate MCP resource URIs or templates.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Resource contents and templates not published.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/.well-known/mcp/server-card.json",
+        "https://era.app/help/mcp-server-era-context/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No",
+      "depends_on_mcp_version": "2024-11-05 for the documented context.era.app server card",
+      "description_what_how": "The official server card sets prompts to false.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not applicable.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/.well-known/mcp/server-card.json"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "Era says reads and writes by an agent are logged and that users can inspect an activity log. The specific exposed endpoint's MCP logging notifications or log delivery are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Product activity log described; MCP logging protocol behavior not documented.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/context/mcp-server",
+        "https://era.app/privacy/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No official documentation or server card states whether MCP sampling is implemented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/.well-known/mcp/server-card.json",
+        "https://era.app/help/mcp-server-era-context/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No official documentation or server card states whether MCP roots are implemented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/.well-known/mcp/server-card.json",
+        "https://era.app/help/mcp-server-era-context/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth metadata is supplied for the input endpoint",
+      "description_what_how": "The supplied endpoint returned HTTP 401 with WWW-Authenticate pointing to its protected-resource metadata. The resource metadata names https://mcp.era.app as authorization server, supports bearer tokens in headers, and lists scopes. The authorization-server metadata advertises authorization_code and refresh_token grants, S256 PKCE, public token clients (token_endpoint_auth_methods_supported: [\"none\"]), and Dynamic Client Registration. Revocation endpoint auth method is none. Token lifetime not disclosed. The supplied OIDC configuration URL returned 404.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Bearer authorization header; exact token lifetime and response behavior not found.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://mcp.era.app/oauth/register; authorization code and refresh token grants; PKCE S256; token endpoint auth methods [\"none\"]; revocation endpoint https://mcp.era.app/oauth/revoke with auth method [\"none\"]. scopes_supported: [\"mcp:discovery\", \"mcp:tools-basic\", \"mcp:tools-write\", \"mcp:billing-write\", \"mcp:resources-read\", \"offline_access\", \"mcp:content-write\", \"mcp:identity-users-in-care\", \"mcp:social-invite\", \"markets:read\", \"content:read\"]. Token lifetime not published.",
+      "authorization_server": "https://mcp.era.app",
+      "sources": [
+        "https://mcp.era.app/.well-known/oauth-protected-resource",
+        "https://mcp.era.app/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.era.app/.well-known/oauth-authorization-server",
+        "https://mcp.era.app/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP Elicitation capability is documented. Product documentation describes approval flows for transfers and client-side confirmation recommendations for destructive tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for MCP Elicitation; product approval workflows are described separately.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/help/mcp-server-era-context/",
+        "https://era.app/.well-known/mcp/server-card.json"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP Tasks capability is documented. Scheduled routines are described as client-controlled.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/help/mcp-server-era-context/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "Era documents OAuth for compatible clients and API keys for some developer-first clients. The supplied endpoint's configuration options, headers, or tool filters are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client setup snippets are documented for the other official endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/help/mcp-server-era-context/",
+        "https://era.app/articles/how-to-connect-ai-to-your-bank-account/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "Era says failed calls return structured errors that clients can explain. It does not publish error schemas for the supplied endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Structured errors claimed; exact format not published.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/help/mcp-server-era-context/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/.well-known/mcp/server-card.json"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP progress notification behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/.well-known/mcp/server-card.json"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP request cancellation behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/.well-known/mcp/server-card.json"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "2024-11-05 for documented server card",
+      "description_what_how": "The official server card identifies the server as Era Context version 1.0.0, Streamable HTTP, with tools and resources enabled and prompts disabled. The help page says agents can use the same financial context across supported clients.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Structured finance data is described; schemas for the supplied endpoint are unavailable.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://era.app/.well-known/mcp/server-card.json",
+        "https://era.app/help/mcp-server-era-context/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official tool list labels tools read-only, write-capable, and sometimes destructive or extra-consent/plan-required. MCP tool annotation fields themselves are not published. 2. Docs describe client confirmation for destructive tools; transfers require user approval before running, and billing has preview/confirm tools plus mcp:billing-write. Destructive-tool confirmation is phrased as a client expectation, not a server guarantee. 3. Input-host OAuth metadata lists scopes; product docs say availability also depends on plan, scopes, connected accounts, and client. Docs describe per-assistant OAuth approval and revocation; consent-approved access expires within an hour after revocation. API key expiry is user-selected; token lifetime and redirect-URI approval rules not found. 4. No read-only endpoint or URL/header tool filters documented. Basic plan is described as read-only; plan and scope access varies. Money movement private beta. 5. Docs say agents do not receive bank credentials; bank auth is handled by regulated aggregators. Privacy page describes account data, retention, and deletion, but tool-level field masking/boundaries not specified. 6. Pricing sets daily MCP call quotas by plan (100/250/1,000/10,000) and an extra-call add-on; no MCP per-call price or result cap documented. Docs mention rate-limit failures without values. 7. Schemas and server-side validation/correction behavior not published. 8. Era says agent reads and writes are logged in an activity log; privacy policy says residual copies may remain in backups, security, audit, and system logs. 9. Tools include referral enrollment, campaign switching, links, stats, and dashboard access; these can support referral activity. No feedback/rating tool found in official list. 10. No server-delivered skills documented; behavioral guidance appears in tool descriptions/docs and client prompts. 11. Knowledge tools persist user financial facts/questions across connected agents; saved memory changes later context. 12. No subserver/proxy architecture documented. 13. No raw API, SQL, or script escape-hatch tool appears in the official tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Memory should come from explicit approval, not inference.",
+      "Rules keep changing future data, so agents should preview and ask before applying them.",
+      "Uncertain transfer matches should be confirmed with you.",
+      "Disconnecting an institution is destructive and should require clear confirmation.",
+      "Review the current plan, compare options, preview exact cost changes, and only then confirm or open checkout.",
+      "Context moves money between your own accounts only after your explicit approval on every transfer. It can't pay bills, place trades, file taxes, or act outside the tools listed here.",
+      "Destructive tools should be surfaced clearly by the client and confirmed by you."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "A flat categorized tool list is documented. The product also shares user memory across clients, but no tool hierarchy or subserver is described.",
+    "sources": [
+      "https://era.app/help/mcp-server-era-context/",
+      "https://era.app/context/mcp-server",
+      "https://era.app/articles/how-to-connect-ai-to-your-bank-account/",
+      "https://new.era.app/pricing/",
+      "https://era.app/privacy/",
+      "https://mcp.era.app/.well-known/oauth-protected-resource"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "89 documented for context.era.app; supplied mcp.era.app count unverified",
+    "action_count_comment": "An official tool list exists at https://era.app/help/mcp-server-era-context/ and names 89 tools across ten categories; it reports those category totals rather than one grand total. The supplied endpoint host is mcp.era.app, whereas the official tool list and server card identify context.era.app. The 89 listed actions are therefore best-available official product evidence, not independently verified as the supplied host's tools. Claude's connector directory lists 27 tools; Composio lists 51; Agent Discoverability lists 50. These are incomplete subsets; no extra catalogue-only names were added. MCP.so reports no tool list available. Tool schemas/parameters are not published in the official list.",
+    "actions": [
+      {
+        "tool_name": "knowledge__confirm_or_reject_inference",
+        "description": "Confirm or reject inference",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "knowledge__defer_question",
+        "description": "Defer question",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "knowledge__forget",
+        "description": "Forget a fact",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "knowledge__get_financial_context_and_overview",
+        "description": "Get financial context and overview",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "knowledge__get_pending_questions",
+        "description": "Get pending questions",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "knowledge__recall_history",
+        "description": "Recall fact history",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "knowledge__remember",
+        "description": "Remember a fact",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "knowledge__reset_pack_questions",
+        "description": "Reset pack questions",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "knowledge__show_question_ui",
+        "description": "Show question form",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accounts__check_account_balance",
+        "description": "Check account balance",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accounts__get_account_balance_series",
+        "description": "Get account balance over time",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accounts__list_financial_accounts",
+        "description": "List financial accounts",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accounts__manage_account",
+        "description": "Manage account",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accounts__manage_account_groups",
+        "description": "Manage account groups",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accounts__set_account_archive",
+        "description": "Set account archive",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accounts__set_account_visibility",
+        "description": "Set account visibility",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accounts__toggle_balance_backfill",
+        "description": "Toggle balance backfill",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "holdings__get_holding_position_timeline",
+        "description": "Get holding position timeline",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "holdings__get_holding_value_series",
+        "description": "Get holding value over time",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "holdings__get_holdings_summary",
+        "description": "Summarise investment accounts",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "holdings__list_holding_groups",
+        "description": "List holding groups",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "holdings__list_holding_lots",
+        "description": "List holding lots",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "holdings__list_holdings",
+        "description": "List holdings",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "holdings__list_holdings_by_group",
+        "description": "List holdings by group",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "holdings__update_holding_group",
+        "description": "Update holding group override",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "connections__connect_bank_account",
+        "description": "Connect bank account",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "connections__disconnect_institution",
+        "description": "Disconnect institution",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "connections__list_connections",
+        "description": "List connections",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "connections__manage_methodfi_connect",
+        "description": "Manage credit connection",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "connections__set_proactive_sync_mode",
+        "description": "Set proactive sync preference",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "connections__trigger_connection_resync",
+        "description": "Trigger connection resync",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__import_csv_transactions",
+        "description": "Import CSV transactions",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__list_recurring_charges",
+        "description": "List recurring charges",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__list_spending_categories",
+        "description": "List spending categories",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__list_transactions",
+        "description": "List transactions",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__manage_automation_rules",
+        "description": "Manage automation rules",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__manage_categories",
+        "description": "Manage spending categories",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__manage_manual_transaction",
+        "description": "Manage manual transactions (batch)",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__manage_transaction_tags",
+        "description": "Manage transaction tags",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__manage_transfer_links",
+        "description": "Manage transfer links",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__search_transactions",
+        "description": "Search transactions",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transactions__update_transactions",
+        "description": "Update transactions",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "insights__analyze_spending",
+        "description": "Analyze spending",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "insights__compare_spending_periods",
+        "description": "Compare spending periods",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "insights__forecast_spending",
+        "description": "Forecast spending",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "insights__get_cash_flow",
+        "description": "Get cash flow",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "insights__get_daily_category_spending",
+        "description": "Get daily category spending",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "insights__get_daily_financial_summary",
+        "description": "Get daily financial summary",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__accept_suggestions",
+        "description": "Accept suggestions",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__archive_document",
+        "description": "Archive document",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__cancel_share_link_recipient",
+        "description": "Cancel share link for one address",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__create_folder",
+        "description": "Create folder",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__create_share_link",
+        "description": "Create share link",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__delete_document_permanently",
+        "description": "Delete document permanently",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__delete_folder",
+        "description": "Delete folder",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__dismiss_suggestions",
+        "description": "Dismiss suggestions",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__extract_documents",
+        "description": "Extract documents",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__get_document",
+        "description": "Get document",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__get_document_view_url",
+        "description": "Get document view link",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__get_library_usage",
+        "description": "Get library usage",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__list_document_observations",
+        "description": "List what a document states",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__list_documents",
+        "description": "List documents",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__list_folders",
+        "description": "List folders",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__list_share_links",
+        "description": "List share links",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__move_folder",
+        "description": "Move folder",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__resend_share_link_recipient",
+        "description": "Resend share link to one address",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__restore_document",
+        "description": "Restore document",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__revoke_share_link",
+        "description": "Revoke share link",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__send_share_link",
+        "description": "Send share link",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__tag_documents",
+        "description": "Tag documents",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__tag_folders",
+        "description": "Tag folders",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__update_document",
+        "description": "Update document",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "content__upload_documents",
+        "description": "Get document upload link",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__cancel_subscription",
+        "description": "Cancel subscription",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__confirm_subscription_change",
+        "description": "Confirm subscription change",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__get_current_plan",
+        "description": "Get current plan",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__list_payments",
+        "description": "List payments",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__list_plans",
+        "description": "List plans",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__list_subscriptions",
+        "description": "List subscriptions",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__manage",
+        "description": "Manage billing",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__preview_subscription_change",
+        "description": "Preview subscription change",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__uncancel_subscription",
+        "description": "Un-cancel subscription",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "billing__upgrade",
+        "description": "Upgrade plan",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "referral__get_dashboard_sso",
+        "description": "Get referral dashboard SSO link",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "referral__get_referral_link",
+        "description": "Get referral link",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "referral__get_referral_stats",
+        "description": "Get referral stats",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "referral__join_referral_program",
+        "description": "Join referral program",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "referral__switch_referral_campaign",
+        "description": "Switch referral campaign",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "help__get_help",
+        "description": "Get help",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://era.app/help/mcp-server-era-context/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim tools/list/initialize payload is available for the supplied endpoint; the official help page lists names and labels but not complete definitions and initialize instructions.",
+    "human_can_agent_cannot": "Era's general product pages describe account, subscription, and financial services beyond the documented MCP tool list. The MCP documentation explicitly says agents cannot pay bills, place trades, or file taxes. Era also offers account connections, live data sources, and product settings through its app; no complete comparison of app operations against MCP is published. Sources: https://era.app/help/mcp-server-era-context/ ; https://new.era.app/pricing/",
+    "sources": [
+      "https://era.app/help/mcp-server-era-context/",
+      "https://era.app/.well-known/mcp/server-card.json",
+      "https://claude.com/connectors/era-context",
+      "https://composio.dev/toolkits/era_context_mcp",
+      "https://agentdiscoverability.com/track/chatgpt/era-context",
+      "https://mcp.so/servers/era-context"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Docs recommend starting with read-only questions, previewing and asking before applying automation rules, and having clients surface and confirm destructive tools. The destructive-action confirmation is explicitly phrased as a client responsibility: \"Destructive tools should be surfaced clearly by the client and confirmed by you.\"",
+    "governance_promises": "Era states: \"Agents do not receive bank credentials.\" It says bank credentials are not stored, OAuth scopes limit access, tool availability depends on plan and scopes, billing changes require separate consent, and agent activity is logged. Privacy policy says account data is retained while the account is active and as reasonably necessary, with deletion/de-identification after request subject to legal exceptions and residual copies in routine backups and logs.",
+    "promises_to_user": "Era describes access as scoped and revocable, memory as private to the user and shared only across that user's connected agents, and account data as not sold. It says users can inspect agent activity and revoke access.",
+    "comparison_with_server_logic": "OAuth metadata confirms an authorization server, scopes, registration, code/refresh grants, and PKCE. The docs describe approval and revocation but do not establish tool-specific enforcement details for the supplied host. Approval for transfers and separate billing scope are documented as controls; destructive-tool confirmation is client-side guidance. Logging, credential protection, and retention claims are product/privacy statements, not independently verified from public server code.",
+    "sources": [
+      "https://era.app/help/mcp-server-era-context/",
+      "https://era.app/context/mcp-server",
+      "https://era.app/articles/how-to-connect-ai-to-your-bank-account/",
+      "https://era.app/privacy/",
+      "https://mcp.era.app/.well-known/oauth-protected-resource",
+      "https://mcp.era.app/.well-known/oauth-authorization-server"
+    ]
+  },
+  "contradictions": [
+    "The supplied endpoint is https://mcp.era.app/mcp and has its own OAuth metadata, while Era's official help page and server card document https://context.era.app and https://context.era.app/mcp. The official 89-tool list is for the documented product endpoint; equivalence of the two hosts is not established.",
+    "The supplied OAuth metadata includes mcp:billing-write, while Era's docs say billing changes require that separate scope and that it is not included in default scopes. The metadata lists supported scopes, not which are granted by default.",
+    "Claude's connector directory exposes 27 tools and Composio lists 51, compared with the official help page's 89 tools. These catalogues appear to show subsets; the official list takes precedence."
+  ],
+  "observations_for_research": [
+    "The docs distinguish server-side permissioning from client-mediated safety: scopes and plan affect availability, while confirmation of destructive actions is recommended as a client behavior.",
+    "Financial memory is a cross-agent product feature: remembered facts and preferences are available to other connected agents, and tools can remember or forget facts.",
+    "Billing has a separate OAuth scope and a documented preview/confirm sequence; transfer actions are described as private beta with per-transfer approval.",
+    "The OAuth metadata for the supplied host offers a distinct resource identity from the currently documented context.era.app endpoint, making endpoint identity a material evidence limitation."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ including official page HTML and script text, and code/GITHUB_COMMITS.txt. No official repository was listed. Input endpoint returned HTTP 401 and its /install path returned 404; its OAuth metadata was supplied. The 89 official tool names were extracted from the Era help page for context.era.app; the page says its tool list comes from live MCP metadata and was last updated October 22, 2026, but host equivalence to mcp.era.app is unverified. Third-party MCP.so has no tool list; MCPI's page did not mention the product; MCPBeat returned 403; Arc0 says its integration is coming soon. actions.json contains the complete 89-name official product list with published labels; schemas were not available in official docs.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.0
+  }
+}

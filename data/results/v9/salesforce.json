@@ -1,0 +1,460 @@
+{
+  "server": "salesforce",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "(per org, pattern not documented)",
+    "documentation_url_csv": "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available",
+    "addressing": "per customer",
+    "repository_url": "https://github.com/forcedotcom/mcp-hosted",
+    "documentation_urls_used": [
+      "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/servers-reference.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-reads.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/sobject-deletes.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/setup-overview.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/client-connection-overview.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/data360-mcp.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/tableau-next.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/connection-issues.html"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The Salesforce DX MCP repository is a separate local stdio developer server, not the Salesforce-managed hosted service. The official forcedotcom/mcp-hosted repository is public but contains documentation and community resources, not the hosted implementation. Its incomplete local download was not used to infer deployed behavior. The DX repository describes 60+ developer tools; those tools are not included in actions.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "7c962c7c2f5451105157a4b0ab8d070bc6400f3a",
+    "commit_date": "2026-07-23",
+    "implementation_language": "NOT FOUND for hosted implementation; TypeScript for separate Salesforce DX local MCP server",
+    "mcp_sdk_and_version": "NOT FOUND for hosted implementation; @modelcontextprotocol/sdk ^1.18.0 for separate Salesforce DX local MCP server",
+    "code_public": "Partially",
+    "license": "NOT FOUND for hosted service implementation; Apache-2.0 for the separate Salesforce DX local server",
+    "release_status": "Generally available (hosted standard servers); Headless 360 and some other listed servers have beta status",
+    "other_official_servers": [
+      "Hosted production and sandbox/scratch variants are separately documented. Standard server paths include /platform/sobject-all and /sandbox/platform/sobject-all.",
+      "Other hosted standard servers have distinct tool sets and endpoints, including SObject Reads, Mutations, Deletes, Data 360, Headless 360, Tableau Next, Content Read-Only/Write, Metadata Grounding, and CRM Analytics.",
+      "Custom hosted servers can expose org-configured Flows, Apex actions, Apex REST, Named Query APIs, Prompt Builder prompts, and API Catalog endpoints.",
+      "Salesforce DX MCP (https://github.com/salesforcecli/mcp) is a distinct local stdio server for developer workflows, not the hosted endpoint."
+    ],
+    "sources": [
+      "https://github.com/forcedotcom/mcp-hosted",
+      "https://github.com/salesforcecli/mcp",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/servers-reference.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/connection-issues.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The sources reviewed do not state a separate MCP access charge. GA availability is described for Enterprise Edition orgs and above; the service requires a Salesforce org and server activation. A Salesforce Developer Edition announcement describes Hosted MCP as included at no cost in that edition.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The official announcement describes Enterprise Edition orgs and above as eligible but provides no prices. Developer Edition is described as free.",
+    "pricing_model_details": "Data 360 MCP calls count against underlying Connect API limits and Flex Credit usage. No general per-call Hosted MCP price or separate hosted-server quota was found.",
+    "other_access_restrictions": "An administrator must enable the MCP service and activate standard servers, which are disabled by default. OAuth client registration and user authorization are required. Access is subject to org edition/API access, user permissions, and product-specific licenses and permissions. Production and sandbox/scratch paths are distinct.",
+    "restrictions_controlled_by": "Salesforce controls platform availability and authentication; org administrators control enablement, server activation, client setup, and user permissions; product permissions and licenses also apply.",
+    "sources": [
+      "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available",
+      "https://developer.salesforce.com/blogs/2026/04/new-developer-edition-agentforce-vibes-claude-mcp",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/servers-reference.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/setup-overview.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/data360-mcp.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/connection-issues.html"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted standard and custom servers expose tools. The exact server in the input is unspecified. As best available endpoint-specific evidence, the documented /platform/sobject-all endpoint lists 11 tools for schema, queries/search, identity, relationships, and CRUD. Other standard/custom servers expose different tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The SObject reference describes structured record arrays, schema information, identity objects, success/error indicators, and search groups. Exact wire result and error schemas are not published there.",
+      "authorization_mechanism": "OAuth 2.0 with PKCE is documented. Salesforce setup instructions call for mcp_api and refresh_token scopes. The supplied metadata evidence says: \"NOT FETCHED: the input endpoint is not a concrete public URL ((per org, pattern not documented)). It is per customer or not published, so there is no public OAuth metadata to fetch; use the documentation to describe how customers obtain and authorise their endpoint.\"",
+      "authorization_server": "Salesforce org OAuth server; exact authorization-server URL is org/client-specific and not supplied.",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/setup-overview.html",
+        "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found that the selected standard SObject endpoint exposes MCP resources. Other hosted server variants and custom configurations may differ.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/custom-servers.html"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The GA announcement describes prompt templates for common tasks. Custom servers may expose Prompt Builder prompts. The SObject All reference does not document prompt names or prompt protocol output.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Prompt templates are described as natural-language starting points; exact MCP prompt definitions are not published in the reviewed endpoint reference.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available",
+        "https://developer.salesforce.com/blogs/2026/06/the-salesforce-developers-guide-to-the-summer-26-release",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Salesforce states that transactions run as the authenticated user and that the user's name appears in the audit trail when the agent updates a record. The reviewed material does not specify MCP-specific log contents, retention, or configuration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling behavior is described in the reviewed hosted-server documentation or endpoint reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/overview",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots support is described in the reviewed hosted-server documentation or endpoint reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/overview",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The client is registered as an External Client App in Salesforce. Setup documentation describes OAuth 2.0, PKCE, JWT-based tokens, callback URLs, and the mcp_api and refresh_token scopes. The user's Salesforce identity and permissions govern tool calls. Supplied metadata was not fetched because the endpoint is not a concrete public URL.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "OAuth 2.0; Dynamic Client Registration is not documented in the reviewed setup pages. External Client App registration is documented. PKCE and JWT-based tokens are described. GA getting-started instructions specify mcp_api and refresh_token. Token lifetime, revocation details, token endpoint authentication methods, and a complete scopes_supported list are NOT FOUND. Supplied raw metadata status: \"NOT FETCHED: the input endpoint is not a concrete public URL ((per org, pattern not documented)). It is per customer or not published, so there is no public OAuth metadata to fetch; use the documentation to describe how customers obtain and authorise their endpoint.\"",
+      "authorization_server": "The Salesforce org's OAuth authorization service; exact URL varies by org/client and was not provided.",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/setup-overview.html",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/create-external-client-app.html",
+        "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed docs recommend that clients obtain user approval before deletes, but do not document MCP Elicitation or a server-enforced elicitation flow.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/sobject-deletes.html"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks support is described for the selected SObject endpoint. Data 360 documentation describes long-running query IDs with polling tools, but that is a separate hosted server variant.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Data 360 long-running query documentation describes queryId, d360_query_sql_status, and d360_query_sql_rows; applicability to the unspecified input endpoint is unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/data360-mcp.html"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Administrators enable the service and activate standard servers in Setup. Standard server tool sets are fixed; custom servers can be configured to expose selected tools and prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/servers-reference.html",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/custom-servers.html",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/setup-overview.html"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool reference pages describe failure conditions and success/error indicators. A troubleshooting page documents endpoint, activation, edition/API access, and client-configuration checks. No complete MCP error schema is published.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Endpoint tool docs describe success/error indicators and operation-specific failures; formal error object schema is not published.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/connection-issues.html"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription capability is documented for the selected server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/overview",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress notification behavior is documented for the selected SObject endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/overview",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation behavior is documented for the selected SObject endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/overview",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The GA announcement describes Salesforce-managed hosting, OAuth and PKCE access, org permissions, and natural-language prompt templates. No initialize instructions for the unspecified endpoint were found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available",
+        "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The best-matched documented SObject All server has read tools (schema, query, find, identity, recent records, related records), create/update tools, and delete tools. Official standard-server docs say standard tool sets are fixed. Tool annotation fields are not shown in the SObject reference pages reviewed; Tableau Next pages do publish readOnlyHint and openWorldHint for that different server. 2. Delete docs say to confirm with the user and recommend query/review first; they do not document a server-enforced confirmation parameter or approval workflow. 3. OAuth 2.0 and PKCE are documented; operations run as the authenticated Salesforce user and respect object permissions, field-level security, and sharing rules. Standard servers are disabled by default and require administrator activation. Client callback URLs and External Client App setup are required. Token lifetime/revocation details were not found. 4. Separate standard endpoints include production and sandbox/scratch. SObject Reads, Mutations, Deletes, and All provide different fixed operation sets; standard tool sets cannot be modified. Custom servers permit administrator selection/configuration of exposed capabilities. No endpoint query-parameter tool filter was found. 5. SObject access follows Salesforce object permissions, field-level security, sharing rules, validation rules, and record relationships. The reviewed docs do not describe MCP-specific PII masking. 6. SObject All SOQL is documented with a 50,000-record transaction cap; SOSL search returns at most 2,000 records. SObject docs advise WHERE/LIMIT and indexed-field filtering. Data 360 API calls consume underlying API limits and Flex Credit usage; this is a different server. 7. Schemas expose field details and validation constraints; docs say invalid/missing required fields, permissions, and validation failures can cause operations to fail. No MCP-specific argument correction or operator override behavior was documented. 8. Salesforce states updates appear in the authenticated user's audit trail. MCP-specific logging configuration, retention, and telemetry details were not found. 9. No feedback/rating/survey/report-to-vendor tool was identified in the 11-tool SObject All list. 10. Natural-language prompt templates are described; delete confirmation and query-first guidance are text recommendations. No server instructions were published for the unspecified endpoint. 11. No evidence found that prior agent behavior changes future tools or results. 12. The hosted offering is a family of distinct standard and configurable custom endpoints, not one universal flat tool list. The exact input endpoint is unspecified. 13. SOQL and SOSL accept query/search strings but are not arbitrary REST request or script execution tools in the documented SObject All list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[ENDPOINT /platform/sobject-all] \"Always include a WHERE clause to filter results and a LIMIT clause to control result size.\"",
+      "[ENDPOINT /platform/sobject-all] \"Confirm with the user before deleting.\"",
+      "[ENDPOINT /platform/sobject-all] \"Call `getObjectSchema` first to understand required fields and valid values\"",
+      "[ENDPOINT /platform/sobject-all] \"Use `find` for “find me anything matching X” scenarios.\"",
+      "[DOCS] \"standard servers are disabled by default\""
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Salesforce publishes multiple hosted endpoints with distinct tool sets (production versus sandbox, read-only versus mutation/delete/full access, and product-specific services), alongside custom servers configured by org administrators. The input does not identify which endpoint path or server variant applies.",
+    "sources": [
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-reads.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/sobject-deletes.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/servers-reference.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/setup-overview.html",
+      "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/data360-mcp.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/tableau-next.html"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "11 for the best-matched documented /platform/sobject-all endpoint; the actual input endpoint's count is unknown",
+    "action_count_comment": "The input endpoint is not a concrete URL and its server path is not specified. The official SObject All tool reference (https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html) describes 11 tools; actions.json lists those documented tools as the best available endpoint-specific evidence. The official reference does not state a numeric total. No catalogue-only tools were added. The DevelopersDigest page says it documents 11 tools and names some of them, consistent with the official list; Composio's Salesforce toolkit is a proxy/API toolkit and was not used as evidence of this hosted endpoint's MCP tool names. Other standard Salesforce hosted servers have different tools and counts.",
+    "actions": [
+      {
+        "tool_name": "getObjectSchema",
+        "description": "Returns compact object index or detailed Salesforce object schema.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "object-name: string (optional)",
+        "parameter_count": 1,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "soqlQuery",
+        "description": "Executes SOQL to retrieve Salesforce records.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required)",
+        "parameter_count": 1,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find",
+        "description": "Searches Salesforce objects with SOSL.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "search: string (required)",
+        "parameter_count": 1,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getUserInfo",
+        "description": "Returns authenticated user identity and context.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": 0,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listRecentSobjectRecords",
+        "description": "Lists recently viewed or modified records by object.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "sobject-name: string (required)",
+        "parameter_count": 1,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getRelatedRecords",
+        "description": "Traverses parent-to-child relationships and returns related records.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "sobject-name: string (required); id: string (required); relationship-path: string (required)",
+        "parameter_count": 3,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSobjectRecord",
+        "description": "Creates a Salesforce record.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "sobject-name: string (required); body: object (required)",
+        "parameter_count": 2,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateSobjectRecord",
+        "description": "Updates a Salesforce record by ID.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "sobject-name: string (required); id: string (required); body: object (required)",
+        "parameter_count": 3,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateRelatedRecord",
+        "description": "Updates a related record through parent-to-child relationship traversal.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "sobject-name: string (required); id: string (required); relationship-path: string (required); body: object (required)",
+        "parameter_count": 4,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteSobjectRecord",
+        "description": "Deletes a record by ID.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "sobject-name: string (required); id: string (required)",
+        "parameter_count": 2,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteRelatedRecord",
+        "description": "Deletes a related record through relationship traversal.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "sobject-name: string (required); id: string (required); relationship-path: string (required)",
+        "parameter_count": 3,
+        "source": "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted server implementation and exact initialize/tool definitions are not public. The separate Salesforce DX local server is a different product variant and is not used to estimate hosted endpoint context.",
+    "human_can_agent_cannot": "The selected SObject All reference documents core record CRUD, queries, search, schema, identity, and relationship operations; it does not establish which other Salesforce UI, API, analytics, or administrative features are available in the unspecified endpoint's org. Salesforce's REST APIs and product UI expose broader functionality, but comparing the unknown endpoint to the full product would require its actual server path and org configuration. Within SObject All, no undelete MCP tool is available; users may recover deleted records from the Recycle Bin for up to 15 days.",
+    "sources": [
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/servers-reference.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/sobject-deletes.html",
+      "https://www.developersdigest.tech/mcp-servers/salesforce-hosted-mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Delete documentation says: “Confirm with the user before deleting.” It also instructs agents to query and review the target set before delete and present results for approval “when possible.” The SObject All reference recommends WHERE and LIMIT clauses for SOQL. These are documented agent-use instructions; the pages do not describe a server-enforced confirmation field or query-shape gate.",
+    "governance_promises": "Salesforce states that “every transaction runs as the authenticated user” and that existing CRUD, field-level security, and sharing rules apply. Its announcement says an agent cannot perform operations the authenticated user lacks permission to perform, and updates appear under that user's name in the audit trail. Setup requires OAuth and PKCE. These are documented platform claims; the public hosted implementation is unavailable for code-level verification.",
+    "promises_to_user": "The service is described as Salesforce-managed infrastructure with no server provisioning or uptime management for customers. Hosted MCP servers are generally available for Enterprise Edition orgs and above. Standard servers must be activated by an administrator and have fixed tool sets.",
+    "comparison_with_server_logic": "The endpoint reference and GA announcement document per-user authentication and platform permission enforcement, but hosted server code is not public, so implementation-level enforcement could not be independently inspected. Delete confirmation, query-first review, and query-filter guidance are text instructions in the docs. Salesforce describes audit trails but does not document MCP-specific log retention or configuration in the reviewed sources.",
+    "sources": [
+      "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/servers-reference.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-all.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/references/reference/sobject-deletes.html",
+      "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/setup-overview.html"
+    ]
+  },
+  "contradictions": [
+    "The input says a per-customer endpoint exists based on manufacturer documentation but does not provide a concrete URL or server path. Salesforce documents multiple standard and custom hosted endpoints; therefore /platform/sobject-all is used only as best available endpoint evidence, not confirmed as the input endpoint.",
+    "Salesforce's official documentation separately lists many hosted server variants and product capabilities. They are not interchangeable tool lists; actions.json uses the official 11-tool SObject All reference only and does not combine other server tools.",
+    "The supplied OAuth evidence says metadata was not fetched because the input endpoint is not concrete. Salesforce docs describe OAuth, PKCE, and setup scopes, but endpoint-specific OAuth metadata and a complete supported-scope list cannot be compared to the tool list."
+  ],
+  "observations_for_research": [
+    "Salesforce provides distinct standard endpoint paths for different operation scopes, including read-only, mutation, delete-focused, and full CRUD variants; administrators activate standard servers but cannot modify their tool sets.",
+    "The hosted offering also supports org-configured custom servers, so the available MCP surface can depend on administrator configuration as well as the endpoint path.",
+    "Published delete confirmation and query-first guidance is phrased as an instruction to the agent; the reviewed docs do not describe server-side confirmation enforcement.",
+    "Salesforce's per-user identity and permission model links MCP operations to existing org permissions and audit identity, while Data 360 and other product servers can bring additional licenses, permission sets, or usage accounting."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "The prepared pages/ copies of Salesforce official docs and blog pages returned HTTP 403, so official pages were read via web browsing. The official forcedotcom/mcp-hosted repository was listed, but its local clone download was incomplete; its public description identifies it as a docs/community repository, not the hosted implementation. The local code copy is salesforcecli/mcp at commit 9bc98ba22f0efe4a901904db7d0c76ebdf09525d (2026-10-05), a separate local Salesforce DX stdio server; it was excluded from actions. Unofficial Smithery Salesforce server was found and excluded. Salesforce docs also include other standard endpoints; because the input endpoint is unspecified, the documented SObject All endpoint is reported as the best-available reference, with that limitation stated throughout.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 6.4
+  }
+}

@@ -1,0 +1,422 @@
+{
+  "server": "databricks",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "(per workspace); Databricks documents workspace-specific endpoints, including https://<workspace-hostname>/ai-gateway/mcp-services/<mcp-name> and separate /api/2.0/mcp/... paths.",
+    "documentation_url_csv": "https://docs.databricks.com/aws/en/agents/mcp-tools/managed-mcp",
+    "addressing": "per customer",
+    "repository_url": "https://github.com/databrickslabs/mcp",
+    "documentation_urls_used": [
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/managed-mcp",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/ai-search",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-agent",
+      "https://docs.databricks.com/aws/en/generative-ai/mcp/connect-clients",
+      "https://docs.databricks.com/aws/en/generative-ai/mcp/custom-mcp-usage",
+      "https://docs.databricks.com/aws/en/admin/account-settings/audit-logs",
+      "https://docs.databricks.com/aws/en/release-notes/unity-gateway/",
+      "https://docs.databricks.com/aws/en/agents/agent-framework/agent-tool",
+      "https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_mcp.html",
+      "https://www.databricks.com/product/pricing",
+      "https://www.databricks.com/legal/privacynotice",
+      "https://www.databricks.com/legal/terms-of-use",
+      "https://claude.com/connectors/databricks"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public Databricks Labs repository is an experimental, deprecated Unity Catalog server, not the hosted Databricks-provided MCP service. Its README recommends managed MCPs instead. Its tools are dynamically inferred from configured Unity Catalog functions, vector indexes, and Genie spaces; they are not included as actions for this hosted endpoint family.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "dc8ba768c5a341a7013a4b1599fe475427a3d060",
+    "commit_date": "2026-10-26",
+    "implementation_language": "NOT FOUND for hosted service; Python for the separate Databricks Labs server.",
+    "mcp_sdk_and_version": "NOT FOUND for hosted service; separate Databricks Labs repository declares mcp>=1.9.2.",
+    "code_public": "Partially",
+    "license": "N/A for hosted service; Apache-2.0 for the separate Databricks Labs repository.",
+    "release_status": "Varies by endpoint: Genie One is GA; system.ai.dbsql, system.ai.sandbox and system.ai.web_search are in Unity Gateway Beta; Genie Agent and AI Search workspace endpoints are Public Preview.",
+    "other_official_servers": [
+      "Databricks-provided workspace MCP family includes system.ai.genie_one_mcp, system.ai.dbsql, system.ai.web_search, system.ai.sandbox and external-service connectors such as system.ai.github and system.ai.slack.",
+      "Separate workspace endpoints include Genie Agent (/api/2.0/mcp/genie/{genie_space_id}), AI Search (/api/2.0/mcp/ai-search/{catalog}/{schema}/{index_name}), Databricks SQL (/api/2.0/mcp/sql), and Unity Catalog functions (/api/2.0/mcp/functions/{catalog}/{schema}/{function_name}).",
+      "The former Beta /api/2.0/mcp/genie endpoint is deprecated; Databricks states it will be sunset on October 31, 2026."
+    ],
+    "sources": [
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/ai-search",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-agent",
+      "https://github.com/databrickslabs/mcp"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP access price was found. Databricks documents underlying service charges: Genie One MCP uses Chat in Genie One pricing; Genie Agent uses Databricks SQL pricing; SQL and AI Search endpoints use their respective product pricing.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Databricks publishes product and compute pricing; no fixed price is stated on the cited product pricing page.",
+    "pricing_model_details": "Underlying compute or product usage applies. Unity Catalog functions use serverless general compute pricing, Databricks SQL MCP uses Databricks SQL pricing, and AI Search indexes use AI Search pricing.",
+    "other_access_restrictions": "The workspace URL is customer-specific. Unity Gateway system.ai MCPs require the relevant service to be enabled; system.ai.dbsql, system.ai.sandbox and system.ai.web_search require an account admin to enable the Unity Gateway Beta preview. Workspace MCP endpoints require a workspace admin to enable Managed MCP Servers. Access is also subject to the underlying resource permissions. system.ai.web_search is unavailable in HIPAA/BAA workspaces and has region/cross-Geo restrictions; system.ai.sandbox has no network egress.",
+    "restrictions_controlled_by": "Vendor and Databricks account/workspace administrators; resource owners control underlying grants and permissions.",
+    "sources": [
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/ai-search",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-agent",
+      "https://www.databricks.com/product/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official tool names vary by MCP service and configuration. Genie One publishes five tools; SQL publishes execute_sql in its example; AI Search names tools from catalog, schema and index; Genie Agent documentation does not publish a tool name.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Genie One tools return asynchronous response state, progress, answers, deep links, and query results; genie_ask and genie_poll_response truncate query results, with genie_get_query_result available for complete results subject to a size limit. SQL runs asynchronously and truncates large results. AI Search returns index search results.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/ai-search",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-agent"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted endpoint documentation does not specify MCP resources. Genie One provides an interactive MCP App View on supporting clients.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for MCP resources; Genie One may return a client-rendered interactive View.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted endpoint documentation does not say whether MCP prompts are exposed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Unity Gateway-governed MCP calls can be monitored through Unity Gateway tracing and usage records. Workspace endpoints that bypass Unity Gateway are explicitly excluded from its tracing tables.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tracing and audit information is available through Databricks governance features; exact hosted MCP log payload and retention are not specified here.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services",
+        "https://docs.databricks.com/aws/en/admin/account-settings/audit-logs",
+        "https://docs.databricks.com/aws/en/release-notes/unity-gateway/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server documentation for MCP sampling was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server documentation for MCP roots was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "OAuth is documented for hosted endpoints. On-behalf-of user authentication is recommended for Genie One; service principal authentication is also supported. The supplied metadata evidence says no public OAuth metadata could be fetched because the endpoint is workspace-specific and unpublished. The overview lists scopes ai-gateway for Unity Gateway services and genie, ai-search, sql, and unity-catalog for specified workspace endpoint paths. No raw endpoint metadata values, token lifetime, or revocation details were available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth-protected workspace endpoint; authorization is mediated by Databricks and resource permissions.",
+      "authorization_mechanism": "OAuth; endpoint-specific scopes documented as ai-gateway, genie, ai-search, sql, or unity-catalog. OAuth metadata was NOT FETCHED because the input endpoint is not a concrete public URL. The distinct Databricks AI Bridge client documents OAuth discovery and Dynamic Client Registration for registering external MCP servers; that does not establish DCR behavior for this hosted endpoint.",
+      "authorization_server": "Databricks workspace OAuth; exact authorization server URL NOT FOUND for this workspace-specific endpoint.",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-agent",
+        "https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_mcp.html"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server documentation for MCP elicitation or server-enforced confirmation was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Genie One and SQL document asynchronous tool operations with polling, but the docs do not establish MCP Tasks protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific response IDs and statuses are described for asynchronous work.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Administrators enable previews and govern services through Unity Gateway. Clients may preset behavior using _meta parameters: SQL warehouse_id; AI Search columns, filters, result count, query type, score threshold, score inclusion, and reranking columns.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration is through workspace/admin settings and MCP _meta parameters.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/ai-search"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP-specific error reporting interface is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Genie One returns progress_steps and narration_instruction through genie_poll_response while Genie works asynchronously; SQL queries also execute asynchronously and require polling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Status, progress steps, narration instruction, final answer and deep links are documented for Genie One.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Genie One publishes genie_cancel_response to request cancellation of an in-flight Genie turn. This is a documented tool, not evidence of general MCP cancellation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Cancellation request tool result; detailed response schema NOT FOUND.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Genie One offers an MCP App interactive View with visualizations and citations for compatible clients. Databricks documents Unity Gateway as a governance layer for MCP services.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Interactive panel for compatible clients; text results for clients that do not support MCP Apps.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+        "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Tool effects vary: Genie One asks questions, returns query results, and can cancel turns; SQL permits reads and writes by default, configurable to read-only; Genie Agent is documented read-only; AI Search is retrieval. No hosted tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) were found. 2. No server-enforced confirmation flow is documented. Unity Gateway policies can restrict calls; user/client confirmation is not equivalent to server enforcement. 3. Access uses OAuth scopes and caller/resource permissions. Genie One recommends on-behalf-of user OAuth and also supports service principals. Gateway services support grants/policies; workspace endpoints bypass Gateway governance. No public metadata, token lifetime, or revocation details were available for the unspecified workspace. 4. Endpoint variants include Unity Gateway and legacy workspace routes; Gateway calls can be restricted with grants and policies. SQL has a read-only policy setting; SQL warehouse and AI Search parameters can be preset via _meta. Workspace endpoints require preview enablement and bypass Gateway policies/traces. 5. Genie One and workspace query services enforce Unity Catalog permissions. AI Search excludes internal columns beginning __ by default; no generalized PII masking documented. 6. Genie query results are truncated, including full-result retrieval when a size limit is exceeded; SQL truncates large results. AI Search supports num_results; no universal rate, quota, or per-call cap identified. Pricing follows underlying service. 7. The pages document typed/configuration parameters and valid AI Search query_type values; hosted validation/correction behavior for unknown arguments or operator overrides is not documented. 8. Gateway traffic has tracing/usage governance; endpoints bypassing Gateway do not appear in its tracing tables. Hosted MCP telemetry payload, retention, and opt-out were not identified. 9. No vendor feedback, rating, survey, or reporting tool appears in the official lists reviewed. Genie One docs recommend Genie One for workspace natural-language analytics and prefer view_ask when available; these are documentation instructions. No upsell response found. 10. No server-delivered skill tool or initialize instructions found. Databricks separately documents adding skills to coding agents; that is outside the listed MCP actions. 11. Genie One supports conversation_id follow-ups. Genie Agent endpoint explicitly does not pass conversation history to Genie. 12. Non-standard service family: separate MCP endpoints expose different tool sets; Unity Gateway fronts governed system.ai services. Genie One also runs a Databricks agent internally. 13. execute_sql is a SQL execution tool, a broad query interface. The reviewed official docs do not describe a generic raw HTTP or script execution tool on these named endpoints; system.ai.sandbox separately runs Python, SQL, or shell code in an isolated environment without network egress.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“Wait for the prior genie_poll_response call to complete before polling again.”",
+      "“To protect the model’s context window, genie_ask and genie_poll_response return truncated query results.”",
+      "“Always limit search results to exactly 3 items for consistent response times”",
+      "“For business questions asked in natural language, Databricks recommends the Genie One MCP server.”",
+      "“Offered instead of genie_ask to MCP Apps clients, and preferred when available.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The provided endpoint is specified only as workspace-addressed, while Databricks documents a family of distinct services and paths with different tools, scopes, and governance. Unity Gateway exposes system.ai services; other workspace endpoints can bypass it. The exact service intended by the placeholder is not identified.",
+    "sources": [
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/ai-search",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-agent",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools",
+      "https://docs.databricks.com/aws/en/release-notes/unity-gateway/"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "6 named tools across Genie One and SQL documentation, plus configuration-dependent AI Search tool(s); Genie Agent tool name is not published",
+    "action_count_comment": "The input is a workspace-level placeholder, not a uniquely selected MCP endpoint. Official tool lists exist for Genie One (5 names: genie_ask, genie_poll_response, genie_get_query_result, genie_cancel_response, view_ask) and Databricks SQL (execute_sql appears in the official example). AI Search has dynamic per-index tool names; its official example gives a placeholder name, and Genie Agent docs publish no tool name. actions.json records all six fixed official names plus the documented AI Search name pattern. No catalogue-only actions were added. Claude's third-party Databricks Genie connector directory lists four Genie tools and omits the official view_ask; it describes the Genie One connector and does not establish the selected workspace endpoint. Composio's page is its Databricks API toolkit, not evidence of this MCP endpoint's tool list.",
+    "actions": [
+      {
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "tool_name": "genie_ask",
+        "type": "Mixed",
+        "description": "Ask Genie a natural-language analytics question and start a response.",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "source": "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp"
+      },
+      {
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "tool_name": "genie_poll_response",
+        "type": "Read",
+        "description": "Poll an in-flight or completed Genie response for progress or answer.",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "source": "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp"
+      },
+      {
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "tool_name": "genie_get_query_result",
+        "type": "Read",
+        "description": "Fetch full SQL result schema and rows for a Genie query.",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "source": "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp"
+      },
+      {
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "tool_name": "genie_cancel_response",
+        "type": "Write",
+        "description": "Request cancellation of an in-flight Genie turn.",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "source": "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp"
+      },
+      {
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "tool_name": "view_ask",
+        "type": "Mixed",
+        "description": "Ask Genie and open interactive View; offered to MCP Apps clients.",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "source": "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp"
+      },
+      {
+        "parameter_count": "1",
+        "source_type": "Official",
+        "tool_name": "execute_sql",
+        "type": "Mixed",
+        "description": "Execute an agent-provided SQL query asynchronously.",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required; inferred from official example)",
+        "source": "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql"
+      },
+      {
+        "parameter_count": "1 tool argument + 7 documented _meta fields",
+        "source_type": "Official",
+        "tool_name": "CATALOG__SCHEMA__INDEX_NAME",
+        "type": "Read",
+        "description": "Dynamic AI Search tool name for an index; accepts semantic search query.",
+        "enabled_by_default": "Unknown",
+        "parameters": "query: string (required; official example); optional _meta: columns, columns_to_rerank, filters, include_score, num_results, query_type (ANN or HYBRID), score_threshold",
+        "source": "https://docs.databricks.com/aws/en/agents/mcp-tools/ai-search"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The open repository is a separate deprecated local server, not the hosted endpoint; no verbatim initialize instructions or complete hosted tool definitions for the selected workspace endpoint were available.",
+    "human_can_agent_cannot": "The selected server is unspecified, so comparison is endpoint-dependent. Databricks documents product functions beyond MCP, including workspace APIs and direct Python libraries. For the covered services, the Genie Agent endpoint is limited to querying and cannot write tables; SQL MCP can run writes by default. No complete product-to-MCP exclusion list was found. Sources: https://docs.databricks.com/aws/en/agents/mcp-tools/genie-agent ; https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql ; https://docs.databricks.com/aws/en/agents/mcp-tools",
+    "sources": [
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/ai-search",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-agent",
+      "https://claude.com/connectors/databricks",
+      "https://composio.dev/toolkits/databricks"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Genie One guidance says to wait for the prior poll call and explains how to use query-result retrieval after truncation. AI Search examples advise setting a three-result cap and search filters via _meta. These are client configuration and agent guidance; the sources do not establish that every caller is forced to use those example values.",
+    "governance_promises": "Databricks states “Unity Catalog permissions are always enforced, so users and agents can only query data they're allowed to access.” Gateway-governed services support grants and policies. The docs also state that workspace endpoint calls bypass Unity Gateway tracing, MCP grants, policies, and guardrails.",
+    "promises_to_user": "Genie One answers are grounded in Genie Ontology and include deep links to Databricks sources; supporting clients may render progress, visualizations, and results in an interactive View. Databricks recommends on-behalf-of user authentication for data governance and clickthrough.",
+    "comparison_with_server_logic": "Permission enforcement is documented for Genie One, AI Search, Genie Agent, and SQL; Unity Gateway provides centralized grants/policies for its managed services. For legacy workspace endpoints, docs explicitly say Gateway policies and tracing do not apply. Result truncation is described as server behavior. No public hosted code was found to independently verify these claims.",
+    "sources": [
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-mcp",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/databricks-sql",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/ai-search",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/genie-agent",
+      "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services"
+    ]
+  },
+  "contradictions": [
+    "The official Genie One tool reference lists five tools, while Claude's third-party Databricks Genie connector lists four and omits view_ask. The official list takes precedence.",
+    "The default /api/2.0/mcp/genie workspace endpoint is described as deprecated, while the current Genie One endpoint is /ai-gateway/mcp-services/system.ai.genie_one_mcp and uses the ai-gateway scope rather than genie.",
+    "The input identifies only a workspace-level endpoint, but official documentation distinguishes multiple MCP services with different tool sets, scopes, release states, and governance. An exact per-endpoint action count therefore cannot be resolved."
+  ],
+  "observations_for_research": [
+    "Databricks exposes services through multiple workspace-specific routes, with some routed through Unity Gateway and others bypassing it.",
+    "The same product area offers both natural-language agent-mediated analytics and direct SQL execution; the documented governance and write behavior differ by endpoint.",
+    "Tool availability can be configuration-dependent: AI Search names tools per index, while Unity Catalog functions and other resources can be reached through separately scoped MCP endpoints."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ including script and HTML copies, and the local Databricks Labs repository. The supplied OAuth evidence says metadata was not fetched because the endpoint is not a concrete public URL; no raw OAuth documents or scopes_supported values were available. The local repository at https://github.com/databrickslabs/mcp is a separate deprecated experimental server, so its tools and code behavior were not attributed to the hosted endpoint. The links check flags the PyPI page as not identifying the product; it was not used. Composio's Databricks API toolkit is not treated as MCP tool evidence. No hosted tool schemas for Genie One were published in the reviewed docs.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.7
+  }
+}

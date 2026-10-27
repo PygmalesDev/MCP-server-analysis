@@ -1,0 +1,489 @@
+{
+  "server": "stripe",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.stripe.com/",
+    "documentation_url_csv": "https://github.com/stripe/agent-toolkit",
+    "addressing": "global",
+    "repository_url": "https://github.com/stripe/ai",
+    "documentation_urls_used": [
+      "https://docs.stripe.com/mcp",
+      "https://github.com/stripe/ai",
+      "https://github.com/stripe/ai/tree/main/tools/modelcontextprotocol",
+      "https://marketplace.stripe.com/apps/stripe-mcp",
+      "https://claude.com/connectors/stripe"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "Stripe's public stripe/ai repository documents both the hosted endpoint and a local @stripe/mcp package. The local package is a separate deployment variant; the repository does not establish that its implementation is the code deployed at mcp.stripe.com. The hosted service's implementation remains unverified.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "acbfbb292b3d88d209d4511006c2a89a46c11f8e",
+    "commit_date": "NOT FOUND",
+    "implementation_language": "TypeScript (public local @stripe/mcp package; hosted implementation unknown)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.17.1 (public local package)",
+    "code_public": "Partially",
+    "license": "MIT (public repository/local package)",
+    "release_status": "Public preview (Stripe documentation)",
+    "other_official_servers": [
+      "Stripe documents a local @stripe/mcp package in stripe/ai; it runs locally and uses an API key, unlike the hosted OAuth endpoint. https://github.com/stripe/ai/tree/main/tools/modelcontextprotocol"
+    ],
+    "sources": [
+      "https://docs.stripe.com/mcp",
+      "https://github.com/stripe/ai",
+      "https://github.com/stripe/ai/tree/main/tools/modelcontextprotocol",
+      "https://github.com/stripe/ai/blob/acbfbb292b3d88d209d4511006c2a89a46c11f8e/tools/modelcontextprotocol/package.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Stripe's App Marketplace listing marks Stripe MCP as Free. The MCP documentation does not state a separate server fee; Stripe usage and product fees can still apply.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Stripe payments are pay-as-you-go; the official U.S. pricing page lists 2.9% + 30¢ per successful domestic-card transaction. Rates vary by product, payment method, and region.",
+    "pricing_model_details": "No MCP per-call or subscription price was found. Normal Stripe product pricing and applicable account/API limits govern operations performed through the server.",
+    "other_access_restrictions": "Stripe account and OAuth consent or an Agent API key required. Organization administrators can enable or disable MCP separately for live mode and sandbox. OAuth permissions are account/environment-specific. Connected-account use requires an Agent API key and Stripe-Account header; the docs say OAuth is unsupported for acting on behalf of connected accounts.",
+    "restrictions_controlled_by": "Stripe controls the service and supported authentication; organization administrators control team MCP access; the user grants and revokes OAuth access and sets key permissions.",
+    "sources": [
+      "https://marketplace.stripe.com/apps/stripe-mcp",
+      "https://stripe.com/pricing",
+      "https://docs.stripe.com/mcp",
+      "https://dashboard.stripe.com/settings/mcp-and-cli-access"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Stripe documents 15 tools: generic API search, details, read and write; account and Atlas helpers; analytics; Treasury operations; documentation search; implementation planning; and feedback. Two additional account-management names appear in Claude's connector listing.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific output and errors are not specified in the hosted documentation. Generic API and analytics result structures are not reproduced there.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp",
+        "https://claude.com/connectors/stripe"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs use resource labels as tool group headings, but do not document MCP Resources protocol capabilities or a resources/list response.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation does not describe MCP Prompts protocol capabilities.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Stripe documents MCP tool-call logs in Workbench. The page does not specify retention duration, fields logged, or an opt-out.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Workbench tool-call logs; detailed schema not published.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted documentation found describing MCP Sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted documentation found describing MCP Roots.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP authorization specification linked by Stripe; exact server protocol version not stated",
+      "description_what_how": "Provided endpoint POST returned HTTP 401 with WWW-Authenticate Bearer resource_metadata=\"https://mcp.stripe.com/.well-known/oauth-protected-resource\" and error_code missing_api_key. Protected-resource metadata: resource https://mcp.stripe.com; scopes_supported [\"mcp\"]; authorization_servers [\"https://access.stripe.com/mcp\"]. Authorization-server metadata: issuer https://access.stripe.com/mcp; authorization_endpoint https://access.stripe.com/mcp/oauth2/authorize; token_endpoint https://access.stripe.com/mcp/oauth2/token; registration_endpoint https://access.stripe.com/mcp/oauth2/register; revocation_endpoint https://access.stripe.com/mcp/oauth2/revoke; response_types_supported [\"code\"]; scopes_supported [\"mcp\"]; response_modes_supported [\"query\"]; grant_types_supported [\"authorization_code\",\"refresh_token\"]; token_endpoint_auth_methods_supported [\"none\"]; code_challenge_methods_supported [\"S256\"]. OpenID configuration at https://access.stripe.com/.well-known/openid-configuration/mcp returned HTTP 404 with invalid_request_error. Stripe also documents Agent API key bearer-token authentication. Token lifetime not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated request receives HTTP 401 and a Bearer WWW-Authenticate challenge pointing to protected-resource metadata; response body error_code is missing_api_key.",
+      "authorization_mechanism": "OAuth authorization code and refresh token grants; PKCE S256; token endpoint auth method none; dynamic client registration endpoint published; revocation endpoint published; scopes_supported [\"mcp\"]. In addition, Stripe documents Agent API keys as bearer tokens. Token lifetime not found. Raw metadata: https://mcp.stripe.com/.well-known/oauth-protected-resource and https://access.stripe.com/.well-known/oauth-authorization-server/mcp.",
+      "authorization_server": "https://access.stripe.com/mcp",
+      "sources": [
+        "https://mcp.stripe.com/.well-known/oauth-protected-resource",
+        "https://access.stripe.com/.well-known/oauth-authorization-server/mcp",
+        "https://access.stripe.com/.well-known/openid-configuration/mcp",
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Stripe documents human approval for certain API writes using a URL and approval token, but does not identify this as MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "For certain actions, a user approves through a Stripe URL; the server provides an approval token and the agent retries the operation.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted documentation found describing MCP Tasks.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Stripe documents endpoint configuration, OAuth or Agent API key authentication, a Stripe-Account header for connected accounts, and separate administrator controls for live and sandbox environments.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client setup uses Streamable HTTP at https://mcp.stripe.com; API key authentication uses Authorization: Bearer; connected-account calls can use Stripe-Account.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint's unauthenticated response documents an error shape. General tool error reporting formats are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated endpoint response: {\"error\":\"Unauthorized. See https://docs.stripe.com/mcp for usage instructions.\",\"error_code\":\"missing_api_key\",\"error_description\":\"No valid API key provided.\"}. Tool-call error format unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://mcp.stripe.com/",
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted documentation found describing MCP subscription notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Stripe Analytics describes query workflows, but the hosted MCP documentation does not specify MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted documentation found describing MCP request cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Stripe recommends plugins and skills that configure the server and provide agent guidance. The hosted tools include a Stripe implementation planner and feedback tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results may include operation-specific guidance; the hosted docs do not publish initialize instructions.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.stripe.com/mcp",
+        "https://docs.stripe.com/skills"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list includes read tools, generic API write, Atlas formation, Treasury money movement/conversion, and product feedback. No hosted tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are published. 2. Stripe says certain stripe_api_write actions, including refunds and outgoing payments, require human approval. The user approves through a Stripe URL; an approval token is then returned, and the agent retries. Approval is not claimed for every write. The docs also recommend enabling the MCP client's tool approval setting; that is client-side. 3. OAuth authorizes access to selected accounts/environments with separate permissions; Agent API keys support persistent access. Team administrators can disable/enable MCP per environment; users and permitted administrators can revoke OAuth sessions. OAuth metadata publishes dynamic registration and revocation endpoints, authorization_code and refresh_token grants, PKCE S256, and scope mcp. Token lifetime and redirect-URI approval policy not found. 4. Docs distinguish live and sandbox account contexts; administrator controls are separate. Connected-account access uses an Agent API key and Stripe-Account header; OAuth is not supported for acting on behalf of connected accounts. No readonly parameter/tool filter or region-specific endpoint found. 5. No MCP-specific PII masking or field exclusion described. Access is constrained by account/environment and the permissions granted via OAuth or API key. 6. No MCP call quota, bulk cap, or server-specific rate limit found. Stripe API limits may apply; result truncation not documented. 7. Hosted MCP parameter validation/correction behavior unknown; the docs do not publish schemas. 8. Stripe documents MCP tool-call logs in Workbench; details and retention not stated. 9. send_stripe_feedback is explicitly a feedback tool. No upsell response or marketing elicitation documented. 10. Stripe provides external agent skills/plugins; these are recommended setup materials, not documented as server-delivered instructions. Tool docs include behavioral guidance. 11. Persistent account sessions and OAuth credentials affect accessible accounts; server-side memory changing tool availability was not found. 12. One hosted endpoint presents generic API tools and named helpers; no nested MCP subservers documented. 13. stripe_api_read and stripe_api_write expose generic API operations, with the latter accepting POST/PATCH/PUT/DELETE methods. The public docs describe access to much of Stripe's API through these generic tools.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Enable the tool approval setting of your MCP client so that you can review tool calls before they are executed. [translated from the German version of the Stripe documentation]",
+      "Be careful when using the Stripe MCP together with other servers, to avoid prompt injection attacks. [translated from the German version of the Stripe documentation]"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The hosted endpoint is documented as one MCP server with a flat set of named tools. Generic API operations are exposed through shared read and write tools.",
+    "sources": [
+      "https://docs.stripe.com/mcp",
+      "https://mcp.stripe.com/.well-known/oauth-protected-resource",
+      "https://access.stripe.com/.well-known/oauth-authorization-server/mcp",
+      "https://claude.com/connectors/stripe"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "17 documented/listed names",
+    "action_count_comment": "Stripe's official tool list at https://docs.stripe.com/mcp names 15 tools. No official total is stated on that page. Two additional exact names, list_available_accounts_or_orgs and manage_stripe_accounts, appear in the third-party Claude connector directory dated 2026-10 and are appended as third-party entries; they are absent from the official list. Agent Discoverability lists 11 tools (https://agentdiscoverability.com/track/chatgpt/stripe); MartechDB reports 15 tools and reproduces the official list (https://martechdb.com/vendors/stripe); Composio lists 10 toolkit tools, including its feedback and analytics entries (https://composio.dev/toolkits/stripe_mcp). These catalogue counts cover different snapshots or surfaces and do not replace the official list. The official docs do not publish input schemas, so parameters remain NOT PUBLISHED.",
+    "actions": [
+      {
+        "tool_name": "stripe_api_search",
+        "description": "Search Stripe API methods by keyword.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "stripe_api_details",
+        "description": "Retrieve detailed parameters for a Stripe API method.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "stripe_api_read",
+        "description": "Read data using a Stripe API GET method.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "stripe_api_write",
+        "description": "Write data using Stripe API POST, PATCH, PUT, or DELETE methods.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_stripe_account_info",
+        "description": "Retrieve Stripe account information.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas_company_formation",
+        "description": "Start or continue Delaware C corporation or LLC formation.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "stripe_analytics",
+        "description": "Query preview metrics, analyze billing, and run financial reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_balance_summary",
+        "description": "Show an interactive overview of Stripe and Treasury balances.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "convert_currency",
+        "description": "Convert funds between currencies within a Treasury account.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_money",
+        "description": "Send money from a Treasury account to a recipient.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "setup_recipient",
+        "description": "Set up a recipient account for Treasury payments.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transfer_money",
+        "description": "Transfer money between supported Stripe balances.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_stripe_documentation",
+        "description": "Search Stripe documentation by question and language.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "stripe_implementation_planner",
+        "description": "Guide Stripe product and integration planning.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_stripe_feedback",
+        "description": "Send feedback about Stripe products.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.stripe.com/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_available_accounts_or_orgs",
+        "description": "List Stripe accounts in the session and their context and live-mode values.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/stripe",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "manage_stripe_accounts",
+        "description": "Return a Dashboard URL to manage accounts or session permissions.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/stripe",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No verbatim hosted initialize instructions or complete hosted tool definitions with schemas were available. The public repository has a local package, but its complete tool definitions and request handlers were not verified as the deployed hosted server.",
+    "human_can_agent_cannot": "Stripe's general API and Dashboard support operations beyond the named tools, but the MCP documentation states that generic read/write tools cover much of the API. Specific unsupported operations were not enumerated in the reviewed material. Stripe's App Marketplace describes product permissions (for example, some resources are read-only or read/write), but those REST/API permission descriptions do not establish MCP tool schemas.",
+    "sources": [
+      "https://docs.stripe.com/mcp",
+      "https://claude.com/connectors/stripe",
+      "https://agentdiscoverability.com/track/chatgpt/stripe",
+      "https://martechdb.com/vendors/stripe",
+      "https://composio.dev/toolkits/stripe_mcp",
+      "https://marketplace.stripe.com/apps/stripe-mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Stripe recommends using its agent plugins and skills to configure the server. It advises enabling the MCP client's tool approval setting and warns about prompt injection when combining servers. The docs do not describe these recommendations as server-enforced controls.",
+    "governance_promises": "Stripe documents per-account and per-environment permissions, team admin controls, OAuth session revocation, and approval for certain writes. Its general Data Processing Agreement describes access controls and logging for personal-data processing, but the reviewed materials do not attribute those controls specifically to MCP. The Stripe Services Agreement states that the user is responsible for actions initiated through an AI agent.",
+    "promises_to_user": "The Stripe App Marketplace describes the MCP listing as Free and says it provides a structured interface to Stripe data and workflows. Stripe documentation says OAuth lets the user authorize and revoke a client without sharing an API key.",
+    "comparison_with_server_logic": "The documented approval flow for certain API writes and account/environment permissions are described as enforced behaviors. Tool-call logging is documented, but its fields and retention are unspecified. Client tool approval and prompt-injection advice are recommendations, not server guarantees. General DPA controls are not specifically tied to the MCP server in the reviewed pages.",
+    "sources": [
+      "https://docs.stripe.com/mcp",
+      "https://marketplace.stripe.com/apps/stripe-mcp",
+      "https://stripe.com/legal/dpa",
+      "https://stripe.com/legal/ssa"
+    ]
+  },
+  "contradictions": [
+    "The Claude connector directory lists list_available_accounts_or_orgs and manage_stripe_accounts, while Stripe's official tool list at https://docs.stripe.com/mcp does not include either name. They are recorded as third-party catalogue-only tools pending official confirmation.",
+    "Third-party catalogues report differing tool totals (11, 10, and 15); the official Stripe documentation lists 15 tool names. The differing counts may refer to distinct snapshots or catalogue surfaces."
+  ],
+  "observations_for_research": [
+    "The server exposes broad Stripe API access through generic read/write tools alongside named product helpers, keeping the published list compact while allowing API operations to be discovered separately.",
+    "Approval is documented for selected sensitive writes and uses an external Stripe approval URL/token/retry sequence; client-side tool approval is presented as an additional recommendation.",
+    "Stripe exposes one global endpoint but scopes OAuth access across selected accounts and separately configured live and sandbox environments."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the supplied links.json, pages/INDEX.txt, page7 official docs including page7.script.txt, the hosted endpoint response, OAuth metadata, repository commit inventory, and available public repository pages. The stripe/ai repository is official and documents the local @stripe/mcp package and hosted URL, but the complete repository snapshot was unavailable locally and the hosted implementation could not be confirmed from public code. No initialize instructions, protocol version, hosted tool schemas, token lifetime, or MCP-specific privacy/retention statement was found. Unofficial/community servers and proxy catalogues were excluded from actions.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 12.8
+  }
+}

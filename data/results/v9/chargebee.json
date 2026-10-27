@@ -1,0 +1,698 @@
+{
+  "server": "chargebee",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.chargebee.com/mcp",
+    "documentation_url_csv": "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/chargebee/agentkit",
+    "documentation_urls_used": [
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/data-lookup-agent",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/knowledge-base-agent",
+      "https://www.chargebee.com/docs/billing/2.0/kb/platform/how-do-i-fix-mcp-server-connection-errors-caused-by-an-incorrect-regional-url",
+      "https://release-notes.chargebee.com/may-2026",
+      "https://release-notes.chargebee.com/june-2026",
+      "https://www.chargebee.com/privacy",
+      "https://claude.com/marketplace/connectors/chargebee"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repository is a deprecated TypeScript local stdio AgentKit server. Its two documentation/code-generation tools differ from the 45-tool global hosted connector listing and from the current documented per-site servers. It is analyzed as a separate official server; its tools are not included in actions.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "de092e2d59ea993fe78133ef1eec37ca9a36817b",
+    "commit_date": "2025-11-18",
+    "implementation_language": "TypeScript [LOCAL CODE]",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.6.1 [LOCAL CODE]",
+    "code_public": "Yes",
+    "license": "MIT [LOCAL CODE]",
+    "release_status": "Beta stated for the May 2026 MCP launch; current supplied endpoint’s release status is not separately stated.",
+    "other_official_servers": [
+      "Chargebee documents per-site Data Lookup endpoints at https://YOUR-CHARGEBEE-SUBDOMAIN.mcp.chargebee.com/data_lookup_agent and corresponding EU/AU hosts; the docs enumerate 120 tool-like entries, including references to other servers and feedback, so that count is not treated as a verified distinct-tool total.",
+      "Per-site Knowledge Base endpoints use /knowledge_base_agent on US/EU/AU regional hosts. Official docs describe two tools: Generate Code Snippet and Explain Chargebee Docs.",
+      "Onboarding and Custom MCP servers are also documented; their site-specific URLs and complete tool lists were not available in the collected evidence.",
+      "Claude’s Chargebee connector directory lists global regional root URLs (https://mcp.chargebee.com/, https://mcp.eu.chargebee.com/, https://mcp.au.chargebee.com/) and says the global connector has 45 tools.",
+      "Per-site Data Lookup MCP Server (https://<site>.mcp.chargebee.com/data_lookup_agent, also .eu/.au): about 110 tools in 23 toolsets (human-readable labels in the docs), individually switchable by admins; API key or OAuth."
+    ],
+    "sources": [
+      "https://github.com/chargebee/agentkit",
+      "https://github.com/chargebee/agentkit/blob/de092e2d59ea993fe78133ef1eec37ca9a36817b/modelcontextprotocol/README.md",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/data-lookup-agent",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/knowledge-base-agent",
+      "https://claude.com/marketplace/connectors/chargebee",
+      "https://release-notes.chargebee.com/may-2026"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific price or usage charge was found. The endpoint challenges unauthenticated requests with HTTP 401 and requires OAuth bearer authorization for scope tool:invoke.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Chargebee describes plans with a fixed fee up to a revenue threshold and an overage percentage above it; current amounts were not established in the collected evidence.",
+    "pricing_model_details": "Official pricing guidance says plan costs depend on monthly revenue processed and directs customers to the current pricing page or sales for a quote. No MCP per-call, credit, or separate fee was found.",
+    "other_access_restrictions": "Global endpoint OAuth metadata advertises the tool:invoke scope and bearer tokens in the Authorization header. Current per-site Data Lookup docs separately describe an MCP Access toggle, API-key or OAuth modes, up to five API keys, and OAuth access limited by the signed-in user’s Chargebee access level; OAuth is unsupported on sites with Multi-Business Entity enabled.",
+    "restrictions_controlled_by": "Vendor and Chargebee site administrator for documented per-site MCP access; user permissions also limit the documented OAuth Data Lookup server. Control details for the supplied global endpoint are not documented.",
+    "sources": [
+      "https://mcp.chargebee.com/mcp",
+      "https://mcp.chargebee.com/.well-known/oauth-protected-resource/mcp",
+      "https://app.chargebee.com/.well-known/oauth-authorization-server/mcp",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/data-lookup-agent",
+      "https://www.chargebee.com/docs/billing/2.0/kb/getting-started/what-is-chargebees-pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Claude’s third-party connector listing identifies 45 tools for the global Chargebee connector, but renders only 24 exact names. No endpoint-specific official tool schema or complete tool listing was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the supplied hosted endpoint. The separate deprecated local code serializes results as JSON text content and represents caught errors with isError=true.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee",
+        "https://mcp.chargebee.com/mcp",
+        "https://github.com/chargebee/agentkit/blob/de092e2d59ea993fe78133ef1eec37ca9a36817b/modelcontextprotocol/src/mcp.ts#L43-L74"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No resource list or resource capability declaration for the supplied endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No prompt list for the supplied endpoint was found. The separate deprecated local server registers a chargebee-tool-selection prompt.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee",
+        "https://github.com/chargebee/agentkit/blob/de092e2d59ea993fe78133ef1eec37ca9a36817b/modelcontextprotocol/src/mcp.ts#L81-L108"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted-endpoint logging or audit behavior was found. The deprecated local code comments that it logs user requests to help understand intent and improve the tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/chargebee/agentkit/blob/de092e2d59ea993fe78133ef1eec37ca9a36817b/modelcontextprotocol/src/tools/code-planner.ts#L4-L6",
+        "https://github.com/chargebee/agentkit/blob/de092e2d59ea993fe78133ef1eec37ca9a36817b/modelcontextprotocol/src/tools/documentation-search.ts#L4-L6"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No sampling capability evidence for the supplied endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No roots capability evidence for the supplied endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate: Bearer resource_metadata=\"https://mcp.chargebee.com/.well-known/oauth-protected-resource\", scope=\"tool:invoke\". Protected-resource metadata advertises scopes_supported [\"tool:invoke\"] and bearer_methods_supported [\"header\"]. Its authorization_servers value is [\"https://app.chargebee.com/mcp\"]. The authorization-server metadata advertises authorization_code and refresh_token grants, code response type, PKCE S256, token endpoint auth method none, and client_id_metadata_document_supported false; no registration_endpoint is listed. Token lifetime and revocation behavior are not specified.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP 401 JSON-RPC error: {\"jsonrpc\":\"2.0\",\"id\":\"\",\"error\":{\"code\":-31001,\"message\":\"Auth required\"}}; metadata challenges clients to use bearer authorization.",
+      "authorization_mechanism": "OAuth protected-resource metadata and authorization-server metadata. Raw endpoint challenge: `Bearer resource_metadata=\"https://mcp.chargebee.com/.well-known/oauth-protected-resource\", scope=\"tool:invoke\"`. Raw protected-resource values: resource `https://mcp.chargebee.com/mcp`; authorization_servers `[\"https://app.chargebee.com/mcp\"]`; scopes_supported `[\"tool:invoke\"]`; bearer_methods_supported `[\"header\"]`. Authorization-server values: authorization_endpoint `https://app.chargebee.com/oauth2/authorize`; token_endpoint `https://app.chargebee.com/oauth2/token`; issuer `https://app.chargebee.com`; jwks_uri `https://app.chargebee.com/oauth2/jwkset`; response_types_supported `[\"code\"]`; grant_types_supported `[\"authorization_code\",\"refresh_token\"]`; code_challenge_methods_supported `[\"S256\"]`; token_endpoint_auth_methods_supported `[\"none\"]`; client_id_metadata_document_supported `false`; no registration_endpoint listed. The `/mcp` OIDC configuration URL returned 404. Token lifetime/revocation not stated.",
+      "authorization_server": "https://app.chargebee.com/mcp",
+      "sources": [
+        "https://mcp.chargebee.com/mcp",
+        "https://mcp.chargebee.com/.well-known/oauth-protected-resource",
+        "https://mcp.chargebee.com/.well-known/oauth-protected-resource/mcp",
+        "https://app.chargebee.com/.well-known/oauth-authorization-server/mcp",
+        "https://app.chargebee.com/.well-known/openid-configuration/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No server-enforced MCP elicitation or approval flow was documented for the supplied endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee",
+        "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No task capability evidence for the supplied endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Official docs describe configurable per-site servers and custom tool input settings (disable fields, defaults, and constraints), but do not establish that these settings apply to the supplied global endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted error-reporting tool or server error format was found beyond the unauthenticated HTTP 401 response.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The supplied unauthenticated request received HTTP 401 and a JSON-RPC Auth required error.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://mcp.chargebee.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No subscriptions capability evidence for the supplied endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No progress notification or tracking evidence for the supplied endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP cancellation capability evidence for the supplied endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No initialize instructions or other server-supplied context for the supplied endpoint was available. Official docs describe distinct per-site Data Lookup, Knowledge Base, Onboarding, and Custom servers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee",
+        "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The endpoint-specific listing supplies no tool annotations. The 24 visible names suggest lookup, list, and search tools plus documentation/code-generation agent tools; read/write status is not declared by the listing. 2. No server-enforced confirmation flow found. Chargebee says approval depends on the MCP client and recommends reviewing actions. 3. OAuth requires `tool:invoke`; token lifetime, revocation, client allowlists, and inheritance of product roles for this global endpoint are unknown. Current per-site Data Lookup docs separately say OAuth access follows the signed-in user's Chargebee access level. 4. No restriction mode or toolset URL/header controls found for the global endpoint. Official per-site servers can be toggled/configured, and tool inputs can be hidden, defaulted, or constrained. Regional root URLs are listed for US/EU/AU. 5. No masking or PII filtering logic found for this endpoint; the directory advertises access to customer, subscription, invoice, and payment data. 6. No endpoint-specific rate limits, quotas, result caps, or costs per call found. 7. No hosted validation or argument-correction behavior found. 8. No hosted audit or telemetry behavior found. Deprecated local code logs a user-request improvement comment and sends client name/version user-agent and a random session ID to Chargebee's AI API; this does not establish behavior of the hosted endpoint. 9. No feedback/rating tool among the 24 visible names; the separate official Data Lookup docs list a `Submit Chargebee MCP Feedback` tool. No endpoint-specific upsell was found. 10. No instructions for the supplied endpoint were exposed. Deprecated local code has an external prompt that steers tool selection; official docs also provide client-facing setup recommendations. 11. No persistent agent memory/state behavior found. 12. The supplied endpoint is listed as a global hosted connector; official documentation separately describes per-site regional system/custom servers. Architecture relationship is not detailed. The separate deprecated local server makes downstream Chargebee AI API calls. 13. No raw API, SQL, script, or arbitrary execution tool among the visible 24 names; the remaining 21 listed tools are not exposed by the page evidence.",
+    "behavioural_instructions_to_ai_verbatim": [],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Chargebee operates a global connector listing alongside distinct per-site, region-specific Data Lookup, Knowledge Base, Onboarding, and Custom MCP servers with different purposes and configuration. The relationship between the global connector and those servers is not specified.",
+    "sources": [
+      "https://claude.com/marketplace/connectors/chargebee",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/data-lookup-agent",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/knowledge-base-agent",
+      "https://release-notes.chargebee.com/may-2026",
+      "https://github.com/chargebee/agentkit/blob/de092e2d59ea993fe78133ef1eec37ca9a36817b/modelcontextprotocol/src/mcp.ts#L23-L34",
+      "https://github.com/chargebee/agentkit/blob/de092e2d59ea993fe78133ef1eec37ca9a36817b/modelcontextprotocol/src/tools/code-planner.ts#L4-L19",
+      "https://github.com/chargebee/agentkit/blob/de092e2d59ea993fe78133ef1eec37ca9a36817b/modelcontextprotocol/src/tools/documentation-search.ts#L4-L28"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "45 (35 names known)",
+    "action_count_comment": "The global endpoint https://mcp.chargebee.com is the Claude/ChatGPT connector; Chargebee states that it gives access to tools of the Knowledge Base MCP Server and the Data Lookup MCP Server. The Claude connector directory states 45 tools; 24 names are visible on the page and 11 more are contained in the page data, so 35 machine names are recorded (all third-party). The remaining 10 names are not published. Chargebee's official docs describe the per-site servers (https://<site>.mcp.chargebee.com/<server>) with human-readable tool labels only; the Data Lookup server alone lists about 110 tools in 23 toolsets that admins switch on or off. Those per-site servers are other official servers, not this endpoint.",
+    "actions": [
+      {
+        "tool_name": "docs_explanation_agent_as_tool",
+        "description": "Explain Chargebee documentation.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "code_generation_agent_as_tool",
+        "description": "Generate Chargebee integration code guidance.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "customer_lookup-retrieve_customer_tool",
+        "description": "Retrieve one customer record.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "customer_lookup-fetch_customers_via_email_tool",
+        "description": "Find customers by email.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "customer_lookup-fetch_customers_via_company_tool",
+        "description": "Find customers by company.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "customer_lookup-list_customers_tool",
+        "description": "List customer records.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data_lookup-get_filter_conditions_metadata_tool",
+        "description": "Retrieve filter condition metadata.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "data_lookup-get_response_field_metadata_tool",
+        "description": "Retrieve response field metadata.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "products_lookup-search_plans_tool",
+        "description": "Search plans.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "products_lookup-search_addons_tool",
+        "description": "Search addons.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "products_lookup-retrieve_plan_tool",
+        "description": "Retrieve plan details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "products_lookup-retrieve_addon_tool",
+        "description": "Retrieve addon details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "products_lookup-retrieve_item_tool",
+        "description": "Retrieve item details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "products_lookup-retrieve_item_price_tool",
+        "description": "Retrieve item price details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "products_lookup-list_item_prices_tool",
+        "description": "List item prices.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "products_lookup-list_items_tool",
+        "description": "List items.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "subscription_lookup-retrieve_subscription_tool",
+        "description": "Retrieve subscription details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "subscription_lookup-list_subscriptions_for_customer_tool",
+        "description": "List subscriptions for a customer.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "subscription_lookup-list_subscriptions_tool",
+        "description": "List subscriptions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "payment_intent_lookup-retrieve_payment_intent_tool",
+        "description": "Retrieve a payment intent.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "invoice_lookup-retrieve_invoice_tool",
+        "description": "Retrieve invoice details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "invoice_lookup-list_invoices_by_customer_tool",
+        "description": "List invoices for a customer.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "invoice_lookup-list_invoices_tool",
+        "description": "List invoices.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "invoice_lookup-list_invoices_by_subscription_tool",
+        "description": "List invoices for a subscription.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "invoice_lookup-retrieve_invoice_pdf_tool",
+        "description": "Get a link to view or download an invoice PDF. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "credit_note_lookup-retrieve_credit_note_tool",
+        "description": "Retrieve one credit note by ID. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "credit_note_lookup-list_credit_notes_tool",
+        "description": "List credit notes matching filters. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "credit_note_lookup-retrieve_credit_note_pdf_tool",
+        "description": "Get a link to view or download a credit note PDF. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "transaction_lookup-list_transactions_by_customer_tool",
+        "description": "List payment and refund transactions of a customer. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "transaction_lookup-list_transactions_tool",
+        "description": "List payment and refund transactions in bulk. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "transaction_lookup-list_transactions_by_invoices_tool",
+        "description": "List transactions of an invoice. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "transaction_lookup-retrieve_transaction_tool",
+        "description": "Retrieve one transaction by ID. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_lookup-list_events_tool",
+        "description": "List events of a given event type. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_lookup-fetch_events_by_customer_id_tool",
+        "description": "List events of a customer. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_lookup-retrieve_event_tool",
+        "description": "Retrieve one event by ID. [name from the page data of the Claude directory listing; description from the official Data Lookup docs]",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/chargebee",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The public code is a deprecated, different local server, not the supplied hosted endpoint. The catalogue provides only a partial name list, not complete tool definitions or initialize instructions.",
+    "human_can_agent_cannot": "Official documentation says per-site Data Lookup exposes product, customer, subscription, invoice, quote, credit note, transaction, event, export, and related lookup toolsets; the supplied global endpoint's 45-tool listing does not expose all names or schemas, so the exact human-versus-agent gap cannot be established. The Knowledge Base server is documented as generating code snippets and explaining documentation; current docs also describe onboarding catalog creation and custom servers.",
+    "sources": [
+      "https://claude.com/marketplace/connectors/chargebee",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/data-lookup-agent",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/knowledge-base-agent",
+      "https://glama.ai/mcp/connectors/io.usefulapi/chargebee",
+      "https://glama.ai/mcp/servers/%40ampcome-mcps/chargebee-mcp/schema",
+      "https://glama.ai/mcp/servers/pipeworx-io/mcp-chargebee/tree"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Chargebee says: “Approval behavior depends on the MCP client, so connect only trusted clients and review actions before they run.” This is a client/user recommendation, not evidence of server-enforced confirmation. Docs also let site administrators configure field hiding, defaults, and constraints on separate per-site servers.",
+    "governance_promises": "The Chargebee MCP overview says servers connect clients “securely” and that OAuth can ensure permissions “strictly mirror each user's existing Chargebee access level” in its May 2026 launch notes. Current Data Lookup docs state access is limited by the signed-in user's Chargebee access level for that separate server. The privacy notice gives general security and retention terms, but does not specifically describe MCP data handling.",
+    "promises_to_user": "Chargebee describes MCP as providing access to selected capabilities and says users are responsible for actions, including writes. May 2026 release notes describe real-time account context and up-to-date documentation.",
+    "comparison_with_server_logic": "The client-dependent approval warning is documented but no server-side confirmation mechanism was found. OAuth metadata verifies a required tool:invoke scope and bearer header; role mirroring is documented for the separate per-site Data Lookup server, not established for this global endpoint. General privacy/security statements do not specify MCP-specific masking, audit, or retention controls.",
+    "sources": [
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp",
+      "https://release-notes.chargebee.com/may-2026",
+      "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/data-lookup-agent",
+      "https://www.chargebee.com/privacy"
+    ]
+  },
+  "contradictions": [
+    "Claude's connector directory lists the global Chargebee connector with 45 tools, while official Chargebee docs route users to per-site Knowledge Base and Data Lookup servers and do not document a 45-tool global tool list. The exact relationship between those tool sets is not stated.",
+    "The official docs describe a separate per-site Knowledge Base server with two human-readable functions; the deprecated public AgentKit code has two differently named local tools, `chargebee_documentation_search` and `chargebee_code_planner`. The repository marks that package deprecated and directs users to the new MCP server."
+  ],
+  "observations_for_research": [
+    "The hosted endpoint has a single global URL in the input, while official operational documentation emphasizes per-site endpoints with regional hosts and administrator-controlled access.",
+    "OAuth metadata exposes a narrowly named `tool:invoke` scope; the documentation does not map that scope to specific tools or data categories.",
+    "The global connector directory discloses a total count larger than its visible exact-name list, limiting tool-level analysis of the omitted portion."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "[MANUAL CORRECTION 2026-10-27: added 11 tool names found in the page data of the Claude directory listing (35 of the stated 45 now listed); clarified that the 114 entries of v7 belong to the per-site Data Lookup servers, not to this endpoint] Checked the prepared links.json, links_check.txt, all collected pages and script text, and the official repository copy. The npm package page returned HTTP 403. The public AgentKit repository is deprecated and not the deployed endpoint. Unofficial servers include MSPbotsAI/chargebee-mcp, pipeworx-io/mcp-chargebee, and ampcome-mcps/chargebee-mcp; they were not used as evidence. Glama/API catalogue warnings and unrelated proxy/community entries were excluded from actions. The official docs' human-readable tool functions refer to separate per-site servers, not verified machine names for the supplied endpoint.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 9.1
+  },
+  "_manual_corrections": [
+    {
+      "date": "2026-10-27",
+      "by": "manual check (Claude)",
+      "change": "added 11 tool names found in the page data of the Claude directory listing (35 of the stated 45 now listed); clarified that the 114 entries of v7 belong to the per-site Data Lookup servers, not to this endpoint",
+      "sources": [
+        "https://claude.com/marketplace/connectors/chargebee",
+        "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/chargebee-mcp",
+        "https://www.chargebee.com/docs/billing/2.0/ai-in-chargebee/data-lookup-agent"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,608 @@
+{
+  "server": "coupler-io",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.couplerio.dev/mcp",
+    "documentation_url_csv": "https://www.couplerio.dev/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/coupler-io/coupler-io-mcp-server",
+    "documentation_urls_used": [
+      "https://www.coupler.io/mcp",
+      "https://docs.coupler.io/ai/mcp",
+      "https://docs.coupler.io/destinations/categories/ai/custom_mcp",
+      "https://blog.coupler.io/how-to-use-coupler-mcp-server/",
+      "https://www.coupler.io/pricing",
+      "https://www.coupler.io/privacy-policy",
+      "https://www.coupler.io/terms-of-use",
+      "https://github.com/coupler-io/coupler-io-mcp-server",
+      "https://claude.com/connectors/coupler-io",
+      "https://mcp.so/servers/coupler-io",
+      "https://mcpyet.com/mcp/coupler-io/"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official repository is a local, self-hosted stdio variant. Its README says the hosted remote server exposes a broader, continuously growing tool set; it is not the code running at the input endpoint. Hosted docs and repository describe the same Coupler.io MCP product, but the endpoint host differs.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "550ec75cb48bbbe0be286577b30c3a32f9bb0eea",
+    "commit_date": "2026-06-04",
+    "implementation_language": "TypeScript (local self-hosted repository)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.26.0 (local self-hosted repository; deployed endpoint version unknown)",
+    "code_public": "Yes",
+    "license": "MIT (local self-hosted repository)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.coupler.io/mcp/<your-account-id> is the vendor-documented hosted remote MCP URL; it is account-specific and uses destination-routed data access. The GitHub README also shows https://mcp.coupler.io/mcp for Claude Code setup.",
+      "The official local self-hosted stdio server in the repository is a distinct, focused, read-only variant with four tools."
+    ],
+    "sources": [
+      "https://mcp.couplerio.dev/mcp",
+      "https://mcp.couplerio.dev/.well-known/oauth-protected-resource",
+      "https://www.coupler.io/mcp",
+      "https://docs.coupler.io/ai/mcp",
+      "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/README.md#L16-L17",
+      "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/src/server/index.ts#L10-L45",
+      "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/package.json#L1-L23"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP fee or MCP-specific price was found. Vendor docs require a Coupler.io account and configured data flow; public pricing does not specify whether hosted MCP access is included in a particular plan.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Official pricing page lists Free ($0), Starter ($24/month billed annually or $32/month), Active ($99/month billed annually or $132/month), Pro ($199/month billed annually or $259/month), and Custom (flexible pricing).",
+    "pricing_model_details": "Plan pricing is subscription-based; plans differ by account, destination, refresh, and row limits. Free pricing page lists one account, one user, one source, one destination, and manual refresh. No MCP per-call charge or MCP-specific quota was found.",
+    "other_access_restrictions": "Vendor docs state AI clients see only datasets in flows routed to that AI client as a destination. The public repository says hosted operations can be feature-flagged. The product page has a free trial; plan and account constraints may apply. Endpoint-specific plan requirements are not stated in official pricing.",
+    "restrictions_controlled_by": "Coupler.io and the workspace/account administrator; dataset exposure is configured per destination in Coupler.io.",
+    "sources": [
+      "https://www.coupler.io/pricing",
+      "https://docs.coupler.io/ai/mcp",
+      "https://blog.coupler.io/how-to-use-coupler-mcp-server/",
+      "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/README.md#L133-L137"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Endpoint is OAuth-protected. Official Coupler.io hosted-server documentation lists 24 tool names; the official repository README separately names list-dataflows for its hosted server. Exact tool listing for the input endpoint was unavailable. See actions.json and endpoint/domain caveat in notes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Official docs describe query results and configuration actions but do not reproduce actual tools/list output or endpoint result schemas. The local stdio variant returns text plus structuredContent for successful tools and text with isError for many errors.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://auth.couplerio.dev/oauth2/register; authorization code response type; PKCE S256; token endpoint https://auth.couplerio.dev/oauth2/token; authorization endpoint https://auth.couplerio.dev/oauth2/authorize; token endpoint auth method none; scopes_supported: [\"mcp\"]; bearer_methods_supported: [\"header\"]. Token lifetime, refresh behavior, and revocation were not provided. Endpoint response: HTTP 401, WWW-Authenticate Bearer error=\"invalid_token\", error_description=\"See response body for details\", scope=\"mcp\", resource_metadata=\"https://mcp.couplerio.dev/.well-known/oauth-protected-resource/mcp\"; body says missing Authorization header.",
+      "authorization_server": "https://auth.couplerio.dev",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://mcp.couplerio.dev/.well-known/oauth-protected-resource",
+        "https://mcp.couplerio.dev/.well-known/oauth-protected-resource/mcp",
+        "https://auth.couplerio.dev/.well-known/oauth-authorization-server",
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The hosted tool documentation does not identify MCP resources. The input endpoint could not be inspected after its authentication challenge.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted prompt list or prompts capability statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The input hosted endpoint's logging behavior is undocumented. The separate local repository declares MCP logging capability and writes logs, but is not the deployed server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint; local variant declares logging capability.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp",
+        "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/src/server/index.ts#L18-L25",
+        "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/src/logger/index.ts"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted sampling capability statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted roots capability statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint returned HTTP 401 when called without credentials and advertised Bearer authentication with an OAuth protected-resource metadata URL. Both protected-resource metadata URLs identify https://auth.couplerio.dev and scope mcp. The authorization-server metadata advertises authorization code, PKCE S256, DCR, and an unauthenticated token endpoint.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"See response body for details\", scope=\"mcp\", resource_metadata=\"https://mcp.couplerio.dev/.well-known/oauth-protected-resource/mcp\"\n{\"error\":\"invalid_token\",\"error_description\":\"Missing Authorization header\"}",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; authorization code; PKCE S256; token endpoint auth method none; scopes_supported [\"mcp\"]; token lifetime and revocation not published. OIDC configuration request returned HTTP 500.",
+      "authorization_server": "https://auth.couplerio.dev",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://mcp.couplerio.dev/.well-known/oauth-protected-resource",
+        "https://mcp.couplerio.dev/.well-known/oauth-protected-resource/mcp",
+        "https://auth.couplerio.dev/.well-known/oauth-authorization-server",
+        "https://auth.couplerio.dev/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Docs describe confirmation as an instruction to the AI before unrequested configuration changes; no server-enforced MCP elicitation flow is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted Tasks capability statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Hosted tools include documented data flow, source, destination, schedule, dataset-query, and dataset-context configuration operations. Availability may depend on feature flags and client configuration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Docs describe workspace changes but do not reproduce response schemas.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.coupler.io/ai/mcp",
+        "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/README.md#L133-L165"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint's error result format is not published. The separate local variant returns text errors and isError for validation and operation errors.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp",
+        "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/src/tools/get-data/handler.ts#L11-L47"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted subscription capability statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted progress notification capability statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted cancellation capability statement was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.couplerio.dev/mcp",
+        "https://docs.coupler.io/ai/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Official docs describe persistent dataset business context and workspace Skills that provide reusable analytical procedures; corresponding tools are update-dataset, list-skills, and get-skill. The hosted server's initialize instructions were not available verbatim.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Context is saved on datasets; skill tools list and load skill instructions. Exact result schemas are not published in the hosted docs.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.coupler.io/ai/mcp",
+        "https://blog.coupler.io/how-to-use-coupler-mcp-server/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Hosted docs distinguish read-only SQL queries from configuration changes; no hosted tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) were published. The separate local server exposes four tools and declares idempotentHint on two read tools; it is not the hosted endpoint. 2. Hosted docs say the AI is instructed to confirm before changes it was not asked to make; confirmation depends on the request and client. No server-enforced confirmation parameter or approval workflow was found. 3. Input endpoint OAuth scope is mcp; metadata advertises auth code, PKCE S256, DCR, and token auth method none. Token duration, revocation, role inheritance, admin switches, redirect approval, and allowlists: Unknown. Workspace destination routing limits datasets visible per AI tool. 4. No hosted read-only mode, toolset filter, query-free mode, or sandbox endpoint documented. Docs describe per-tool destination routing; repository lists feature-flagged hosted setup tools and account-specific URL on mcp.coupler.io. 5. Docs say the AI sees only datasets routed to it and support shaping data to hide fields and filter rows before exposure. No MCP-side PII masking or secret redaction behavior documented. 6. No endpoint-specific rate limits, quotas, result caps, or per-call costs found. General product plan caps and client consumption limits may constrain usage; docs state Custom MCP has no hard data limit. 7. Hosted parameter validation/correction is undocumented. The local code strictly validates schemas and rejects unknown parameters; its get-data query must begin SELECT. 8. Hosted MCP logging, audit trails, and telemetry specifics are undocumented. Custom plan pricing lists audit logs as a product feature; local server logs locally. Privacy policy describes general product usage collection, not MCP-specific event payloads. 9. No feedback/rating/report/survey tool appears in the hosted tool list. No MCP-specific upsell response was found. 10. Hosted server exposes list-skills/get-skill and update-dataset for context; separate skills are also described in vendor content. AI confirmation language is instruction-level, not documented enforcement. 11. Saved dataset business context persists for later use; docs say Skills and context can be reused across conversations/team members. 12. Hosted server is documented as a shared MCP infrastructure behind AI integrations and Custom MCP; the input endpoint uses a different host/auth domain than the vendor-documented host. It routes data by configured destinations. 13. get-data is the documented query tool; it runs SQL on a dataset. No arbitrary API, shell, or script tool was listed. Local source runs SQLite queries in read-only mode.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“Those are real changes to your workspace, so the AI is instructed to confirm with you before making one you didn't ask for.” — Official docs, https://docs.coupler.io/ai/mcp",
+      "“The AI only does this when you ask.” — run-dataflow description in official docs, https://docs.coupler.io/ai/mcp",
+      "“The AI reads this before querying, so it interprets your columns correctly.” — get-schema description in official docs, https://docs.coupler.io/ai/mcp",
+      "“Make sure to first query a sample of 5 rows from `data` table, e.g. `SELECT * from data LIMIT 5`, and then run the `get-schema` tool, to better understand the structure.” — local-only tool description, https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/src/tools/get-data/index.ts#L5-L17"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The vendor describes destination-specific routing of datasets to AI clients, account-specific Custom MCP URLs, feature-flagged hosted tools, and a separate local stdio server with a smaller read-only toolset. The input endpoint uses a distinct couplerio.dev host.",
+    "sources": [
+      "https://docs.coupler.io/ai/mcp",
+      "https://docs.coupler.io/destinations/categories/ai/custom_mcp",
+      "https://blog.coupler.io/how-to-use-coupler-mcp-server/",
+      "https://www.coupler.io/pricing",
+      "https://www.coupler.io/privacy-policy",
+      "https://mcp.couplerio.dev/mcp",
+      "https://mcp.couplerio.dev/.well-known/oauth-protected-resource",
+      "https://auth.couplerio.dev/.well-known/oauth-authorization-server",
+      "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/README.md#L133-L220",
+      "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/src/tools/get-data/handler.ts#L11-L47",
+      "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/src/tools/get-data/schema.ts#L4-L19"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "25 documented names; exact input-endpoint count unknown",
+    "action_count_comment": "Official tool list exists at https://docs.coupler.io/ai/mcp and names 24 tools. The official repository README's hosted-server list adds list-dataflows, for 25 distinct official names. No tools were added from catalogues. Claude's third-party connector directory shows 2 tools (get-data and get-schema); mcp.so has no tool list; mcpyet has no tool names. MCPBeat page returned 403. No stated official total was found. Because the input endpoint uses a distinct couplerio.dev host and no tools/list response was available, the documented names are the best available official evidence, not a verified live list for that exact endpoint.",
+    "actions": [
+      {
+        "tool_name": "list-datasets",
+        "description": "List datasets available across configured data flows.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-datasets",
+        "description": "Search datasets by name, source, or keyword.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-templates",
+        "description": "Browse ready-made data flow templates.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-schema",
+        "description": "Read dataset columns, types, descriptions, and saved business context.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-data",
+        "description": "Run SQL against a dataset and return query results.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-dataset",
+        "description": "Create a SQL dataset from datasets in the same data flow.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-dataset-query",
+        "description": "Change SQL behind an existing SQL dataset.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-dataset-schema",
+        "description": "Update dataset column labels and descriptions.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-dataflow",
+        "description": "Create an empty data flow.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-dataflow-from-template",
+        "description": "Create a data flow from a template.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-dataflow",
+        "description": "Read a data flow state, sources, destinations, and last run.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-dataflow-source",
+        "description": "Add a source to a data flow.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-dataflow-source",
+        "description": "Modify a data flow source.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-dataflow-destination",
+        "description": "Add a destination to a data flow.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-dataflow-destination",
+        "description": "Modify a data flow destination.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-dataflow",
+        "description": "Rename a data flow or change or pause its schedule.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-credentials",
+        "description": "List authorized service credentials.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-integrations",
+        "description": "List supported source and destination integrations.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-integration",
+        "description": "Read integration parameters, authentication requirements, and options.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-integration-field-options",
+        "description": "Resolve dynamic choices for integration settings.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-dataset",
+        "description": "Save business context for a dataset.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run-dataflow",
+        "description": "Trigger a data flow refresh.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-skills",
+        "description": "List analytical workflow skills available to the workspace.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-skill",
+        "description": "Load a named skill procedure.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.coupler.io/ai/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-dataflows",
+        "description": "List data flows that have an AI destination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/README.md#L133-L165",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted endpoint instructions and exact hosted tool definitions were not available. Local repository is a separate variant and cannot supply the input endpoint's pre-interaction token count.",
+    "human_can_agent_cannot": "A human can create and configure data flows through Coupler.io's UI, use all product integrations and account functions, and manage their subscription. The documented MCP tools provide selected data analysis and flow/configuration functions, not the full Coupler.io product interface or every integration setting. General product pricing and plan limits are documented; no complete MCP-to-UI parity list was found. Sources: https://docs.coupler.io/ai/mcp; https://www.coupler.io/pricing; https://docs.coupler.io/destinations/categories/ai/custom_mcp.",
+    "sources": [
+      "https://docs.coupler.io/ai/mcp",
+      "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/README.md#L133-L165",
+      "https://claude.com/connectors/coupler-io",
+      "https://mcp.so/servers/coupler-io",
+      "https://mcpyet.com/mcp/coupler-io/",
+      "https://mcpbeat.com/mcp-servers/coupler/remote-mcp-server/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Docs instruct the AI to confirm before making unrequested workspace changes; they say run-dataflow is only done when asked. No hosted server enforcement mechanism was documented. Docs recommend routing each flow to the intended AI destination and checking fields/rows exposed. Verbatim: “The AI only does this when you ask.” and “the AI is instructed to confirm with you before making one you didn't ask for.” Source: https://docs.coupler.io/ai/mcp.",
+    "governance_promises": "Vendor docs state that an AI client sees only datasets from flows configured for that destination and that SQL queries cannot edit, delete, or overwrite imported rows. Blog guidance says users can hide sensitive fields and filter rows before exposure; it also cautions, “Anyone with the token and endpoint can read the data sets routed to it.” The local repository separately claims scoped, read-only, short-lived tokens; not attributed to the input hosted endpoint. Sources: https://docs.coupler.io/ai/mcp; https://blog.coupler.io/how-to-use-coupler-mcp-server/; https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/README.md#L217-L221.",
+    "promises_to_user": "Vendor describes MCP as allowing natural-language analysis over Coupler.io data flows, server-side SQL calculations, and access to large datasets without loading all records into the AI context. Official repository says calculations are executed and verified by Coupler.io's Analytical Engine; this claim describes the product, not verified code for the input endpoint.",
+    "comparison_with_server_logic": "Destination-based visibility and read-only data queries are explicitly documented; the exact hosted enforcement code was unavailable. Confirmation is described as an AI instruction dependent on client/request, not a documented server-side guard. Field hiding and row filtering are configured in data preparation before exposure. OAuth proves endpoint authentication is required but does not establish permission inheritance, token lifetime, or audit behavior.",
+    "sources": [
+      "https://docs.coupler.io/ai/mcp",
+      "https://blog.coupler.io/how-to-use-coupler-mcp-server/",
+      "https://github.com/coupler-io/coupler-io-mcp-server/blob/550ec75cb48bbbe0be286577b30c3a32f9bb0eea/README.md#L217-L221",
+      "https://mcp.couplerio.dev/mcp",
+      "https://auth.couplerio.dev/.well-known/oauth-authorization-server"
+    ]
+  },
+  "contradictions": [
+    "Input endpoint and OAuth metadata use mcp.couplerio.dev / auth.couplerio.dev, while official vendor documentation, pricing, and repository identify the hosted MCP as mcp.coupler.io. No official source found that explains this domain difference.",
+    "The official docs tool list names 24 hosted tools, and the official repository README's hosted list additionally names list-dataflows. The exact endpoint list remains unverified.",
+    "Claude's third-party connector directory lists only get-data and get-schema, fewer than the 24 names on the official docs page and the 25 distinct names across official docs and hosted README. The listing uses connector URL https://mcp.coupler.io/mcp/.",
+    "Official hosted docs describe a broad, configurable toolset with configuration writes; the official public local server has only four read-only tools. The repository identifies it as a separate self-hosted variant, so its tools and restrictions do not establish the deployed endpoint's implementation."
+  ],
+  "observations_for_research": [
+    "Dataset visibility is described as destination-specific: an AI client sees only flows configured for that client, while the built-in Coupler.io AI Agent is described as having workspace-wide dataset access.",
+    "Hosted tool availability varies by client and may be feature-flagged; the official repository calls the hosted set continuously growing.",
+    "Public OAuth metadata exposes a single scope, mcp, despite tool documentation spanning both read operations and workspace configuration changes."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the supplied links.json, pages/INDEX.txt and captured pages, links_check.txt, oauth_metadata.txt, official repo clone, tool-reference/docs pages, legal/pricing pages, and catalogues. Input docs URL https://www.couplerio.dev/mcp returned HTTP 401; mcp.couplerio.dev/mcp returned 401 with OAuth challenge. Official pages and public code were found under coupler.io, which differs from input domain. The public GitHub repository is verified as the vendor's local stdio variant and was not treated as deployed code. Third-party mcpbeat page was inaccessible (403); several guessed catalogue pages returned 404. No hosted initialize instructions or exact tool schemas were available.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.6
+  }
+}

@@ -1,0 +1,396 @@
+{
+  "server": "excalidraw-app-demo",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.excalidraw.com/mcp",
+    "documentation_url_csv": "https://plus.excalidraw.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/excalidraw/excalidraw-mcp",
+    "documentation_urls_used": [
+      "https://github.com/excalidraw/excalidraw-mcp/blob/main/README.md",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/api/mcp.ts",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/checkpoint-store.ts",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/package.json",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/manifest.json",
+      "https://plus.excalidraw.com/docs/mcp",
+      "https://plus.excalidraw.com/docs/mcp/getting-started",
+      "https://plus.excalidraw.com/docs/mcp/auth-and-permissions",
+      "https://plus.excalidraw.com/docs/mcp/tools",
+      "https://plus.excalidraw.com/docs/mcp/mcp-api-key-types",
+      "https://plus.excalidraw.com/pricing",
+      "https://plus.excalidraw.com/privacy-policy",
+      "https://claude.com/connectors/excalidraw-app-demo",
+      "https://mcp.tc/i/excalidraw"
+    ],
+    "open_code_equals_deployed_server": "Yes",
+    "open_code_note": "The official repository README names https://mcp.excalidraw.com as its recommended remote server. The repository contains the hosted Vercel handler and the same tool registration code; it also supports local stdio use.",
+    "mcp_protocol_version": "[THIRD-PARTY mcp.tc, 2026-10] 2025-11-25",
+    "commit_hash": "157aa23ceb1976008aadc89eb05e3444060f09d6",
+    "commit_date": "2026-03-24",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk 1.25.2; @modelcontextprotocol/ext-apps ^0.4.0; mcp-handler 1.0.7",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://api.excalidraw.com/api/v1/mcp — separate Excalidraw+ MCP, documented as public beta; API-key authenticated, route-permission-filtered, and the docs name 37 tools. It is not the input endpoint."
+    ],
+    "sources": [
+      "https://github.com/excalidraw/excalidraw-mcp/blob/main/README.md",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/api/mcp.ts",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/package.json",
+      "https://plus.excalidraw.com/docs/mcp/getting-started",
+      "https://plus.excalidraw.com/docs/mcp/tools",
+      "https://mcp.tc/i/excalidraw"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "The input endpoint is described as requiring no sign-in or API key; no MCP-specific fee is stated.",
+    "linked_software": "Open source + paid cloud",
+    "linked_software_cost": "Excalidraw’s free plan is free forever. Excalidraw+ lists Plus at USD 6 per user per month; the input endpoint does not require that plan.",
+    "pricing_model_details": "The official Excalidraw+ pricing page lists Free and Plus plans and shows the MCP feature as public beta for Plus. This applies to the separate Excalidraw+ endpoint, not the unauthenticated input endpoint.",
+    "other_access_restrictions": "No account, API key, or role restriction is listed for the input endpoint. Clients must support Streamable HTTP; inline app rendering requires MCP Apps support.",
+    "restrictions_controlled_by": "Vendor controls endpoint and implementation; the user or client selects whether to connect and which tools to invoke.",
+    "sources": [
+      "https://mcp.tc/i/excalidraw",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/main/README.md",
+      "https://plus.excalidraw.com/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Tool registration via the MCP SDK; mcp.tc reports protocol 2025-11-25.",
+      "description_what_how": "The source registers five tools. read_me and create_view are model-visible; export_to_excalidraw, save_checkpoint, and read_checkpoint carry app-only visibility metadata.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results use text content; create_view also returns structuredContent.checkpointId. Errors use isError and text content. The app resource is returned as HTML.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L407-L435",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L495-L506",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L515-L645"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP Apps extension",
+      "description_what_how": "Registers the UI resource ui://excalidraw/mcp-app.html with RESOURCE_MIME_TYPE, HTML content, CSP domains, border preference, and clipboard-write permission metadata.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "One HTML resource with UI metadata; the server reads the built mcp-app.html file.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L650-L679"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No prompt registration appears in the analyzed public server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No MCP logging capability is registered. The hosted handler logs caught server errors to console.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/main.ts",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/api/mcp.ts"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No server-initiated sampling calls appear in the analyzed code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No roots capability or roots request appears in the analyzed server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "The endpoint POST probe returned HTTP 406 requiring application/json and text/event-stream in Accept, not an authorization challenge. Supplied OAuth metadata probes returned HTTP 404 for the protected-resource origin and path documents and authorization-server and OpenID documents. Public hosted code contains no OAuth or API-key authentication implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "No OAuth metadata found: endpoint POST returned HTTP 406 with “Not Acceptable: Client must accept both application/json and text/event-stream”; the supplied .well-known probes all returned HTTP 404 with {\"error\": {\"code\": \"404\", \"message\": \"The page could not be found\"}}. No scopes_supported, registration_endpoint, PKCE, grant types, token methods, lifetime, or revocation metadata were provided.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.excalidraw.com/mcp",
+        "https://mcp.excalidraw.com/.well-known/oauth-protected-resource",
+        "https://mcp.excalidraw.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.excalidraw.com/.well-known/oauth-authorization-server",
+        "https://mcp.excalidraw.com/.well-known/openid-configuration",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/api/mcp.ts"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No server-initiated MCP elicitation is implemented in the analyzed code. The app UI includes its own export confirmation flow.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts",
+        "https://github.com/excalidraw/excalidraw-mcp/releases"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No MCP task capability is registered in the analyzed server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No MCP configuration capability is registered. Hosted storage selection depends on server environment variables, not a client-facing MCP configuration tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/api/mcp.ts",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/checkpoint-store.ts#L107-L143"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No dedicated error-reporting capability or feedback tool is registered. Tool-level failures return isError with text; the hosted handler logs caught exceptions to console.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Errors are returned as text content with isError true; handler-level errors use JSON-RPC error code -32603.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L436-L450",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/api/mcp.ts"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No subscription capability is registered.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No MCP progress notifications appear in the analyzed code. The create_view tool streams visual elements in its app UI, as described by the repository.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/main/README.md"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "N/A",
+      "description_what_how": "No cancellation-specific MCP request handling appears in the analyzed code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "N/A",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/api/mcp.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP Apps extension",
+      "description_what_how": "The server associates app tools with a UI resource and marks three tools app-only. Tool results include checkpoint instructions for later editing; the MCP App UI enables interactive diagram editing.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "UI resource and app visibility metadata; create_view returns a checkpoint ID used by later calls.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L421-L435",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L495-L506",
+        "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L660-L679"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The code annotates read_me and create_view with readOnlyHint; the other three tools have no read-only or destructive hints. create_view persists checkpoint state despite its read-only hint. export_to_excalidraw uploads data; save_checkpoint writes state. 2. The UI release notes describe a confirmation modal before export; no server-enforced confirm parameter or MCP elicitation is present. 3. Input endpoint has no OAuth/API-key gate in public code; no product-user permission inheritance or role checks are implemented. 4. No read-only mode, toolset filter, query-free mode, or endpoint variants are shown in this server code. This project also supports local stdio and self-hosted Vercel deployments. 5. Inputs are capped at 5 MiB by string length; checkpoint IDs are restricted to alphanumeric, hyphen, and underscore, max 64 characters. Export encrypts serialized diagram data with AES-GCM before posting it to json.excalidraw.com; the key is placed in the returned URL fragment. 6. create_view, export, and checkpoint input strings have 5 MiB limits. Checkpoint storage is in-memory by default on Vercel or Upstash Redis with 30-day TTL when configured; in-memory store evicts oldest after 100. Local file store prunes oldest over 100. No rate limit or per-call price found. 7. Zod string schemas validate input types. create_view parses JSON and returns an error on invalid JSON; app checkpoint save also parses JSON. Camera aspect ratios outside tolerance trigger a textual suggestion, not a parameter rewrite. 8. Hosted handler logs caught server errors to console. No user-facing audit trail or telemetry found in code. 9. No feedback, rating, report, survey, or upsell tool found. 10. read_me and create_view descriptions and read_me output steer the model; the server does not enforce those drawing recommendations. MCP App UI is bundled with the server. 11. Checkpoint IDs let later calls restore state; hosted in-memory storage is per runtime instance and Redis storage expires after 30 days. 12. The server exposes a single tool set plus an MCP Apps UI resource; app-only tool visibility divides the tools by consumer. 13. No raw API, SQL, script, or arbitrary execution tool is present.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Returns the Excalidraw element format reference with color palettes, examples, and tips. Call this BEFORE using create_view for the first time.",
+      "Call read_me first to learn the element format.",
+      "Thanks for calling read_me! Do NOT call it again in this conversation — you will not see anything new. Now use create_view to draw.",
+      "ALWAYS start with a `cameraUpdate` as the FIRST element.",
+      "For add, send a JSON array string of new element skeletons and do not include id. The server generates persisted IDs for newly added elements."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The MCP Apps extension exposes a UI resource and marks export_to_excalidraw, save_checkpoint, and read_checkpoint as app-only. The code registers five tools, while only two carry no app-only visibility restriction.",
+    "sources": [
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/checkpoint-store.ts",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/api/mcp.ts",
+      "https://github.com/excalidraw/excalidraw-mcp/releases"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "5 registered tools; 2 model-visible and 3 app-only",
+    "action_count_comment": "The official server code defines five tool names; its MCPB manifest lists only read_me and create_view. The five code-defined tools are included in actions.json. Third-party catalogues add zero tools: the Claude connector directory (publisher-verified) lists five; mcp.tc lists five; Skills Playground lists five; ToolJunction lists five. No additional tools were found in other checked catalogue pages.",
+    "actions": [
+      {
+        "tool_name": "read_me",
+        "description": "Returns Excalidraw element format reference with palettes, examples, and tips; says to call before first create_view.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L407-L415",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_view",
+        "description": "Renders Excalidraw elements with streamed draw-on animations and returns checkpoint ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "elements: string (required; JSON array string)",
+        "parameter_count": "1",
+        "source": "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L421-L435",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export_to_excalidraw",
+        "description": "Uploads serialized diagram to excalidraw.com and returns a shareable URL; app-visible only.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "json: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L515-L521",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_checkpoint",
+        "description": "Updates checkpoint with user-edited diagram state; app-visible only.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "id: string (required); data: string (required; JSON)",
+        "parameter_count": "2",
+        "source": "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L606-L612",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_checkpoint",
+        "description": "Reads checkpoint state for restore; app-visible only.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L632-L638",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "291",
+    "token_method": "[LOCAL CODE @157aa23] Serialized five tool names, descriptions, input schemas and annotations from server.ts as compact JSON; 1,161 characters ÷ 4, rounded up. No initialize instructions are set in the code.",
+    "human_can_agent_cannot": "A human can directly draw and edit diagrams in Excalidraw; the model-facing tools create a diagram view and read the format reference. The app-only export tool is invoked by the UI, not the model. No evidence that the input endpoint supports Excalidraw+ workspace operations such as collections, invites, users, or logs; those are documented for the separate https://api.excalidraw.com/api/v1/mcp endpoint.",
+    "sources": [
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/manifest.json",
+      "https://claude.com/connectors/excalidraw-app-demo",
+      "https://mcp.tc/i/excalidraw",
+      "https://skillsplayground.com/connectors/excalidraw-app-demo/",
+      "https://www.tooljunction.io/mcp/excalidraw-app-demo",
+      "https://plus.excalidraw.com/docs/mcp/tools"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The read_me tool says to call it before the first create_view call; its returned guide says “Do NOT call it again in this conversation”. It also gives drawing, sizing, and element-order recommendations. The server validates JSON and input size but does not enforce most drawing advice.",
+    "governance_promises": "The export implementation encrypts the serialized diagram before upload and returns a URL containing the decryption key in its fragment. Repository release notes say: “Confirmation modal before upload” and “Encrypts + uploads to excalidraw.com”. No MCP-specific privacy, retention, or AI-training promise was found.",
+    "promises_to_user": "The README describes the app as rendering hand-drawn diagrams with smooth viewport camera control and interactive fullscreen editing. The listing says the endpoint needs no sign-in.",
+    "comparison_with_server_logic": "Encryption and upload behavior are visible in code. The export confirmation is implemented in the UI flow described in release notes, not enforced by the server tool schema. No MCP-specific privacy or retention commitments were identified.",
+    "sources": [
+      "https://github.com/excalidraw/excalidraw-mcp/blob/main/README.md",
+      "https://github.com/excalidraw/excalidraw-mcp/blob/157aa23ceb1976008aadc89eb05e3444060f09d6/src/server.ts#L558-L598",
+      "https://github.com/excalidraw/excalidraw-mcp/releases",
+      "https://mcp.tc/i/excalidraw",
+      "https://plus.excalidraw.com/privacy-policy"
+    ]
+  },
+  "contradictions": [
+    "The repository MCPB manifest lists two tools (read_me and create_view), while the server source registers five. The hosted endpoint catalogue listings report all five; actions.json follows the hosted server source.",
+    "create_view carries readOnlyHint: true, but its handler saves a checkpoint and returns a checkpoint ID.",
+    "The create_view response instructs the agent to call read_widget_context, but no such tool is registered in this server's source; the instruction therefore depends on client-provided context support."
+  ],
+  "observations_for_research": [
+    "The two model-facing tools are accompanied by three app-only tools, so the tool list available to a model can differ from the complete server registration.",
+    "The read_me result contains extensive behavior and format guidance that shapes diagram generation, while most of the guidance is advisory rather than schema-enforced.",
+    "create_view has a read-only annotation despite saving state; this illustrates a gap between declared tool hints and handler side effects.",
+    "The server's open-source local stdio option and hosted endpoint share the same repository implementation, whereas Excalidraw+ MCP is a separate product endpoint with a broader permission-filtered tool set."
+  ],
+  "confidence": "High (open code)",
+  "notes": "Checked prepared links.json, links_check.txt, pages, and the pinned official repository copy. The hosted endpoint probe returned HTTP 406 because the request did not accept both required response types; the pre-fetched OAuth metadata URLs returned 404. Excalidraw+ docs, pricing, permissions, privacy, and its 37 named tools concern api.excalidraw.com/api/v1/mcp, not this endpoint. No input-endpoint-specific privacy policy, rate limit, retention statement, or release status was found. Unofficial community repositories were listed in links.json and excluded as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 22.7
+  }
+}

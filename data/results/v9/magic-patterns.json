@@ -1,0 +1,846 @@
+{
+  "server": "magic-patterns",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.magicpatterns.com/mcp",
+    "documentation_url_csv": "https://www.magicpatterns.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/magicpatterns/agent-plugins",
+    "documentation_urls_used": [
+      "https://www.magicpatterns.com/docs/mcp",
+      "https://www.magicpatterns.com/product/mcp",
+      "https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/set-up-the-magic-patterns-mcp-server-connect-your-coding-agent-to-your-design",
+      "https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/how-to-connect-magic-patterns-to-any-mcp-compatible-agent",
+      "https://www.magicpatterns.com/blog/magic-patterns-agent-2-0",
+      "https://www.magicpatterns.com/pricing",
+      "https://www.magicpatterns.com/blog/new-plans-and-pricing",
+      "https://trust.magicpatterns.com/",
+      "https://claude.com/connectors/magic-patterns",
+      "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+      "https://manufact.com/mcp-catalog/magic-patterns",
+      "https://mcp.so/servers/magic-patterns"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repository contains client plugins, connection configuration, and agent skills. It does not contain the hosted MCP server implementation. The repository's Codex configuration points to the supplied endpoint.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "95423dbebeed508436bcedad8df39334f05b7f28",
+    "commit_date": "2026-08-05",
+    "implementation_language": "NOT FOUND (hosted server); plugin repository primarily contains Markdown skills and JSON configuration",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT (plugin repository)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://www.magicpatterns.com/docs/mcp — separate documentation-site MCP manifest exposing documentation search, filesystem query, and feedback tools; not the product server analyzed here."
+    ],
+    "sources": [
+      "https://mcp.magicpatterns.com/mcp",
+      "https://www.magicpatterns.com/docs/mcp",
+      "https://github.com/magicpatterns/agent-plugins/tree/95423dbebeed508436bcedad8df39334f05b7f28",
+      "https://github.com/magicpatterns/agent-plugins/blob/95423dbebeed508436bcedad8df39334f05b7f28/codex/.mcp.json",
+      "https://github.com/magicpatterns/agent-plugins/blob/95423dbebeed508436bcedad8df39334f05b7f28/LICENSE"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "Official setup guides say MCP integration requires a paid plan and usage is billed against the account's normal credits. Another official product page says users can start for free, creating a documentation conflict.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Official search result reports limited free tier; Starter $20/seat/month, Business $100/seat/month, Enterprise custom. An official article describes $20 and $100 monthly standard prices after June 30, 2026.",
+    "pricing_model_details": "Credits scale with request complexity. Paid plans can opt into on-demand pay-as-you-go usage beyond monthly credits; the article says a fixed per-credit rate applies but does not state the rate. Workspace budget limits and alert thresholds are described.",
+    "other_access_restrictions": "A paid plan is documented as required by setup guides. OAuth is default for named clients; an API key is documented for custom or headless clients. No product-specific OAuth scopes or rate limits are published in the reviewed evidence.",
+    "restrictions_controlled_by": "Vendor for plan and credit eligibility; user or workspace billing administrator for plan choice and on-demand settings. Exact access control enforcement is not documented.",
+    "sources": [
+      "https://www.magicpatterns.com/blog/aeo/blog/set-up-the-magic-patterns-mcp-server-connect-your-coding-agent-to-your-design",
+      "https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/how-to-connect-magic-patterns-to-any-mcp-compatible-agent",
+      "https://www.magicpatterns.com/product/mcp",
+      "https://www.magicpatterns.com/blog/new-plans-and-pricing",
+      "https://www.magicpatterns.com/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint responds to unauthenticated POST with HTTP 401 and a JSON-RPC authentication error. Third-party listings identify tool names, but no public product-server tools/list response was available. The Scalekit connector documents 47 routed tools; Claude's connector listing names three.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated request returns JSON-RPC error object with code -32000, message \"Missing or invalid Authorization header. Please authenticate.\", and id null. Authenticated tool-result structures were not publicly retrieved.",
+      "authorization_mechanism": "The supplied protected-resource metadata advertises authorization server https://oauth.magicpatterns.com, scopes_supported [\"openid\",\"email\",\"profile\",\"offline_access\"], bearer_methods_supported [\"header\"]. The supplied authorization-server metadata advertises DCR at https://oauth.magicpatterns.com/oauth2/register, authorization-code, refresh-token, and device-code grants, PKCE S256, token endpoint authentication methods none/client_secret_post/client_secret_basic, and scopes [\"email\",\"offline_access\",\"openid\",\"profile\"]. The supplied OIDC configuration additionally lists client_credentials. The vendor documents API-key authentication as an alternative, skipped in place of OAuth when a key is present. Token lifetime and revocation were not found.",
+      "authorization_server": "https://oauth.magicpatterns.com",
+      "sources": [
+        "https://mcp.magicpatterns.com/mcp",
+        "https://mcp.magicpatterns.com/.well-known/oauth-protected-resource",
+        "https://oauth.magicpatterns.com/.well-known/oauth-authorization-server",
+        "https://oauth.magicpatterns.com/.well-known/openid-configuration",
+        "https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/how-to-connect-magic-patterns-to-any-mcp-compatible-agent"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The product endpoint's resources were not enumerated in available evidence. The public plugin repository distributes external agent skills; the separate documentation MCP manifest exposes a skill resource, which is not evidence about the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/magicpatterns/agent-plugins/tree/95423dbebeed508436bcedad8df39334f05b7f28",
+        "https://www.magicpatterns.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No product-endpoint prompt definitions were found in the public evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.magicpatterns.com/mcp",
+        "https://claude.com/connectors/magic-patterns"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Logging or audit behavior for product-server tool calls was not documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://www.magicpatterns.com/docs/mcp",
+        "https://trust.magicpatterns.com/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No evidence found for server-initiated sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.magicpatterns.com/mcp",
+        "https://claude.com/connectors/magic-patterns"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No evidence found for roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.magicpatterns.com/mcp",
+        "https://claude.com/connectors/magic-patterns"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint returns HTTP 401 with a Bearer resource-metadata challenge when unauthenticated. Protected-resource metadata points to WorkOS-hosted OAuth at oauth.magicpatterns.com. The metadata advertises header bearer tokens, PKCE S256, DCR, authorization-code/refresh-token/device-code grants, and OIDC scopes openid, email, profile, offline_access. OIDC configuration also lists client_credentials. Official setup articles document API-key authentication as an alternative. No product-specific scopes, token lifetime, or revocation details were found.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://mcp.magicpatterns.com/.well-known/oauth-protected-resource\"",
+      "post_interaction_context_structure": "Unauthenticated JSON-RPC error: {\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32000,\"message\":\"Missing or invalid Authorization header. Please authenticate.\"},\"id\":null}",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; authorization code, refresh token and device code grants; PKCE S256; token endpoint methods none, client_secret_post, client_secret_basic; scopes_supported: openid, email, profile, offline_access; API key also documented by vendor. Token lifetime and revocation NOT FOUND.",
+      "authorization_server": "https://oauth.magicpatterns.com",
+      "sources": [
+        "https://mcp.magicpatterns.com/mcp",
+        "https://mcp.magicpatterns.com/.well-known/oauth-protected-resource",
+        "https://oauth.magicpatterns.com/.well-known/oauth-authorization-server",
+        "https://oauth.magicpatterns.com/.well-known/openid-configuration",
+        "https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/how-to-connect-magic-patterns-to-any-mcp-compatible-agent"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No evidence found for MCP elicitation or server-enforced confirmation prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.magicpatterns.com/mcp",
+        "https://claude.com/connectors/magic-patterns"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint's MCP task capability was not documented. Some catalogued design-generation operations are described as asynchronous, but this does not establish MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "https://mcp.magicpatterns.com/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Vendor setup guides show a single remote URL for MCP clients. They do not document endpoint query parameters or configurable toolsets.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://www.magicpatterns.com/product/mcp",
+        "https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/set-up-the-magic-patterns-mcp-server-connect-your-coding-agent-to-your-design"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Unauthenticated JSON-RPC error behavior is visible. Other tool error formats and reporting facilities were not established.",
+      "pre_interaction_context_verbatim": "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32000,\"message\":\"Missing or invalid Authorization header. Please authenticate.\"},\"id\":null}",
+      "post_interaction_context_structure": "JSON-RPC error object observed for missing or invalid authorization. Other errors Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.magicpatterns.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No evidence found for MCP subscriptions or server-initiated resource updates.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.magicpatterns.com/mcp",
+        "https://claude.com/connectors/magic-patterns"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Scalekit's third-party connector descriptions mention polling design-generation status and progress, but this does not verify MCP progress notifications on the input endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No evidence found for MCP request cancellation support on the input endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.magicpatterns.com/mcp",
+        "https://claude.com/connectors/magic-patterns"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The vendor distributes external client-side skills through its public plugin repository, including workflows for prototyping, design inspiration, uploading local UI, and integrating a design into a codebase. This is external guidance, not evidence of product-endpoint MCP resources or initialize instructions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Skills are Markdown files installed with client plugins.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/magicpatterns/agent-plugins/tree/95423dbebeed508436bcedad8df39334f05b7f28"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Third-party Scalekit listing classifies its 47 routed tools as 14 read-only, 26 write, and 7 destructive; it does not establish server annotations on the input endpoint. Claude lists get_design, read_files, update_design without annotations. 2. No MCP-enforced confirmation flow found; the published catalog descriptions include recommendations but their enforcement is unknown. 3. OAuth metadata exposes only openid, email, profile, offline_access; vendor documents API-key alternative and paid-plan requirement. Product-role inheritance, admin switches, allowlists, token lifetime and revocation are Unknown. 4. Vendor setup documents one remote endpoint; no read-only mode, filters, sandbox, or regional variants found. 5. No MCP-specific PII masking or data-scope rules found. 6. MCP calls consume normal account credits; the vendor says usage scales by complexity. No per-call rate limits or result truncation found. 7. Public hosted implementation is unavailable; parameter validation and argument correction are Unknown. 8. MCP-specific logs, audit trails, telemetry and opt-out are Unknown. 9. No feedback/rating tool appears in the identified product tool listings. The separate documentation MCP includes submit_feedback, but is not this product endpoint. 10. Vendor-distributed plugins provide external skills; the product tool descriptions in the Scalekit catalog contain agent instructions, not verifiable server initialize instructions. 11. Whether prior agent actions affect later tools or results is Unknown. 12. The supplied endpoint is one hosted product endpoint; the vendor's documentation-site search MCP is a separate server. 13. Scalekit lists bash, grep, and verify among its routed tools; bash is described as shell-like file operations within a Magic OS. These are third-party listings; their exact scope and restrictions on the input endpoint are unverified.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[THIRD-PARTY Scalekit, 2026-10] “Always call this (or get_design_status) to get the latest active artifact before reading files or creating a new artifact branch.”",
+      "[THIRD-PARTY Scalekit, 2026-10] “Always read files before making changes with write_artifact_files.”",
+      "[THIRD-PARTY Scalekit, 2026-10] “Check about once a minute, not in a tight loop.”",
+      "[THIRD-PARTY Scalekit, 2026-10] “ONLY when the user has explicitly asked for Magic Patterns' AI, MagicOS, or the OS's agent to do the work.”",
+      "[THIRD-PARTY Scalekit, 2026-10] “Do NOT use it to read, search or edit one file — no `cat`, `sed -n`, `grep`, `find`, `sed -i`, heredocs or one-file scripts.”",
+      "[THIRD-PARTY Scalekit, 2026-10] “Use `list_positions` first if you have not worked out the layout.”",
+      "[THIRD-PARTY Scalekit, 2026-10] “Run this after a set of edits and before you finish: it catches imports that no longer resolve, renamed exports, and changed prop shapes”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The vendor's docs also expose a separate documentation-search MCP server, distinct from the product endpoint. Scalekit documents a 47-tool integration for the product, while other catalogues expose three names or no tool list; this suggests differing catalog surfaces or versions, not a verified endpoint-side dynamic tool hierarchy.",
+    "sources": [
+      "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+      "https://claude.com/connectors/magic-patterns",
+      "https://www.magicpatterns.com/docs/mcp",
+      "https://github.com/magicpatterns/agent-plugins/tree/95423dbebeed508436bcedad8df39334f05b7f28"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "50",
+    "action_count_comment": "No official product tool-name reference was found on the vendor site or in its public plugin repository. The official site describes MCP capabilities but gives no exact tool names. The Claude connector directory lists 3 names; Manufact also reports 3. Scalekit reports 47 routed tools; its native-looking names are included after removing the `magicpatternsmcp_` proxy prefix, all marked third-party and unknown default status. The 47-item Scalekit set and three Claude-directory names are listed in actions.json; they may represent different catalog snapshots or naming surfaces. MCP.so has no tool list.",
+    "actions": [
+      {
+        "tool_name": "list_design_systems",
+        "description": "Lists available design systems, including presets and user-defined systems.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_artifact",
+        "description": "Gets the active artifact for a design, including its ID and list of files.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "editorId: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_design_status",
+        "description": "Gets the current status of a design: whether AI generation is active, the active artifact ID, and available files.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "editorId: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_design_system",
+        "description": "Resolves a design system's active artifact and lists its files.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "designSystemId: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_editor_id_from_url",
+        "description": "Resolves a Magic Patterns URL to an editor ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "url: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_inspiration_document",
+        "description": "Loads a Magic Patterns inspiration document by its ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "inspirationId: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_files",
+        "description": "List files on the current page.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required); depth: number (optional); filter: string (optional); offset: number (optional); osFile: string (optional); path: string (optional)",
+        "parameter_count": 6,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_magicos_threads",
+        "description": "The threads MagicOS has handed work to on this OS, newest first: whether each is working, queued, waiting on the user, done, failed, or stopped; what it last said or its recap; ...",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_os",
+        "description": "List the Magic OSes you can reach, newest first, with the id every other tool takes.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_positions",
+        "description": "List each OS file id, canvas name, kind, and top left on the current page.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "list_version_history",
+        "description": "Lists the artifact version history for a design, returning the most recent 20 versions with their artifact IDs, version labels, and titles.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "editorId: string (required); skip: number (optional)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "read_artifact_files",
+        "description": "Reads the contents of one or more files from an artifact.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "artifactId: string (required); fileNames: array (required)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "read_design_system_files",
+        "description": "Reads the contents of one or more files from a design system's active artifact, such as components/<Name>/index.tsx, index.css, tailwind.config.js, or rules/<slug>.md.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "designSystemId: string (required); fileNames: array (required)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "read_recent_message_history",
+        "description": "Reads the recent chat item history for a design, returning the last 10 chat items (user prompts, AI responses, artifact versions, edits).",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "editorId: string (required); skip: number (optional)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "ask_magicos",
+        "description": "Hand work to MagicOS, this OS's own Magic Patterns design agent, by sending it a message exactly as if the user had typed it into the OS's chat.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "message: string (required); osId: string (required)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "bash",
+        "description": "Run a shell command inside the current page, where each OS file is a directory, or inside one when `osFile` is given.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "command: string (required); osId: string (required); purpose: string (required); osFile: string (optional)",
+        "parameter_count": 4,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "create_design",
+        "description": "Creates a new Magic Patterns design.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "designSystem: string (optional); designSystemId: string (optional); imageUrls: array (optional); name: string (optional); prompt: string (optional); templateId: string (optional)",
+        "parameter_count": 6,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "create_design_system",
+        "description": "Creates a new, blank design system owned by the authenticated user and returns its ID plus editor URL.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "name: string (required); logo: string (optional)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "create_inspiration_document",
+        "description": "Creates a Magic Patterns inspiration document and returns a shareable magicpatterns.com/inspiration/<id> link that renders 1-8 design concepts side by side.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "files: array (required); baseline: object (optional); repositoryUrl: string (optional); title: string (optional)",
+        "parameter_count": 4,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "create_new_artifact",
+        "description": "Creates a new artifact by cloning an existing artifact, setting it as the active artifact for the design.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "artifactId: string (required); name: string (required); description: string (optional)",
+        "parameter_count": 3,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "create_os",
+        "description": "Create a new, empty Magic OS owned by you, and return its id.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "name: string (optional)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "create_os_file",
+        "description": "Add a new file to this OS canvas.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "name: string (required); osId: string (required); coordinates: object (optional); copyFrom: string (optional); kind: string (optional); layout: string (optional); newRow: boolean (optional); nextTo: string (optional); preset: string (optional)",
+        "parameter_count": 9,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "create_slide_deck",
+        "description": "Creates a new Magic Patterns slide deck and kicks off AI generation.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "prompt: string (required); designSystem: string (optional); designSystemId: string (optional); imageUrls: array (optional); name: string (optional)",
+        "parameter_count": 5,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "edit_file",
+        "description": "Apply one or more exact-string replacements to a file, atomically.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required); edits: array (optional); old_: string (optional); new_: string (optional); old_: string (optional); new_: string (optional); old_: string (optional); new_: string (optional); old_: string (optional); new_string: string (optional); old_: string (optional); old_string: string (optional); osFile: string (optional); path: string (optional); replace_all: boolean (optional); old_: string (optional)",
+        "parameter_count": 16,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "finish_working",
+        "description": "Save what you wrote for the canvas.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required); title: string (optional)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "generate_image",
+        "description": "Generate up to 5 images from a description, concurrently, and get back permanent CDN URLs.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "images: array (required); osId: string (required); addToCanvas: boolean (optional); nextTo: string (optional)",
+        "parameter_count": 4,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "grep",
+        "description": "Search file contents with a regular expression, across the current page by default or within one OS file when `osFile` is given.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required); pattern: string (required); glob: string (optional); osFile: string (optional); path: string (optional); upload: string (optional)",
+        "parameter_count": 6,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "grep_magic_patterns_design",
+        "description": "Search source files in a separate Magic Patterns design with a JavaScript regular expression.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required); query: string (required); editorId: string (optional); filePattern: string (optional); sub: string (optional); maximum: number (optional); Optional: number (optional); url: string (optional)",
+        "parameter_count": 8,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "inspiration_add_variant",
+        "description": "Fills in one concept of an existing Magic Patterns inspiration document with its self-contained HTML.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "html: string (required); inspirationId: string (required); description: string (optional); name: string (optional); variantId: string (optional)",
+        "parameter_count": 5,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "move_os_file",
+        "description": "Move an OS file already on this canvas.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osFile: string (required); osId: string (required); coordinates: object (optional); nextTo: string (optional)",
+        "parameter_count": 4,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "preview_design",
+        "description": "Use sparingly to visually verify layout, styling, or other appearance-dependent work.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osFile: string (required); osId: string (required)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "publish_artifact",
+        "description": "Compiles an artifact's source files and sets it as the active artifact for the design.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "artifactId: string (required); editorId: string (required); description: string (optional)",
+        "parameter_count": 3,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "publish_design_system",
+        "description": "Publishes the design system's active artifact as a new immutable version.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "designSystemId: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "read_file",
+        "description": "Read a file and return it with line numbers, so you can cite `path:line`.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required); limit: number (optional); offset: number (optional); osFile: string (optional); path: string (optional); upload: string (optional)",
+        "parameter_count": 6,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "read_magic_patterns_design",
+        "description": "Get a quick overview of a separate Magic Patterns design from its URL or editor id.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required); editorId: string (optional); url: string (optional)",
+        "parameter_count": 3,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "read_magic_patterns_design_files",
+        "description": "Read specific source files from a separate Magic Patterns design.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "files: array (required); osId: string (required); editorId: string (optional); url: string (optional)",
+        "parameter_count": 4,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "set_os_file_layout",
+        "description": "Set an existing design's layout, and optionally resize its canvas node to a preset.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "layout: string (required); osFile: string (required); osId: string (required); preset: string (optional)",
+        "parameter_count": 4,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "set_status",
+        "description": "Tell anyone watching this OS what you are working on.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required); summary: string (required); osFiles: array (optional)",
+        "parameter_count": 3,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "verify",
+        "description": "Type-check every OS file in this OS and report what is broken.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "write_file",
+        "description": "Create a file or replace its entire contents.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "content: string (required); osId: string (required); osFile: string (optional); path: string (optional)",
+        "parameter_count": 4,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "delete_file",
+        "description": "Delete one file from inside an OS file, or a project file at the OS root when `osFile` is omitted.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osId: string (required); path: string (required); osFile: string (optional)",
+        "parameter_count": 3,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "delete_os_file",
+        "description": "Remove a whole file from this OS canvas, including everything inside it.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "osFile: string (required); osId: string (required)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "inspiration_clear_variants",
+        "description": "Resets every concept of an existing Magic Patterns inspiration document back to an empty placeholder, dropping each concept's html and its pre-created 'Iterate' room.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "inspirationId: string (required)",
+        "parameter_count": 1,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "inspiration_update_variant",
+        "description": "Revises a single already-filled concept of a Magic Patterns inspiration document in place, replacing its html (and optionally its name/description).",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "html: string (required); inspirationId: string (required); variantId: string (required); description: string (optional); name: string (optional)",
+        "parameter_count": 5,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "send_prompt",
+        "description": "Sends a natural language prompt to the Magic Patterns AI for an existing design.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "editorId: string (required); prompt: string (required)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "write_artifact_files",
+        "description": "Creates or overwrites one or more files in an artifact.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "artifactId: string (required); files: array (required)",
+        "parameter_count": 2,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "write_design_system_files",
+        "description": "Creates or overwrites files in a design system.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (seen only via proxy Scalekit)",
+        "parameters": "designSystemId: string (required); files: array (required); baseArtifactId: string (optional)",
+        "parameter_count": 3,
+        "source": "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+        "source_type": "Third-party (Scalekit, 2026-10)"
+      },
+      {
+        "tool_name": "get_design",
+        "description": "Access and discuss a Magic Patterns design.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/magic-patterns",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "read_files",
+        "description": "Read files associated with a Magic Patterns design.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/magic-patterns",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "update_design",
+        "description": "Update a Magic Patterns design.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/magic-patterns",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted endpoint's tool definitions and initialize instructions were not available verbatim; no equivalent public server implementation exists in the repository.",
+    "human_can_agent_cannot": "Humans can generate interfaces, import design systems from Figma or Storybook, link GitHub repositories, edit prototypes visually, and use Magic Patterns' web application. MCP is documented for accessing designs and design systems and moving layouts between code and the product, but exact MCP coverage and unsupported human operations are not enumerated. Sources: https://www.magicpatterns.com/product/mcp; https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/set-up-the-magic-patterns-mcp-server-connect-your-coding-agent-to-your-design",
+    "sources": [
+      "https://www.magicpatterns.com/docs/mcp",
+      "https://claude.com/connectors/magic-patterns",
+      "https://manufact.com/mcp-catalog/magic-patterns",
+      "https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+      "https://mcp.so/servers/magic-patterns"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The setup guide says to add an Integration Skill: “It tells your agent to treat each design as a spec and adapt it to your codebase's components and conventions, rather than pasting the prototype verbatim.” This is client-side guidance; enforcement by the server is not shown. It also recommends pasting a specific design URL to trigger lookup.",
+    "governance_promises": "The vendor says MCP calls use the account's normal credits and describes design-system context as the source for generated output. No MCP-specific statements about data retention, AI training, masking, tool-call logging, or permission inheritance were found. The Trust Center page describes security posture but exposed no detailed policy text in the collected copy.",
+    "promises_to_user": "The vendor says the remote server connects coding agents to designs and design systems, supports a code-to-design roundtrip, and requires no local server to run. It claims design-system components and tokens can guide generated UI.",
+    "comparison_with_server_logic": "OAuth challenge and metadata are directly observable. The public server implementation is unavailable, so most product claims and client recommendations cannot be compared with server-side enforcement. The repository contains client skills, not server handlers. Paid-plan and credit statements conflict across official pages.",
+    "sources": [
+      "https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/set-up-the-magic-patterns-mcp-server-connect-your-coding-agent-to-your-design",
+      "https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/how-to-connect-magic-patterns-to-any-mcp-compatible-agent",
+      "https://www.magicpatterns.com/product/mcp",
+      "https://trust.magicpatterns.com/",
+      "https://mcp.magicpatterns.com/.well-known/oauth-protected-resource"
+    ]
+  },
+  "contradictions": [
+    "Official product page says users can “start building for free” and answers “Do I need a paid plan to start?” with “No”; the two official MCP setup guides say MCP integration requires a paid plan. https://www.magicpatterns.com/product/mcp ; https://www.magicpatterns.com/blog/aeo/blog/implementation-guide/set-up-the-magic-patterns-mcp-server-connect-your-coding-agent-to-your-design",
+    "The Claude connector directory and Manufact list three tools (get_design, read_files, update_design), while Scalekit lists 47 routed tools with different names. The vendor's public docs do not publish an exact product tool list, so this cannot be resolved from official tool definitions. https://claude.com/connectors/magic-patterns ; https://manufact.com/mcp-catalog/magic-patterns ; https://docs.scalekit.dev/agentkit/connectors/magicpatternsmcp/",
+    "The OAuth protected-resource metadata lists authorization-code, refresh-token, and device-code support in the authorization-server document, while the OIDC configuration additionally lists client_credentials. No corresponding MCP product behavior is documented. https://oauth.magicpatterns.com/.well-known/oauth-authorization-server ; https://oauth.magicpatterns.com/.well-known/openid-configuration"
+  ],
+  "observations_for_research": [
+    "The public plugin repository distributes agent skills that prescribe multi-step workflows; those client instructions may shape agent behavior independently of the hosted server's tool descriptions.",
+    "The MCP tool surface is represented inconsistently across third-party catalogues: three generic design tools versus 47 detailed routed operations, including file, canvas, shell-like, generation, and destructive operations.",
+    "Authentication metadata advertises generic identity scopes rather than product-specific design or write scopes; product-level authorization semantics remain undocumented."
+  ],
+  "confidence": "Low (third-party / sparse docs)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/ including pageN.script.txt files, and the local repository at commit 95423dbebeed508436bcedad8df39334f05b7f28. The repository is an official client-plugin and skills repo, not the hosted server code. The `/docs/mcp` page is a separate docs-search MCP manifest and was excluded from product actions. MCP.so has no displayed tool list; Manufact and Claude list three tools; Scalekit lists 47 routed operations. The official pricing page's collected copy was client-rendered and lacked readable prices, so pricing details use official product search results and the official pricing-change article. No detailed privacy policy text or hosted product tool schemas were found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.2
+  }
+}

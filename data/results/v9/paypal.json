@@ -1,0 +1,842 @@
+{
+  "server": "paypal",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.paypal.com/mcp",
+    "documentation_url_csv": "https://developer.paypal.com/ai-tools/mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/paypal/paypal-mcp-server",
+    "documentation_urls_used": [
+      "https://developer.paypal.com/ai-tools/mcp-server",
+      "https://developer.paypal.com/ai-tools/build-with-llm/",
+      "https://github.com/paypal/paypal-mcp-server",
+      "https://github.com/paypal/agent-toolkit",
+      "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md",
+      "https://claude.com/connectors/paypal",
+      "https://mcp.paypal.com/.well-known/oauth-protected-resource/mcp",
+      "https://mcp.paypal.com/.well-known/oauth-authorization-server"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "PayPal publishes a local stdio MCP server and the shared Agent Toolkit it imports. PayPal says the complete tool catalog is available locally and remotely. The hosted endpoint implementation is closed; code and the hosted tool inventory differ in breadth.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "6b1ced271959d5ea53857502dc6e5ddef0cbc126",
+    "commit_date": "2025-10-28",
+    "implementation_language": "TypeScript (public local server and Agent Toolkit)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.6.1 (local package manifest)",
+    "code_public": "Partially",
+    "license": "MIT (public paypal-mcp-server repository)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.sandbox.paypal.com — PayPal sandbox hosted MCP server.",
+      "https://mcp.paypal.com/sse and https://mcp.paypal.com/http — production transports documented by PayPal; the provided endpoint is the distinct /mcp path.",
+      "https://mcp.sandbox.paypal.com/sse and https://mcp.sandbox.paypal.com/http — sandbox transport paths documented by PayPal."
+    ],
+    "sources": [
+      "https://developer.paypal.com/ai-tools/mcp-server",
+      "https://github.com/paypal/paypal-mcp-server",
+      "https://github.com/paypal/agent-toolkit",
+      "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md",
+      "https://mcp.paypal.com/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific hosted access price or limit was found. PayPal's developer blog says its development tools are free, while transaction fees apply to live payment processing.",
+    "linked_software": "Paid",
+    "linked_software_cost": "NOT FOUND",
+    "pricing_model_details": "MCP-specific pricing and account plan requirements were not published in the reviewed materials. Live PayPal payment processing may incur standard transaction fees; amounts were not found.",
+    "other_access_restrictions": "The endpoint requires a Bearer token. PayPal documents separate sandbox and production environments and states that the sandbox endpoint must be used for sandbox accounts. Hosted setup requires PayPal login and user consent; local setup uses an access token.",
+    "restrictions_controlled_by": "PayPal controls hosted authentication and endpoint availability; account credentials and environment selection are supplied by the user or administrator.",
+    "sources": [
+      "https://developer.paypal.com/ai-tools/mcp-server",
+      "https://developer.paypal.com/community/blog/accelerating-agentic-payments/",
+      "https://mcp.paypal.com/.well-known/oauth-protected-resource/mcp",
+      "https://mcp.paypal.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint is an MCP server. PayPal states that its complete tool catalog is available remotely and locally. The public toolkit defines 47 tools; PayPal's official inventory separately identifies three remote-only commerce tools gated by x-feature-flags: commerce:true.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The public toolkit wraps successful results as MCP text content containing a stringified result. Errors are returned as JSON text with an error message and type.",
+      "authorization_mechanism": "Bearer token in the HTTP Authorization header, as confirmed by the endpoint's 401 response and protected-resource metadata.",
+      "authorization_server": "https://mcp.paypal.com",
+      "sources": [
+        "https://developer.paypal.com/ai-tools/mcp-server",
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts",
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/api.ts",
+        "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md",
+        "https://mcp.paypal.com/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed public local MCP server registers tools; no resource handlers were found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/paypal/paypal-mcp-server/blob/6b1ced271959d5ea53857502dc6e5ddef0cbc126/src/index.ts",
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public MCP server registers tool descriptions and schemas; no MCP prompt handlers were found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public toolkit logs API operation details through a debug logger. Optional SDK debug logging can include request and response bodies and headers. No hosted logging policy was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Logs are implementation-level debug output; the MCP response is returned separately as text content.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/client.ts",
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/functions.ts"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling support was found in the reviewed public MCP implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots support was found in the reviewed public MCP implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "POST to the endpoint returned HTTP 401 with WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.paypal.com/.well-known/oauth-protected-resource/mcp\", error=\"invalid_token\", error_description=\"Missing or invalid access token\". Protected-resource metadata reports resource https://mcp.paypal.com/mcp, authorization server https://mcp.paypal.com, and bearer_methods_supported [\"header\"]. The root metadata identifies https://mcp.paypal.com as resource. Authorization-server metadata: issuer https://mcp.paypal.com; authorization_endpoint https://mcp.paypal.com/authorize; token_endpoint https://mcp.paypal.com/token; registration_endpoint https://mcp.paypal.com/register; response_types_supported [\"code\"]; response_modes_supported [\"query\"]; grant_types_supported [\"authorization_code\",\"refresh_token\"]; token_endpoint_auth_methods_supported [\"client_secret_basic\",\"client_secret_post\",\"none\"]; revocation_endpoint https://mcp.paypal.com/token; code_challenge_methods_supported [\"S256\"]; client_id_metadata_document_supported false. No scopes_supported or token lifetime were provided. OpenID configuration returned 404.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Missing/invalid token response: HTTP 401 and JSON {\"error\":\"invalid_token\",\"error_description\":\"Missing or invalid access token\"}.",
+      "authorization_mechanism": "Protected-resource metadata and OAuth authorization-server metadata; dynamic client registration endpoint is published at https://mcp.paypal.com/register. Authorization-code and refresh-token grants; PKCE S256; token authentication methods client_secret_basic, client_secret_post, none; revocation endpoint https://mcp.paypal.com/token. scopes_supported and token lifetime absent. The endpoint's WWW-Authenticate challenge reports the protected-resource metadata path and invalid_token.",
+      "authorization_server": "https://mcp.paypal.com",
+      "sources": [
+        "https://mcp.paypal.com/mcp",
+        "https://mcp.paypal.com/.well-known/oauth-protected-resource",
+        "https://mcp.paypal.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.paypal.com/.well-known/oauth-authorization-server",
+        "https://mcp.paypal.com/.well-known/oauth-authorization-server/mcp",
+        "https://mcp.paypal.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted elicitation behavior is not documented. The public local server does not implement an elicitation flow.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.paypal.com/ai-tools/mcp-server",
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted endpoint's Tasks capability is not documented; no support was identified in the reviewed local implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.paypal.com/ai-tools/mcp-server",
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "PayPal documents local selection of tools and sandbox/production configuration. Hosted docs document production and sandbox endpoints and SSE/Streamable HTTP transport choices. An official inventory says three remote-only commerce tools require x-feature-flags: commerce:true.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration is supplied through endpoint choice, local environment variables/CLI options, and (for commerce tools) an HTTP feature-flag header.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.paypal.com/ai-tools/mcp-server",
+        "https://github.com/paypal/paypal-mcp-server/blob/6b1ced271959d5ea53857502dc6e5ddef0cbc126/src/index.ts",
+        "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public toolkit catches tool errors and returns JSON text with error message and type; LlmError values are serialized directly. The hosted endpoint's unauthenticated error response is invalid_token.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP text content containing a JSON-serialized result or error; invalid-token response is HTTP 401 JSON.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/api.ts",
+        "https://mcp.paypal.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was found in the public implementation. The server exposes business subscription-management tools, which are listed in actions.json.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts",
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications were found in the reviewed public implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP request-cancellation handling was found in the reviewed public implementation. Business operations such as cancelling invoices and subscriptions are tools, not MCP request cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/modelcontextprotocol/toolkit.ts",
+        "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "PayPal documents remote hosted access, local stdio use, sandbox/production endpoints, SSE and Streamable HTTP transports, and remote-only commerce tools behind a feature flag.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.paypal.com/ai-tools/mcp-server",
+        "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Public local code defines read and mutating tools; no MCP tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) were found. 2. No server-enforced confirmation flow or required confirm parameter was found. PayPal's docs show clients asking for information before creating an invoice, but do not establish server enforcement. 3. Hosted OAuth metadata publishes authorization-code and refresh-token grants, DCR, PKCE S256, and header bearer authentication; no scopes_supported or token lifetime. Docs describe login and consent. Local implementation uses access tokens. 4. PayPal documents sandbox and production, SSE and Streamable HTTP, and local tool selection. Three remote-only commerce tools require x-feature-flags: commerce:true. 5. No MCP-specific masking or PII exclusion was found. Toolkit sends request data to PayPal APIs and returns API results. Optional SDK debug logging may log request/response bodies and headers. 6. No MCP rate limits, quota, or call-cost details found. 7. Local code uses Zod input schemas and API handlers; no general unknown-argument policy, hallucinated-alias correction, or operator override found. 8. Public code includes debug logging and sends a User-Agent identifying toolkit, version, OS, and source; no hosted audit/retention policy found. 9. No feedback, rating, survey, or vendor-reporting tool found in the reviewed lists. No upsell responses found. 10. PayPal separately distributes AI Toolkit skills and guidance. The local tool descriptions contain workflow instructions; no enforcement of those instructions was identified. 11. No persistent MCP memory/state behavior documented. 12. Hosted and local servers, sandbox/production hosts, and multiple transport paths are documented; the three commerce tools are remote-only. 13. No raw API request, arbitrary SQL, or script execution tool found.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[OFFICIAL AI-Toolkit, mcp-tools.md] “Prefer MCP tools over raw API calls when the MCP server is available in the agent context.”",
+      "[OFFICIAL AI-Toolkit, mcp-tools.md] “For full control over request structure, fall back to the REST API directly.”",
+      "[LOCAL CODE @a3aa963] The public tool prompts instruct agents on payment, invoice, and subscription workflows; examples include: “This does not process a new payment -- it only logs one that was already collected.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "PayPal documents both hosted and local variants, sandbox and production environments, multiple transport paths, and remote-only commerce tools selected by a feature-flag header.",
+    "sources": [
+      "https://developer.paypal.com/ai-tools/mcp-server",
+      "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts",
+      "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/prompts.ts",
+      "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/client.ts",
+      "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md",
+      "https://mcp.paypal.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "50 identified (47 in public shared toolkit code plus 3 official remote-only commerce names)",
+    "action_count_comment": "PayPal's official quickstart says a complete catalog exists for local and remote servers but does not enumerate it: https://developer.paypal.com/ai-tools/mcp-server. The official local MCP README names 30 tools. The public shared Agent Toolkit code defines 47 tools; these are listed in actions.json, including tools absent from the local README and hosted inventory. PayPal's official AI-Toolkit reference adds three remote-only commerce tools gated by x-feature-flags: commerce:true. Claude's third-party connector directory says “Show all 28 tools” and lists 28, with singular list_product/list_transaction spellings that differ from PayPal's names. Other third-party catalogues report differing counts; those counts are not used to replace official names. Hosted endpoint's exact live list was unavailable without authentication.",
+    "actions": [
+      {
+        "parameters": "[LOCAL CODE] createInvoiceParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L118-L128",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "create Invoice",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "create_invoice"
+      },
+      {
+        "parameters": "[LOCAL CODE] createRecurringSeriesParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L129-L139",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "create Recurring Invoice Series",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "create_recurring_series"
+      },
+      {
+        "parameters": "[LOCAL CODE] activateRecurringSeriesParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L140-L150",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "activate Recurring Invoice Series",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "activate_recurring_series"
+      },
+      {
+        "parameters": "[LOCAL CODE] getRecurringSeriesParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L151-L161",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "get Recurring Invoice Series",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "get_recurring_series"
+      },
+      {
+        "parameters": "[LOCAL CODE] cancelRecurringSeriesParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L162-L172",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "cancel Recurring Invoice Series",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "cancel_recurring_series"
+      },
+      {
+        "parameters": "[LOCAL CODE] deleteRecurringSeriesParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L173-L183",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "delete Recurring Invoice Series",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "delete_recurring_series"
+      },
+      {
+        "parameters": "[LOCAL CODE] listInvoicesParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L184-L194",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "list Invoices",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "list_invoices"
+      },
+      {
+        "parameters": "[LOCAL CODE] getInvoicParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L195-L205",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "get Invoice",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "get_invoice"
+      },
+      {
+        "parameters": "[LOCAL CODE] sendInvoiceParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L206-L216",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "send Invoice",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "send_invoice"
+      },
+      {
+        "parameters": "[LOCAL CODE] sendInvoiceReminderParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L217-L227",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "send Invoice Reminder",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "send_invoice_reminder"
+      },
+      {
+        "parameters": "[LOCAL CODE] cancelSentInvoiceParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L228-L238",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "cancel Sent Invoice",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "cancel_sent_invoice"
+      },
+      {
+        "parameters": "[LOCAL CODE] deleteInvoiceParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L239-L249",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "delete Invoice",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "delete_invoice"
+      },
+      {
+        "parameters": "[LOCAL CODE] setupInvoiceAutoReminderParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L250-L260",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "setup Invoice Auto Reminders",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "setup_invoice_auto_reminders"
+      },
+      {
+        "parameters": "[LOCAL CODE] updateInvoiceAutoReminderParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L261-L271",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "update Invoice Auto Reminder",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "update_invoice_auto_reminder"
+      },
+      {
+        "parameters": "[LOCAL CODE] searchInvoicingParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L272-L282",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "search Invoices or Recurring Invoice Series",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "search_invoicing"
+      },
+      {
+        "parameters": "[LOCAL CODE] updateInvoicingParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L283-L293",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "update Invoice or Recurring Invoice Series",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "update_invoicing"
+      },
+      {
+        "parameters": "[LOCAL CODE] cancelInvoiceAutoReminderParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L294-L304",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "cancel Invoice Auto Reminder",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "cancel_invoice_auto_reminder"
+      },
+      {
+        "parameters": "[LOCAL CODE] generateInvoiceQrCodeParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L305-L315",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "generate Invoice QR Code",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "generate_invoice_qr_code"
+      },
+      {
+        "parameters": "[LOCAL CODE] generateInvoiceNumberParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L316-L326",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "generate Invoice Number",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "generate_invoice_number"
+      },
+      {
+        "parameters": "[LOCAL CODE] recordPaymentForInvoiceParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L327-L337",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "record Payment For Invoice",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "record_payment_for_invoice"
+      },
+      {
+        "parameters": "[LOCAL CODE] recordRefundForInvoiceParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L338-L348",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "record Refund For Invoice",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "record_refund_for_invoice"
+      },
+      {
+        "parameters": "[LOCAL CODE] createConditionalRulesForInvoiceParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L349-L359",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "create Conditional Rules For Invoice",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "create_conditional_rules_for_invoice"
+      },
+      {
+        "parameters": "[LOCAL CODE] createProductParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L360-L370",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "create Product",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "create_product"
+      },
+      {
+        "parameters": "[LOCAL CODE] listProductsParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L371-L381",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "list Products",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "list_products"
+      },
+      {
+        "parameters": "[LOCAL CODE] updateProductParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L382-L392",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "update Product",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "update_product"
+      },
+      {
+        "parameters": "[LOCAL CODE] showProductDetailsParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L393-L403",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "show Products Details",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "show_product_details"
+      },
+      {
+        "parameters": "[LOCAL CODE] createSubscriptionPlanParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L404-L414",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "create Subscription Plan",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "create_subscription_plan"
+      },
+      {
+        "parameters": "[LOCAL CODE] listSubscriptionPlansParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L415-L425",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "list Subscription Plans",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "list_subscription_plans"
+      },
+      {
+        "parameters": "[LOCAL CODE] showSubscriptionPlanDetailsParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L426-L436",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "show Subscription Plan Details",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "show_subscription_plan_details"
+      },
+      {
+        "parameters": "[LOCAL CODE] createSubscriptionParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L437-L447",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "create Subscription",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "create_subscription"
+      },
+      {
+        "parameters": "[LOCAL CODE] showSubscriptionDetailsParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L448-L458",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "show Subscription Details",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "show_subscription_details"
+      },
+      {
+        "parameters": "[LOCAL CODE] cancelSubscriptionParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L459-L469",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "cancel Subscription",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "cancel_subscription"
+      },
+      {
+        "parameters": "[LOCAL CODE] updateSubscriptionParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L470-L480",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "update Subscription",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "update_subscription"
+      },
+      {
+        "parameters": "[LOCAL CODE] createShipmentParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L481-L491",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "create shipment",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "create_shipment_tracking"
+      },
+      {
+        "parameters": "[LOCAL CODE] getShipmentTrackingParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L492-L502",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "get Shipment Tracking",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "get_shipment_tracking"
+      },
+      {
+        "parameters": "[LOCAL CODE] updateShipmentTrackingParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L503-L513",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "update Shipment Tracking",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "update_shipment_tracking"
+      },
+      {
+        "parameters": "[LOCAL CODE] createOrderParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L514-L524",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "create Order",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "create_order"
+      },
+      {
+        "parameters": "[LOCAL CODE] getOrderParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L525-L535",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "get Order",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "get_order"
+      },
+      {
+        "parameters": "[LOCAL CODE] captureOrderParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L536-L546",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "process payment for an authorized order",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "pay_order"
+      },
+      {
+        "parameters": "[LOCAL CODE] listDisputesParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L547-L557",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "list Disputes",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "list_disputes"
+      },
+      {
+        "parameters": "[LOCAL CODE] getDisputeParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L558-L568",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "get Dispute",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "get_dispute"
+      },
+      {
+        "parameters": "[LOCAL CODE] acceptDisputeClaimParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L569-L579",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "accept dispute claim",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "accept_dispute_claim"
+      },
+      {
+        "parameters": "[LOCAL CODE] listTransactionsParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L580-L590",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "list Transactions",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "list_transactions"
+      },
+      {
+        "parameters": "[LOCAL CODE] updatePlanParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L591-L601",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "update Plan",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "update_plan"
+      },
+      {
+        "parameters": "[LOCAL CODE] createRefundParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L602-L612",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "create Refund",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "create_refund"
+      },
+      {
+        "parameters": "[LOCAL CODE] getRefundParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L613-L623",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "get Refund",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "get_refund"
+      },
+      {
+        "parameters": "[LOCAL CODE] getMerchantInsightsParameters(context) Zod input schema; see pinned parameters source",
+        "source": "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts#L624-L634",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "get Merchant Insights",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "tool_name": "get_merchant_insights"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source": "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "Search the PayPal product catalog for agentic shopping.",
+        "type": "Read",
+        "enabled_by_default": "No (requires x-feature-flags: commerce:true)",
+        "tool_name": "search_product"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source": "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "Create a shopping cart for agentic commerce.",
+        "type": "Write",
+        "enabled_by_default": "No (requires x-feature-flags: commerce:true)",
+        "tool_name": "create_cart"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source": "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md",
+        "parameter_count": "Unknown",
+        "source_type": "Official",
+        "description": "Complete checkout for an agentic commerce cart.",
+        "type": "Write",
+        "enabled_by_default": "No (requires x-feature-flags: commerce:true)",
+        "tool_name": "checkout_cart"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No authenticated hosted tools/list or initialize response was available; public code schemas alone do not establish the exact hosted pre-interaction context.",
+    "human_can_agent_cannot": "No definitive MCP-specific exclusions were documented. PayPal's REST API documentation describes many APIs beyond MCP, but REST-only parameters and operations were not treated as MCP actions. The public toolkit's own inventory includes deletion, recurring-invoice, and merchant-insight tools absent from the local MCP README's 30 named tools; hosted availability remains unverified.",
+    "sources": [
+      "https://developer.paypal.com/ai-tools/mcp-server",
+      "https://github.com/paypal/paypal-mcp-server",
+      "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/tools.ts",
+      "https://github.com/paypal/AI-Toolkit/blob/1401791aca82568525bd60aa40aaeb3e9a9615d0/skills/paypal-best-practices/references/mcp-tools.md",
+      "https://claude.com/connectors/paypal"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "PayPal tells users to select the sandbox endpoint for sandbox accounts and to obtain user consent during remote setup. These are client/setup instructions; public code does not enforce the hosted endpoint choice or client-side consent. The Agent Toolkit reference recommends MCP over raw API calls when available, then REST for full control.",
+    "governance_promises": "PayPal blog materials describe tokenized flows and data protection, but the reviewed hosted MCP docs do not provide detailed MCP-specific retention, AI-training, or audit terms. The public toolkit sends authenticated API requests to PayPal; optional debug logging can include request/response bodies and headers.",
+    "promises_to_user": "The quickstart says remote MCP lets users continue tasks across devices after authentication. PayPal presents SSE and Streamable HTTP as remote transport options. PayPal disclaims guarantees about accuracy of AI-generated content in its MCP materials.",
+    "comparison_with_server_logic": "OAuth protection and token-based API calls are evidenced by endpoint metadata and public code. Sandbox/production selection is described for clients. Security, retention, AI-training, and audit claims specific to the hosted endpoint were not backed by inspected hosted implementation evidence.",
+    "sources": [
+      "https://developer.paypal.com/ai-tools/mcp-server",
+      "https://developer.paypal.com/community/blog/paypal-model-context-protocol/",
+      "https://developer.paypal.com/community/blog/accelerating-agentic-payments/",
+      "https://github.com/paypal/agent-toolkit/blob/a3aa963960caf32912691a759879a8ce7a6018b2/typescript/src/shared/client.ts"
+    ]
+  },
+  "contradictions": [
+    "PayPal's official local MCP README names 30 tools; the shared Agent Toolkit code defines 47 tools. The quickstart says the complete catalog is available both locally and remotely, but does not reconcile these totals.",
+    "The official AI-Toolkit reference names three remote-only commerce tools (search_product, create_cart, checkout_cart) behind x-feature-flags: commerce:true; they do not appear in the public shared toolkit tool definitions or local MCP wrapper whitelist.",
+    "Claude's connector directory reports 28 tools and uses list_product and list_transaction spellings; PayPal's local README and code use list_products and list_transactions. Claude also omits many names present in the shared toolkit code.",
+    "OAuth authorization-server metadata does not include scopes_supported or token lifetime; no scope-based comparison with tool access can be made."
+  ],
+  "observations_for_research": [
+    "Public toolkit tool definitions contain Zod schemas and natural-language descriptions, but the hosted endpoint's exact tools/list output is not available from unauthenticated evidence.",
+    "The shared toolkit includes business operations whose names and count differ from the local MCP wrapper's accepted tool whitelist and PayPal's hosted tool inventory.",
+    "PayPal's official reference documents a header-controlled remote-only commerce tool set, giving the caller an additional way to affect tool availability."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Inspected links.json, links_check.txt, pages/ and all three local PayPal repositories. Hosted endpoint and install path returned HTTP 401 without credentials; no login was attempted. OAuth values are from supplied pre-fetched responses; OpenID configuration returned 404. Official docs provide no hosted tool schemas or complete names; public code is the local MCP implementation/shared toolkit, not confirmed deployed hosted code. The npm package page returned HTTP 403. Pricing/legal links were absent from the evidence inventory. Third-party catalogues, including Claude's directory, were used only to cross-check; an unofficial npm server was identified but excluded.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.3
+  }
+}

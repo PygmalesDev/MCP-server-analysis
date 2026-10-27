@@ -1,0 +1,758 @@
+{
+  "server": "circleci",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.circleci.com/v1/mcp",
+    "documentation_url_csv": "https://circleci.com/product/mcp/",
+    "addressing": "global",
+    "repository_url": "https://github.com/CircleCI-Public/mcp-server-circleci",
+    "documentation_urls_used": [
+      "https://circleci.com/product/mcp/",
+      "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+      "https://circleci.com/docs/guides/toolkit/connecting-to-the-circleci-mcp-server/",
+      "https://circleci.com/docs/guides/toolkit/managing-api-tokens/",
+      "https://circleci.com/docs/guides/toolkit/oauth-dynamic-client-registration/",
+      "https://circleci.com/changelog/hosted-mcp-server-now-available/",
+      "https://circleci.com/legal/privacy/",
+      "https://circleci.com/legal/terms-of-use/",
+      "https://circleci.com/pricing/",
+      "https://claude.com/connectors/circleci"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public TypeScript repository is CircleCI’s deprecated local/self-managed MCP server, not the hosted endpoint. CircleCI documents the hosted server and CLI MCP as distinct variants; hosted tools and schemas are not published in that repository.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "616a1818d23b3960cae26dbbdda58f3156c1e212",
+    "commit_date": "2026-10-21",
+    "implementation_language": "TypeScript (deprecated local variant)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.15.1 (deprecated local variant)",
+    "code_public": "Yes",
+    "license": "Apache-2.0 (deprecated local variant)",
+    "release_status": "Hosted server: NOT FOUND; public local variant is deprecated",
+    "other_official_servers": [
+      "CircleCI CLI MCP: a separate local server built into the CircleCI CLI; docs say it exposes the CLI’s commands rather than a fixed hosted tool list.",
+      "Deprecated local/self-managed MCP package: https://github.com/CircleCI-Public/mcp-server-circleci; its 13 tool names differ from the hosted reference list.",
+      "CircleCI’s docs identify a separate docs MCP connection workflow; it is for documentation search and is not the product endpoint analyzed here."
+    ],
+    "sources": [
+      "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+      "https://circleci.com/docs/guides/toolkit/connecting-to-the-circleci-mcp-server/",
+      "https://github.com/CircleCI-Public/mcp-server-circleci/blob/616a1818d23b3960cae26dbbdda58f3156c1e212/README.md#L1-L2",
+      "https://github.com/CircleCI-Public/mcp-server-circleci/blob/616a1818d23b3960cae26dbbdda58f3156c1e212/src/circleci-tools.ts#L1-L75"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific price or usage charge was found in the official MCP documentation or pricing page. Access requires a CircleCI account and authentication; whether MCP access is separately priced is not stated.",
+    "linked_software": "Paid",
+    "linked_software_cost": "CircleCI lists Free at $0, Performance starting at $15/month, and Scale with custom pricing billed annually. The pricing page describes different plan inclusions and usage credits.",
+    "pricing_model_details": "CircleCI plans use credits for team usage. The published pricing page does not attribute credit charges to MCP calls.",
+    "other_access_restrictions": "Requires a CircleCI account with access to the projects to inspect and an MCP host supporting remote Streamable HTTP. OAuth2 is recommended; a personal API token is the fallback for unsupported OAuth hosts or headless/automated use. Product permission level and MCP-specific rate limits are not specified.",
+    "restrictions_controlled_by": "CircleCI controls account authentication and product access; the user chooses an account and authentication method. Organization permissions are inherited from the account, but MCP-specific admin controls are not documented.",
+    "sources": [
+      "https://circleci.com/docs/guides/toolkit/connecting-to-the-circleci-mcp-server/",
+      "https://circleci.com/pricing/",
+      "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted reference lists 13 tools for connectivity checks, run/workflow/job inspection, logs, artifacts, tests, usage export, workflow reruns, and cancellation. Tool names and short descriptions are documented, but the hosted schemas and annotations are not.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The overview says the server transforms raw CircleCI API responses into structured data. Exact hosted result and error schemas are not published.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation does not say whether the endpoint exposes MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP prompt capability is documented. The public local variant’s capabilities do not establish what the hosted endpoint implements.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "https://github.com/CircleCI-Public/mcp-server-circleci/blob/616a1818d23b3960cae26dbbdda58f3156c1e212/src/index.ts#L18-L21"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted request logging and audit-log behavior are not described in the reviewed hosted documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted server sampling support is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted server roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with `WWW-Authenticate: Bearer resource_metadata=\"https://mcp.circleci.com/.well-known/oauth-protected-resource/v1/mcp\"` and `{\"message\":\"You must log in first\"}`. Protected-resource metadata identifies `https://app.circleci.com` and `bearer_methods_supported:[\"header\"]`. The authorization-server metadata lists authorization code only, PKCE S256, PAR, and DCR. `scopes_supported` and token authentication methods are absent. CircleCI’s OAuth guide says DCR issues no client secret and resulting personal API tokens last 90 days; user-selected access levels are Read, Write, or Admin. Hosted-specific token lifetime and revocation behavior are not separately stated.",
+      "pre_interaction_context_verbatim": "HTTP 401; WWW-Authenticate: Bearer resource_metadata=\"https://mcp.circleci.com/.well-known/oauth-protected-resource/v1/mcp\"; response: {\"message\":\"You must log in first\"}. Protected-resource JSON: {\"resource\":\"https://mcp.circleci.com/v1/mcp\",\"authorization_servers\":[\"https://app.circleci.com\"],\"bearer_methods_supported\":[\"header\"]}. Authorization-server JSON: {\"issuer\":\"https://app.circleci.com\",\"authorization_endpoint\":\"https://app.circleci.com/oauth/authorize\",\"token_endpoint\":\"https://app.circleci.com/oauth/token\",\"pushed_authorization_request_endpoint\":\"https://app.circleci.com/oauth/par\",\"registration_endpoint\":\"https://app.circleci.com/oauth/register\",\"response_types_supported\":[\"code\"],\"grant_types_supported\":[\"authorization_code\"],\"code_challenge_methods_supported\":[\"S256\"]}",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "Metadata Doc; OAuth authorization code flow; grant_types_supported=[\"authorization_code\"]; response_types_supported=[\"code\"]; code_challenge_methods_supported=[\"S256\"]; registration_endpoint=https://app.circleci.com/oauth/register (DCR); pushed_authorization_request_endpoint=https://app.circleci.com/oauth/par (PAR); bearer_methods_supported=[\"header\"]; scopes_supported not present in supplied metadata. Docs also allow a personal API token as a bearer header fallback. The OAuth guide states 90-day resulting tokens and user-visible revocation for its DCR flow; endpoint-specific lifetime and revocation were not found.",
+      "authorization_server": "https://app.circleci.com",
+      "sources": [
+        "https://mcp.circleci.com/v1/mcp",
+        "https://mcp.circleci.com/.well-known/oauth-protected-resource",
+        "https://mcp.circleci.com/.well-known/oauth-protected-resource/v1/mcp",
+        "https://app.circleci.com/.well-known/oauth-authorization-server",
+        "https://app.circleci.com/.well-known/openid-configuration",
+        "https://circleci.com/docs/guides/toolkit/oauth-dynamic-client-registration/",
+        "https://circleci.com/docs/guides/toolkit/connecting-to-the-circleci-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted server documentation does not state whether it uses MCP Elicitation. The docs recommend that the assistant review destructive actions with the user, but do not describe server-enforced elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted task capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "CircleCI publishes connection setup instructions for clients and a separate CLI MCP configuration path. Hosted toolset configuration or filtering is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/connecting-to-the-circleci-mcp-server/",
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation describes troubleshooting authentication and stale tool lists, but does not publish MCP error formats or a dedicated error-reporting capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation does not describe MCP progress notifications. Some tools return CircleCI run or workflow state, which is product data rather than evidence of MCP progress tracking.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted tool `cancel_workflow` cancels a CircleCI workflow. Documentation does not say whether MCP request cancellation is supported.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs give recommendations to the client/assistant, including letting the assistant chain tools and reviewing destructive actions before confirmation. They do not publish initialize instructions for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The current hosted reference names read tools plus `rerun_workflow` and `cancel_workflow`; it publishes no hosted tool annotations. The separate product page lists other write-capable actions. 2. Docs recommend review before rerun/cancel, but no server-enforced confirmation parameter or flow is documented. 3. OAuth authorizes through CircleCI accounts; docs describe account/project access and API token fallback. Scope choice, role inheritance details, allowlists, and hosted token lifetime are not specified; the general DCR guide documents user-selected Read/Write/Admin and 90-day tokens. 4. No hosted read-only mode, tool filters, environment selector, or regional endpoints were found. 5. No MCP-specific field masking or PII exclusions were documented. Access is described in terms of the user’s CircleCI account/project access. 6. The overview states usage exports cover up to 31 days. No hosted rate or call quotas were found. 7. Hosted parameter validation/correction is undocumented; schemas are not published. 8. Hosted audit/telemetry behavior was not found. The distinct public local variant exports OpenTelemetry invocation, duration, and error metrics by default unless `DISABLE_TELEMETRY=true`; its README says remote metrics use the same request token. This is not evidence of hosted behavior. 9. No feedback/rating tool appears in the hosted reference or Claude directory list. No hosted upsell behavior was found. 10. No hosted skill-loading tools or initialize instructions were published. Docs provide behavioral recommendations; they are not shown as server-enforced. 11. Memory/state across agent sessions is undocumented. 12. CircleCI documents hosted and CLI MCP as separate servers with different tool scope; the hosted server calls CircleCI APIs and structures their responses. 13. The hosted reference does not list an arbitrary API, SQL, shell, or script escape hatch. The separate CLI MCP exposes the CLI, including direct API access, according to the overview.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] “You do not call these tools yourself. You ask your AI assistant a question or give it an instruction in plain language. Your assistant then decides which tools to call, in which order, and with which arguments.”",
+      "[DOCS] “Most of these tools chain together. list_runs returns run IDs for get_run. get_run feeds list_workflows. list_workflows feeds list_jobs. list_jobs feeds get_job, get_job_logs, list_artifacts, and list_job_tests.”",
+      "[DOCS] “Review destructive actions before confirming. Rerunning or canceling a workflow changes real CI state, so check what your assistant is about to do first. This matters most on a shared or production-facing project.”",
+      "[DOCS] “After CircleCI releases new tools, restart your MCP host or reconnect the server to load them.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "CircleCI documents two distinct MCP servers: the global hosted server with a curated tool list and a CLI MCP that runs locally and exposes the CircleCI CLI. The hosted server itself is described as a bridge to CircleCI APIs. The CLI server is a separate variant, not a sub-server of the endpoint analyzed.",
+    "sources": [
+      "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+      "https://circleci.com/product/mcp/",
+      "https://circleci.com/docs/guides/toolkit/oauth-dynamic-client-registration/",
+      "https://github.com/CircleCI-Public/mcp-server-circleci/blob/616a1818d23b3960cae26dbbdda58f3156c1e212/src/lib/telemetry/metrics.ts#L1-L150",
+      "https://github.com/CircleCI-Public/mcp-server-circleci/blob/616a1818d23b3960cae26dbbdda58f3156c1e212/README.md#L1038-L1047"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "43 named tools across collected lists; endpoint default count not settled by the sources",
+    "action_count_comment": "The dedicated official overview names 13 hosted tools. The official product page separately names 17 tools under “Hosted MCP server tools”; 2 names overlap, producing 28 distinct official names. The Claude connector directory (third-party, marked Anthropic verified) names 24 tools; 9 names overlap the dedicated overview, so 15 additional names are included as catalogue-only. Its list and the product page conflict with the dedicated overview; this collected count must not be read as a verified endpoint tool count. See actions.json.",
+    "actions": [
+      {
+        "tool_name": "hello",
+        "description": "Verifies connectivity to the hosted CircleCI MCP server.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_runs",
+        "description": "Lists project runs or the user’s runs; supports branch and status filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_run",
+        "description": "Fetches a run’s phase, outcome, VCS details, and config errors.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_workflows",
+        "description": "Lists workflows belonging to a run.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_workflow",
+        "description": "Fetches a workflow’s name, phase, and outcome.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "rerun_workflow",
+        "description": "Reruns a workflow from start or failed jobs and downstream jobs.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cancel_workflow",
+        "description": "Cancels a running workflow.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_jobs",
+        "description": "Lists jobs belonging to a workflow.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job",
+        "description": "Fetches a job’s phase, outcome, and per-step exit details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job_logs",
+        "description": "Fetches job step output; defaults to failed steps when no step is named.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_artifacts",
+        "description": "Lists artifacts persisted by a job.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_job_tests",
+        "description": "Lists test results; failing tests by default, optionally all results.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "download_usage_data",
+        "description": "Exports organization usage data as downloadable CSV for up to 31 days.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "analyze_diff",
+        "description": "Checks a diff for rule violations before code review.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "config_helper",
+        "description": "Helps fix CircleCI configuration issues.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_prompt_template",
+        "description": "Generates prompts for consistent AI behavior.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "download_usage_api_data",
+        "description": "Exports CircleCI usage data for cost and capacity analysis.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_flaky_tests",
+        "description": "Identifies and troubleshoots unstable tests.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_underused_resource_classes",
+        "description": "Finds jobs with low CPU or RAM utilization.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_build_failure_logs",
+        "description": "Retrieves build failure logs for debugging.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job_test_results",
+        "description": "Retrieves job test results and performance details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_latest_pipeline_status",
+        "description": "Monitors the latest pipeline status.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_component_versions",
+        "description": "Lists deployed component versions and rollback targets.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_followed_projects",
+        "description": "Lists projects the user follows and their projectSlug.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "recommend_prompt_template_tests",
+        "description": "Recommends tests for prompt reliability.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_evaluation_tests",
+        "description": "Runs prompt evaluation tests on a CircleCI pipeline.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_pipeline",
+        "description": "Triggers a CircleCI pipeline.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_rollback_pipeline",
+        "description": "Triggers a rollback pipeline.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (conflicts with dedicated hosted-server reference)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://circleci.com/product/mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_deploy_component",
+        "description": "Retrieves a deploy component.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_deploy_environment",
+        "description": "Retrieves a deploy environment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_job_resource_usage",
+        "description": "Retrieves job resource usage.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_me",
+        "description": "Retrieves the authenticated user.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_orb",
+        "description": "Retrieves an orb.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_orb_source",
+        "description": "Retrieves orb source.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_deploy_component_versions",
+        "description": "Lists deploy component versions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_deploy_components",
+        "description": "Lists deploy components.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_deploy_environments",
+        "description": "Lists deploy environments.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_deployments",
+        "description": "Lists deployments.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_job_artifacts",
+        "description": "Lists artifacts for a job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_run_workflows",
+        "description": "Lists workflows for a run.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_workflow_jobs",
+        "description": "Lists jobs for a workflow.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "rollback_deploy_component",
+        "description": "Rolls back a deploy component.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "validate_config",
+        "description": "Validates CircleCI configuration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official lists)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/circleci",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted endpoint is closed to unauthenticated listing, and the available public code is a deprecated, distinct local variant. No hosted tool definitions or initialize instructions were available to serialize.",
+    "human_can_agent_cannot": "The documented CLI MCP provides configuration authoring/validation, organization and project administration, orb tooling, security policy commands, self-hosted runner management, iOS signing, deploy tracking, Docker Layer Cache operations, and direct CircleCI API access. The hosted overview describes a narrower curated focus on run diagnostics and actions. Product documentation also names config, prompt-template, evaluation, component deployment, and rollback operations in a separate hosted tools list; their availability on the input endpoint is unclear because that list conflicts with the dedicated reference. Sources: https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/ ; https://circleci.com/product/mcp/",
+    "sources": [
+      "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+      "https://circleci.com/product/mcp/",
+      "https://claude.com/connectors/circleci"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The overview advises asking specific questions, allowing the assistant to chain tools, reviewing destructive actions before confirming, and selecting the hosted or CLI server based on task needs. These are user/client recommendations; no hosted server enforcement is documented.",
+    "governance_promises": "The connection guide says OAuth sign-in uses the CircleCI account and avoids copying or storing a token in client configuration; it also says CircleCI can revoke or rotate access. The privacy policy describes processing of account, service, and AI-feature data generally, but does not state MCP-specific retention, training, or audit terms.",
+    "promises_to_user": "CircleCI describes the hosted server as requiring no local installation, using OAuth2, and returning structured information from CircleCI APIs. The docs describe supported workflows such as inspecting runs, reading logs, rerunning or canceling workflows, and examining test results.",
+    "comparison_with_server_logic": "The hosted endpoint’s implementation is closed, so the docs’ bridge and access descriptions cannot be compared against hosted code. Confirmation before destructive actions is a recommendation, not a documented enforcement mechanism. Generic API OAuth documentation supports the user-controlled access and revocation claims, but hosted-specific token lifetime is not stated.",
+    "sources": [
+      "https://circleci.com/docs/guides/toolkit/circleci-mcp-overview/",
+      "https://circleci.com/docs/guides/toolkit/connecting-to-the-circleci-mcp-server/",
+      "https://circleci.com/legal/privacy/",
+      "https://circleci.com/docs/guides/toolkit/oauth-dynamic-client-registration/"
+    ]
+  },
+  "contradictions": [
+    "The dedicated MCP overview says the hosted server currently supports 13 tools: `hello`, `list_runs`, `get_run`, `list_workflows`, `get_workflow`, `rerun_workflow`, `cancel_workflow`, `list_jobs`, `get_job`, `get_job_logs`, `list_artifacts`, `list_job_tests`, and `download_usage_data`. The official product page instead lists 17 under “Hosted MCP server tools,” including names such as `analyze_diff`, `config_helper`, and `run_pipeline` and omitting many names from the overview.",
+    "The Claude connector directory, marked Anthropic verified and pointing to the same endpoint, lists 24 tool names. It includes names absent from both official lists and differently named counterparts such as `list_run_workflows`/`list_workflows`, `list_workflow_jobs`/`list_jobs`, and `list_job_artifacts`/`list_artifacts`. These catalogue-only names are included after official names in actions.json and are marked third-party.",
+    "The public repository’s deprecated local variant defines a different 13-tool set, including `config_helper`, `run_pipeline`, and `run_rollback_pipeline`; it does not match the hosted overview list. It is not treated as the hosted endpoint’s implementation or used to fill hosted schemas."
+  ],
+  "observations_for_research": [
+    "The hosted overview recommends user review for workflow reruns and cancellation but does not describe server-side confirmation enforcement.",
+    "The official product page, dedicated tool reference, and publisher-verified connector directory present materially different hosted tool inventories, leaving the endpoint’s default tool set uncertain.",
+    "CircleCI distinguishes a hosted curated MCP server from a local CLI MCP; the latter is documented as exposing a wider command surface, including direct API access."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/ copies, and all local repository files. The input endpoint returned HTTP 401 with OAuth protected-resource metadata; no credentials were used. The official hosted reference did not publish schemas, annotations, initialize instructions, hosted code, or exact output/error formats. The public repo is deprecated local code and was inspected as a distinct variant. The MCPwell listing corroborates the endpoint and OAuth bearer auth but does not list tools; Composio’s page describes a proxy/API toolkit and was not used as evidence for the native server’s tool inventory. Other tool catalogs checked included Stackduke, DevHunt, and Inite; Inite timed out. The official pricing page contains CircleCI plan pricing but no MCP-specific charge.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 10.2
+  }
+}

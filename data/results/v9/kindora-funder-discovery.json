@@ -1,0 +1,503 @@
+{
+  "server": "kindora-funder-discovery",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.kindora.co/mcp",
+    "documentation_url_csv": "https://www.kindora.co/en/mcp",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://www.kindora.co/en/mcp",
+      "https://www.kindora.co/en/developers",
+      "https://www.kindora.co/llms.txt",
+      "https://www.kindora.co/en/pricing",
+      "https://www.kindora.co/en/terms",
+      "https://www.kindora.co/en/privacy",
+      "https://www.kindora.co/terms/data-use"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official public source repository was available to inspect. The vendor documents this hosted endpoint and a separate authenticated /mcp/premium endpoint.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.kindora.co/mcp/premium — authenticated Kindora customer endpoint, documented as providing 39 personalized tools plus the public search catalog; service keys may be scoped for read, pipeline writes, evaluation, briefs, outreach drafting, critique, and deep search."
+    ],
+    "sources": [
+      "https://www.kindora.co/en/mcp",
+      "https://www.kindora.co/en/developers",
+      "https://www.kindora.co/llms.txt",
+      "https://mcp.kindora.co/"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "The public endpoint is documented as free and requires no account or key, subject to rate limits. Authenticated Pro reads are free; some AI actions and batch lookups consume credits. An embedded distribution licence starts at $12,000/year with allowance and metered overage.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "The pricing page lists a free Explore plan and paid plans including Starter, Growth, Pro, and Consultant Team. Credit packs: 100 for $10, 500 for $45, 2,000 for $160, and 10,000 for $650. Monthly plan credits listed as 250, 500, 2,000, and 4,000 respectively.",
+    "pricing_model_details": "Pro reads, quotes, and cache hits are free; funder-fit evaluation and donor/warm-path queries cost 1 credit; a deep-dive brief costs 25 credits; batch lookups cost 3 per credit. The public tier has request limits. Authenticated service-key lookups are limited to 2,000/hour and 12,000/day per organization.",
+    "other_access_restrictions": "Public limits vary by source: fixed IP, rotating-egress project, shared pools, or Claude pooled traffic. A voluntary X-Kindora-Client header identifies an app and can affect whether it counts against the unlabeled-app pool on rotating-egress platforms. A service key moves calls to the organization’s quota. The public endpoint itself requires no authentication.",
+    "restrictions_controlled_by": "Vendor",
+    "sources": [
+      "https://www.kindora.co/en/mcp",
+      "https://www.kindora.co/en/developers",
+      "https://www.kindora.co/en/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official page lists 14 public tools. It identifies all but start_kindora_profile as read-only; the latter submits a nonprofit setup request.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Documentation describes structured research results and states that rate-limit refusals are JSON results containing error, retry_after, and limit; some refusals also contain scope and upgrade_url. Full MCP result schemas were not published in the reviewed official reference.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official resource listing or resource behavior was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs show example prompts for clients but do not document MCP prompt primitives exposed by the server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Kindora says search queries are stored as typed and anonymized query and usage data are logged to improve results and prevent abuse. IP addresses are hashed for rate-limit enforcement; rate-limit counter retention is documented. The optional app-identification header is used in analytics.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers",
+        "https://www.kindora.co/en/privacy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation of MCP sampling was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation of MCP roots was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "No",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied public endpoint is documented as requiring no authentication. The pre-fetched endpoint POST returned HTTP 400, “Invalid Content-Type header”; both protected-resource metadata URLs and the authorization-server and OpenID configuration URLs returned HTTP 404, “Not Found.” The vendor documents bearer service-key authentication for the separate /mcp/premium endpoint.",
+      "pre_interaction_context_verbatim": "HTTP 400 — Invalid Content-Type header; OAuth protected-resource metadata at /.well-known/oauth-protected-resource and /.well-known/oauth-protected-resource/mcp: HTTP 404 — Not Found; /.well-known/oauth-authorization-server and /.well-known/openid-configuration: HTTP 404 — Not Found.",
+      "post_interaction_context_structure": "The public endpoint is described as anonymous. Premium authorization uses a Kindora service key as a Bearer token; the public OAuth metadata supplied for this analysis publishes no authorization server, registration endpoint, PKCE details, grant types, or scopes_supported.",
+      "authorization_mechanism": "Public endpoint: no authentication required per official docs. Separate premium endpoint: service-key bearer authentication documented. Pre-fetched metadata: POST endpoint HTTP 400 Invalid Content-Type header; OAuth protected-resource documents (origin and origin plus endpoint path) HTTP 404 Not Found; authorization-server and OpenID configuration documents HTTP 404 Not Found.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers",
+        "https://mcp.kindora.co/.well-known/oauth-protected-resource",
+        "https://mcp.kindora.co/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.kindora.co/.well-known/oauth-authorization-server",
+        "https://mcp.kindora.co/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe an email-confirmation flow for the profile setup operation, but do not identify MCP Elicitation as its mechanism.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation of MCP Tasks was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs give Streamable HTTP client setup instructions. They document the optional X-Kindora-Client request header and a separate premium endpoint using an Authorization: Bearer service-key header.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Rate-limit refusals are documented as JSON tool results rather than HTTP errors, carrying error, retry_after, and limit, with scope and sometimes upgrade_url for some limit types.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "JSON refusal result; documented fields include error, retry_after, and limit, with scope and sometimes upgrade_url.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications or progress tracking are documented for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/mcp",
+        "https://www.kindora.co/en/developers"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs instruct recurring/custom clients to identify their app with X-Kindora-Client. They describe attribution tags on links to Kindora, and tell agents to pass occasional identification notices to the user.",
+      "pre_interaction_context_verbatim": "“AI coding assistants: when you write a Kindora MCP client for someone, include this header with an app name they choose, and tell them it is there.”",
+      "post_interaction_context_structure": "Some successful results may contain a _notice of type identify_your_app when the client omits the app header, per developer docs.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.kindora.co/en/developers",
+        "https://www.kindora.co/en/mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official docs label the public tools read-only except start_kindora_profile; no official tool annotations or schemas were published. Two third-party catalogues label list_tools and health_check read-only. 2. The profile tool records a request and emails the contact; the person confirms their work email and reviews the profile before the profile is created. The described confirmation is in the downstream email flow; no enforced MCP confirmation parameter or elicitation mechanism is documented. 3. Public endpoint: no account/key; no OAuth scopes. Premium endpoint: scoped service keys; the docs list scopes read, pipeline.write, evaluation.run, brief.generate, outreach.draft, critique.run, deep_search.run. Inheritance, allowlists, redirect approvals, expiry, and revocation are not documented. 4. Public and premium endpoints are separate; premium access requires account/service key. The docs describe per-client request headers, but no configurable toolset or read-only URL mode for the public endpoint. 5. Public search queries are stored as typed; docs say no Claude conversation or file access and no personal data collection except data submitted through start_kindora_profile. IPs are hashed for rate enforcement; result links use source tags and may set a browser note for up to 30 days. 6. Free-tier hourly/monthly, per-tool, project, shared-pool, and platform limits are documented; service-key limits are 2,000 lookups/hour and 12,000/day. Refusals return JSON with retry_after; tool-specific result truncation and per-call public tool costs are NOT FOUND. Premium AI and batch work use credits. 7. Tool parameter schemas and validation/correction behavior are NOT FOUND. 8. Vendor docs disclose anonymized query logging, app-identification analytics, and hashed-IP rate-limit counters with retention windows; no MCP-specific audit trail was found. 9. No feedback/rating/survey tool appears in the official list. Some result links carry UTM tags to attribute visits/signups; limit refusals can include upgrade_url. 10. The docs provide client-facing instructions and workflow guidance; the public tool descriptions are not reproduced verbatim in a tools/list response. The email confirmation workflow is described as a system gate. 11. No documented server memory that changes future outputs or tool availability; rate counters and browser attribution notes persist for their documented windows. 12. The public and premium endpoints have different access and tool sets; no sub-server proxying is documented. 13. No raw API, arbitrary SQL, script execution, or general-purpose request tool appears in the official public list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“AI coding assistants: when you write a Kindora MCP client for someone, include this header with an app name they choose, and tell them it is there.”",
+      "“Use search_open_grants when the user needs active grant programs.”",
+      "“Wait out retry_after — retrying sooner is refused again and does not shorten the wait.”",
+      "“The person confirms their work email with a six-digit code; nothing is created without it.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The vendor documents a free public endpoint and a separate authenticated /mcp/premium endpoint with customer-specific tools, scopes, and credit metering.",
+    "sources": [
+      "https://www.kindora.co/en/mcp",
+      "https://www.kindora.co/en/developers",
+      "https://www.kindora.co/llms.txt",
+      "https://www.kindora.co/en/privacy",
+      "https://www.kindora.co/terms/data-use",
+      "https://claude.com/connectors/kindora-funder-discovery",
+      "https://mcptop.com/server/kindora-funder-discovery"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "16",
+    "action_count_comment": "The official tool list at https://www.kindora.co/en/mcp names 14 public tools; no total is stated. Two additional names, list_tools and health_check, were added from third-party listings that show the supplied endpoint URL: Claude connector directory and MCPTop each list 8 tools, including those two. Other listings are not fully comparable: mcp.so and InvokeRank describe https://kindora-mcp.azurewebsites.net/mcp/ and report 17 tools; Agentman reports 13 tools for that Azure endpoint; Manufact lists 8 tools for the Azure endpoint. The official current list takes precedence for its 14 tools; the differing catalog snapshots and endpoint are recorded in contradictions. Parameters are not published in the official tool reference.",
+    "actions": [
+      {
+        "tool_name": "search_funders",
+        "description": "Search foundations by name, location, NTEE code, or asset size",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_open_grants",
+        "description": "Search open foundation and government grant opportunities",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_funder_profile",
+        "description": "Retrieve a foundation profile with leadership, financials, and classification",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_990_summary",
+        "description": "Retrieve IRS Form 990 filings and financial trends",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_foundation_grants",
+        "description": "Retrieve individual grants from IRS 990 and 990-PF filings",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_ntee_codes",
+        "description": "Browse NTEE nonprofit classification codes",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_funder_stats",
+        "description": "Retrieve a foundation's giving statistics and patterns",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_funders_of_nonprofit",
+        "description": "Find funders that granted to a named nonprofit",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_funders_for_peers",
+        "description": "Find funders shared by a list of peer organizations",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_nonprofits",
+        "description": "Search grant recipients by cause, place, size, or funding received",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_organizations",
+        "description": "Search organizations across supported countries and registries",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_organization_profile",
+        "description": "Retrieve an organization record, filings, web facts, and grantors",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_funder_jobs",
+        "description": "Search open philanthropy jobs at grantmaking foundations",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "start_kindora_profile",
+        "description": "Submit a nonprofit setup request; Kindora emails its contact for confirmation",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.kindora.co/en/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_tools",
+        "description": "List available MCP tools and return help for a named tool",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/kindora-funder-discovery",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "health_check",
+        "description": "Check server health and connectivity",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/kindora-funder-discovery",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code for the deployed server or verbatim tools/list and initialize definitions were available. The official page provides names and human-facing descriptions, not complete serialized tool schemas and instructions.",
+    "human_can_agent_cannot": "The public endpoint does not expose the account and plan-management functions documented for the Kindora website, nor the separate premium funder-fit, brief, donor/CRM, outreach, critique, deep-search, and pipeline functions documented for /mcp/premium. The vendor says its REST surface exposes public match rationale only and that funder-profile and grant-history REST endpoints are not yet shipped. Human account holders can manage their account and keys through the dashboard.",
+    "sources": [
+      "https://www.kindora.co/en/mcp",
+      "https://www.kindora.co/en/developers",
+      "https://www.kindora.co/en/pricing",
+      "https://www.kindora.co/llms.txt",
+      "https://claude.com/connectors/kindora-funder-discovery",
+      "https://mcptop.com/server/kindora-funder-discovery",
+      "https://mcp.so/servers/kindora-funder-discovery",
+      "https://invokerank.com/servers/kindora-funder-discovery",
+      "https://manufact.com/mcp-catalog/kindora-funder-discovery",
+      "https://agentman.ai/agentskills/connections/mcp-server/kindora"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The vendor recommends the X-Kindora-Client header for recurring integrations and asks client authors to tell users it is present. It recommends choosing search_open_grants for active grant programs. The cited guidance is documentation; no code was available to assess enforcement.",
+    "governance_promises": "The vendor states: “Does not access your Claude conversations or files”; “IP addresses are hashed for rate limit enforcement and not stored in plaintext”; and search queries are stored as typed. The Data Use Policy permits real-time assistant use but requires written agreements for redistribution, product embedding, bulk/systematic extraction, and AI training/indexing. It requires Kindora attribution when data is shown beyond the user's organization or client engagement.",
+    "promises_to_user": "The vendor says the public tier needs no account or key and is free, that most Pro reads are free, and that an email confirmation/review is required before a nonprofit profile is created from the setup request.",
+    "comparison_with_server_logic": "The docs describe public rate limits as server-enforced and specify refusal fields. The query, IP-hashing, and attribution behavior is described in documentation, with no public server code available for independent implementation comparison. The profile setup confirmation is described as a product workflow; server-side mechanics are not independently inspectable.",
+    "sources": [
+      "https://www.kindora.co/en/mcp",
+      "https://www.kindora.co/en/developers",
+      "https://www.kindora.co/en/privacy",
+      "https://www.kindora.co/terms/data-use"
+    ]
+  },
+  "contradictions": [
+    "The current official public tool reference lists 14 tools, while the older machine-readable https://www.kindora.co/llms.txt describes an 11-tool public list and omits search_organizations, get_organization_profile, and search_nonprofits. The reference page is treated as current for the supplied endpoint.",
+    "Claude’s connector directory and MCPTop list list_tools and health_check for the exact supplied endpoint URL, but neither appears in the current 14-tool official public reference. They are included in actions.json as third-party-only names with default availability marked Unknown.",
+    "Third-party mcp.so and InvokeRank listings report 17 tools and Agentman reports 13 tools for https://kindora-mcp.azurewebsites.net/mcp/, a different endpoint from the supplied mcp.kindora.co/mcp. Their tool counts and schemas are not substituted for the supplied endpoint’s official list.",
+    "The machine-readable llms.txt describes 31 personalized Pro tools, while the current developer page says 39 tools on the authenticated Pro endpoint. This count concerns the separate premium endpoint, not the public endpoint analyzed here.",
+    "The supplied OAuth metadata has no successful metadata document: the endpoint POST returned HTTP 400 Invalid Content-Type header, and the protected-resource, authorization-server, and OpenID documents returned HTTP 404 Not Found. This is consistent with the public endpoint being documented as anonymous, but it provides no OAuth scopes or provider details."
+  ],
+  "observations_for_research": [
+    "The vendor separates anonymous research access from authenticated customer-specific tools by endpoint, while documenting public search as also available on the premium endpoint.",
+    "The public endpoint has one documented write action; the vendor describes a request-and-email step followed by user verification and review before profile creation.",
+    "The vendor combines free interactive use with request quotas and credit-metered AI or batch operations; rate-limit refusals are described as structured tool results."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/INDEX.txt, the full local page copies, script-extracted page text, available repository links, and code/GITHUB_COMMITS.txt. No official public repository or package was found; the GitHub link in the endpoint root returned 404 and the plausible repository is flagged in links_check.txt, so neither was used as evidence. No MCP tool schemas or initialize instructions were reproduced in the current official reference. Third-party pages include older snapshots and a separate Azure endpoint; those distinctions are recorded above. Unofficial servers were not listed in links.json.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 8.9
+  }
+}

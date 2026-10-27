@@ -1,0 +1,773 @@
+{
+  "server": "quartr",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.quartr.com/mcp",
+    "documentation_url_csv": "https://quartr.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://mcp.quartr.com/docs",
+      "https://quartr.com/docs/mcp",
+      "https://quartr.com/mcp?source=banner",
+      "https://quartr.com/pricing",
+      "https://claude.com/connectors/quartr",
+      "https://manufact.com/mcp-catalog/quartr",
+      "https://mcp.so/servers/quartr",
+      "https://tedix.dev/apps/quartr/"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official Quartr MCP repository or package was found in the collected sources. The community repository listed in links.json is unofficial and was not used as evidence.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://quartr.com/docs/mcp is the product documentation page. https://quartr.com/docs exposes a separate documentation-site MCP with documentation search and feedback tools; it is not the product server analyzed here."
+    ],
+    "sources": [
+      "https://mcp.quartr.com/docs",
+      "https://quartr.com/docs/mcp",
+      "https://quartr.com/mcp?source=banner"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "MCP access is included with a Quartr Pro subscription. Student plans are ineligible. The vendor does not publish a price on the pricing page; it directs customers to sales.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Quartr Pro pricing is described as scalable for multi-seat deals; prices are not published. Enterprise deal options are available.",
+    "pricing_model_details": "No separate MCP per-call charge is documented. The endpoint documents user-level request limits per tool and across all tools.",
+    "other_access_restrictions": "A valid Quartr account and OAuth authorization are required. Read-only authorization exposes only read-only tools. Documentation describes two combined limits: 100 requests/minute, 2,250/hour, and 8,500/day. Per-tool limits shown in the tool reference range from 20 to 100 requests/minute.",
+    "restrictions_controlled_by": "Vendor controls subscription eligibility, endpoint authorization, and rate limits. The user chooses read-only access at consent or requests the mcp:read scope. Microsoft 365 access is also controlled by the Microsoft 365 admin.",
+    "sources": [
+      "https://mcp.quartr.com/docs",
+      "https://quartr.com/pricing",
+      "https://quartr.com/mcp?source=banner"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference lists 47 tools spanning user information, companies, events, conferences, documents, summaries, financials, reference data, watchlists, keywords, saved items, workspaces, and search filters. The reference labels tools Read-only, Write, or Destructive and gives per-tool request limits.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The product reference does not document MCP resources. A separate docs-site MCP mentions resources, but it is a different server and is not evidence for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs",
+        "https://quartr.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No product-server prompts are documented in the collected official product reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The product documentation reviewed does not describe MCP call logging, user-visible audit records, or telemetry settings.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs",
+        "https://quartr.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability is documented for the product server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is documented for the product server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Endpoint POST evidence: HTTP 401, WWW-Authenticate Bearer realm=\"mcp\", resource_metadata=\"https://mcp.quartr.com/.well-known/oauth-protected-resource/mcp\", scope=\"mcp:tools\". Protected-resource metadata at both the origin and endpoint path reports resource_name \"Quartr MCP Server\", bearer_methods_supported [\"header\"], scopes_supported [\"mcp:tools\",\"mcp:read\"], and authorization_servers [\"https://mcp.quartr.com\"]. Authorization-server metadata reports authorization_endpoint /oauth/authorize, token_endpoint /oauth/token, registration_endpoint /oauth/register, revocation_endpoint /oauth/revoke, response_types_supported [\"code\"], grant_types_supported [\"authorization_code\",\"refresh_token\"], token_endpoint_auth_methods_supported [\"none\"], code_challenge_methods_supported [\"S256\"], scopes_supported [\"mcp:tools\",\"mcp:read\"], resource_indicators_supported true, and revocation_endpoint_auth_methods_supported [\"none\"]. The product docs state OAuth 2.0 with PKCE, support client ID metadata documents or dynamic client registration, and say tokens are refreshed automatically. They state tokens are scoped to mcp:tools by default and users can request mcp:read for read-only access. The authorization-server path-suffix metadata and token lifetime were not provided.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated endpoint returned HTTP 401 and {\"error\":\"Unauthorized\"}. Product documentation describes 429 responses with Retry-After for combined-limit breaches and tool error results containing error: \"rate_limited\" and retryAfterSeconds for per-tool breaches.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; client ID metadata documents; OAuth 2.0 authorization code and refresh token grants; PKCE S256; token endpoint auth method none; Bearer token in header; scopes_supported: mcp:tools, mcp:read; revocation endpoint /oauth/revoke, revocation auth method none. Token lifetime not stated. Raw endpoint challenge: Bearer realm=\"mcp\", resource_metadata=\"https://mcp.quartr.com/.well-known/oauth-protected-resource/mcp\", scope=\"mcp:tools\".",
+      "authorization_server": "https://mcp.quartr.com",
+      "sources": [
+        "https://mcp.quartr.com/mcp",
+        "https://mcp.quartr.com/.well-known/oauth-protected-resource",
+        "https://mcp.quartr.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.quartr.com/.well-known/oauth-authorization-server",
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe read-only selection on the OAuth consent screen; no MCP Elicitation capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint uses Streamable HTTP. The docs say it is stateless, requires no session ID, and uses JSON responses. Read-only access is available through the consent screen or mcp:read scope; the endpoint then exposes only tools marked Read-only.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Rate-limit errors are documented. A general MCP error-reporting capability is not described.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "429 with Retry-After for combined limits; per-tool error result with error: \"rate_limited\" and retryAfterSeconds. Other error formats are not documented.",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server documentation requires an eligible Quartr Pro subscription, but does not describe MCP subscription notifications or a subscription capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress notifications or progress-tracking capability are documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation capability or behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No initialize instructions for the product endpoint were found in the public product documentation. Tool descriptions include task guidance, including a preference for standardized financial figures on numeric questions and a preferred append mode for workspace edits.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.quartr.com/docs"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Tools are explicitly labeled Read-only, Write, or Destructive in the official reference; no individual readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations are documented. 2. No confirmation parameter or approval workflow is documented for writes. Read-only consent is a scope-level access restriction, not confirmation for individual actions. 3. OAuth scopes are mcp:tools and mcp:read; docs say read-only access exposes only tools marked Read-only. No product-role inheritance, admin switches for the hosted endpoint, client allowlist, or token lifetime is documented. Token revocation is documented at /oauth/revoke; metadata says revocation auth method none. 4. Read-only mode is documented. No toolset URL/header filters, sandbox endpoint, or regional product endpoint found. 5. No MCP-specific PII masking or data-boundary behavior documented. 6. Per-tool limits are shown in the tool reference; combined limits are 100/minute, 2,250/hour, 8,500/day per user. Some tools paginate or cap results; examples include list_events max 200, search results up to 100, and write_workspace max 200 top-level blocks. read_document returns chunks; long transcript reads support timestamp windows. 7. The tool reference describes parameter requirements, enums, ranges, and some validation constraints. No general unknown-argument rejection or argument correction is documented. 8. MCP audit logging and telemetry are not documented. 9. No feedback, rating, survey, report, or upsell tool appears in the official product tool list. 10. No server-delivered skill tool is documented. Tool descriptions contain behavioral guidance but the public server code is unavailable to establish enforcement. 11. Persistence is evident for user-owned watchlists, keyword alerts, saved items, folders, workspaces, and search filters; no evidence that prior agent behavior changes outputs or available tools. Workspace edits are live to connected users and prior state snapshots are documented. 12. The product endpoint is documented as one stateless Streamable HTTP endpoint. 13. The official tool list contains no raw API, SQL, or arbitrary script escape-hatch tool.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Prefer this over transcript or summary tools for any numeric or financial-figure question",
+      "so confirm the period in the report before treating it as a single quarter.",
+      "Use this to answer who presented at or what happened at a named conference.",
+      "Prefer `append` unless the user asked for a full rewrite."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The documented product endpoint is a single stateless Streamable HTTP server. A separate documentation-site MCP exists, but it is not part of this endpoint.",
+    "sources": [
+      "https://mcp.quartr.com/docs",
+      "https://quartr.com/docs/mcp",
+      "https://mcp.quartr.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "48",
+    "action_count_comment": "The official tool reference at https://mcp.quartr.com/docs names 47 tools; the page has no stated total. actions.json contains all 47 official names. One additional catalogue-only name, read_live_transcript, appears in the Claude connector directory listing of 38 tools and is not in the current official list; it is therefore marked third-party with default status unknown. The Claude listing says 38 tools; Manufact reports 38; Agent Discoverability reports 47; MCP.so says its tool list is unavailable; Tedix lists tool names but no total. These catalogue counts/listings differ from the 47 names in the official reference.",
+    "actions": [
+      {
+        "tool_name": "get_current_user",
+        "description": "Get the signed-in user's name, email, and subscription.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_companies",
+        "description": "Search companies by name or financial identifiers.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required); page: integer (optional); perPage: integer (optional)",
+        "parameter_count": "3",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_company",
+        "description": "Get a company's full profile.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "companyId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_companies",
+        "description": "List companies with optional filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "gics: string[] (optional); countries: string[] (optional); status: enum[] (optional, 3); marketCaps: enum[] (optional, 6); page: integer (optional); perPage: integer (optional)",
+        "parameter_count": "6",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_related_companies",
+        "description": "Find up to 25 peers and competitors for a company.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "companyId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_events",
+        "description": "List events for a company or watchlist.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "companyId: number (optional); watchlistId: number (optional); eventTypes: enum[] (optional, 45); limit: number (optional); startDate: string (optional); endDate: string (optional); order: enum (optional, 2); after: string (optional); expand: enum[]|null (required, 4)",
+        "parameter_count": "9",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_event",
+        "description": "Get details for a specific event.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "eventId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_event_types",
+        "description": "List all event types.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_conferences",
+        "description": "List investor and industry conferences.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "startDate: string|null (optional); endDate: string|null (optional); organizerCompanyId: number|null (optional); query: string|null (optional); limit: number|null (optional); after: string|null (optional)",
+        "parameter_count": "6",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_conference",
+        "description": "Get a conference and its events.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "conferenceId: number (required); limit: number (optional); after: string (optional)",
+        "parameter_count": "3",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_documents",
+        "description": "List documents for a company.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "companyId: number (required); documentTypes: enum[] (optional, 17); startDate: string (optional); endDate: string (optional); limit: number (optional); after: string (optional)",
+        "parameter_count": "6",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_document",
+        "description": "Read a slide deck or report in page chunks.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "documentId: number (required); startPage: number (optional); maxPages: number (optional)",
+        "parameter_count": "3",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_transcript",
+        "description": "Read full or filtered event transcript paragraphs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "eventId: number (optional); documentId: number (optional); section: enum|null (optional, 2); fromTimestamp: number|null (optional); query: string (optional)",
+        "parameter_count": "5",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_documents",
+        "description": "Search transcripts, slides, and reports by text.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required); documentTypes: enum[] (required, 3); limit: number (optional); startDate: string (optional); endDate: string (optional); filingTypes: enum[] (optional, 8); filter: string (optional)",
+        "parameter_count": "7",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_document_summary",
+        "description": "Get a Quartr summary of a document.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "documentId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_event_summary",
+        "description": "Get a Quartr summary of an event and attached documents.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "eventId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_financials",
+        "description": "Get standardized reported financial figures for a company.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "companyId: number (required); startDate: string (optional); endDate: string (optional); periodType: enum (optional, 4); financialType: enum (optional, 3); metrics: enum[] (optional, 117); includeNullValues: boolean (optional); includeReferenceUrls: boolean (optional)",
+        "parameter_count": "8",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_gics",
+        "description": "List the GICS classification hierarchy.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_watchlists",
+        "description": "List the user's watchlists.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_watchlist",
+        "description": "Get a watchlist and its companies.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "watchlistId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_watchlist",
+        "description": "Create a watchlist, optionally with companies.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); companyIds: number[] (optional)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "rename_watchlist",
+        "description": "Rename a watchlist.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "watchlistId: number (required); name: string (required)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_watchlist",
+        "description": "Delete a watchlist.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "watchlistId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_to_watchlist",
+        "description": "Add companies to a watchlist or followed list.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "watchlistId: number (required); companyIds: number[] (required)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_from_watchlist",
+        "description": "Remove companies from a watchlist or followed list.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "watchlistId: number (required); companyIds: number[] (required)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_keywords",
+        "description": "List the user's keyword alerts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_keyword",
+        "description": "Create a scoped keyword alert.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); companySetting: enum (required, 5); watchlistIds: number[] (optional); companyIds: number[] (optional); eventTypeIds: number[] (optional); documentTypes: enum[] (optional, 3); countries: string[] (optional); gics: string[] (optional); marketCapCategories: enum[] (optional, 6)",
+        "parameter_count": "9",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_keyword",
+        "description": "Update a keyword alert and its scope.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "keywordId: number (required); name: string (required); companySetting: enum (required, 5); watchlistIds: number[] (optional); companyIds: number[] (optional); eventTypeIds: number[] (optional); documentTypes: enum[] (optional, 3); countries: string[] (optional); gics: string[] (optional); marketCapCategories: enum[] (optional, 6)",
+        "parameter_count": "10",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_keyword",
+        "description": "Delete a keyword alert.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "keywordId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_saved_items",
+        "description": "List saved items, with folder and visibility filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "folderId: number|null (optional); type: enum|null (optional, 3); visibility: enum|null (optional, 2); companyIds: number[]|null (optional); eventTypeIds: number[]|null (optional); limit: number|null (optional); after: string|null (optional)",
+        "parameter_count": "7",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_item",
+        "description": "Save a transcript paragraph or document page.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "item: object (required; transcript or slide/report variant); folderId: number|null (optional)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_saved_item",
+        "description": "Remove one of the user's saved items.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "savedItemId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move_saved_items",
+        "description": "Move saved items into or out of a folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "savedItemIds: number[] (required); targetFolderId: number|null (required)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_folders",
+        "description": "List folders in the user's saved items.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_folder",
+        "description": "Create a folder in saved items.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); visibility: enum (optional, 2)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "rename_folder",
+        "description": "Rename a saved items folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "folderId: number (required); name: string (required)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_folder",
+        "description": "Delete a saved items folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "folderId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_workspaces",
+        "description": "List the user's workspaces.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (optional); visibility: enum (optional, 2)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_workspace",
+        "description": "Read a workspace's properties and content.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "workspaceId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "write_workspace",
+        "description": "Append to or overwrite a workspace document body.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "workspaceId: number (required); mode: enum (required, 2); markdown: string (required)",
+        "parameter_count": "3",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_workspace",
+        "description": "Create a workspace.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); visibility: enum (optional, 2)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_workspace",
+        "description": "Delete a workspace.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "workspaceId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tag_company_to_workspace",
+        "description": "Tag a company to a workspace.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "workspaceId: number (required); companyId: number (required)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "untag_company_from_workspace",
+        "description": "Remove a company tag from a workspace.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "workspaceId: number (required); tagId: number (required)",
+        "parameter_count": "2",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_search_filters",
+        "description": "List the user's saved search filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_search_filter",
+        "description": "Create a saved search filter.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); gics: string[] (optional); countries: string[] (optional); eventTypes: string[] (optional); companyIds: number[] (optional); marketCapCategories: enum[] (optional, 6)",
+        "parameter_count": "6",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_search_filter",
+        "description": "Delete a saved search filter.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "filterId: number (required)",
+        "parameter_count": "1",
+        "source": "https://mcp.quartr.com/docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_live_transcript",
+        "description": "Read a live event transcript (catalogue-reported; not in current official list).",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/quartr",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim initialize and complete tool-definition payload was found for this endpoint; the documentation list is not a serialized tools/list response.",
+    "human_can_agent_cannot": "The product pages advertise AI chat, live earnings-call audio, consensus estimates, event calendars, transcript highlighting, slide history comparison, and export of custom datasets. These product capabilities were not found among the 47 MCP tools in the official reference. Sources: https://quartr.com/mcp?source=banner and https://quartr.com/pricing.",
+    "sources": [
+      "https://mcp.quartr.com/docs",
+      "https://claude.com/connectors/quartr",
+      "https://manufact.com/mcp-catalog/quartr",
+      "https://agentdiscoverability.com/track/chatgpt/quartr",
+      "https://mcp.so/servers/quartr",
+      "https://tedix.dev/apps/quartr/",
+      "https://quartr.com/mcp?source=banner",
+      "https://quartr.com/pricing"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool descriptions provide guidance, including “Prefer this over transcript or summary tools for any numeric or financial-figure question” and “Prefer `append` unless the user asked for a full rewrite.” These are tool-description instructions; without public implementation code, whether the server enforces them is not established.",
+    "governance_promises": "The product documentation says read-only connections expose only tools marked Read-only, so the AI cannot create, change, or delete listed research assets. Workspace edits automatically snapshot prior state for reversion in version history. The vendor states the MCP is for individual subscribers' own research workflows and directs product builders to the Public API.",
+    "promises_to_user": "The product page describes the data as first-party IR material published directly by public companies and says it contains no news feeds, broker research, or third-party content. MCP access is included with Quartr Pro.",
+    "comparison_with_server_logic": "OAuth metadata and documentation support the existence of authorization and read-only scopes. The official tool reference marks read-only and write/destructive operations, but no public implementation code was found to verify authorization filtering, workspace snapshots, or other server-side enforcement. Data provenance and product-purpose claims are documentation statements; technical verification was not available.",
+    "sources": [
+      "https://mcp.quartr.com/docs",
+      "https://quartr.com/mcp?source=banner",
+      "https://quartr.com/pricing"
+    ]
+  },
+  "contradictions": [
+    "The current official reference lists 47 tools, while the Claude connector directory and Manufact list 38; the Agent Discoverability catalogue reports 47. The Claude listing includes read_live_transcript, which is absent from the current official list, while the official list includes additional tools not shown by the 38-tool directory listings.",
+    "The OAuth protected-resource metadata lists both mcp:tools and mcp:read. The product documentation describes mcp:tools as the default scope and mcp:read as read-only access; it does not explain whether mcp:tools is strictly read/write or whether other authorization rules apply."
+  ],
+  "observations_for_research": [
+    "The documented read-only configuration is enforced through OAuth consent or scope selection and changes which tools are exposed, rather than relying only on the client to refrain from writes.",
+    "Several tool descriptions give workflow preferences and cautions that can steer agent choices, including preferring standardized financial data for numeric questions and checking report periods for year-to-date cash-flow values."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages/INDEX.txt, official product docs and page scripts, tool reference, pricing page, and collected catalogues. The official GitHub repository list was empty; the listed community GitHub server is unofficial and was not used as evidence. No official privacy-policy page or MCP-specific retention, training, logging, token-lifetime, or complete initialize/tools/list payload was present in the collected evidence. The separate https://quartr.com/docs/mcp page describes the documentation-site MCP, not the product endpoint.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.0
+  }
+}

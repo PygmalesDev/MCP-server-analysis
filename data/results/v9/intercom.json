@@ -1,0 +1,522 @@
+{
+  "server": "intercom",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.intercom.com/mcp",
+    "documentation_url_csv": "https://developers.intercom.com/docs/guides/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/intercom/intercom-mcp-server",
+    "documentation_urls_used": [
+      "https://developers.intercom.com/docs/guides/mcp",
+      "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+      "https://www.intercom.com/pricing",
+      "https://www.intercom.com/legal/privacy",
+      "https://www.intercom.com/legal/terms-and-policies"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "The public repository contains a README describing the hosted server, but no server implementation was present in the local repository copy. It cannot establish whether that implementation matches the deployed endpoint.",
+    "mcp_protocol_version": "The documentation refers to the authenticated remote MCP specification; no protocol version is stated for the deployed service.",
+    "commit_hash": "96140be28cf8eeb2ae4a4c860ca1eddcdfb006d9",
+    "commit_date": "2025-09-22",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "NOT FOUND",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.eu.intercom.com/mcp — EU-hosted workspace endpoint; requests are processed within the EU.",
+      "https://mcp.intercom.com/sse and https://mcp.eu.intercom.com/sse — legacy SSE endpoints, documented as deprecated.",
+      "https://api.intercom.io/fin/mcp — separate Fin Agent API MCP server; distinct from the input server."
+    ],
+    "sources": [
+      "https://developers.intercom.com/docs/guides/mcp",
+      "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+      "https://github.com/intercom/intercom-mcp-server",
+      "https://github.com/intercom/intercom-mcp-server/commit/96140be28cf8eeb2ae4a4c860ca1eddcdfb006d9"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP access price or MCP-specific limit is published. Fin Operator message calls use Operator credits in the same way as turns started in Intercom; the other four Operator tools are free.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The pricing page lists Essential from $19 per seat/month billed annually (or $29 monthly), Advanced $85 per seat/month, and Expert $132 per seat/month. Fin AI Agent is listed from $0.99 per outcome. Pro, which includes Operator, is listed from $100/month.",
+    "pricing_model_details": "Fin AI Agent is priced per outcome. Operator calls through send_operator_message consume Operator credits; the Fin Operator guide describes the same usage as a turn started in Intercom. Other four Fin Operator tools are free. The pricing page notes usage-based charges for some channels.",
+    "other_access_restrictions": "US and EU hosted workspaces are supported; AU is not. Fin Operator tools require a Fin Operator workspace, OAuth connection, teammate Operator permission, and Use Fin Operator permission. The OAuth redirect URI must be allowlisted, except localhost and 127.0.0.1 callbacks, which are permitted on any port. Fin Operator calls are limited to 60 per minute per connection.",
+    "restrictions_controlled_by": "Intercom controls hosted-region availability and redirect-URI allowlisting; workspace administrators and teammate permissions determine product access; the connecting user authorizes the connection.",
+    "sources": [
+      "https://www.intercom.com/pricing",
+      "https://developers.intercom.com/docs/guides/mcp",
+      "https://developers.intercom.com/docs/guides/fin-operator-mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The main guide lists 14 tools: search, fetch, conversation and contact search/retrieval, company and article tools, and add_internal_note. Workspaces meeting Fin Operator conditions can also receive five Operator tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results include resource data, pagination metadata, and, for Operator calls, status envelopes and proposal details. Errors include authentication and permission failures; Operator errors may include error codes.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/mcp",
+        "https://developers.intercom.com/docs/guides/fin-operator-mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The endpoint returns HTTP 401 without a token. The available official guides describe tools, but do not establish whether MCP resources are exposed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://mcp.intercom.com/mcp",
+        "https://developers.intercom.com/docs/guides/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The endpoint returns HTTP 401 without a token. Official guides do not document MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://mcp.intercom.com/mcp",
+        "https://developers.intercom.com/docs/guides/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The reviewed endpoint metadata and official MCP guides do not document server-side logging or MCP audit records.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/mcp",
+        "https://developers.intercom.com/docs/guides/fin-operator-mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Not documented in the reviewed official server guides; implementation code was not available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Not documented in the reviewed official server guides; implementation code was not available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Authenticated remote MCP specification referenced by the guide",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate: Bearer realm=\"OAuth\", error=\"invalid_token\", error_description=\"Missing or invalid access token\", resource_metadata=\"https://mcp.intercom.com/.well-known/oauth-protected-resource/mcp\", scope=\"mcp operator\". The supplied protected-resource documents report resource values https://mcp.intercom.com and https://mcp.intercom.com/mcp, authorization server https://mcp.intercom.com, scopes_supported [\"mcp\", \"operator\"], and bearer_methods_supported [\"header\"]. Authorization-server metadata reports issuer https://mcp.intercom.com, authorization endpoint /authorize, token endpoint /token, registration endpoint /register, scopes_supported [\"mcp\", \"operator\"], response_types_supported [\"code\"], response_modes_supported [\"query\"], grant_types_supported [\"authorization_code\", \"refresh_token\"], token_endpoint_auth_methods_supported [\"client_secret_basic\", \"client_secret_post\", \"none\"], revocation_endpoint /token, and code_challenge_methods_supported [\"S256\"]. The guide documents OAuth and bearer-token authentication, dynamic client registration, redirect URI allowlisting, and localhost exceptions. Token lifetime is not stated. The guide says product permissions are checked for tool use.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Authentication failure at the supplied endpoint returns HTTP 401 with a JSON invalid_token error and the WWW-Authenticate metadata described above.",
+      "authorization_mechanism": "Metadata Doc / Dynamic Client Registration / bearer token: OAuth authorization_code and refresh_token grants; PKCE S256; token endpoint authentication methods client_secret_basic, client_secret_post, none; scopes_supported: mcp, operator; bearer method header. DCR endpoint https://mcp.intercom.com/register. Revocation endpoint https://mcp.intercom.com/token. Guide documents OAuth consent and direct bearer-token authentication. Token lifetime not found.",
+      "authorization_server": "https://mcp.intercom.com",
+      "sources": [
+        "https://mcp.intercom.com/mcp",
+        "https://mcp.intercom.com/.well-known/oauth-protected-resource",
+        "https://mcp.intercom.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.intercom.com/.well-known/oauth-authorization-server",
+        "https://mcp.intercom.com/.well-known/oauth-authorization-server/mcp",
+        "https://developers.intercom.com/docs/guides/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The Fin Operator workflow can return clarifying questions and requires the client to ask the user and submit answers. The documentation does not identify this as MCP Elicitation; it is an Operator tool interaction.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Operator responses may include needs_input and clarifying_questions with indexed questions, options, and multi_select fields.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/fin-operator-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Fin Operator work runs asynchronously and is retrieved using get_operator_response. The documentation describes this as an Operator workflow, not MCP Tasks.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The Operator status envelope reports working, complete, needs_input, needs_approval_in_ui, or error.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/fin-operator-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "The server documents US and EU endpoint selection, OAuth or bearer-token setup, and conditional Fin Operator tool availability. No general toolset filter or read-only URL/header mode is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool availability varies by workspace, authentication method, and permissions.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/mcp",
+        "https://developers.intercom.com/docs/guides/fin-operator-mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Guides describe invalid-query validation, authentication and permission errors, rate-limit responses, and Operator error codes. No separate MCP error-reporting or feedback tool is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Errors may be returned with explanatory text; Operator errors can begin with codes such as rate_limited, chat_busy, usage_limit, invalid_answers, or no_pending_question.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/mcp",
+        "https://developers.intercom.com/docs/guides/fin-operator-mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "No MCP subscription capability is documented in the reviewed official guides.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Fin Operator exposes asynchronous progress through get_operator_response status values and polling guidance. The guide does not establish MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Operator statuses communicate whether a turn is working, complete, awaiting input/approval, or errored.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/fin-operator-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "No cancellation mechanism for MCP calls or Operator turns is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/fin-operator-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Intercom documents regional hosted endpoints and a deprecated SSE transport alongside the recommended Streamable HTTP endpoint. The endpoint's OAuth metadata also exposes dynamic registration and PKCE.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.intercom.com/docs/guides/mcp",
+        "https://mcp.intercom.com/.well-known/oauth-authorization-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official guide lists read tools, article creation/update, and add_internal_note. Fin Operator tools include proposal application and rejection. Only the Fin Operator guide publishes annotations; it explicitly says annotations are hints, not enforcement. The core 14 tools' annotations are not documented.\n2. The Fin Operator workflow recommends reviewing proposals and human confirmation before apply; apply_proposals itself accepts proposals and has no documented confirm parameter. The guide says some changes cannot be undone. No server-enforced confirmation flag is documented. Operator may separately wait for teammate input/confirmation in Intercom.\n3. OAuth metadata supports scopes mcp and operator; docs describe product permissions for conversations, contacts/companies, articles, and Use Fin Operator. Operator permissions inherit teammate access. Fin Operator requires OAuth and is unavailable with bearer tokens. Redirect URIs are allowlisted; localhost/127.0.0.1 callbacks are allowed on any port. Token lifetime was not found.\n4. US and EU endpoints are documented; AU workspaces are unsupported. Legacy SSE is deprecated. No read-only mode, toolsets filter, or query-free mode is documented. Fin Operator tools are conditional on workspace, OAuth, and permission.\n5. No general PII masking or field-exclusion mechanism is documented. add_internal_note is teammate-only and cannot send customer-visible replies; note authorship is fixed to the authorizing admin. EU endpoint processing is documented as within the EU.\n6. Search/list pagination is documented, commonly up to 150 results per page; list_companies caps per_page at 60; list_articles allows 1–150. Fin proposal detail responses are about 1 MB and describe at most 50 proposals at a time; apply_proposals allows 5 proposals per call and reject_proposals 20 IDs. Fin Operator calls are limited to 60 per minute per connection. No general MCP rate limit is stated. Operator message calls consume Operator credits.\n7. Search validates fields and operators and returns errors for invalid queries. add_internal_note normalizes supported conversation ID forms. Docs state required parameters and some constraints; implementation-level unknown-argument handling and coercion are not documented.\n8. Server logging, audit trails, and MCP telemetry are not described in the reviewed guides.\n9. No feedback, rating, survey, or report-to-vendor tool appears in the official lists. No MCP upsell response or marketing elicitation is documented. Fin Operator uses credits; pricing separately lists Fin outcomes and Pro.\n10. Server-side instructions or skills are not published in the reviewed guides. Behavioral recommendations include checking proposal changes and not re-sending a possibly accepted Operator message. The server's enforcement of these recommendations is not documented.\n11. Operator chats retain current turn state and proposals for later retrieval via chat_id. No effect of prior independent agent behavior on future tool availability is documented.\n12. The main endpoint has a flat documented list with five conditional Fin Operator tools. The Fin Operator tools invoke Intercom's separate Operator agent within the workspace; a separate Fin Agent API MCP endpoint is also documented as another server.\n13. No raw API request, arbitrary SQL, script execution, or equivalent universal escape-hatch tool is documented.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] “Once a turn has been accepted, never re-send the same message to retry.”",
+      "[DOCS] “Never starts new work and never waits — it returns the chat's current state immediately.”",
+      "[DOCS] “Review each one with get_proposal_details before you apply it — some changes cannot be undone.”",
+      "[DOCS] “Set it only when a human explicitly chose a mode, and only to a mode listed in that proposal's supported_apply_modes.”",
+      "[DOCS] “Quote numbers and data from tool_outputs verbatim rather than re-deriving them.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The documented tool set varies by workspace and authentication/permission conditions, and includes tools that delegate work to Fin Operator, a vendor agent operating inside Intercom. Intercom also documents separate regional endpoints and a separate Fin Agent API MCP endpoint.",
+    "sources": [
+      "https://developers.intercom.com/docs/guides/mcp",
+      "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+      "https://mcp.intercom.com/.well-known/oauth-protected-resource/mcp",
+      "https://mcp.intercom.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "14 core tools; up to 19 when Fin Operator conditions are met",
+    "action_count_comment": "Official main tool list: https://developers.intercom.com/docs/guides/mcp states 14 tools. The separate official Fin Operator guide names 5 additional conditional tools; the main guide says workspaces with Fin Operator also get these tools. No catalogue-only tools were added. MartechDB reports 14 tools from Intercom documentation; Claude's connector directory lists 6 tools; mcptest.io had not observed tools because sign-in is required. Composio pages describe proxy/toolkit offerings and were not treated as the native endpoint list.",
+    "actions": [
+      {
+        "tool_name": "search",
+        "description": "Search conversations or contacts using a query DSL.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch",
+        "description": "Retrieve full details for a resource returned by search.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_conversations",
+        "description": "Search conversations by IDs and conversation filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "ids: array (optional); source_type: string (optional); source_author_name: string (optional); source_author_email: string (optional); state: enum (optional; 3 categories); team_assignee_id: string (optional); admin_assignee_id: number (optional); statistics_time_to_assignment, statistics_time_to_admin_reply, statistics_time_to_first_close: filters with comparison operators (optional); starting_after: string (optional); limit: number (optional)",
+        "parameter_count": "12 (statistics filters counted separately)",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_conversation",
+        "description": "Retrieve a conversation and its parts and metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_contacts",
+        "description": "Search contacts by identifiers, attributes, or email domain.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_contact",
+        "description": "Retrieve contact details, attributes, location, and activity timestamps.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_companies",
+        "description": "List companies with optional filters and pagination.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (optional); company_id: string (optional); tag_id: string (optional); segment_id: string (optional); per_page: number (optional); page: number (optional)",
+        "parameter_count": "6",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_company",
+        "description": "Retrieve company details, attributes, segments, and tags.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_articles",
+        "description": "List Help Center articles with page-based pagination.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: number (optional); per_page: number (optional)",
+        "parameter_count": "2",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_articles",
+        "description": "Search Help Center articles by phrase, state, or Help Center.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "phrase: string (optional); state: enum (optional; published or draft); help_center_id: number (optional); highlight: boolean (optional); at least one search parameter required",
+        "parameter_count": "4",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_article",
+        "description": "Retrieve complete article content and metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_article",
+        "description": "Create a Help Center article, draft by default.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "title: string (required); author_id: number (required); description: string (optional); body: string (optional); state: enum (optional; published or draft); parent_id: number (optional); parent_type: enum (optional; collection or section)",
+        "parameter_count": "7",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_article",
+        "description": "Update an existing Help Center article.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: number (required); title, author_id, description, body, state, parent_id, parent_type (optional; types and enums as create_article); at least one update field required",
+        "parameter_count": "8",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_internal_note",
+        "description": "Add a teammate-only note to a conversation; may reopen a snoozed conversation.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "conversation_id: string or number (required); body: string (required)",
+        "parameter_count": "2",
+        "source": "https://developers.intercom.com/docs/guides/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_operator_message",
+        "description": "Send a request or answers to Fin Operator; returns asynchronously.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (conditional: Fin Operator workspace, OAuth, permission)",
+        "parameters": "message: string (optional); answers: object (optional); chat_id: string (optional); send message or answers, not both; answers requires chat_id",
+        "parameter_count": "3",
+        "source": "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_operator_response",
+        "description": "Read the latest state and answer from an Operator chat.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conditional: Fin Operator workspace, OAuth, permission)",
+        "parameters": "chat_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_proposal_details",
+        "description": "Show pending proposal changes and blocking details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (conditional: Fin Operator workspace, OAuth, permission)",
+        "parameters": "chat_id: string (required); proposal_ids: array (optional)",
+        "parameter_count": "2",
+        "source": "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "apply_proposals",
+        "description": "Apply reviewed proposals to live workspace configuration.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (conditional: Fin Operator workspace, OAuth, permission)",
+        "parameters": "chat_id: string (required); proposals: array (required, up to 5; proposal_id: string required; apply_mode: enum optional, 5 categories)",
+        "parameter_count": "2 top-level",
+        "source": "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reject_proposals",
+        "description": "Discard pending proposals without changing workspace configuration.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (conditional: Fin Operator workspace, OAuth, permission)",
+        "parameters": "chat_id: string (required); proposal_ids: array (required, up to 20)",
+        "parameter_count": "2",
+        "source": "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No deployed server implementation or verbatim initialize/tool definitions were available. Official guides document tool descriptions and partial parameters, not the complete serialized tool definitions and initialize instructions required for the specified character-count method.",
+    "human_can_agent_cannot": "The main MCP guide documents tools for searching and retrieving conversations/contacts, company and Help Center article operations, and internal notes; it does not document customer-visible conversation replies, ticket operations, or general workspace administration. Fin Operator proposals can include broader configuration changes, but only through the separate Operator workflow. Intercom's REST API documents a broader API surface; this study did not treat REST-only operations as MCP tools. Sources: https://developers.intercom.com/docs/guides/mcp ; https://developers.intercom.com/docs/guides/fin-operator-mcp ; https://developers.intercom.com/docs/references/rest-api",
+    "sources": [
+      "https://developers.intercom.com/docs/guides/mcp",
+      "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+      "https://martechdb.com/vendors/intercom",
+      "https://claude.com/connectors/intercom",
+      "https://mcptest.io/servers/intercom/",
+      "https://composio.dev/toolkits/intercom",
+      "https://composio.dev/toolkits/intercom_mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The guide recommends reviewing proposal details before applying and requires a human to choose apply_mode when overriding a proposal's default. It states: “Review each one with get_proposal_details before you apply it — some changes cannot be undone.” The guide describes tool annotations as client hints and explicitly says authorization decides whether calls are allowed. The main guide advises checking the OAuth redirect address and cancelling if the app or destination is not recognized.",
+    "governance_promises": "Intercom states that authentication verifies user permissions and that access is authenticated and authorized. The EU endpoint is stated to process requests within the EU in line with Regional Data Hosting commitments. The guide says internal notes are visible to teammates only and cannot send customer-visible replies. The reviewed pages do not specify MCP-specific retention, AI training, audit logging, or field masking terms.",
+    "promises_to_user": "The main guide presents MCP as a standardized, secure way for AI clients to access Intercom data. The Fin Operator guide says proposals can be reviewed and applied from the client and that the read-only proposal-details tool costs no Operator credits.",
+    "comparison_with_server_logic": "Authentication and product permission checks are documented as access controls. Proposal application is a separate tool from proposal review, but the human-review guidance is described as workflow advice rather than an enforced confirmation parameter. Tool annotations are explicitly hints. The EU processing statement is a regional hosting promise; no corresponding MCP-specific retention, masking, or audit mechanism is documented.",
+    "sources": [
+      "https://developers.intercom.com/docs/guides/mcp",
+      "https://developers.intercom.com/docs/guides/fin-operator-mcp",
+      "https://www.intercom.com/legal/privacy",
+      "https://www.intercom.com/legal/terms-and-policies"
+    ]
+  },
+  "contradictions": [
+    "The public repository README describes an older six-tool server and US-only support; the current official hosted MCP guide describes 14 core tools plus five conditional Fin Operator tools and supports US and EU. The repository copy does not contain implementation code, so the difference may reflect documentation age rather than deployed-code behavior.",
+    "The Claude connector directory lists six tools, while the current official guide lists 14 core tools. The Claude listing is a third-party connector directory entry and does not include the article, company, or note tools documented by Intercom.",
+    "OAuth metadata advertises scopes_supported [\"mcp\", \"operator\"], while the guide describes consent permissions for conversations, contacts/companies, articles, and Use Fin Operator. The metadata scopes are not a one-to-one enumeration of those product permissions.",
+    "Composio's intercom toolkit pages show platform toolkit counts (including 133 and 15), not a confirmed native tool list for the input endpoint; these counts were excluded from actions."
+  ],
+  "observations_for_research": [
+    "The Fin Operator tools are exposed conditionally by workspace capability, OAuth use, and teammate permission; bearer-token connections do not receive them.",
+    "Proposal review, application, and rejection are separate tools. The documentation differentiates tool annotation hints from permission enforcement and describes review/confirmation as a human workflow.",
+    "Fin Operator delegates work to Intercom's internal agent and returns asynchronous status, clarifying questions, and proposed changes through separate retrieval tools."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages/INDEX.txt, official guide pages and their rendered text, available page scripts/HTML references, links_check.txt, and the local repository copy. The repository contains a README only; its commit is recorded above, but it does not expose server implementation. Endpoint and OAuth metadata were supplied as pre-fetched evidence. Catalogues were checked for cross-reference; proxy/toolkit listings were not used to replace the official native tool list. Exact core tool schemas and tool annotations are not fully published in the reviewed guide. Privacy and terms pages were reviewed for relevant policy context; no MCP-specific retention or logging rule was identified.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.8
+  }
+}

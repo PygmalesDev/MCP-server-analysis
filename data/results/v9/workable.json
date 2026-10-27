@@ -1,0 +1,1282 @@
+{
+  "server": "workable",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.workable.com/mcp",
+    "documentation_url_csv": "https://workable.readme.io/reference/workable-mcp-server",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://workable.readme.io/reference/workable-mcp-server",
+      "https://help.workable.com/hc/en-us/articles/39415735712407-Using-the-Workable-MCP-server-to-connect-to-AI-assistant",
+      "https://resources.workable.com/inside-hr/how-workables-mcp-server-grew-to-94-tools-and-why-that-matters-for-recruiting-and-hr-teams/",
+      "https://resources.workable.com/workable-mcp-server",
+      "https://www.workable.com/pricing",
+      "https://www.workable.com/privacy",
+      "https://www.workable.com/terms",
+      "https://mcp.workable.com/.well-known/oauth-protected-resource",
+      "https://mcp.workable.com/.well-known/oauth-authorization-server",
+      "https://learn.microsoft.com/en-us/connectors/workablemcp/",
+      "https://claude.com/connectors/workable"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official public repository or package was found in the prepared repository list or official documentation. The endpoint is a hosted Workable server; its implementation could not be compared with public code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (no public repository found)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "Production-ready integration according to Workable; no separate MCP release-status label found.",
+    "other_official_servers": [],
+    "sources": [
+      "https://workable.readme.io/reference/workable-mcp-server",
+      "https://resources.workable.com/inside-hr/how-workables-mcp-server-grew-to-94-tools-and-why-that-matters-for-recruiting-and-hr-teams/",
+      "https://resources.workable.com/backstage-at-workable/workable-agent-and-workable-mcp-server-a-complete-support-guide/"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Workable says MCP is available to customers on all plans at no added cost. Advanced Candidate Search and Advanced Employee Search require Premier+ or Enterprise. A Workable account and authorized user are required.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The pricing page lists Standard at $299/month or $3,588/year, Premier at $599/month or $7,188/year, and Enterprise at $719/month or $8,628/year for the displayed 1–20 employee band. Pricing varies by company size and billing option.",
+    "pricing_model_details": "MCP itself has no additional charge according to Workable. Plan and product availability still apply; advanced candidate and employee searches are limited to Premier+ and Enterprise. The pricing page also lists optional add-ons and AI credit packages, but does not state that MCP calls consume credits.",
+    "other_access_restrictions": "OAuth sign-in is required. Calls use the signed-in user's Workable permissions and require an account subdomain on every tool except get_accounts. Relevant Workable products must be enabled; advanced searches are plan-restricted. Workable's MCP OAuth uses a pre-approved redirect-URI list. Calls are subject to Workable API rate limits.",
+    "restrictions_controlled_by": "Workable controls OAuth and plan/product availability; the Workable account administrator controls user roles and permissions; the authenticated user selects the account subdomain.",
+    "sources": [
+      "https://resources.workable.com/inside-hr/how-workables-mcp-server-grew-to-94-tools-and-why-that-matters-for-recruiting-and-hr-teams/",
+      "https://www.workable.com/pricing",
+      "https://workable.readme.io/reference/workable-mcp-server",
+      "https://help.workable.com/hc/en-us/articles/39415735712407-Using-the-Workable-MCP-server-to-connect-to-AI-assistant",
+      "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference lists 94 tools covering recruiting, HR, account administration, time tracking and performance reviews. Workable documents Streamable HTTP, stateless JSON mode, without SSE or streaming. Read-only and write/destructive annotations are reported by Microsoft’s connector documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reference describes tool outputs in prose but does not reproduce complete tools/list schemas or a standard result envelope. Microsoft documents tool errors for unauthorized, forbidden, not found, conflict, unprocessable and rate-limited responses.",
+      "authorization_mechanism": "OAuth 2.0 authorization code and refresh token grants; dynamic client registration; PKCE S256. Endpoint WWW-Authenticate advertises scope=\"r_candidates w_candidates r_jobs w_jobs r_offers w_offers r_requisitions w_requisitions w_comments r_account w_departments w_members r_employees w_employees r_timeoff w_timeoff r_time_tracking w_time_tracking r_reviews w_reviews r_reports r_surveys w_surveys\". Protected-resource and authorization-server documents list scopes_supported: r_candidates, w_candidates, r_jobs, w_jobs, r_offers, w_offers, r_requisitions, w_requisitions, w_comments, r_account, w_departments, w_members, r_employees, w_employees, r_timeoff, w_timeoff, r_time_tracking, w_time_tracking, r_reviews, w_reviews, r_reports, r_surveys, w_surveys. Authorization endpoint https://workable.com/oauth/authorize; token endpoint https://workable.com/oauth/token; registration endpoint https://mcp.workable.com/oauth/register. Token lifetime, token authentication methods and revocation endpoint were not published in the supplied metadata. The help article says users can revoke authorization in Workable Settings > Integrations.",
+      "authorization_server": "https://mcp.workable.com",
+      "sources": [
+        "https://workable.readme.io/reference/workable-mcp-server",
+        "https://mcp.workable.com/.well-known/oauth-protected-resource",
+        "https://mcp.workable.com/.well-known/oauth-authorization-server",
+        "https://help.workable.com/hc/en-us/articles/39415735712407-Using-the-Workable-MCP-server-to-connect-to-AI-assistant",
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Workable's connector documentation says the server exposes tools only and does not publish MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "No resource output structure documented.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Workable's connector documentation says the server exposes tools only and does not publish MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "No prompt output structure documented.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The MCP-specific sources do not describe server-side request logging, telemetry, audit retention or opt-out. The tools can retrieve existing candidate and job activity logs from Workable.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Activity tools return Workable activity-log data; MCP request logging format is not documented.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://workable.readme.io/reference/workable-mcp-server",
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The connector documentation says the server does not use sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT APPLICABLE",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No documentation found about MCP roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://workable.readme.io/reference/workable-mcp-server",
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The input endpoint returned HTTP 401 with a Bearer challenge and resource_metadata URL. Its protected-resource metadata identifies https://mcp.workable.com as authorization server. The supplied metadata advertises authorization_code and refresh_token grants, code_challenge_methods_supported S256, and Dynamic Client Registration. Scope list: r_candidates, w_candidates, r_jobs, w_jobs, r_offers, w_offers, r_requisitions, w_requisitions, w_comments, r_account, w_departments, w_members, r_employees, w_employees, r_timeoff, w_timeoff, r_time_tracking, w_time_tracking, r_reviews, w_reviews, r_reports, r_surveys, w_surveys. Token lifetime and revocation endpoint are not in the metadata.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Authorization errors include 401 for missing, invalid or expired token and 403 for permissions or product restrictions, according to Microsoft connector documentation.",
+      "authorization_mechanism": "OAuth metadata documents response_types_supported code; grant_types_supported authorization_code and refresh_token; code_challenge_methods_supported S256; registration_endpoint https://mcp.workable.com/oauth/register. The full advertised scopes are listed above.",
+      "authorization_server": "https://mcp.workable.com",
+      "sources": [
+        "https://mcp.workable.com/.well-known/oauth-protected-resource",
+        "https://mcp.workable.com/.well-known/oauth-authorization-server",
+        "https://mcp.workable.com/.well-known/oauth-protected-resource/mcp",
+        "https://help.workable.com/hc/en-us/articles/39415735712407-Using-the-Workable-MCP-server-to-connect-to-AI-assistant",
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The connector documentation says the server does not use MCP elicitation. User confirmation guidance appears in tool descriptions, but no server-side elicitation flow is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT APPLICABLE",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/",
+        "https://workable.readme.io/reference/workable-mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No documentation found about MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://workable.readme.io/reference/workable-mcp-server",
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Dynamic client registration supports client setup. Each tool except get_accounts requires an account argument; the client must choose an accessible account subdomain. The official tool reference describes plan- and product-dependent capabilities, but no URL toolset or read-only configuration modes were found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT APPLICABLE",
+      "authorization_mechanism": "OAuth dynamic client registration; account selection is explicit per call.",
+      "authorization_server": "https://mcp.workable.com",
+      "sources": [
+        "https://workable.readme.io/reference/workable-mcp-server",
+        "https://mcp.workable.com/.well-known/oauth-authorization-server",
+        "https://resources.workable.com/inside-hr/how-workables-mcp-server-grew-to-94-tools-and-why-that-matters-for-recruiting-and-hr-teams/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Microsoft's connector documentation lists 401, 403, 404, 409, 422 and 429 outcomes with meanings and suggested remedies. It states that permission refusals are tool errors describing the restriction.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Errors are described by HTTP-like status and message; a complete MCP error schema is not published.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted service is documented as stateless with no notifications between calls. No MCP subscription mechanism is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT APPLICABLE",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/",
+        "https://workable.readme.io/reference/workable-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Workable documents JSON mode with no SSE or streaming; the connector documentation also describes stateless calls with no pushed notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "No streaming progress structure documented.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://workable.readme.io/reference/workable-mcp-server",
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No documentation found about MCP request cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://workable.readme.io/reference/workable-mcp-server",
+        "https://learn.microsoft.com/en-us/connectors/workablemcp/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server uses Streamable HTTP, stateless JSON mode. The official reference says all tools except get_accounts require the account subdomain as an argument.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Stateless request/response calls; no SSE or streaming is documented.",
+      "authorization_mechanism": "OAuth 2.0",
+      "authorization_server": "https://mcp.workable.com",
+      "sources": [
+        "https://workable.readme.io/reference/workable-mcp-server",
+        "https://mcp.workable.com/.well-known/oauth-authorization-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official list includes read and write operations. Microsoft describes read-only and destructive annotations; no official annotation payload or complete per-tool annotation table was found. 2. No mandatory confirm=true parameter or MCP elicitation documented. Several tool descriptions advise confirmation before final review actions; this is agent guidance. 3. OAuth scopes are broad and include read/write pairs for candidates, jobs, offers, requisitions, employees, time off, time tracking, reviews and surveys. Workable says authorization inherits the signed-in user's permissions. Microsoft reports a pre-approved redirect URI list and revocation via Settings > Integrations. Token lifetime is Unknown. 4. No read-only endpoint, toolset URL filter or query-free mode found. Server is stateless; account is selected explicitly. Advanced candidate/employee searches require Premier+ and Enterprise; HR tools depend on products enabled on the account. 5. No general PII masking policy found. Employee document access is said to respect Workable access permissions; detailed review answers are scoped to the caller. Candidate files may include temporary pre-signed preview URLs. 6. Calls are subject to Workable API rate limits; Microsoft says 429 errors ask the agent to retry after a short wait. Bulk time-entry tool allows up to 500 entries; review answer pagination limit is 1–200, default 50. No general MCP result truncation or call cost found. 7. Search tools expose field schemas and valid filter options; tool docs say invalid values can lead to 422 errors. Candidate tags/skills and review forms are replacement semantics. No operator defaults overriding model arguments documented. 8. MCP request logging, telemetry and opt-out are Unknown. Existing candidate/job activity log tools are available. 9. No vendor-feedback/rating tool identified in the official 94 names/descriptions. The OAuth scopes include r_surveys and w_surveys, but no survey-named tool appears in the official list. No MCP upsell response found. 10. No initialize instructions or server-delivered skills found. Tool descriptions include behavioral guidance; separate external skills were not located in the prepared evidence. 11. Server is stateless and does not push notifications; no documented persistent agent memory. 12. One hosted MCP endpoint with a flat tool list; account subdomains are tool arguments, not subservers. 13. No raw API, arbitrary SQL, script execution or general request escape hatch identified.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Call this first — use the returned subdomain as the account parameter on every other tool",
+      "Preferred over add_review for agent workflows.",
+      "confirm with the user first",
+      "Submit is final — a second submit fails; confirm with the user before submitting"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted endpoint exposes a flat list of tools. Account selection is an argument passed to tools.",
+    "sources": [
+      "https://workable.readme.io/reference/workable-mcp-server",
+      "https://learn.microsoft.com/en-us/connectors/workablemcp/",
+      "https://mcp.workable.com/.well-known/oauth-protected-resource",
+      "https://mcp.workable.com/.well-known/oauth-authorization-server",
+      "https://help.workable.com/hc/en-us/articles/39415735712407-Using-the-Workable-MCP-server-to-connect-to-AI-assistant"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "94",
+    "action_count_comment": "The official tool reference lists 94 tools across its categories; the same total is stated in Workable's August 2026 article. actions.json contains all 94 official names. No catalogue-only tools were added: Claude's connector page exposes 24 visible names, all present in the official list, while its button states 45 tools total; the remaining names are not exposed in the captured page. Microsoft Learn describes the connector as having “just over 100 tools” and says deployment/account configuration can disable tools, so this count differs from Workable's published 94-tool list. The Microsoft page provides representative tools rather than a complete native-name list. Composio's separate Workable toolkit lists 37 proxy/API actions and was not treated as the input MCP server's tools.",
+    "actions": [
+      {
+        "tool_name": "get_accounts",
+        "description": "List all Workable accounts accessible to the authenticated user. Call this first — use the returned subdomain as the account parameter on",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_jobs",
+        "description": "List jobs filtered by state (published, draft, archived, closed)",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_jobs",
+        "description": "Find jobs by a full or partial job title and get back each match's shortcode, title, state, and id. Use this when",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job",
+        "description": "Get full details for a specific job by shortcode",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job_activities",
+        "description": "Get the activity log for a specific job",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job_application_form",
+        "description": "Get the application form questions for a job",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job_custom_attributes",
+        "description": "Get custom attributes configured for a job",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job_members",
+        "description": "Get team members assigned to a job",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job_recruiters",
+        "description": "Get external recruiters assigned to a job",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job_stages",
+        "description": "Get the pipeline stages configured for a job",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_candidates",
+        "description": "List candidates for a job with filtering by stage, email, and date",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_candidate",
+        "description": "Get full profile details for a specific candidate",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_candidate_activities",
+        "description": "Get the activity log for a candidate (stage changes, comments, etc.)",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_candidate_activity",
+        "description": "Get details for a single candidate activity",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_candidate_offer",
+        "description": "Get the offer associated with a specific candidate",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_candidate_files",
+        "description": "List files attached to a candidate's profile — timeline attachments (source: \"Comment\") and offer documents (source: \"Offer\").",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_candidate",
+        "description": "Source a new candidate and attach them to a specific job (supports resume, social profiles, education, experience, and application answers)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_talent_pool_candidate",
+        "description": "Add a candidate to the talent pool without attaching to a specific job",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "copy_candidate",
+        "description": "Copy a candidate to another job, keeping the original record in the source job (duplicates profile, education, experience, resume, form answers, and",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "relocate_candidate",
+        "description": "Move a candidate to another job, removing them from the source job — only one record remains. Accepts an optional target stage",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move_candidate",
+        "description": "Move a candidate to a different pipeline stage (supports requisition linking on hire)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "disqualify_candidate",
+        "description": "Disqualify a candidate with a reason (rejected or withdrew)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "revert_disqualification",
+        "description": "Revert a previously disqualified candidate, restoring them to active status on the job",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_candidate",
+        "description": "Update an existing candidate's profile with a partial set of fields — only the fields you provide change. Writable fields include name",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_comment",
+        "description": "Add a comment to a candidate with visibility controls",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_review",
+        "description": "Add a rating/review to a candidate (thumbs, stars, or numeric scale)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsert_candidate_rating",
+        "description": "Submit or update a candidate rating with upsert semantics — updates the existing rating for the member on the stage, otherwise creates",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_candidate_tags",
+        "description": "Replace the full set of tags on a candidate — the provided array overwrites all existing tags (pass [] to clear). To",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_offer",
+        "description": "Get details for a specific offer by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "approve_offer",
+        "description": "Approve an offer",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reject_offer",
+        "description": "Reject an offer with an optional rejection reason",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_requisitions",
+        "description": "List requisitions with filtering by state, job, and date",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_requisition",
+        "description": "Get details for a specific requisition by code",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_requisition",
+        "description": "Create a new headcount requisition with job title, owner, hiring manager, salary, and department",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_requisition",
+        "description": "Update an existing requisition (employment type, experience, location, salary, reason, notes, plan date, hiring manager, owner).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "approve_requisition",
+        "description": "Approve a requisition by code",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reject_requisition",
+        "description": "Reject a requisition with an optional rejection reason",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_members",
+        "description": "List account members, filterable by role, status, email, and job",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "invite_member",
+        "description": "Invite a new person to the account, creating a pending invitation.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_member",
+        "description": "Update an existing member's roles, permission sets, or access scope. Partial update — only the fields you provide change. Returns the full",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enable_member",
+        "description": "Re-enable (restore) a previously deactivated member, reinstating their access.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_member",
+        "description": "Remove (deactivate) a member, revoking their access — used for offboarding.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_permission_sets",
+        "description": "List the custom permission sets defined on the account.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_stages",
+        "description": "Get all available recruitment pipeline stages in the account",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_disqualification_reasons",
+        "description": "Get all configured disqualification reasons (required before disqualifying a candidate)",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_account_custom_attributes",
+        "description": "Get all custom attributes configured at the account level",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employees",
+        "description": "List employees with search, status filtering, and ordering by department or division",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employee",
+        "description": "Get full details for a specific employee",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employee_documents",
+        "description": "List documents attached to an employee's profile — each document includes its ID, file name, file type, upload date, and download URL.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_orgchart",
+        "description": "Get the organization chart, optionally scoped to a legal entity, department, or employee subtree",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_candidate_detailed_fields",
+        "description": "Step 1 — return the full candidate field schema: field names, types, operators, and valid options for dropdowns",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_candidate_detailed_filter_options",
+        "description": "Step 2 — return the current valid values for a given dropdown field/filter ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_candidates_detailed",
+        "description": "Step 3 — search candidates by any combination of standard and custom filters, with column selection, sort, and pagination",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employee_fields",
+        "description": "Step 1 — return the full employee field schema: field names, types, operators, and valid options for dropdowns",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employee_filter_options",
+        "description": "Step 2 — return the current valid values for a given dropdown field/filter ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_employees",
+        "description": "Step 3 — search employees by any combination of standard and custom filters, with column selection, sort, and pagination",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_profile_update_fields",
+        "description": "Step 1 — return the available columns and filter fields for profile update requests",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_profile_update_filter_options",
+        "description": "Step 2 — return the valid option values for a given dropdown field/filter ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_profile_updates",
+        "description": "Step 3 — search profile update requests by filters, with column selection, sort, and pagination",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_departments",
+        "description": "List all departments in the account",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_department",
+        "description": "Create a new department, optionally under a parent department",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_department",
+        "description": "Update a department's name or parent",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_department",
+        "description": "Delete a department by id (supports force to delete even when the department has data)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "merge_department",
+        "description": "Merge a source department into a target department, moving all associated data",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_legal_entities",
+        "description": "Get all legal entities configured in the account",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_work_schedules",
+        "description": "Get all work schedules configured in the account",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_events",
+        "description": "List events (calls, interviews, meetings) with filtering by job, candidate, member, type, and date range",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_event",
+        "description": "Get full details for a specific event",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_timeoff_requests",
+        "description": "Get time off requests within a date range, filterable by employee, category, and state",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_timeoff_balances",
+        "description": "Get time off balances for a specific employee or all employees",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_timeoff_categories",
+        "description": "Get all configured time off categories",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_timeoff_request",
+        "description": "Create a new time off request (supports half-day entries and notes)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_timeoff_approval",
+        "description": "Approve or reject a pending approval from the pending_approvals array",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_time_entries",
+        "description": "List time tracking entries with filters for date range, employees, type (time-entry, clock-in, clock-out), and duration",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_time_entry",
+        "description": "Create a complete time entry (both clock_in_time and clock_out_time) for an employee",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "clock_in",
+        "description": "Open a clock-in for an employee at the supplied UTC timestamp (clock_in_time is required)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "clock_out",
+        "description": "Close the currently open clock-in for an employee at the supplied UTC timestamp (clock_out_time is required); returns an array of the entries",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_create_time_entries",
+        "description": "Create complete time entries for multiple employees in one request (max 500)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_time_entry",
+        "description": "Update an existing entry's clock-in/out times or note (pass note: null to clear)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_review_cycle_templates",
+        "description": "List performance review cycle templates (paginated)",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_review_cycle_template",
+        "description": "Get a specific template by id, including its sections and questions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_review_cycle_template",
+        "description": "Create a template with sections and questions (paragraph, star / numeric / custom rated, multiple choice).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_review_cycles",
+        "description": "List performance review cycles visible to the account.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_review_cycle",
+        "description": "Get a single review cycle by id, including its dates, deadlines, counts, and configured review types (self / manager / peer /",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_review_tasks",
+        "description": "List the authenticated member's review tasks in a cycle, split into preparation_tasks (templates to customize as aggregate manager) and active_tasks (each with",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_review_form",
+        "description": "Fetch the questionnaire form for a given review_type (self/manager/peer/upwards) on a preparation task, returning the underlying review plus its sections and questions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_review_form",
+        "description": "Create or replace the questionnaire for a review type on a preparation task. The whole questionnaire is replaced (not merged) — pass",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "mark_review_task_ready",
+        "description": "Finalize every customizable review form on a preparation task. Point of no return — once ready in an active cycle the forms",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_review",
+        "description": "Fetch a single review by review_id as { review, questionnaire } — the template merged with any autosaved draft answers. Restricted to",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_review",
+        "description": "Fill in a review and either save (autosave a draft, upserting answers by question_id) or submit (run validation and finalize). Submit is",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "share_review",
+        "description": "Share a completed review aggregate with the reviewee and send notifications. Takes the aggregate (task) id, not a review ID; the manager",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sign_review",
+        "description": "Record the calling member's signature on a shared review aggregate (reviewee and/or manager).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_review_aggregate",
+        "description": "Fetch an employee's full review aggregate in a cycle — status, reviewee, manager, cycle, and every review visible to the caller (each",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_review_cycle_answers",
+        "description": "Bulk-pull persisted review answers in a cycle for reporting integrations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://workable.readme.io/reference/workable-mcp-server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim initialize/tools/list payload was available; official reference descriptions are not complete schemas.",
+    "human_can_agent_cannot": "The MCP list does not expose tools for webhook subscription management or every operation in Workable's developer API. The API reference separately documents webhook subscription endpoints and broader Recruiting/HR operations; specific operations absent from the MCP list include creating webhook subscriptions and managing assessment/video-interview/background-check integrations. This compares exposed MCP tools with Workable's API documentation, not with every UI workflow.",
+    "sources": [
+      "https://workable.readme.io/reference/workable-mcp-server",
+      "https://resources.workable.com/inside-hr/how-workables-mcp-server-grew-to-94-tools-and-why-that-matters-for-recruiting-and-hr-teams/",
+      "https://claude.com/connectors/workable",
+      "https://learn.microsoft.com/en-us/connectors/workablemcp/",
+      "https://composio.dev/toolkits/workable",
+      "https://workable.readme.io/reference/subscriptionsget",
+      "https://workable.readme.io/reference/assessments-video-interviews-api"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool descriptions direct the agent to call get_accounts first and pass the chosen account on later calls; they also advise fetching and merging existing tags before replacement. Workable's help article says, “Always review what your AI assistant is about to do before confirming actions that modify data.” These are client/agent instructions; no universal server-enforced confirmation flow is documented.",
+    "governance_promises": "Workable says MCP access is limited to the signed-in user's existing permissions. The help article says credentials are not stored by the AI client. Microsoft's connector page says the server “does not retain content beyond what is needed to serve the request”; this is third-party connector documentation, not a Workable MCP-specific retention clause. Workable's terms say AI-powered features are intended to support human decision-making and customers remain responsible for employment decisions; the terms do not clearly establish that this clause specifically governs external MCP clients.",
+    "promises_to_user": "Workable describes the MCP server as production-ready and available to all customers on all plans at no additional cost, with advanced candidate and employee searches limited to Premier+ and Enterprise. It says the authenticated user's permissions govern access and actions.",
+    "comparison_with_server_logic": "Permission inheritance is described both by Workable and the connector documentation, but implementation cannot be inspected because no public server code was found. The cited retention statement is from Microsoft connector documentation, and MCP-specific retention/logging controls were not independently documented by Workable. Confirmation-before-write language is guidance to review/confirm; no mandatory server-side confirmation mechanism was found.",
+    "sources": [
+      "https://workable.readme.io/reference/workable-mcp-server",
+      "https://help.workable.com/hc/en-us/articles/39415735712407-Using-the-Workable-MCP-server-to-connect-to-AI-assistant",
+      "https://resources.workable.com/inside-hr/how-workables-mcp-server-grew-to-94-tools-and-why-that-matters-for-recruiting-and-hr-teams/",
+      "https://learn.microsoft.com/en-us/connectors/workablemcp/",
+      "https://www.workable.com/terms"
+    ]
+  },
+  "contradictions": [
+    "Workable's official reference and August 2026 article list 94 tools, while Microsoft's connector page says “just over 100 tools”; Microsoft also says the available list can vary by account or deployment, so the count may describe a different deployment state.",
+    "Claude's connector directory states “Show all 45 tools” but the captured page exposes only 24 names. All 24 visible names also occur in Workable's official list; the other 21 names could not be checked.",
+    "OAuth metadata advertises w_jobs, r_reports, r_surveys and w_surveys scopes, but the official 94-tool list has no job-write tools, report-specific tools or survey-specific tools. The metadata scopes therefore advertise access categories broader than the named MCP tool set."
+  ],
+  "observations_for_research": [
+    "The server requires explicit account selection on every call except get_accounts, reducing ambiguity for users with multiple Workable accounts.",
+    "Several tool descriptions document irreversible or replacement-style effects and prompt the agent to confirm with the user, while separate annotations may allow a supporting client to request confirmation.",
+    "Advanced search is structured as field discovery, enum-option lookup and search, making valid filter choices discoverable at runtime.",
+    "The official tool reference provides names and descriptions but not complete MCP input schemas, limiting independent assessment of required parameters and validation."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "No official repository or package was present in the evidence folder; code/GITHUB_COMMITS.txt was empty. Checked official reference, Workable help and resource pages, pricing, privacy and terms, prepared endpoint metadata, Microsoft Learn and Claude connector catalogue. Composio's Workable toolkit appears to describe a separate proxy/API toolkit and was not used as evidence for native endpoint actions. Claude's visible list is incomplete despite its stated count. The supplied OAuth metadata was used; the OpenID configuration URL returned 404. Workable MCP-specific privacy retention terms, initialize instructions, token lifetime, complete tool schemas, and MCP protocol version were not found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.8
+  }
+}

@@ -1,0 +1,480 @@
+{
+  "server": "semrush",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.semrush.com/v2/mcp",
+    "documentation_url_csv": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+    "addressing": "global",
+    "repository_url": "https://github.com/semrush/skills",
+    "documentation_urls_used": [
+      "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+      "https://developer.semrush.com/api/v3/introduction/semrush-mcp/",
+      "https://developer.semrush.com/api/v4/introduction/release-notes/",
+      "https://www.semrush.com/mcp/",
+      "https://www.semrush.com/mcp/prompt-library",
+      "https://www.semrush.com/mcp/prompt-library/skills/keyword-research",
+      "https://www.semrush.com/mcp/prompt-library/skills/serp-analysis",
+      "https://www.semrush.com/mcp/prompt-library/skills/content-brief",
+      "https://www.semrush.com/kb/1618-mcp",
+      "https://www.semrush.com/kb/1619-getting-started-with-mcp",
+      "https://www.semrush.com/kb/1620-mcp-prompt-library",
+      "https://www.semrush.com/kb/1621-mcp-common-use-cases",
+      "https://www.semrush.com/news/423229-new-mcp-server-bridges-data-and-ai-with-effortless-api-integration/",
+      "https://www.semrush.com/pricing/",
+      "https://www.semrush.com/company/legal/terms-of-service/",
+      "https://www.semrush.com/company/legal/privacy-policy/",
+      "https://www.semrush.com/company/legal/dpa/",
+      "https://www.semrush.com/company/legal/semrush-artificial-intelligence-services-terms/",
+      "https://claude.com/connectors/semrush"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public semrush/skills repository contains Markdown agent workflows, not the hosted MCP server implementation or a local server variant. Its README says skills define workflows while the hosted server provides data and tools.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "019ab369403c0e816707edae6194fa3bb47dfcd0",
+    "commit_date": "2026-10-20",
+    "implementation_language": "Markdown (public skills repository; hosted server language NOT FOUND)",
+    "mcp_sdk_and_version": "NOT FOUND for hosted server; public repository contains no MCP server implementation or SDK",
+    "code_public": "Partially",
+    "license": "Apache License 2.0 (public skills repository; hosted server license NOT FOUND)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "The protected-resource metadata also identifies https://mcp.semrush.com/v1/mcp as a resource; separate current tool-list evidence for that version was not found.",
+      "The Claude connector directory lists https://mcp.semrush.com/claude/v1/mcp. This endpoint is listed by a third-party directory and was not independently confirmed in Semrush documentation."
+    ],
+    "sources": [
+      "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+      "https://github.com/semrush/skills",
+      "https://mcp.semrush.com/.well-known/oauth-protected-resource",
+      "https://claude.com/connectors/semrush"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "MCP has no additional usage fee, but access to its data requires an eligible Semrush subscription/API access. SEO plans named by the MCP documentation include Semrush One Starter or Pro+, and SEO Classic Pro or Guru, with 50,000 API units that refresh on renewal. Advanced/Business options require an API units package. Trends data requires a Trends API subscription.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The official pricing page showed SEO Classic Pro at €112.52/month billed annually (€134 monthly) and Semrush One Starter at €158.40/month billed annually (€190 monthly). MCP-specific eligible-plan and unit requirements are described separately in the MCP docs. Prices may vary by locale and billing term.",
+    "pricing_model_details": "Each MCP query consumes API units under the same unit system as direct API requests. Standard API unit packages are listed as 2 million, 5 million, 10 million, or 20 million; package prices were not published on the reviewed pages. Unit consumption depends on report type and requested data volume. Trends access depends on subscription level.",
+    "other_access_restrictions": "Data availability depends on subscription/API access and available API units. The documentation says Trends API Basic or Premium is required for Trends data. The OAuth authorization page requires the user to review and approve Semrush account access. The endpoint returned HTTP 401 without authorization.",
+    "restrictions_controlled_by": "Semrush controls subscription entitlements, API unit allowances, and OAuth authorization; organization or client restrictions may also apply through the AI client. Specific MCP admin switches or client allowlists were NOT FOUND.",
+    "sources": [
+      "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+      "https://www.semrush.com/pricing/",
+      "https://www.semrush.com/kb/1618-mcp",
+      "https://mcp.semrush.com/v2/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official overview names 14 tools: 12 discovery tools, get_report_schema, and execute_report. Discovery tools identify available report types; get_report_schema provides a selected report's parameters; execute_report runs it. The endpoint's unauthenticated request returned HTTP 401, so no live tools/list response was inspected.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND; result format and tool error envelope were not documented in reviewed MCP pages.",
+      "authorization_mechanism": "OAuth is the documented default. Protected-resource metadata: resource https://mcp.semrush.com/v2/mcp; authorization_servers [https://oauth.semrush.com]; bearer_methods_supported [body]; scopes_supported [mcp.access]. Authorization-server metadata: issuer https://oauth.semrush.com; authorization_endpoint https://api.semrush.com/apis/v4/auth/v0/oauth2/auth; registration_endpoint https://api.semrush.com/apis/v4-raw/auth/v1/oauth2/register; token_endpoint https://api.semrush.com/apis/v4-raw/auth/v1/oauth2/access_token; response_types_supported [code]; grant_types_supported [authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer]; scopes_supported [offline_access, offline, mcp.access]; token_endpoint_auth_methods_supported [none]; code_challenge_methods_supported [plain, S256]; revocation_endpoint https://api.semrush.com/apis/v4/auth/v1/oauth2/revoke. The docs also describe API-key authentication as a fallback for clients without OAuth, using Authorization: Apikey YOUR_API_KEY. Token lifetime was NOT FOUND. The endpoint's WWW-Authenticate header references https://mcp.semrush.com/.well-known/oauth-protected-resource/v2/mcp.",
+      "authorization_server": "https://oauth.semrush.com",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "https://mcp.semrush.com/v2/mcp",
+        "https://mcp.semrush.com/.well-known/oauth-protected-resource",
+        "https://mcp.semrush.com/.well-known/oauth-protected-resource/v2/mcp",
+        "https://oauth.semrush.com/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Reviewed official MCP documentation describes tools and reports but does not document MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Semrush publishes an external prompt library, but the reviewed sources do not establish that the MCP server implements MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://www.semrush.com/mcp/prompt-library",
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Semrush documents an API Query log for API use, but the reviewed pages do not say whether it identifies MCP-originated requests, what fields it records, or its retention period.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "https://www.semrush.com/company/legal/privacy-policy/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling implementation was documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots implementation was documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate: Bearer resource_metadata=\"https://mcp.semrush.com/.well-known/oauth-protected-resource/v2/mcp\". That metadata names https://oauth.semrush.com and mcp.access. The authorization-server metadata advertises authorization code, refresh token, and JWT bearer grants; no client authentication at the token endpoint; plain and S256 PKCE; and a registration endpoint. The server docs say OAuth is default and API key is available for clients lacking OAuth.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "OAuth protected-resource metadata and authorization-server metadata; Dynamic Client Registration endpoint advertised. Full raw values are recorded in the description. Docs additionally support API key fallback in the Authorization header.",
+      "authorization_server": "https://oauth.semrush.com",
+      "sources": [
+        "https://mcp.semrush.com/v2/mcp",
+        "https://mcp.semrush.com/.well-known/oauth-protected-resource/v2/mcp",
+        "https://mcp.semrush.com/.well-known/oauth-protected-resource",
+        "https://oauth.semrush.com/.well-known/oauth-authorization-server",
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability or server-side confirmation flow was documented. Account authorization uses a user approval page in the OAuth setup described by Semrush.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability was documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Documentation specifies a Streamable HTTP endpoint and setup examples for AI clients, but does not document server-side toolset, read-only, or URL-parameter configuration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs give client troubleshooting advice, but do not specify MCP tool error formats or a server error-reporting capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was documented. Usage is billed against Semrush API units.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress-notification capability was documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability was documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted service uses Streamable HTTP transport. Semrush separately publishes installable Markdown skills that guide agent workflows; they are not shown as MCP prompts or tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "https://github.com/semrush/skills"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official docs describe read-only access; the 14 named tools cover discovery, schema retrieval, and report execution. Tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) and live tool schemas were NOT FOUND. 2. No server-enforced confirmation or MCP Elicitation flow was documented; OAuth account approval is a connection authorization step. 3. OAuth metadata advertises mcp.access; subscription entitlements and API access govern available data. Inheritance of product roles, admin switches, allowlists, redirect URI approval policy, token lifetime, and revocation behavior for MCP tokens were NOT FOUND. Metadata advertises a revocation endpoint. 4. No toolsets, read-only URL modes, query-free mode, sandbox, or regional endpoint configuration was documented for v2. 5. No MCP-specific field masking or PII exclusion logic was documented. AI Terms say not to submit personal data unless applicable privacy obligations are met. 6. MCP calls consume API units, with usage depending on report and requested data. 7. Report parameters are obtained through get_report_schema; validation, coercion, argument rewriting, overrides, and truncation behavior were NOT FOUND. 8. An API Query log is documented, but MCP-specific records, telemetry, opt-out, and retention were NOT FOUND. 9. No feedback, rating, survey, or upsell tool was in the official 14 names. 10. External skills repository provides workflow instructions; the server docs recommend schema lookup before report execution. Whether hosted instructions enforce this is NOT FOUND. 11. No server memory behavior was documented; docs describe context carried over in a client session as usage advice. 12. v2 presents one endpoint and a flat 14-tool list; separate directory-listed endpoints are noted under contradictions. No nested server or delegated AI agent was documented. 13. No raw API request, SQL, script, or general execution escape hatch was named.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "MUST call before execute_report if params unknown.",
+      "Use-if: rank, score, totals, global rank, or rank trend over time. Avoid-if: you need the individual keywords — use organic_research.",
+      "Use this when the task involves comparing, contrasting, or cross-referencing two or more domains."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The v2 documentation presents one hosted endpoint with a flat list of 14 tools. Report discovery, schema lookup, and execution form a staged workflow within that list.",
+    "sources": [
+      "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+      "https://developer.semrush.com/api/v4/introduction/release-notes/",
+      "https://www.semrush.com/company/legal/semrush-artificial-intelligence-services-terms/",
+      "https://github.com/semrush/skills",
+      "https://oauth.semrush.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "14",
+    "action_count_comment": "The official MCP overview lists 14 names: 12 discovery tools plus get_report_schema and execute_report. Its “Missing tools” section enumerates all 14. The Claude connector directory also lists 14 names matching that set. Third-party catalogues do not add tools here: Skills Playground lists 13 names for a different /claude/v1/mcp endpoint and uses divergent names; it is recorded as a contradiction. MartechDB reports 14 based on Semrush documentation. Parameter schemas are not published in the official overview or the reviewed cross-check lists.",
+    "actions": [
+      {
+        "tool_name": "domain_overview",
+        "description": "Find available domain overview reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "organic_research",
+        "description": "Find available organic search reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "keyword_research",
+        "description": "Find available keyword analytics reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "competitors_research",
+        "description": "Find available competitive research reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "backlinks_research",
+        "description": "Find available backlink analytics reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "audience_research",
+        "description": "Find available audience analytics reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "traffic_overview",
+        "description": "Find available website traffic and engagement reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "paid_search_research",
+        "description": "Find available paid search reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "shopping_research",
+        "description": "Find available Google Shopping reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "position_tracking",
+        "description": "Find available project position tracking reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "site_audit",
+        "description": "Find available technical site audit reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "projects",
+        "description": "Find available project management reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_report_schema",
+        "description": "Get parameters for a selected report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute_report",
+        "description": "Run a Semrush report with report parameters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No hosted server code or verbatim initialize/tool definitions available. The public repository contains agent skills only, so no server context token count can be computed.",
+    "human_can_agent_cannot": "The Semrush Projects API exposes human/API operations to create, update, and delete projects, but the MCP documentation limits project access to read-only methods; those mutations are therefore outside the documented MCP capability. Other APIs such as Listing Management also document create, update, and delete operations, but the MCP docs do not list them as MCP data sources.",
+    "sources": [
+      "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+      "https://claude.com/connectors/semrush",
+      "https://skillsplayground.com/connectors/semrush/",
+      "https://martechdb.com/vendors/semrush",
+      "https://developer.semrush.com/api/v4/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The MCP docs advise agents to use get_report_schema before execute_report when needed: “MUST call before execute_report if params unknown.” The docs also advise users to be specific about result count, database, and filters to reduce unit consumption. Server enforcement of these recommendations was not documented.",
+    "governance_promises": "The Semrush help article states: “The connection uses read-only access, meaning your AI assistants can retrieve Semrush data but cannot modify or delete it.” AI Terms state: “Semrush does not train or develop its models, and does not allow its third-party providers to train or develop its models on User Input.” The terms also permit using, storing, modifying, editing, deleting, and transferring User Input to third-party AI providers to provide and improve AI Generative Services; applicability to MCP query traffic specifically is not stated.",
+    "promises_to_user": "Semrush describes OAuth as the default connection and says API credentials remain secure. It disclaims guarantees of accuracy or reliability for AI-agent outputs and advises users to verify them before decisions, publication, or other critical use.",
+    "comparison_with_server_logic": "Read-only behavior is consistent with the documented report-oriented tool set and the Projects API restriction. No public server code or endpoint tool schemas were available to verify enforcement. The model-training statement is a contractual AI Terms promise; the reviewed evidence does not show MCP-specific enforcement or clarify whether all MCP inputs are AI Terms User Input. Unit-consumption guidance is advisory.",
+    "sources": [
+      "https://developer.semrush.com/api/v4/introduction/semrush-mcp/",
+      "https://www.semrush.com/kb/1618-mcp",
+      "https://www.semrush.com/company/legal/semrush-artificial-intelligence-services-terms/"
+    ]
+  },
+  "contradictions": [
+    "The official v4 documentation names 14 tools for https://mcp.semrush.com/v2/mcp. Skills Playground reports 13 for https://mcp.semrush.com/claude/v1/mcp and lists divergent names, including backlink_research, overview_research, projects_research, and siteaudit_research. This is a different endpoint path and does not replace the v2 tool list.",
+    "OAuth protected-resource metadata at the origin identifies resource https://mcp.semrush.com/v1/mcp, while path-specific metadata identifies https://mcp.semrush.com/v2/mcp. This indicates distinct advertised resources; the reviewed official v4 docs identify v2 as the documented MCP endpoint.",
+    "The MCP docs list only read-only Projects API methods, while the broader Projects API documentation includes create, update, and delete operations. Those REST/API operations are not documented as available via MCP."
+  ],
+  "observations_for_research": [
+    "The MCP interface groups many underlying reports behind discovery tools, a schema lookup, and a shared report execution tool rather than exposing one MCP tool per report.",
+    "Report access consumes the same API-unit allowance as direct API usage, making the requested report and data volume relevant to the user's account allowance.",
+    "Semrush distributes separate agent workflow skills outside the MCP server; these skills prescribe tool ordering and result interpretation."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared links.json, links_check.txt, all indexed official pages and linked prompt/skill pages, relevant legal/pricing pages, and the local semrush/skills repository. That repository is instructions-only, not the hosted server implementation. The official docs' v2 page provides the complete 14-name list but no parameter schemas or initialize instructions. Endpoint and OAuth evidence were supplied in the prompt; the protected-resource and authorization metadata were not re-fetched. The OAuth OpenID configuration URL returned 404. Unofficial GitHub servers mrkooblu/semrush-mcp and metehan777/semrush-mcp were present in the evidence index and excluded from evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.7
+  }
+}

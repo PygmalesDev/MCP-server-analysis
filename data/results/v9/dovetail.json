@@ -1,0 +1,837 @@
+{
+  "server": "dovetail",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://dovetail.com/api/mcp",
+    "documentation_url_csv": "https://developers.dovetail.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/dovetail/dovetail-mcp",
+    "documentation_urls_used": [
+      "https://developers.dovetail.com/docs/mcp",
+      "https://developers.dovetail.com/docs/mcp-self-hosted",
+      "https://docs.dovetail.com/integrations/mcp-server",
+      "https://dovetail.com/changelog/dovetail-mcp-server/",
+      "https://dovetail.com/changelog/new-mcp-tools/",
+      "https://dovetail.com/changelog/mcp-tools-projects-and-tags/",
+      "https://dovetail.com/pricing/",
+      "https://dovetail.com/privacy/privacy-policy/",
+      "https://dovetail.com/legal/master-subscription-agreement/"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "Dovetail describes the public repository as its self-hosted STDIO server, while the input is the hosted Streamable HTTP endpoint. It is the same product and a local server variant, but the hosted documentation lists many tools absent from the code. The code contains eight tools; four are also in the hosted list and four are absent there.",
+    "mcp_protocol_version": "NOT FOUND for the hosted endpoint; the SDK dependency is @modelcontextprotocol/sdk ^1.12.1 in the local variant.",
+    "commit_hash": "88a7389ccca718f9eff2f680ecb3f34713500866",
+    "commit_date": "2026-04-20",
+    "implementation_language": "TypeScript (public self-hosted variant)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.12.1 (public self-hosted variant)",
+    "code_public": "Partially",
+    "license": "MIT (public self-hosted variant)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "The vendor documents a self-hosted STDIO server at https://developers.dovetail.com/docs/mcp-self-hosted; it uses the same product API but has a smaller, different tool set than the hosted endpoint."
+    ],
+    "sources": [
+      "https://developers.dovetail.com/docs/mcp",
+      "https://developers.dovetail.com/docs/mcp-self-hosted",
+      "https://github.com/dovetail/dovetail-mcp",
+      "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/package.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP price or MCP-specific plan entitlement was found. The hosted docs describe API-token and browser OAuth access; users need a Dovetail account and API token for token-based access.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "The vendor pricing page lists Free at $0 per user/month and Enterprise at custom pricing. No numeric price for other plans was available in the collected page.",
+    "pricing_model_details": "The pricing page presents a free tier and custom-priced Enterprise. It does not specify an MCP charge, per-call cost, or MCP usage quota.",
+    "other_access_restrictions": "The hosted endpoint requires authentication. Hosted OAuth does not support Dynamic Client Registration (DCR) or Client-Initiated Metadata Discovery (CIMD); API-token authentication is offered as an alternative. Dovetail says MCP access follows the connected user's existing Dovetail permissions. The help page also describes enabling a connector through Connected apps.",
+    "restrictions_controlled_by": "Vendor and Dovetail workspace permissions; users can connect or disconnect the assistant.",
+    "sources": [
+      "https://developers.dovetail.com/docs/mcp",
+      "https://dovetail.com/pricing/",
+      "https://docs.dovetail.com/integrations/mcp-server"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND for hosted endpoint",
+      "description_what_how": "The official developer page lists 50 hosted tools for workspace search and project, folder, data, document, highlight, channel, people, tag, field, and file operations. The public local variant defines eight tools; four of those names are absent from the hosted list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Hosted tool-call result schemas and error format are NOT FOUND in the collected official material. The public code returns successful data as MCP text content containing JSON; request failures are thrown as errors.",
+      "sources": [
+        "https://developers.dovetail.com/docs/mcp",
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts#L97-L435"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP resources are registered in the public local server code. Hosted resource support is not described in the official hosted-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompts are registered in the public local server code. Hosted prompt support is not described in the collected official documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local code logs startup and retry messages to stderr. Outbound API requests include a User-Agent identifying the STDIO server and a source=dovetail-mcp-v1 query parameter. Hosted logging behavior is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The local server logs retry attempts and startup text to stderr; no structured MCP logging capability is registered.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts",
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/utils/retry.ts"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling handler or capability is declared in the public local server code. Hosted support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots handler or capability is declared in the public local server code. Hosted support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth metadata is available for the hosted endpoint.",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate: Bearer, error=\"invalid_request\", error_description=\"Authentication required\", resource=\"https://dovetail.com/api/mcp\", and resource_metadata=\"https://dovetail.com/.well-known/oauth-protected-resource/api/mcp\". The path-specific protected-resource document returns resource https://dovetail.com/api/mcp; authorization_servers [https://auth.dovetail.com]; scopes_supported [audit_logs:read, channel:delete, channel:read, channel:write, chat:read, chat:write, comment:delete, comment:read, comment:write, contact:delete, contact:read, contact:write, data:file_import, doc:file_import, email, field:delete, field:read, field:write, file:read, folder:delete, folder:read, folder:write, insight:delete, insight:read, insight:write, note:delete, note:read, note:write, offline_access, openid, profile, project:delete, project:read, project:write, search:read, user:read]; bearer_methods_supported [header]; resource_documentation https://dovetail.com/help/api; grant_types_supported [authorization_code, refresh_token]. The origin-level protected-resource URL returned 404. The authorization-server metadata advertises authorization_code and refresh_token among many supported grant types, PKCE methods S256 and plain, token endpoint authentication methods client_secret_basic, client_secret_post, private_key_jwt, and none. Hosted MCP docs say DCR and CIMD are unsupported and no client ID/client secret is exposed for third-party tools. Metadata did not provide a token lifetime.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Bearer authentication is indicated by the endpoint challenge; the protected-resource metadata specifies bearer header transport.",
+      "authorization_mechanism": "OAuth Protected Resource Metadata; OAuth authorization code and refresh-token grants are listed for the MCP resource. The authorization-server document lists PKCE S256 and plain and token endpoint auth methods client_secret_basic, client_secret_post, private_key_jwt, none. Hosted docs say no DCR/CIMD and no third-party clientId/clientSecret. API-token Bearer authentication is also documented. Revocation endpoint: https://auth.dovetail.com/oauth/revoke. Token lifetime: NOT FOUND. Protected-resource scopes_supported: audit_logs:read, channel:delete, channel:read, channel:write, chat:read, chat:write, comment:delete, comment:read, comment:write, contact:delete, contact:read, contact:write, data:file_import, doc:file_import, email, field:delete, field:read, field:write, file:read, folder:delete, folder:read, folder:write, insight:delete, insight:read, insight:write, offline_access, openid, profile, project:delete, project:read, project:write, search:read, user:read.",
+      "authorization_server": "https://auth.dovetail.com",
+      "sources": [
+        "https://dovetail.com/.well-known/oauth-protected-resource/api/mcp",
+        "https://auth.dovetail.com/.well-known/oauth-authorization-server",
+        "https://developers.dovetail.com/docs/mcp",
+        "https://dovetail.com/api/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No elicitation capability is implemented in the public local server code. Hosted elicitation behavior is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No task capability is implemented in the public local server code. Hosted support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation provides endpoint, API-token header, OAuth setup, and client configuration examples. The local variant reads DOVETAIL_API_TOKEN from the environment.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration is client-side connection setup, not a server-delivered configuration object.",
+      "sources": [
+        "https://developers.dovetail.com/docs/mcp",
+        "https://developers.dovetail.com/docs/mcp-self-hosted",
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local code throws an error containing the API status and status text for unsuccessful HTTP responses, and retries network and selected 5xx failures up to three times. Hosted error details are not published in the collected docs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Local failures are thrown as errors; successful responses are returned as JSON text content.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts",
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/utils/retry.ts"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription capability is registered in the public local server code. Hosted support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress-tracking capability is registered in the public local server code. Hosted support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation handler is implemented in the public local server code. Hosted support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local server identifies itself as dovetail-mcp-server version 0.2.0. No initialize instructions are defined in its server setup. Hosted initialize instructions were not found in the official documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Standard tool-call content structure is not fully documented for the hosted endpoint.",
+      "sources": [
+        "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Hosted list includes read and write operations; no readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations are published. Local tools use server.tool without explicit annotations. 2. No enforced confirmation parameter or preview-confirm flow was found; docs do not describe MCP elicitation or approval gates. 3. OAuth/API-token authentication; Dovetail states access and changes use the connected user's permissions. The metadata lists broad scopes, including write and delete scopes; docs say DCR/CIMD are unsupported. Token lifetime and client allowlists were not found. 4. No hosted read-only mode, tool filter, query-free mode, or environment-specific endpoint was documented. Public code is STDIO and differs in tool set. 5. Vendor says the AI cannot see data the user lacks permission to access. No MCP-specific PII masking rule was found. 6. Hosted rate limits and quotas were not found in the collected MCP docs. Local schemas use pagination limits described as 0-100; hosted file upload docs state up to 5 GB. Local code retries selected network/5xx failures up to three times; hosted server limits remain unknown. 7. Local schemas validate with Zod and construct selected API query parameters; no alias rewriting or operator-argument override was observed. Hosted validation behavior is not documented. 8. Local API calls add source=dovetail-mcp-v1 and User-Agent dovetail-mcp/0.2.0 (stdio); retry messages go to stderr. The vendor says changes are performed on the user's behalf. Hosted MCP audit logging and telemetry details were not found. 9. No feedback/rating/report tool appears in the official hosted list or local code. The help page invites users to share feedback with the Dovetail team outside the tool list. No tool-result upsell was found. 10. No server-provided AI skill or behavioral tool instruction was found. Vendor help contains general use/setup descriptions; the local code has no initialize instructions. 11. No MCP memory/state mechanism was found in the docs or local code. 12. Hosted HTTP and self-hosted STDIO variants have different tool sets; see A_general. No nested vendor agent or proxy architecture was documented. 13. No raw API request, arbitrary SQL, or script execution tool appears in the hosted list or local code.",
+    "behavioural_instructions_to_ai_verbatim": [],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Dovetail documents a hosted Streamable HTTP endpoint and a separate self-hosted STDIO variant with a different, smaller tool set.",
+    "sources": [
+      "https://developers.dovetail.com/docs/mcp",
+      "https://developers.dovetail.com/docs/mcp-self-hosted",
+      "https://docs.dovetail.com/integrations/mcp-server",
+      "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts",
+      "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/utils/retry.ts",
+      "https://dovetail.com/.well-known/oauth-protected-resource/api/mcp"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "54",
+    "action_count_comment": "The official hosted tool list at https://developers.dovetail.com/docs/mcp names 50 tools. The official public STDIO code defines eight; four names overlap the hosted list, and four additional code-defined names are included as official but marked unknown for hosted enablement. No catalogue-only tools were added. The Claude connector directory lists nine names, all matching the official hosted list or official local code. Glama reports seven local-code tools; APIs.io and Manufact report nine tool names in their collected pages. These catalogue counts describe their observed snapshots, not a stated vendor total.",
+    "actions": [
+      {
+        "tool_name": "search_workspace",
+        "description": "Search across all workspace content",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_dovetail_projects",
+        "description": "List all workspace projects",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: object (optional; start_cursor: string, limit: number 0-100); filter: object (optional; created_at bounds, project_id string|string[], title contains/equal_to); sort: string|string[] (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts#L121-L435",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project",
+        "description": "Get one project by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project",
+        "description": "Create a project",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_context",
+        "description": "Get project AI keywords and context docs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_project_context_keywords",
+        "description": "Add keywords to project AI context",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_project_context_doc",
+        "description": "Link an insight doc to project AI context",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_workspace_context",
+        "description": "Get workspace AI context docs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_workspace_context_doc",
+        "description": "Link an insight doc to workspace AI context",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_project_templates",
+        "description": "List reusable project templates",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_folders",
+        "description": "List folders in workspace hierarchy",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_folder",
+        "description": "Get one folder by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_folder_contents",
+        "description": "List items directly inside a folder",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_folder",
+        "description": "Create a folder",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_project_data",
+        "description": "List data entries in a project",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: object (optional; start_cursor: string, limit: number 0-100); filter: object (optional; created_at bounds, project_id string|string[], title contains/equal_to); sort: string|string[] (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts#L121-L435",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_data",
+        "description": "Get one data entry by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "data_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts#L121-L435",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_data_content",
+        "description": "Get data content as markdown",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "data_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts#L121-L435",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_data",
+        "description": "Create a data entry in a project",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_highlights",
+        "description": "Get highlights for a project",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_highlight",
+        "description": "Get one highlight by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_transcript_highlight",
+        "description": "Create a transcript highlight",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_docs",
+        "description": "List workspace docs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_doc",
+        "description": "Get doc metadata by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_doc_content",
+        "description": "Get doc content as markdown",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_doc",
+        "description": "Create a doc",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_doc_comments",
+        "description": "List comments on a doc",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_doc_comment",
+        "description": "Get one doc comment by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_comment",
+        "description": "Post a doc comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_channels",
+        "description": "List workspace channels",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_channel",
+        "description": "Get one channel by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_channel_data",
+        "description": "List raw data points in a channel",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_channel_datum",
+        "description": "Get one channel data point",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_channel_themes",
+        "description": "List channel themes",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_channel_datum",
+        "description": "Send a data point to a channel",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_users",
+        "description": "List workspace members",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_user",
+        "description": "Get one workspace member",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_contacts",
+        "description": "List workspace contacts",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_contact",
+        "description": "Get one contact by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_tags",
+        "description": "List tags scoped to a project",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tag",
+        "description": "Get one tag by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_tag",
+        "description": "Create a tag in a project",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "apply_tags",
+        "description": "Apply existing tags to a highlight",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_fields",
+        "description": "List project custom fields",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_field",
+        "description": "Get one field definition by ID",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_file",
+        "description": "Get file attachment metadata",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "download_file",
+        "description": "Generate a short-lived presigned download URL",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_file",
+        "description": "Initiate a single-PUT upload, up to 5 GB",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "complete_file_upload",
+        "description": "Finalize file upload after bytes are PUT",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "import_file_to_data",
+        "description": "Create data by importing a file",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "import_file_to_doc",
+        "description": "Create a doc by importing a file",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.dovetail.com/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_insight",
+        "description": "Get one insight by ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "insight_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts#L97-L435",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_insight_content",
+        "description": "Get insight content as markdown",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "insight_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts#L97-L435",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_project_insights",
+        "description": "List insights for a project",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "page: object (optional; start_cursor: string, limit: number 0-100); filter: object (optional; created_at date bounds, project_id string|string[], published boolean, title contains/equal_to); sort: string|string[] (optional)",
+        "parameter_count": "3",
+        "source": "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts#L97-L435",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_personal_project_insights",
+        "description": "List insights for a user projects",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "user_id: string (required); page/filter/sort as list_project_insights",
+        "parameter_count": "4",
+        "source": "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts#L97-L435",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "396",
+    "token_method": "[LOCAL CODE @88a7389] Approximate serialized JSON character count for the eight local tool names, descriptions, and compact parameter summaries, divided by four; no initialize instructions are defined in the code. This estimate is for the local variant, not the hosted tool catalog.",
+    "human_can_agent_cannot": "The hosted tool list does not include several product functions available in Dovetail, such as editing or deleting existing objects, managing users and permissions, or configuring workspace settings; these are not listed as MCP tools. Dovetail's API reference documents broader API operations than the MCP list. Sources: https://developers.dovetail.com/docs/mcp and https://developers.dovetail.com/docs/introduction",
+    "sources": [
+      "https://developers.dovetail.com/docs/mcp",
+      "https://github.com/dovetail/dovetail-mcp/blob/88a7389ccca718f9eff2f680ecb3f34713500866/src/index.ts",
+      "https://claude.com/connectors/dovetail",
+      "https://glama.ai/mcp/servers/tomgutt/dovetail-mcp/schema",
+      "https://apis.io/servers/dovetail/dovetail/",
+      "https://manufact.com/mcp-catalog/dovetail"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "No behavioral instruction to the AI was found in the hosted tool descriptions, which are short operation summaries. Setup guidance is addressed to the user/client and includes: “Your MCP client must support setting a custom Authorization header to pass a Dovetail API token.” No server enforcement of that client guidance was established.",
+    "governance_promises": "Dovetail states: “The AI only has access to the information you can access. It can’t see projects or data that you don’t have permission to access. Any changes made through the MCP server are performed on your behalf, using your own access and permissions.” The privacy policy says Dovetail excludes training generalized/non-personalized AI and ML models from stated service-improvement use. No MCP-specific retention or masking rule was found.",
+    "promises_to_user": "The help page says users can connect or disconnect the assistant whenever they like. The developer documentation describes OAuth browser authentication and API-token setup.",
+    "comparison_with_server_logic": "Permission inheritance is documented as a product promise; the hosted implementation is closed, so its enforcement could not be inspected. The local code sends an API token to the Dovetail API, but does not demonstrate hosted OAuth permission enforcement. The privacy statement concerns Dovetail's general service-improvement use, not a specifically documented MCP data path.",
+    "sources": [
+      "https://developers.dovetail.com/docs/mcp",
+      "https://docs.dovetail.com/integrations/mcp-server",
+      "https://dovetail.com/privacy/privacy-policy/"
+    ]
+  },
+  "contradictions": [
+    "The hosted developer page says the endpoint handles OAuth 2.1 or API tokens, while its hosted-endpoint section also says custom clients must pass an API token and that DCR/CIMD are unsupported. The supplied protected-resource and authorization-server metadata documents an authorization-code and refresh-token flow, so the OAuth flow is discoverable but third-party client registration is constrained.",
+    "The protected-resource metadata advertises delete scopes for channels, comments, contacts, fields, folders, insights, notes, and projects, while the official hosted tool list contains no corresponding delete tools. Scopes do not establish that those operations are exposed through MCP.",
+    "The official hosted tool list contains 50 tools; the public local STDIO code has eight tools, four not listed in the hosted tool list. Tool surfaces therefore differ between vendor variants.",
+    "The vendor help page describes the server as supporting creation of projects, docs, data, highlights, and channel data; the public local code implements only read-oriented retrieval tools. This aligns with the distinction between hosted and self-hosted variants rather than proving a hosted mismatch."
+  ],
+  "observations_for_research": [
+    "The hosted OAuth resource metadata exposes substantially broader scopes, including delete and chat scopes, than the published MCP tool list exposes as named operations.",
+    "The vendor provides both browser OAuth and API-token setup for the hosted endpoint, while disallowing DCR and CIMD for third-party clients.",
+    "The hosted tool list combines retrieval with content creation, uploads, and imports; the public local variant offers a smaller read-focused interface and includes legacy insight-listing tools absent from the hosted list.",
+    "The same user-permission boundary is stated for hosted MCP operations, while the public code demonstrates bearer-token forwarding to the product API."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/ and local repository copy first. No relevant collected official source had a plausibility warning. The input endpoint itself returned HTTP 401 with an authentication challenge; its install page returned 404. The origin-level OAuth protected-resource document returned 404; the path-specific document returned 200 and was used. The 50-name official list comes from the hosted developer page. Unofficial community repositories were listed in links.json and excluded. The Claude connector directory is third-party even though it marks Dovetail as Anthropic verified. Hosted protocol version, tool schemas, token lifetime, MCP-specific pricing, and MCP-specific audit/retention details were not found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.6
+  }
+}

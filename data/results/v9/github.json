@@ -1,0 +1,1125 @@
+{
+  "server": "github",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://api.githubcopilot.com/mcp",
+    "documentation_url_csv": "https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp-in-your-ide/set-up-the-github-mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/github/github-mcp-server",
+    "documentation_urls_used": [
+      "https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp-in-your-ide/set-up-the-github-mcp-server",
+      "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/use-the-github-mcp-server",
+      "https://docs.github.com/en/copilot/concepts/customizations/mcp",
+      "https://docs.github.com/en/copilot/concepts/enterprise/mcp-management",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/remote-server.md",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/policies-and-governance.md",
+      "https://github.blog/changelog/2025-09-04-remote-github-mcp-server-is-now-generally-available/",
+      "https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification/",
+      "https://github.com/features/copilot/plans",
+      "https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement",
+      "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "[LOCAL CODE @f385262] The remote server is built using this repository as a library and an internal repository binds it into GitHub server infrastructure. GitHub says it regularly updates the remote server from this code and documents remote-only tools. The internal hosting code is not public, so the repository is a direct codebase/library equivalent, not the complete deployed service.",
+    "mcp_protocol_version": "2026-07-28 support is documented; repository tests also exercise 2025-11-25 compatibility.",
+    "commit_hash": "f38526264abb14961b32cea386e38ec6d3cf674f",
+    "commit_date": "2026-10-22",
+    "implementation_language": "Go",
+    "mcp_sdk_and_version": "github.com/modelcontextprotocol/go-sdk v1.8.0",
+    "code_public": "Partially",
+    "license": "MIT",
+    "release_status": "GA",
+    "other_official_servers": [
+      "https://api.githubcopilot.com/mcp/readonly: default toolset restricted to read-access tools.",
+      "https://api.githubcopilot.com/mcp/x/{toolset}: hosted per-toolset paths; each has a /readonly variant.",
+      "https://api.githubcopilot.com/mcp/insiders: default toolset with early-access features; /readonly and toolset variants are documented.",
+      "https://api.githubcopilot.com/mcp/x/copilot_spaces: separate remote-only Copilot Spaces toolset.",
+      "https://api.githubcopilot.com/mcp/x/github_support_docs_search: separate remote-only GitHub documentation search toolset, not the GitHub product tools.",
+      "GitHub Enterprise Cloud with data residency uses a customer-specific host such as https://copilot-api.<customer>.ghe.com/mcp; remote hosting for GitHub Enterprise Server is not supported."
+    ],
+    "sources": [
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/remote-server.md",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/README.md",
+      "https://github.blog/changelog/2025-09-04-remote-github-mcp-server-is-now-generally-available/",
+      "https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification/"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "GitHub says the MCP server is available to users regardless of plan. Specific tools inherit their corresponding GitHub feature requirements; Copilot Cloud Agent tools require a paid Copilot license. The MCP endpoint itself has no separate price listed.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "The official Copilot plans page lists Free at $0, Pro at $10/month, Pro+ at $39/month, and Max at $100/month. Business and Enterprise plans are also offered; prices depend on the plan and billing terms.",
+    "pricing_model_details": "Some Copilot interactions consume GitHub AI Credits; the plans page lists base credit allowances and optional usage. Those are Copilot plan charges, not an MCP call price. GitHub API rate limits depend on authentication method.",
+    "other_access_restrictions": "A GitHub account and an MCP-compatible host are required. Enterprise Copilot users may need an admin to enable the MCP servers policy. OAuth host apps require their own registered GitHub App or OAuth App. Tools are limited by token scopes, GitHub permissions, feature entitlements, selected toolsets, and optional read-only mode. Remote service is supported for GitHub Enterprise Cloud, not GitHub Enterprise Server.",
+    "restrictions_controlled_by": "GitHub controls endpoint hosting, feature access, and service limits; organization or enterprise administrators control applicable Copilot, OAuth-app, GitHub-App, PAT, and SSO policies; users and host applications select authentication and optional endpoint modes.",
+    "sources": [
+      "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/use-the-github-mcp-server",
+      "https://github.com/features/copilot/plans",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/policies-and-governance.md",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/remote-server.md"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Tool listing and calls use MCP; output schemas and structured results are version-dependent, documented for 2026-07-28 or newer.",
+      "description_what_how": "The endpoint returns tools selected by its path, headers, feature availability, and authorization. The base URL uses the default toolsets; the documented read-only path and per-toolset paths alter the inventory. The public code documents MCP annotations and JSON input schemas.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results are MCP content blocks; for supported 2026-07-28 protocol clients, documented tools may also return typed outputSchema and structuredContent. Errors are returned through MCP tool errors or error content, depending on the handler.",
+      "authorization_mechanism": "Bearer token in the Authorization header. The endpoint returned HTTP 401 with WWW-Authenticate: Bearer error=\"invalid_request\", error_description=\"No access token was provided in this request\", resource_metadata=\"https://api.githubcopilot.com/.well-known/oauth-protected-resource/mcp\".",
+      "authorization_server": "https://github.com/login/oauth",
+      "sources": [
+        "https://api.githubcopilot.com/.well-known/oauth-protected-resource/mcp",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/remote-server.md",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/error-handling.md"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not stated.",
+      "description_what_how": "Public code registers repository resource templates for repository content, branches, commits, tags, and pull requests. Which resources are exposed depends on the selected inventory and toolsets.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP resource/resource-template responses; exact hosted response inventory was not retrieved because the endpoint requires authorization.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/resources.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/inventory.go"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not stated.",
+      "description_what_how": "Public code registers issue-oriented prompts, including coding-agent assignment and issue-to-fix workflow prompts. Their exposure is inventory/toolset-dependent.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP prompt list and prompt retrieval results; exact hosted prompt inventory was not retrieved.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/prompts.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/inventory.go"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Not stated.",
+      "description_what_how": "The public code does not advertise the MCP Logging capability. Governance documentation separately says underlying API calls are logged in GitHub audit logs when available; this is distinct from MCP Logging.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/server.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/policies-and-governance.md"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Not stated.",
+      "description_what_how": "No server-side MCP sampling implementation was found in the public code. Copilot coding-agent operations are product API calls, not evidence of MCP sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/server.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/go.mod"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Not stated.",
+      "description_what_how": "No MCP Roots capability implementation was found in the public code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/server.go"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP authorization metadata is exposed at the protected-resource URL; OAuth server metadata was supplied separately.",
+      "description_what_how": "Endpoint-origin metadata at /.well-known/oauth-protected-resource returned 404. The endpoint-path metadata at /.well-known/oauth-protected-resource/mcp returned HTTP 200 with resource https://api.githubcopilot.com/mcp, authorization server https://github.com/login/oauth, bearer_methods_supported [\"header\"], and scopes_supported [\"repo\",\"read:org\",\"read:user\",\"user:email\",\"read:packages\",\"write:packages\",\"read:project\",\"project\",\"gist\",\"notifications\"]. The endpoint itself returned HTTP 401 when no Authorization header was supplied. The authorization-server document returned HTTP 200 with authorization_endpoint https://github.com/login/oauth/authorize, token_endpoint https://github.com/login/oauth/access_token, response_types_supported [\"code\"], grant_types_supported [\"authorization_code\",\"refresh_token\",\"urn:ietf:params:oauth:grant-type:device_code\"], code_challenge_methods_supported [\"S256\"], device_authorization_endpoint https://github.com/login/device/code, authorization_response_iss_parameter_supported true, and scopes_supported [\"offline_access\"]. No registration_endpoint was present. The authorization server's path-suffixed OpenID configuration returned 404. Token lifetime, revocation, and endpoint-specific client registration details were not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Bearer authentication is required; an unauthenticated request receives HTTP 401.",
+      "authorization_mechanism": "Metadata Doc; OAuth authorization code, refresh-token, and device-code grants are listed; PKCE S256 is listed. Resource metadata advertises the full list: repo, read:org, read:user, user:email, read:packages, write:packages, read:project, project, gist, notifications. Authorization-server metadata lists only offline_access under scopes_supported and does not publish a registration_endpoint. Bearer token is sent in the HTTP header.",
+      "authorization_server": "https://github.com/login/oauth",
+      "sources": [
+        "https://api.githubcopilot.com/.well-known/oauth-protected-resource",
+        "https://api.githubcopilot.com/.well-known/oauth-protected-resource/mcp",
+        "https://github.com/.well-known/oauth-authorization-server/login/oauth",
+        "https://github.com/.well-known/openid-configuration/login/oauth",
+        "https://api.githubcopilot.com/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "The repository documents a newer URL-elicitation flow for local OAuth; repository deletion uses form elicitation.",
+      "description_what_how": "Public code implements form elicitation for repository deletion: the tool requests the exact owner/repository name, checks the accepted value, and verifies that the target has not changed. Remote OAuth is handled by the host's OAuth flow; the local code's browser/device login is not evidence that the hosted endpoint uses URL elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Elicitation response is checked; cancellation, absent, invalid, changed, or expired confirmation state prevents deletion.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/repositories.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/remote-server.md",
+        "https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Not stated.",
+      "description_what_how": "No MCP Tasks capability implementation was found in the public code. Some tools delegate work to GitHub Copilot Cloud Agent, which is a nested product operation rather than the MCP Tasks protocol.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/server.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/copilot.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/README.md"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not stated.",
+      "description_what_how": "Remote configuration supports toolset selection through path variants and X-MCP-Toolsets, read-only operation through /readonly or X-MCP-Readonly, and insiders mode through path/header options. Unknown toolsets in the header are silently ignored.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The selected server path and headers determine the offered tool inventory and read-only mode.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/remote-server.md",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf/README.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Structured error metadata and output formats are version-dependent.",
+      "description_what_how": "Public code maps GitHub API and input errors into MCP tool results and documents typed error data for supported modern protocol versions. Hosted internal error handling is not public.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP tool errors and text content; some modern-protocol responses add typed error data.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/error-handling.md",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf/pkg/errors/error.go"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Not stated.",
+      "description_what_how": "No MCP resource-subscription capability was found; public code tests assert that resource subscriptions are not advertised. GitHub notification subscription management exists as product tools, which is separate.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/server_test.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf/pkg/github/notifications.go"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Uses MCP progress notifications when the client supplies a progress token.",
+      "description_what_how": "Long-running Copilot operations in public code send progress notifications when a progress token is present in the request.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP progress notifications; no general progress behavior is documented for every tool.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/copilot.go"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not stated.",
+      "description_what_how": "Public handlers use request contexts for API operations, allowing context cancellation to propagate in the code. Hosted cancellation behavior and coverage for every underlying API operation are not separately documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Cancellation terminates context-aware handler work where propagated.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/dependencies.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/copilot.go"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP initialize instructions are emitted through the server inventory.",
+      "description_what_how": "The public code adds toolset-specific instructions to server instructions during inventory construction. Default context, issues, and pull-request toolsets add behavioral guidance.",
+      "pre_interaction_context_verbatim": "Always call 'get_me' first to understand current user permissions and context.\n\n## Issues\n\nCheck 'list_issue_types' first for organizations to use proper issue types. Use 'search_issues' before creating new issues to avoid duplicates. Always set 'state_reason' when closing issues.\n\n## Pull Requests\n\nPR review workflow: Always use 'pull_request_review_write' with method 'create' to create a pending review, then 'add_comment_to_pending_review' to add comments, and finally 'pull_request_review_write' with method 'submit_pending' to submit the review for complex reviews with line-specific comments.\n\nBefore creating a pull request, search for pull request templates in the repository. Template files are called pull_request_template.md or they're located in '.github/PULL_REQUEST_TEMPLATE' directory. Use the template content to structure the PR description and then call create_pull_request tool.",
+      "post_interaction_context_structure": "Instructions are server-level context; tool calls return MCP results.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/toolset_instructions.go",
+        "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/server.go"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official tool definitions carry readOnlyHint and idempotentHint annotations. The public snapshots do not declare destructiveHint or openWorldHint. The action list distinguishes read/write using readOnlyHint; writes include creation, updates, and deletion.\n2. Server-enforced confirmation: delete_repository uses elicitation to require the exact owner/repository name, checks acceptance and matching name, and aborts if the target changes or confirmation state expires. The other tools do not share a universal server-enforced confirmation step in the reviewed code; host/client approval behavior varies.\n3. Authorization: endpoint OAuth metadata advertises repo, read:org, read:user, user:email, read:packages, write:packages, read:project, project, gist, notifications. GitHub permissions and authenticated-user access constrain API access. Enterprise controls include Copilot policy, OAuth/GitHub App approvals, PAT policies, and SSO. OAuth-server scopes_supported lists only offline_access; metadata provides no registration_endpoint. Token lifetime/revocation were not found.\n4. Modes: /readonly and X-MCP-Readonly restrict offered tools to read-access operations; /x/{toolset}, /x/all, X-MCP-Toolsets and insiders variants change the inventory. The default endpoint uses the default toolset. Insiders can alter features. GitHub Enterprise Cloud residency has customer-specific hosts; GHES remote hosting is unsupported.\n5. Data handling: access is bounded by GitHub permissions and token repository access. Public code defines compact output DTOs and filtering for some results; no server-wide PII masking or secrets-redaction policy specific to MCP was found. GitHub privacy terms cover service content generally, not MCP-specific processing details.\n6. Limits: GitHub API rate limits apply according to authentication method. Public code includes per-tool pagination and some result caps; for example ui_get caps at ten pages, but it is app-visible rather than model-visible. A general MCP call quota or price per call was not found.\n7. Validation/correction: input schemas and handler validation are implemented. Some handlers normalize case for routing keys; code contains targeted normalizers. Remote X-MCP-Toolsets silently ignores unknown names. No general operator-default override of model arguments was identified.\n8. Governance documentation says underlying API calls are logged in GitHub audit logs when available. The public code contains request logging and telemetry-related hooks; hosted telemetry payload, retention, defaults, and opt-out were not established from public evidence.\n9. Vendor-interest scan: the default action names/descriptions contain no feedback, rating, report, survey, or suggestion tool. No upsell message or marketing elicitation was found in reviewed default tool definitions. Copilot tools invoke GitHub Copilot features and carry their documented product/license requirements.\n10. Behavioral context: the initialize instructions and tool descriptions steer the agent. The toolset instructions include required ordering and workflow suggestions; except for the separate delete confirmation logic, these instructions are not themselves server-enforced. GitHub also publishes skills and setup guidance outside the server.\n11. Memory/state: the July 2026 changelog says remote Redis sessions were removed; no cross-request agent-behavior memory was found in the public code. Product-side GitHub state naturally changes subsequent API results.\n12. Structure: non-flat inventory with distinct toolset endpoints, dynamic filtering, and remote-only tools. Copilot coding-agent tools invoke a nested GitHub agent operation. Remote server includes internal hosting infrastructure absent from the public code.\n13. Escape hatch scan: no raw API request, arbitrary SQL, or script-execution tool was found in the default action list. Git/GitHub tools expose domain operations rather than a general arbitrary-request interface.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Always call 'get_me' first to understand current user permissions and context.",
+      "Check 'list_issue_types' first for organizations to use proper issue types. Use 'search_issues' before creating new issues to avoid duplicates. Always set 'state_reason' when closing issues.",
+      "PR review workflow: Always use 'pull_request_review_write' with method 'create' to create a pending review, then 'add_comment_to_pending_review' to add comments, and finally 'pull_request_review_write' with method 'submit_pending' to submit the review for complex reviews with line-specific comments.",
+      "Before creating a pull request, search for pull request templates in the repository. Template files are called pull_request_template.md or they're located in '.github/PULL_REQUEST_TEMPLATE' directory. Use the template content to structure the PR description and then call create_pull_request tool.",
+      "Repository owner. You can guess the owner, but confirm it with the user before proceeding."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The endpoint family selects distinct toolsets and modes through URL paths and headers, and the remote host adds tools and toolsets absent from the local server. GitHub says the deployed service binds the public library into an internal hosting repository.",
+    "sources": [
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/tools.go",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/toolset_instructions.go",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/repositories.go",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/remote-server.md",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/policies-and-governance.md",
+      "https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification/",
+      "https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "47",
+    "action_count_comment": "Official list: https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/README.md#tools. The public list contains tool definitions across toolsets but states no aggregate total. For the input endpoint's default toolsets, I extracted 46 applicable tools from the documented Context, Copilot, Issues, Pull Requests, Repositories, and Users sections, excluding ui_get because its public code marks it app-visible only. The hosted server documents one additional default Copilot tool, create_pull_request_with_copilot, for 47 total. Copilot Spaces and GitHub Support Docs Search are separate opt-in remote toolsets and are not included. No catalogue-only tools were added. mcp.tc says the tools are sign-in gated and does not display them; API Tracker matches the official registry listing but gives no inspectable tool total in the captured page; the captured Claude directory page did not expose an MCP tool inventory.",
+    "actions": [
+      {
+        "tool_name": "get_me",
+        "description": "Get details of the authenticated GitHub user. Use this when a request is about the user's own profile for GitHub. Or when information is missing",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": null,
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/get_me.snap#L1-L113",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_team_members",
+        "description": "Get member usernames of a specific team in an organization. Limited to organizations accessible with current credentials",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "org: string (required); team_slug: string (required)",
+        "parameter_count": [
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/get_team_members.snap#L1-L35",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_teams",
+        "description": "Get details of the teams the user is a member of. Limited to organizations accessible with current credentials",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "user: string (optional)",
+        "parameter_count": 1,
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/get_teams.snap#L1-L63",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "assign_copilot_to_issue",
+        "description": "Assign Copilot to a specific issue in a GitHub repository. This tool can help with the following outcomes: - a Pull Request created with source",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "base_ref: string (optional); custom_instructions: string (optional); issue_number: number (required); owner: string (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/assign_copilot_to_issue.snap#L1-L116",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "request_copilot_review",
+        "description": "Request a GitHub Copilot code review for a pull request. Use this for automated feedback on pull requests, usually before requesting a human reviewer.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); pullNumber: number (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/request_copilot_review.snap#L1-L56",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_issue_comment",
+        "description": "Add a comment and/or reaction to a specific issue or issue comment in a GitHub repository. Use this tool with pull requests as well (in",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "body: string (optional); comment_id: integer (optional); issue_number: number (required); owner: string (required); reaction: string (optional; enum 8 categories); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/add_issue_comment.snap#L1-L138",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_label",
+        "description": "Get a specific label from a repository.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); owner: string (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/get_label.snap#L1-L52",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "issue_read",
+        "description": "Get information about a specific issue in a GitHub repository.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "issue_number: number (required); method: string (required; enum 5 categories); owner: string (required); page: number (optional); perPage: number (optional); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/issue_read.snap#L1-L942",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "issue_write",
+        "description": "Create a new or update an existing issue in a GitHub repository.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "assignees: array (optional); body: string (optional); duplicate_of: number (optional); issue_fields: array (optional); issue_number: number (optional); labels: array (optional); method: string (required; enum 2 categories); milestone: number (optional); owner: string (required); parent_issue_number: number (optional); parent_owner: string (optional); parent_repo: string (optional); repo: string (required); state: string (optional; enum 2 categories); state_reason: string (optional; enum 3 categories); title: string (optional); type: unknown (optional)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/issue_write.snap#L1-L232",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_issue_fields",
+        "description": "List issue fields for a repository or organization. Returns field definitions including name, type (text, number, date, single_select), and for single_select fields the list of",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); repo: string (optional)",
+        "parameter_count": [
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/list_issue_fields.snap#L1-L114",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_issue_types",
+        "description": "List supported issue types for a repository or its owner organization. When repo is omitted, returns org-level issue types directly.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); repo: string (optional)",
+        "parameter_count": [
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/list_issue_types.snap#L1-L75",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_issues",
+        "description": "List issues in a GitHub repository. For pagination, use the 'endCursor' from the previous response's 'pageInfo' in the 'after' parameter.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "after: string (optional); direction: string (optional; enum 2 categories); field_filters: array (optional); fields: array (optional); labels: array (optional); orderBy: string (optional; enum 3 categories); owner: string (required); perPage: number (optional); repo: string (required); since: string (optional); state: string (optional; enum 2 categories)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/list_issues.snap#L1-L113",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_issues",
+        "description": "Search issues using natural-language semantic matching. Best for conceptual or paraphrased queries (e.g. \"login fails after password reset\"). Already scoped to is:issue.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fields: array (optional); order: string (optional; enum 2 categories); owner: string (optional); page: number (optional); perPage: number (optional); query: string (required); repo: string (optional); sort: string (optional; enum 11 categories)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/search_issues.snap#L1-L98",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sub_issue_write",
+        "description": "Add a sub-issue to a parent issue in a GitHub repository.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "after_id: number (optional); before_id: number (optional); issue_number: number (required); method: string (required); owner: string (required); replace_parent: boolean (optional); repo: string (required); sub_issue_id: number (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/sub_issue_write.snap#L1-L265",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_issue_comment",
+        "description": "Update the body of an existing issue or pull request conversation comment. This tool cannot update pull request review comments.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "body: string (required); comment_id: integer (required); owner: string (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/update_issue_comment.snap#L1-L67",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_comment_to_pending_review",
+        "description": "Add review comment to the requester's latest pending pull request review. A pending review needs to already exist to call this (check with the user",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "body: string (required); line: number (optional); owner: string (required); path: string (required); pullNumber: number (required); repo: string (required); side: string (optional; enum 2 categories); startLine: number (optional); startSide: string (optional; enum 2 categories); subjectType: string (required; enum 2 categories)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/add_comment_to_pending_review.snap#L1-L87",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_reply_to_pull_request_comment",
+        "description": "Add a reply and/or reaction to an existing pull request comment. This can create a new comment linked as a reply to the specified comment,",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "body: string (optional); commentId: number (required); owner: string (required); pullNumber: number (optional); reaction: string (optional; enum 8 categories); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/add_reply_to_pull_request_comment.snap#L1-L116",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_pull_request",
+        "description": "Create a new pull request in a GitHub repository.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "base: string (required); body: string (optional); draft: boolean (optional); head: string (required); maintainer_can_modify: boolean (optional); owner: string (required); repo: string (required); reviewers: array (optional); title: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/create_pull_request.snap#L1-L108",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_pull_requests",
+        "description": "List pull requests in a GitHub repository. If the user specifies an author, then DO NOT use this tool and use the search_pull_requests tool instead.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "base: string (optional); direction: string (optional; enum 2 categories); fields: array (optional); head: string (optional); owner: string (required); page: number (optional); perPage: number (optional); repo: string (required); sort: string (optional; enum 4 categories); state: string (optional; enum 3 categories)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/list_pull_requests.snap#L1-L106",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "merge_pull_request",
+        "description": "Merge a pull request in a GitHub repository.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "commit_message: string (optional); commit_title: string (optional); expectedHeadSha: string (optional); merge_method: string (optional; enum 3 categories); owner: string (required); pullNumber: number (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/merge_pull_request.snap#L1-L94",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pull_request_read",
+        "description": "Get information on a specific pull request in GitHub repository.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "after: string (optional); method: string (required; enum 9 categories); owner: string (required); page: number (optional); perPage: number (optional); pullNumber: number (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/pull_request_read.snap#L1-L1002",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pull_request_review_write",
+        "description": "Create and/or submit, delete review of a pull request. Available methods: - create: Create a new review of a pull request. If \"event\" parameter is",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "body: string (optional); commitID: string (optional); event: string (optional; enum 3 categories); method: string (required; enum 5 categories); owner: string (required); pullNumber: number (required); repo: string (required); resolutionReason: string (optional); threadId: string (optional)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/pull_request_review_write_resolution_reason.snap#L1-L81",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_pull_requests",
+        "description": "Search for pull requests in GitHub repositories using issues search syntax already scoped to is:pr",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fields: array (optional); order: string (optional; enum 2 categories); owner: string (optional); page: number (optional); perPage: number (optional); query: string (required); repo: string (optional); sort: string (optional; enum 11 categories)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/search_pull_requests.snap#L1-L96",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_pull_request",
+        "description": "Update an existing pull request in a GitHub repository.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "base: string (optional); body: string (optional); draft: boolean (optional); maintainer_can_modify: boolean (optional); owner: string (required); pullNumber: number (required); repo: string (required); reviewers: array (optional); state: string (optional; enum 2 categories); title: string (optional)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/update_pull_request.snap#L1-L114",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_pull_request_branch",
+        "description": "Update the branch of a pull request with the latest changes from the base branch.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "expectedHeadSha: string (optional); owner: string (required); pullNumber: number (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/update_pull_request_branch.snap#L1-L51",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_branch",
+        "description": "Create a new branch in a GitHub repository",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "branch: string (required); from_branch: string (optional); owner: string (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/create_branch.snap#L1-L83",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_file",
+        "description": "Create or update a single file in a GitHub repository. If updating, you should provide the SHA of the file you want to update. Use",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "allow_symlink_write: boolean (optional); branch: string (required); content: string (required); message: string (required); owner: string (required); path: string (required); repo: string (required); sha: string (optional)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/create_or_update_file.snap#L1-L147",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_repository",
+        "description": "Create a new GitHub repository in your account or specified organization",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "autoInit: boolean (optional); description: string (optional); name: string (required); organization: string (optional); private: boolean (optional)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/create_repository.snap#L1-L69",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_file",
+        "description": "Delete a file from a GitHub repository",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "branch: string (required); message: string (required); owner: string (required); path: string (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/delete_file.snap#L1-L144",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_repository",
+        "description": "Delete a GitHub repository after the user confirms the exact owner/repository name",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/delete_repository.snap#L1-L56",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fork_repository",
+        "description": "Fork a GitHub repository to your account or specified organization",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organization: string (optional); owner: string (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/fork_repository.snap#L1-L79",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_commit",
+        "description": "Get details for a commit from a GitHub repository",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "detail: string (optional; enum 3 categories); owner: string (required); page: number (optional); perPage: number (optional); repo: string (required); sha: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/get_commit.snap#L1-L372",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_file_contents",
+        "description": "Get the contents of a file or directory from a GitHub repository",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fields: array (optional); owner: string (required); path: string (optional); ref: string (optional); repo: string (required); sha: string (optional)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/get_file_contents.snap#L1-L302",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_latest_release",
+        "description": "Get the latest release in a GitHub repository",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/get_latest_release.snap#L1-L177",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_release_by_tag",
+        "description": "Get a specific release by its tag name in a GitHub repository",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); repo: string (required); tag: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/get_release_by_tag.snap#L1-L182",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tag",
+        "description": "Get details about a specific git tag in a GitHub repository",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); repo: string (required); tag: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/get_tag.snap#L1-L141",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_branches",
+        "description": "List branches in a GitHub repository",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); page: number (optional); perPage: number (optional); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/list_branches.snap#L1-L37",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_commits",
+        "description": "Get list of commits of a branch in a GitHub repository. Returns at least 30 results per page by default, but can return more if",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "author: string (optional); fields: array (optional); owner: string (required); page: number (optional); path: string (optional); perPage: number (optional); repo: string (required); sha: string (optional); since: string (optional); until: string (optional)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/list_commits.snap#L1-L348",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_releases",
+        "description": "List releases in a GitHub repository",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fields: array (optional); owner: string (required); page: number (optional); perPage: number (optional); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/list_releases.snap#L1-L226",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_repository_collaborators",
+        "description": "List collaborators of a GitHub repository. Results are paginated; the response includes `nextPage`, `prevPage`, `firstPage`, and `lastPage` fields. To get the next page, use the",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "affiliation: string (optional; enum 3 categories); owner: string (required); page: number (optional); perPage: number (optional); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/list_repository_collaborators.snap#L1-L114",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_tags",
+        "description": "List git tags in a GitHub repository",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); page: number (optional); perPage: number (optional); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/list_tags.snap#L1-L37",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "push_files",
+        "description": "Push multiple files to a GitHub repository in a single commit",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "branch: string (required); files: array (required); message: string (required); owner: string (required); repo: string (required)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/push_files.snap#L1-L107",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_code",
+        "description": "Fast and precise code search across ALL GitHub repositories using GitHub's native search engine. Best for finding exact symbols, functions, classes, or specific code patterns.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fields: array (optional); order: string (optional; enum 2 categories); page: number (optional); perPage: number (optional); query: string (required); sort: string (optional)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/search_code.snap#L1-L58",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_commits",
+        "description": "Search for commits across GitHub repositories using GitHub's commit search syntax. Useful for finding specific changes, authors, or messages across one or many repositories. Searches",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "order: string (optional; enum 2 categories); page: number (optional); perPage: number (optional); query: string (required); sort: string (optional; enum 2 categories)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/search_commits.snap#L1-L401",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_repositories",
+        "description": "Find GitHub repositories by name, description, readme, topics, or other metadata. Perfect for discovering projects, finding examples, or locating specific repositories across GitHub.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "minimal_output: boolean (optional); order: string (optional; enum 2 categories); page: number (optional); perPage: number (optional); query: string (required); sort: string (optional; enum 4 categories)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/search_repositories.snap#L1-L279",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_users",
+        "description": "Find GitHub users by username, real name, or other profile information. Useful for locating developers, contributors, or team members.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "order: string (optional; enum 2 categories); page: number (optional); perPage: number (optional); query: string (required); sort: string (optional; enum 3 categories)",
+        "parameter_count": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/__toolsnaps__/search_users.snap#L1-L166",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_pull_request_with_copilot",
+        "description": "Perform a task with GitHub Copilot coding agent and create a pull request.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "owner: string (required); repo: string (required); problem_statement: string (required); title: string (required); base_ref: string (optional)",
+        "parameter_count": 5,
+        "source": "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/README.md#L1650-L1657",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "approximately 13334",
+    "token_method": "[LOCAL CODE @f385262] Serialized the 46 default public tool definitions' names, descriptions, input schemas, and annotations, plus default initialize instructions; added the hosted-only tool schema documented in README; divided character count by four. Estimate, not tokenizer output.",
+    "human_can_agent_cannot": "The MCP tool list exposes selected GitHub API operations, not every action available in GitHub's web product or REST/GraphQL APIs. Examples outside the default tool inventory include actions, notifications, discussions, projects, gists, security alerts, governance, labels, and other separately selectable toolsets. GitHub also offers account, billing, settings, organization-administration, and Copilot plan controls that are not listed as default MCP actions. Sources: https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/remote-server.md ; https://docs.github.com/en/rest ; https://docs.github.com/en/graphql",
+    "sources": [
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/README.md",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/remote-server.md",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/tools.go",
+      "https://github.com/features/copilot/plans",
+      "https://mcp.tc/i/github",
+      "https://apitracker.io/mcp-server/registry/io.github.github/github-mcp-server",
+      "https://claude.com/connectors/github"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Server instructions direct the agent to call get_me first, check issue types, search before creating issues, set state_reason when closing, follow a specified PR review sequence, and search repository templates before creating a PR. The documented create_pull_request_with_copilot description says, \"You can guess the owner, but confirm it with the user before proceeding.\" These are prompt/tool-description guidance; the server enforces the separate delete_repository elicitation flow.",
+    "governance_promises": "GitHub's governance document states: \"Authentication: Required for all operations, no anonymous access\"; \"Authorization: Access enforced by GitHub's native permission model\"; and \"All underlying API calls are logged in GitHub's audit log when available.\" It also says access cannot exceed what the user or app could normally access through the API. The general privacy statement includes code, inputs, AI outputs, text, documents, and feedback among content GitHub may collect. No MCP-specific retention or model-training promise was located.",
+    "promises_to_user": "GitHub describes the hosted remote server as requiring no local setup or runtime and announced it as generally available. Documentation says the server is available regardless of GitHub plan, while individual tools retain their feature entitlement requirements.",
+    "comparison_with_server_logic": "The public code supports bearer-authenticated API access, GitHub permission-aware operation, toolset/read-only filters, input checks, and repository-deletion confirmation. The exact hosted enforcement and logging infrastructure are partly internal. Agent workflow instructions are context text, not enforcement. General privacy collection terms are not MCP-specific guarantees.",
+    "sources": [
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/pkg/github/toolset_instructions.go",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf674f/docs/policies-and-governance.md",
+      "https://github.com/github/github-mcp-server/blob/f38526264abb14961b32cea386e38ec6d3cf/pkg/github/repositories.go",
+      "https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement",
+      "https://github.blog/changelog/2025-09-04-remote-github-mcp-server-is-now-generally-available/",
+      "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/use-the-github-mcp-server"
+    ]
+  },
+  "contradictions": [
+    "Resource metadata advertises repo, read:org, read:user, user:email, read:packages, write:packages, read:project, project, gist, notifications, while the authorization-server document lists only offline_access under scopes_supported. These are different metadata documents and do not explain how resource scopes are negotiated.",
+    "The general GitHub Docs page says the MCP server is available regardless of plan, while the linked Copilot plan page makes Copilot Cloud Agent unavailable on Free; the tool documentation clarifies that individual MCP tools inherit their feature and subscription requirements."
+  ],
+  "observations_for_research": [
+    "Server-level initialize instructions steer sequencing and workflow, while only selected actions have corresponding server-side checks such as exact-name repository deletion elicitation.",
+    "Tool availability is shaped at endpoint level by toolset path, read-only path/header, feature flags, and token permissions, so the root endpoint represents a subset of the hosted server's possible inventories.",
+    "The hosted endpoint is built from public library code plus an internal repository; remote-only Copilot and documentation-search tools mean public local tool definitions do not completely enumerate the hosted service."
+  ],
+  "confidence": "High (open code)",
+  "notes": "Checked links.json, pages/INDEX.txt, official cached pages and scripts, repository at pinned commit f38526264abb14961b32cea386e38ec6d3cf674f, policy and remote-server docs, and captured catalogue pages. The hosted endpoint and its install path require OAuth, so the actual tools/list response was not obtained; default inventory is derived from the official default-toolset documentation and public code. Copilot terms URL in the evidence folder returned 404; GitHub's general privacy statement and terms were used. Pricing cache fetch was incomplete; official plans page was checked in web search on the analysis date. Unofficial third-party GitHub MCP wrappers appeared in search results but were not used as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 33.5
+  }
+}

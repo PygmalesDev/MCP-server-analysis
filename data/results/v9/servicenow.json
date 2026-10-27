@@ -1,0 +1,322 @@
+{
+  "server": "servicenow",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://developer.service-now.com/api/mcp",
+    "documentation_url_csv": "",
+    "addressing": "per customer",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125",
+      "https://www.servicenow.com/docs/r/zurich/intelligent-experiences/mcp-platform-manager-landing.html",
+      "https://www.servicenow.com/docs/r/intelligent-experiences/create-mcp-server.html",
+      "https://www.servicenow.com/platform/action-fabric.html",
+      "https://claude.com/marketplace/connectors/servicenow",
+      "https://composio.dev/toolkits/servicenow"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official repository for this endpoint was found. ServiceNow's official docs describe configurable MCP Server Console deployments at customer instance URLs; evidence does not establish that those deployments share this developer-domain endpoint.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "ServiceNow MCP Server Console creates customer-instance endpoints of the form https://<instance>.service-now.com/sncapps/mcp-server/mcp/<server-name>; the documented Quickstart Server is named sn_mcp_server_default.",
+      "Official pre-built domain-specific MCP servers include ITSM and ITOM; the ITOM MCP Server requires activation and supporting plugins."
+    ],
+    "sources": [
+      "https://developer.service-now.com/api/mcp",
+      "https://developer.service-now.com/api/mcp/install",
+      "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125",
+      "https://www.servicenow.com/docs/r/intelligent-experiences/create-mcp-server.html",
+      "https://www.servicenow.com/docs/r/it-operations-management/now-assist-for-it-operations-management/activate-itom-mcp-server.html"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No pricing for the specified developer-domain endpoint was found. The official MCP Server Console FAQ advises contacting the account team about pricing; it does not specify an MCP-specific fee.",
+    "linked_software": "Paid",
+    "linked_software_cost": "ServiceNow publishes no fixed prices in the reviewed official MCP materials; pricing is quote-based through the account team.",
+    "pricing_model_details": "NOT FOUND for this endpoint; official FAQ discussion directs pricing inquiries to the account team.",
+    "other_access_restrictions": "The endpoint responds HTTP 401 with WWW-Authenticate: Basic realm=\"Service-now\" and an unauthenticated error. Its OAuth protected-resource and authorization-server well-known URLs returned 404; the openid-configuration path returned an HTML ServiceNow page, not OAuth metadata.",
+    "restrictions_controlled_by": "The endpoint's operator controls authentication; customer-instance MCP Server Console configurations are controlled by ServiceNow administrators, per the separate official documentation.",
+    "sources": [
+      "https://developer.service-now.com/api/mcp",
+      "https://developer.service-now.com/.well-known/oauth-protected-resource",
+      "https://developer.service-now.com/.well-known/oauth-protected-resource/api/mcp",
+      "https://developer.service-now.com/.well-known/oauth-authorization-server",
+      "https://developer.service-now.com/.well-known/openid-configuration",
+      "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned an authentication error; no tools/list response or endpoint-specific tool list was available. ServiceNow docs describe tools for separate customer-instance MCP servers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Endpoint returned HTTP 401 and JSON error: {\"error\":{\"message\":\"User is not authenticated\",\"detail\":\"Required to provide Auth information\"},\"status\":\"failure\"}.",
+      "authorization_mechanism": "Basic challenge observed at endpoint; successful authentication mechanism NOT FOUND.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.service-now.com/api/mcp",
+        "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific evidence. The official MCP Server Console FAQ says its configurable instance-hosted servers do not support MCP resources at the time of that FAQ.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp",
+        "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific evidence. The official MCP Server Console FAQ says its configurable instance-hosted servers do not support MCP prompts at the time of that FAQ.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp",
+        "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Endpoint logging is undocumented. For MCP Server Console deployments, the vendor describes audit history through AI Gateway when the server is managed there.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp",
+        "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific documentation or successful initialization exchange was available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific documentation or successful initialization exchange was available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Endpoint returned HTTP 401 with WWW-Authenticate: Basic realm=\"Service-now\" and JSON message “User is not authenticated” / “Required to provide Auth information.” The provided origin-level and path-specific oauth-protected-resource URLs and oauth-authorization-server URL returned HTTP 404. The openid-configuration URL returned HTTP 200 HTML for the ServiceNow Developer Program, not an OAuth metadata document. No scopes, registration endpoint, grant types, PKCE data, token lifetime, or revocation data were obtained for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP 401 JSON error response as recorded above.",
+      "authorization_mechanism": "Basic challenge observed; OAuth metadata unavailable. Raw supplied metadata results: /.well-known/oauth-protected-resource = 404; /.well-known/oauth-protected-resource/api/mcp = 404; /.well-known/oauth-authorization-server = 404; /.well-known/openid-configuration = 200 HTML page, not OAuth metadata. No scopes_supported or DCR evidence for this endpoint.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.service-now.com/api/mcp",
+        "https://developer.service-now.com/.well-known/oauth-protected-resource",
+        "https://developer.service-now.com/.well-known/oauth-protected-resource/api/mcp",
+        "https://developer.service-now.com/.well-known/oauth-authorization-server",
+        "https://developer.service-now.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific evidence found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific evidence found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific configuration controls or query parameters were found. Separate MCP Server Console documentation describes configurable instance-hosted servers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp",
+        "https://www.servicenow.com/docs/r/intelligent-experiences/create-mcp-server.html"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Only the unauthenticated HTTP 401 JSON response was observed; other error behavior is unknown.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Observed unauthenticated error: {\"error\":{\"message\":\"User is not authenticated\",\"detail\":\"Required to provide Auth information\"},\"status\":\"failure\"}.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific evidence found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific evidence found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific evidence found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific initialize instructions, server card, MCP Apps, or other extension metadata was obtained.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.service-now.com/api/mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Endpoint tools and annotations: Unknown; no tools/list response. Separate Console docs support read/write capabilities but publish no annotations for this endpoint. 2. Server-enforced confirmation: Unknown. Console docs describe AI Gateway approval workflows for client connections, not per-call confirmation enforcement. 3. Permissions: endpoint auth details unknown beyond Basic challenge; supplied OAuth metadata endpoints yielded no metadata. Console variant uses Authorization Code OAuth, manual client registration, user or integration-user identity, roles, ACLs, and optional third-party IDPs. 4. Modes: endpoint restrictions unknown. Console variant offers per-server tool catalogs and scoped use-case servers; docs do not establish endpoint filters or read-only mode. 5. PII protection: endpoint unknown. Console variant says AI Gateway can detect/block regulated patterns when enabled; without it, no automated interception layer. 6. Limits: unknown for endpoint. 7. Validation/correction: unknown. 8. Logging: unknown for endpoint; Console AI Gateway offers usage, latency, connection health, executions and exportable audit history when configured. 9. Feedback/upsell: no endpoint tool list to inspect; none evidenced. 10. Instructions/skills: unknown for endpoint; separate Console FAQ recommends descriptions that explain what tools do and when to call them. 11. Memory/state: unknown. 12. Structure: endpoint architecture unknown; ServiceNow separately documents configurable Console servers and pre-built domain servers. 13. Escape-hatch tools: unknown for endpoint; no endpoint action list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[OFFICIAL ServiceNow MCP Server Console FAQ, separate instance-hosted server guidance] “Every tool description should answer two questions: what does this tool do, and when should it be called?”",
+      "[OFFICIAL ServiceNow MCP Server Console FAQ, separate instance-hosted server guidance] “The recommended approach is one server per use case.”"
+    ],
+    "server_structure": "Unknown",
+    "server_structure_explanation": "No evidence describes the endpoint's architecture. ServiceNow's separate MCP Server Console product supports configurable and pre-built domain-specific servers; that does not establish this endpoint's structure.",
+    "sources": [
+      "https://developer.service-now.com/api/mcp",
+      "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "0 confirmed for this endpoint; actual count unknown",
+    "action_count_comment": "No official tool list for https://developer.service-now.com/api/mcp was found; its endpoint and /install page returned 401. The ServiceNow MCP Server Console FAQ is an official tool reference for a separate, configurable instance-hosted product, not this endpoint; it lists four Quickstart Server names depending on installed apps. Claude's connector directory gives no machine tool names. Composio reports 171 toolkit tools but describes a proxy/direct-API integration; it does not establish names exposed by this endpoint, so none are added. Official endpoint list: 0 names found; catalogues added: 0. The input endpoint's actual tools could not be enumerated.",
+    "actions": "see actions.json",
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code, initialize instructions, or successful tools/list response for the endpoint was available.",
+    "human_can_agent_cannot": "Unknown for this endpoint. ServiceNow's separate MCP Server Console documentation describes a broad configurable set of tool types, but the exact exposed tools depend on server configuration and installed apps; it cannot establish this endpoint's feature boundary. Sources: https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125 ; https://www.servicenow.com/docs/r/intelligent-experiences/create-mcp-server.html",
+    "sources": [
+      "https://developer.service-now.com/api/mcp",
+      "https://developer.service-now.com/api/mcp/install",
+      "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125",
+      "https://claude.com/marketplace/connectors/servicenow",
+      "https://composio.dev/toolkits/servicenow"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The separate Console FAQ advises: “Every tool description should answer two questions: what does this tool do, and when should it be called?” It also recommends one server per use case. These are configuration recommendations; no evidence connects them to enforcement at the input endpoint.",
+    "governance_promises": "The Console FAQ says: “Your ServiceNow instance retains access control and policy enforcement over every interaction.” It describes existing ACLs and role/field security applying to Console tool calls, while automated sensitive-data detection and audit history require AI Gateway configuration.",
+    "promises_to_user": "ServiceNow describes Action Fabric as enabling governed ServiceNow actions for AI agents. These product-level claims concern Action Fabric/Console; endpoint-specific claims were not found.",
+    "comparison_with_server_logic": "The endpoint's only observed behavior was an unauthenticated 401. No server-side implementation or successful interaction was available to verify the separate Console FAQ's governance claims for this endpoint.",
+    "sources": [
+      "https://www.servicenow.com/community/servicenow-otto-articles/mcp-server-console-faq/ta-p/3550125",
+      "https://www.servicenow.com/platform/action-fabric.html",
+      "https://developer.service-now.com/api/mcp"
+    ]
+  },
+  "contradictions": [
+    "The supplied endpoint is at developer.service-now.com/api/mcp and returns a Basic-auth 401, while ServiceNow's official MCP Server Console documentation describes customer-instance endpoints under /sncapps/mcp-server/mcp/<server-name>. The available evidence does not establish these as the same server.",
+    "The official MCP Server Console FAQ lists four Quickstart Server tools under app-install conditions, but those names are not confirmed for the input endpoint and therefore are not included in actions.",
+    "Composio lists 171 ServiceNow toolkit tools, but its page describes a Composio toolkit supporting MCP or direct API integration; it is not an official list for the input endpoint."
+  ],
+  "observations_for_research": [
+    "ServiceNow documents administrator-configured tool catalogs and instance-specific URLs for MCP Server Console, suggesting exposure can vary by customer configuration; no evidence ties that framework to this developer-domain endpoint.",
+    "The provided OAuth well-known URLs yielded no metadata for the endpoint; the observed Basic authentication challenge does not reveal its successful authorization flow."
+  ],
+  "confidence": "Low (third-party / sparse docs)",
+  "notes": "Checked links.json, pages/INDEX.txt, endpoint snapshots, official docs and community FAQ, available catalogue pages, links_check.txt, and the supplied OAuth responses. Official docs pages fetched in the evidence folder were largely generic anti-bot placeholders; browsed official docs and the vendor's official Community FAQ were used as best-available evidence and kept distinct from the input endpoint. No official source-code repository for this endpoint was found. Unofficial community servers are listed in links.json and excluded. No official endpoint-specific pricing, license, protocol version, exact tool names, server instructions, annotations, or successful authorization flow was found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.2
+  }
+}

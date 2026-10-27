@@ -1,0 +1,571 @@
+{
+  "server": "slack",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.slack.com/mcp",
+    "documentation_url_csv": "https://docs.slack.dev/ai/slack-mcp-server/",
+    "addressing": "global",
+    "repository_url": "https://github.com/slack-samples/bolt-js-slack-mcp-server",
+    "documentation_urls_used": [
+      "https://docs.slack.dev/ai/slack-mcp-server/",
+      "https://docs.slack.dev/ai/slack-mcp-server/developing/",
+      "https://docs.slack.dev/ai/slack-mcp-server/connect-to-harnesses/",
+      "https://docs.slack.dev/ai/slack-skills-plugin/",
+      "https://docs.slack.dev/ai/mcp-overview/",
+      "https://docs.slack.dev/changelog/2026/02/17/slack-mcp",
+      "https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server",
+      "https://slack.com/help/articles/54548358406419-Manage-access-to-the-Slack-MCP-server-through-your-identity-provider"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public bolt-js-slack-mcp-server repository is a sample Slack app/client that connects to Slack’s hosted MCP server; it is not the hosted server implementation. The slackapi/slack-skills-plugin repository is a companion skills collection, not the server implementation.",
+    "mcp_protocol_version": "JSON-RPC 2.0 over Streamable HTTP; MCP specification version NOT FOUND",
+    "commit_hash": "e246c4cfc767847340e04103aacd449a19d14a28",
+    "commit_date": "2026-10-26",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "N/A for closed hosted server; sample repository license applies to sample only",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Slack’s separate Slackbot MCP client connects Slackbot to third-party MCP servers; it is a client feature, not another server endpoint. https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server"
+    ],
+    "sources": [
+      "https://docs.slack.dev/ai/slack-mcp-server/",
+      "https://github.com/slack-samples/bolt-js-slack-mcp-server",
+      "https://github.com/slackapi/slack-skills-plugin"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No standalone MCP server fee or MCP-specific price is stated in the reviewed docs. Access requires a registered Slack app and user authorization; only Slack Marketplace-published or internal apps are permitted. https://docs.slack.dev/ai/slack-mcp-server/",
+    "linked_software": "Paid",
+    "linked_software_cost": "Slack plan pricing varies by plan and region; the official pricing page was collected incompletely and exact amounts could not be verified in the prepared evidence. https://slack.com/pricing",
+    "pricing_model_details": "Slack Web API rate limits apply by tool/action type. The official MCP overview lists tiers including Tier 2 (20+ per minute), Tier 3 (50+ per minute), Tier 4 (100+ per minute), and special limits for message/file search and sending. https://docs.slack.dev/ai/slack-mcp-server/",
+    "other_access_restrictions": "A registered Slack app with fixed app ID is required; app must be Marketplace-published or internal. Workspace admins can approve and manage MCP client integrations. Configured app IP allowlists also apply. Enterprise+ customers using Okta can manage access through their identity provider; Enterprise-Managed Authorization is documented for Slack Enterprise+ and Claude Team/Enterprise. https://docs.slack.dev/ai/slack-mcp-server/ https://slack.com/help/articles/54548358406419-Manage-access-to-the-Slack-MCP-server-through-your-identity-provider",
+    "restrictions_controlled_by": "Slack controls eligibility and platform behavior; workspace/org admins control app approval and identity-provider provisioning; app owners configure app identity and any IP allowlist.",
+    "sources": [
+      "https://docs.slack.dev/ai/slack-mcp-server/",
+      "https://slack.com/pricing",
+      "https://slack.com/help/articles/54548358406419-Manage-access-to-the-Slack-MCP-server-through-your-identity-provider"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted tools search Slack content, read and send/schedule/draft messages, manage conversations, reactions, canvases, users, files and lists. Official documentation describes tool categories and rate limits but does not publish a single complete machine-readable tool schema. The attached actions.json records documented/native tool names and marks parameters unpublished where unavailable.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results and errors use MCP/JSON-RPC; detailed result schemas and error catalog were not found.",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed server documentation describes tools and OAuth but does not document MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-provided MCP prompts are documented in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Slack says requests are associated with the registered app for logging, rate limits and access control, and directs customers to audit MCP activity using associated audit logs. https://docs.slack.dev/ai/slack-mcp-server/",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability is documented in the reviewed server materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is documented in the reviewed server materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with JSON-RPC error missing_token and a Bearer challenge pointing to https://mcp.slack.com/.well-known/oauth-protected-resource. That resource metadata identifies https://mcp.slack.com as authorization server; bearer methods header/form; TLS-bound tokens false; and scopes_supported: canvases:read, canvases:write, channels:history, channels:read, channels:write, chat:write, emoji:read, files:read, files:write, groups:history, groups:read, groups:write, im:history, im:read, im:write, lists:read, lists:write, mpim:history, mpim:read, mpim:write, reactions:read, reactions:write, search:read.files, search:read.im, search:read.mpim, search:read.private, search:read.public, search:read.users, users:read, users:read.email. Authorization-server metadata advertises authorization_code, refresh_token, and urn:ietf:params:oauth:grant-type:jwt-bearer; token endpoint auth client_secret_post; PKCE S256; authorization endpoint https://slack.com/oauth/v2_user/authorize; token endpoint https://slack.com/api/oauth.v2.user.access. Slack docs say no Dynamic Client Registration and require a registered app with fixed app ID and client secret. Metadata does not establish token lifetime or revocation behavior.",
+      "pre_interaction_context_verbatim": "HTTP 401; WWW-Authenticate: Bearer resource_metadata=\"https://mcp.slack.com/.well-known/oauth-protected-resource\"; {\"jsonrpc\":\"2.0\",\"id\":null,\"error\":{\"code\":-32001,\"message\":\"missing_token\"}}",
+      "post_interaction_context_structure": "Unauthenticated requests return JSON-RPC 2.0 error object; authenticated tool result schemas not published in reviewed docs.",
+      "authorization_mechanism": "OAuth protected-resource metadata and authorization-server metadata; confidential OAuth with pre-registered Slack app, fixed app ID/client ID and client secret; authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer; client_secret_post; PKCE S256. No DCR per official docs; registration_endpoint absent from metadata. Token lifetime/revocation not found. The resource metadata advertises bearer_methods_supported header and form and the full scopes_supported list above.",
+      "authorization_server": "https://mcp.slack.com",
+      "sources": [
+        "https://mcp.slack.com/mcp",
+        "https://mcp.slack.com/.well-known/oauth-protected-resource",
+        "https://mcp.slack.com/.well-known/oauth-authorization-server",
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation interaction is documented. OAuth consent and app installation are documented outside MCP tool execution.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks support is documented in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Slack app settings configure the MCP feature, OAuth scopes, redirect URLs, app identity and optional allowed IP ranges. Documentation presents one global Streamable HTTP endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/",
+        "https://docs.slack.dev/ai/slack-mcp-server/developing/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The unauthenticated endpoint returns a JSON-RPC error with code -32001 and message missing_token. Other tool error formats are not described.",
+      "pre_interaction_context_verbatim": "{\"jsonrpc\":\"2.0\",\"id\":null,\"error\":{\"code\":-32001,\"message\":\"missing_token\"}}",
+      "post_interaction_context_structure": "JSON-RPC error object observed for missing credentials; other errors unknown.",
+      "sources": [
+        "https://mcp.slack.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Slack explicitly says SSE-based connections are unsupported. The documented transport is Streamable HTTP.",
+      "pre_interaction_context_verbatim": "\"We do not support SSE-based connections or Dynamic Client Registration at this time.\"",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notification behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation behavior is documented in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP server is hosted and managed by Slack; client apps need a fixed registered app identity. Documentation identifies workspace admins as able to approve/manage integrations.",
+      "pre_interaction_context_verbatim": "\"Since Slack hosts and manages the MCP Server, handling the tool logic on your behalf, implementing the connection is simple.\"",
+      "post_interaction_context_structure": "N/A",
+      "sources": [
+        "https://docs.slack.dev/ai/slack-mcp-server/",
+        "https://docs.slack.dev/ai/slack-mcp-server/developing/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Tools include read operations and writes such as sending/scheduling messages, creating conversations, reactions, canvases, lists and uploading files. Official docs do not publish readOnlyHint, destructiveHint, idempotentHint or openWorldHint annotations. 2. No server-enforced confirmation parameter or MCP elicitation is documented. Slack describes draft/format/preview messages in AI clients; the file upload flow requires a second completion call before the file becomes visible. 3. OAuth user scopes are listed by tool; docs describe user-authorized actions on the user’s behalf. App approval, Marketplace/internal app eligibility and optional IP allowlisting apply. Workspace admins manage approved integrations; Enterprise+ IdP options are documented. 4. No read-only endpoint, toolsets filter or query-free mode documented; one Streamable HTTP endpoint. SSE unsupported. 5. Search supports content and metadata filters; full profile information includes custom fields/statuses. No MCP-specific masking documented. 6. Per-tool/action Web API rate limits apply; overview lists Tier 2/3/4 and special limits. 7. Parameter validation/correction behavior not documented. 8. Slack says requests are associated with app for logging, rate limits and access control; advises audit via associated audit logs. Telemetry/retention specifics not found. 9. No vendor feedback/rating/reporting tool is named in the documented MCP tool categories; no tool-level upsell found. 10. Slack’s companion skills plugin distributes skills outside MCP. No server-delivered skill tool documented. 11. Cross-session memory/state behavior not documented. 12. Flat documented hosted service; no sub-server hierarchy described. 13. No raw API/SQL/script escape hatch documented.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“Call the slack_get_file_upload_url tool to get a signed upload URL and file ID, then POST your file bytes to that URL.”",
+      "“Call the slack_complete_file_upload tool with the file ID to finalize it, optionally sharing the file to a channel with a message.”",
+      "“Draft messages — draft, format, and preview messages directly within AI clients.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "Documentation describes one hosted MCP endpoint with a flat collection of Slack tools.",
+    "sources": [
+      "https://docs.slack.dev/ai/slack-mcp-server/",
+      "https://docs.slack.dev/ai/slack-mcp-server/developing/",
+      "https://slack.com/help/articles/54548358406419-Manage-access-to-the-Slack-MCP-server-through-your-identity-provider"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "28",
+    "action_count_comment": "The official overview is https://docs.slack.dev/ai/slack-mcp-server/ and describes tool categories and operations, but does not expose a single exact-name, schema-complete list or state a numeric total. Names in actions.json are taken from Slack’s official documentation and companion Slack skills references; descriptions are summarized from the official overview. Parameters are NOT PUBLISHED because the official reviewed sources do not provide the MCP schemas. No catalogue-only tools were added. Third-party catalogue pages were reviewed for cross-checking; neither was treated as authoritative for native names or schemas.",
+    "actions": [
+      {
+        "tool_name": "slack_search_public",
+        "description": "Search public Slack messages.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_search_public_and_private",
+        "description": "Search public and private Slack messages.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_search_files",
+        "description": "Search files in Slack.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_search_users",
+        "description": "Search workspace users.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_search_channels",
+        "description": "Search public and private channels.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_search_emoji",
+        "description": "Find custom workspace emoji.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_list_user_channels",
+        "description": "List channels the user belongs to.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_read_file",
+        "description": "Read Slack file contents.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_read_channel",
+        "description": "Read channel message history.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_read_thread",
+        "description": "Read a conversation thread.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_send_message",
+        "description": "Send a Slack message.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_send_message_draft",
+        "description": "Create and preview a message draft.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_schedule_message",
+        "description": "Schedule a message.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_create_conversation",
+        "description": "Create a channel or direct conversation.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_add_reaction",
+        "description": "Add a reaction to a message.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_get_reactions",
+        "description": "Get message reactions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_create_canvas",
+        "description": "Create a Slack canvas.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_update_canvas",
+        "description": "Update a Slack canvas.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_read_canvas",
+        "description": "Read a canvas as Markdown.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_read_user_profile",
+        "description": "Read a user profile.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_list_channel_members",
+        "description": "List members of a channel.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_get_file_upload_url",
+        "description": "Get a signed file upload URL.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_complete_file_upload",
+        "description": "Complete a Slack file upload.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_create_list",
+        "description": "Create a Slack list.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_read_list",
+        "description": "Read list contents.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_update_list",
+        "description": "Update list metadata and columns.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_create_list_record",
+        "description": "Add a row to a Slack list.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "slack_update_list_record",
+        "description": "Update a row in a Slack list.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.slack.dev/ai/slack-mcp-server/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public server code or verbatim complete tool definitions/initialize instructions available; not computed.",
+    "human_can_agent_cannot": "Slack humans can perform product operations beyond the documented MCP set, including workspace administration, app management and configuration. The official MCP overview limits its described operations to Slack search, messages, conversations, reactions, canvases, user/profile, file and list operations; exact exhaustive UI/API-only differences were not published in the reviewed MCP reference. https://docs.slack.dev/ai/slack-mcp-server/ https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server",
+    "sources": [
+      "https://docs.slack.dev/ai/slack-mcp-server/",
+      "https://github.com/slackapi/slack-skills-plugin",
+      "https://integrations.sh/slack.com/slack-mcp-server/",
+      "https://www.letsauth.eu/mcp/servers/slack/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Slack recommends care when connecting multiple MCP servers and says clients give them access to Slack data as context. The upload workflow is documented as a two-step sequence; no evidence shows the server itself enforces the AI-facing recommendation to follow that sequence beyond requiring the file ID for completion.",
+    "governance_promises": "Slack says workspace admins can approve/manage MCP client integrations and app identity supports logging, rate limits and access control. It advises auditing MCP activity through associated audit logs. Documentation does not specify retention periods, AI training use, or MCP-specific masking.",
+    "promises_to_user": "Slack describes the connection as secure and says the server enables access to Slack data/actions on behalf of the authenticated user. Admin approval and user OAuth consent are described.",
+    "comparison_with_server_logic": "OAuth scopes and API rate limits are exposed through metadata/documentation. App approval and IP allowlists are documented controls. Audit logging is promised/documented but implementation details are not independently verifiable from public server code. No public implementation was found to verify other documentation claims.",
+    "sources": [
+      "https://docs.slack.dev/ai/slack-mcp-server/",
+      "https://docs.slack.dev/ai/slack-mcp-server/developing/",
+      "https://slack.com/help/articles/54548358406419-Manage-access-to-the-Slack-MCP-server-through-your-identity-provider"
+    ]
+  },
+  "contradictions": [
+    "The provided OAuth authorization-server metadata advertises grant_types_supported including refresh_token and jwt-bearer, while Slack’s overview describes confidential OAuth for MCP clients but does not enumerate those grant types. The metadata is the endpoint’s direct published value.",
+    "The resource metadata advertises bearer_methods_supported as header and form; the official docs discuss OAuth client token handling but do not describe form bearer-token use.",
+    "Official docs describe message drafting/previewing and list operations, but no complete official tool-name/schema listing was found; exact action names and parameters are therefore less directly documented than the capabilities."
+  ],
+  "observations_for_research": [
+    "The service uses confidential OAuth with pre-registered app identity rather than Dynamic Client Registration.",
+    "Slack delegates access control to user OAuth scopes and app/workspace approval, while applying the same Web API rate limits to MCP actions.",
+    "File upload is described as a two-call flow where the file remains invisible until completion.",
+    "Slack publishes a companion skills plugin separately from the hosted server."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ including HTML/script extracts and docs/help pages, and local repository copies. No public implementation of the hosted server was found. The official Slack skills-plugin repository and Bolt JS sample are not the deployed server; the latter is a sample app/client. Endpoint /mcp returned HTTP 401 missing_token; root OAuth protected-resource metadata was provided, while the path-suffixed resource metadata returned 404. Pricing page capture was incomplete, so exact current plan prices are omitted. Unofficial npm package @chinchillaenterprises/mcp-slack was noted but excluded as evidence. The 28 action entries in actions.json reflect documented operation categories and names available in official Slack references; official docs do not state an aggregate tool total or publish complete schemas.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.2
+  }
+}

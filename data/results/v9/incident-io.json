@@ -1,0 +1,1205 @@
+{
+  "server": "incident-io",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.incident.io/mcp",
+    "documentation_url_csv": "https://docs.incident.io/ai/remote-mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/incident-io/incidentio-mcp-golang",
+    "documentation_urls_used": [
+      "https://docs.incident.io/ai/remote-mcp",
+      "https://incident.io/changelog/remote-mcp-server",
+      "https://incident.io/blog/we-built-an-mcp-server-so-claude-can-access-your-incidents",
+      "https://incident.io/pricing",
+      "https://incident.io/legal/privacy",
+      "https://incident.io/legal/terms",
+      "https://incident.io/legal/data-processing-addendum",
+      "https://github.com/incident-io/skills"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public Go repository is an archived local prototype, which incident.io says was superseded by the hosted server in March 2026. The separate skills repository bundles configuration and agent skills, not the hosted server implementation.",
+    "mcp_protocol_version": "NOT FOUND (docs show 2025-11-25 as an example initialize request, not a confirmed server version)",
+    "commit_hash": "a6b65421105c4ebc65bc7da6b55bdd1b236507dc",
+    "commit_date": "2026-04-01",
+    "implementation_language": "Go (archived prototype; hosted implementation not public)",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "N/A for hosted server; legacy prototype is described as MIT licensed",
+    "release_status": "Public beta (per March 31, 2026 changelog)",
+    "other_official_servers": [
+      "The incident.io macOS app includes a local MCP server with the remote server's tools plus richer investigation and native UI support: https://docs.incident.io/ai/remote-mcp.",
+      "The docs site lists https://docs.incident.io/llms.txt as its documentation index; it is not the incident management MCP server."
+    ],
+    "sources": [
+      "https://docs.incident.io/ai/remote-mcp",
+      "https://incident.io/changelog/remote-mcp-server",
+      "https://incident.io/blog/we-built-an-mcp-server-so-claude-can-access-your-incidents",
+      "https://github.com/incident-io/incidentio-mcp-golang",
+      "https://github.com/incident-io/skills"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "No separate MCP fee is stated. The docs say it is available on Team, Pro, and Enterprise plans, not Basic. The changelog says the public beta opened to paying customers.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Official pricing page lists Basic as free; Team at $19 per user/month, with an annual-discount price shown as $15; Pro at $25 per user/month; Enterprise is custom-priced. On-call add-ons are separately priced.",
+    "pricing_model_details": "Subscription pricing is per user/month for Team and Pro; Enterprise is custom quoted. The MCP docs do not state per-call charges or MCP-specific quotas.",
+    "other_access_restrictions": "An organization admin enables the server in Settings → MCP. OAuth access follows the approving user's permissions and lasts 28 days before re-approval; API keys act as service actors and remain valid until deleted. Non-built-in OAuth redirect domains require admin allowlisting, with up to five allowed domains.",
+    "restrictions_controlled_by": "Vendor and organization admin; the approving user determines OAuth identity and permissions.",
+    "sources": [
+      "https://docs.incident.io/ai/remote-mcp",
+      "https://incident.io/changelog/remote-mcp-server",
+      "https://incident.io/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official docs publish 91 tool names and descriptions. The reference does not publish input schemas or tool annotations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool result and error schemas are not documented in the available official reference.",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe resource_list and resource_show tools and a config://organisation resource containing organization configuration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Resource result structure is not specified.",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-provided MCP prompts are described in the available hosted-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted-server docs do not describe MCP logging capability or a logging interface.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP sampling behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Provided evidence: POST https://mcp.incident.io/mcp returned HTTP 401 with WWW-Authenticate: Bearer resource_metadata=\"https://mcp.incident.io/mcp/.well-known/oauth-protected-resource\". Protected-resource documents returned HTTP 200 with authorization_servers=[\"https://mcp.incident.io/mcp\"] and resource=\"https://mcp.incident.io\". Authorization-server metadata returned issuer https://mcp.incident.io/mcp; authorization_endpoint https://app.incident.io/auth/plugin/authorize; token_endpoint https://app.incident.io/auth/plugin/token; registration_endpoint https://mcp.incident.io/mcp/oauth/register; grant_types_supported=[\"authorization_code\"]; response_types_supported=[\"code\"]; code_challenge_methods_supported=[\"S256\"]; token_endpoint_auth_methods_supported=[\"none\"]; id_token_signing_alg_values_supported=[\"RS256\"]; subject_types_supported=[\"public\"]; jwks_uri=https://mcp.incident.io/mcp/oauth/jwks. No scopes_supported field is present. Docs also describe API-key Bearer authentication; API keys can be created with selected scopes. OAuth connections last 28 days; API keys persist until deleted. Token revocation details are not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthorized requests receive HTTP 401 and a Bearer challenge directing clients to protected-resource metadata.",
+      "authorization_mechanism": "Metadata Doc and Dynamic Client Registration; authorization code grant with PKCE S256, public client, no token-endpoint client authentication. Raw metadata: registration_endpoint=https://mcp.incident.io/mcp/oauth/register; grant_types_supported=[\"authorization_code\"]; code_challenge_methods_supported=[\"S256\"]; token_endpoint_auth_methods_supported=[\"none\"]. scopes_supported is absent. Docs also describe API-key Bearer authentication with user-selected key scopes.",
+      "authorization_server": "https://mcp.incident.io/mcp",
+      "sources": [
+        "https://mcp.incident.io/.well-known/oauth-protected-resource",
+        "https://mcp.incident.io/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.incident.io/.well-known/oauth-authorization-server/mcp",
+        "https://mcp.incident.io/.well-known/openid-configuration/mcp",
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe a client-side prompt for approving feedback after tasks, but do not identify this as MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks support is described.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The organization enables the remote server from Settings → MCP. Tools can read organization configuration through resource_show and config://organisation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The configuration resource's full schema is not published in the tool reference.",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tool list includes feedback tools, but the docs do not describe an MCP protocol error-reporting capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notification behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs include server setup guidance and behavioral recommendations. They also describe API-key authentication alongside OAuth.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.incident.io/ai/remote-mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official tool table labels no tools with read-only, destructive, idempotent, or open-world annotations. Read/write labels in actions.json are inferred from tool descriptions and names. 2. No general server-enforced confirmation flow is documented. status_page_update only drafts; a human publishes. Feedback submission is described as requiring user approval in the assistant/client. 3. OAuth inherits the approving user's permissions; API keys use configured scopes and a service actor. Organization admins enable MCP and approve non-built-in redirect domains (up to five); built-in clients are trusted. OAuth lifetime is 28 days; API keys last until deleted. Revocation details are not documented. 4. No read-only mode, tool filter, URL mode, query-free mode, or regional endpoint is documented. Organizations enable the server in Settings → MCP. 5. Docs say users see the same data as in the dashboard; no MCP-specific masking, PII exclusion, or field-level boundaries are described. 6. No rate limits, quotas, per-call costs, or general result limits are stated. alert_tag_apply is described as applying tags to up to 50 alerts. 7. Tool input schemas and validation/correction behavior are not published. 8. MCP audit or telemetry behavior is not documented; privacy policy generally covers usage data and data communicated through the service. 9. feedback submits tool feedback; docs say the assistant prompts after tasks and asks the user to approve. No tool-list upsell is documented. ask, ask_incident, and ask_telemetry call incident.io AI agents. 10. Behavioral recommendations appear in docs; the separate official skills repository and plugin distribute skills outside the MCP protocol. 11. No persistent MCP-specific agent memory is described. 12. Tool list is flat; several tools call incident.io agents and connected telemetry/investigation sources. This is agent-to-agent behavior, not a documented nested MCP server. 13. No raw API, arbitrary SQL, or script execution tool is listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Before filtering or grouping, ask the tools for your organization’s configuration — it lists your severity levels, custom fields, roles, and other values you’ll need:",
+      "Before setting a custom field on an incident, use custom_field_values to find the values that field actually accepts.",
+      "When investigating an incident, always request the investigation and post-mortem data:",
+      "status_page_update only drafts.",
+      "Your AI assistant will prompt you about this after completing tasks — approve the feedback to help us prioritise improvements."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted endpoint with a flat tool list; some tools invoke incident.io agents or connected data sources.",
+    "sources": [
+      "https://docs.incident.io/ai/remote-mcp",
+      "https://incident.io/changelog/remote-mcp-server",
+      "https://incident.io/legal/privacy"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "91",
+    "action_count_comment": "An official tool list exists at https://docs.incident.io/ai/remote-mcp; it names 91 tools and states no total. All 91 official names are included in actions.json; no catalogue-only actions were added. The Claude connector directory lists 35 tools (a subset of the official list). Manufact also reports 35 and exposes a partial list. APIs.io reports 35. MCP.tc's captured page describes the server but gives no tool total. Agent Discoverability's 146 figure is a directory-level count, not this server's tool count.",
+    "actions": [
+      {
+        "tool_name": "action_create",
+        "description": "Create an action on an incident",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "action_delete",
+        "description": "Delete an incident action",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "action_list",
+        "description": "List incident actions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "action_update",
+        "description": "Update an existing action",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_attach",
+        "description": "Attach an existing alert to an incident",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_create_incident",
+        "description": "Declare an incident from one or more alerts",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_detach",
+        "description": "Detach an alert from an incident",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_list",
+        "description": "Search and browse alerts",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_resolve",
+        "description": "Resolve one or more firing alerts",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_show",
+        "description": "Full alert details with linked incidents",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_source_list",
+        "description": "List configured alert sources",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_stats",
+        "description": "Alert counts with workload from linked incidents",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_tag_apply",
+        "description": "Add, remove, or replace tags on up to 50 alerts",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "alert_tag_list",
+        "description": "List the alert tags available to apply",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "analysis_start",
+        "description": "Start a structured operational analysis with playbooks and report template",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ask",
+        "description": "AI agent for on-call queries, schedule management, and general questions",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ask_incident",
+        "description": "AI agent for incident investigation and management actions",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ask_telemetry",
+        "description": "AI agent for querying logs, metrics, traces, and dashboards",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "catalog_entry_list",
+        "description": "Browse entries in a catalog type",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "catalog_entry_show",
+        "description": "Full catalog entry with all attributes",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "catalog_type_list",
+        "description": "List catalog types (Service, Team, etc.)",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cover_request_create",
+        "description": "Ask for volunteers to cover a shift",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cover_request_list",
+        "description": "List cover requests and how candidates responded",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cover_request_manage",
+        "description": "Cancel a cover request, accept an offer, or remind candidates",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cover_request_respond",
+        "description": "Respond to a cover request you’re a candidate on",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "custom_field_values",
+        "description": "Look up the values a custom field accepts",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "document_search",
+        "description": "Search your synced runbooks, guides, and post-mortems",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "document_show",
+        "description": "Read a synced document’s full content",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "duration_metrics_stats",
+        "description": "Time to acknowledge, time to resolve, and other duration metrics with percentiles",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "escalation_create",
+        "description": "Page a user or an escalation path",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "escalation_list",
+        "description": "Search escalations (pages)",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "escalation_path_list",
+        "description": "List escalation paths",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "escalation_path_show",
+        "description": "Who would be paged at each level",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "escalation_respond",
+        "description": "Acknowledge or decline a page",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "escalation_show",
+        "description": "Full escalation details with transition history",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "escalation_stats",
+        "description": "Paging counts by path, priority, time of day",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_connector_list",
+        "description": "List connectors with their capabilities and connection health",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_plugin_create",
+        "description": "Load a plugin from a source-control repository",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_plugin_list",
+        "description": "List plugins with their skills and sync state",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_plugin_sync",
+        "description": "Re-sync a plugin from its source repository",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_plugin_update",
+        "description": "Enable, disable, rename, or change which skills agents load",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_skill_feedback_list",
+        "description": "Current feedback on a plugin’s skills",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_skill_feedback_update",
+        "description": "Dismiss or reopen a skill feedback issue",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_skill_usage_list",
+        "description": "List assessed skill loads, with the run behind each one",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_upload_url",
+        "description": "Get a URL to upload content that isn’t in a readable repository",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_verify",
+        "description": "Test proposed extension content before landing it",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extension_verify_show",
+        "description": "Show a verification’s status and result",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "external_service_list",
+        "description": "List the third-party services whose status pages we monitor",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "external_service_status",
+        "description": "Check a monitored vendor’s current status and recent changes",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "feedback",
+        "description": "Submit feedback about the tools",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "follow_up_create",
+        "description": "Create a follow-up on an incident",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "follow_up_list",
+        "description": "List post-incident follow-ups",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "follow_up_stats",
+        "description": "Follow-up counts grouped by owner, status, and more",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "follow_up_update",
+        "description": "Update an existing follow-up",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "help_query",
+        "description": "Ask how incident.io works, answered from our documentation",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "incident_create",
+        "description": "Create a new incident",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "incident_list",
+        "description": "Search and browse incidents with filters, sortable by workload",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "incident_merge",
+        "description": "Merge incidents that turn out to be the same problem",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "incident_message",
+        "description": "Post a finding into an incident’s channel",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "incident_show",
+        "description": "Full incident details with optional investigation, post-mortem, and update history",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "incident_stats",
+        "description": "Aggregate counts and workload by 10+ dimensions",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "incident_unmerge",
+        "description": "Reverse a merge, restoring an incident as standalone",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "incident_update",
+        "description": "Update incident fields (status, severity, roles, custom fields)",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "incident_update_list",
+        "description": "Full status update history for an incident",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "investigation_feedback",
+        "description": "Record whether an investigation was helpful",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "investigation_start",
+        "description": "Start an AI investigation for an incident",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "investigation_steer",
+        "description": "Redirect a running investigation’s hypothesis",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "investigation_sync",
+        "description": "Download a full investigation as an archive for LLM analysis",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "maintenance_window_alerts",
+        "description": "Count the alerts a maintenance window held back",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "maintenance_window_create",
+        "description": "Schedule a window where matching alerts don’t page",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "maintenance_window_delete",
+        "description": "Cancel a maintenance window that hasn’t started",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "maintenance_window_list",
+        "description": "List maintenance windows by status",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "maintenance_window_update",
+        "description": "Change a window’s name, lead, or times, or end one now",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "nexus_health_show",
+        "description": "Health of the AI data sources you’ve connected",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notification_pause_create",
+        "description": "Pause someone’s notifications so escalations skip them",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notification_pause_delete",
+        "description": "Cancel an upcoming pause, or end an active one now",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notification_pause_list",
+        "description": "List notification pauses for a user or schedule",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notification_pause_update",
+        "description": "Change a pause’s times or reason",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resource_list",
+        "description": "List the resources available to read",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resource_show",
+        "description": "Read organisation config, analysis playbooks, or telemetry datasources",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "schedule_list",
+        "description": "List on-call schedules",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "schedule_override_create",
+        "description": "Put someone on call, or clear the schedule, for a period",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "schedule_override_delete",
+        "description": "Remove an override, restoring the underlying rotation",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "schedule_show",
+        "description": "Schedule details with current and upcoming shifts",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "status_page_update",
+        "description": "Draft a status page update for a human to publish",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "suggestion_list",
+        "description": "List AI suggestions waiting on a human",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "team_list",
+        "description": "List teams",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "team_show",
+        "description": "Team details with owned escalation paths, alert sources, and schedules",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "telemetry_inspect",
+        "description": "Discover the real labels and metric names on a datasource",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "time_spent_stats",
+        "description": "Responder hours by person, period, or custom field",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "user_list",
+        "description": "Find users by name or email",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.incident.io/ai/remote-mcp",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted server initialize instructions and full tool schemas are not available; the public Go code is a superseded local prototype, not the deployed server.",
+    "human_can_agent_cannot": "A human must publish status page updates: the MCP tool only drafts them, and publishing sends email and text notifications to subscribers. The remote docs distinguish it from the macOS app, which has richer investigation display and native UI interactions. Sources: https://docs.incident.io/ai/remote-mcp",
+    "sources": [
+      "https://docs.incident.io/ai/remote-mcp",
+      "https://claude.com/connectors/incident-io",
+      "https://manufact.com/mcp-catalog/incident-io",
+      "https://apis.io/servers/incident-io/incident-io/",
+      "https://mcp.tc/i/incident-io",
+      "https://agentdiscoverability.com/track/chatgpt/incident-io"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Docs advise reading organization configuration before filtering/grouping and requesting investigation and post-mortem data for deeper analysis. These are agent-facing recommendations; the docs do not describe server enforcement.",
+    "governance_promises": "The changelog says OAuth inherits user permissions; docs say actions are attributed to the user and expose the same data as the dashboard. The privacy policy describes security measures and processing of personal data, usage data, and data communicated through the service.",
+    "promises_to_user": "The status-page tool drafts updates for human review; a person publishes them. The changelog describes the hosted server as officially supported and in public beta.",
+    "comparison_with_server_logic": "Permission inheritance is documented for OAuth, while API keys use service-actor identity and configured scopes. Human publication is reflected in the tool boundary because the listed tool drafts only. Other agent-facing workflow suggestions are not described as server-enforced.",
+    "sources": [
+      "https://docs.incident.io/ai/remote-mcp",
+      "https://incident.io/changelog/remote-mcp-server",
+      "https://incident.io/legal/privacy",
+      "https://incident.io/legal/data-processing-addendum"
+    ]
+  },
+  "contradictions": [
+    "Third-party catalogues report 35 tools (Claude connector directory, Manufact, and APIs.io), while the current official docs list 91. The catalogue counts are incomplete; no third-party-only actions were added.",
+    "The public Go prototype and its blog describe a local server, while the current hosted endpoint is a separate officially supported remote server. The vendor states the prototype was superseded."
+  ],
+  "observations_for_research": [
+    "The tool set combines incident-management operations, analysis and telemetry tools, extension-management functions, and tools that call incident.io AI agents.",
+    "The feedback tool is an explicit feedback channel; docs describe a client-mediated approval prompt after tasks.",
+    "The server supports both user OAuth and service-actor API-key authentication, with different permission inheritance and lifetimes."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ including embedded scripts, the OAuth evidence supplied with the task, the official docs, pricing and legal pages, third-party catalogues, and local repository copies. The hosted implementation is closed; the local Go prototype is explicitly superseded and was not used for hosted tool definitions. Official tool schemas, annotations, initialize instructions, and complete protocol-capability details were not found. The official docs table was extracted from its embedded page data. Unofficial server listings were not used as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 6.2
+  }
+}

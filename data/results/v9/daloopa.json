@@ -1,0 +1,440 @@
+{
+  "server": "daloopa",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.daloopa.com/mcp",
+    "documentation_url_csv": "https://docs.daloopa.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/daloopa/daloopa-plugin-claude; https://github.com/daloopa/daloopa-plugin-codex; https://github.com/daloopa/investing",
+    "documentation_urls_used": [
+      "https://docs.daloopa.com/docs/mcp",
+      "https://docs.daloopa.com/docs/daloopa-mcp",
+      "https://docs.daloopa.com/docs/mcp-authentication",
+      "https://docs.daloopa.com/docs/mcp-integrations",
+      "https://docs.daloopa.com/docs/mcp-prompts",
+      "https://docs.daloopa.com/docs/api-vs-mcp",
+      "https://docs.daloopa.com/docs/skills",
+      "https://docs.daloopa.com/docs/faq",
+      "https://docs.daloopa.com/docs/daloopa-privacy-and-data-collection-disclosure-for-mcp-access",
+      "https://www.daloopa.com/products/mcp",
+      "https://daloopa.com/privacy-policy"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repositories contain investing workflow code and Claude/Codex skill plugins, not the hosted MCP server implementation. The plugins depend on Daloopa MCP/tool access; none is identified as code running at the endpoint or a local equivalent.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "e2dd01d46adaad163079741ea55cf7f74765ff09",
+    "commit_date": "2026-07-22",
+    "implementation_language": "NOT FOUND for hosted server",
+    "mcp_sdk_and_version": "NOT FOUND for hosted server",
+    "code_public": "Partially",
+    "license": "Hosted server: N/A (closed); Claude and Codex plugin repositories have public licenses; investing repository license applies to that repository only.",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.daloopa.com/server/mcp — official financial-data MCP endpoint documented by Daloopa; differs from input path /mcp.",
+      "https://docs.daloopa.com/mcp — separate documentation-site KnowledgeBase MCP, reported at HTTP 403 in collected evidence; not the financial-data server."
+    ],
+    "sources": [
+      "https://docs.daloopa.com/docs/daloopa-mcp",
+      "https://docs.daloopa.com/docs/mcp-integrations",
+      "https://github.com/daloopa/investing",
+      "https://github.com/daloopa/daloopa-plugin-claude",
+      "https://github.com/daloopa/daloopa-plugin-codex",
+      "https://mcp.daloopa.com/mcp",
+      "https://mcp.daloopa.com/.well-known/oauth-protected-resource",
+      "https://mcp.daloopa.com/.well-known/oauth-authorization-server"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The MCP docs require Daloopa customer credentials but do not state a separate MCP price. No public MCP-specific price or limits found.",
+    "linked_software": "Paid",
+    "linked_software_cost": "NOT FOUND; official pages direct prospective users to contact Daloopa and publish no price.",
+    "pricing_model_details": "Daloopa's API-versus-MCP documentation describes predictable API pricing, but no MCP price or metering rate was found. The FAQ's monthly credit allowance describes Scout, not MCP, so it is not attributed to MCP.",
+    "other_access_restrictions": "Requires a Daloopa account/credentials. Expert-call transcripts are available only when enabled for the user's firm; Daloopa says to contact its representative to enable. No MCP-specific request rate limit found in available docs.",
+    "restrictions_controlled_by": "Vendor and customer account/firm configuration; documentation does not specify a per-tool user control for MCP.",
+    "sources": [
+      "https://docs.daloopa.com/docs/mcp-authentication",
+      "https://docs.daloopa.com/docs/daloopa-mcp",
+      "https://docs.daloopa.com/docs/api-vs-mcp",
+      "https://docs.daloopa.com/docs/faq"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Official reference lists 10 named tools; Tool Prompts documents 12 definitions, adding discover_comparable_companies_metrics and get_comparable_companies_fundamentals. No tool annotations or schemas are published in the list page; prompt signatures provide parameters.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific outputs are described in the official prompt reference; formats include lists of company/series/fundamental/document records, document content or section-required/refusal objects, skill instructions, transcripts, and OHLCV data. Errors may be strings.",
+      "sources": [
+        "https://docs.daloopa.com/docs/daloopa-mcp",
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No product-server resource listing or resource implementation description found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/daloopa-mcp",
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The vendor publishes tool prompts and separately distributes workflow skills. No MCP prompts/list capability is documented for the hosted server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/mcp-prompts",
+        "https://docs.daloopa.com/docs/skills"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The privacy disclosure states that access logs record user-level authentication events, accessed tickers, and usage frequency. It does not describe MCP protocol logging operations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/daloopa-privacy-and-data-collection-disclosure-for-mcp-access"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No sampling capability found in the hosted-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/daloopa-mcp",
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No roots capability found in the hosted-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/daloopa-mcp",
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Input endpoint returned HTTP 401 with WWW-Authenticate: Bearer resource_metadata=\"https://mcp.daloopa.com/.well-known/oauth-protected-resource\". Provided protected-resource JSON: resource https://mcp.daloopa.com/server/mcp; authorization_servers [https://mcp.daloopa.com]. Provided authorization-server JSON: issuer https://mcp.daloopa.com; authorization_endpoint /authorize; token_endpoint /token; registration_endpoint /register; response_types_supported [code]; grant_types_supported [authorization_code, urn:ietf:params:oauth:grant-type:saml2-bearer, refresh_token]; code_challenge_methods_supported [S256]; token_endpoint_auth_methods_supported [client_secret_post, none]. scopes_supported not present. The path-suffixed protected-resource URL returned 401 with the same metadata challenge; authorization-server path-suffixed metadata was not included in the supplied evidence. OpenID configuration returned 404. Docs additionally describe OAuth login, 24-hour API-key-generated bearer tokens, and direct X-API-KEY auth.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated endpoint responds HTTP 401 Unauthorized; authenticated result structure depends on the tool.",
+      "authorization_mechanism": "Metadata Doc / Dynamic Client Registration / OAuth authorization code with PKCE S256; grants include authorization_code, urn:ietf:params:oauth:grant-type:saml2-bearer, refresh_token; token auth client_secret_post or none; registration endpoint /register; scopes_supported absent. Docs describe API-key token generation (24-hour bearer) and direct X-API-KEY authentication. Token lifetime/revocation for OAuth not found.",
+      "authorization_server": "https://mcp.daloopa.com",
+      "sources": [
+        "https://mcp.daloopa.com/mcp",
+        "https://mcp.daloopa.com/.well-known/oauth-protected-resource",
+        "https://mcp.daloopa.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.daloopa.com/.well-known/oauth-authorization-server",
+        "https://mcp.daloopa.com/.well-known/openid-configuration",
+        "https://docs.daloopa.com/docs/mcp-authentication"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP elicitation mechanism documented. Tool guidance sometimes instructs the agent to ask the user for inputs or a document section, but server-enforced elicitation is not established.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No task capability found in hosted-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/daloopa-mcp",
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Users configure the documented remote server URL in MCP clients. Integrations documentation also shows client-specific configuration; no server-side toolset/query-free URL parameters or admin configuration options found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/mcp-integrations"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Tool prompt descriptions indicate some calls may return a message string on failure, but no standardized MCP error-reporting feature is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Some tools may return a string message on error; protocol error format unknown.",
+      "sources": [
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No subscription capability in the MCP protocol is documented. Account access and firm feature enablement are described outside MCP.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/mcp-authentication",
+        "https://docs.daloopa.com/docs/daloopa-mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No progress notifications or tracking capability found in hosted-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/daloopa-mcp",
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No cancellation capability found in hosted-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.daloopa.com/docs/daloopa-mcp",
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The prompt reference includes server-wide instructions in an example FastMCP definition and extensive per-tool prompting. It is documentation for developers building on Daloopa's APIs; no evidence establishes that this exact initialize instruction text is sent by the hosted server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not applicable",
+      "sources": [
+        "https://docs.daloopa.com/docs/mcp-prompts"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Read/write: vendor describes MCP as read-only; all 12 documented tools retrieve/search data or skill instructions. No annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are published. 2. Confirmation: no server-enforced confirmation mechanism documented. Tool text asks agents to ask for user inputs in some workflows; not an approval gate for data writes. 3. Permissions: OAuth metadata identifies authorization server and grants, but no scopes_supported; docs describe Daloopa login, API-key token (24 hours), and X-API-KEY. User-role inheritance, revocation, allowlists, OAuth lifetime, and redirect approval not found. Expert transcripts require firm feature enablement. 4. Modes: no read-only switch, tool filters, query-free mode, or regional MCP endpoint documented. Product is described as read-only; expert calls are feature-gated. 5. Data protection: Daloopa privacy disclosure says access logs cover authentication events, accessed tickers, and usage frequency; prompts/queries and LLM outputs are not systematically collected/stored. It claims encrypted transit and restricted/audited internal access. 6. Limits: document search prompt says 1–10 keywords, up to 10 matching documents, and 120 requests/minute/API key; get_document_content caps returned content at MCP_SECTION_MAX_CHARACTERS without publishing its value. Other limits not found. 7. Validation/correction: prompts specify date formats, required inputs and workflow rules; server-side rejection, coercion, or operator overrides are not documented. 8. Monitoring: privacy disclosure says access logs and internal analytics; no opt-out or MCP action audit detail documented. 9. Vendor-interest: no feedback/rating/survey/report tool in the official tool list; no MCP upsell messages identified. 10. Behaviour: official tool descriptions include proactive-call, citation, formatting, period-selection, and ask-before-fetching instructions; external Claude/Codex plugins distribute 21 skills but are not tools in the hosted server list. 11. Memory/state: no agent-history-dependent behavior documented; firm feature enablement affects transcript availability. 12. Structure: one flat tool list documented for financial endpoint; docs search MCP is a separate endpoint. 13. Escape hatches: no raw API, SQL, script, or arbitrary request tool listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "\"DO NOT wait for the user to explicitly request a document search.\" — https://docs.daloopa.com/docs/mcp-prompts (search_documents)",
+      "\"Call this tool FIRST, without waiting for the user to ask for it, whenever the user wants a structured deliverable or repeatable analysis\" — https://docs.daloopa.com/docs/mcp-prompts (list_skills)",
+      "\"Do NOT auto-pick a section. Once the user chooses one, call get_document_content again with that section argument.\" — https://docs.daloopa.com/docs/mcp-prompts (get_document_content)",
+      "\"NEVER present document search results without hyperlink citations.\" — https://docs.daloopa.com/docs/mcp-prompts (search_documents)",
+      "\"At the end of results and artifacts, always add \\\"Data sourced from Daloopa\\\"\" — https://docs.daloopa.com/docs/mcp-prompts"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The financial-data endpoint is documented as one remote MCP URL with a flat tool set; the separate docs-site MCP is another server and not a nested component.",
+    "sources": [
+      "https://docs.daloopa.com/docs/daloopa-mcp",
+      "https://docs.daloopa.com/docs/mcp-prompts",
+      "https://docs.daloopa.com/docs/mcp-authentication",
+      "https://docs.daloopa.com/docs/daloopa-privacy-and-data-collection-disclosure-for-mcp-access",
+      "https://docs.daloopa.com/docs/mcp-integrations",
+      "https://docs.daloopa.com/docs/skills",
+      "https://mcp.daloopa.com/.well-known/oauth-protected-resource",
+      "https://mcp.daloopa.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "12",
+    "action_count_comment": "Official list exists at https://docs.daloopa.com/docs/daloopa-mcp: it names 10 tools, despite an introductory sentence saying “Three tools.” The official Tool Prompts page documents 12 tool definitions; the two additional names are discover_comparable_companies_metrics and get_comparable_companies_fundamentals. actions.json contains all 12 official names and adds no catalogue-only tools. Tedix and Manufact each report 3 tools; Obot describes capabilities but supplies no list in the collected page; Claude connector directory has no detailed tool list in the collected page. These catalogue counts conflict with the official documentation’s 10-name reference and 12 prompt definitions.",
+    "actions": [
+      {
+        "tool_name": "discover_companies",
+        "description": "Find companies by ticker or name.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "keyword: string (required)",
+        "parameter_count": "1",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "discover_company_series",
+        "description": "Find company financial series by keyword.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "company_id: integer (required); keywords: array[string] (required in signature)",
+        "parameter_count": "2",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_company_fundamentals",
+        "description": "Retrieve financial datapoints for selected periods and series.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "company_id: integer (required); periods: array[string] (required); series_ids: array[integer] (required in signature)",
+        "parameter_count": "3",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_documents",
+        "description": "Search filings, transcripts, and presentations by keywords.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "company_ids: array[integer]; keywords: array[string]; periods: array[string] (official prompt; requiredness not explicit)",
+        "parameter_count": "3",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "discover_company_documents",
+        "description": "List indexed company documents for selected quarters.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "company_id: integer (required); periods: array[string] (required)",
+        "parameter_count": "2",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_document_content",
+        "description": "Retrieve document text or a selected section.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "document_id: integer (required); section: string (optional)",
+        "parameter_count": "2",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_stock_prices",
+        "description": "Retrieve daily OHLCV data for companies and dates.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "company_ids: array[integer] (required); start_date: string (optional); end_date: string (optional); dates: array[string] (optional)",
+        "parameter_count": "4",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_skills",
+        "description": "List available investing skills, descriptions, and required inputs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "none",
+        "parameter_count": "0",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_skill",
+        "description": "Fetch skill instructions with supplied inputs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "name: string (required); params: object (optional)",
+        "parameter_count": "2",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_expert_call_transcripts",
+        "description": "Retrieve expert interview transcripts when firm feature enabled.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "company_id: integer (required)",
+        "parameter_count": "1",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "discover_comparable_companies_metrics",
+        "description": "Find comparable taxonomy metrics by company, industry, or keyword.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "company_ids: array[integer] (optional); industry_id: integer (optional); keywords: array[string] (optional)",
+        "parameter_count": "3",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_comparable_companies_fundamentals",
+        "description": "Retrieve comparable reported metric values across companies.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "company_ids: array[integer] (required); metric_ids: array[integer] (required); calendar_periods: array[string] (optional); fiscal_periods: array[string] (optional)",
+        "parameter_count": "4",
+        "source": "https://docs.daloopa.com/docs/mcp-prompts",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code for the deployed server or verbatim initialize/tool definitions established as the hosted endpoint's complete payload. The tool prompt page provides developer-facing prompt examples, not confirmed hosted tool definitions; no estimate substituted.",
+    "human_can_agent_cannot": "The official API-versus-MCP page lists API capabilities beyond MCP, including company model status, bulk company subscriptions, and usage/consumption endpoints. These REST API operations are not among the 12 documented MCP tools. Source: https://docs.daloopa.com/docs/api-vs-mcp",
+    "sources": [
+      "https://docs.daloopa.com/docs/daloopa-mcp",
+      "https://docs.daloopa.com/docs/mcp-prompts",
+      "https://docs.daloopa.com/docs/api-vs-mcp",
+      "https://tedix.dev/apps/daloopa/",
+      "https://manufact.com/mcp-catalog/daloopa",
+      "https://obot.ai/mcp-catalog/daloopa/",
+      "https://claude.com/connectors/daloopa"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The tool prompts advise citation formats, search triggers, metric selection, period formatting, financial table orientation, and user input collection. For example: “DO NOT wait for the user to explicitly request a document search.” The documentation does not establish that these are server-enforced constraints.",
+    "governance_promises": "The MCP privacy disclosure says: “MCP access is strictly read-only. Third parties cannot write to, upload to, or modify any Daloopa data via the protocol.” It says Daloopa does not systematically collect/store user prompts or queries, nor LLM outputs; access logs include authentication events, accessed tickers, and usage frequency. It also claims encrypted transit, restricted and monitored internal access, and no sale/sharing of collected MCP user data or logs.",
+    "promises_to_user": "The vendor says every output derived from a Daloopa datapoint maps to a source, and product materials describe data points as hyperlinked to original source documents. The MCP product page calls the service a read-only remote server secured with OAuth.",
+    "comparison_with_server_logic": "Read-only promise is consistent with the documented tool purposes: all 12 are retrieval, search, discovery, or skill-instruction tools. No public server code or tool annotations were found to independently verify enforcement. Citation and formatting requirements appear as text instructions, not verified enforcement. Privacy and logging statements are policy disclosures rather than observable MCP behavior.",
+    "sources": [
+      "https://docs.daloopa.com/docs/daloopa-privacy-and-data-collection-disclosure-for-mcp-access",
+      "https://docs.daloopa.com/docs/mcp-prompts",
+      "https://docs.daloopa.com/docs/daloopa-mcp",
+      "https://www.daloopa.com/products/mcp"
+    ]
+  },
+  "contradictions": [
+    "Input endpoint /mcp returns OAuth-protected 401, and its provided protected-resource metadata declares resource https://mcp.daloopa.com/server/mcp; official docs identify /server/mcp as the financial MCP URL. No tool manifest specific to input path /mcp was found, so documented endpoint tools are used as best available evidence and this endpoint-path discrepancy remains unresolved.",
+    "Official introduction says “Three tools” but its Available Tools list names 10; official Tool Prompts documents 12 definitions, including two taxonomy tools absent from the Available Tools list.",
+    "Third-party Tedix and Manufact listings report 3 tools, matching discover_companies, discover_company_series, and get_company_fundamentals only; this is fewer than the official reference list and Tool Prompts list. These catalogues are not used to replace the official names."
+  ],
+  "observations_for_research": [
+    "The published prompt instructions include proactive tool selection and output-format directives, while public evidence does not show whether the hosted implementation enforces them.",
+    "The reference page's introductory count, its own list, and the more extensive Tool Prompts page show different tool totals; this can affect an agent's perceived available capabilities.",
+    "Daloopa distributes a 21-skill workflow library separately from the MCP tool list; documentation describes MCP tools for discovering and fetching skill instructions, while the skill implementations are external plugin files."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Searched the prepared pages, scripts, links.json, links_check.txt, and all three local public repositories. No server implementation or hosted tool manifest was found; the public repositories are related workflow/plugin projects, not endpoint code. The input path is distinct from the documented endpoint path. The official docs list and prompt reference are used over third-party catalogs. The docs-site MCP endpoint returned HTTP 403 in the evidence folder and is not treated as the product server. Official vendor pricing was not included in collected links; product and API/MCP pages were checked for published amounts, with none found. OAuth values are from the supplied pre-fetched raw metadata.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.7
+  }
+}

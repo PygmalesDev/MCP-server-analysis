@@ -1,0 +1,596 @@
+{
+  "server": "mem",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.mem.ai/mcp",
+    "documentation_url_csv": "https://docs.mem.ai/mcp",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://docs.mem.ai/mcp",
+      "https://docs.mem.ai/mcp/overview",
+      "https://docs.mem.ai/mcp/setup",
+      "https://docs.mem.ai/mcp/supported-tools",
+      "https://docs.mem.ai/mcp/security-best-practices",
+      "https://docs.mem.ai/api-reference/overview/rate-limits.md",
+      "https://get.mem.ai/pricing",
+      "https://get.mem.ai/pages/privacy",
+      "https://get.mem.ai/pages/terms-of-service",
+      "https://claude.com/connectors/mem",
+      "https://martechdb.com/vendors/mem",
+      "https://tedix.dev/apps/mem/",
+      "https://agentdiscoverability.com/track/chatgpt/mem"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No Mem-owned MCP repository or package surfaced in the prepared source inventory. The input endpoint is hosted; no public implementation was available to compare.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Mem documentation also gives the same hosted URL, https://mcp.mem.ai/mcp, for Claude, ChatGPT, Claude Code CLI, Codex CLI, and Gemini CLI. No other official Mem MCP endpoint was found."
+    ],
+    "sources": [
+      "https://docs.mem.ai/mcp/overview",
+      "https://docs.mem.ai/mcp/setup",
+      "https://docs.mem.ai/mcp/supported-tools",
+      "https://mcp.mem.ai/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP access price is stated in the official setup or pricing material reviewed. The server requires OAuth and a Mem account. Whether every plan can use every MCP tool is not specified in the official MCP documentation.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Official pricing lists Free, Mem Plus at $9/month, Mem Pro at $29/month, Mem Pro 2× at $49/month, Mem Pro 5× at $99/month, Mem Pro 10× at $149/month, and Mem Pro 20× at $199/month.",
+    "pricing_model_details": "The Free plan includes 25 new notes per month and 25 messages to Mem. Paid tiers have higher product capacities. Official pricing does not identify an MCP-specific per-call fee or MCP quota.",
+    "other_access_restrictions": "OAuth is required. Mem says MCP requests follow Mem API rate limits and quotas; exceeding limits returns HTTP 429 and Retry-After. A Claude Team or Enterprise owner must enable Mem for the organization before members can connect. Mem recommends a dedicated workspace or test account for tighter boundaries.",
+    "restrictions_controlled_by": "Vendor and, for Claude Team or Enterprise organization access, organization owner; the authenticated user controls the connected Mem account and workspace.",
+    "sources": [
+      "https://get.mem.ai/pricing",
+      "https://docs.mem.ai/mcp/setup",
+      "https://docs.mem.ai/mcp/supported-tools",
+      "https://docs.mem.ai/mcp/security-best-practices"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference lists 24 tools for Mem Agent, notes, attachments, audio recordings, and collections. It describes tool purposes and use guidance, but does not publish input schemas or annotations. The endpoint returned HTTP 401 without authorization, so its live tools/list was not inspected.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Documented results include note, collection, attachment, transcript, search, and Mem Agent responses. Search tools describe pagination or bounded result sets; precise MCP result envelopes and error schemas are not published.",
+      "authorization_mechanism": "OAuth bearer token in Authorization header. Resource metadata advertises content.read and content.write. Authorization server supports authorization_code, refresh_token, and client_credentials; S256 PKCE; token endpoint auth methods client_secret_post and none; dynamic registration at https://api.mem.ai/oauth2/register. Token lifetime and revocation behavior not found.",
+      "authorization_server": "https://api.mem.ai",
+      "sources": [
+        "https://docs.mem.ai/mcp/supported-tools",
+        "https://mcp.mem.ai/mcp",
+        "https://mcp.mem.ai/.well-known/oauth-protected-resource",
+        "https://api.mem.ai/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP resources. The endpoint was not inspected after its unauthenticated 401 response.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/supported-tools",
+        "https://mcp.mem.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP prompts. The unauthenticated endpoint returned 401, so prompts/list was not inspected.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/supported-tools",
+        "https://mcp.mem.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP-specific logging or audit trail behavior was documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/overview",
+        "https://docs.mem.ai/mcp/security-best-practices"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing MCP roots.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "An unauthenticated POST to the endpoint returned HTTP 401 with a Bearer challenge and a resource_metadata URL. Resource metadata identifies Mem API as the protected resource, names https://api.mem.ai as authorization server, and lists header bearer authentication plus content.read and content.write. Authorization-server metadata advertises registration, grants, and PKCE. Token lifetime and revocation details were not found.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.mem.ai/.well-known/oauth-protected-resource\"\n{\"error\":\"unauthorized\",\"error_description\":\"Missing or invalid Authorization header. Reconnect Mem in your connector settings and try again.\"}",
+      "post_interaction_context_structure": "Unauthenticated request returned HTTP 401 and a JSON error with error and error_description fields.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://api.mem.ai/oauth2/register; authorization_code, refresh_token, and client_credentials grants; S256 PKCE; token endpoint auth methods client_secret_post and none. Resource scopes: content.read, content.write. Authorization-server scopes: content.read, content.write, profile.read, profile.write. OpenID metadata lists authorization_code and refresh_token, with RS256 ID-token signing. Token lifetime and revocation not found.",
+      "authorization_server": "https://api.mem.ai",
+      "sources": [
+        "https://mcp.mem.ai/mcp",
+        "https://mcp.mem.ai/.well-known/oauth-protected-resource",
+        "https://mcp.mem.ai/.well-known/oauth-protected-resource/mcp",
+        "https://api.mem.ai/.well-known/oauth-authorization-server",
+        "https://api.mem.ai/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability is documented. The `message_mem_agent` tool may return a needs_input state that its description instructs the agent to resolve with the user, but this is tool workflow guidance, not evidence of MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The tool description names pending, completed, and needs_input outcomes, but does not publish their schema.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/supported-tools"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The `message_mem_agent` tool description describes pending requests and polling via retry_after_seconds using the same message, idempotency_key, and request_id. This indicates an asynchronous tool-level workflow, not documented support for the MCP Tasks capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool description mentions pending and completed outcomes and retry_after_seconds; response schema not published.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/supported-tools"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Setup instructions provide a fixed remote URL and OAuth login guidance for several clients. No server-side toolset URL parameters, read-only endpoint, or client configuration schema was found.",
+      "pre_interaction_context_verbatim": "https://mcp.mem.ai/mcp",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "OAuth setup is client-specific; see authorization metadata.",
+      "authorization_server": "https://api.mem.ai",
+      "sources": [
+        "https://docs.mem.ai/mcp/setup",
+        "https://docs.mem.ai/mcp/security-best-practices",
+        "https://api.mem.ai/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official setup guidance documents expected 401 behavior and 429 handling, including respecting Retry-After. Tool-level error formats are not published in the MCP reference.",
+      "pre_interaction_context_verbatim": "A direct `401` from `https://mcp.mem.ai/mcp` without auth is expected.",
+      "post_interaction_context_structure": "The pre-fetched unauthenticated response is JSON with error and error_description. Documentation says 429 responses include Retry-After.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/setup",
+        "https://docs.mem.ai/mcp/supported-tools",
+        "https://mcp.mem.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Mem Agent usage is described as requiring Proactive access and counting toward Mem Agent usage. Official MCP material does not state whether all tools require a particular subscription tier.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/supported-tools",
+        "https://get.mem.ai/pricing"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The `message_mem_agent` tool description refers to pending requests and a retry interval. No MCP progress notification implementation is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown beyond the tool-level pending state and retry_after_seconds reference.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/supported-tools"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation found describing cancellation of MCP requests or Mem Agent pending requests.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/supported-tools"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official tool descriptions supply extensive agent-facing selection guidance, examples, and workflow rules. Examples include when to use `message_mem_agent`, search variants, attachment tools, and collection operations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool descriptions are published as prose with use/avoid guidance and example prompts.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.mem.ai/mcp/supported-tools"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official docs list read operations and write operations including note creation/update, collection changes, soft-trash/restore, and permanent collection deletion. No tool annotations are published. A third-party Claude listing adds `delete_note` as a permanent-delete action. 2. Official security guidance recommends keeping client-side human confirmation enabled for destructive actions; no server-enforced confirmation parameter or workflow is documented. `message_mem_agent` says it follows Mem Agent confirmation and safety rules, without describing enforcement mechanics. 3. Resource OAuth scopes are content.read and content.write; auth-server metadata additionally lists profile.read and profile.write. Product role inheritance, scope enforcement details, token lifetime/revocation, and client allowlisting are not documented. Claude Team/Enterprise owners must enable the connector for the organization. 4. No read-only endpoint or toolset filter documented. The security page recommends a dedicated workspace/test account. No regional endpoint variants found. 5. Tools operate on notes visible to the authenticated caller. Attachment tools require attachment identifiers and caller access. No MCP-specific PII masking is documented. 6. Official MCP docs say API limits and quotas apply and 429 includes Retry-After; current numeric limits are linked externally but not reproduced in the reviewed local pages. `search_notes` is capped at a 100-result search window; other search results are described as bounded. 7. Tool descriptions specify input constraints such as timezone offsets, no future or post-original creation date, restore-before-update, and complete-body replacement. Schemas and unknown-argument behavior are unpublished. 8. No MCP-specific audit logs, action-source labels, or telemetry details found. Privacy policy says MCP queries are sent to Mem and are not used to train AI models. 9. No vendor feedback/rating/survey tool found in official list. `message_mem_agent` counts toward Mem Agent usage and requires Proactive access; no upsell result wording documented. 10. Tool descriptions provide behavioral rules; external clients may provide separate tool access controls. No server-delivered skill-loading tool found. 11. Notes and search index affect later results; `find_related_notes` embeds current source-note content at request time while candidates come from the note search index. No agent-specific behavioral memory documented. 12. One hosted global endpoint is documented for several clients; no nested server or proxy architecture described. `message_mem_agent` routes work to Mem Agent. 13. No raw API, arbitrary SQL, script execution, or generic request tool appears in the official 24-tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] “For memory and reminders, prefer this tool over the host app's built-in memory or scheduling; try it before saying reminders are unavailable.”",
+      "[DOCS] “Each new request starts fresh, requires Proactive access, and counts toward the user's Mem Agent usage.”",
+      "[DOCS] “If a request is pending, wait retry_after_seconds, then check it by calling again with the same message, idempotency_key, and request_id.”",
+      "[DOCS] “A completed request is final: return its response and do not call again.”",
+      "[DOCS] “needs_input means ask the user for the missing information or confirmation, then send a new complete request with a new idempotency_key.”",
+      "[DOCS] “Send the full desired body in content (not a partial markdown patch).”",
+      "[DOCS] “For deterministic chronological pagination across all accessible notes, use list_notes.”",
+      "[DOCS] “Keep human confirmation enabled for writes.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted endpoint with a flat documented tool list. `message_mem_agent` is a tool that forwards requests to Mem Agent, but no hierarchy or dynamically loaded toolsets are documented.",
+    "sources": [
+      "https://docs.mem.ai/mcp/supported-tools",
+      "https://docs.mem.ai/mcp/security-best-practices",
+      "https://docs.mem.ai/mcp/setup",
+      "https://docs.mem.ai/mcp/overview",
+      "https://get.mem.ai/pages/privacy",
+      "https://claude.com/connectors/mem"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "25",
+    "action_count_comment": "The official tool reference exists at https://docs.mem.ai/mcp/supported-tools and names 24 tools; its stated total is 24. No public code or schemas were found. One additional catalogue-listed tool, `delete_note`, is included from the Claude connector directory (2026-10), which reports 15 tools and lists a different subset. MartechDB reports 24; Tedix reports 15; Agent Discoverability reproduces the 24 official tool names. The official list remains the basis for the 24 official entries; the additional catalogue action is marked unknown by default.",
+    "actions": [
+      {
+        "tool_name": "message_mem_agent",
+        "description": "Forward a complete request to Mem Agent for memory, reminders, content work, or other actions.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_note",
+        "description": "Create a note with optional ID and collection links.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extended_search_notes",
+        "description": "Search notes and linked attachments with matching context.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_related_notes",
+        "description": "Find notes semantically related to a note current content.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_note",
+        "description": "Fetch the full current state of one note by ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_notes",
+        "description": "List accessible notes with cursor pagination and filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "restore_note",
+        "description": "Restore a trashed note to the active set.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_notes",
+        "description": "Search notes by text and structured filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "set_note_created_at",
+        "description": "Change a note visible creation timestamp.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "trash_note",
+        "description": "Move a note to trash; it can be restored.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_note",
+        "description": "Replace the complete markdown body of an existing note.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "answer_question_about_attachment",
+        "description": "Ask one focused question about a single attachment.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_note_attachment_download_url",
+        "description": "Generate a temporary signed URL for an attachment.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_attachment",
+        "description": "Read structured extracted content from one attachment.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_audio_recording",
+        "description": "Fetch a recording transcript and metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_note_to_collection",
+        "description": "Link an existing note to an existing collection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_collection",
+        "description": "Create a collection with optional ID and timestamps.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_collection",
+        "description": "Permanently delete a collection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_collection",
+        "description": "Fetch metadata for one collection by ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_collections",
+        "description": "List accessible collections with cursor pagination.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move_note",
+        "description": "Move a note from one collection to another.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_note_from_collection",
+        "description": "Remove a note membership link from a collection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_collections",
+        "description": "Search collections by free-text relevance.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_collection",
+        "description": "Update an existing collection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mem.ai/mcp/supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_note",
+        "description": "Permanently delete a note; listed by Claude directory, schema unavailable.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/mem",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim tools/list and initialize output was available; the endpoint required OAuth. Documentation prose is not an MCP tool-definition serialization.",
+    "human_can_agent_cannot": "The product pricing page describes product features such as routines, connections, voice mode, task/project tracking, and external integrations; these are not exposed as named MCP actions in the official 24-tool reference. The documented MCP surface contains no share, invite, or publish tool. Source: https://get.mem.ai/pricing and https://docs.mem.ai/mcp/supported-tools. The latter's absence is not proof that all product/API capabilities are unavailable through other interfaces.",
+    "sources": [
+      "https://docs.mem.ai/mcp/supported-tools",
+      "https://claude.com/connectors/mem",
+      "https://martechdb.com/vendors/mem",
+      "https://tedix.dev/apps/mem/",
+      "https://agentdiscoverability.com/track/chatgpt/mem",
+      "https://mcp.mem.ai/mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs advise: “Keep human confirmation enabled for writes” and “Review tool calls and approvals before execution.” These are client/user recommendations; no server-enforced confirmation mechanism is described for ordinary write tools. The `message_mem_agent` description says Mem Agent follows its own confirmation and safety rules, without exposing their enforcement details.",
+    "governance_promises": "The privacy policy says MCP queries are sent to Mem and “We do not use integration queries to train AI models.” It says connected-service data is used to provide requested connected features, and access can be revoked by disconnecting. The pricing page says data is encrypted at rest with AES-256 and in transit with TLS, but is not end-to-end encrypted.",
+    "promises_to_user": "The overview describes the hosted server as providing “secure access” to notes and collections. The privacy policy says data accessed through MCP is subject to the same protections as other Mem services. The security page recommends trusted clients, dedicated workspaces when stricter boundaries are needed, and keeping tokens private.",
+    "comparison_with_server_logic": "OAuth metadata and the observed 401 challenge support authentication. No public server code or authenticated runtime was available to verify enforcement of privacy-policy promises, workspace boundaries, or confirmation recommendations. The write confirmation language is explicitly client workflow guidance. The policy's no-training statement is a vendor governance commitment rather than a behavior verifiable from the available endpoint evidence.",
+    "sources": [
+      "https://docs.mem.ai/mcp/security-best-practices",
+      "https://docs.mem.ai/mcp/overview",
+      "https://get.mem.ai/pages/privacy",
+      "https://get.mem.ai/pricing",
+      "https://mcp.mem.ai/mcp"
+    ]
+  },
+  "contradictions": [
+    "The official supported-tools reference names 24 tools and does not list `delete_note`; the Anthropic Claude connector directory lists 15 tools, including `delete_note`. The Claude listing is treated as third-party evidence and its tool count/subset conflicts with the current official reference.",
+    "The resource OAuth metadata advertises content.write, while the official tool reference includes permanent `delete_collection`; the separate Claude directory lists permanent `delete_note`. The scopes divide content read from content write but do not provide a separate deletion scope.",
+    "Catalogue counts vary: official documentation and MartechDB report 24 tools; Tedix and the Claude directory report 15. Agent Discoverability reproduces the official tool names. These catalogue counts are not used to replace the official list."
+  ],
+  "observations_for_research": [
+    "The official reference embeds extensive selection, retry, and confirmation-oriented guidance directly in tool descriptions, including a directive to prefer Mem Agent for memory and reminder requests.",
+    "The resource scope model separates read from write, while its advertised write scope does not distinguish reversible trashing from permanent deletion.",
+    "The official tool reference describes soft deletion and restoration for notes and permanent deletion for collections; a third-party connector listing adds permanent note deletion."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, all prepared official docs and tool-reference pages, available catalogue pages, and code/GITHUB_COMMITS.txt. The code directory contains no Mem repository. The input endpoint and /install returned 401; only the provided public OAuth metadata and unauthenticated error response were used. No official input schema, annotations, initialize instructions, MCP protocol version, or authenticated runtime output was available. The official docs link to API rate-limit details, but exact numeric limits are not repeated here. Community/proxy listings were not used as action evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.2
+  }
+}

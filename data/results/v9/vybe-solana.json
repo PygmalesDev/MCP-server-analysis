@@ -1,0 +1,791 @@
+{
+  "server": "vybe-solana",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.vybenetwork.xyz/mcp",
+    "documentation_url_csv": "https://docs.vybenetwork.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/vybenetwork/solana-mcp-vybe",
+    "documentation_urls_used": [
+      "https://docs.vybenetwork.com/docs/mcp",
+      "https://docs.vybenetwork.com/changelog/vybe-solana-api-mcp-server-now-available",
+      "https://docs.vybenetwork.com/docs/plans-rate-limits",
+      "https://docs.vybenetwork.com/docs/pricing",
+      "https://github.com/vybenetwork/solana-mcp-vybe",
+      "https://registry.modelcontextprotocol.io/v0.1/servers?search=vybenetwork",
+      "https://mcp.vybenetwork.xyz/.well-known/oauth-protected-resource",
+      "https://mcp.vybenetwork.xyz/.well-known/oauth-protected-resource/mcp",
+      "https://mcp.vybenetwork.xyz/.well-known/oauth-authorization-server",
+      "https://mcp.vybenetwork.xyz/.well-known/openid-configuration",
+      "https://vybe.fyi/privacy",
+      "https://vybe.fyi/terms"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository identifies the same hosted endpoint and provides its tool inventory, client manifests, submission metadata, and companion skills. It does not contain the hosted server runtime implementation.",
+    "mcp_protocol_version": "[THIRD-PARTY VerifyMCP, 2026-10-27] Reports MCP spec version 2026-07-28 for the hosted endpoint; not independently confirmed from vendor protocol output.",
+    "commit_hash": "aff7c7264bd72b9262319fa14f28f33ae4115644",
+    "commit_date": "2026-10-25",
+    "implementation_language": "NOT FOUND (hosted runtime language not disclosed; public repository contains manifests and Markdown rather than runtime implementation)",
+    "mcp_sdk_and_version": "NOT FOUND (no runtime SDK dependency or implementation in the public repository)",
+    "code_public": "Partially",
+    "license": "MIT stated in the Claude plugin manifest; repository-wide license not established.",
+    "release_status": "Hosted server listed in the official MCP Registry; no vendor GA/beta status found.",
+    "other_official_servers": [
+      "https://docs.vybenetwork.com/mcp — separate registered hosted server under io.github.vybenetwork/vybe-solana-api; older registry metadata describes OpenAPI discovery and live API execution. The product guide describes four tools on this surface.",
+      "https://mcp.vybenetwork.xyz — same hosted server advertised by the registry without the explicit /mcp path."
+    ],
+    "sources": [
+      "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md",
+      "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/server.json",
+      "https://docs.vybenetwork.com/docs/mcp",
+      "https://registry.modelcontextprotocol.io/v0.1/servers?search=vybenetwork",
+      "https://verifymcp.io/servers/vybenetwork-solana-mcp-vybe/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP fee was found. Vendor documentation says API access requires an API key and describes free and paid API plans; it does not explicitly state whether all MCP calls are free or how they map to API-plan charges.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "API plans: Free $0/month; Developer $49/month; Advanced $149/month; Pro $299/month; Business $599/month. A Portfolio package is separately priced from $999/month, with combined plan prices also listed.",
+    "pricing_model_details": "The vendor lists monthly API credits, request-per-minute limits, endpoint access by plan, and separate Portfolio credits. Free: 25,000 credits and 60 RPM; paid tiers: 500,000–20,000,000 credits and 500–2,000 RPM. REST calls consume credits according to endpoint; requests exceeding limits return HTTP 429. MCP-specific billing is not specified.",
+    "other_access_restrictions": "Vendor docs say all endpoints require an API key. OAuth is required at the supplied MCP endpoint. Product API endpoint access and limits vary by subscription; whether these API plan restrictions apply identically to every MCP tool is not stated.",
+    "restrictions_controlled_by": "Vendor controls OAuth and API service; the user selects or holds an API plan. Org-admin controls and client allowlists were not found.",
+    "sources": [
+      "https://docs.vybenetwork.com/docs/mcp",
+      "https://docs.vybenetwork.com/docs/plans-rate-limits",
+      "https://docs.vybenetwork.com/docs/pricing",
+      "https://mcp.vybenetwork.xyz/.well-known/oauth-protected-resource",
+      "https://mcp.vybenetwork.xyz/.well-known/oauth-authorization-server"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The official repository lists 44 tools for market, token, wallet, trading, transfer, Pyth, and x402-guide functions. The vendor guide still lists four older schema-discovery/API-query tools. The supplied endpoint returned HTTP 401 without authorization, so no unauthenticated tool inventory was obtained.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool result structure and error format for the supplied endpoint were not available in official runtime source or public vendor documentation.",
+      "authorization_mechanism": "Bearer token in the HTTP Authorization header; protected-resource metadata advertises scopes openid, email, mcp:read, mcp:write.",
+      "authorization_server": "https://mcp.vybenetwork.xyz",
+      "sources": [
+        "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "https://docs.vybenetwork.com/docs/mcp",
+        "https://mcp.vybenetwork.xyz/.well-known/oauth-protected-resource/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "[THIRD-PARTY VerifyMCP, 2026-10-27] Reports 0 resources in its scan. The vendor does not document resource support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://verifymcp.io/servers/vybenetwork-solana-mcp-vybe/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No vendor prompt definitions or prompt-list documentation found. Repository default prompts in plugin submission metadata are client submission examples, not confirmed MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/plugin.json",
+        "https://verifymcp.io/servers/vybenetwork-solana-mcp-vybe/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Vendor documentation does not describe server-side MCP call logging or audit records. The endpoint runtime is not public.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.vybenetwork.com/docs/mcp",
+        "https://github.com/vybenetwork/solana-mcp-vybe"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No vendor evidence found for server-initiated sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.vybenetwork.com/docs/mcp",
+        "https://github.com/vybenetwork/solana-mcp-vybe"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No vendor evidence found for roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.vybenetwork.com/docs/mcp",
+        "https://github.com/vybenetwork/solana-mcp-vybe"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint returned HTTP 401 and a WWW-Authenticate Bearer challenge referencing protected-resource metadata. The metadata advertises authorization server https://mcp.vybenetwork.xyz, header bearer method, resource https://mcp.vybenetwork.xyz/mcp, and scopes openid, email, mcp:read, mcp:write. Authorization-server metadata advertises authorization_code and refresh_token grants; PKCE S256; response type code; token auth method none; client ID metadata documents supported; and registration endpoint /register. Token lifetime and revocation were not disclosed.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer realm=\"mcp\", resource_metadata=\"https://mcp.vybenetwork.xyz/.well-known/oauth-protected-resource/mcp\"",
+      "post_interaction_context_structure": "Unauthenticated POST response: HTTP 401, WWW-Authenticate Bearer challenge, body `unauthorized`.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration endpoint https://mcp.vybenetwork.xyz/register; authorization code and refresh token grants; PKCE S256; token endpoint auth method none; scopes_supported exactly: openid, email, mcp:read, mcp:write; bearer token via header. Token lifetime and revocation: NOT FOUND.",
+      "authorization_server": "https://mcp.vybenetwork.xyz",
+      "sources": [
+        "https://mcp.vybenetwork.xyz/mcp",
+        "https://mcp.vybenetwork.xyz/.well-known/oauth-protected-resource",
+        "https://mcp.vybenetwork.xyz/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.vybenetwork.xyz/.well-known/oauth-authorization-server",
+        "https://mcp.vybenetwork.xyz/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No server-enforced MCP Elicitation flow documented. Companion skills recommend confirmation before transaction-building calls, but these are external guidance rather than evidence of server-side elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/skills/vybe-api-explorer/SKILL.md"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No vendor documentation or runtime source found for MCP Tasks.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.vybenetwork.com/docs/mcp",
+        "https://github.com/vybenetwork/solana-mcp-vybe"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The vendor documents remote URL setup for multiple clients and says API key forwarding is needed for live API calls on clients supporting headers. Public metadata provides the hosted endpoint and OAuth settings. No server-side tool filtering or read-only URL options were found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client configuration is JSON with an HTTP URL; examples are client-specific.",
+      "authorization_mechanism": "OAuth at hosted endpoint; vendor guide also refers to API key forwarding for API calls.",
+      "authorization_server": "https://mcp.vybenetwork.xyz",
+      "sources": [
+        "https://docs.vybenetwork.com/docs/mcp",
+        "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/docs/mcp.md",
+        "https://mcp.vybenetwork.xyz/.well-known/oauth-protected-resource"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Vendor docs describe 429 responses for API-plan limit excess, but do not publish MCP tool error envelopes or error-reporting capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "API limit behavior documented as HTTP 429; MCP-level error structure unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.vybenetwork.com/docs/plans-rate-limits"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The vendor has monthly API plans and a separate Portfolio package, but no MCP subscription or subscription-management tool is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.vybenetwork.com/docs/plans-rate-limits",
+        "https://docs.vybenetwork.com/docs/pricing"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No vendor documentation or runtime source found for MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.vybenetwork.com/docs/mcp",
+        "https://github.com/vybenetwork/solana-mcp-vybe"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No vendor documentation or runtime source found for request cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.vybenetwork.com/docs/mcp",
+        "https://github.com/vybenetwork/solana-mcp-vybe"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The public repository distributes three companion skills for API exploration, token/market intelligence, and wallet analytics. They are plugin/repository files, not evidence of initialize instructions from the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Skill Markdown files with workflows and behavioral rules.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/vybenetwork/solana-mcp-vybe/tree/aff7c7264bd72b9262319fa14f28f33ae4115644/skills"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official repository publishes annotations in its ChatGPT app submission metadata, including readOnlyHint, openWorldHint, and destructiveHint. The three build-* transaction tools are marked non-read-only and destructive; read tools are marked read-only. Runtime emission of these declarations is not independently confirmed. 2. No server-enforced confirmation flow was documented. Companion skills ask the agent to confirm transaction intent and require the user to sign in their wallet; this is guidance, not verified server enforcement. 3. OAuth scopes are openid, email, mcp:read, mcp:write. API docs require an API key. Product permission inheritance, token lifetime/revocation, org admin controls, and client allowlists: Unknown. 4. No read-only endpoint, filters, toolsets, query-free mode, or environment/region variants were found for the supplied host. Vendor docs describe API endpoint/plan access limits. 5. Public app-submission metadata says transaction builders do not accept private keys and return unsigned transactions; skills also warn against asking for seed phrases. Other PII masking and data boundaries: Unknown. 6. API plans publish credit and RPM limits; MCP-specific caps and result truncation: Unknown. 7. Runtime argument validation, coercion, and overrides: Unknown; hosted runtime code is not public. 8. MCP audit logging and telemetry: Unknown. Vendor pricing docs say the API dashboard provides usage stats/history. 9. No feedback, rating, survey, or report tool appears in the 44-tool inventory. `get-x402-access-guide` provides pay-per-call guidance but does not itself send payment. 10. Three skills are distributed separately in the public repository; examples include tool selection, confirmation and signing guidance. These are not shown as server-enforced rules. 11. No persistent MCP memory or behavior-dependent tool exposure documented. 12. The current input endpoint is documented as a flat set of 44 endpoint-specific tools. A separate legacy/docs-host endpoint exists. 13. No raw arbitrary HTTP request, SQL, shell, or script tool appears in the current inventory. The older endpoint's `execute-request` is not part of the current input endpoint inventory.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[OFFICIAL REPOSITORY skill, SKILL.md] “Each tool calls one Vybe endpoint. Pass that tool's arguments directly. Do not pass a path, URL, or HTTP method.”",
+      "[OFFICIAL REPOSITORY skill, SKILL.md] “build-swap, build-close-token-accounts, and build-withdraw-mev return an unsigned payload. Confirm intent, then tell the user to sign it in their own wallet.”",
+      "[OFFICIAL REPOSITORY skill, SKILL.md] “Prefer the smallest successful request (low `limit`) before large pulls.”",
+      "[OFFICIAL REPOSITORY skill, SKILL.md] “Never ask for or handle private keys or seed phrases.”",
+      "[OFFICIAL DOCS] “If you need live API execution from Claude, use the Claude.ai connector method below.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The current endpoint is represented as one flat tool list, with each listed tool mapped to a Vybe API endpoint or static x402 guide. The docs-host server is a separate endpoint and is listed separately above.",
+    "sources": [
+      "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+      "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/chatgpt-app-submission.json",
+      "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/skills/vybe-api-explorer/SKILL.md",
+      "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/skills/vybe-wallet-analytics/SKILL.md",
+      "https://docs.vybenetwork.com/docs/mcp",
+      "https://docs.vybenetwork.com/docs/plans-rate-limits",
+      "https://mcp.vybenetwork.xyz/.well-known/oauth-authorization-server",
+      "https://verifymcp.io/servers/vybenetwork-solana-mcp-vybe/mcp"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "44",
+    "action_count_comment": "The official product guide lists 4 older tools at https://docs.vybenetwork.com/docs/mcp. The current official repository inventory lists 44 tools at https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133, matching VerifyMCP's 44-tool live-server scan on 2026-10-27. The changelog also described the earlier four-tool variant. No catalogue-only tools added. ProtocolProbe reported 7 tools in its 2026-10-08 read-only scan, including older names; MCP Harbor lists the repository but no tool count. The actions.json list uses the current official repository inventory and excludes old endpoint/tool names.",
+    "actions": [
+      {
+        "tool_name": "list-pyth-price-feeds",
+        "description": "List pyth price feeds from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-pyth-price-candles",
+        "description": "Get pyth price candles from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-pyth-price",
+        "description": "Get pyth price from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-market",
+        "description": "Get market from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-markets",
+        "description": "List markets from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-market-candles",
+        "description": "Get market candles from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-pyth-price-history",
+        "description": "Get pyth price history from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-pyth-product",
+        "description": "Get pyth product from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-candles",
+        "description": "Get token candles from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-tokens",
+        "description": "List tokens from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-labeled-programs",
+        "description": "List labeled programs from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-supported-dexes",
+        "description": "List supported dexes from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-liquidity",
+        "description": "Get token liquidity from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token",
+        "description": "Get token from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-holder-count-history",
+        "description": "Get token holder count history from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-instruction-names",
+        "description": "List instruction names from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-trader-activity",
+        "description": "Get token trader activity from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-top-pnl-traders",
+        "description": "Get token top pnl traders from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-top-holders",
+        "description": "Get token top holders from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-transfers",
+        "description": "List transfers from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-swap-quote",
+        "description": "Get swap quote from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-trade-volume-history",
+        "description": "Get token trade volume history from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "build-swap",
+        "description": "Builds an unsigned Solana transaction for user review and signing.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-trades",
+        "description": "List trades from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-empty-accounts-batch",
+        "description": "Get empty accounts batch using a batch read endpoint.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-dust-accounts-batch",
+        "description": "Get dust accounts batch using a batch read endpoint.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-balance-history-batch",
+        "description": "Get token balance history batch using a batch read endpoint.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-balances-batch",
+        "description": "Get token balances batch using a batch read endpoint.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-top-traders",
+        "description": "List top traders from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-counterparties",
+        "description": "Get wallet counterparties from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-labeled-accounts",
+        "description": "List labeled accounts from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-token-accounts-batch",
+        "description": "Get token accounts batch using a batch read endpoint.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-defi-positions",
+        "description": "Get wallet defi positions from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-empty-accounts",
+        "description": "Get wallet empty accounts from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-dust-accounts",
+        "description": "Get wallet dust accounts from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-token-account-history",
+        "description": "Get wallet token account history from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-token-balances",
+        "description": "Get wallet token balances from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-pnl",
+        "description": "Get wallet pnl from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-pnl-history",
+        "description": "Get wallet pnl history from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-token-balance-history",
+        "description": "Get wallet token balance history from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "build-close-token-accounts",
+        "description": "Builds an unsigned Solana transaction for user review and signing.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-wallet-transfer-volume",
+        "description": "Get wallet transfer volume from Vybe Solana API.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "build-withdraw-mev",
+        "description": "Builds an unsigned Solana transaction for user review and signing.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-x402-access-guide",
+        "description": "Returns x402 pay-per-call integration guidance; does not send payment.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The public repository does not contain the deployed server's runtime tool schemas or initialize instructions. Third-party token estimates were not substituted.",
+    "human_can_agent_cannot": "The vendor API also offers WebSocket streams, and plan documentation lists 43 REST endpoints across tiers; the current MCP tool inventory provides specific endpoint tools and does not list WebSocket subscription management. The transaction builder tools return unsigned payloads; signing and broadcasting remain wallet/user steps per the official repository's app metadata and companion skills. Sources: https://docs.vybenetwork.com/docs/plans-rate-limits, https://docs.vybenetwork.com/docs/pricing, https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/chatgpt-app-submission.json",
+    "sources": [
+      "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/README.md#L86-L133",
+      "https://docs.vybenetwork.com/docs/mcp",
+      "https://docs.vybenetwork.com/changelog/vybe-solana-api-mcp-server-now-available",
+      "https://verifymcp.io/servers/vybenetwork-solana-mcp-vybe/mcp",
+      "https://protocolprobe.com/mcp/servers/io.github.vybenetwork/solana-mcp-vybe",
+      "https://www.mcpharbor.app/tools/vybenetwork-solana-mcp-vybe/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The companion skills recommend confirming intent before building transactions, having users sign in their own wallet, using small limits, and avoiding private keys/seed phrases. These are client/plugin instructions; the hosted runtime source is unavailable, so enforcement is unverified. The product guide recommends using Claude.ai rather than Claude Desktop via mcp-remote for live API execution.",
+    "governance_promises": "The public app-submission metadata states: “It does not take private keys, and it does not broadcast transactions for you.” The repository says transaction-building tools return an unsigned transaction for the user to review and sign in their own wallet. Privacy policy and terms URLs are advertised in OAuth metadata, but their relevant policy text was not retrievable in the prepared evidence or browser review.",
+    "promises_to_user": "The vendor describes the server as providing live Solana API access, schema discovery, and code generation grounded in the API specification. The repository describes OAuth connection and says not to commit API keys.",
+    "comparison_with_server_logic": "The returned-unsigned-transaction behavior and transaction-builder annotations are present in public submission metadata, but runtime implementation is not public. User confirmation and private-key avoidance appear as companion-skill guidance; server enforcement is not established. Privacy, retention, and training promises could not be compared because policy text was unavailable.",
+    "sources": [
+      "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/chatgpt-app-submission.json",
+      "https://github.com/vybenetwork/solana-mcp-vybe/blob/aff7c7264bd72b9262319fa14f28f33ae4115644/skills/vybe-api-explorer/SKILL.md",
+      "https://docs.vybenetwork.com/docs/mcp",
+      "https://mcp.vybenetwork.xyz/.well-known/oauth-authorization-server",
+      "https://vybe.fyi/privacy",
+      "https://vybe.fyi/terms"
+    ]
+  },
+  "contradictions": [
+    "The official product guide and its changelog describe four tools: list-endpoints, search-endpoints, get-endpoint, and execute-request. The current official repository inventory for the same hosted product lists 44 endpoint-specific tools instead. VerifyMCP recorded the 44-tool inventory on 2026-10-27; ProtocolProbe had observed 7 older tools on 2026-10-08. This indicates tool-set changes or endpoint/version drift; the vendor guide does not yet match the current repository inventory.",
+    "The product guide says Claude Desktop via mcp-remote exposes only 3 of 4 tools, whereas the current repository documents a different 44-tool inventory. This compatibility statement applies to the older documented set and does not establish the availability of each current tool in that client.",
+    "OAuth metadata supports both mcp:read and mcp:write scopes, while the current official inventory consists mostly of read tools plus three unsigned transaction builders. The scope metadata does not explain per-tool permission mapping.",
+    "Older MCP Registry entries identify https://docs.vybenetwork.com/mcp as a separate server with schema discovery and live API execution; the supplied endpoint is https://mcp.vybenetwork.xyz/mcp and has a distinct OAuth-protected resource. Their tool inventories should not be combined."
+  ],
+  "observations_for_research": [
+    "The current repository names separate tools for endpoint-specific API operations, while the older product guide described generic API-schema discovery and request execution tools.",
+    "The public repository distributes behavioral skills separately from the MCP endpoint, including workflow instructions and guidance to confirm transaction intent.",
+    "The three build-* tools produce unsigned transaction payloads, with official submission annotations marking them destructive despite documentation stating they are not signed or broadcast by the server.",
+    "OAuth grants broad mcp:read and mcp:write scopes; the published metadata does not map those scopes to specific tools or Vybe API plan entitlements."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed prepared links.json, pages/ (including official page text, HTML, and script extracts), links_check.txt, and the local official repository at aff7c7264bd72b9262319fa14f28f33ae4115644. The repository is official and tied to the hosted endpoint, but it is configuration, submission metadata, and skills rather than runtime code. No repo-wide license file, runtime language/SDK, tool input schemas for the current 44-tool set, initialize instructions, tool result envelopes, token expiry/revocation, MCP-specific price, or public governance policy text was found. Official docs-search/API MCP endpoint at docs.vybenetwork.com is distinct from the input endpoint. Unofficial community servers were not used as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.7
+  }
+}

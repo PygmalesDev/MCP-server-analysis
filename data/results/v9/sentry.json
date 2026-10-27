@@ -1,0 +1,1098 @@
+{
+  "server": "sentry",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.sentry.dev/mcp",
+    "documentation_url_csv": "https://mcp.sentry.dev/",
+    "addressing": "global",
+    "repository_url": "https://github.com/getsentry/toolkit",
+    "documentation_urls_used": [
+      "https://mcp.sentry.dev/",
+      "https://mcp.sentry.dev/llms.txt",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/README.md",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/README.md",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/docs/cloudflare/oauth-architecture.md",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/plugins/sentry-mcp/agents/sentry-mcp.md",
+      "https://sentry.io/pricing/",
+      "https://sentry.io/privacy/",
+      "https://sentry.io/trust/",
+      "https://sentry.io/legal/dpa/1.0.0/",
+      "https://glama.ai/mcp/connectors/dev.sentry.mcp/sentry",
+      "https://composio.dev/toolkits/sentry_mcp"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The public getsentry/toolkit repository contains the shared MCP core and the hosted Cloudflare transport, as well as a separate stdio package for self-hosted deployments. Hosted docs and repository describe the remote service; the exact deployed revision and runtime configuration were not independently verified. The core definitions are therefore used for tool names and schemas, with hosted availability marked where appropriate.",
+    "mcp_protocol_version": "NOT FOUND (the server negotiates MCP protocol versions; the repository uses @modelcontextprotocol/sdk 1.32.0)",
+    "commit_hash": "17833f7433af2c7c908ec904697e37642847f291",
+    "commit_date": "2026-10-26",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk 1.32.0; hosted transport also uses @cloudflare/workers-oauth-provider",
+    "code_public": "Yes",
+    "license": "FSL-1.1-ALv2",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.sentry.dev/sse — legacy SSE endpoint; returned HTTP 410 during evidence collection. Repository says to use HTTP transport at /mcp.",
+      "Local stdio server distributed as @sentry/mcp-server — separate transport intended to support self-hosted Sentry; its tools share the MCP core.",
+      "An independent Docs MCP Worker is described in the repository as providing documentation search and AI-generated answers; it is not the input endpoint."
+    ],
+    "sources": [
+      "https://mcp.sentry.dev/",
+      "https://mcp.sentry.dev/llms.txt",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/README.md",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/package.json",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-cloudflare/package.json",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-cloudflare/src/server/app.ts"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific fee or limit was found in the hosted documentation. The official pricing page was not retrievable during this review; official help-center search results direct users to https://sentry.io/pricing/ for plan pricing.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The official pricing page is the source for current plan amounts; it could not be read during this review. Search results for the official Sentry Help Center describe Developer as free and refer to the pricing page for plan estimates. Do not treat MCP itself as separately priced based on this evidence.",
+    "pricing_model_details": "Sentry pricing and usage quotas apply to the linked Sentry service. No MCP-specific per-call charge was found.",
+    "other_access_restrictions": "Hosted connections use OAuth. OAuth metadata advertises org:read, project:write, team:write, event:write, alerts:write. The service supports optional organization- and project-scoped URL paths and an experimental=1 query parameter. Hosted tool availability can also depend on granted skills and constraints.",
+    "restrictions_controlled_by": "Vendor controls the hosted endpoint, OAuth metadata, and server-side exposure; the user authorizes a Sentry account; Sentry organization permissions also constrain API operations.",
+    "sources": [
+      "https://mcp.sentry.dev/",
+      "https://mcp.sentry.dev/.well-known/oauth-protected-resource/mcp",
+      "https://mcp.sentry.dev/.well-known/oauth-authorization-server",
+      "https://sentry.io/pricing/",
+      "https://www.sentry.help/en/articles/13965054-can-i-get-a-quote-for-sentry",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/skills.ts"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP tools capability; exact negotiated protocol version not found",
+      "description_what_how": "Hosted docs document tool exposure without enumerating the list. Repository code defines 76 tool configurations: 15 top-level tools and 61 catalog tools available through search_sentry_tools and execute_sentry_tool. Skills, scope constraints, and URL constraints filter exposure.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results are MCP content, structured output, or formatted text errors; errors are returned with isError=true. Exact live endpoint responses were not retrieved because the endpoint requires OAuth.",
+      "sources": [
+        "https://mcp.sentry.dev/",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/tools/surfaces.ts",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted resource inventory was available. Repository code includes a tool named get_sentry_resource, which fetches Sentry data through a tool call and does not establish that MCP Resources are implemented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.sentry.dev/",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted prompt inventory or implementation evidence was found in the reviewed server sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.sentry.dev/",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Repository code logs transport and tool issues and attaches request attributes to active telemetry spans. The endpoint's logging configuration and retention are not documented in the sources reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Logs are server-side; tool-call errors are returned as formatted text content with isError=true.",
+      "sources": [
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/telem/logging.ts",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-cloudflare/src/server/index.ts"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling request or sampling capability declaration was located in reviewed server code or hosted documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.sentry.dev/",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability or roots request handling was located in reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.sentry.dev/",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth-based remote authorization",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate Bearer and resource_metadata=https://mcp.sentry.dev/.well-known/oauth-protected-resource/mcp. That metadata returned resource=https://mcp.sentry.dev/mcp, authorization_servers=[https://mcp.sentry.dev], scopes_supported=[org:read, project:write, team:write, event:write, alerts:write], bearer_methods_supported=[header]. Authorization-server metadata advertises authorization_endpoint=https://mcp.sentry.dev/oauth/authorize, token_endpoint=https://mcp.sentry.dev/oauth/token, registration_endpoint=https://mcp.sentry.dev/oauth/register, response_types_supported=[code], response_modes_supported=[query], grant_types_supported=[authorization_code, refresh_token], token_endpoint_auth_methods_supported=[client_secret_basic, client_secret_post, none], revocation_endpoint=https://mcp.sentry.dev/oauth/token, code_challenge_methods_supported=[S256], authorization_response_iss_parameter_supported=true, client_id_metadata_document_supported=true. Repository documents 30-day refresh-token TTL. The unscoped protected-resource URL and OpenID configuration returned 404.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP 401 challenge for unauthenticated endpoint requests; successful authorized MCP response structure not observed.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; authorization-code flow with refresh tokens; PKCE S256; token auth methods client_secret_basic, client_secret_post, none; scopes_supported: org:read, project:write, team:write, event:write, alerts:write; refreshTokenTTL is 30 days in public code; OAuth revocation endpoint is /oauth/token. The challenge and metadata values above are from the prefetched raw responses.",
+      "authorization_server": "https://mcp.sentry.dev",
+      "sources": [
+        "https://mcp.sentry.dev/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.sentry.dev/.well-known/oauth-authorization-server",
+        "https://mcp.sentry.dev/mcp",
+        "https://mcp.sentry.dev/.well-known/oauth-protected-resource",
+        "https://mcp.sentry.dev/.well-known/openid-configuration",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-cloudflare/src/server/index.ts",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/docs/cloudflare/oauth-architecture.md"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The OAuth authorization flow includes a user consent screen, but no MCP Elicitation capability was located. Consent-screen OAuth approval is not evidence of MCP Elicitation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/docs/cloudflare/oauth-architecture.md",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability was found. Some tool descriptions note that Seer analysis can take several minutes; this alone does not show MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted endpoint documentation supports organization/project scope in the URL and experimental=1. Repository code also supports skill-based filtering and experimental mode; the hosted page does not document all repository configuration options.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool list varies with scope, granted skills, and experimental mode.",
+      "sources": [
+        "https://mcp.sentry.dev/",
+        "https://mcp.sentry.dev/llms.txt",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/skills.ts",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/tools/surfaces.ts"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool handler failures are formatted into text content and returned with isError=true. Unexpected errors may be recorded in telemetry; expected input, configuration, authentication, or provider errors are handled separately in the shared core.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP tool result with text content and isError=true for handler failures.",
+      "sources": [
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/internal/error-formatting.ts"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was found in the reviewed endpoint documentation or repository code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.sentry.dev/",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notification support was located. Some tools describe long-running Seer analysis, but no progress protocol behavior was established.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No explicit request cancellation handling was located in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.sentry.dev/",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Repository and hosted page expose server identity/setup information; server instructions and direct tools are shaped through skill and scope selection. The hosted documentation recommends project scoping where possible.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool availability can change with configured organization/project scope and skills.",
+      "sources": [
+        "https://mcp.sentry.dev/",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/skills.ts",
+        "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/tools/surfaces.ts"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. [LOCAL CODE @17833f7] Tool modules declare readOnlyHint, destructiveHint, and openWorldHint; idempotentHint is optional. The definitions JSON does not preserve annotations. The server registers annotations with tools. Tool list includes read and mutating operations. 2. [LOCAL CODE @17833f7] Several tool descriptions recommend explicit user approval or workflow sequencing; these instructions are not generic server-enforced confirmation gates. OAuth consent is enforced for remote authorization, but is not a per-tool confirmation. 3. [OAUTH METADATA] Scopes: org:read, project:write, team:write, event:write, alerts:write. The remote OAuth flow grants access to the user's Sentry account and is constrained by upstream permissions. Public code sets a 30-day refresh-token TTL. DCR and client ID metadata documents are supported; PKCE S256 is advertised. Redirect URI details are in OAuth code. 4. [DOCS/LOCAL CODE] Endpoint paths support organization/project scoping; project scope is recommended. Docs expose experimental=1. Skills filter tools; constrained sessions hide discovery tools that would escape or duplicate scope. Repository describes skill options for local/stdio and direct remote token usage; those options are not all documented on the hosted page. 5. No general MCP-specific PII masking or field exclusion policy was found. DPA/privacy documents govern Sentry service data generally; tool-specific output filtering depends on tool implementations. 6. [LOCAL CODE] Cloudflare applies IP-based rate limiting to /mcp and /oauth; exact thresholds are deployment configuration and not published in reviewed sources. Some tools impose schema limits (e.g., comment text max 4096 characters); no general result truncation cap was found. 7. [LOCAL CODE] Input schemas validate typed/required fields and selected bounds. Scope constraints are injected into tool parameters. Further automatic correction is tool-specific; embedded search agents may repair query parameters. 8. [LOCAL CODE] Server adds client, transport, experimental-mode, constraint, and skill attributes to spans; errors and some failures are logged to Sentry telemetry. Public sources do not specify hosted telemetry opt-out or retention. 9. Tool names/descriptions were searched for feedback, rating, report, survey, and suggestion terms. No vendor feedback/rating tool or MCP-specific upsell message was identified. Tools for retrieving user reports concern Sentry product data. 10. Server exposes skill-filtered tools; a Claude Code plugin/subagent is distributed outside the MCP endpoint. Tool instructions include behavior recommendations that clients may follow but which are not necessarily enforced by handlers. 11. [LOCAL CODE] OAuth/client and token state is stored for authorization and refresh. No evidence found that past agent tool behavior changes future tool output or availability. 12. [LOCAL CODE] The top-level endpoint uses a two-stage tool structure: catalog tools are found with search_sentry_tools and invoked using execute_sentry_tool. This is a dynamically discoverable catalog within one MCP server. Seer invokes Sentry's AI analysis service. 13. No arbitrary SQL, shell, script, or general raw API request tool was identified. execute_sentry_tool invokes catalogued Sentry MCP tools and is a broad dispatcher, not a documented arbitrary API escape hatch.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "When scoped, tools automatically default to the constrained org/project and unnecessary discovery tools are hidden. Scoping to a project is recommended when possible.",
+      "Do NOT call this tool as an automatic follow-up to get_sentry_resource.",
+      "Pass Sentry URLs unchanged to issueUrl or url parameters — NEVER try to fetch Sentry URLs via HTTP directly, always use the MCP tools which handle authentication.",
+      "For any Sentry-related operation that is not directly listed as a tool, treat it as a Sentry tool. Use search_sentry_tools only when you need to discover the tool name or schema.",
+      "Chain multiple tool calls when a request requires it."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The server exposes a top-level set of tools and a larger catalog that agents search and dispatch through search_sentry_tools and execute_sentry_tool. Organization/project constraints and skill selections also change tool availability.",
+    "sources": [
+      "https://mcp.sentry.dev/",
+      "https://mcp.sentry.dev/.well-known/oauth-protected-resource/mcp",
+      "https://mcp.sentry.dev/.well-known/oauth-authorization-server",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/tools/surfaces.ts",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/server.ts",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-cloudflare/src/server/index.ts",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-cloudflare/src/server/utils/rate-limiter.ts",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/plugins/sentry-mcp/agents/sentry-mcp.md",
+      "https://sentry.io/privacy/",
+      "https://sentry.io/legal/dpa/1.0.0/"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "76",
+    "action_count_comment": "Official tool definitions exist in the public getsentry/toolkit repository at packages/mcp-core/src/toolDefinitions.json; 76 names were extracted (15 direct tools and 61 catalog tools). The hosted docs do not state a total. Catalog tools are discoverable and invoked through the official search/execute tools, subject to skills and constraints. No third-party catalog actions were added. Glama's hosted connector did not yield a stable complete inventory; its older @getsentry/sentry-mcp entry is a separate catalog entry. Composio's Sentry API toolkit reports 209 proxy/API actions and its Sentry MCP toolkit reports 9 wrapper tools; neither is used to replace or augment the native repository list.",
+    "actions": [
+      {
+        "tool_name": "add_issue_note",
+        "description": "Add a human-visible comment to a Sentry issue's activity feed.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); issueUrl: string (optional); text: string (required)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L3-L11",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_team_to_project",
+        "description": "Grant a team access to an existing Sentry project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); teamSlug: string (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L47-L55",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "analyze_issue_with_seer",
+        "description": "Use Seer to analyze production errors and get detailed root cause analysis with specific code fixes.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); issueUrl: string (optional); instruction: string (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L113-L121",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_alert_rule",
+        "description": "Create a Sentry Alert (workflow) with notification actions and explicit sources.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); name: string (required); status: string (optional; enum 2 categories); frequencyMinutes: integer (optional); environment: string|null (optional); owner: string|null (optional); triggers: object|null (optional); actionFilters: array (required); projectSlugs: array (optional); detectorIds: array (optional)",
+        "parameter_count": "11",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L154-L162",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_dsn",
+        "description": "Create an additional DSN for an EXISTING project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); name: string (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L503-L511",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_metric_monitor",
+        "description": "Create a Sentry Metric Monitor with Static, Percent or Dynamic detection in a project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); name: string (required); description: string,null (optional); owner: string|null (optional); query: object (required); config: object (required); conditionGroup: object (required); workflowIds: array (optional)",
+        "parameter_count": "10",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L563-L571",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project",
+        "description": "Create a new project in Sentry (provisions DSN automatically).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); teamSlug: string (required); name: string (required); slug: string|null (optional); platform: string|null (optional); repository: string,null (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L979-L987",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_team",
+        "description": "Create a new team in Sentry.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); name: string (required)",
+        "parameter_count": "3",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1045-L1053",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_uptime_monitor",
+        "description": "Create a Sentry HTTP uptime monitor.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); name: string (required); url: string (required); intervalSeconds: integer (required); timeoutMs: integer (optional); method: string (optional; enum 7 categories); headers: array (optional); body: string (optional); status: string (optional; enum 2 categories); owner: string (optional); environment: string (optional); traceSampling: boolean (optional); responseCaptureEnabled: boolean (optional); recoveryThreshold: integer (optional); downtimeThreshold: integer (optional)",
+        "parameter_count": "17",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1101-L1109",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_alert_rule",
+        "description": "Permanently delete a Sentry Alert (workflow), preserving its connected monitors.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string|null (optional); ruleId: string (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1302-L1310",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_metric_monitor",
+        "description": "Permanently delete a Sentry Metric Monitor, preserving its connected Alerts and their other monitors.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (optional); monitorId: string (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1361-L1369",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_monitor_environment",
+        "description": "Delete one environment from a Sentry cron monitor.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); monitorSlug: string (required); environment: string (required)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1413-L1421",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_uptime_monitor",
+        "description": "Delete a Sentry HTTP uptime monitor.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); uptimeMonitorId: string (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1481-L1489",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute_sentry_tool",
+        "description": "Execute an available Sentry MCP tool discovered through search_sentry_tools.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); arguments: object (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1536-L1545",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_alert_rules",
+        "description": "Find Sentry alert rules.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); kind: string (optional; enum 3 categories); projectSlug: string|null (optional); query: string|null (optional); cursor: string|null (optional); limit: integer (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1563-L1571",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_dashboards",
+        "description": "Find Sentry dashboards in an organization.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); titleQuery: string|null (optional); sort: string (optional; enum 4 categories); cursor: string|null (optional); limit: integer (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1820-L1828",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_dropped_events",
+        "description": "Find events dropped before they were stored in Sentry — ground-truth data-fidelity information about what was and was…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); dataset: string (optional; enum 4 categories); projectSlug: string|null (optional); statsPeriod: string|null (optional); start: string|null (optional); end: string|null (optional); interval: string|null (optional); outcome: string|null (optional); reason: string|null (optional)",
+        "parameter_count": "10",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L1967-L1975",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_dsns",
+        "description": "List all Sentry DSNs for a specific project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required)",
+        "parameter_count": "3",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L2193-L2201",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_metric_monitors",
+        "description": "Find Sentry Metric Monitors that evaluate errors, performance, logs, metrics or crash rates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (optional); query: string (optional); cursor: string (optional); limit: integer (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L2252-L2260",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_monitors",
+        "description": "Find Sentry cron monitors.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string|null (optional); environment: string|null (optional); owner: string|null (optional); query: string|null (optional); limit: integer (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L2352-L2360",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_organizations",
+        "description": "Find organizations that the user has access to in Sentry.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string|null (optional); cursor: string|null (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L2577-L2588",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_projects",
+        "description": "Find projects in Sentry.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); query: string|null (optional); cursor: string|null (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L2661-L2669",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_releases",
+        "description": "Find releases in Sentry.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string|null (optional); query: string|null (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L2740-L2748",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_teams",
+        "description": "Find teams in an organization in Sentry.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); query: string|null (optional); cursor: string|null (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L2953-L2961",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_uptime_monitors",
+        "description": "Find Sentry uptime monitors.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (optional); environment: string (optional); owner: string (optional); query: string (optional); limit: integer (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L3035-L3043",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_conversation_details",
+        "description": "Fetch the chronological transcript and debugging details for one agent conversation, formerly called an AI conversati…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); conversationId: string (required); project: string (optional); start: string (optional); end: string (optional); regionUrl: string (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L3154-L3162",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_ai_conversation_details",
+        "description": "Deprecated alias for get_agent_conversation_details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); conversationId: string (required); project: string (optional); start: string (optional); end: string (optional); regionUrl: string (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L3605-L3613",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_alert_options",
+        "description": "Discover available actions, conditions, or sources for a Sentry Alert (notification workflow).",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); section: string (required; enum 3 categories); actionTypes: array|null (optional); conditionGroup: string|null (optional); projectSlug: string|null (optional); sourceTypes: array|null (optional); query: string|null (optional); cursor: string,null (optional); limit: integer (optional)",
+        "parameter_count": "10",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4056-L4064",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_alert_rule",
+        "description": "Get details for a Sentry alert rule.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); kind: string (optional; enum 3 categories); projectSlug: string|null (optional); ruleIdOrName: string (required)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4406-L4414",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_dashboard_details",
+        "description": "Get detailed information about a specific Sentry dashboard.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); dashboardIdOrTitle: string (required)",
+        "parameter_count": "3",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4458-L4466",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_doc",
+        "description": "Fetch the full markdown content of a Sentry documentation page.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "path: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4492-L4501",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_event_attachment",
+        "description": "Download attachments from a Sentry event.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); projectSlug: string (required); eventId: string (required); attachmentId: string|null (optional); regionUrl: string|null (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4509-L4517",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_event_stacktrace",
+        "description": "Get a full thread stacktrace from a specific Sentry event.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); issueId: string (required); eventId: string|string (optional); thread: integer|string (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4559-L4567",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_issue_activity",
+        "description": "Get the activity feed and comments for a Sentry issue.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); issueUrl: string (optional); includeComments: boolean (optional); limit: integer (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4621-L4629",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_issue_breadcrumbs",
+        "description": "Get the breadcrumb trail from a Sentry issue event.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); issueUrl: string (optional); eventId: string|string (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4668-L4676",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_issue_details",
+        "description": "Get detailed information about a specific Sentry issue by ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); eventId: string (optional); issueUrl: string (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4720-L4728",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_issue_tag_values",
+        "description": "Get tag value distribution for a specific Sentry issue.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); issueUrl: string (optional); tagKey: string (required)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4762-L4770",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_issue_user_reports",
+        "description": "Get legacy User Reports or crash-report feedback attached to a Sentry issue.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); issueUrl: string (optional); cursor: string|null (optional); limit: integer (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4850-L4858",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_latest_base_snapshot",
+        "description": "Get the latest UI screenshots/images for an app from the preprod snapshot system.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); appId: string (required); branch: string|null (optional); project: string|null (optional); regionUrl: string|null (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4906-L4914",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_metric_monitor_details",
+        "description": "Inspect a Sentry Metric Monitor's query, dataset, detection mode, thresholds, resolution conditions and connected Ale…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (optional); monitorId: string (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L4963-L4971",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_monitor_details",
+        "description": "Get details for a Sentry cron monitor.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlugOrId: string,null (optional); monitorSlug: string (required); environment: string|null (optional); period: string|null (optional); start: string|null (optional); end: string|null (optional); checkInLimit: integer (optional); includeStats: boolean (optional); rollupSeconds: integer|null (optional)",
+        "parameter_count": "11",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5168-L5176",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_profile",
+        "description": "Analyze CPU profiling data to identify performance bottlenecks and detect regressions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "profileUrl: string (optional); organizationSlug: string (optional); regionUrl: string|null (optional); projectSlugOrId: string,number (optional); transactionName: string (optional); period: string (optional); compareAgainstPeriod: string (optional); focusOnUserCode: boolean (optional); maxHotPaths: integer (optional)",
+        "parameter_count": "9",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5286-L5295",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_profile_details",
+        "description": "Inspect a specific Sentry profile in detail.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "profileUrl: string (optional); organizationSlug: string (optional); regionUrl: string|null (optional); projectSlugOrId: string,number (optional); profileId: string (optional); profilerId: string (optional); start: string (optional); end: string (optional); focusOnUserCode: boolean (optional)",
+        "parameter_count": "9",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5350-L5359",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_release_details",
+        "description": "Get details for a Sentry release.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); releaseVersion: string (required); projectSlugOrId: string|null (optional); includeHealth: boolean (optional); includeDeploys: boolean (optional); includeCommits: boolean (optional); limit: integer (optional)",
+        "parameter_count": "8",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5408-L5416",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_replay_details",
+        "description": "Get high-level information about a specific Sentry replay by URL or replay ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "replayUrl: string (optional); organizationSlug: string (optional); replayId: string (optional); regionUrl: string|null (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5476-L5485",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_sentry_mcp_info",
+        "description": "Get information about the running Sentry MCP server.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5512-L5522",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_sentry_resource",
+        "description": "Fetch a Sentry resource by URL, or by resourceType plus resourceId.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "url: string (optional); resourceType: string (optional; enum 8 categories); resourceId: string (optional); organizationSlug: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5531-L5540",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_snapshot",
+        "description": "Get a preprod snapshot comparison summary, including metadata, counts, and changed image sections.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); snapshotId: string (required); showUnmodified: boolean (optional); regionUrl: string|null (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5570-L5578",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_snapshot_image",
+        "description": "Get metadata and image content for one image in a preprod snapshot.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); snapshotId: string (required); imageIdentifier: string (required); imageResolution: string (optional; enum 2 categories); regionUrl: string|null (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5609-L5617",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_span_details",
+        "description": "Get detailed information about a specific span within a Sentry trace.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); traceId: string (required); spanId: string (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5654-L5662",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_trace_details",
+        "description": "Get detailed information about a specific Sentry trace by ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); traceId: string (required); spanId: string (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5693-L5701",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_uptime_monitor_details",
+        "description": "Get details for a Sentry uptime monitor, including recent checks.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); uptimeMonitorId: string (required); period: string (optional); start: string (optional); end: string (optional); checkLimit: integer (optional)",
+        "parameter_count": "8",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5732-L5740",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "link_issue",
+        "description": "Link an existing external ticket or GitHub pull request to a Sentry issue by URL.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); issueUrl: string (optional); externalIssueUrl: string (required); integrationId: string (optional); appSlug: string (optional); fields: object (optional)",
+        "parameter_count": "8",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5794-L5802",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "onboarding_status_update",
+        "description": "Update the progress shown in Sentry's agentic onboarding UI.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); runToken: string (required); update: object (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L5899-L5907",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_team_from_project",
+        "description": "Revoke a team's access to an existing Sentry project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); teamSlug: string (required)",
+        "parameter_count": "4",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L6084-L6092",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_agent_conversations",
+        "description": "Search Sentry Agent Conversations, formerly called AI Conversations, and return one summary row per conversation.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); query: string (optional); project: string|array (optional); environment: string|array (optional); period: string (optional); start: string (optional); end: string (optional); cursor: string (optional); limit: integer (optional); regionUrl: string (optional)",
+        "parameter_count": "10",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L6150-L6158",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_ai_conversations",
+        "description": "Deprecated alias for search_agent_conversations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); query: string (optional); project: string|array (optional); environment: string|array (optional); period: string (optional); start: string (optional); end: string (optional); cursor: string (optional); limit: integer (optional); regionUrl: string (optional)",
+        "parameter_count": "10",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L6373-L6381",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_docs",
+        "description": "Search Sentry documentation for SDK setup, instrumentation, and configuration guidance.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required); maxResults: integer (optional); guide: string (optional; enum 126 categories)",
+        "parameter_count": "3",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L6596-L6606",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_errors",
+        "description": "Search Sentry error events: exceptions and crashes with stack traces. Use for error counts, statistics, trends, and i…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); query: string (optional); fields: array|null (optional); sort: string,null (optional); projectSlug: string|null (optional); period: string (optional); regionUrl: string|null (optional); limit: number (optional); includeExplanation: boolean (optional)",
+        "parameter_count": "9",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L6754-L6762",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_events",
+        "description": "Deprecated multi-dataset event search, kept for backward compatibility.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); dataset: string (optional; enum 6 categories); query: string (optional); fields: array|null (optional); sort: string,null (optional); projectSlug: string|null (optional); environment: string|array (optional); period: string (optional); regionUrl: string|null (optional); limit: number (optional); includeExplanation: boolean (optional)",
+        "parameter_count": "11",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L6834-L6842",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_issue_events",
+        "description": "Search and filter events within a specific issue.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string|null (optional); issueId: string (optional); issueUrl: string (optional); query: string (optional); sort: string (optional); period: string (optional); projectSlug: string|null (optional); regionUrl: string|null (optional); limit: number (optional); includeExplanation: boolean (optional)",
+        "parameter_count": "10",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L6936-L6948",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_issues",
+        "description": "Search for grouped issues/problems in Sentry - returns a LIST of issues, NOT counts or aggregations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); query: string (optional); sort: string (optional; enum 5 categories); projectSlugOrId: string,null (optional); regionUrl: string|null (optional); limit: number (optional); period: string (optional; enum 5 categories); includeExplanation: boolean (optional)",
+        "parameter_count": "8",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L7021-L7029",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_logs",
+        "description": "Search Sentry logs: application log entries, including error- and warning-severity log messages. Use for log counts, …",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); query: string (optional); fields: array|null (optional); sort: string,null (optional); projectSlug: string|null (optional); period: string (optional); regionUrl: string|null (optional); limit: number (optional); includeExplanation: boolean (optional)",
+        "parameter_count": "9",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L7084-L7092",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_metrics",
+        "description": "Search Sentry metrics: counters, gauges, and distributions, as rows or aggregates. Use for metric values, percentiles…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); query: string (optional); fields: array|null (optional); sort: string,null (optional); projectSlug: string|null (optional); period: string (optional); regionUrl: string|null (optional); limit: number (optional); includeExplanation: boolean (optional)",
+        "parameter_count": "9",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L7164-L7172",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_profiles",
+        "description": "Search Sentry profiles: transaction and continuous profile results, profile IDs, and profiled transactions. Use to fi…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); query: string (optional); fields: array|null (optional); sort: string,null (optional); projectSlug: string|null (optional); period: string (optional); regionUrl: string|null (optional); limit: number (optional); includeExplanation: boolean (optional)",
+        "parameter_count": "9",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L7244-L7252",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_replays",
+        "description": "Search Sentry session replays: rage clicks, dead clicks, visited pages, errors seen, and replay users.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); query: string (optional); sort: string,null (optional); projectSlug: string|null (optional); environment: string|array (optional); period: string (optional); regionUrl: string|null (optional); limit: number (optional); includeExplanation: boolean (optional)",
+        "parameter_count": "9",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L7324-L7332",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_sentry_tools",
+        "description": "Search the available Sentry MCP tool catalog by name and description.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required); limit: integer|null (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L7407-L7416",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_traces",
+        "description": "Search Sentry spans and traces: requests, API/HTTP calls, endpoints, DB queries, AI/LLM calls, and other operations. …",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); query: string (optional); fields: array|null (optional); sort: string,null (optional); projectSlug: string|null (optional); period: string (optional); regionUrl: string|null (optional); limit: number (optional); includeExplanation: boolean (optional)",
+        "parameter_count": "9",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L7491-L7499",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unlink_issue",
+        "description": "Remove an external ticket or GitHub pull request reference from a Sentry issue by URL.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); issueUrl: string (optional); externalIssueUrl: string (required); integrationId: string (optional); appSlug: string (optional)",
+        "parameter_count": "7",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L7571-L7579",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_alert_rule",
+        "description": "Update a Sentry Alert (workflow), including notification actions and connections.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string|null (optional); ruleIdOrName: string (required); name: string (optional); status: string (optional; enum 2 categories); frequencyMinutes: integer (optional); environment: string|null (optional); owner: string|null (optional); triggers: object (optional); actionFilters: array (optional); addProjectSlugs: array (optional); removeProjectSlugs: array (optional); addDetectorIds: array (optional); removeDetectorIds: array (optional)",
+        "parameter_count": "15",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L7666-L7674",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_dsn",
+        "description": "Update settings for an existing DSN (client key) in a project, such as name, active status, rate limit, and loader sc…",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); keyId: string (required); name: string (optional); isActive: boolean (optional); rateLimitWindow: integer (optional); rateLimitCount: integer (optional); disableRateLimit: boolean (optional); browserSdkVersion: string (optional); loaderHasReplay: boolean (optional); loaderHasPerformance: boolean (optional); loaderHasDebug: boolean (optional); loaderHasFeedback: boolean (optional); loaderHasLogsAndMetrics: boolean (optional)",
+        "parameter_count": "15",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L8054-L8062",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_issue",
+        "description": "Update a Sentry issue's status or assignment.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (optional); regionUrl: string|null (optional); issueId: string (optional); issueUrl: string (optional); status: string (optional; enum 4 categories); assignedTo: string|null (optional); ignoreMode: string (optional; enum 5 categories); ignoreDurationMinutes: integer (optional); ignoreCount: integer (optional); ignoreWindowMinutes: integer (optional); ignoreUserCount: integer (optional); ignoreUserWindowMinutes: integer (optional); reason: string (optional)",
+        "parameter_count": "13",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L8140-L8148",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_metric_monitor",
+        "description": "Update a Sentry Metric Monitor's query, detection conditions, metadata, status or connected Alerts.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (optional); monitorId: string (required); name: string (optional); description: string,null (optional); status: string (optional; enum 2 categories); owner: string|null (optional); query: object (optional); config: object (optional); conditionGroup: object (optional); workflowIds: array (optional)",
+        "parameter_count": "12",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L8245-L8253",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_project",
+        "description": "Update project metadata in Sentry, such as name, slug, and platform.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); name: string|null (optional); slug: string|null (optional); platform: string|null (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L8657-L8665",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_uptime_monitor",
+        "description": "Update a Sentry HTTP uptime monitor.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "organizationSlug: string (required); regionUrl: string|null (optional); projectSlug: string (required); uptimeMonitorId: string (required); name: string (optional); url: string (optional); intervalSeconds: integer (optional); timeoutMs: integer (optional); method: string (optional; enum 7 categories); headers: array (optional); body: string,null (optional); status: string (optional; enum 2 categories); owner: string|null (optional); environment: string|null (optional); traceSampling: boolean (optional); responseCaptureEnabled: boolean (optional); recoveryThreshold: integer (optional); downtimeThreshold: integer (optional)",
+        "parameter_count": "18",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L8752-L8760",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "whoami",
+        "description": "Identify the authenticated user in Sentry.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json#L8960-L8971",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "60849",
+    "token_method": "[LOCAL CODE @17833f7] Serialized packages/mcp-core/src/toolDefinitions.json names, descriptions, and input schemas as JSON (243393 characters ÷ 4, rounded up). The generated file does not include tool annotations or initialize instructions, so this estimate excludes those fields.",
+    "human_can_agent_cannot": "Sentry users can access product features beyond the MCP catalog, including other product administration and account/billing functions. No complete MCP-to-product capability comparison was found. The MCP repository describes the service as focused on developer workflows and debugging rather than general access to all Sentry functionality. REST API operations not represented by the MCP tools were not counted as MCP actions.",
+    "sources": [
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/toolDefinitions.json",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/tools/surfaces.ts",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/README.md",
+      "https://glama.ai/mcp/connectors/dev.sentry.mcp/sentry",
+      "https://glama.ai/mcp/servers/%40getsentry/sentry-mcp/tools",
+      "https://composio.dev/toolkits/sentry_mcp",
+      "https://composio.dev/toolkits/sentry"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Hosted docs recommend project scoping but describe it as a recommendation. Repository agent guidance includes tool-selection, URL handling, sequencing, and when-to-use instructions. Such text guides the model; handler-level enforcement is tool-specific.",
+    "governance_promises": "The Sentry DPA says customer personal data is processed to provide the Service and related technical support, as otherwise permitted or required by use or agreement, and as otherwise documented in written instructions. It also describes deletion during the term consistent with service functionality. These are general Sentry service terms, not MCP-specific implementation guarantees.",
+    "promises_to_user": "Hosted docs say all connections use OAuth and that first connection triggers an authentication flow. The repository describes project scoping as a way to constrain tools to the selected project.",
+    "comparison_with_server_logic": "OAuth requirement is reflected in the endpoint's 401 challenge and OAuth metadata. URL scoping and tool filtering exist in repository code. The recommendation to scope to a project is advisory. General privacy/DPA commitments do not establish specific MCP output masking, telemetry retention, or per-tool deletion behavior.",
+    "sources": [
+      "https://mcp.sentry.dev/",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/plugins/sentry-mcp/agents/sentry-mcp.md",
+      "https://github.com/getsentry/toolkit/blob/17833f7433af2c7c908ec904697e37642847f291/packages/mcp-core/src/tools/surfaces.ts",
+      "https://sentry.io/privacy/",
+      "https://sentry.io/trust/",
+      "https://sentry.io/legal/dpa/1.0.0/"
+    ]
+  },
+  "contradictions": [
+    "The hosted endpoint's supplied OAuth metadata advertises alerts:write, while the public shared-core SCOPES map reviewed in the repository lists org:read, project:write, team:write, event:write, and alerts:write only in the current source; tool-specific requiredScopes in toolDefinitions.json include entries that may not be represented as top-level OAuth scopes. The exact hosted grant-to-tool scope mapping could not be confirmed from the unauthenticated endpoint.",
+    "The hosted documentation describes the input endpoint as a global endpoint with optional org/project scoping. Repository documentation also describes local stdio and direct Sentry-Bearer remote access, which are separate authentication/transport modes rather than evidence of additional hosted endpoint URLs.",
+    "The endpoint's legacy /sse route returned HTTP 410, consistent with repository code stating that SSE transport has been removed."
+  ],
+  "observations_for_research": [
+    "The hosted service uses global URL addressing with optional organization/project constraints that alter defaults and hide selected discovery tools.",
+    "The public tool surface distinguishes direct tools from catalog tools, which are searched and dispatched through a pair of top-level tools.",
+    "OAuth scope metadata includes write scopes, while repository skill definitions and tool-level scopes provide another layer of capability selection."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/ and local code/getsentry__toolkit copy. The official endpoint homepage and llms.txt were accessible; /mcp returned HTTP 401 and the OAuth metadata supplied with the task was used without refetching. The official repository commit was 17833f7433af2c7c908ec904697e37642847f291 dated 2026-10-26. The repository has the hosted Cloudflare transport and shared core plus a separate stdio package; exact deployed build was not verified. The pricing page was inaccessible during review; the official Help Center points to it. Unofficial npm/GitHub servers were present in links.json and were excluded as tool evidence. The complete generated action list is in actions.json.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 23.8
+  }
+}

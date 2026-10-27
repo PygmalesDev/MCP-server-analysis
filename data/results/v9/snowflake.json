@@ -1,0 +1,360 @@
+{
+  "server": "snowflake",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "(per account URL)",
+    "documentation_url_csv": "https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-mcp-server/",
+    "addressing": "per customer",
+    "repository_url": "https://github.com/Snowflake-Labs/mcp",
+    "documentation_urls_used": [
+      "https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-mcp-server/",
+      "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+      "https://docs.snowflake.com/en/sql-reference/sql/create-mcp-server",
+      "https://docs.snowflake.com/en/sql-reference/sql/show-mcp-servers",
+      "https://docs.snowflake.com/en/release-notes/2025/other/2025-11-04-cortex-agents-mcp",
+      "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-ai-gateway/tools/admin-server-oauth-setup",
+      "https://www.snowflake.com/en/pricing-options/",
+      "https://www.snowflake.com/en/legal/privacy-policy/"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public Snowflake-Labs/mcp repository is a deprecated local server, distinct from the current managed account endpoint. Its README directs users to the managed server documentation. It was reviewed as a separate variant; its tools are not included in actions.",
+    "mcp_protocol_version": "2025-11-25",
+    "commit_hash": "662cb486395d79ab1ad0b3538f933fe6a686ce7c",
+    "commit_date": "2026-05-15",
+    "implementation_language": "Python (deprecated local variant; managed server implementation language NOT FOUND)",
+    "mcp_sdk_and_version": "FastMCP >=2.14.7,<3.0.0 and mcp[cli] >=1.24.0,<2.0.0 (deprecated local variant; managed server SDK NOT FOUND)",
+    "code_public": "Partially",
+    "license": "Apache-2.0 (deprecated local variant)",
+    "release_status": "General availability",
+    "other_official_servers": [
+      "Snowflake documentation describes other account-specific managed MCP servers created in different databases and schemas; their tools depend on each server object's specification.",
+      "https://docs.snowflake.com/user-guide/cortex-code/cortex-code-mcp describes the separate Cortex Code MCP interface; it is not the per-account managed MCP server in this input.",
+      "The Snowflake docs site offers documentation-search MCP functionality; it is not this product server."
+    ],
+    "sources": [
+      "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+      "https://docs.snowflake.com/en/release-notes/2025/other/2025-11-04-cortex-agents-mcp",
+      "https://github.com/Snowflake-Labs/mcp/blob/662cb486395d79ab1ad0b3538f933fe6a686ce7c/README.md#L1-L4",
+      "https://github.com/Snowflake-Labs/mcp/blob/662cb486395d79ab1ad0b3538f933fe6a686ce7c/pyproject.toml#L1-L15",
+      "https://docs.snowflake.com/user-guide/cortex-code/cortex-code-mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP-server charge is stated in the reviewed documentation. The managed server operates within Snowflake accounts, where underlying compute and AI usage can consume billable credits; exact costs depend on account agreement, region, edition, workload, and configured services.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Snowflake offers Standard, Enterprise, Business Critical, and Virtual Private Snowflake editions. The official pricing page describes on-demand or prepaid capacity; exact prices vary by region, edition, and agreement.",
+    "pricing_model_details": "Snowflake bills account usage under its consumption pricing model. Queries and configured services can consume warehouse credits or other billable usage. No MCP-specific per-call rate or quota price was found.",
+    "other_access_restrictions": "A server is created within a Snowflake account, database, and schema. Connecting users need USAGE on the MCP server and required privileges on its underlying objects. Administrators configure OAuth and role access. Government-region availability has stated exceptions.",
+    "restrictions_controlled_by": "Snowflake account administrators configure roles, grants, server objects, OAuth integrations, and underlying resources; Snowflake controls service availability and platform limits.",
+    "sources": [
+      "https://www.snowflake.com/en/pricing-options/",
+      "https://www.snowflake.com/legal-files/CreditConsumptionTable.pdf",
+      "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "2025-11-25",
+      "description_what_how": "Clients discover and invoke tools using tools/list and tools/call. Each MCP server object is configured with one or more tools, chosen from Cortex Search, Cortex Analyst, SQL execution, Cortex Agent, Coding Agent, and GENERIC UDF or stored-procedure tools. Names and input schemas depend on the account's specification.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results use MCP content results. As of August 20, 2026, tools/call responses are returned as an SSE stream; clients should accept application/json and text/event-stream. The stream ends with data: [DONE].",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+        "https://docs.snowflake.com/en/sql-reference/sql/create-mcp-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No",
+      "depends_on_mcp_version": "2025-11-25",
+      "description_what_how": "Snowflake states that its managed MCP server does not support MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT APPLICABLE",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No",
+      "depends_on_mcp_version": "2025-11-25",
+      "description_what_how": "Snowflake states that its managed MCP server does not support MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT APPLICABLE",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed MCP documentation does not specify MCP-call logging or whether tool calls are recorded with an MCP source label.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+        "https://www.snowflake.com/en/legal/privacy-policy/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No",
+      "depends_on_mcp_version": "2025-11-25",
+      "description_what_how": "Snowflake states that its managed MCP server does not support sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT APPLICABLE",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No",
+      "depends_on_mcp_version": "2025-11-25",
+      "description_what_how": "Snowflake states that its managed MCP server does not support roots.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT APPLICABLE",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Snowflake OAuth is the default; customers can bind an External OAuth identity provider. OAuth sessions use the connecting user's DEFAULT_ROLE by default. Administrators can configure OAUTH_SCOPES_SUPPORTED, ALLOWED_ROLES_LIST, redirect URIs, and secondary-role behavior. The supplied pre-fetch says no public metadata was fetched because the input is not a concrete URL, so endpoint-specific metadata and raw scope values are unavailable.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth-protected access; exact response is account-specific.",
+      "authorization_mechanism": "Snowflake OAuth by default, or External OAuth. OAuth 2.0; public clients can use PKCE; confidential clients use a client secret. Dynamic Client Registration is not supported. By default, the advertised scope is session:role:all. Configurable primary-role scopes include session:role-any and session:role:<role_name>; administrators can set OAUTH_SCOPES_SUPPORTED. The provided metadata result: NOT FETCHED because endpoint is per-customer/not public. Token lifetime and revocation details were not found in the reviewed MCP-specific pages.",
+      "authorization_server": "Snowflake authorization server by default; optional customer-configured External OAuth identity provider. Exact host is account-specific.",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-ai-gateway/tools/admin-server-oauth-setup"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation support or server-enforced user confirmation flow is documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP Tasks support is not described in the reviewed managed-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "An administrator creates an MCP server object with a YAML tool specification. Configuration determines tool names, types, descriptions, underlying objects, schemas, optional annotations, and some per-tool settings. Availability may depend on account parameters and feature flags.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP server object specification is stored as metadata and can be viewed with DESCRIBE MCP SERVER.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/sql-reference/sql/create-mcp-server",
+        "https://docs.snowflake.com/en/sql-reference/sql/show-mcp-servers",
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed documentation provides client troubleshooting examples but does not specify a general MCP error format or vendor-reporting tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+        "https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No",
+      "depends_on_mcp_version": "2025-11-25",
+      "description_what_how": "Snowflake states that the managed server supports only tool capabilities; no MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT APPLICABLE",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notification mechanism is described. Agent and coding-agent calls may return streamed tool-call responses, but the documentation does not identify these as MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "As of August 20, 2026, tools/call responses use SSE; the docs describe data events and a terminal [DONE] event.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Cancellation support is not described in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "2025-11-25",
+      "description_what_how": "Cortex Agent and Coding Agent tools can use continuation state via thread_id and parent_message_id when ENABLE_MCP_AGENT_RUN_THREAD_CONTINUATION is enabled (default on). Coding Agent runs receive a managed sandbox; a code_toolset_all tool is appended. This is per-tool conversation state, not a general MCP memory feature.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Agent tool result contains the agent reply and thread_id; coding-agent sandbox persists with its conversation thread.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+        "https://docs.snowflake.com/en/sql-reference/sql/create-mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The server supports read-oriented Search, Analyst, and optional read-only SQL tools; GENERIC and Agent tools can perform writes. Optional annotations include readOnlyHint, destructiveHint, idempotentHint, and openWorldHint. For GENERIC and CORTEX_AGENT_RUN, defaults are false/true/false/true respectively; these are client hints, not enforced controls. 2. No universal confirmation flow is documented. 3. Access uses OAuth or PAT; permissions inherit Snowflake role grants on the server and its underlying objects. OAuth scopes control the primary role; secondary roles are separately configured. 4. Administrators define server tool composition and can use separate server objects and roles. SQL read_only defaults true; response cap and recursion limits apply. 5. Documentation says role-based access and masking policies apply; no MCP-specific PII masking logic is described. 6. Maximum 50 tools per server; generic and SQL results truncate at 250 KB; query_timeout is configurable for SQL and generic tools; recursion depth is capped at 10. 7. Input schemas are specified for GENERIC tools; no general MCP-specific correction or override behavior is documented. 8. MCP-specific audit logging and telemetry details: Unknown. 9. No feedback/rating/marketing tools identified in the documented quickstart list; configured custom tools can vary. 10. Tool descriptions and optional Coding Agent instructions are administrator-provided; client-facing annotation hints are not enforced. 11. Agent/coding-agent continuation can persist by thread ID when enabled; default is on. 12. Server uses configurable tool objects; Cortex Agent and Coding Agent may orchestrate nested tools. 13. SYSTEM_EXECUTE_SQL is an unrestricted SQL surface unless configured read_only=true; SQL is an escape hatch around agent semantic views and orchestration. Snowflake warns of that bypass.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Use this agent for governed business data questions.",
+      "Write and run code when that answers the question.",
+      "A tool to execute read-only SQL queries against the connected Snowflake database."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The server exposes a customer-configured list of tool objects; tool composition can include nested Cortex Agents or Coding Agents, and Coding Agent receives a dynamically appended code_toolset_all tool. Configurations may vary among account-specific endpoints.",
+    "sources": [
+      "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+      "https://docs.snowflake.com/en/sql-reference/sql/create-mcp-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "Unknown for the input account endpoint; four tools are enumerated for the official quickstart example",
+    "action_count_comment": "No fixed official tool list exists for every account endpoint: administrators define the tool array in each MCP server object. The official CREATE MCP SERVER reference lists six supported tool types, not a fixed set of names. The official Getting Started guide states that its example server exposes four tools; those four quickstart names are in actions.json as the best available concrete list, not a claim about the unspecified input account's configuration. No catalogue-only tools were added. Third-party catalogues describe other Snowflake integrations or variants and do not establish the tools of this account endpoint.",
+    "actions": [
+      {
+        "description": "Generate SQL for financial-services questions over the configured semantic view.",
+        "type": "Read",
+        "parameter_count": "1",
+        "enabled_by_default": "Unknown",
+        "tool_name": "Finance_and_Risk_Assessment_Semantic_View",
+        "parameters": "message: string (required)",
+        "source": "https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "description": "Search unstructured support-ticket descriptions.",
+        "type": "Read",
+        "parameter_count": "4",
+        "enabled_by_default": "Unknown",
+        "tool_name": "Support_Tickets_Cortex_Search",
+        "parameters": "query: string (required); columns: string[] (optional); filter: object (optional); limit: integer (optional)",
+        "source": "https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "description": "Run read-only SQL queries against the connected Snowflake database.",
+        "type": "Read",
+        "parameter_count": "1",
+        "enabled_by_default": "Unknown",
+        "tool_name": "SQL_Execution_Tool",
+        "parameters": "sql: string (required)",
+        "source": "https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "description": "Call a configured procedure to send email to a verified address.",
+        "type": "Write",
+        "parameter_count": "3",
+        "enabled_by_default": "Unknown",
+        "tool_name": "Send_Email",
+        "parameters": "body: string (optional); recipient_email: string (optional); subject: string (optional)",
+        "source": "https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-mcp-server/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The public repository is a deprecated local server, not the deployed managed server; the managed server's complete input-specific tool definitions and initialize instructions are unavailable.",
+    "human_can_agent_cannot": "Snowflake users can perform account, database, schema, warehouse, object, access-control, and administrative operations through Snowflake interfaces and SQL. The managed MCP server exposes only the tools configured in its tool array, up to 50; the reviewed guide's example exposes only four tools and does not expose general server administration. Sources: https://docs.snowflake.com/en/sql-reference/sql/create-mcp-server ; https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-mcp-server/.",
+    "sources": [
+      "https://www.snowflake.com/en/developers/guides/getting-started-with-snowflake-mcp-server/",
+      "https://docs.snowflake.com/en/sql-reference/sql/create-mcp-server",
+      "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Snowflake recommends least privilege, OAuth, checking tool definitions, and avoiding recursive loops. It warns that tool annotations are client-facing hints and do not enforce behavior. Quote: \"Tool annotations are client-facing hints, not security controls.\"",
+    "governance_promises": "Snowflake describes governance through RBAC and says data masking policies can govern MCP access. The privacy policy says customer content is retained under the customer agreement. No MCP-specific telemetry opt-out, retention period, or AI-training statement was found in the reviewed pages.",
+    "promises_to_user": "The managed server is presented as a way to expose Snowflake data tools without deploying separate infrastructure, while using the same role-based access controls as the account.",
+    "comparison_with_server_logic": "RBAC is implemented through Snowflake privileges on the MCP server and its configured objects. SQL read_only and tool annotations are configuration options; annotations are explicitly non-enforcing. Result truncation, tool-count and recursion limits are documented server-side. Privacy-policy retention terms are general service terms, not specific MCP-call controls.",
+    "sources": [
+      "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp",
+      "https://docs.snowflake.com/en/sql-reference/sql/create-mcp-server",
+      "https://www.snowflake.com/en/legal/privacy-policy/"
+    ]
+  },
+  "contradictions": [
+    "No endpoint-specific OAuth metadata was fetched because the input gives only a per-customer account URL placeholder; documentation describes default and configurable scopes, but these cannot be compared with raw metadata for this account.",
+    "The deprecated Snowflake-Labs/mcp repository is a separate local server variant. Its tool list and implementation are excluded from actions for the managed endpoint."
+  ],
+  "observations_for_research": [
+    "Tool names, descriptions, schemas, and behavior are configured by the account administrator, so the same vendor-managed endpoint class can expose materially different agent capabilities per customer.",
+    "The endpoint host and OAuth metadata are account-specific; the provided input does not identify one concrete server object or published URL.",
+    "The administrator-configurable SYSTEM_EXECUTE_SQL tool can be set read-only or configured with broader SQL permissions, changing whether the client can bypass Cortex Agent orchestration."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared links.json, links_check.txt, pages/ text, script-text, and HTML evidence, plus the pinned Snowflake-Labs/mcp repository. No endpoint-specific hosted page or OAuth response was available because the input endpoint is a pro-account placeholder. The public repository is explicitly deprecated and separate from the managed server. Third-party catalogue pages were checked but not used as evidence for the managed endpoint's tool names. Pricing was checked against Snowflake's official pricing page and service consumption table. `actions.json` contains the four tools from the documented quickstart configuration; the actual account-specific list remains unobserved.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 21.1
+  }
+}

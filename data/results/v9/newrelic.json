@@ -1,0 +1,676 @@
+{
+  "server": "newrelic",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.newrelic.com/mcp",
+    "documentation_url_csv": "https://docs.newrelic.com/docs/agentic-ai/mcp/setup/",
+    "addressing": "global",
+    "repository_url": "https://github.com/newrelic/mcp-server",
+    "documentation_urls_used": [
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/setup/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/troubleshoot/",
+      "https://docs.newrelic.com/docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing/",
+      "https://newrelic.com/termsandconditions/service-specific"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "The vendor repository at the same product name contains a README only in the captured copy; it describes the hosted MCP server but provides no implementation to compare with the endpoint.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "73e3cd4505e1320187feaf666b50f3e438f6a060",
+    "commit_date": "2025-10-24",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "NOT FOUND",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.eu.newrelic.com/mcp/ — regional endpoint for EU accounts.",
+      "https://mcp.jp.newrelic.com/mcp/ — regional endpoint for JP accounts."
+    ],
+    "sources": [
+      "https://github.com/newrelic/mcp-server",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/setup/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP server fee is stated in the official documentation reviewed. Tool usage is metered against New Relic compute allocations; four AI-powered analysis tools require the Advanced Compute add-on.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The reviewed pricing page describes usage-based Data + User, Data + Core Compute, and Advanced Compute add-on models. It states that 100 GB of data ingestion per month is free; no fixed prices are given here.",
+    "pricing_model_details": "Most MCP tools are metered as Core Compute Units (CCUs). natural_language_to_nrql_query, generate_alert_insights_report, generate_user_impact_report, and analyze_deployment_impact use Advanced Compute Capacity Units (aCCUs) and require the Advanced Compute add-on. Preview tools are read-only; pricing is to be determined after GA.",
+    "other_access_restrictions": "The docs state a limit of up to 2,000 tool calls per hour per user, which may vary. Access depends on the connected New Relic user's RBAC and accounts. The four AI-powered analysis tools and three preview tools require OAuth; API keys cannot access them. Preview tools require the Preview Tools prerequisite. US, EU, and JP endpoints are documented.",
+    "restrictions_controlled_by": "Vendor and New Relic organization/user permissions; the client chooses endpoint and optional include-tags header.",
+    "sources": [
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/setup/",
+      "https://docs.newrelic.com/docs/accounts/accounts-billing/new-relic-one-pricing-billing/new-relic-one-pricing-billing/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official reference lists 38 unique tools in six tagged categories, including three read-only preview tools. Calls query or analyze observability data; the reference exposes names and summaries but not parameter schemas.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool result schemas and error format are not documented in the pages reviewed.",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server resources are documented in the official material reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompts are documented in the official material reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP logging capability or server-side audit-log behavior is specified in the reviewed MCP docs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/",
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Sampling support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Roots support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint's supplied 401 response advertises API key authentication using the api-key header, or OAuth Bearer tokens. Protected-resource metadata names https://oauth2.service.newrelic.com as the authorization server and lists observability:read, offline, and offline_access. Authorization-server metadata advertises authorization_code, implicit, client_credentials, refresh_token, and device_code grants; token endpoint auth methods client_secret_post, client_secret_basic, private_key_jwt, and none; PKCE methods plain and S256; and a registration endpoint. Token lifetime is not specified in the supplied metadata. A revocation endpoint is advertised at https://oauth2.service.newrelic.com/oauth2/revoke.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer realm=\"New Relic MCP\", resource_metadata=\"https://mcp.newrelic.com/.well-known/oauth-protected-resource\", scope=\"observability:read offline offline_access\"",
+      "post_interaction_context_structure": "Unauthenticated request returned HTTP 401 with JSON error unauthorized and a description requiring api-key or Authorization: Bearer token.",
+      "authorization_mechanism": "Metadata Doc / Dynamic Client Registration / API key / OAuth Bearer. Endpoint 401 lists api-key (NRAK-...) and Bearer. Protected-resource scopes_supported: observability:read, offline, offline_access. Authorization-server metadata lists authorization_code, implicit, client_credentials, refresh_token, urn:ietf:params:oauth:grant-type:device_code; PKCE plain and S256; registration_endpoint https://dcr.service.newrelic.com/register; token endpoint auth methods client_secret_post, client_secret_basic, private_key_jwt, none; revocation_endpoint https://oauth2.service.newrelic.com/oauth2/revoke. Token lifetime not advertised.",
+      "authorization_server": "https://oauth2.service.newrelic.com",
+      "sources": [
+        "https://mcp.newrelic.com/mcp",
+        "https://mcp.newrelic.com/.well-known/oauth-protected-resource",
+        "https://mcp.newrelic.com/.well-known/oauth-protected-resource/mcp",
+        "https://oauth2.service.newrelic.com/.well-known/oauth-authorization-server",
+        "https://oauth2.service.newrelic.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation flow is documented. The OAuth browser flow is client authentication setup, not documented as server elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/setup/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP Tasks support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Clients can send the include-tags HTTP header to limit the tools presented to the agent. Documented tags are discovery, data-access, alerting, incident-response, performance-analytics, and advanced-analysis. Setup docs also specify regional endpoint selection.",
+      "pre_interaction_context_verbatim": "\"You can dynamically filter the tools your supported MCP client receives by sending the include-tags HTTP header with your requests.\"",
+      "post_interaction_context_structure": "The server presents tools matching requested tags; the docs do not specify behavior for invalid or empty tags.",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/setup/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Permission errors are mentioned, but standardized MCP error payloads and server reporting behavior are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/troubleshoot/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Subscriptions are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Progress notifications are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Request cancellation behavior is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe downloadable workflow skills in a separate New Relic repository, intended for configuring agents. They do not establish whether the MCP server itself sends initialize instructions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "https://github.com/newrelic/nr-skills-hub"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Tool reference documents data-query and analysis tools; it does not describe write or destructive operations. The three preview tools are explicitly read-only. Per-tool MCP annotations are not published. 2. No server-enforced confirmation flow is documented. Docs recommend least-privilege account/RBAC setup. 3. OAuth scope list is observability:read, offline, offline_access; docs say tools inherit the user's RBAC and account access. API-key alternative is supported for some clients/tools. Admin switches, client allowlists, redirect approval, token lifetime, and revocation behavior are not specified; metadata advertises a revocation endpoint. 4. include-tags filters tools by six documented tags. US, EU, and JP endpoints are available. No read-only mode or query-free mode is documented. 5. Docs describe access boundaries through New Relic RBAC; field masking, PII exclusions, and secret redaction are not specified. 6. Up to 2,000 calls/hour/user is documented, subject to variation. Most calls meter CCUs; four AI analysis tools meter aCCUs. No general result truncation or time-range cap is stated. 7. Tool schemas and server-side parameter validation/correction are not published. 8. MCP audit logging and telemetry behavior are not specified. 9. The official list contains no feedback, rating, survey, or report-to-vendor tool. No in-result upsell message is documented; pricing requirements are stated in docs. 10. Skills are distributed separately through the New Relic skills hub. Tool descriptions and reference examples guide agent tool selection; enforcement beyond access control is not specified. 11. Past agent behavior changing future output or tool availability is not documented. 12. US/EU/JP are regional endpoints; each has an observed OAuth-protected 401 response. No sub-server or proxy architecture is documented. 13. No raw API, arbitrary SQL, or script execution tool is listed. execute_nrql_query accepts NRQL, but the published docs do not establish whether NRQL can perform mutations.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "\"The AI agent in your development tool will automatically select the appropriate MCP tools and format the results for you.\"",
+      "\"This allows you to request only specific subsets of tools, which is helpful for reducing the tool corpus and helping to improve the efficiency and accuracy of whatever AI model is being used for the inquiry.\""
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The server supports dynamically filtered tool sets through the include-tags HTTP header and documents three regional endpoints with the same product purpose.",
+    "sources": [
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/setup/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/",
+      "https://mcp.eu.newrelic.com/mcp/",
+      "https://mcp.jp.newrelic.com/mcp/",
+      "https://mcp.newrelic.com/.well-known/oauth-protected-resource",
+      "https://oauth2.service.newrelic.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "38",
+    "action_count_comment": "The official tool list exists at https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/ and names 38 unique tools. It has no stated overall total; names were counted across categories after deduplicating tools repeated under multiple tags. Three preview tools are included. No catalogue-only tools were added. Gamut presents a 10-tool selection; Merge says its generic MCP tool surface is defined by New Relic and does not enumerate tools; APIs.io lists no tool names. The official reference does not publish parameter schemas.",
+    "actions": [
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Convert a relative time period to epoch milliseconds.",
+        "tool_name": "convert_time_period_to_epoch_ms"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Fetch details for a specific dashboard.",
+        "tool_name": "get_dashboard"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Fetch entities by GUID or search by name pattern.",
+        "tool_name": "get_entity"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List entities one hop from an entity GUID.",
+        "tool_name": "list_related_entities"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List account IDs available to the user.",
+        "tool_name": "list_available_new_relic_accounts"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List dashboards for a New Relic account.",
+        "tool_name": "list_dashboards"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Search entities by tag key and value.",
+        "tool_name": "search_entity_with_tag"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Discover metric names reported by an entity or account.",
+        "tool_name": "list_metric_names"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Execute an NRQL query against NRDB.",
+        "tool_name": "execute_nrql_query"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Convert natural language to NRQL, execute it, and return results.",
+        "tool_name": "natural_language_to_nrql_query"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List alert condition details for an alert policy.",
+        "tool_name": "list_alert_conditions"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List alert events with flexible filtering.",
+        "tool_name": "search_incident"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List alert policies, optionally filtered by policy name.",
+        "tool_name": "list_alert_policies"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List open issues for an account.",
+        "tool_name": "list_recent_issues"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List synthetic monitors.",
+        "tool_name": "list_synthetic_monitors"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Return synthetic check run rows over a time window.",
+        "tool_name": "list_synthetic_monitor_results"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Aggregate synthetic check rates, failures, and duration percentiles.",
+        "tool_name": "get_synthetic_check_statistics"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Analyze performance impact of a deployment on an entity.",
+        "tool_name": "analyze_deployment_impact"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Generate alert intelligence analysis for an issue.",
+        "tool_name": "generate_alert_insights_report"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Generate end-user impact analysis for an issue.",
+        "tool_name": "generate_user_impact_report"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Fetch entity error groups within a time window.",
+        "tool_name": "list_entity_error_groups"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List change-event history for an entity.",
+        "tool_name": "list_change_events"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Aggregate error counts, timestamps, trends, and facets.",
+        "tool_name": "get_error_statistics"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Return raw error events matching filters.",
+        "tool_name": "search_errors"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Analyze logs for error patterns and anomalous behavior.",
+        "tool_name": "analyze_entity_logs"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Analyze key health metrics: throughput, response time, errors, saturation.",
+        "tool_name": "analyze_golden_metrics"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Analyze Kafka lag, throughput, latency, and partition balance.",
+        "tool_name": "analyze_kafka_metrics"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Analyze entity thread state, CPU, and memory metrics.",
+        "tool_name": "analyze_threads"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Identify slow/error-prone transactions and P95/P99 latency.",
+        "tool_name": "analyze_transactions"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List garbage collection and memory metrics.",
+        "tool_name": "list_garbage_collection_metrics"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "List recent logs for an account and entity.",
+        "tool_name": "list_recent_logs"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Fetch entity performance risk groups in a time window.",
+        "tool_name": "list_entity_performance_risk_groups"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Fetch aggregate dimensional or timeslice metric values.",
+        "tool_name": "get_metric_statistics"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Aggregate log counts, levels, attributes, and trends.",
+        "tool_name": "get_log_statistics"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Return span attributes, anomalies, and links for a trace.",
+        "tool_name": "get_distributed_trace_details"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Preview: search entity traces by duration, errors, or backend time.",
+        "tool_name": "search_traces"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Preview: identify transaction or error classes behind trace anomalies.",
+        "tool_name": "analyze_trace_anomaly"
+      },
+      {
+        "source": "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+        "source_type": "Official",
+        "type": "Read",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "description": "Preview: map entity dependencies and flag unhealthy connections.",
+        "tool_name": "analyze_service_dependencies"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The local vendor repository snapshot contains only a README, not executable server code or complete tool definitions; the official docs publish names and summaries but not full tool schemas or initialize instructions.",
+    "human_can_agent_cannot": "The product documentation describes broader New Relic capabilities, but the MCP reference lists only the 38 tools in actions.json. Specific REST/API operations outside that list are not established here as MCP-inaccessible because the docs do not provide a complete feature-to-tool mapping. The documented MCP tools do not include create/update/delete operations.",
+    "sources": [
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/overview/",
+      "https://www.gamut.so/mcp/analytics-marketing/new-relic",
+      "https://docs.merge.dev/merge-agent-handler/connectors/generic/new-relic",
+      "https://apis.io/servers/new-relic/new-relic/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "\"Your use of any AI tools ... means your AI will take actions in your New Relic account on your behalf.\" The setup page advises creating accounts with desired RBAC and least-privilege permissions. This is user guidance; the docs do not show the server enforcing least privilege beyond inherited permissions.",
+    "governance_promises": "The tool reference says tool actions are strictly governed by the connected user's RBAC and limited to data, entities, and accounts accessible to that user. The setup guide recommends appropriate role-based access and least privilege. MCP-specific retention, AI training, and audit-log promises were not found in the reviewed pages. Service-specific terms state that GenAI inputs and outputs are Customer Data and that New Relic monitors them for harmful content; the provision also mentions processing/storage in the United States and Europe.",
+    "promises_to_user": "The official reference says include-tags can reduce the tool corpus to improve model efficiency and accuracy. The endpoint supports authenticated access, and documentation presents OAuth as the recommended setup method except where explicitly stated otherwise.",
+    "comparison_with_server_logic": "RBAC inheritance is documented as the permission boundary, but the available materials do not expose implementation code for verification. include-tags filtering is documented as a server-facing configuration, though detailed invalid-tag behavior is absent. Least privilege is recommended to the customer, not documented as server-enforced. GenAI processing terms are contractual text; MCP-specific handling details are not provided.",
+    "sources": [
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/setup/",
+      "https://docs.newrelic.com/docs/agentic-ai/mcp/tool-reference/",
+      "https://newrelic.com/termsandconditions/service-specific"
+    ]
+  },
+  "contradictions": [
+    "The pre-fetched endpoint 401 and OAuth metadata advertise API-key authentication, but the setup documentation says supported MCP clients should use OAuth unless expressly indicated otherwise and warns that API-key setup may not work as documented or intended. The docs separately say API keys are currently required/supported for Antigravity CLI and that some tools are OAuth-only.",
+    "The OAuth scope observability:read suggests a read scope, and the tool reference describes query/analysis tasks; the docs do not publish complete tool schemas or explain whether NRQL execution is strictly read-only."
+  ],
+  "observations_for_research": [
+    "Tools are grouped with overlapping tags, and a request header can change which tools the client receives.",
+    "Four AI analysis tools require OAuth and the aCCU add-on; three further read-only tools are identified as preview features.",
+    "Official workflow skills are hosted in a separate vendor repository rather than documented as MCP prompts."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the provided links.json, links_check.txt, captured pages, and local repository snapshots. The official repository snapshot has only a README and no server implementation; therefore implementation language, SDK, protocol version, runtime annotations, and exact tool schemas were unavailable. Gamut's catalogue cross-checks a subset of official names; Merge describes the generic server without enumerating tools. APIs.io is a directory listing. Unofficial community servers were present in links.json and excluded from evidence. Pricing, legal, and MCP docs were reviewed for relevant product terms and restrictions.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 11.4
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "server": "square",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.squareup.com/mcp",
+    "documentation_url_csv": "https://developer.squareup.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/square/square-mcp-server",
+    "documentation_urls_used": [
+      "https://developer.squareup.com/docs/mcp",
+      "https://github.com/square/square-mcp-server",
+      "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/README.md",
+      "https://squareup.com/us/en/legal/general/privacy",
+      "https://squareup.com/help/us/en/article/5068-what-are-square-s-fees",
+      "https://squareup.com/us/en/pricing",
+      "https://learn.microsoft.com/en-us/connectors/squaremcp/",
+      "https://chatgptplugins.directory/mcp/square",
+      "https://claude.com/connectors/square",
+      "https://www.linkdomain.com/connectors/square-mcp-server/",
+      "https://composio.dev/toolkits/square"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repository is Square's local, self-hosted stdio server using an access token. Square documents the hosted OAuth server separately. The repository's tool definitions are useful product evidence, but are not confirmed as the deployed endpoint's exact implementation.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "b276734fe2f1e6d4990fd99c2189c5d8d280a8b8",
+    "commit_date": "2026-10-14",
+    "implementation_language": "TypeScript (local server)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.5.0 (local package manifest)",
+    "code_public": "Yes",
+    "license": "MIT (local repository)",
+    "release_status": "Beta",
+    "other_official_servers": [
+      "https://mcp.squareup.com/sse — legacy hosted SSE endpoint; Square says it remains served for existing configurations."
+    ],
+    "sources": [
+      "https://developer.squareup.com/docs/mcp",
+      "https://github.com/square/square-mcp-server",
+      "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/README.md",
+      "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/package.json",
+      "https://mcp.squareup.com/sse"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific charge or limit is documented. Square's software and payment services have plan and transaction pricing; those are not stated as MCP access fees.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Square Free, Square Plus, and Square Premium plans are listed; the cited U.S. pricing page gives transaction and add-on fees but plan prices depend on the seller's current offer and location.",
+    "pricing_model_details": "Official U.S. fee information lists payment processing rates by plan and transaction type, including in-person, online/API, invoice, and manually entered payments. No MCP per-call price is stated.",
+    "other_access_restrictions": "OAuth login and consent are required for the hosted server. Square documents an allowlist of MCP clients. Available access is scope- and account-permission-dependent. Hosted remote instances access production; local instances can target Sandbox.",
+    "restrictions_controlled_by": "Vendor controls client allowlisting and OAuth service; the authorizing account grants scopes, and product permissions may limit access.",
+    "sources": [
+      "https://developer.squareup.com/docs/mcp",
+      "https://squareup.com/help/us/en/article/5068-what-are-square-s-fees",
+      "https://squareup.com/us/en/pricing",
+      "https://learn.microsoft.com/en-us/connectors/squaremcp/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted docs describe access to the Square API platform but do not publish a complete hosted tool manifest. Square's local repository documents three generic tools: get_service_info, get_type_info, and make_api_request. A third-party listing attributes those same names to Square's documentation; exact hosted definitions and schemas are not publicly evidenced here.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Local code returns text content, JSON-serialized discovery/type data, or JSON error text with isError=true. Hosted result structure not found.",
+      "authorization_mechanism": "Bearer token in Authorization header, per endpoint challenge. OAuth metadata advertises authorization_code and refresh_token grants; PKCE plain and S256; token auth methods client_secret_basic, client_secret_post, and none; DCR at https://mcp.squareup.com/register; scopes_supported: BANK_ACCOUNTS_READ, CASH_DRAWER_READ, CUSTOMERS_READ, CUSTOMERS_WRITE, DEVICE_CREDENTIAL_MANAGEMENT, EMPLOYEES_READ, EMPLOYEES_WRITE, INVENTORY_READ, INVENTORY_WRITE, ITEMS_READ, ITEMS_WRITE, MERCHANT_PROFILE_READ, ORDERS_READ, ORDERS_WRITE, PAYMENTS_READ, PAYMENTS_WRITE, PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS, PAYMENTS_WRITE_IN_PERSON, SETTLEMENTS_READ, TIMECARDS_READ, TIMECARDS_WRITE, TIMECARDS_SETTINGS_READ, TIMECARDS_SETTINGS_WRITE, APPOINTMENTS_READ, APPOINTMENTS_WRITE, APPOINTMENTS_BUSINESS_SETTINGS_READ, INVOICES_READ, INVOICES_WRITE, SUBSCRIPTIONS_READ, SUBSCRIPTIONS_WRITE, DISPUTES_READ, DISPUTES_WRITE, GIFTCARDS_READ, GIFTCARDS_WRITE, ONLINE_STORE_SNIPPETS_WRITE, ONLINE_STORE_SNIPPETS_READ, ONLINE_STORE_SITE_READ, PAYMENTS_WRITE_SHARED_ONFILE, APPOINTMENTS_ALL_READ, APPOINTMENTS_ALL_WRITE, MERCHANT_PROFILE_WRITE, VENDOR_READ, VENDOR_WRITE, PAYOUTS_READ, REPORTING_READ, DEVICES_READ, LOYALTY_READ, LOYALTY_WRITE. Token lifetime not stated; revocation endpoint is https://mcp.squareup.com/token.",
+      "authorization_server": "https://mcp.squareup.com",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp",
+        "https://mcp.squareup.com/mcp",
+        "https://mcp.squareup.com/.well-known/oauth-protected-resource",
+        "https://mcp.squareup.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.squareup.com/.well-known/oauth-authorization-server",
+        "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts#L180-L236",
+        "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts#L240-L333",
+        "https://www.linkdomain.com/connectors/square-mcp-server/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted resources listing or documentation was found. The local repository registers tools; no resources registration was identified.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp",
+        "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted prompts listing or documentation was found. The local repository code examined registers tools and does not document prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp",
+        "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP-specific logging behavior, audit trail, or telemetry policy was found in the hosted documentation reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp",
+        "https://squareup.com/us/en/legal/general/privacy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability is documented for the hosted endpoint. No sampling implementation was identified in the local server code reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp",
+        "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is documented for the hosted endpoint or local server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp",
+        "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The input endpoint returned HTTP 401 with WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.squareup.com/.well-known/oauth-protected-resource/mcp\", error=\"invalid_token\", error_description=\"Missing or invalid access token\". Path-specific protected-resource metadata names the resource https://mcp.squareup.com/mcp and supports bearer_methods_supported=[\"header\"]. The general protected-resource metadata advertises the scope list recorded above.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.squareup.com/.well-known/oauth-protected-resource/mcp\", error=\"invalid_token\", error_description=\"Missing or invalid access token\"",
+      "post_interaction_context_structure": "Unauthenticated request returns JSON error and description. Authenticated MCP response structure not found.",
+      "authorization_mechanism": "OAuth authorization-code and refresh-token grants; PKCE plain and S256; DCR registration endpoint; client auth methods client_secret_basic, client_secret_post, none; revocation endpoint /token. Token expiry and rotation behavior not found.",
+      "authorization_server": "https://mcp.squareup.com",
+      "sources": [
+        "https://mcp.squareup.com/mcp",
+        "https://mcp.squareup.com/.well-known/oauth-protected-resource",
+        "https://mcp.squareup.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.squareup.com/.well-known/oauth-authorization-server",
+        "https://developer.squareup.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation support or server-enforced confirmation exchange is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No Tasks capability is documented for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Square documents hosted OAuth setup and client allowlisting. Local configuration supports ACCESS_TOKEN, SANDBOX, PRODUCTION, DISALLOW_WRITES, and SQUARE_VERSION; those environment options are for the local server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not applicable",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp",
+        "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/README.md",
+        "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/config.ts"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Square's MCP docs direct users to open GitHub issues for feedback or bug reports. In the local code, tool errors are returned as text containing error and details with isError=true; no hosted error format is documented.",
+      "pre_interaction_context_verbatim": "\"To provide feedback or report bugs, open GitHub issues.\"",
+      "post_interaction_context_structure": "Local tool errors contain JSON text with error and details; MCP isError=true. Hosted error structure not found.",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp",
+        "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts#L220-L236"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress notifications or progress-tracking behavior is documented for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No request cancellation capability is documented for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Square recommends testing prompts against a Sandbox account before production use. It states that hosted remote instances access production resources and local instances can target Sandbox.",
+      "pre_interaction_context_verbatim": "\"Square recommends that you become familiar with the server and test your prompts against a Square account Sandbox environment before using it in production.\"",
+      "post_interaction_context_structure": "Not applicable",
+      "sources": [
+        "https://developer.squareup.com/docs/mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Hosted tool annotations and read/write labels are not published. Local code defines 3 generic tools without annotations; the selected API method may read or write. 2. No hosted confirmation mechanism is documented. Local code does not require confirm=true; DISALLOW_WRITES is an optional local setting, not a hosted confirmation flow. 3. OAuth grants access using selected scopes; permissions depend on account authorization. Square documents client allowlisting. Inherited product roles, admin switches, redirect approval, token lifetime, and revocation behavior beyond the metadata endpoint are not found. 4. Hosted docs say remote instances access production. Local configuration supports Sandbox, Production, and DISALLOW_WRITES. No hosted read-only mode, tool filters, or regional endpoints were found. Legacy SSE endpoint is documented. 5. MCP-specific PII masking or field exclusion is not documented. General privacy notice applies, but does not describe MCP-specific handling. 6. No MCP-specific rate, quota, bulk, time-range, truncation, or call-cost limits found. 7. Local code validates service/method names, accepts arbitrary request-object properties, and passes the request to service handlers; it does not expose strict per-operation schemas on make_api_request. No automatic argument alias correction identified. 8. No hosted MCP audit/logging or telemetry behavior found. 9. Tool names and descriptions checked for feedback, rating, survey, report, and similar tools: none found. The hosted docs ask users to report issues via GitHub, outside tool calls. No MCP upsell results or product-steering instructions found beyond Square's recommendation to test in Sandbox. 10. Server tool descriptions in local code instruct a sequence: get_service_info, then get_type_info, then make_api_request; the tool description says get_type_info must be called first. The code does not enforce this sequence. 11. No persistent agent memory/state behavior documented. 12. Hosted `/mcp` and legacy `/sse` are documented; local stdio server is a separate variant. 13. Local make_api_request is a broad API-operation escape hatch across the service map, with method validation and optional local write blocking; hosted exposure of this exact tool is not independently confirmed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Get type information for a Square API method. You must call this before calling the make_api_request tool.",
+      "Get information about a Square API service. Call me before trying to get type info",
+      "Unified tool for all Square API operations. Be sure to get types before calling."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The hosted endpoint is presented as a single Square server. The separately documented local server and legacy SSE URL are variants/endpoints; no nested server hierarchy or dynamically loaded hosted toolsets were found.",
+    "sources": [
+      "https://developer.squareup.com/docs/mcp",
+      "https://mcp.squareup.com/mcp",
+      "https://mcp.squareup.com/.well-known/oauth-protected-resource",
+      "https://mcp.squareup.com/.well-known/oauth-authorization-server",
+      "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts",
+      "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/README.md",
+      "https://squareup.com/us/en/legal/general/privacy"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "3 documented generic tools; hosted live manifest not independently retrieved",
+    "action_count_comment": "Square's official documentation page describes the hosted server but does not publish a tool table. The official repository README names 3 tools for the local server. The Claude directory and MartechDB attribute the same 3 tool names to Square's documentation; Microsoft's connector says operations are discovered live but names none. Composio lists 122 actions for its own toolkit/proxy surface and is not evidence of native hosted tool names, so none were added. The 3 names below are the best available official product evidence, but cannot be confirmed as the exact input endpoint manifest.",
+    "actions": [
+      {
+        "tool_name": "get_service_info",
+        "description": "Lists methods and descriptions available for a Square API service.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "service: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts#L291-L333",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_type_info",
+        "description": "Returns parameter type requirements for a Square API method.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "service: string (required); method: string (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts#L240-L287",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "make_api_request",
+        "description": "Executes a selected operation from the Square API service map.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "service: string (required); method: string (required); request: object (optional; arbitrary properties)",
+        "parameter_count": "3",
+        "source": "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts#L180-L236",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted endpoint's initialize instructions and exact live tool definitions were unavailable. Local code is a separate stdio variant and was not used to estimate hosted pre-interaction context.",
+    "human_can_agent_cannot": "No MCP-specific operation exclusions were found in Square's MCP documentation. Square's broader product includes dashboard and point-of-sale workflows; the hosted docs broadly claim access to the Square API platform, but do not enumerate MCP coverage sufficiently to identify exact human-only operations. The local server maps API services and methods from its generated code.",
+    "sources": [
+      "https://developer.squareup.com/docs/mcp",
+      "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/README.md",
+      "https://claude.com/connectors/square",
+      "https://www.linkdomain.com/connectors/square-mcp-server/",
+      "https://learn.microsoft.com/en-us/connectors/squaremcp/",
+      "https://composio.dev/toolkits/square"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The local tool descriptions recommend a call sequence: \"Call me before trying to get type info\" and \"You must call this before calling the make_api_request tool.\" Local code validates service/method existence but does not enforce the sequence. Square recommends Sandbox testing before production; that recommendation is not enforced by the hosted server.",
+    "governance_promises": "Square says hosted OAuth provides \"more control and granular permissions\" and lets an application \"authorize only the scopes your application needs.\" The hosted server also maintains an MCP client allowlist. The general privacy notice describes Square's broader personal-information practices, but no MCP-specific retention, AI-training, masking, or audit commitment was found.",
+    "promises_to_user": "Square presents the hosted server as a bridge to its REST API platform and recommends OAuth rather than manual token management. Hosted remote instances access production resources; local testing can use Sandbox.",
+    "comparison_with_server_logic": "OAuth, scope metadata, and client allowlisting are supported by public endpoint metadata and documentation. Tool sequence advice and Sandbox testing are recommendations rather than server-enforced requirements. The local repository implements optional write blocking; hosted write restrictions are not documented.",
+    "sources": [
+      "https://developer.squareup.com/docs/mcp",
+      "https://github.com/square/square-mcp-server/blob/b276734fe2f1e6d4990fd99c2189c5d8d280a8b8/server.ts",
+      "https://squareup.com/us/en/legal/general/privacy"
+    ]
+  },
+  "contradictions": [
+    "Square's MCP docs describe hosted access to the full Square API platform but provide no hosted tool list. The repository README names three tools for the local self-hosted variant; the hosted endpoint's exact tool set cannot be confirmed from available official evidence.",
+    "The path-specific protected-resource metadata for `/mcp` omits scopes_supported, while the origin-level protected-resource metadata publishes 48 scopes. The latter is used as authorization evidence.",
+    "OAuth scope names indicate many read and write domains, but hosted docs do not map individual scopes to named MCP tools or disclose tool-level read/write annotations."
+  ],
+  "observations_for_research": [
+    "The local variant consolidates many API operations behind a small number of generic discovery and request tools rather than exposing each Square operation as a separate MCP tool.",
+    "The hosted server uses OAuth with granular scopes and a client allowlist, while the documented local variant uses a Square access token and supports optional write blocking."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/, and the pinned official repository. The npm page returned HTTP 403. The hosted endpoint and install path returned HTTP 401 without credentials; no login was attempted. Third-party sources were used to cross-check the three documented names, not to substitute proxy actions. Composio's 122 actions describe its toolkit/proxy surface and were excluded. Unofficial Square servers appeared in the prepared links and were excluded. Token lifetime, hosted tool schemas, hosted initialize instructions, and MCP-specific privacy or logging behavior were not found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 12.0
+  }
+}

@@ -1,0 +1,465 @@
+{
+  "server": "exa",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.exa.ai/mcp",
+    "documentation_url_csv": "https://github.com/exa-labs/exa-mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/exa-labs/exa-mcp-server",
+    "documentation_urls_used": [
+      "https://exa.ai/docs/get-started/exa-mcp",
+      "https://exa.ai/docs/admin/mcp-enterprise-managed-auth",
+      "https://github.com/exa-labs/exa-mcp-server",
+      "https://exa.ai/pricing?tab=api",
+      "https://exa.ai/privacy-policy",
+      "https://exa.ai/security",
+      "https://exa.ai/assets/Exa_Labs_Terms_of_Service.pdf/"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository contains the hosted HTTP handler and a stdio entry point. Its shared handler appears to be the direct local equivalent of the hosted service, but the deployed build and runtime configuration were not independently inspected. The hosted docs name four tools; the current handler registry defines twelve, several deprecated or disabled by default.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "0b499f095c4ca145eee07b09137641c037d58449",
+    "commit_date": "2026-10-19",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.12.1",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://websetsmcp.exa.ai/mcp — separate Exa Websets MCP endpoint; its tool inventory was not available in the prepared evidence."
+    ],
+    "sources": [
+      "https://github.com/exa-labs/exa-mcp-server",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts#L1-L300",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/toolRegistry.ts#L1-L150",
+      "https://exa.ai/docs/get-started/exa-mcp",
+      "https://websetsmcp.exa.ai/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "The official docs describe keyless, free rate-limited MCP use; OAuth and API-key use draw on the user's Exa team plan and limits. `agent_run` requires OAuth or an API key. No separate MCP access charge is stated.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Starter: free, with $10 credits monthly plus a $10 onboarding bonus. Developer: pay-as-you-go. Enterprise: custom pricing.",
+    "pricing_model_details": "Official pricing lists Search from $4/1,000 requests, Agent at $0.012–$1.00/run depending on effort, and Contents at $1/1,000 pages per content type. Starter includes MCP access, 10 Search QPS and 50 Agent concurrency; Developer lists up to 25 Search QPS and 50 Agent concurrency. Enterprise limits are custom.",
+    "other_access_restrictions": "Keyless use is rate-limited. The hosted docs say OAuth/API-key connections use the user's team plan and limits. Tool visibility can be changed using the `tools` URL parameter; an explicit list replaces defaults. `agent_run` is unavailable on free keyless access. Enterprise Managed Auth is an optional Claude/Okta setup.",
+    "restrictions_controlled_by": "Vendor controls service limits and tool registration; Exa organization admins control eligible team membership and identity-provider registration; the client/user selects URL tool options and authentication mode.",
+    "sources": [
+      "https://exa.ai/docs/get-started/exa-mcp",
+      "https://exa.ai/pricing?tab=api",
+      "https://exa.ai/docs/admin/mcp-enterprise-managed-auth",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/toolRegistry.ts#L1-L120"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted docs name web_search_exa and web_fetch_exa as defaults, web_search_advanced_exa as opt-in, and agent_run as available with OAuth or an API key. The shared code registry contains twelve tool definitions; runtime registration depends on configuration and authentication. The endpoint's initial probe returned HTTP 406 because the client did not accept both application/json and text/event-stream.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tools return text content, sometimes with structured content and metadata. Errors may be returned as tool results with isError; agent_run declares a structured output schema. Exact endpoint-specific tools/list output was not provided.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://exa.ai/docs/get-started/exa-mcp",
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts#L48-L150",
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/toolRegistry.ts#L1-L100"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The code registers exa://tools/list. When agent tools are registered, it also registers exa://agent/skill and exa://agent/schema-templates.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Resource contents are text with application/json or text/markdown MIME types.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts#L200-L265"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The code registers web_search_help and, when agent tools are available, agent_research_help. The latter can accept an optional task string and includes the Exa Agent research guide.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Prompts return user-role messages containing text and, for the agent prompt, a resource message.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts#L150-L200"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool handlers use a request logger. The hosted handler logs request URL, enabled tools, authentication method, and some rate-limit events. Agnost tracking is configured with input, output, error, and log collection disabled; this does not establish that all other server or infrastructure logging is disabled.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts#L270-L300",
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/api/mcp.ts#L740-L800",
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/utils/logger.ts"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling capability is declared in the inspected shared server handler.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability is declared in the inspected shared server handler.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Provided protected-resource metadata: resource https://mcp.exa.ai/mcp; authorization server https://auth.exa.ai; scopes_supported [\"mcp:tools\"]; bearer_methods_supported [\"header\"]. The authorization-server metadata lists authorization_endpoint https://auth.exa.ai/oauth/authorize, token_endpoint https://auth.exa.ai/api/oauth/token, registration_endpoint https://auth.exa.ai/api/oauth/register, revocation_endpoint https://auth.exa.ai/api/oauth/revoke, jwks_uri https://auth.exa.ai/api/oauth/jwks, response_types_supported [\"code\"], grant_types_supported [\"authorization_code\",\"refresh_token\",\"urn:ietf:params:oauth:grant-type:jwt-bearer\"], code_challenge_methods_supported [\"S256\"], token_endpoint_auth_methods_supported [\"none\"], scopes_supported [\"mcp:tools\",\"mimic:detect\"], and client_id_metadata_document_supported true. No token lifetime was supplied. The openid-configuration URL returned 404. Docs also offer API-key and keyless modes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration endpoint is published; authorization-code and refresh-token grants and JWT bearer grant are listed; PKCE S256; token endpoint auth method none; resource scopes_supported: mcp:tools; authorization-server scopes_supported: mcp:tools, mimic:detect; bearer in header; revocation endpoint published; lifetime NOT FOUND. Official docs additionally describe OAuth login via ?login, x-api-key header, and keyless rate-limited access.",
+      "authorization_server": "https://auth.exa.ai",
+      "sources": [
+        "https://mcp.exa.ai/.well-known/oauth-protected-resource",
+        "https://mcp.exa.ai/.well-known/oauth-protected-resource/mcp",
+        "https://auth.exa.ai/.well-known/oauth-authorization-server",
+        "https://auth.exa.ai/.well-known/openid-configuration",
+        "https://exa.ai/docs/get-started/exa-mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation flow is declared in the inspected shared handler. Documentation describes browser-based OAuth sign-in, which is an authorization flow rather than an MCP elicitation mechanism.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts",
+        "https://exa.ai/docs/get-started/exa-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The inspected code does not declare the MCP Tasks capability. Exa Agent runs are asynchronous product operations exposed through agent_run, with run IDs and polling/continuation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Agent run output can include status, run ID, output readiness, result, usage, cost, or error fields.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/agentRun.ts",
+        "https://exa.ai/docs/get-started/exa-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted endpoint supports URL configuration including `tools`, `login`, and agent call-window options. Official docs explain that an explicit tools list replaces the defaults. Public code also supports environment and runtime configuration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://exa.ai/docs/get-started/exa-mcp",
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/api/mcp.ts#L360-L390",
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/api/well-known-mcp-config.ts"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool errors are formatted for MCP results. The hosted handler returns authentication and rate-limit errors; code includes agent-specific messages for missing run IDs, failed runs, interrupted streams, and retry conditions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Text content; some errors set isError. HTTP/JSON-RPC errors are also used by the hosted handler.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/utils/errorHandler.ts",
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/agentRun.ts",
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/api/mcp.ts#L180-L210"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is declared in the inspected shared handler.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "agent_run can emit MCP progress notifications when the client provides a progress token. The code throttles progress and emits heartbeat/status messages during retained-run polling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Progress notifications include progressToken, progress count, and message.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/agentRun.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "agent_run observes a client abort signal and can stop waiting or streaming locally. An Exa Agent client wrapper defines upstream cancelRun, but the inspected MCP tool path does not expose a cancellation tool or invoke that wrapper method.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Aborted or interrupted runs may return running status and a run ID for continuation.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/agentRun.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The shared handler provides a tools-list resource and Agent guide/schema resources plus prompts. The official repository also distributes search and agent skills outside the MCP server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Resources are text or JSON; prompts contain text and resource messages.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/exa-labs/exa-mcp-server",
+        "https://github.com/exa-labs/exa-mcp-server/tree/0b499f095c4ca145eee07b09137641c037d58449/skills",
+        "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts#L150-L265"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The inspected tools are primarily read-only search/fetch operations. deep_researcher_start is marked readOnlyHint false; agent_run and the search tools are marked read-only, though agent_run starts or resumes a billable asynchronous product run. Tool annotations are set in code; annotations for the deprecated aliases share their underlying implementation. 2. No server-enforced user confirmation or MCP elicitation flow was found. agent_run requires exactly one of query or runId and restricts resume calls to runId; this is input validation, not user confirmation. 3. Resource metadata lists mcp:tools; authorization-server metadata additionally lists mimic:detect. OAuth DCR, PKCE S256, authorization code/refresh/JWT bearer grants, no client authentication at token endpoint, and revocation endpoint are published. Token lifetime NOT FOUND. Docs describe team-based usage and optional Okta Enterprise Managed Auth; no per-tool product-role inheritance details were found. 4. Docs support configurable tools by URL and say an explicit list replaces defaults. No documented read-only mode was found. Free keyless and authenticated use differ; no region selector was found. 5. Code sanitizes Exa search/content results. No MCP-specific PII exclusion or masking guarantee was found. Privacy policy says Query Data is not intended for personal information and is used to improve products, including model training; business-offering processing may instead be governed by customer agreements. 6. Official pricing describes keyless rate limits and plan QPS/concurrency; endpoint code implements anonymous IP rate limiting and 60-second search/fetch timeouts, 300-second advanced-search timeout. web_fetch_exa defaults maxCharacters to 3000 per page. agent_run uses effort and optional budget controls. 7. Code uses lenient validation helpers for some arguments; URLs supplied as a string are parsed as JSON if possible, otherwise wrapped as a one-item list. Advanced search rejects unsupported parameters for `lite`; agent_run validates query/runId combinations and resume-call fields. 8. Code sends x-exa-integration and can send bearer token, MCP session ID, and MCP client metadata to Exa API. Request logging exists. Agnost tracking is configured with disableLogs/input/output/error true. Privacy policy describes automatic interaction collection and Query Data use; scope and retention specifics for MCP calls were not separately documented. 9. No feedback/rating/report/survey tool was found in the twelve-tool registry. Keyless rate-limit messages invite sign-up for an API key. 10. Search/Agent skills are available in the repository and resource/prompt surfaces. Tool descriptions include recommendations such as using web_fetch_exa after search; these are model-facing instructions, not server-enforced routing. 11. Agent runs can use previousRunId and input/exclusion data; retained runs can be resumed by runId. This creates task state, but no evidence that prior general agent behavior changes future tool availability. 12. The product has a separate official Websets MCP endpoint. The analyzed handler otherwise registers one configurable tool set; agent_run calls Exa's Agent API behind the MCP tool. 13. No raw arbitrary API, SQL, shell, or script escape-hatch tool was found.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[LOCAL CODE @0b499f0] \"If highlights are insufficient, follow up with web_fetch_exa on the best URLs.\"",
+      "[LOCAL CODE @0b499f0] \"Not recommended for: Simple searches - use web_search_exa instead.\"",
+      "[LOCAL CODE @0b499f0] \"The Agent run is still active. Call agent_run again with runId=\"",
+      "[DOCS] \"An explicit `tools` list replaces the defaults, so include every tool you want enabled including web search and fetch.\"",
+      "[DOCS] \"Use `runId` to keep waiting on current work. Use `previousRunId` to ask a new follow-up based on finished work.\""
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The endpoint supports URL-selected tool subsets and authentication-dependent registration, and Exa also operates a separate Websets MCP endpoint. The handler conditionally adds Agent resources and prompts when agent tools are registered.",
+    "sources": [
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/toolRegistry.ts",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/agentRun.ts",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/webSearch.ts",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/webSearchAdvanced.ts",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/webFetch.ts",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/api/mcp.ts",
+      "https://exa.ai/docs/get-started/exa-mcp",
+      "https://exa.ai/privacy-policy",
+      "https://exa.ai/pricing?tab=api"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "12 code-defined tools; hosted docs list 4",
+    "action_count_comment": "Official hosted documentation lists four tools at https://exa.ai/docs/get-started/exa-mcp: web_search_exa, web_fetch_exa, web_search_advanced_exa, and agent_run. The official pinned repository's registry/shared handler defines twelve names; actions.json includes all twelve. Three of the documentation-listed tools are default or auth-gated; advanced search is opt-in. The other eight registry entries include deprecated/legacy names and are disabled by default. No catalogue-only tool was added. Claude's third-party connector listing gives web_search_exa and get_code_context_exa, which differs from the current hosted list. The independent ChatGPT Plugins Directory lists four names matching the hosted docs.",
+    "actions": [
+      {
+        "tool_name": "web_search_exa",
+        "description": "Search the web and return relevant text and highlights.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required); numResults: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/webSearch.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "web_search_advanced_exa",
+        "description": "Search with filters, domain/date constraints and content options.",
+        "type": "Read",
+        "enabled_by_default": "No (opt-in)",
+        "parameters": "query: string (required); numResults: number (optional); type: enum 4 (optional); category: enum 8 (optional); includeDomains: string[] (optional); excludeDomains: string[] (optional); startPublishedDate: string (optional); endPublishedDate: string (optional); startCrawlDate: string (optional); endCrawlDate: string (optional); includeText: string[] (optional); excludeText: string[] (optional); userLocation: string (optional); moderation: boolean (optional); additionalQueries: string[] (optional); textMaxCharacters: number (optional); contextMaxCharacters: number (optional); enableSummary: boolean (optional); summaryQuery: string (optional); enableHighlights: boolean (optional); highlightsMaxCharacters: number (optional); highlightsNumSentences: number (optional); highlightsPerUrl: number (optional); subpages: number (optional); subpageTarget: string[] (optional); livecrawl: enum (optional); maxAgeHours: number (optional)",
+        "parameter_count": 27,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/webSearchAdvanced.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "company_research_exa",
+        "description": "Research a company and return search results.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "companyName: string (required); numResults: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/companyResearch.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "web_fetch_exa",
+        "description": "Fetch clean page content from one or more URLs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "urls: string[] (required); maxCharacters: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/webFetch.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "crawling_exa",
+        "description": "Deprecated alias for fetching page content.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "urls: string[] (required); maxCharacters: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/webFetch.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "people_search_exa",
+        "description": "Search for people and professional profiles.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "query: string (required); numResults: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/peopleSearch.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "linkedin_search_exa",
+        "description": "Deprecated LinkedIn people search.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "query: string (required); numResults: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/linkedInSearch.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deep_researcher_start",
+        "description": "Start an asynchronous deep research task.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "instructions: string (required); model: string (optional); outputSchema: object (optional)",
+        "parameter_count": 3,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/deepResearchStart.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deep_researcher_check",
+        "description": "Check status and retrieve a deep research result.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "researchId: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/deepResearchCheck.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_code_context_exa",
+        "description": "Search code repositories and documentation for code context.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "query: string (required); numResults: number (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/exaCode.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deep_search_exa",
+        "description": "Run deep search with synthesis and optional structured output.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "objective: string (required); searchQueries: string[] (optional); excludeDomains: string[] (optional); numResults: number (optional); highlightMaxCharacters: number (optional); includeDomains: string[] (optional); instructions: string (optional); structuredOutput: boolean (optional)",
+        "parameter_count": 8,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/deepSearch.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "agent_run",
+        "description": "Run multi-step research or resume a retained run.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes with OAuth/API key",
+        "parameters": "query: string (optional, exclusive with runId); runId: string (optional, exclusive with query); systemPrompt: string (optional); outputSchema: object (optional); input: object (optional); dataSources: object[] (optional); previousRunId: string (optional); effort: enum 7 (optional); budget: object (optional)",
+        "parameter_count": 9,
+        "source": "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/tools/agentRun.ts",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted endpoint's exact initialize instructions and runtime tools/list serialization were not available as captured output; public code has conditional registration based on auth and URL configuration, so a precise pre-interaction character count divided by four cannot be derived from the docs inventory alone.",
+    "human_can_agent_cannot": "The product exposes Search API, Contents API, Agent API, Monitors API, and Exa Connect data providers. The MCP tool set does not expose Monitors management, arbitrary account/billing operations, API-key creation, or direct use of every REST parameter. See official product/pricing documentation and the Search/Agent API references.",
+    "sources": [
+      "https://exa.ai/docs/get-started/exa-mcp",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/toolRegistry.ts",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts",
+      "https://claude.com/connectors/exa",
+      "https://chatgptplugins.directory/mcp/exa",
+      "https://exa.ai/pricing?tab=api",
+      "https://exa.ai/docs/reference/search",
+      "https://exa.ai/docs/reference/agent-api-guide"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs recommend web_search_exa for ordinary queries and web_search_advanced_exa for explicit filters. They advise using runId to continue a running task and previousRunId for a new follow-up. These are model/client recommendations; tool registration and input validation are enforced in code, but the recommendations themselves are not.",
+    "governance_promises": "The privacy policy says query fields are not intended for personal information, Query Data is used to improve products and technology including training/fine-tuning models, and business-offering content processed on behalf of customers is governed by customer agreements. Pricing identifies Enterprise zero data retention as an included feature. Security page provides general security information; no MCP-specific data retention guarantee was located.",
+    "promises_to_user": "The docs describe keyless free rate-limited usage, OAuth or API-key usage against the user's team limits, and an Agent output package that may include findings, sources, validated JSON, usage, and cost.",
+    "comparison_with_server_logic": "Code implements tool filtering, authentication checks, API calls, result sanitization, timeouts, and some validation. Recommendations about preferred search workflow are descriptive only. Privacy and zero-retention statements are product-plan/policy claims and were not mapped to MCP-specific code behavior.",
+    "sources": [
+      "https://exa.ai/docs/get-started/exa-mcp",
+      "https://exa.ai/privacy-policy",
+      "https://exa.ai/pricing?tab=api",
+      "https://exa.ai/security",
+      "https://github.com/exa-labs/exa-mcp-server/blob/0b499f095c4ca145eee07b09137641c037d58449/src/mcp-handler.ts"
+    ]
+  },
+  "contradictions": [
+    "The hosted MCP docs list four available tools, while the current official code registry/shared handler defines twelve. The additional code-defined names include deprecated or legacy tools and are disabled by default; hosted deployment of those additional names was not independently confirmed.",
+    "The authorization-server metadata lists scopes_supported [\"mcp:tools\",\"mimic:detect\"], while both protected-resource metadata documents list only [\"mcp:tools\"].",
+    "The Claude connector directory lists web_search_exa and get_code_context_exa, while current hosted docs list web_search_exa, web_fetch_exa, web_search_advanced_exa, and agent_run. This third-party directory may describe a different or older connector tool surface."
+  ],
+  "observations_for_research": [
+    "The hosted docs describe keyless, OAuth, and API-key access; authentication mode affects the available tools and rate limits.",
+    "The `tools` URL parameter lets a client select a subset, and an explicit selection replaces the default tool list.",
+    "The public handler can expose resources and prompts conditionally alongside tools, including an Agent guide and schema templates."
+  ],
+  "confidence": "High (open code)",
+  "notes": "Inspected links.json, links_check.txt, all prepared pages and script extracts, and the local official repository at the listed commit. The endpoint probe showed HTTP 200 with JSON-RPC evidence; the supplied raw OAuth probe showed HTTP 406 when Accept did not include both application/json and text/event-stream. Public code contains the hosted handler and local stdio variant; deployment equivalence is assessed as partial because the live build/configuration was not inspected. The hosted docs page6 is the official tool list; code registry lists more names than docs. Third-party catalogues were used only to cross-check. Unofficial Pipeworx server was noted but excluded. Exact token count, protocol version, token lifetime, and Websets tool inventory were not found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 6.3
+  }
+}

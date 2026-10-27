@@ -1,0 +1,724 @@
+{
+  "server": "supabase",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.supabase.com/mcp",
+    "documentation_url_csv": "https://supabase.com/docs/guides/ai-tools/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/supabase/mcp",
+    "documentation_urls_used": [
+      "https://supabase.com/docs/guides/ai-tools/mcp",
+      "https://supabase.com/docs/guides/platform/personal-access-tokens",
+      "https://supabase.com/docs/guides/platform/sso/enterprise-mcp-authentication",
+      "https://supabase.com/docs/guides/ai-tools/plugins",
+      "https://supabase.com/docs/guides/self-hosting/enable-mcp",
+      "https://supabase.com/blog/remote-mcp-server",
+      "https://supabase.com/blog/mcp",
+      "https://supabase.com/features/mcp-server",
+      "https://supabase.com/pricing",
+      "https://claude.com/marketplace/connectors/supabase"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository contains Supabase's MCP implementation and tool schemas, and its README connects the package to the hosted endpoint. It also documents CLI and self-hosted variants with limited tool sets; the repository does not establish that the hosted deployment runs this exact commit.",
+    "mcp_protocol_version": "2026-07-28 referenced in server code and hosted docs; actual negotiated endpoint version NOT FOUND",
+    "commit_hash": "25d357c20849453fbee08f2e000fecf0c032f076",
+    "commit_date": "2026-10-26",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/server 2.0.0 (repository lockfile); @modelcontextprotocol/node 2.0.0",
+    "code_public": "Yes",
+    "license": "Apache-2.0",
+    "release_status": "General Availability (official feature page); OAuth protected-resource metadata calls the resource “Supabase MCP (Beta)”",
+    "other_official_servers": [
+      "Supabase CLI local endpoint: http://localhost:54321/mcp; official README says it offers a limited subset of tools and no OAuth 2.1.",
+      "Self-hosted Supabase MCP runs behind the internal API; official setup guide says external connections are denied by default and it is not intended to be exposed to the Internet."
+    ],
+    "sources": [
+      "https://mcp.supabase.com/mcp",
+      "https://mcp.supabase.com/.well-known/oauth-protected-resource/mcp",
+      "https://supabase.com/docs/guides/ai-tools/mcp",
+      "https://supabase.com/docs/guides/self-hosting/enable-mcp",
+      "https://github.com/supabase/mcp",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/package.json",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/pnpm-lock.yaml",
+      "https://supabase.com/features/mcp-server"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "No separate MCP access price was found. MCP actions can create billable resources: project and branch creation have cost checks and confirmation flows. Branching requires a paid plan.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Official pricing lists Free at $0/month, Pro from $25/month, Team from $599/month, and Enterprise at custom pricing. Additional projects and usage can add charges.",
+    "pricing_model_details": "Supabase plan and usage charges apply to resources and services used through MCP. The server's cost workflow covers create_project and create_branch; a zero-cost project quote does not prompt for confirmation.",
+    "other_access_restrictions": "OAuth sign-in grants a client access to an organization. Available tools vary by project scope, feature groups, read-only mode, permissions, client elicitation support, and plan-dependent branching. Hosted configuration supports project_ref, read_only, features, and skip_elicitations. Organization SSO and administrator authorization apply to enterprise-managed authorization.",
+    "restrictions_controlled_by": "Vendor and organization administrator; users select project scope, read-only mode, feature groups, and confirmation-skip settings in the connection URL or configuration panel.",
+    "sources": [
+      "https://supabase.com/pricing",
+      "https://supabase.com/docs/guides/ai-tools/mcp",
+      "https://supabase.com/docs/guides/platform/personal-access-tokens",
+      "https://supabase.com/docs/guides/platform/sso/enterprise-mcp-authentication"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Tool listing and calls; repository uses MCP server SDK 2.0.0.",
+      "description_what_how": "Hosted docs list tools by feature group. The official repository defines 40 tool schemas across account, branching, database, debugging, development, docs, functions, storage, notebooks, and feedback groups. The available set depends on connection options, server capabilities, permissions, and the hosted deployment.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tools return structured results through the MCP tool result format; tool errors include server-side caller errors. Hosted documentation describes confirmation or elicitation responses for supported calls.",
+      "sources": [
+        "https://supabase.com/docs/guides/ai-tools/mcp",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/tool-schemas.ts",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP resources are declared in the analyzed Supabase server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompts are declared in the analyzed Supabase server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server offers project-log retrieval tools. Whether it implements MCP protocol-level logging notifications is not established by the reviewed endpoint evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Project-log tools return log data; endpoint MCP logging notifications are Unknown.",
+      "sources": [
+        "https://supabase.com/docs/guides/ai-tools/mcp",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/debugging-tools.ts"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side sampling request is declared in the analyzed implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side roots capability is declared in the analyzed implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth protected-resource metadata and authorization-server metadata provided for analysis.",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate pointing to protected-resource metadata and message “No access token provided”. The metadata advertises bearer tokens in headers, authorization server https://api.supabase.com, resource name “Supabase MCP (Beta)”, and resource documentation https://mcp.supabase.com/api/mcp. The protected-resource document's raw scopes_supported are organizations:read, projects:read, projects:write, database:write, database:read, analytics:read, secrets:read, edge_functions:read, edge_functions:write, environment:read, environment:write, storage:read, storage:write. Authorization-server metadata advertises authorization_code, refresh_token, and urn:ietf:params:oauth:grant-type:jwt-bearer; registration_endpoint https://api.supabase.com/platform/oauth/apps/register; PKCE methods S256 and plain; token auth client_secret_basic and client_secret_post. Token lifetime and revocation details were not found in the supplied metadata.",
+      "pre_interaction_context_verbatim": "HTTP 401; WWW-Authenticate: Bearer resource_metadata=\"https://mcp.supabase.com/.well-known/oauth-protected-resource/mcp\"; response: {\"message\":\"No access token provided\"}",
+      "post_interaction_context_structure": "Requests without a bearer access token receive HTTP 401.",
+      "authorization_mechanism": "Metadata Doc / Dynamic Client Registration. Supplied endpoint response: HTTP 401; WWW-Authenticate references https://mcp.supabase.com/.well-known/oauth-protected-resource/mcp. Protected-resource metadata: resource https://mcp.supabase.com/mcp; bearer_methods_supported [\"header\"]; authorization_servers [\"https://api.supabase.com\"]; resource_documentation https://mcp.supabase.com/api/mcp; resource_name \"Supabase MCP (Beta)\"; scopes_supported [\"organizations:read\",\"projects:read\",\"projects:write\",\"database:write\",\"database:read\",\"analytics:read\",\"secrets:read\",\"edge_functions:read\",\"edge_functions:write\",\"environment:read\",\"environment:write\",\"storage:read\",\"storage:write\"]. Authorization-server metadata: issuer https://api.supabase.com; authorization_endpoint https://api.supabase.com/v1/oauth/authorize; token_endpoint https://api.supabase.com/v1/oauth/token; registration_endpoint https://api.supabase.com/platform/oauth/apps/register; response_types_supported [\"code\"]; response_modes_supported [\"query\"]; grant_types_supported [\"authorization_code\",\"refresh_token\",\"urn:ietf:params:oauth:grant-type:jwt-bearer\"]; token_endpoint_auth_methods_supported [\"client_secret_basic\",\"client_secret_post\"]; code_challenge_methods_supported [\"S256\",\"plain\"]; scopes_supported [\"organizations:read\",\"projects:read\",\"projects:write\",\"database:write\",\"database:read\",\"analytics:read\",\"secrets:read\",\"edge_functions:read\",\"edge_functions:write\",\"environment:read\",\"environment:write\",\"storage:read\",\"storage:write\"]; authorization_response_iss_parameter_supported true; authorization_grant_profiles_supported [\"urn:ietf:params:oauth:grant-profile:id-jag\"].",
+      "authorization_server": "https://api.supabase.com",
+      "sources": [
+        "https://mcp.supabase.com/mcp",
+        "https://mcp.supabase.com/.well-known/oauth-protected-resource",
+        "https://mcp.supabase.com/.well-known/oauth-protected-resource/mcp",
+        "https://api.supabase.com/.well-known/oauth-authorization-server",
+        "https://api.supabase.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "The hosted docs reference elicitation specification revision 2026-07-28; client support is also required.",
+      "description_what_how": "Hosted docs describe form elicitation for cost and destructive-SQL confirmations, and URL elicitation for Edge Function secret entry. Availability depends on the hosted server, tool configuration, and client mode support. The repository also defines notebook SQL elicitation.",
+      "pre_interaction_context_verbatim": "“Treat elicitations as a guardrail, not a guarantee of human review or approval.”",
+      "post_interaction_context_structure": "Client interaction may pause a tool call and resume, decline, or cancel it; unsupported or skipped forms follow documented tool-specific behavior.",
+      "sources": [
+        "https://supabase.com/docs/guides/ai-tools/mcp",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/confirmation.ts",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/notebook-tools.ts"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No task-specific feature was found in the reviewed hosted docs. Task protocol support at the endpoint was not determined.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://supabase.com/docs/guides/ai-tools/mcp",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted URL options include project_ref, read_only, features, and skip_elicitations. Feature groups can alter the listed tool set; project-scoped mode disables account tools. The docs say all groups except Storage are enabled by default.",
+      "pre_interaction_context_verbatim": "“All groups except Storage are enabled by default.”",
+      "post_interaction_context_structure": "Invalid skip_elicitations names are rejected; URL options may be combined.",
+      "sources": [
+        "https://supabase.com/docs/guides/ai-tools/mcp",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/transports/local-http-entry.ts",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/types.ts"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool results can return errors. The public code also defines submit_feedback and delete_feedback tools to send and delete feedback, but those names are not in the hosted documentation list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool errors are returned in MCP tool results; feedback submission returns a delete token.",
+      "sources": [
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/feedback-tools.ts",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/util.ts"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server subscription capability is declared in the analyzed implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No tool-level progress behavior was found in the hosted documentation reviewed. Endpoint support was not determined.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://supabase.com/docs/guides/ai-tools/mcp",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Endpoint cancellation support was not established by the reviewed hosted docs or implementation evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://supabase.com/docs/guides/ai-tools/mcp",
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The implementation defines server instructions for effective tool use, including schema inspection before changes, debugging order, and local-versus-remote workflows. Hosted docs also describe skills and a coding-agent plugin installed separately from the MCP server.",
+      "pre_interaction_context_verbatim": "“Before making schema changes, inspect the existing tables so you understand the current structure”",
+      "post_interaction_context_structure": "Instructions are initialize context; separately distributed skills/plugin are not server tools.",
+      "sources": [
+        "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts",
+        "https://supabase.com/docs/guides/ai-tools/plugins"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Read/write tools are distinguished in code annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint); read-only mode excludes or adapts write tools. 2. Cost and destructive-SQL confirmation are server elicitations where supported; confirmation may be skipped by URL parameter, while client call approval is a separate client control. SQL detection is a guardrail, not a guarantee. 3. OAuth scopes are in the metadata above; docs map tools to PAT permissions and say access is limited by granted permissions. Enterprise-managed OAuth requires SSO and organization owner/admin client authorization; token lifetime/revocation details were not found. 4. Hosted modes include project scoping, read-only, feature-group selection, and skip_elicitations. Storage is disabled by default per docs; branching requires a paid plan. Local CLI and self-hosted endpoints are separate variants. 5. Database RLS remains enforced; project scoping narrows accessible resources. Secret values are entered in the Dashboard rather than chat or tool arguments. Tool results may contain untrusted user data and code wraps SQL results with warnings. 6. query_logs permits up to 24 hours per request; repository notebook results cap at about 1 MB. Cost can accrue for projects and branches. 7. Schemas validate inputs; transport validates query options and rejects invalid skip_elicitations names. Project IDs are injected in scoped mode and omitted from schemas. No evidence of operator defaults overriding supplied tool arguments was found. 8. Monitoring/audit trail and MCP-specific telemetry disclosure were not found in reviewed docs. 9. Code defines submit_feedback/delete_feedback; submission instructions say use on user request or bug/missing capability, ask before unsolicited feedback, exclude sensitive content, and show the deletion token. These names are absent from hosted docs list. No upsell message found. 10. Initialize instructions and tool descriptions steer agent behavior; code instructs installing Supabase agent skills separately. 11. No evidence that past agent behavior changes future outputs or tools. 12. Hosted global endpoint, CLI local endpoint, and self-hosted server are documented variants; no nested sub-server architecture found. 13. execute_sql is a raw SQL escape hatch; run_notebook also runs SQL cells. Their access remains subject to authentication, permissions, and read-only mode.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[LOCAL CODE @25d357c] “Before making schema changes, inspect the existing tables so you understand the current structure”",
+      "[LOCAL CODE @25d357c] “When debugging issues, start by reading the project's logs and its security, performance, and health advisories before making changes”",
+      "[LOCAL CODE @25d357c] “SQL runs on the project's database server. Never read server-side files or run OS commands via SQL.”",
+      "[LOCAL CODE @25d357c] “Use it when the user asks, or when you hit a bug or missing capability. Ask the user before sending feedback they didn't request. Never include secrets, personal data, or database contents. Show the user the returned delete token.”",
+      "[LOCAL CODE @25d357c] “Do not poll this tool in a loop.” (query_logs description)",
+      "[DOCS] “Treat elicitations as a guardrail, not a guarantee of human review or approval.”",
+      "[DOCS] “Keep manual approval enabled for interactive work, and review each tool call before you run it.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The global hosted MCP endpoint presents configurable feature groups; the documented local CLI and self-hosted variants are separate server deployments rather than nested sub-servers.",
+    "sources": [
+      "https://supabase.com/docs/guides/ai-tools/mcp",
+      "https://supabase.com/docs/guides/platform/personal-access-tokens",
+      "https://supabase.com/docs/guides/platform/sso/enterprise-mcp-authentication",
+      "https://supabase.com/blog/mcp",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/server.ts",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/tool-schemas.ts",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/feedback-tools.ts",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/notebook-tools.ts",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/transports/local-http-entry.ts"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "40 in pinned public code; hosted docs group list names 33 tools; configured runtime set varies",
+    "action_count_comment": "The official hosted tool list is https://supabase.com/docs/guides/ai-tools/mcp. Counting grouped names gives 33; the official feature page says “over 20 tools” without an exact total. The pinned official repository defines 40 tools. Seven code-defined tools absent from the hosted docs list are get_logs, submit_feedback, delete_feedback, create_notebook, list_notebooks, get_notebook, and run_notebook; treated as local-equivalent definitions with hosted availability Unknown. No catalogue-only tools were added. Claude's third-party connector page reports “Show all 32 tools” and lists a differing set, including get_logs; its count/list differs from the hosted docs and code. Feature settings, project scope, server support, and permissions change the available count.",
+    "actions": [
+      {
+        "tool_name": "list_organizations",
+        "description": "Lists organizations the user belongs to.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "none",
+        "parameter_count": "0",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/account-tools.ts#L140-L153",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_organization",
+        "description": "Returns organization details and subscription plan.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/account-tools.ts#L164-L175",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_projects",
+        "description": "Lists Supabase projects for the user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "none",
+        "parameter_count": "0",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/account-tools.ts#L155-L166",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project",
+        "description": "Returns details for a Supabase project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/account-tools.ts#L177-L187",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_cost",
+        "description": "Gets the cost of creating a project or branch.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "type: enum (2 categories, required); organization_id: string (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/account-tools.ts#L64-L84",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "confirm_cost",
+        "description": "Returns a cost confirmation ID after user agreement.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "type: enum (2 categories, required); recurrence: enum (2 categories, required); amount: number (required)",
+        "parameter_count": "3",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/account-tools.ts#L85-L110",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project",
+        "description": "Creates a project after cost handling and organization selection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "project name, organization, region, database password, plan and confirmation fields (see schema)",
+        "parameter_count": "multiple",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/account-tools.ts#L30-L145",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pause_project",
+        "description": "Pauses a Supabase project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/account-tools.ts#L227-L238",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "restore_project",
+        "description": "Restores a paused Supabase project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/account-tools.ts#L239-L249",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_branch",
+        "description": "Creates a development branch and applies migrations.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id, name, confirm_cost_id and branching options (see schema)",
+        "parameter_count": "multiple",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/branching-tools.ts#L100-L120",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_branches",
+        "description": "Lists development branches.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/branching-tools.ts#L121-L132",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_branch",
+        "description": "Deletes a development branch.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "branch_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/branching-tools.ts#L134-L144",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "merge_branch",
+        "description": "Merges a branch into its parent project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "branch_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/branching-tools.ts#L146-L157",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reset_branch",
+        "description": "Resets a development branch.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "branch_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/branching-tools.ts#L159-L170",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "rebase_branch",
+        "description": "Rebases branch migrations from the parent project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "branch_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/branching-tools.ts#L172-L184",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_tables",
+        "description": "Lists database tables.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required); schemas: string[] (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/database-operation-tools.ts#L213-L226",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_extensions",
+        "description": "Lists available and installed Postgres extensions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/database-operation-tools.ts#L228-L238",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_migrations",
+        "description": "Lists database migrations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/database-operation-tools.ts#L240-L250",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "apply_migration",
+        "description": "Applies a SQL migration.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required); name: string (required); query: string (required)",
+        "parameter_count": "3",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/database-operation-tools.ts#L252-L264",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute_sql",
+        "description": "Executes raw SQL; destructive statements may require elicitation.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required); query: string (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/database-operation-tools.ts#L266-L281",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_logs",
+        "description": "Runs read-only SQL over project logs; window limited to 24 hours.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id, query, iso_timestamp_start, iso_timestamp_end (see schema)",
+        "parameter_count": "multiple",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/debugging-tools.ts#L78-L90",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_advisors",
+        "description": "Returns security and performance advisory findings.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/debugging-tools.ts#L254-L264",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_url",
+        "description": "Returns the API URL for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/development-tools.ts#L42-L54",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_publishable_keys",
+        "description": "Returns publishable and legacy anon keys.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/development-tools.ts#L56-L67",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate_typescript_types",
+        "description": "Generates TypeScript types from project schema.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required); schemas: string[] (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/development-tools.ts#L69-L80",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_edge_functions",
+        "description": "Lists Edge Functions in a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/edge-function-tools.ts#L63-L75",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edge_function",
+        "description": "Returns a specific Edge Function.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required); function_slug: string (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/edge-function-tools.ts#L77-L88",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deploy_edge_function",
+        "description": "Deploys or replaces an Edge Function.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id, name, files and deployment options (see schema)",
+        "parameter_count": "multiple",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/edge-function-tools.ts#L90-L103",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_edge_function_secret",
+        "description": "Requests secret entry through the Supabase Dashboard.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "project_id: string (required); name: string (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/secret-tools.ts#L82-L100",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_docs",
+        "description": "Searches Supabase documentation.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/docs-tools.ts#L19-L48",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_storage_buckets",
+        "description": "Lists storage buckets.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/storage-tools.ts#L42-L54",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_storage_config",
+        "description": "Gets storage configuration.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/storage-tools.ts#L56-L66",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_storage_config",
+        "description": "Updates storage configuration.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "project_id: string (required); features: object (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/storage-tools.ts#L68-L80",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_logs",
+        "description": "Gets project logs by service type and time window.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "project_id, service, iso_timestamp_start, iso_timestamp_end (see schema)",
+        "parameter_count": "multiple",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/debugging-tools.ts#L227-L240",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_feedback",
+        "description": "Sends feedback about Supabase tools to the Supabase team.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "feedback: string (required, 1–1000 chars); project_id: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/feedback-tools.ts#L32-L57",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_feedback",
+        "description": "Deletes feedback previously sent.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "delete_token: UUID (required); project_id: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/feedback-tools.ts#L47-L64",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_notebook",
+        "description": "Creates a project notebook.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "project_id, name and description (see schema)",
+        "parameter_count": "multiple",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/notebook-tools.ts#L133-L159",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_notebooks",
+        "description": "Lists project notebooks.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "project_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/notebook-tools.ts#L145-L159",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_notebook",
+        "description": "Returns a notebook and its cells.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "project_id: string (required); notebook_id: UUID (required)",
+        "parameter_count": "2",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/notebook-tools.ts#L161-L172",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_notebook",
+        "description": "Runs notebook SQL and log query cells in order.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (not in hosted docs)",
+        "parameters": "project_id, notebook_id, expected_updated_at (see schema)",
+        "parameter_count": "multiple",
+        "source": "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/notebook-tools.ts#L174-L190",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The repository contains definitions and initialize instructions, but no serialized endpoint tools/list response was available to count characters. The token count for the endpoint context was not determinable from the collected evidence.",
+    "human_can_agent_cannot": "Product UI/API supports operations beyond this published MCP list, including managing organization members, invitations, webhooks, OAuth apps, and broader platform settings. The personal access token documentation lists MCP tools and permissions separately from many Management API operations. The hosted MCP tool list does not document these operations as available through MCP.",
+    "sources": [
+      "https://supabase.com/docs/guides/ai-tools/mcp",
+      "https://supabase.com/docs/guides/platform/personal-access-tokens",
+      "https://supabase.com/features/mcp-server",
+      "https://claude.com/marketplace/connectors/supabase",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/tool-schemas.ts"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Docs recommend project scoping, read-only mode, narrow queries, manual client approval, review of outputs, and avoiding production data unless required. These recommendations depend partly on client configuration and user choices. Verbatim: “Keep manual approval enabled for interactive work, and review each tool call before you run it.”",
+    "governance_promises": "Docs state database-level RLS remains enforced; project scope limits resources; read-only mode uses a read-only Postgres user. Secret values are entered through the Dashboard, not chat or tool arguments. Docs caution that SQL result wrapping is “not foolproof”.",
+    "promises_to_user": "For supported cost elicitation, creation pauses for user approval, cost is checked again before creation, and declining or expiring creates nothing. Destructive-SQL confirmation applies only when detection and client form support are present.",
+    "comparison_with_server_logic": "Project scoping, read-only behavior, input validation, and tool gating have implementation support in public code. Elicitation handling is implemented but conditional on client capability/configuration; docs explicitly say SQL detection can miss destructive statements and elicitation is not proof of human approval. Advice to manually review actions is a client/user practice rather than an enforced server check.",
+    "sources": [
+      "https://supabase.com/docs/guides/ai-tools/mcp",
+      "https://supabase.com/blog/mcp",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/database-operation-tools.ts",
+      "https://github.com/supabase/mcp/blob/25d357c20849453fbee08f2e000fecf0c032f076/packages/mcp-server-supabase/src/tools/tool-schemas.ts"
+    ]
+  },
+  "contradictions": [
+    "OAuth protected-resource metadata labels the endpoint “Supabase MCP (Beta)”, while the vendor feature page lists MCP Server stage as “General Availability”.",
+    "The hosted docs say all feature groups except Storage are enabled by default. The pinned public implementation's DEFAULT_FEATURES excludes both Storage and Notebooks; the docs do not name Notebooks in their group list. Repository and hosted deployment defaults may differ.",
+    "The official repository contains get_logs and four notebook tools plus submit_feedback and delete_feedback, which are absent from the hosted docs tool list. Hosted availability is not established by the public code.",
+    "Claude's third-party connector directory reports 32 tools and includes get_logs, while the official hosted docs name 33 grouped tools and the public code defines 40. Catalogue tool names/counts do not match the docs/code inventory.",
+    "The resource metadata advertises broad read/write scopes, while hosted docs say manual OAuth app setup should grant write access to all available scopes because finer-grained scopes are not yet supported; the metadata enumerates separate capability scopes. Whether each endpoint tool maps to a corresponding runtime scope was not found."
+  ],
+  "observations_for_research": [
+    "Tool availability can be configured through URL parameters that change the server's listed surface, including project scope, read-only mode, feature groups, and selected elicitation skips.",
+    "Some confirmation flows are server-side tool-call pauses, but collection and display depend on client elicitation support; the legacy cost workflow instead uses tools and agent-facing descriptions.",
+    "The public implementation includes an explicit feedback submission/deletion pair with an agent instruction to ask before unsolicited submission and provide a deletion token.",
+    "Tool descriptions and server initialize instructions carry behavior guidance, including sequencing suggestions and warnings about untrusted database content."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/, and code/ before other sources. The official docs tool list and official repository were reviewed; the repo is pinned to the supplied latest commit. The repository represents the product's public implementation and CLI/local usage, but exact hosted deployment equivalence and endpoint tool listing were not independently verified. OAuth metadata was supplied as pre-fetched evidence; the origin-level protected-resource URL and OpenID configuration returned 404. Pricing page used as current vendor pricing; MCP-specific charge not stated. MCP-specific privacy retention, AI-training, telemetry, and endpoint audit details were not found in reviewed docs. Unofficial/community server listings were excluded from evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 6.6
+  }
+}

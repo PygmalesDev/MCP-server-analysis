@@ -1,0 +1,418 @@
+{
+  "server": "cisco-webex",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.webexapis.com/mcp/webex-meeting",
+    "documentation_url_csv": "https://developer.webex.com/mcp/docs/webex-mcp-server-overview",
+    "addressing": "global",
+    "repository_url": "https://github.com/CiscoDevNet/webex-mcp-official",
+    "documentation_urls_used": [
+      "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+      "https://developer.webex.com/mcp/docs/webex-mcp-server-overview",
+      "https://developer.webex.com/mcp/docs/webex-agentic-mcp-servers",
+      "https://developer.webex.com/mcp/docs/admin-approval-guide-for-agentic-apps",
+      "https://developer.webex.com/mcp/docs/security-overview",
+      "https://developer.webex.com/mcp/docs/agentic-apps-overview",
+      "https://developer.webex.com/mcp/docs/provisioning-on-control-hub",
+      "https://developer.webex.com/meeting/docs/meetings",
+      "https://help.webex.com/en-us/article/noae57p",
+      "https://www.cisco.com/site/us/en/about/legal/privacy.html"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public CiscoDevNet repository is a documentation repository: its README reproduces the Meetings MCP overview and tool names, but contains no server implementation. It cannot establish runtime behavior for the hosted endpoint.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "4e2077036632b577e883afdbf4e4c17b1230eb73",
+    "commit_date": "2026-06-01",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "N/A (documentation-only repository; no license file identified)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.webexapis.com/mcp/webex-messaging — sibling Webex Messaging endpoint; its server URL and tool list are documented in the public repository README.",
+      "https://mcp.webexapis.com/mcp/vidcast — sibling Vidcast endpoint; its server URL and tool list are documented in the public repository README.",
+      "https://mcp.webexapis.com/mcp/webex-suite — sibling endpoint listed in the collected official endpoint inventory; its tool set was not established from the available official pages.",
+      "The endpoint inventory also lists https://mcp.webexapis.com/mcp/workspaces; its tool set and purpose were not independently verified."
+    ],
+    "sources": [
+      "https://github.com/CiscoDevNet/webex-mcp-official/blob/4e2077036632b577e883afdbf4e4c17b1230eb73/README.md#L1-L16",
+      "https://github.com/CiscoDevNet/webex-mcp-official/blob/4e2077036632b577e883afdbf4e4c17b1230eb73/README.md#L98-L123",
+      "https://developer.webex.com/mcp/docs/meetings-mcp-server"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP fee or MCP-specific plan requirement was found in the reviewed Meetings MCP documentation. The endpoint requires organization admin enablement and Webex authentication.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Official US pricing page lists Webex Free at $0, Webex Meet at $12/user/month billed annually ($144/user/year), Webex Suite Meet + Call at $22.50/user/month billed annually ($270/user/year), and Enterprise as contact sales. Prices and plan names can vary by locale and billing term.",
+    "pricing_model_details": "The MCP documentation does not state per-call charges, credits, or MCP-specific quotas. Webex product plans are priced per user; Webex AI Assistant is included in the listed paid plans.",
+    "other_access_restrictions": "The organization's administrator must enable the Meetings server in Webex Control Hub. Admins can enable or disable tools and limit their discovery to selected groups. OAuth metadata for this endpoint lists all seven scopes as required. The Meetings MCP page does not publish a rate limit.",
+    "restrictions_controlled_by": "Vendor and organization administrator; the authenticated user's Webex permissions also apply to operations.",
+    "sources": [
+      "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+      "https://developer.webex.com/mcp/docs/provisioning-on-control-hub",
+      "https://plans.webex.com/",
+      "https://developer.webex.com/meeting/docs/integration-scopes",
+      "https://mcp.webexapis.com/.well-known/oauth-protected-resource/mcp/webex-meeting"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official Meetings MCP page lists eight tools for searching and managing meetings and retrieving meeting status, summaries, recordings, and transcripts. It does not publish input schemas, output schemas, or tool annotations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The anonymous endpoint returned a JSON-RPC 2.0 error with code -32001 and message \"Authorization header with Bearer token is required.\" Successful tool-result structure was not available.",
+      "authorization_mechanism": "Bearer-token authorization is required. The endpoint's protected-resource metadata lists scopes_supported and required_scopes as spark:mcp, meeting:schedules_read, meeting:schedules_write, meeting:participants_read, meeting:summaries_read, meeting:recordings_read, meeting:transcripts_read.",
+      "authorization_server": "https://mcp.webexapis.com",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "https://mcp.webexapis.com/mcp/webex-meeting",
+        "https://mcp.webexapis.com/.well-known/oauth-protected-resource/mcp/webex-meeting"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The Meetings page lists tools but does not list endpoint-specific MCP resources. Control Hub documentation describes generic Resources administration for MCP servers, which does not establish that this endpoint exposes resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "https://developer.webex.com/mcp/docs/provisioning-on-control-hub"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No Meetings-specific MCP prompts are listed. Control Hub documentation describes generic prompt administration for MCP servers but does not establish that this endpoint exposes prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "https://developer.webex.com/mcp/docs/provisioning-on-control-hub"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The general Webex MCP overview claims complete audit trails as an enterprise benefit. The Meetings page does not describe what invocation data is logged, retention, or an opt-out.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/webex-mcp-server-overview",
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific sampling capability was found in the documentation or public repository.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "https://github.com/CiscoDevNet/webex-mcp-official"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific roots behavior was found in the documentation or public repository.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "https://github.com/CiscoDevNet/webex-mcp-official"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint challenges unauthenticated requests with HTTP 401 and a Bearer WWW-Authenticate header pointing to path-specific protected-resource metadata. That metadata identifies https://mcp.webexapis.com as the authorization server and lists seven supported and required scopes. Authorization-server metadata lists authorization_code and refresh_token grants, code response type, and S256 PKCE. No registration_endpoint, token authentication methods, token lifetime, or revocation metadata was supplied. The Webex setup guide separately documents WCIT token authentication with runtime scope elicitation and OAuth 2.0 integrations.",
+      "pre_interaction_context_verbatim": "Authorization header with Bearer token is required.",
+      "post_interaction_context_structure": "Unauthenticated request: HTTP 401; JSON-RPC 2.0 error code -32001; data.reason WCIT006. WWW-Authenticate names resource_metadata at https://mcp.webexapis.com/.well-known/oauth-protected-resource/mcp/webex-meeting.",
+      "authorization_mechanism": "Metadata Doc and OAuth 2.0 Bearer token. Pre-fetched endpoint response: HTTP 401; WWW-Authenticate: Bearer realm=\"mcp\", resource_metadata=\"https://mcp.webexapis.com/.well-known/oauth-protected-resource/mcp/webex-meeting\". Path-specific protected-resource metadata: resource https://mcp.webexapis.com/mcp/webex-meeting; authorization_servers [https://mcp.webexapis.com]; scopes_supported and required_scopes both [spark:mcp, meeting:schedules_read, meeting:schedules_write, meeting:participants_read, meeting:summaries_read, meeting:recordings_read, meeting:transcripts_read]. Authorization-server metadata: issuer https://mcp.webexapis.com; authorization_endpoint https://webexapis.com/v1/authorize; token_endpoint https://webexapis.com/v1/access_token; response_types_supported [code]; grant_types_supported [authorization_code, refresh_token]; code_challenge_methods_supported [S256]; scopes_supported [spark:mcp]. The endpoint descriptor has six meeting scopes beyond the authorization-server metadata's spark:mcp listing. No DCR endpoint was provided. The setup guide says WCIT connects with spark:mcp and requests additional tool scopes through elicitation; clients without elicitation are directed to OAuth 2.0.",
+      "authorization_server": "https://mcp.webexapis.com",
+      "sources": [
+        "https://mcp.webexapis.com/mcp/webex-meeting",
+        "https://mcp.webexapis.com/.well-known/oauth-protected-resource",
+        "https://mcp.webexapis.com/.well-known/oauth-protected-resource/mcp/webex-meeting",
+        "https://mcp.webexapis.com/.well-known/oauth-authorization-server",
+        "https://mcp.webexapis.com/.well-known/openid-configuration",
+        "https://developer.webex.com/mcp/docs/webex-agentic-mcp-servers"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Cisco's Webex MCP connection guide says WCIT tokens begin with spark:mcp and that additional scopes required by tools are requested at tool-call time via MCP elicitation. It says this flow requires a client that supports elicitation. No endpoint-specific elicitation prompt or confirmation flow is published.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The guide describes an additional-scope consent request during tool call; exact request and response structure is not published.",
+      "authorization_mechanism": "WCIT token with spark:mcp; further scopes requested at runtime via elicitation. OAuth 2.0 is offered as the alternative for clients without elicitation support.",
+      "authorization_server": "https://mcp.webexapis.com",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/webex-agentic-mcp-servers"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific MCP Tasks capability was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Admins can enable or disable tools and control which groups can discover enabled functions in Control Hub. The public guide provides client setup instructions and explains WCIT and OAuth configuration. Endpoint-specific URL parameters or restrictive request headers are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Control Hub settings determine organization enablement and tool discovery; no MCP configuration response structure is published.",
+      "authorization_mechanism": "Organization administrator configures access in Control Hub; end users authenticate using Webex credentials or token-based setup.",
+      "authorization_server": "https://mcp.webexapis.com",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/provisioning-on-control-hub",
+        "https://developer.webex.com/mcp/docs/webex-agentic-mcp-servers",
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The unauthenticated endpoint returns a structured JSON-RPC error with code -32001, message, and data containing reason WCIT006 and a trackingId. Other error formats and reporting workflows are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Observed unauthorized response: {\"jsonrpc\":\"2.0\",\"id\":null,\"error\":{\"code\":-32001,\"message\":\"Authorization header with Bearer token is required.\",\"data\":{\"reason\":\"WCIT006\",\"trackingId\":\"ef8fe955-fd2d-4760-be90-e575ab1fdcf5\"}}}.",
+      "authorization_mechanism": "Bearer token required.",
+      "authorization_server": "https://mcp.webexapis.com",
+      "sources": [
+        "https://mcp.webexapis.com/mcp/webex-meeting"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific MCP subscription capability was found. Meetings MCP documentation describes listing and retrieving meetings rather than event subscriptions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint-specific progress notifications or long-running operation behavior was found in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP request-cancellation behavior is documented. A listed tool deletes a scheduled meeting, which is a product operation, not MCP request cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public documentation describes an OAuth bearer-token bridge in which plugins call Webex REST APIs on behalf of the authenticated user. It also documents organization-side agentic-app governance. No endpoint-specific server instructions, MCP Apps, or initialize context were published.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "OAuth 2.0 Bearer Token or documented WCIT token path.",
+      "authorization_server": "https://mcp.webexapis.com",
+      "sources": [
+        "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "https://developer.webex.com/mcp/docs/webex-agentic-mcp-servers",
+        "https://developer.webex.com/mcp/docs/provisioning-on-control-hub"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Read/write: the official list includes five read tools and three write tools; webex-delete-meeting deletes a scheduled meeting. The docs do not publish tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint). 2. Confirmation: no server-enforced confirmation parameter or preview-confirm flow is documented. The admin approval guide recommends explicit confirmation for high-risk tools, but that is review guidance, not evidence of enforcement by this endpoint. 3. Permissions: the endpoint metadata lists seven required scopes, including meeting:schedules_write. Cisco says API permissions also depend on the user's permissions. Admins must enable the server and may disable individual tools or limit discovery to groups. WCIT can request scopes via elicitation; revocation guidance says deleting the WCIT removes access. OAuth metadata documents authorization_code, refresh_token, and S256 PKCE. Token lifetime and revocation metadata were not found. 4. Restriction modes: no Meetings-specific read-only endpoint, toolset URL parameter, or mode header was found. Control Hub can disable tools or limit their discovery by group. Sibling product endpoints exist. 5. Data: listed outputs include meeting details, participant lists, AI summaries, recording URLs/passwords, and optionally full transcript text. No MCP-level masking or field filtering is documented. 6. Limits: no Meetings MCP rate limit, quota, result cap, or MCP charge was found. 7. Validation/correction: input schemas are not published; no parameter correction or override behavior was found. 8. Monitoring: general overview claims complete audit trails; admin docs discuss audit trails for configuration changes and operational telemetry. Invocation-level MCP logging, retention, and opt-out are not specified. 9. Vendor-interest: no feedback, rating, survey, reporting, or upsell tool appears in the eight-tool official list; no server-side marketing elicitation was found. 10. Behavior shaping: no server-delivered instructions or skills were found. The WCIT scope request is documented; admin approval guidance recommends elicitation for high-risk operations. 11. Memory/state: no agent-memory behavior documented. 12. Structure: one flat documented tool list backed by Webex plugins and REST API calls; sibling endpoints expose other product surfaces. 13. Escape hatches: no raw API, arbitrary SQL, script execution, or generic request tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The Meetings endpoint is documented as one flat list of eight tools. Cisco's description of plugins making Webex REST API calls explains backend implementation, but does not document dynamically loaded toolsets or a nested MCP server hierarchy.",
+    "sources": [
+      "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+      "https://developer.webex.com/mcp/docs/webex-agentic-mcp-servers",
+      "https://developer.webex.com/mcp/docs/provisioning-on-control-hub",
+      "https://developer.webex.com/mcp/docs/admin-approval-guide-for-agentic-apps",
+      "https://developer.webex.com/mcp/docs/webex-mcp-server-overview",
+      "https://developer.webex.com/meeting/docs/integration-scopes",
+      "https://mcp.webexapis.com/.well-known/oauth-protected-resource/mcp/webex-meeting",
+      "https://mcp.webexapis.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "8",
+    "action_count_comment": "The official tool list exists at https://developer.webex.com/mcp/docs/meetings-mcp-server and names 8 tools. The same names and count appear in the public documentation repository README. No official parameter schemas are published there. Agentman’s third-party listing also reports the same 8 names; it adds no tools. No other catalogue additions were made. The GitHub repository is documentation-only, not executable endpoint code.",
+    "actions": [
+      {
+        "tool_name": "webex-list-meetings",
+        "description": "List and search meetings by date range, topic, state, or type.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "webex-create-meeting",
+        "description": "Create a meeting with invitees, recurrence, and password; sends invitations.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "webex-update-meeting",
+        "description": "Update meeting properties and add, update, or remove invitees.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "webex-delete-meeting",
+        "description": "Delete a scheduled meeting; may send cancellation email.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "webex-get-meeting-status",
+        "description": "Retrieve meeting details and optionally the live participant list.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "webex-get-meeting-summary",
+        "description": "Retrieve AI-generated summary notes and action items for ended meetings.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "webex-list-recordings",
+        "description": "List recording metadata with playback/download URLs and passwords.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "webex-list-transcripts",
+        "description": "List transcript metadata and optionally retrieve full plain-text content.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The deployed server's initialize instructions and verbatim tool definitions are unavailable. The public repository is a documentation mirror, not server code; the tool reference does not provide machine-readable schemas or initialize output.",
+    "human_can_agent_cannot": "The Meetings MCP list documents eight actions; Webex REST API references expose additional meeting operations and parameters that are not established as MCP tools, including administrative and group meeting operations. The MCP tool schemas are not published, so REST API parameters cannot be assumed to be MCP parameters. Webex's general APIs also support webhook workflows not listed in this endpoint's tool set.",
+    "sources": [
+      "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+      "https://github.com/CiscoDevNet/webex-mcp-official/blob/4e2077036632b577e883afdbf4e4c17b1230eb73/README.md#L110-L149",
+      "https://agentman.ai/agentskills/connections/mcp-server/webex-meetings",
+      "https://developer.webex.com/meeting/docs/meetings"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The server page calls the toolset a fit for meeting coordination, post-meeting recaps, transcript search, and meeting intelligence. The general guide describes natural-language control. No endpoint-specific instruction text sent to the agent was found. Cisco's admin guide recommends high-risk tools pause for explicit confirmation; this is guidance for administrators to assess, not proof of server enforcement.",
+    "governance_promises": "The general overview claims: “Centralized authentication, granular permissions, and complete audit trails give IT unified control over AI access to Webex collaboration data.” Cisco's AI privacy guidance says: “Cisco does not retain customer input data after the inference process,” and says its third-party model provider will not use customer content to improve Azure OpenAI models. Those claims concern Cisco AI features generally and do not explicitly establish retention behavior for MCP transcripts or tool calls. The Cisco Privacy Statement applies generally and directs readers to product-specific privacy notices where applicable.",
+    "promises_to_user": "The Meetings MCP page says plugins call Webex REST APIs “on behalf of the authenticated user.” It describes the server as connecting AI workflows to Webex meeting capabilities. It says meeting summaries require Webex AI Assistant.",
+    "comparison_with_server_logic": "OAuth metadata verifies authentication requirements; Control Hub documentation describes admin tool enablement and audience controls. The general audit-trail claim is not accompanied by Meetings-specific invocation logging details. General AI privacy statements are not specific to the MCP endpoint. The meeting page documents tool capabilities but does not publish server-side schemas, confirmation enforcement, data masking, or retention behavior.",
+    "sources": [
+      "https://developer.webex.com/mcp/docs/webex-mcp-server-overview",
+      "https://developer.webex.com/mcp/docs/meetings-mcp-server",
+      "https://developer.webex.com/mcp/docs/admin-approval-guide-for-agentic-apps",
+      "https://developer.webex.com/mcp/docs/provisioning-on-control-hub",
+      "https://help.webex.com/en-us/article/noae57p",
+      "https://www.cisco.com/site/us/en/about/legal/privacy.html"
+    ]
+  },
+  "contradictions": [
+    "The endpoint-specific OAuth protected-resource descriptor lists seven scopes as both supported and required, while the authorization-server metadata lists only spark:mcp under scopes_supported. The Meetings documentation lists all seven as required for OAuth; the separate connection guide describes WCIT authentication with spark:mcp and additional scopes requested through elicitation.",
+    "Cisco documentation says Control Hub can enable or disable individual MCP tools, while the endpoint-specific OAuth descriptor marks all seven scopes required. These represent separate controls: tool visibility/enablement and token scope requirements; available evidence does not show that OAuth grants can omit a required scope."
+  ],
+  "observations_for_research": [
+    "The documentation presents two authorization paths with different consent timing: OAuth scope grant at connection setup, or WCIT with additional scopes requested during a tool call through elicitation.",
+    "The endpoint metadata marks all listed scopes required, including the schedule-write scope, while Control Hub separately offers tool-level enablement and group-based discovery controls.",
+    "The official tool reference gives names and short descriptions but not input schemas, output schemas, or annotation values, limiting assessment of validation and confirmation behavior."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/INDEX.txt, all collected official documentation pages and their extracted script text, the local GitHub repository, the official tool reference, the pre-fetched OAuth metadata, and the Agentman catalogue. The official repository contains only README documentation; it is not the hosted server implementation. Agentman was used only to cross-check the eight official names and count. The endpoint and its /install path returned HTTP 401 without a token. No exact tool schemas, initialize instructions, protocol version, MCP-specific pricing, Meetings MCP rate limit, MCP-specific privacy terms, or executable public implementation were found. Unofficial servers were not used as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.3
+  }
+}

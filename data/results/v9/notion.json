@@ -1,0 +1,967 @@
+{
+  "server": "notion",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.notion.com/mcp",
+    "documentation_url_csv": "https://developers.notion.com/guides/mcp/overview",
+    "addressing": "global",
+    "repository_url": "https://github.com/makenotion/notion-mcp-server",
+    "documentation_urls_used": [
+      "https://developers.notion.com/guides/mcp/overview",
+      "https://developers.notion.com/guides/mcp/get-started-with-mcp",
+      "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+      "https://developers.notion.com/guides/mcp/common-mcp-clients",
+      "https://developers.notion.com/guides/mcp/mcp-security-best-practices",
+      "https://developers.notion.com/guides/mcp/enterprise-managed-authorization",
+      "https://developers.notion.com/guides/mcp/hosting-open-source-mcp",
+      "https://developers.notion.com/guides/mcp/notion-skills",
+      "https://www.notion.com/help/notion-mcp",
+      "https://www.notion.com/help/set-up-enterprise-managed-connections-for-notion-mcp",
+      "https://www.notion.com/pricing",
+      "https://www.notion.com/trust/privacy-policy",
+      "https://www.notion.com/help/privacy",
+      "https://trust.notion.com/terms-and-privacy",
+      "https://developers.notion.com/reference/admin/list-mcp-client-connections",
+      "https://developers.notion.com/reference/admin/revoke-mcp-client-connection"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official repository is a separate, self-hosted Notion API implementation, described by Notion as not actively maintained or supported. The hosted remote server is the object here; its tools are documented separately.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "730ae781ba28beeaf0865025a3f2ed4c25ea2387",
+    "commit_date": "2026-09-20",
+    "implementation_language": "TypeScript (separate self-hosted implementation)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.29.0 (separate self-hosted implementation)",
+    "code_public": "Yes",
+    "license": "MIT (separate self-hosted implementation)",
+    "release_status": "Beta; OAuth protected-resource metadata names it “Notion MCP (Beta)”",
+    "other_official_servers": [
+      "https://mcp.notion.com/sse — same hosted Notion MCP service via SSE; endpoint returned HTTP 401 in the evidence check.",
+      "The public repository provides a separate local stdio or Streamable HTTP server; its tools are not included in this hosted endpoint's action list."
+    ],
+    "sources": [
+      "https://mcp.notion.com/.well-known/oauth-protected-resource/mcp",
+      "https://developers.notion.com/guides/mcp/overview",
+      "https://developers.notion.com/guides/mcp/hosting-open-source-mcp",
+      "https://github.com/makenotion/notion-mcp-server/blob/730ae781ba28beeaf0865025a3f2ed4c25ea2387/README.md",
+      "https://github.com/makenotion/notion-mcp-server/blob/730ae781ba28beeaf0865025a3f2ed4c25ea2387/package.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "No separate MCP access fee was found. Tool access depends on Notion plan, AI access, connection type, capabilities, and admin settings; some tools return upgrade prompts when unavailable.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Official pricing page lists Free at €0 per seat/month, Plus at €9.50 per seat/month, Business at €19.50 per seat/month, and Enterprise as contact sales. Prices are locale-specific.",
+    "pricing_model_details": "Notion AI and certain MCP functions require Business or Enterprise and Notion AI access. Some query access is metered on plans without full access. MCP-specific per-call pricing was not found.",
+    "other_access_restrictions": "OAuth authorization is required for the hosted endpoint. AI search and connected-source search require Business or Enterprise with Notion AI. Enterprise administrators can restrict clients and tools; workspace-owned connections expose an admin-selected tool set. Other tools and parameters have plan, capability, and permission restrictions.",
+    "restrictions_controlled_by": "Vendor and workspace/org admin; underlying Notion permissions are inherited from the connected user.",
+    "sources": [
+      "https://www.notion.com/pricing",
+      "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+      "https://www.notion.com/help/notion-mcp",
+      "https://developers.notion.com/guides/mcp/overview"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted MCP offers tools to search, read, and change Notion content, and to use connected-source search, calendar, skills, and agent-session features. Tool availability varies with connection type, capabilities, plan, and workspace configuration. The official supported-tools page documents 65 tool identifiers, including a compatibility search tool that is not in tools/list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific structured responses and errors; documented examples include result objects, warnings/notices, permission or validation errors, async task handles, and signed file URLs.",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "https://developers.notion.com/guides/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supported-tools documentation refers to the notion://docs/memory MCP resource and notion-file-block:// references for file blocks. The public hosted resource listing was not available in the prepared evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Resource contents and schemas NOT FOUND.",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-supported-tools"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted prompts capability declaration or prompt list was found in the official documentation reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/overview",
+        "https://developers.notion.com/guides/mcp/mcp-supported-tools"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted MCP logging behavior was not documented in the reviewed materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-security-best-practices",
+        "https://www.notion.com/trust/privacy-policy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted sampling capability declaration was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted roots capability declaration was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with a Bearer challenge and protected-resource metadata URL. The resource metadata identifies https://mcp.notion.com as authorization server, supports the default scope, and accepts bearer tokens in the header. Authorization-server metadata advertises authorization code, refresh token, and ID-JAG JWT-bearer grants; DCR; PKCE S256; and client authentication methods client_secret_basic, client_secret_post, none, and private_key_jwt. Metadata also advertises revocation and introspection endpoints. ID-JAG documentation says default access-token lifetime is eight hours but may change; it provides no refresh token for that grant. OAuth scopes_supported in the authorization-server metadata are default and ema_issuer:manage; the endpoint resource metadata scopes_supported value is default.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.notion.com/.well-known/oauth-protected-resource/mcp\", scope=\"default\"",
+      "post_interaction_context_structure": "Bearer authorization header. The provided raw metadata reports resource https://mcp.notion.com/mcp, authorization_servers [https://mcp.notion.com], scopes_supported [default], bearer_methods_supported [header], resource_name Notion MCP (Beta). Authorization-server metadata: issuer https://mcp.notion.com; authorization_endpoint /authorize; token_endpoint /token; registration_endpoint /register; revocation_endpoint /token; introspection_endpoint /introspect; response_types_supported [code]; response_modes_supported [query]; grant_types_supported [authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer]; authorization_grant_profiles_supported [urn:ietf:params:oauth:grant-profile:id-jag]; token_endpoint_auth_methods_supported [client_secret_basic, client_secret_post, none, private_key_jwt]; code_challenge_methods_supported [S256].",
+      "authorization_mechanism": "Metadata Doc / Dynamic Client Registration / client ID metadata document / Enterprise-managed ID-JAG. Raw protected-resource metadata at https://mcp.notion.com/.well-known/oauth-protected-resource/mcp: resource=https://mcp.notion.com/mcp; authorization_servers=[https://mcp.notion.com]; scopes_supported=[default]; bearer_methods_supported=[header]; resource_name=Notion MCP (Beta). Raw authorization-server metadata at https://mcp.notion.com/.well-known/oauth-authorization-server: scopes_supported=[default, ema_issuer:manage]; grant_types_supported=[authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer]; authorization_grant_profiles_supported=[urn:ietf:params:oauth:grant-profile:id-jag]; code_challenge_methods_supported=[S256]; registration_endpoint=https://mcp.notion.com/register; revocation_endpoint=https://mcp.notion.com/token. ID-JAG documentation states default expiry is 8 hours, subject to change; revocation semantics and standard OAuth token lifetime were not found.",
+      "authorization_server": "https://mcp.notion.com",
+      "sources": [
+        "https://mcp.notion.com/.well-known/oauth-protected-resource",
+        "https://mcp.notion.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.notion.com/.well-known/oauth-authorization-server",
+        "https://developers.notion.com/guides/mcp/enterprise-managed-authorization",
+        "https://developers.notion.com/guides/mcp/build-mcp-client"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation feature was documented. The security guide recommends that clients require confirmation for content-changing actions; it does not document server-enforced elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-security-best-practices"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server documents asynchronous tool operations and notion-get-async-task polling. Whether this uses the MCP Tasks protocol capability is not stated.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Documented async operation handles contain task ID/status and suggested polling delay; completion returns operation result or error.",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-supported-tools"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Workspace-owned connections let an admin select a tool list. Enterprise admins can govern client access and approved apps. No URL query parameter or header based hosted tool filtering was found in the documentation reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Connection-specific tool list and access status are described by the official documentation.",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "https://www.notion.com/help/notion-mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool documentation describes validation_error, permission errors, conflict errors, warnings/notices, upgrade prompts, and async task failure objects. No standalone MCP error-reporting capability was identified.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific error objects, notices, warning arrays, and status fields.",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-supported-tools"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability declaration was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe async task status polling, but do not establish MCP protocol progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Task states include queued, running, retrying, succeeded, and failed.",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-supported-tools"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "A notion-stop-session tool is documented for Custom Agent sessions. General MCP request cancellation support was not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Session cancellation behavior is documented as a tool; protocol cancellation behavior is Unknown.",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-supported-tools"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official docs describe server-delivered behavior guidance in tool descriptions, a notion://docs/memory resource, Notion Skills tools and enabled-skill settings, and tools that start or interact with Notion Custom Agent sessions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Skills are page-backed content and can be downloaded or uploaded; Custom Agent tools return session identifiers/URLs and session events.",
+      "sources": [
+        "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "https://developers.notion.com/guides/mcp/notion-skills"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official tool list includes reads, writes, destructive operations (delete pages, databases, comments), and mixed flows such as file uploads. The hosted tool reference does not publish MCP tool annotations such as readOnlyHint, destructiveHint, idempotentHint, or openWorldHint. 2. No server-enforced confirmation parameter or preview-confirm flow was identified. The security guide recommends client confirmation before changes. 3. OAuth connects as a user and the docs state existing Notion permissions are respected. Enterprise admins can restrict clients/tools; workspace-owned connections expose an admin-selected list. Individual capabilities, plan access, and connected-source permissions further constrain tools. 4. No read-only hosted endpoint, URL toolset filter, or production/sandbox mode was found. Tool selection is documented for workspace-owned connections; availability can vary by connection type, AI access, capabilities, plan, and integrations. A separate /sse endpoint exists. 5. Docs state tools act within the user's permissions; connector fetch returns only what the user's source connection can see. Signed file URLs expire after five minutes; attachment and upload limits are documented per tool. No general PII masking policy for MCP results was found. 6. Limits include search up to 50 results; recent pages limited to the user's top 1,000; upload and attachment size/time limits; session search result/text-span limits; page and cursor limits. No general MCP rate quota or per-call charge was found. 7. Tool docs describe validation errors, ignored unsupported search filters with notices, and certain plan-limited parameters being dropped rather than failing. Hosted implementation code is unavailable, so internal coercion/unknown-argument behavior is Unknown. 8. Admin APIs can list/revoke MCP client connections. Hosted MCP-specific telemetry, call logs, and audit retention details were not found. 9. Official tool list contains no vendor feedback/rating/report/survey tool. Tool responses may contain upgrade links/prompts when the plan lacks access. No generic product upsell in tool results was documented. 10. Notion Skills can be listed, enabled, downloaded, and uploaded; descriptions advise when to use skills. Custom Agent sessions permit nested agent interactions. Behavioral tool guidance is documented but enforcement varies; no public hosted code is available to verify enforcement. 11. notion-memory-search reads memories saved by connected agents in earlier sessions; memory results may thus depend on prior user/agent activity. Enabled Skills are user settings. 12. Hosted MCP integrates Notion and connected sources and documents Custom Agent session tools; it remains a single endpoint with a dynamic/configuration-dependent tool list. 13. No universal raw API request, arbitrary SQL, or script execution tool appears in the official tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "For a question that covers both Notion and connected sources, call both tools in parallel.",
+      "Fetch important matches before relying on them.",
+      "Read the notion://docs/memory MCP resource once before you first search or save memories in a conversation.",
+      "The tool descriptions tell assistants to fix a comment with notion-update-comment instead of deleting it and posting a new one, and to resolve a discussion only when a person asks.",
+      "The notion-create-pages and notion-update-page tools support allow_async: true for page create and update work. Their tool descriptions recommend that assistants pass it for most page writes. This is guidance to assistants, not a schema or server default."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The available tools are configuration- and entitlement-dependent. The service can search connected external sources, access user memory, download/manage Skills, and start/interact with Custom Agent sessions, so the exposed tool surface is not a single fixed list.",
+    "sources": [
+      "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+      "https://developers.notion.com/guides/mcp/mcp-security-best-practices",
+      "https://www.notion.com/help/notion-mcp",
+      "https://developers.notion.com/reference/admin/list-mcp-client-connections",
+      "https://developers.notion.com/reference/admin/revoke-mcp-client-connection"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "65 documented tool identifiers",
+    "action_count_comment": "The official tool list is https://developers.notion.com/guides/mcp/mcp-supported-tools. It names 65 tool identifiers in the page's tool descriptions and grouped tool lists; Notion states no overall total. This count includes notion-ai-search, which the docs say does not appear in tools/list but remains callable by name for compatibility. The set exposed to a given session varies by connection type, selected workspace-owned tools, capabilities, plan, AI access, connected sources, and admin settings. No catalogue-only tools were added because the official list is extensive and documented as the supported list. Third-party catalogues were consulted for cross-checking; their reported inventories/counts differ by listing and proxy/API surface, so they were not used to replace the official names. The complete action array is in actions.json.",
+    "actions": [
+      {
+        "tool_name": "notion-search",
+        "description": "`notion-ai-search`, `notion-fetch`, `notion-get-self`, `notion-get-tool-access`, `notion-create-attachment`, `notion-create-file-upload`, `notion-download-attachment`, `notion-get-file-download-urls`, `notion-create-pages`, `notion-create-database`, ",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-ai-search",
+        "description": "`notion-fetch`, `notion-get-self`, `notion-get-tool-access`, `notion-create-attachment`, `notion-create-file-upload`, `notion-download-attachment`, `notion-get-file-download-urls`, `notion-create-pages`, `notion-create-database`, `notion-update-page`",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-fetch",
+        "description": "`notion-get-self`, `notion-get-tool-access`, `notion-create-attachment`, `notion-create-file-upload`, `notion-download-attachment`, `notion-get-file-download-urls`, `notion-create-pages`, `notion-create-database`, `notion-update-page`, `notion-conver",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-self",
+        "description": "`notion-get-tool-access`, `notion-create-attachment`, `notion-create-file-upload`, `notion-download-attachment`, `notion-get-file-download-urls`, `notion-create-pages`, `notion-create-database`, `notion-update-page`, `notion-convert-page-to-skill`, `",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-tool-access",
+        "description": "`notion-create-attachment`, `notion-create-file-upload`, `notion-download-attachment`, `notion-get-file-download-urls`, `notion-create-pages`, `notion-create-database`, `notion-update-page`, `notion-convert-page-to-skill`, `notion-update-data-source`",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-create-attachment",
+        "description": "`notion-create-file-upload`, `notion-download-attachment`, `notion-get-file-download-urls`, `notion-create-pages`, `notion-create-database`, `notion-update-page`, `notion-convert-page-to-skill`, `notion-update-data-source`, `notion-create-view`, `not",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-create-file-upload",
+        "description": "`notion-download-attachment`, `notion-get-file-download-urls`, `notion-create-pages`, `notion-create-database`, `notion-update-page`, `notion-convert-page-to-skill`, `notion-update-data-source`, `notion-create-view`, `notion-update-view`, `notion-mov",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-download-attachment",
+        "description": "`notion-get-file-download-urls`, `notion-create-pages`, `notion-create-database`, `notion-update-page`, `notion-convert-page-to-skill`, `notion-update-data-source`, `notion-create-view`, `notion-update-view`, `notion-move-pages`, `notion-duplicate-pa",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-file-download-urls",
+        "description": "`notion-create-pages`, `notion-create-database`, `notion-update-page`, `notion-convert-page-to-skill`, `notion-update-data-source`, `notion-create-view`, `notion-update-view`, `notion-move-pages`, `notion-duplicate-page`, `notion-create-comment`, `no",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-create-pages",
+        "description": "`notion-create-database`, `notion-update-page`, `notion-convert-page-to-skill`, `notion-update-data-source`, `notion-create-view`, `notion-update-view`, `notion-move-pages`, `notion-duplicate-page`, `notion-create-comment`, `notion-get-comments`, `no",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-create-database",
+        "description": "`notion-update-page`, `notion-convert-page-to-skill`, `notion-update-data-source`, `notion-create-view`, `notion-update-view`, `notion-move-pages`, `notion-duplicate-page`, `notion-create-comment`, `notion-get-comments`, `notion-get-async-task`, `not",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-update-page",
+        "description": "`notion-convert-page-to-skill`, `notion-update-data-source`, `notion-create-view`, `notion-update-view`, `notion-move-pages`, `notion-duplicate-page`, `notion-create-comment`, `notion-get-comments`, `notion-get-async-task`, `notion-get-users`, `notio",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-convert-page-to-skill",
+        "description": "`notion-update-data-source`, `notion-create-view`, `notion-update-view`, `notion-move-pages`, `notion-duplicate-page`, `notion-create-comment`, `notion-get-comments`, `notion-get-async-task`, `notion-get-users`, `notion-query-data-sources`, and `noti",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-update-data-source",
+        "description": "`notion-create-view`, `notion-update-view`, `notion-move-pages`, `notion-duplicate-page`, `notion-create-comment`, `notion-get-comments`, `notion-get-async-task`, `notion-get-users`, `notion-query-data-sources`, and `notion-query-multiple-data-source",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-create-view",
+        "description": "`notion-update-view`, `notion-move-pages`, `notion-duplicate-page`, `notion-create-comment`, `notion-get-comments`, `notion-get-async-task`, `notion-get-users`, `notion-query-data-sources`, and `notion-query-multiple-data-sources`. Other tools on thi",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-update-view",
+        "description": "`notion-move-pages`, `notion-duplicate-page`, `notion-create-comment`, `notion-get-comments`, `notion-get-async-task`, `notion-get-users`, `notion-query-data-sources`, and `notion-query-multiple-data-sources`. Other tools on this page aren't availabl",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-move-pages",
+        "description": "`notion-duplicate-page`, `notion-create-comment`, `notion-get-comments`, `notion-get-async-task`, `notion-get-users`, `notion-query-data-sources`, and `notion-query-multiple-data-sources`. Other tools on this page aren't available in workspace-owned ",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-duplicate-page",
+        "description": "`notion-create-comment`, `notion-get-comments`, `notion-get-async-task`, `notion-get-users`, `notion-query-data-sources`, and `notion-query-multiple-data-sources`. Other tools on this page aren't available in workspace-owned connections.\r\n> **Search ",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-create-comment",
+        "description": "`notion-get-comments`, `notion-get-async-task`, `notion-get-users`, `notion-query-data-sources`, and `notion-query-multiple-data-sources`. Other tools on this page aren't available in workspace-owned connections.\r\n> **Search Notion**\r\n>\r\n> `notion-se",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-comments",
+        "description": "`notion-get-async-task`, `notion-get-users`, `notion-query-data-sources`, and `notion-query-multiple-data-sources`. Other tools on this page aren't available in workspace-owned connections.\r\n> **Search Notion**\r\n>\r\n> `notion-search`\r\n>\r\n> Searches No",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-async-task",
+        "description": "`notion-get-users`, `notion-query-data-sources`, and `notion-query-multiple-data-sources`. Other tools on this page aren't available in workspace-owned connections.\r\n> **Search Notion**\r\n>\r\n> `notion-search`\r\n>\r\n> Searches Notion pages and databases,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-users",
+        "description": "`notion-query-data-sources`, and `notion-query-multiple-data-sources`. Other tools on this page aren't available in workspace-owned connections.\r\n> **Search Notion**\r\n>\r\n> `notion-search`\r\n>\r\n> Searches Notion pages and databases, or looks up a works",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-query-data-sources",
+        "description": "and `notion-query-multiple-data-sources`. Other tools on this page aren't available in workspace-owned connections.\r\n> **Search Notion**\r\n>\r\n> `notion-search`\r\n>\r\n> Searches Notion pages and databases, or looks up a workspace user by name or email. I",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-query-multiple-data-sources",
+        "description": "Other tools on this page aren't available in workspace-owned connections.\r\n> **Search Notion**\r\n>\r\n> `notion-search`\r\n>\r\n> Searches Notion pages and databases, or looks up a workspace user by name or email. It doesn't search connected sources such as",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-connector-search",
+        "description": "for those, when the session lists it. For a question that covers both Notion and connected sources, call both tools in parallel. You don't need to call another tool first.\r\n>\r\n> Content searches report `type: \"workspace_search\"`. Use short, specific ",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-calendar-list-events",
+        "description": "with a time range that covers it.\r\n>\r\n> Only connections that act as a user can open these results: Notion MCP OAuth connections and personal access tokens. The user needs the same AI access as `notion-connector-search`. Custom Agents and other bots ",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-memory-search",
+        "description": ">\r\n> Searches the memories that the user's connected agents saved in earlier sessions, such as context, preferences, corrections, and decisions. Pass words or a short phrase as `query`, up to 500 characters. `limit` defaults to 10 and can be at most ",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-download-skill",
+        "description": ">\r\n> Downloads a complete [Notion Skill](https://developers.notion.com/guides/mcp/notion-skills.md#download-a-complete-skill). Pass the Skill page's `id`. The response contains `id`, `version_id`, and a signed `url` for a `tar.gz` archive with `SKILL",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-upload-skill",
+        "description": ">\r\n> Imports an [Agent Skills standard](https://agentskills.io/home) directory into an existing page in a Skills database. Uploading takes three steps:\r\n>\r\n> 1. Call the tool with `action: \"prepare\"`, the target `page_id`, and the exact `content_leng",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-enabled-skills",
+        "description": "lists the Notion Skills the user has enabled for MCP clients. It takes no arguments. Each entry has the Skill page's `id`, a `name`, and a `description` of when to use it when one exists. Fetch a Skill's `id` to read it. The list holds at most 30 Ski",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-update-enabled-skills",
+        "description": "enables or disables Skills by page URL. Pass up to 50 URLs in `add_skill_urls` or `remove_skill_urls`. `surfaces` picks which settings change: `mcp`, `notion_ai`, or both. It defaults to both. The tool changes only the current user's settings.\r\n>\r\n> ",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-list-private-pages",
+        "description": "top-level pages and databases in the user's **Private** section.\r\n> * `notion-list-shared-pages`: pages and databases in the user's **Shared** section.\r\n> * `notion-list-favorite-pages`: the user's favorites, in sidebar order.\r\n> * `notion-list-recen",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-list-shared-pages",
+        "description": "pages and databases in the user's **Shared** section.\r\n> * `notion-list-favorite-pages`: the user's favorites, in sidebar order.\r\n> * `notion-list-recent-pages`: pages and databases the user recently viewed, ranked by recency and visit frequency. It ",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-list-favorite-pages",
+        "description": "the user's favorites, in sidebar order.\r\n> * `notion-list-recent-pages`: pages and databases the user recently viewed, ranked by recency and visit frequency. It covers only the user's 1,000 top-ranked pages. This list reflects views, not edits. To fi",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-list-recent-pages",
+        "description": "pages and databases the user recently viewed, ranked by recency and visit frequency. It covers only the user's 1,000 top-ranked pages. This list reflects views, not edits. To find pages the user edited, use `notion-search` with `filters.edited_by_use",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-list-page-backlinks",
+        "description": ">\r\n> Lists the pages in the connected workspace that link to or mention a page or database. Pass the page's ID or URL as `page_id`. The tool returns IDs, titles, and URLs, never page content. To read a result, fetch it with `notion-fetch`. Requires t",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-teams",
+        "description": "All pages in the call share that parent. See [Teamspace root pages](#teamspace-root-pages) for permissions and an example.\r\n>\r\n> Use `creation_mode: \"draft\"` when the user wants a durable page but has not named a destination. Draft mode creates a wor",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-delete-pages",
+        "description": ">\r\n> Move up to 20 Notion pages to Trash. Database rows are pages. To move a whole database to Trash, use `notion-delete-databases`. Items in Trash can be restored with `notion-restore-pages` or from Trash in Notion. Locked pages can't be moved to Tr",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-delete-databases",
+        "description": "Items in Trash can be restored with `notion-restore-pages` or from Trash in Notion. Locked pages can't be moved to Trash; unlock them in Notion first.\r\n>\r\n> The call must set `user_confirmed: true`. Without it, nothing is moved to Trash, and the erro",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-restore-pages",
+        "description": "or from Trash in Notion. Locked pages can't be moved to Trash; unlock them in Notion first.\r\n>\r\n> The call must set `user_confirmed: true`. Without it, nothing is moved to Trash, and the error lists the pages so the MCP client can confirm them with t",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-create-folder",
+        "description": ">\r\n> Create an empty Folder under a parent page.\r\n>\r\n> **Example prompts:**\r\n>\r\n> * \"Create a folder named 'Project files' under this page\"\r\n> * \"Create a folder named 'Supporting documents' under this project page\"\r\n> **Update a folder**\r\n>\r\n> `noti",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-update-folder",
+        "description": ">\r\n> Changes an existing Folder with one command per call. Pass the Folder's `folder_id`, with or without dashes, and exactly one of these command shapes:\r\n>\r\n> * `{\"command\": \"add_files\", \"file_upload_ids\": [...]}` adds files by the file upload IDs ",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-query-meeting-notes",
+        "description": ">\r\n> Query the current user's meeting notes, filtering by meeting-specific properties (such as a title keyword search). Returns meetings where the user is an attendee or creator by default.\r\n>\r\n> > [!NOTE]\r\n> >\r\n> > Available on all plans, but using ",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-search-agents",
+        "description": "to find a Custom Agent by name or description,\r\n> or to browse the user's favorite agents and the workspace's newest agents.\r\n> It returns the Custom Agent URL needed to start a session. Then use these\r\n> tools to find sessions, start a session, send",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-query-sessions",
+        "description": "> * `notion-search-sessions`\r\n> * `notion-spawn-session`\r\n> * `notion-get-session-status`\r\n> * `notion-wait-session`\r\n> * `notion-stop-session`\r\n> * `notion-send-message-to-session`\r\n> * `notion-list-session-events`\r\n> * `notion-read-session-event`\r\n",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-search-sessions",
+        "description": "> * `notion-spawn-session`\r\n> * `notion-get-session-status`\r\n> * `notion-wait-session`\r\n> * `notion-stop-session`\r\n> * `notion-send-message-to-session`\r\n> * `notion-list-session-events`\r\n> * `notion-read-session-event`\r\n>\r\n> Search results include up",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-spawn-session",
+        "description": "> * `notion-get-session-status`\r\n> * `notion-wait-session`\r\n> * `notion-stop-session`\r\n> * `notion-send-message-to-session`\r\n> * `notion-list-session-events`\r\n> * `notion-read-session-event`\r\n>\r\n> Search results include up to 20 matches. Each title i",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-session-status",
+        "description": "> * `notion-wait-session`\r\n> * `notion-stop-session`\r\n> * `notion-send-message-to-session`\r\n> * `notion-list-session-events`\r\n> * `notion-read-session-event`\r\n>\r\n> Search results include up to 20 matches. Each title is limited to 150\r\n> characters, a",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-wait-session",
+        "description": "> * `notion-stop-session`\r\n> * `notion-send-message-to-session`\r\n> * `notion-list-session-events`\r\n> * `notion-read-session-event`\r\n>\r\n> Search results include up to 20 matches. Each title is limited to 150\r\n> characters, and each matching text span ",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-stop-session",
+        "description": "> * `notion-send-message-to-session`\r\n> * `notion-list-session-events`\r\n> * `notion-read-session-event`\r\n>\r\n> Search results include up to 20 matches. Each title is limited to 150\r\n> characters, and each matching text span is limited to 300 character",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-send-message-to-session",
+        "description": "> * `notion-list-session-events`\r\n> * `notion-read-session-event`\r\n>\r\n> Search results include up to 20 matches. Each title is limited to 150\r\n> characters, and each matching text span is limited to 300 characters.\r\n>\r\n> `notion-search-sessions` retu",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-list-session-events",
+        "description": "> * `notion-read-session-event`\r\n>\r\n> Search results include up to 20 matches. Each title is limited to 150\r\n> characters, and each matching text span is limited to 300 characters.\r\n>\r\n> `notion-search-sessions` returns no matches and a `warning` whe",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-read-session-event",
+        "description": ">\r\n> Search results include up to 20 matches. Each title is limited to 150\r\n> characters, and each matching text span is limited to 300 characters.\r\n>\r\n> `notion-search-sessions` returns no matches and a `warning` when the\r\n> workspace's search index",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-update-comment",
+        "description": "replaces the text of a comment the user wrote. Pass `comment_id` and the full new text as inline markdown in `markdown`. The new text replaces the whole comment. Block-level markdown, such as lists and headings, isn't supported.\r\n>\r\n> * `notion-delet",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-delete-comment",
+        "description": "deletes a comment the user wrote. If it's the last comment in its discussion, the discussion is removed too.\r\n>\r\n> * `notion-set-discussion-resolved` resolves a discussion with `resolved: true` or reopens it with `resolved: false`. Pass `discussion_i",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-set-discussion-resolved",
+        "description": "resolves a discussion with `resolved: true` or reopens it with `resolved: false`. Pass `discussion_id`, either a `discussion://` URL from `notion-get-comments` or the `discussion_id` from `notion-create-comment`.\r\n>\r\n> * `notion-set-comment-reaction`",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-set-comment-reaction",
+        "description": "adds (`reacted: true`) or removes (`reacted: false`) the user's reaction on a comment. Pass one standard Unicode emoji in `emoji`. Setting the same state twice changes nothing.\r\n>\r\n> > [!NOTE]\r\n> >\r\n> > Requires a Business or Enterprise plan. On othe",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-get-groups",
+        "description": ">\r\n> Lists the permission groups in the current workspace that the user can see, with each group's ID and name. Pass an optional `query` to search by name, or pass a group reference from a People property value (`space_permission_group-\r\n`, or the ba",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-calendar-list-calendars",
+        "description": ">\r\n> Lists calendars grouped by connected account. Use this to get calendar identifiers before another Calendar operation.\r\n>\r\n> Calendar tools use your connected Calendar accounts. They're available on all Notion plans in user-authorized MCP connect",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-calendar-list-coworkers-events",
+        "description": ">\r\n> Reads detailed events for coworkers in the same organization within a time range.\r\n>\r\n> **Example prompts:**\r\n>\r\n> * \"Show Casey's calendar for tomorrow.\"\r\n> **Find calendar resources**\r\n>\r\n> `notion-calendar-list-calendar-resources`\r\n>\r\n> Finds",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-calendar-list-calendar-resources",
+        "description": ">\r\n> Finds rooms or other calendar resources for specific times. Requires a Google Workspace account with admin permissions to view Calendar resources.\r\n>\r\n> **Example prompts:**\r\n>\r\n> * \"Which meeting rooms are available tomorrow at 2 PM for 30 minu",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-calendar-list-contacts",
+        "description": ">\r\n> Finds contacts by name or email across your connected Calendar accounts.\r\n>\r\n> **Example prompts:**\r\n>\r\n> * \"Find Casey's email address in my Calendar contacts.\"\r\n> **Create calendar events**\r\n>\r\n> `notion-calendar-create-events`\r\n>\r\n> Creates o",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-calendar-create-events",
+        "description": ">\r\n> Creates one or more events on writable calendars. Creating events may notify attendees.\r\n>\r\n> Choose each event's `calendar` using a reference from `notion-calendar-list-calendars`. If you omit `calendar`, the event is created on the primary/def",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-calendar-update-events",
+        "description": ">\r\n> Updates identified events, including their timing, attendees, recurrence, resources, or RSVP status. Updates may notify attendees.\r\n>\r\n> Use `notion-calendar-list-events` to get each event's `calendar` reference and `eventId`; pass them in `upda",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "notion-calendar-cancel-events",
+        "description": ">\r\n> Cancels identified events you can manage. Cancellation may notify attendees. To decline an event you don't organize, use `notion-calendar-update-events` with `updateType: \"RSVP\"` instead.\r\n>\r\n> Pass each event's `calendar` reference and `eventId",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted server code and verbatim initialize/tool schema output were not available; public source code is a separate self-hosted implementation, so it was not used to estimate hosted pre-interaction context.",
+    "human_can_agent_cannot": "The Notion API exposes API operations and parameters beyond those in the MCP tool reference; exact MCP exclusions were not exhaustively enumerated. Notion's public local server README says the local implementation deliberately limits exposed API scope and gives database deletion as an example unavailable there, but that statement does not establish a hosted-server exclusion. The hosted tool reference documents its own supported operations and limitations. Sources: https://developers.notion.com/reference/intro ; https://github.com/makenotion/notion-mcp-server/blob/730ae781ba28beeaf0865025a3f2ed4c25ea2387/README.md ; https://developers.notion.com/guides/mcp/mcp-supported-tools",
+    "sources": [
+      "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+      "https://developers.notion.com/guides/mcp/overview",
+      "https://www.notion.com/pricing",
+      "https://claude.com/connectors/notion",
+      "https://mcp.tc/i/notion",
+      "https://composio.dev/toolkits/notion_mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The official guide recommends client-side confirmation for content-changing actions: “Enable confirmation before actions that change content. This lets you review an action before the MCP client runs it.” Tool documentation also recommends asynchronous writes but says this is guidance, not a server default. These are client/assistant instructions; hosted implementation enforcement is not publicly inspectable.",
+    "governance_promises": "Notion says the server “automatically respects each user's existing Notion permissions” and that tools operate with the user's permissions. The security guide warns that clients can send returned content outside Notion and advises treating tool content as untrusted. Enterprise admin controls include client/tool approval and connection revocation. Privacy and retention details specific to MCP interactions were not established from the reviewed policy pages.",
+    "promises_to_user": "Notion describes the hosted server as a remote MCP service that uses the Notion API, with OAuth and access to workspace content; it claims token-efficient responses and semantic search across the workspace and connected apps.",
+    "comparison_with_server_logic": "Permission inheritance and tool availability constraints are reflected in documented hosted behavior. Confirmation before writes is a recommendation to MCP clients, not a documented server-enforced check. Enterprise allowlists and connection revocation are admin controls. Claims about token efficiency and semantic search are product descriptions; no hosted code or initialize output was available to verify their implementation details.",
+    "sources": [
+      "https://developers.notion.com/guides/mcp/overview",
+      "https://developers.notion.com/guides/mcp/mcp-security-best-practices",
+      "https://developers.notion.com/guides/mcp/mcp-supported-tools",
+      "https://www.notion.com/help/notion-mcp",
+      "https://developers.notion.com/guides/mcp/enterprise-managed-authorization",
+      "https://www.notion.com/trust/privacy-policy"
+    ]
+  },
+  "contradictions": [
+    "The tool reference names notion-ai-search as callable for compatibility but explicitly says it does not appear in tools/list; the documented notion-search and notion-connector-search pair is preferred for new code.",
+    "The default hosted tool surface is broader than the workspace-owned connection allowlist: workspace-owned connections list only the tools selected by an admin from a defined subset and do not list notion-connector-search.",
+    "The OAuth authorization-server metadata advertises scopes_supported [default, ema_issuer:manage], while the endpoint's protected-resource metadata advertises only [default]. These refer to different metadata roles; the hosted docs also state ID-JAG flow does not need OAuth scopes.",
+    "The hosted overview describes OAuth and user permission inheritance; the public GitHub repository is explicitly a separate local implementation using integration tokens and manual page sharing. Its code and tools are not evidence for hosted tool schemas or behavior."
+  ],
+  "observations_for_research": [
+    "The hosted tool inventory is personalized/configuration-dependent: availability is tied to connection type, admin selection, user capabilities, plan, AI entitlements, and connected services.",
+    "Some search calls silently drop unsupported filters or sorts and return notices, which can broaden results relative to the agent's request.",
+    "The service documents asynchronous write guidance while stating that allow_async is not a server default; callers must handle synchronous and asynchronous result shapes.",
+    "Tool descriptions include operational instructions, including cross-source parallel search, fetching before relying on search matches, and comment-editing preferences.",
+    "Custom Agent session tools create an agent-calls-agent pathway, while memory search can expose information saved by prior connected-agent sessions."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ and the locally pinned code repository. The hosted endpoint and /sse returned HTTP 401; supplied OAuth metadata was used as primary evidence. Official supported-tools documentation exists and was used as the action source. Public code is the separate self-hosted server and was not treated as deployed hosted code. Pricing was taken from Notion's official pricing page. Catalogue inventories can describe other Notion/API or proxy surfaces; they were cross-checks only. OAuth token lifetime for the standard authorization-code flow, hosted tool schemas/annotations, initialize instructions, hosted logging, and protocol capability negotiation were not found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 10.6
+  }
+}

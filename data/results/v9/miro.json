@@ -1,0 +1,599 @@
+{
+  "server": "miro",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.miro.com/mcp",
+    "documentation_url_csv": "https://developers.miro.com/docs/connecting-to-miro-mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/miroapp/miro-ai",
+    "documentation_urls_used": [
+      "https://developers.miro.com/docs/connecting-to-miro-mcp",
+      "https://developers.miro.com/docs/miro-mcp",
+      "https://developers.miro.com/docs/miro-mcp-tools",
+      "https://developers.miro.com/docs/miro-mcp-server-frequently-asked-questions",
+      "https://developers.miro.com/docs/miro-mcp-server-faq-and-troubleshooting",
+      "https://developers.miro.com/docs/mcp-usage-and-daily-limits",
+      "https://developers.miro.com/docs/mcp-server-vs-rest-api",
+      "https://developers.miro.com/docs/oidc-support-for-miro-mcp",
+      "https://developers.miro.com/changelog/legacy-mcp-board-tools-have-been-removed",
+      "https://developers.miro.com/changelog/canvas-tools-replace-layout-tools",
+      "https://developers.miro.com/changelog/new-miro-mcp-server-tools-create-items-boards-code-widgets-read-comments-and-more",
+      "https://miro.com/pricing/",
+      "https://claude.com/connectors/miro"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "[LOCAL CODE @b6408e1] The official miro-ai repository contains client plugins, connection configuration, and agent skills; its README describes the hosted MCP server as a separate API. It is not the implementation deployed at mcp.miro.com. The GitHub mirror entry is a third-party registry listing, not source code for the hosted server.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "b6408e1bdfe0c842f209d40b52e92caf118a4d39",
+    "commit_date": "2026-09-17",
+    "implementation_language": "NOT FOUND for hosted server; the public client-integration repository contains TypeScript/JavaScript and documentation",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT for the public client-integration repository; hosted server license N/A (closed source)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [],
+    "sources": [
+      "https://mcp.miro.com/mcp",
+      "https://github.com/miroapp/miro-ai",
+      "https://developers.miro.com/docs/miro-mcp",
+      "https://developers.miro.com/docs/connecting-to-miro-mcp"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Miro says MCP is available across plans without a separate MCP price; each plan has a daily call allowance. Enterprise availability requires admin enablement. The linked Miro subscription is separately priced.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Free plan is available; Starter, Business, and Enterprise are offered. The captured official pricing page describes paid plans as per-seat but did not provide stable numeric amounts in the extracted evidence; Enterprise is custom priced.",
+    "pricing_model_details": "Daily MCP calls: Free 100, Starter 500, Business 2,000, Enterprise 10,000. Limits reset at 00:00 UTC. Calls are counted regardless of AI credit use. Calls are blocked after the allowance until reset; the error prompts an upgrade. Enterprise customers may request higher limits. Miro subscriptions are per seat; AI credits are separate and plan-dependent.",
+    "other_access_restrictions": "Enterprise admins enable MCP at organization level and select all or specific teams; it may be disabled by default. Access follows the authorized user's existing Miro board permissions. The connection is documented as one team per user at a time across clients; authorizing a different team or client supersedes the previous connection. OAuth team selection is required.",
+    "restrictions_controlled_by": "Vendor controls plan allowances and endpoint behavior; organization admins control Enterprise MCP enablement and team selection; the user authorizes a team and their existing Miro permissions constrain access.",
+    "sources": [
+      "https://developers.miro.com/docs/mcp-usage-and-daily-limits",
+      "https://developers.miro.com/docs/miro-mcp-server-frequently-asked-questions",
+      "https://developers.miro.com/docs/miro-mcp-server-faq-and-troubleshooting",
+      "https://miro.com/pricing/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official tool reference documents board search and creation, comments, images, tables, prototypes, and canvas operations. It names 20 current tools; the official changelog separately names five code-widget tools. The hosted tool schemas and actual enabled list were not retrievable without OAuth.",
+      "pre_interaction_context_verbatim": "\"Once per session, before writing anything. Returns the current SVG spec.\"",
+      "post_interaction_context_structure": "Tool results and error schemas are not published in the documentation reviewed. The pages describe returned content for individual operations but do not reproduce a complete tools/list response.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp-tools",
+        "https://developers.miro.com/changelog/new-miro-mcp-server-tools-create-items-boards-code-widgets-read-comments-and-more",
+        "https://mcp.miro.com/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Documentation describes skill-loading tools that return guidance, but does not establish whether the server exposes MCP Resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp-tools"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed materials show example prompts and separate skills, but do not document MCP Prompts protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp",
+        "https://developers.miro.com/docs/miro-mcp-get-started"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Enterprise admins can view MCP usage. The FAQ says details about auditing which users use MCP are evolving; request-level logging is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/mcp-usage-and-daily-limits",
+        "https://developers.miro.com/docs/miro-mcp-server-frequently-asked-questions"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No public evidence found for MCP Sampling support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp",
+        "https://developers.miro.com/docs/miro-mcp-tools"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No public evidence found for MCP Roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp",
+        "https://developers.miro.com/docs/miro-mcp-tools"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returns HTTP 401 with `WWW-Authenticate: Bearer resource_metadata=\"https://mcp.miro.com/.well-known/oauth-protected-resource\"` and body `{\"error\":\"Authentication required\"}`. Protected-resource metadata: `resource=https://mcp.miro.com/`; `authorization_servers=[https://mcp.miro.com/]`; `scopes_supported=[boards:read, boards:write, openid, email]`; `bearer_methods_supported=[header]`. Authorization-server metadata: issuer `https://mcp.miro.com/`, authorization endpoint `/authorize`, token endpoint `/token`, registration endpoint `/register`, `response_types_supported=[code]`, `grant_types_supported=[authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer]`, token auth methods `[client_secret_post, client_secret_basic]`, PKCE `[S256]`, grant profile `[urn:ietf:params:oauth:grant-profile:id-jag]`. OIDC configuration additionally reports token endpoint auth `[none]`, revocation endpoint `/oidc/revoke`, audience `https://mcp.miro.com`, and ID-token signing algorithm `[HS256]`. Token lifetime is NOT FOUND. Miro documentation calls the flow OAuth 2.1 with dynamic client registration and describes signed OIDC ID tokens with verified email.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Authentication failure observed as HTTP 401 JSON error with Bearer resource-metadata challenge; successful token and refresh response formats not provided.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; authorization code and refresh token grants; JWT bearer grant; PKCE S256; header bearer token. Raw endpoint metadata values recorded above. Protected resource scopes: boards:read, boards:write, openid, email. Authorization server metadata token auth methods: client_secret_post, client_secret_basic; OIDC configuration reports none. Revocation endpoint: https://mcp.miro.com/oidc/revoke. Token lifetime NOT FOUND.",
+      "authorization_server": "https://mcp.miro.com/",
+      "sources": [
+        "https://mcp.miro.com/mcp",
+        "https://mcp.miro.com/.well-known/oauth-protected-resource",
+        "https://mcp.miro.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.miro.com/.well-known/oauth-authorization-server",
+        "https://mcp.miro.com/.well-known/openid-configuration",
+        "https://developers.miro.com/docs/oidc-support-for-miro-mcp",
+        "https://developers.miro.com/docs/connecting-to-miro-mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Documentation recommends user confirmation for some consequential operations, but does not document MCP Elicitation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp-tools",
+        "https://developers.miro.com/changelog/new-miro-mcp-server-tools-create-items-boards-code-widgets-read-comments-and-more"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No public evidence found for MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp",
+        "https://developers.miro.com/docs/miro-mcp-tools"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Users configure the hosted URL in their client and select a team through OAuth. Enterprise admins can enable MCP organization-wide or for selected teams. Documentation reviewed does not describe URL parameters or request headers for filtering tools or enforcing read-only mode.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/connecting-to-miro-mcp",
+        "https://developers.miro.com/docs/miro-mcp-server-frequently-asked-questions"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Miro documents errors for daily-limit exhaustion, team mismatch, lost access, and authorization/client-registration failures. Exact tool error structures and retry metadata are not published.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Limit errors tell the agent the daily limit was reached and prompt a plan upgrade; other formats are Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/mcp-usage-and-daily-limits",
+        "https://developers.miro.com/docs/miro-mcp-server-frequently-asked-questions",
+        "https://developers.miro.com/docs/miro-mcp-server-faq-and-troubleshooting"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No public evidence found for MCP subscription capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp",
+        "https://developers.miro.com/docs/miro-mcp-tools"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No public evidence found for MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp",
+        "https://developers.miro.com/docs/miro-mcp-tools"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No public evidence found for MCP request cancellation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp",
+        "https://developers.miro.com/docs/miro-mcp-tools"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Canvas guidance tools provide the current SVG format and format-specific instructions; Miro also distributes client-side skills and plugins in its public integrations repository. These materials can guide agent actions but are separate from the hosted server implementation.",
+      "pre_interaction_context_verbatim": "\"On top of the base spec, for format-specific guidance such as diagramming notation.\"",
+      "post_interaction_context_structure": "The official reference says the skill tools return format guidance; exact payload structure is not published.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.miro.com/docs/miro-mcp-tools",
+        "https://github.com/miroapp/miro-ai"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list labels tools Search/Read or Write/Update, but no readOnlyHint, destructiveHint, idempotentHint, or openWorldHint values are published. Canvas update is documented as creating, updating, and deleting items; separate code-widget deletion is documented in a changelog. 2. The changelog says board_create requires user confirmation; canvas deletion is described as explicit and consent-gated. These are documented safeguards, but server enforcement is not established. FAQ says human-in-the-loop confirmation details are evolving. 3. OAuth scopes are boards:read, boards:write, openid, email. Existing Miro board permissions apply; Enterprise admins enable MCP organization-wide or for selected teams. OAuth team connection is 1:1 per user across clients. Redirect URI approval and token lifetime are not documented; metadata advertises revocation endpoint /oidc/revoke. 4. No read-only mode or tool filter documented. User selects one team; Enterprise admins can choose org-wide or selected-team access. No alternate official endpoint documented. 5. Docs say current permissions govern access; no MCP-specific field masking or PII exclusion documented. 6. Daily quotas are 100/500/2,000/10,000 calls by Free/Starter/Business/Enterprise; reset 00:00 UTC; further calls blocked. Enterprise can request increases. Large canvas reads may be expensive; docs recommend scoping to a frame. 7. Server-side schema validation, coercion, argument correction, and operator overrides are Unknown. 8. Enterprise usage is visible to admins; request-level audit details are described as evolving. Telemetry and opt-out are Unknown. 9. No feedback/rating tool appears in the reviewed official list. The usage-limit error prompts an upgrade; docs pages include feedback forms and bug-report links. 10. Server tools provide canvas composition and format skills. Separate official client repository distributes additional skills. The official reference recommends loading composer guidance once before writing and format guidance as needed; enforcement is not documented. 11. OAuth team selection changes the active team connection; the previous connection is superseded. Other effects of past agent behavior on outputs/tools/resources are Unknown. 12. No nested server or proxy hierarchy documented. Team selection is stateful but the documented tool interface is a single hosted server. 13. No arbitrary raw API request, SQL, or script execution tool documented.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Once per session, before writing anything. Returns the current SVG spec.",
+      "On top of the base spec, for format-specific guidance such as diagramming notation.",
+      "To find what is on a board before reading it. Supports an overview mode for a high-level pass.",
+      "After all content has been created, call the board_show tool once to display the result to the user. (Official changelog text for board creation.)"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted MCP endpoint is documented with a flat tool list; team selection and skill-returning tools do not establish a nested server hierarchy.",
+    "sources": [
+      "https://developers.miro.com/docs/miro-mcp-tools",
+      "https://developers.miro.com/docs/miro-mcp-server-frequently-asked-questions",
+      "https://developers.miro.com/docs/mcp-usage-and-daily-limits",
+      "https://developers.miro.com/changelog/new-miro-mcp-server-tools-create-items-boards-code-widgets-read-comments-and-more",
+      "https://developers.miro.com/changelog/canvas-tools-replace-layout-tools",
+      "https://mcp.miro.com/.well-known/oauth-protected-resource"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "25 documented names; current enablement for five code-widget tools is uncertain",
+    "action_count_comment": "The official tool reference (https://developers.miro.com/docs/miro-mcp-tools) names 18 tools in its main table and names two more in its canvas workflow table, for 20. The official changelog also names five code_widget_* tools, giving 25 distinct official names; those five are not in the current reference table, so their current enablement is Unknown. Claude connector directory, a third-party listing dated February 2026 and marked Anthropic verified, states 31 tools; the captured listing exposes 24 names, eight of which Miro explicitly says have been removed, and seven names are not visible in the captured page text. No catalogue-only action was added. The Composio toolkit page describes its own Miro API toolkit and was not used as evidence for hosted-server names.",
+    "actions": [
+      {
+        "tool_name": "image_get_data",
+        "description": "Get image metadata and base64-encoded image data.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "image_get_upload_url",
+        "description": "Get a temporary single-use presigned upload URL.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "image_get_url",
+        "description": "Get a download URL for a board image.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_create",
+        "description": "Create a table with specified columns.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_list_rows",
+        "description": "Read table rows, column metadata, and optional filtered results.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "table_sync_rows",
+        "description": "Add or update table rows using key-based upsert matching.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "board_create",
+        "description": "Create a new Miro board.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "board_search_boards",
+        "description": "Search and list boards accessible to the current user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "comment_list_comments",
+        "description": "List comments on a board or specific item.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "comment_reply",
+        "description": "Add a reply to an existing comment thread.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "comment_resolve",
+        "description": "Resolve or unresolve a comment thread.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "image_create",
+        "description": "Create an image item on a board.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_create_from_svg",
+        "description": "Create multiple board items from SVG.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_get_canvas_composer_skill",
+        "description": "Get the current SVG specification for board layouts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_read_as_svg",
+        "description": "Read existing board items and return them as SVG.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_update_from_svg",
+        "description": "Apply an SVG document as a board diff.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "prototype_read",
+        "description": "Read prototype screens and metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "prototype_create",
+        "description": "Create a Miro prototype from HTML screens.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_load_format_skill",
+        "description": "Load supplementary guidance for a supported canvas format.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "canvas_search",
+        "description": "Search board content, including overview mode.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/docs/miro-mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "code_widget_create",
+        "description": "Create a syntax-highlighted code block on a board.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in current official tool reference; listed in official changelog)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/changelog/new-miro-mcp-server-tools-create-items-boards-code-widgets-read-comments-and-more",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "code_widget_get",
+        "description": "Read a code widget's source, language, and metadata.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in current official tool reference; listed in official changelog)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/changelog/new-miro-mcp-server-tools-create-items-boards-code-widgets-read-comments-and-more",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "code_widget_update",
+        "description": "Update code, language, title, line numbers, or position.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in current official tool reference; listed in official changelog)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/changelog/new-miro-mcp-server-tools-create-items-boards-code-widgets-read-comments-and-more",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "code_widget_delete",
+        "description": "Remove a code widget from a board.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in current official tool reference; listed in official changelog)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/changelog/new-miro-mcp-server-tools-create-items-boards-code-widgets-read-comments-and-more",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "code_widget_list_items",
+        "description": "List code widgets on a board with pagination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in current official tool reference; listed in official changelog)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.miro.com/changelog/new-miro-mcp-server-tools-create-items-boards-code-widgets-read-comments-and-more",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted server is closed source and no complete verbatim tools/list schemas or initialize instructions were available. The public repository is a client-integration/skills repository, not code for the deployed endpoint, so a token estimate cannot be calculated from it.",
+    "human_can_agent_cannot": "The documented MCP abstraction does not expose the full REST API. Miro states REST API access includes team, organization, and project data on Enterprise and webhooks, while MCP docs describe a curated subset of board operations. The REST API covers items and operations not currently represented in the MCP tool list, including connectors, tags, and broader team/org/project operations. See Miro's comparison and FAQ for current limitations.",
+    "sources": [
+      "https://developers.miro.com/docs/miro-mcp-tools",
+      "https://developers.miro.com/docs/mcp-server-vs-rest-api",
+      "https://developers.miro.com/docs/miro-mcp-server-frequently-asked-questions",
+      "https://claude.com/connectors/miro",
+      "https://developers.miro.com/changelog/legacy-mcp-board-tools-have-been-removed"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The reference instructs agents to load the canvas spec once before writing, load format-specific guidance on top of it, search before reading, and use SVG diffs. Miro says these tools guide agent behavior, but hosted enforcement of ordering is not shown. The public integration repository includes additional client-side skills.",
+    "governance_promises": "Miro states that permissions respect existing board access controls and that current user permissions govern access. OAuth/OIDC documentation describes signed ID tokens with verified email. Daily MCP calls are capped by plan and reset at 00:00 UTC. Miro's general security page says data is encrypted in transit and at rest and not used to train Miro AI models; the latter is a product-wide statement, not an MCP-specific term found in the captured MCP docs.",
+    "promises_to_user": "Miro describes the hosted MCP server as available across plans, connecting AI clients to boards, and respecting the user's existing Miro permissions. The usage page says calls beyond the daily allowance are blocked until reset.",
+    "comparison_with_server_logic": "Permission inheritance and daily call blocking are documented as server/product behavior. Admin enablement and team selection are described in setup documentation. Request-level audit behavior, telemetry, masking, retention, and exact confirmation enforcement are not established by the reviewed evidence. General security and AI-training claims are vendor documentation; implementation details for the hosted MCP server were not public.",
+    "sources": [
+      "https://developers.miro.com/docs/connecting-to-miro-mcp",
+      "https://developers.miro.com/docs/miro-mcp-server-frequently-asked-questions",
+      "https://developers.miro.com/docs/oidc-support-for-miro-mcp",
+      "https://developers.miro.com/docs/mcp-usage-and-daily-limits",
+      "https://developers.miro.com/docs/miro-mcp-tools",
+      "https://miro.com/pricing/"
+    ]
+  },
+  "contradictions": [
+    "The input endpoint is https://mcp.miro.com/mcp, while current setup guides tell clients to connect to https://mcp.miro.com/. The input path returns 401 and has its own protected-resource metadata; documentation does not explain the path difference.",
+    "OAuth metadata advertises boards:write, while the official tool reference classifies multiple operations as Write/Update; no scope-to-tool mapping is published, so the breadth of write authority cannot be inferred from the tool list.",
+    "The official tool reference gives 20 current names, while the official changelog separately documents five code_widget_* names absent from that reference. Current availability of those five is therefore uncertain.",
+    "Claude's Anthropic-verified connector directory states 31 tools but its captured text shows 24 names, including eight legacy names Miro says have been removed. It does not expose seven names in the captured page text, and its visible listing lacks current canvas/prototype tools."
+  ],
+  "observations_for_research": [
+    "The server exposes bulk canvas editing through SVG; the official documentation says a single diff operation can create, update, and delete board items, rather than requiring one tool per item type.",
+    "The server documentation describes guidance tools that return the current authoring specification and format-specific skill text. Miro presents these as agent-facing instructions with prescribed call order.",
+    "OAuth team selection creates a documented one-team-at-a-time connection per user, including across multiple clients; reauthorizing another team supersedes the earlier connection.",
+    "Miro's public client repository distributes agent skills alongside MCP configuration, but those skills are not the hosted server's source code."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/, and code/ folders first. The official reference's main table and canvas workflow list were extracted from the markdown copy; docs pages, usage limits, changelogs, pricing, OAuth metadata, and local official GitHub repositories were reviewed. The repo plausibility check found no MCP SDK dependency, consistent with the repository being integrations and skills rather than server code. The hosted endpoint and /install returned HTTP 401. The Miro Help Center admin guide returned 403. The unofficial Glama evalstate server was excluded from evidence. The Claude directory is a third-party listing and appears to retain removed legacy tools.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 14.9
+  }
+}

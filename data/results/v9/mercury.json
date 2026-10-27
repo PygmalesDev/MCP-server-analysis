@@ -1,0 +1,778 @@
+{
+  "server": "mercury",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.mercury.com/mcp",
+    "documentation_url_csv": "https://docs.mercury.com/docs/what-is-mercury-mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/MercuryTechnologies/mercury-cli",
+    "documentation_urls_used": [
+      "https://docs.mercury.com/docs/what-is-mercury-mcp",
+      "https://docs.mercury.com/docs/connecting-mercury-mcp",
+      "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+      "https://docs.mercury.com/docs/security-best-practices",
+      "https://docs.mercury.com/changelog/vault-api-retrieve-agent-card-credentials",
+      "https://mercury.com/blog/march-2026-product-updates",
+      "https://mercury.com/legal/privacy",
+      "https://mercury.com/legal/terms",
+      "https://support.mercury.com/hc/en-us/articles/28769703794580-Mercury-pricing-plans",
+      "https://claude.com/connectors/mercury",
+      "https://composio.dev/toolkits/mercury_mcp",
+      "https://manufact.com/mcp-catalog/mercury"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public MercuryTechnologies/mercury-cli repository is a Go command-line client for Mercury APIs, not the hosted MCP server. Mercury says it does not offer a non-hosted MCP. The repository has no MCP SDK dependency; its actions are not included in this endpoint's actions list.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "6f9be1d7697fca669f5e0883e55742ab34bdd620",
+    "commit_date": "2026-10-22",
+    "implementation_language": "NOT FOUND for hosted server; Go for the separate public CLI",
+    "mcp_sdk_and_version": "NOT FOUND for hosted server; the public CLI has no MCP SDK dependency",
+    "code_public": "Yes",
+    "license": "Apache-2.0 for the separate public CLI; hosted server license N/A",
+    "release_status": "Beta",
+    "other_official_servers": [
+      "https://mcp.mercury.com/register — OAuth Dynamic Client Registration endpoint.",
+      "https://mcp.mercury.com/authorize — OAuth authorization endpoint.",
+      "https://mcp.mercury.com/token — OAuth token and refresh endpoint.",
+      "https://mcp.mercury.com/.well-known/oauth-protected-resource — protected-resource metadata; the path-suffixed variant returned 404.",
+      "https://mcp.mercury.com/.well-known/oauth-authorization-server — authorization-server metadata.",
+      "Mercury states it does not offer a non-hosted MCP."
+    ],
+    "sources": [
+      "https://docs.mercury.com/docs/what-is-mercury-mcp",
+      "https://docs.mercury.com/docs/connecting-mercury-mcp",
+      "https://github.com/MercuryTechnologies/mercury-cli",
+      "https://mcp.mercury.com/.well-known/oauth-protected-resource",
+      "https://mcp.mercury.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "Mercury's documentation does not specify a separate MCP fee. Plugboard describes access as free, but that is a third-party listing. Access requires a Mercury account and OAuth authorization.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Mercury advertises free business banking and paid subscriptions; its pricing information describes paid plans starting at $35/month. The MCP documentation does not tie MCP access to a particular paid plan.",
+    "pricing_model_details": "No MCP-specific per-call charge, quota, or pricing tier was found. The linked banking product has free services and paid subscription plans; some banking features may have separate fees.",
+    "other_access_restrictions": "Available tools depend on account type, Mercury permissions, and granted OAuth scopes. Payment and transfer requests require Mercury approval. Existing read-only connections must reauthorize to grant write scopes.",
+    "restrictions_controlled_by": "Mercury controls OAuth scopes and server access; the account's Mercury permissions and organizational approval policies also apply. The user chooses whether to authorize the client and requested permissions.",
+    "sources": [
+      "https://docs.mercury.com/docs/what-is-mercury-mcp",
+      "https://docs.mercury.com/docs/connecting-mercury-mcp",
+      "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+      "https://support.mercury.com/hc/en-us/articles/28769703794580-Mercury-pricing-plans",
+      "https://mercury.com/pricing",
+      "https://getplugboard.com/connectors/mercury"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Mercury publishes a tool reference. It names 37 tools: 35 in tables and two internal-transfer approval lookup tools in prose. Availability depends on account type, Mercury permissions, and OAuth scopes. The reference does not publish tool input schemas.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown; no public hosted-server result or error schema was found.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No resources are documented in the reviewed official MCP pages or public code for this hosted server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/what-is-mercury-mcp",
+        "https://docs.mercury.com/docs/connecting-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP prompts are documented in the reviewed official pages. The docs give example user prompts, which are not evidence of the server exposing the MCP prompts capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted-server logging or audit-trail behavior is documented. Mercury's terms say the AI connection is operated by its provider, which controls its own data handling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://mercury.com/legal/terms",
+        "https://docs.mercury.com/docs/security-best-practices"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No sampling behavior is documented for the hosted server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/what-is-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No roots behavior is documented for the hosted server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/connecting-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth 2.0; MCP authorization version not specified",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"Missing Authorization header\". Protected-resource metadata names https://mcp.mercury.com/ as authorization server and lists scopes_supported: read, offline_access, transactions:request, transfers:request, categories:create, categories:edit, transactions:update, budgets:manage. Authorization metadata advertises authorization_code and refresh_token grants, S256 PKCE, client_secret_basic and none token authentication, and dynamic registration. Docs say tokens are short-lived, refresh is available with offline_access, and access can be revoked from the Mercury dashboard. Docs say Claude connector sessions last about three days; the March 2026 blog says 24-hour token expiration.",
+      "pre_interaction_context_verbatim": "HTTP 401; WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"Missing Authorization header\". Protected-resource metadata: {\"resource\":\"https://mcp.mercury.com/mcp\",\"authorization_servers\":[\"https://mcp.mercury.com/\"],\"scopes_supported\":[\"read\",\"offline_access\",\"transactions:request\",\"transfers:request\",\"categories:create\",\"categories:edit\",\"transactions:update\",\"budgets:manage\"],\"resource_name\":\"Mercury MCP Server\"}. Authorization-server metadata: {\"issuer\":\"https://mcp.mercury.com/\",\"authorization_endpoint\":\"https://mcp.mercury.com/authorize\",\"response_types_supported\":[\"code\"],\"code_challenge_methods_supported\":[\"S256\"],\"token_endpoint\":\"https://mcp.mercury.com/token\",\"token_endpoint_auth_methods_supported\":[\"client_secret_basic\",\"none\"],\"grant_types_supported\":[\"authorization_code\",\"refresh_token\"],\"scopes_supported\":[\"read\",\"offline_access\",\"transactions:request\",\"transfers:request\",\"categories:create\",\"categories:edit\",\"transactions:update\",\"budgets:manage\"],\"revocation_endpoint_auth_methods_supported\":[\"client_secret_basic\",\"none\"],\"registration_endpoint\":\"https://mcp.mercury.com/register\"}",
+      "post_interaction_context_structure": "HTTP 401 missing-authorization error was observed. Other tool result and error formats are unknown.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration (RFC 7591); OAuth 2.0 authorization-code and refresh-token grants; PKCE S256 required; token endpoint auth methods client_secret_basic or none. Raw WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"Missing Authorization header\". Raw protected-resource scopes_supported: read, offline_access, transactions:request, transfers:request, categories:create, categories:edit, transactions:update, budgets:manage. Docs say read uses read scope, write tools require their listed scopes, and offline_access enables refresh. Docs describe time-limited tokens and dashboard revocation; no exact lifetime is given there.",
+      "authorization_server": "https://mcp.mercury.com/",
+      "sources": [
+        "https://mcp.mercury.com/mcp",
+        "https://mcp.mercury.com/.well-known/oauth-protected-resource",
+        "https://mcp.mercury.com/.well-known/oauth-authorization-server",
+        "https://docs.mercury.com/docs/connecting-mercury-mcp",
+        "https://docs.mercury.com/docs/security-best-practices",
+        "https://mercury.com/blog/march-2026-product-updates"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Elicitation feature is documented. Mercury's OAuth consent and payment approval screens are product authorization and approval flows, not evidence of MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/connecting-mercury-mcp",
+        "https://docs.mercury.com/docs/security-best-practices"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Tasks capability is documented. Mercury's payment approval requests are product-level records.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No server URL parameters, headers, toolset filters, or read-only mode configuration are documented. OAuth scopes and account permissions determine tool access.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/connecting-mercury-mcp",
+        "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP error-reporting capability or hosted-server error schema is documented. The endpoint's unauthenticated response is an HTTP 401 with a JSON invalid_token error.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Observed unauthenticated JSON: {\"error\":\"invalid_token\",\"error_description\":\"Missing Authorization header\"}. Other errors unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://mcp.mercury.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/what-is-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No progress-tracking behavior is documented for the hosted server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/connecting-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No cancellation behavior is documented for the hosted server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/connecting-mercury-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Mercury provides a hosted server over Streamable HTTP and an OAuth flow. No initialize instructions or server prompts are published in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.mercury.com/docs/connecting-mercury-mcp",
+        "https://docs.mercury.com/docs/what-is-mercury-mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list separates five write actions from read actions. No readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations are published. 2. Mercury enforces approval for payment and transfer requests; the server creates requests but cannot approve or move money. Category and transaction metadata edits apply immediately. A chat confirmation is not Mercury approval. 3. OAuth scopes and the user's Mercury permissions apply. Existing read-only connections must reauthorize for write scopes. Org approval policies still apply. Docs describe dashboard revocation; exact token lifetime is not documented there. 4. One global URL is documented. No URL/header tool filters, read-only mode, sandbox endpoint, or regional endpoint was found. Docs say there is no non-hosted MCP. 5. Read access can expose balances, transaction histories, recipient bank details, statements, and card information. No MCP field masking is described. Card-number/expiry/CVC reveal for agent cards is explicitly not available via MCP. 6. No MCP rate limits, quotas, bulk caps, time-range caps, truncation, or per-call cost were found. 7. Public MCP schemas and validation/correction behavior were not found. 8. MCP logging, audit trails, and telemetry are undocumented. Mercury's terms state AI connections are operated by their provider, which controls how it uses, stores, and protects shared data. 9. The official tool page asks users to email feedback about desired MCP tools/data; no feedback/rating tool or upsell result behavior is documented. 10. No server-delivered skills or initialize instructions were found. Docs give client/user recommendations, including checking uncertain payment requests before retrying. 11. No persistent agent memory or behavior-dependent tool changes are documented. 12. The hosted endpoint is presented as one Mercury server; no nested servers or agent-calls-agent are documented. 13. No raw API, arbitrary SQL, script execution, or equivalent escape-hatch tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Check for an existing request before creating another one after an uncertain result.",
+      "We'd love your feedback. If there are more tools or data you'd love to see in Mercury's MCP, email us at"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted endpoint and a flat documented tool list; availability varies by account, permissions, and OAuth scopes.",
+    "sources": [
+      "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+      "https://docs.mercury.com/docs/connecting-mercury-mcp",
+      "https://docs.mercury.com/docs/security-best-practices",
+      "https://docs.mercury.com/changelog/vault-api-retrieve-agent-card-credentials",
+      "https://mercury.com/legal/terms",
+      "https://mcp.mercury.com/.well-known/oauth-protected-resource",
+      "https://mcp.mercury.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "37 official documented names; 6 additional catalogue-only names; 43 named actions in actions.json",
+    "action_count_comment": "The official reference is https://docs.mercury.com/docs/supported-tools-on-mercury-mcp. It names 35 tools in tables and names listTransferMoneyApprovalRequests and getTransferMoneyApprovalRequest in prose, for 37 official names; it states no total. Six additions: five names from Claude's third-party connector listing (also shown by Manufact) and getTreasuryStatements from Composio's third-party MCP listing. Claude and Manufact each report five; Composio reports 30, including a platform helper and overlapping official names; the helper was excluded. Agent Discoverability reports 46 legacy ChatGPT-plugin tools but publishes no names. SourceMedium, mcp.tc, Gamut, Plugboard, and mcp.so do not provide exact machine-name lists in the reviewed pages. Catalogue-only names are labeled with their source and unknown default availability.",
+    "actions": [
+      {
+        "tool_name": "requestSendMoney",
+        "description": "Creates a payment request to an existing recipient. Requires approval in Mercury before money is sent.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "requestTransferMoney",
+        "description": "Creates a transfer request between your own Mercury accounts. Requires approval in Mercury before money moves.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createCategory",
+        "description": "Creates a custom expense category immediately. No separate approval in Mercury.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "editCategory",
+        "description": "Updates a custom expense category immediately. No separate approval in Mercury.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateTransaction",
+        "description": "Updates or clears an existing transaction's note or category immediately. No separate approval in Mercury.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAccount",
+        "description": "Retrieve details of a specific Mercury account using its account ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAccountCards",
+        "description": "Retrieve all debit and credit cards associated with a specific account",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAccountStatements",
+        "description": "Retrieve monthly statements for a specific account. Supports date range filtering",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTransaction",
+        "description": "Retrieve details of a specific transaction using account ID and transaction ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAccounts",
+        "description": "Retrieve a list of all Mercury accounts for the organization",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listCategories",
+        "description": "Retrieve a list of all available custom expense categories for the organization. These are custom categories different from Mercury's built-in categories",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listCredit",
+        "description": "Retrieve a list of all credit accounts for the organization",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrganization",
+        "description": "Retrieve information about your organization including EIN, legal business name, and DBAs",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getRecipient",
+        "description": "Retrieve details of a specific recipient by ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getRecipients",
+        "description": "Retrieve a list of all recipients",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listTransactions",
+        "description": "Retrieve transactions with advanced filtering by date ranges, status, categories, and cursor-based pagination. Automatically handles pagination for complete results",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTreasury",
+        "description": "Retrieve all treasury accounts associated with the authenticated organization",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTreasuryTransactions",
+        "description": "Retrieve paginated treasury transactions for a specific treasury account",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCard",
+        "description": "Retrieve details of a specific card by its ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listCards",
+        "description": "Retrieve a paginated list of cards",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getUser",
+        "description": "Retrieve details of a specific user using their user ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getUsers",
+        "description": "Retrieve a list of all users for the organization",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWebhook",
+        "description": "Retrieve details of a specific webhook endpoint by ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getWebhooks",
+        "description": "Retrieve a list of all webhook endpoints for your organization. Supports filtering by status",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTransactionById",
+        "description": "Retrieve a single transaction by its ID, including attachments, check images, and related metadata",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listSendMoneyApprovalRequests",
+        "description": "Retrieve a list of send money approval requests for the organization. Supports filtering by account and status",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSafeRequest",
+        "description": "Retrieve a specific SAFE request by its ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSafeRequests",
+        "description": "Retrieve all SAFE (Simple Agreement for Future Equity) requests for your organization",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listRecipientsAttachments",
+        "description": "Retrieve a list of all recipient tax form attachments across all recipients in the organization",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getAttachment",
+        "description": "Retrieve attachment details, including a download URL",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCustomer",
+        "description": "Retrieve details of a specific customer by their ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listCustomers",
+        "description": "Retrieve a paginated list of customers. Supports cursor-based pagination with limit, order, start\\_after, and end\\_before query parameters",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getInvoice",
+        "description": "Retrieve details of an invoice by its ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listInvoices",
+        "description": "Retrieve a paginated list of invoices. Supports cursor-based pagination with limit, order, start\\_after, and end\\_before query parameters",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listInvoiceAttachments",
+        "description": "Retrieve a list of all attachments for a specific invoice",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listTransferMoneyApprovalRequests",
+        "description": "List internal transfer approval requests for the organization. Supports filtering by account and status.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getTransferMoneyApprovalRequest",
+        "description": "Retrieve a specific internal transfer approval request.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "load_account",
+        "description": "Load account and balance information.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/mercury",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "load_transaction",
+        "description": "Load transaction information.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/mercury",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "load_recipient",
+        "description": "Load recipient information.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/mercury",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "load_account_statement",
+        "description": "Load an account statement.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/mercury",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "load_accounts_card",
+        "description": "Load account card information.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/mercury",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "getTreasuryStatements",
+        "description": "Retrieve paginated statements for a specific treasury account.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/mercury_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No hosted tool schemas or initialize instructions were published; public CLI is a separate non-MCP program.",
+    "human_can_agent_cannot": "The MCP write tools do not create recipients, delete categories, issue or manage cards, or create invoices. The public API can offer capabilities not exposed as MCP write tools. Agent-card credentials (full card number, expiry, and CVC) are specifically available through the Vault API/CLI but not MCP. Payment/transfer approval and execution remain in Mercury; the MCP can only create requests.",
+    "sources": [
+      "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+      "https://docs.mercury.com/changelog/vault-api-retrieve-agent-card-credentials",
+      "https://claude.com/connectors/mercury",
+      "https://composio.dev/toolkits/mercury_mcp",
+      "https://manufact.com/mcp-catalog/mercury",
+      "https://agentdiscoverability.com/track/chatgpt/mercury"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The supported-tools page advises: “Check for an existing request before creating another one after an uncertain result.” Documentation also tells users to review the recipient/destination, amount, payment method, and timing before approval. The public hosted implementation is unavailable, so server enforcement of these recommendations cannot be confirmed.",
+    "governance_promises": "Mercury says OAuth provides “Time-limited access tokens that expire automatically” and “The ability to revoke access at any time from your Mercury dashboard.” It states payment and transfer requests require Mercury approval and that AI connections are operated by their providers, whose own data handling terms apply. Security guidance warns shared AI contexts and model-training practices depend on the client/provider.",
+    "promises_to_user": "Mercury describes the MCP as beta and advises users to double-check LLM responses for important decisions. The docs say write scopes are explicit, money movement needs Mercury approval, and category or note changes apply immediately.",
+    "comparison_with_server_logic": "OAuth scopes are supported by the public metadata. Docs describe approval and immediate-write behavior, but closed hosted code prevents verification of enforcement details. Dashboard revocation is documented, but metadata only reports revocation endpoint authentication methods and not the revocation URL. Data retention, AI-provider use, and prompt-injection precautions are user-facing guidance or provider-dependent, not demonstrated MCP server controls.",
+    "sources": [
+      "https://docs.mercury.com/docs/what-is-mercury-mcp",
+      "https://docs.mercury.com/docs/supported-tools-on-mercury-mcp",
+      "https://docs.mercury.com/docs/security-best-practices",
+      "https://docs.mercury.com/docs/connecting-mercury-mcp",
+      "https://mercury.com/legal/terms",
+      "https://mcp.mercury.com/.well-known/oauth-protected-resource",
+      "https://mcp.mercury.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "contradictions": [
+    "The OAuth metadata advertises budgets:manage, but the official tool list documents no budget tool or matching scope use.",
+    "Claude's connector directory and Manufact list load_account, load_transaction, load_recipient, load_account_statement, and load_accounts_card; none appear in Mercury's official tool list. These catalogue names are included as third-party additions with unknown default availability.",
+    "Composio lists getTreasuryStatements, which is absent from Mercury's official tool reference. It is included as a third-party addition with unknown default availability.",
+    "Mercury's March 2026 blog describes MCP as read-only and says tokens expire after 24 hours; the later MCP documentation describes scoped write actions, immediate metadata edits, and approval-gated money requests. The blog's read-only description appears older than the current docs.",
+    "The general security documentation describes time-limited tokens but gives no duration; the connecting guide says Claude connector sessions last about three days, while the March 2026 blog says token expiration is 24 hours."
+  ],
+  "observations_for_research": [
+    "Write access is divided by OAuth scope, with separate authorization and approval paths for money movement versus immediate category and transaction metadata edits.",
+    "A public protected-resource metadata document and dynamic client registration are available, but the input endpoint's 401 response does not advertise a resource_metadata pointer, and the path-suffixed protected-resource document returns 404.",
+    "Official docs describe tool availability as dependent on account type, Mercury permissions, and granted scopes, without publishing schemas or annotations.",
+    "The official tool reference names two transfer-approval lookup tools only in instructional prose rather than in its tool tables."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ (including official tool-reference HTML, text, and script extracts), OAuth captures, and the local Mercury CLI repository. The support article returned HTTP 403. The public repository is a separate Go CLI, not the hosted server. The March 2026 blog and third-party catalogues describe older or differing tool surfaces; catalogue-only names are marked accordingly. Official pricing pages reviewed do not state a separate MCP fee. Unofficial community Mercury MCP repositories were found but excluded as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 6.1
+  }
+}

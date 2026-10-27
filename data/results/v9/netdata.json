@@ -1,0 +1,458 @@
+{
+  "server": "netdata",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://app.netdata.cloud/api/v1/mcp",
+    "documentation_url_csv": "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/netdata/netdata",
+    "documentation_urls_used": [
+      "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+      "https://learn.netdata.cloud/docs/netdata-ai/mcp/supported-ai-clients",
+      "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+      "https://github.com/netdata/netdata/blob/f283c86293a8586f0bf88a1c51b4e8529bdcdbd9/src/web/mcp/README.md"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public Netdata repository documents the local Agent/Parent MCP server and stdio bridges. The input is the hosted Netdata Cloud MCP endpoint; the available evidence does not establish that the local implementation is the deployed Cloud service. The repository archive was not downloaded because it exceeded the evidence setup's 40 MB limit.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "f283c86293a8586f0bf88a1c51b4e8529bdcdbd9",
+    "commit_date": "2026-10-27",
+    "implementation_language": "Go (local Agent/Parent server, per third-party AgentAge listing); hosted Cloud implementation NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "GPL-3.0 (Netdata repository)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Netdata Agent/Parent MCP at http://<agent-or-parent>:19999/mcp; local server, distinct from the hosted Cloud endpoint. The docs also describe /sse and WebSocket transports for local Agent/Parent MCP."
+    ],
+    "sources": [
+      "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+      "https://github.com/netdata/netdata",
+      "https://catalog.agentage.io/mcp/io-github-netdata-mcp-server"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "The Cloud MCP documentation requires a Netdata Cloud account with a Paid plan and an API token with scope:mcp. It does not state a separate per-call MCP fee.",
+    "linked_software": "Open source + paid cloud",
+    "linked_software_cost": "The official pricing page advertises Community as free (up to 5 nodes, non-commercial) and Homelab at $90/year (unlimited nodes, fair usage); paid plan pricing also depends on plan and node usage.",
+    "pricing_model_details": "Netdata Cloud plans use a yearly flat fee for committed nodes plus metered active-node usage; monthly or yearly billing is described. MCP-specific charges are not stated. Netdata's separate AI investigations/reports have credit rules, but the docs do not establish a separate MCP tool-call charge for this endpoint.",
+    "other_access_restrictions": "Requires a paid Cloud space, a Cloud API token with scope:mcp, and nodes claimed to that Cloud space. The endpoint's unauthenticated POST returned HTTP 401 with errorMessage 'no cookie'; no WWW-Authenticate header or OAuth metadata was provided. Docs direct users to Bearer-token authentication.",
+    "restrictions_controlled_by": "Vendor sets plan and token requirements; the user or Space administrator controls the account, token, and node enrollment. Exact endpoint-level role enforcement is not described.",
+    "sources": [
+      "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+      "https://www.netdata.cloud/pricing/",
+      "https://learn.netdata.cloud/docs/netdata-cloud/netdata-plans-%26-billing",
+      "https://app.netdata.cloud/api/v1/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official product description lists 13 Cloud MCP tool names. The endpoint requires authentication; no tool schemas or initialize response were available in the evidence. The official setup page describes the transport as Streamable HTTP and stateless.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool result and error schema NOT FOUND for this endpoint. The unauthenticated endpoint returned HTTP 401 JSON with errorCode, errorMsgKey, and errorMessage.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No Cloud MCP resource list or resource capability declaration was found in the official docs or supplied endpoint evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No Cloud MCP prompt list or prompt capability declaration was found in the official docs or supplied endpoint evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP logging capability declaration was found. Netdata product-level reporting and monitoring material does not establish MCP protocol logging behavior.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://learn.netdata.cloud/docs/welcome-to-netdata/reporting"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling capability declaration was found for the Cloud endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability declaration was found for the Cloud endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official docs say Cloud MCP requests require a Netdata Cloud API token with scope:mcp, sent as a Bearer token in Authorization. The supplied probe returned HTTP 401 and JSON errorMessage 'no cookie' without WWW-Authenticate. The supplied protected-resource, authorization-server, and OpenID configuration URLs each returned HTTP 404; no scopes_supported, registration_endpoint, PKCE, grant types, token lifetime, or revocation metadata were found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated POST response: HTTP 401; JSON fields errorCode, errorMsgKey, errorMessage; raw errorMessage: 'no cookie'.",
+      "authorization_mechanism": "API key/token (per official docs): Bearer token in Authorization header; token must have scope:mcp. Probe returned HTTP 401 with errorMessage 'no cookie'. No WWW-Authenticate header was provided. Protected-resource URLs returned 404: https://app.netdata.cloud/.well-known/oauth-protected-resource and https://app.netdata.cloud/.well-known/oauth-protected-resource/api/v1/mcp. Authorization-server and OpenID configuration URLs also returned 404. No OAuth scopes_supported list, DCR, PKCE, grant types, token auth methods, lifetime, or revocation metadata found.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp",
+        "https://app.netdata.cloud/.well-known/oauth-protected-resource",
+        "https://app.netdata.cloud/.well-known/oauth-protected-resource/api/v1/mcp",
+        "https://app.netdata.cloud/.well-known/oauth-authorization-server",
+        "https://app.netdata.cloud/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability or server-enforced confirmation flow was documented for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability declaration was found for the Cloud endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No Cloud MCP configuration capability declaration was found. Configuration guidance describes endpoint and client setup, not a server configuration capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP error-reporting capability declaration was found. The unauthenticated endpoint response is an HTTP 401 JSON error.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Observed unauthenticated error has errorCode, errorMsgKey, and errorMessage fields; authenticated tool errors were not available.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability declaration was found for the Cloud endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress-tracking capability declaration was found for the Cloud endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability declaration was found for the Cloud endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://app.netdata.cloud/api/v1/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official docs give usage advice to AI clients, including queries that provide fleet-wide cardinality instead of sampling and prompting the client to use Netdata MCP. These are guidance statements, not verified initialize instructions. The endpoint is described as stateless Streamable HTTP.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+        "https://github.com/netdata/netdata/blob/f283c86293a8586f0bf88a1c51b4e8529bdcdbd9/src/web/mcp/README.md"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official product description lists 13 read-oriented tools. Netdata's MCP documentation calls MCP access read-only and says dynamic configuration is not exposed. No hosted tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) were found. 2. No server-enforced confirmation flow documented; read-only access is the documented restriction. 3. Cloud API token with scope:mcp; docs say permissions follow the user's Netdata Cloud role and sensitive Functions require corresponding permission. The paid-plan requirement is documented. OAuth metadata is absent. 4. Cloud endpoint is fleet-wide; local Agent/Parent endpoints are separate variants. No Cloud read-only toggle, tool filter, or per-region endpoint documented. 5. Access is limited to nodes connected to the user's Cloud space; no MCP-specific masking or PII exclusion documented. 6. No endpoint-specific rate limits, result caps, time-range caps, or per-call costs found. 7. No hosted input validation, coercion, correction, or operator override details found. 8. MCP-specific logging, audit trails, and telemetry behavior are not documented. 9. No vendor feedback, rating, survey, or report tool appears in the official 13-name list. 10. Official client guidance recommends querying broad contexts (for example app.*, systemd.*, cgroup.*) to avoid sampling, checking available tools when newer features are missing, explicitly asking the assistant to use Netdata, and reviewing/cross-checking answers. These are client instructions; server enforcement is not shown. 11. No MCP-specific cross-session agent memory behavior documented. 12. Hosted Cloud endpoint is a single fleet-wide endpoint; Agent/Parent MCP and Netdata Cloud's outbound MCP Connections are distinct products/features. 13. No raw API, SQL, script, or arbitrary execution escape hatch documented; execute_function is an official tool name, described as running Netdata live functions, while MCP is documented as read-only.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "\"For all such queries, Netdata responses return cardinality information (much like the NIDL charts on your Netdata dashboard), so the AI assistant could get a much better picture instead of sampling data.\"",
+      "\"Answering \\\"check your MCP tools, features, functions\\\" is usually enough for the AI assistant to check the available features and start using them.\"",
+      "\"So instead of saying \\\"check the performance of my production db\\\", you can say \\\"use netdata to check the performance of my production db\\\".\"",
+      "\"Our advice is to use AI assistants to do \\\"your laundry\\\": Give them specific tasks, check the queries they did to get that information, and when possible ask them to cross-check their answers using a different tool/source.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The input is documented as a single fleet-wide Cloud endpoint with one official list of 13 tools. The local Agent/Parent server and Netdata Cloud's outbound MCP Connections are separate variants/features.",
+    "sources": [
+      "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+      "https://learn.netdata.cloud/docs/netdata-ai/mcp/supported-ai-clients",
+      "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "13",
+    "action_count_comment": "The official product description lists 13 tools at https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description. `actions.json` contains all 13. Official MCP setup docs do not publish their schemas. Third-party listings checked did not expose a competing tool list or additional native tool names; no catalogue-only actions were added.",
+    "actions": [
+      {
+        "tool_name": "list_metrics",
+        "description": "Discover metrics available across monitored nodes.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_metrics_details",
+        "description": "Retrieve details about selected metrics.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_nodes",
+        "description": "Discover nodes connected to the Netdata Cloud space.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_nodes_details",
+        "description": "Retrieve details about selected nodes.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_functions",
+        "description": "Discover live system inspection functions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute_function",
+        "description": "Run a Netdata live function on a connected node.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_metrics",
+        "description": "Query and aggregate time-series metrics.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_correlated_metrics",
+        "description": "Identify metrics correlated with a selected period or issue.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_anomalous_metrics",
+        "description": "Find metrics with anomalous behavior.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_unstable_metrics",
+        "description": "Find metrics with unstable or fluctuating behavior.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_raised_alerts",
+        "description": "List currently raised alerts.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_running_alerts",
+        "description": "List active alert evaluations.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_alert_transitions",
+        "description": "List alert state transitions and history.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No initialize instructions or verbatim hosted tool definitions/schemas were available; the endpoint required authentication and OAuth metadata requests returned 404. The public Netdata repository describes a separate local Agent/Parent MCP server, not the deployed hosted Cloud implementation.",
+    "human_can_agent_cannot": "Netdata users can configure or modify monitoring settings and dynamic configuration in the product; official local MCP documentation explicitly says dynamic configuration is not exposed and MCP is read-only. The hosted Cloud MCP list contains no documented configuration mutation tools. Sources: https://github.com/netdata/netdata/blob/f283c86293a8586f0bf88a1c51b4e8529bdcdbd9/src/web/mcp/README.md and https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+    "sources": [
+      "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description",
+      "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+      "https://mcp.tc/i/netdata",
+      "https://catalog.agentage.io/mcp/io-github-netdata-mcp-server"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The official MCP client guide recommends querying broad metric contexts to avoid sampling; asking the assistant to check its MCP tools when it misses newer features; explicitly telling it to use Netdata; and checking/cross-checking queries and answers. These are recommendations to the client/user, not documented server-enforced rules. Verbatim examples are recorded in D.",
+    "governance_promises": "Official docs describe the MCP integration as read-only and state that dynamic configuration is not exposed. The Cloud setup requires a token with scope:mcp and says it can only access nodes connected to the Cloud space. The complete product description claims Cloud MCP follows the user's Cloud role and requires corresponding permissions for sensitive Functions.",
+    "promises_to_user": "The Cloud endpoint is described as one hosted URL with fleet-wide visibility, requiring no bridge or firewall changes. The documentation states that it uses stateless Streamable HTTP.",
+    "comparison_with_server_logic": "Read-only access and node-space bounds are documented as product behavior, but hosted code and tool annotations were unavailable for verification. Token-scope requirements are documented; OAuth metadata probe results do not expose an authorization server or supported scopes. Behavioral client guidance is documentation-only. Logging, retention, and MCP-specific telemetry claims were not found.",
+    "sources": [
+      "https://learn.netdata.cloud/docs/netdata-ai/mcp",
+      "https://learn.netdata.cloud/docs/netdata-ai/mcp/supported-ai-clients",
+      "https://learn.netdata.cloud/docs/welcome-to-netdata/complete-product-description"
+    ]
+  },
+  "contradictions": [
+    "The official setup docs state that Cloud MCP requests require a Bearer token with scope:mcp, while the provided unauthenticated endpoint probe returned HTTP 401 JSON errorMessage 'no cookie'. The probe did not include a WWW-Authenticate header, and all supplied OAuth metadata endpoints returned 404; the observed response and documented authentication method therefore differ in wording, while both indicate authentication is required.",
+    "The local Agent/Parent README describes an earlier development-preview state in which Cloud MCP was 'not yet available'; current official docs describe the hosted Cloud endpoint as available. This describes different documentation states and server variants; the local README is not used as proof of current Cloud behavior."
+  ],
+  "observations_for_research": [
+    "The hosted endpoint's authentication instructions specify a product API token and scope, while the endpoint-origin OAuth metadata URLs return 404. This distinguishes API-token authorization documentation from publicly discoverable OAuth metadata.",
+    "The official docs separate Netdata as an MCP server for external AI clients from Netdata Cloud acting as an MCP client for other systems; the latter's tool-selection and read-only rules do not establish the hosted Cloud server's tool schemas.",
+    "The documentation publishes tool names in the complete product description but omits their schemas. The endpoint probe was unauthenticated, so parameter details and annotations could not be observed."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/ and the supplied OAuth responses, including official MCP docs, supported-client docs, product description, local server README, pricing, billing, terms, and third-party directory pages. The official Netdata repository is listed at commit f283c86293a8586f0bf88a1c51b4e8529bdcdbd9, but its archive was not downloaded because it exceeded 40 MB; available public evidence concerns the local Agent/Parent implementation, not the deployed Cloud service. MCP.tc says the tool list is only available to authenticated clients. AgentAge's listing labels the server Go, but its catalogue text does not supply native tool schemas. No dedicated Cloud tool-reference page, initialize instructions, tool schemas, token lifetime, revocation details, or MCP-specific privacy/retention statements were found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 10.5
+  }
+}

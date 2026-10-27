@@ -1,0 +1,511 @@
+{
+  "server": "windsor-ai",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.windsor.ai/",
+    "documentation_url_csv": "https://windsor.ai/documentation/windsor-mcp/how-to-connect-windsor-mcp-to-any-ai-client/",
+    "addressing": "global",
+    "repository_url": "https://github.com/windsor-ai/windsor_mcp",
+    "documentation_urls_used": [
+      "https://mcp.windsor.ai/docs",
+      "https://mcp.windsor.ai/llms.txt",
+      "https://mcp.windsor.ai/llms-full.txt",
+      "https://mcp.windsor.ai/datasources",
+      "https://mcp.windsor.ai/actions",
+      "https://windsor.ai/documentation/windsor-mcp/",
+      "https://windsor.ai/documentation/windsor-mcp/how-to-connect-windsor-mcp-to-any-ai-client/",
+      "https://windsor.ai/documentation/windsor-mcp/write-actions/",
+      "https://windsor.ai/pricing/",
+      "https://windsor.ai/privacy-statement/",
+      "https://windsor.ai/terms-of-service/",
+      "https://windsor.ai/security"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official windsor_mcp repository is a discovery and documentation surface. It says the hosted endpoints are authoritative; it does not contain the deployed server implementation. Separate official Claude and Cursor plugins are client integrations, not server source code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "d54108d67a348dd45d4cc519f2dbcac605b10e58",
+    "commit_date": "2026-08-19",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT (public repository); hosted server license NOT FOUND",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp-beta.windsor.ai/ — official beta endpoint, also linked from the hosted reference; distinct tool set or behavior NOT FOUND."
+    ],
+    "sources": [
+      "https://github.com/windsor-ai/windsor_mcp",
+      "https://mcp.windsor.ai/llms-full.txt",
+      "https://mcp-beta.windsor.ai/"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "The vendor describes MCP access as free. Windsor.ai offers a Forever Free plan after a 30-day trial; the page lists paid plans from Basic at $23/month ($19/month annually), Standard at $118/month ($99 annually), Plus at $299/month ($249 annually), and Professional at $598/month ($499 annually); Enterprise is quote-based. The page associates MCP access with Windsor.ai plans but does not specify a separate MCP fee or plan-specific MCP limits.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Forever Free tier; Basic $23/month or $19/month annually; Standard $118/month or $99/month annually; Plus $299/month or $249/month annually; Professional $598/month or $499/month annually; Enterprise quote-based.",
+    "pricing_model_details": "Vendor pricing is subscription-based and varies by plan, including source, account and destination-task limits. Paid subscriptions renew automatically unless cancelled. No separate MCP per-call price is documented.",
+    "other_access_restrictions": "The Forever Free plan lists 1 user, 1 data source and 1 account after the trial. Other plan limits vary. The server requires authentication. Some AI clients may require their own paid plan to use connectors.",
+    "restrictions_controlled_by": "Vendor controls Windsor.ai plan and account access; the AI-client provider controls its own connector access and subscription requirements.",
+    "sources": [
+      "https://windsor.ai/pricing/",
+      "https://windsor.ai/terms-of-service/",
+      "https://mcp.windsor.ai/llms-full.txt"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted reference documents 18 tools, including data reads, connector/account setup links, custom fields, write-action discovery and dispatch, scheduled exports, dashboard links, and a vendor contact tool. A separate official catalog lists 139 connector write actions dispatched through execute_action.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reference describes structured objects, lists, URLs, Markdown links, data results and pending-job objects. Exact runtime result schemas are not published for every tool.",
+      "authorization_mechanism": "Bearer token required; hosted reference describes OAuth 2.0 and Windsor API-key bearer authentication as an alternative.",
+      "authorization_server": "https://mcp.windsor.ai/",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt",
+        "https://mcp.windsor.ai/actions"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public reference exposes HTTP documentation and catalog endpoints, but does not establish that the MCP resources protocol capability is implemented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public reference does not document MCP prompt templates or the prompts protocol capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP logging capability or server logging behavior is documented in the hosted reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt",
+        "https://windsor.ai/privacy-statement/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 and a Bearer challenge with scope=\"create delete\" and protected-resource metadata at https://mcp.windsor.ai/.well-known/oauth-protected-resource. That document lists resource https://mcp.windsor.ai/, authorization server https://mcp.windsor.ai/, scopes_supported [\"create\",\"delete\",\"offline_access\"], and bearer_methods_supported [\"header\"]. Authorization-server metadata lists /authorize, /token and /register; response type code; grants authorization_code and refresh_token; token auth methods none and private_key_jwt; PKCE S256; client_id_metadata_document_supported true; issuer-parameter support true. Token lifetime and revocation are NOT FOUND. Hosted docs additionally describe OAuth proxy URLs on onboard.windsor.ai and API-key bearer auth.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Authentication errors are documented as HTTP 401; detailed JSON-RPC error format is NOT FOUND.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; authorization_code and refresh_token grants; PKCE S256; token endpoint auth methods none and private_key_jwt; scopes_supported: create, delete, offline_access; bearer header. The endpoint challenge requests create delete. Vendor docs also mention API-key bearer authentication.",
+      "authorization_server": "https://mcp.windsor.ai/",
+      "sources": [
+        "https://mcp.windsor.ai/.well-known/oauth-protected-resource",
+        "https://mcp.windsor.ai/.well-known/oauth-authorization-server",
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation flow is documented. Vendor text recommends asking users to confirm before executing write actions; it does not establish server-enforced elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt",
+        "https://windsor.ai/documentation/windsor-mcp/write-actions/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The get_data workflow can return a pending job and be called again to retrieve results, but the reference does not identify this as MCP Tasks protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Pending data pulls are documented with status, job_id, running_seconds and poll_after_seconds; completed pulls return status, data and total_rows.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reference documents client setup and tool parameters, but does not establish an MCP configuration capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reference describes authentication and tool-error cases, but does not specify a dedicated MCP error-reporting capability or complete response format.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool errors are described in prose; exact standardized response format is NOT FOUND.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "get_subscription_url returns a pricing or plan-upgrade link; the user completes checkout in the browser.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Returns a Markdown link string; accepted target_plan values are BASIC, STANDARD, PLUS, PROFESSIONAL and ENTERPRISE.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt",
+        "https://windsor.ai/pricing/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Long data pulls may return pending status and polling timing fields, but MCP progress notifications are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Pending job objects include running_seconds and poll_after_seconds.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP request or job cancellation method is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reference documents Streamable HTTP POST and SSE GET endpoints, plus HTTP documentation and catalog routes. It includes workflow instructions for reads, writes, scheduled exports, connecting accounts and subscription links.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "JSON-RPC 2.0 is documented; endpoint-specific result descriptions appear in the hosted full reference.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.windsor.ai/llms-full.txt"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The hosted tool reference and write-action catalog describe read tools and 139 connector write actions. Public tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are NOT FOUND. 2. Confirmation is recommended to the client: “Confirm intent with the user before invoking.” Server enforcement of confirmation is NOT FOUND. 3. OAuth metadata scopes are create, delete and offline_access; endpoint challenge requests create delete. Docs say connected platform accounts and user authorization govern access. Admin switches, token lifetime, revocation and client allowlists are NOT FOUND. 4. Streamable HTTP and SSE are documented; beta endpoint exists. Read-only mode, tool filters and region variants are NOT FOUND. 5. The docs instruct clients not to ask users to paste credentials into chat and to use connect forms. General PII masking and field exclusions are NOT FOUND. 6. get_data defaults to the last 3 days when no dates are given; cached recent data may be refreshed only on eligible plans. Long pulls can take up to an hour. Pricing limits vary by plan. General rate limits and response truncation are NOT FOUND. 7. The docs specify typed parameters, filter operators and connector-specific schemas; runtime unknown-argument handling, coercion and parameter overriding are NOT FOUND. 8. Vendor privacy and security pages describe processing and security commitments; MCP-specific logging, audit trail details and telemetry defaults are NOT FOUND. 9. contact_windsor sends feedback, support or feature requests to the vendor. get_subscription_url returns pricing/upgrade links. Marketing or upsell result messages are NOT FOUND. 10. Hosted reference carries workflow instructions; docs recommend, but do not establish server enforcement of, user confirmation before writes. Separate official Claude and Cursor plugins provide client-side integrations. 11. Persistence is documented for created custom fields and scheduled destination tasks; whether past agent behavior changes future results or tool availability is NOT FOUND. 12. A global hosted endpoint has separate read and write workflows; beta endpoint is separately listed. No nested MCP server architecture is documented. 13. execute_action dispatches named connector actions. A Meta ad-set schema also documents extra_params for further Meta Graph API fields, making that action a partial escape hatch; no universal raw API or SQL tool is listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] “Confirm intent with the user before invoking.”",
+      "[DOCS] “Never ask for secrets in chat; they are entered in that form.”",
+      "[DOCS] “Whenever an analytical answer ends with a recommendation to change something on a connected platform (pause or enable a campaign, ad set, or ad, create a new one, raise or lower a budget, etc.) — do not stop at describing the change in prose. Offer to execute it.”",
+      "[DOCS] “Use this proactively whenever your analysis is about to recommend a change on a connected platform.”",
+      "[DOCS] “The user completes any checkout themselves in their browser.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "A global hosted MCP endpoint with a flat documented list of tools, including a generic dispatcher for connector write actions. A separately listed beta hostname does not by itself establish a different server structure.",
+    "sources": [
+      "https://mcp.windsor.ai/llms-full.txt",
+      "https://mcp.windsor.ai/actions",
+      "https://windsor.ai/documentation/windsor-mcp/write-actions/",
+      "https://windsor.ai/privacy-statement/",
+      "https://windsor.ai/security"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "18 MCP tools; 139 connector write actions",
+    "action_count_comment": "The official hosted reference at https://mcp.windsor.ai/llms-full.txt names 18 MCP tools. The official write-action page and https://mcp.windsor.ai/actions report 139 actions across 19 connectors; these are dispatched through execute_action, not separate MCP tools, so they are not counted as distinct tools here. No third-party catalogue supplied an additional tool list. mcp.so reports no tool list; mcpyet describes the endpoint but does not enumerate tools; the Claude connector listing is third-party and does not provide an additional native tool list.",
+    "actions": [
+      {
+        "tool_name": "get_current_user",
+        "description": "Return the authenticated user's profile. Useful as a sanity check that the auth token is working and to greet the user by name.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_connectors",
+        "description": "List Windsor.ai connectors, their connected accounts, the write actions each connector supports, and the read options each exposes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_connector_connect_info",
+        "description": "Describe how to grant access to a connector, including the auth type, direct connect URL, and any manual credential fields. Use this for connect,…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_connector_authorization_url",
+        "description": "Returns a URL the user can open in their browser to set up a connector. Handles both OAuth-based and manual-credential connectors. Use this for…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_subscription_url",
+        "description": "Returns a clickable Markdown link to the Windsor.ai pricing page, or to a specific plan's upgrade page when `target_plan` is given. The user completes…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_options",
+        "description": "List available fields, date filter columns, and connector-specific options.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_fields",
+        "description": "Get detailed descriptions, types and tables for specific fields.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_data",
+        "description": "Retrieve data from a connector. The most powerful tool — supports date ranges, account filtering, custom field filters, and connector-specific options.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_custom_fields",
+        "description": "List the custom (formula) fields the user has defined across connectors.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_custom_field",
+        "description": "Create a custom (formula) field on a connector — a calculated metric or dimension computed from the connector's existing fields, e.g. CPA or spend…",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_actions",
+        "description": "Discover write operations a connector exposes. The connectors with write actions today: - Meta Ads (`facebook`) — `create_campaign`, `enable_campaign`, `pause_campaign`, `update_campaign`, `set_campaign_budget`, `create_adset`, `enable_adset`,…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute_action",
+        "description": "Execute a write action against a specific connector account — for example creating, pausing, or enabling a campaign, ad set, or ad, or setting…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_destinations",
+        "description": "List destinations that can receive a scheduled export of connector data, such as BigQuery, Google Sheets, Snowflake, databases, and cloud storage.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_destination_tasks",
+        "description": "List the scheduled export tasks the user has already created.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_destination_setup_info",
+        "description": "Describe how to set up a scheduled export to one destination.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_destination_task",
+        "description": "Create a recurring export of a connector's data to a destination.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_windsor_login_url",
+        "description": "Return a URL into the Windsor.ai dashboard. The user's own browser session signs them in; if it has expired they are asked to sign…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "contact_windsor",
+        "description": "Send feedback, a support request, or a feature request to Windsor.ai.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.windsor.ai/llms-full.txt",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The public repository has no server implementation or verbatim initialize output; hosted docs describe tools but do not reproduce the complete runtime tool definitions and initialization instructions as JSON.",
+    "human_can_agent_cannot": "Users can configure and manage Windsor.ai accounts, connected sources and plan settings through the vendor dashboard. The hosted reference documents a login URL tool but does not show MCP tools for all dashboard administration, billing changes or account management. The REST API documentation describes additional API surfaces; REST-only operations are not treated as MCP tools. Sources: https://windsor.ai/api-documentation/ ; https://mcp.windsor.ai/llms-full.txt",
+    "sources": [
+      "https://mcp.windsor.ai/llms-full.txt",
+      "https://mcp.windsor.ai/actions",
+      "https://windsor.ai/documentation/windsor-mcp/write-actions/",
+      "https://mcp.so/servers/windsor-ai",
+      "https://mcpyet.com/mcp/windsor-ai/",
+      "https://claude.com/connectors/windsor-ai"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The reference recommends client-side confirmation before writes and instructs clients to route connection requests through vendor connect links rather than collecting credentials in chat. It also encourages clients to offer write actions when analysis suggests platform changes. These are documented instructions; no public server implementation establishes that the server enforces them.",
+    "governance_promises": "Vendor privacy and security pages describe personal-data processing and SOC 2 Type II controls, including encryption in transit and at rest. The public materials reviewed do not specify MCP-specific retention, request logging, AI training use or audit records.",
+    "promises_to_user": "The vendor describes the MCP server as free, compatible with MCP clients, and capable of accessing connected data sources; its write-action page says actions are reversible where the platform allows it. Tool descriptions also identify particular irreversible or externally visible operations.",
+    "comparison_with_server_logic": "The confirm-before-write rule is text directed to clients, not evidenced as server enforcement. OAuth and authenticated connector access are documented, while the reviewed material does not specify MCP-specific logging, retention or telemetry behavior. Reversibility is qualified by the target platform and action; some tool descriptions explicitly state that an operation cannot be undone through an action.",
+    "sources": [
+      "https://windsor.ai/privacy-statement/",
+      "https://windsor.ai/security",
+      "https://windsor.ai/documentation/windsor-mcp/write-actions/",
+      "https://mcp.windsor.ai/llms-full.txt",
+      "https://windsor.ai/pricing/"
+    ]
+  },
+  "contradictions": [
+    "OAuth metadata at https://mcp.windsor.ai/.well-known/oauth-authorization-server lists authorization_endpoint https://mcp.windsor.ai/authorize and token_endpoint https://mcp.windsor.ai/token; the hosted full reference describes proxied authorization and token URLs at https://onboard.windsor.ai/oauth/authorize and https://onboard.windsor.ai/oauth/token.",
+    "The endpoint challenge requests scopes create delete, while protected-resource and authorization-server metadata list create, delete and offline_access as supported scopes. The documented tool surface includes updates and other writes as well as create/delete operations; the meaning and enforcement of these broad scopes are not explained.",
+    "The hosted reference says connector write actions are discovered dynamically and lists 139 operations, while the MCP tool list has a single generic execute_action dispatcher. These counts describe different levels of the interface."
+  ],
+  "observations_for_research": [
+    "One generic MCP dispatcher exposes many connector-specific write operations whose schemas are fetched at runtime through list_actions.",
+    "The published 139-action catalog is distinct from the MCP tools/list inventory and varies with the connectors a user has connected.",
+    "The reference couples data reads to discovery tools for connector options and field metadata, and documents polling by repeating get_data for long-running pulls.",
+    "The documented write-confirmation rule is addressed to the AI client; the published evidence does not show a server-side approval gate."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Inspected the prepared links.json, pages/INDEX.txt, hosted reference pages, official docs, pricing and legal pages, plausibility-check file, and local copies of the official GitHub repositories. The official windsor_mcp repository contains documentation and a license but no runtime server implementation; its commit is recorded above. Unofficial repositories were not used as evidence. Catalogue pages were checked for additional tool names; none supplied a distinct native tool inventory. Exact hosted initialization text, MCP protocol version, SDK version, tool annotations, token expiry/revocation, logging details and MCP-specific retention were not found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.3
+  }
+}

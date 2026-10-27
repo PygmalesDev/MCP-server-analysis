@@ -1,0 +1,484 @@
+{
+  "server": "descrybe-legal-engine",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.descrybe.com/mcp",
+    "documentation_url_csv": "https://app.descrybe.com/connect",
+    "addressing": "global",
+    "repository_url": "https://github.com/descrybe-com/descrybe-legal-engine-python",
+    "documentation_urls_used": [
+      "https://app.descrybe.com/connect",
+      "https://descrybe.com/user-guide/open-connector",
+      "https://descrybe.com/user-guide/claude-connector",
+      "https://descrybe.com/user-guide/chatgpt-connector",
+      "https://descrybe.com/user-guide/copilot-connector",
+      "https://descrybe.com/user-guide/perplexity-connector",
+      "https://descrybe.com/user-guide/claude-code",
+      "https://descrybe.com/user-guide/release-notes",
+      "https://descrybe.com/legal/terms",
+      "https://descrybe.com/legal/privacy",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/SECURITY_MODEL.md",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/SERVICE_ACCESS.md",
+      "https://claude.com/connectors/descrybe-legal-engine",
+      "https://manufact.com/mcp-catalog/descrybe-legal-engine"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repository is the Apache-2.0 Python Open Connector SDK and client for calling the hosted MCP service. It is not the server implementation. Its tool reference documents a baseline list for connected users; the SDK says to use `dle list-tools` for an account's live list.",
+    "mcp_protocol_version": "2025-11-25 reported by Manufact for the hosted endpoint; the public SDK client sends protocolVersion 2025-06-18 during initialize.",
+    "commit_hash": "d93702c24de804a483320a632d72de464cdeadfa",
+    "commit_date": "2026-09-13",
+    "implementation_language": "Hosted server: NOT FOUND. Public SDK: Python.",
+    "mcp_sdk_and_version": "Hosted server: NOT FOUND. Public SDK: custom Streamable HTTP JSON-RPC client; no MCP SDK dependency declared.",
+    "code_public": "Partially",
+    "license": "Hosted server: NOT FOUND. Public SDK: Apache-2.0.",
+    "release_status": "Hosted server: NOT FOUND. Public SDK: first public alpha release (version 0.1.0).",
+    "other_official_servers": [
+      "Descrybe documents connectors for ChatGPT, Claude, Microsoft 365 Copilot, and Perplexity. The pages describe supported client integrations; they do not identify distinct endpoint URLs or separate tool sets.",
+      "The official Open Connector Python package is a client for the hosted endpoint, not a separate server."
+    ],
+    "sources": [
+      "https://mcp.descrybe.com/mcp",
+      "https://app.descrybe.com/connect",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/d93702c24de804a483320a632d72de464cdeadfa/src/descrybe_legal_engine/mcp.py#L80-L159",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/d93702c24de804a483320a632d72de464cdeadfa/pyproject.toml"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "The vendor advertises Legal Engine at $25/month, with a first-month $12.50 promotion on the consulted page. The subscription covers supported assistants; the vendor says there are no per-search charges or AI add-on fees. MCP access requires an account with Legal Engine or Platform access.",
+    "linked_software": "Open source + paid cloud",
+    "linked_software_cost": "The Python SDK is Apache-2.0. Hosted service access requires an applicable subscription or entitlement. The public connector page lists $25/month and a first month at $12.50; terms say rates are those shown at purchase.",
+    "pricing_model_details": "Flat monthly subscription advertised for supported assistants; no per-search or per-question AI fees advertised. Subscription renews monthly unless cancelled; the page says access continues through the paid month. Organization-sponsored access is also mentioned. Claude, ChatGPT, Microsoft 365, and Perplexity subscriptions or access are separate.",
+    "other_access_restrictions": "OAuth consent and a Descrybe account with an active Legal Engine or Platform entitlement are required. Vendor SDK guidance says each human user should connect their own account. Microsoft connector availability also depends on Microsoft 365 plan and administrator settings; Perplexity custom connectors and other client features depend on the client.",
+    "restrictions_controlled_by": "Vendor controls Descrybe account entitlements and rate limits; organization administrators control some client-side availability, including Microsoft partner Sources. Users authorize their own Descrybe accounts.",
+    "sources": [
+      "https://app.descrybe.com/connect",
+      "https://descrybe.com/user-guide/open-connector",
+      "https://descrybe.com/user-guide/claude-connector",
+      "https://descrybe.com/user-guide/copilot-connector",
+      "https://descrybe.com/user-guide/perplexity-connector",
+      "https://descrybe.com/legal/terms",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/d93702c24de804a483320a632d72de464cdeadfa/SERVICE_ACCESS.md"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP; Manufact reports protocol version 2025-11-25.",
+      "description_what_how": "Official vendor material names 13 baseline research tools. The tool reference says the account-specific live list can be obtained with `dle list-tools`. The server checks legal questions, searches U.S. primary law, resolves and extracts case references, retrieves case information, and verifies quotes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Third-party Manufact snapshot shows tools/list capability, descriptions, input/output schemas, and behavior annotations. Official documentation describes MCP tool errors and result purposes; actual deployed response payloads were not available for direct inspection.",
+      "authorization_mechanism": "Bearer token in Authorization header, supported by protected-resource metadata. The metadata names authorization server https://api.descrybe.com, registration endpoint https://api.descrybe.com/oauth/register, authorization code and refresh-token grants, PKCE S256, token endpoint auth methods none/client_secret_basic/client_secret_post, and scopes_supported [\"connect:mcp:read\"]. Token lifetime and revocation metadata were not supplied.",
+      "authorization_server": "https://api.descrybe.com",
+      "sources": [
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "https://app.descrybe.com/connect",
+        "https://manufact.com/mcp-catalog/descrybe-legal-engine",
+        "https://mcp.descrybe.com/.well-known/oauth-protected-resource",
+        "https://mcp.descrybe.com/.well-known/oauth-protected-resource/mcp",
+        "https://api.descrybe.com/.well-known/oauth-authorization-server",
+        "https://api.descrybe.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Hosted documentation and the reviewed tool catalogue describe tools, but do not establish whether the endpoint exposes MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://app.descrybe.com/connect",
+        "https://manufact.com/mcp-catalog/descrybe-legal-engine"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No official prompt-list documentation or public server code was found. An external SDK repository supplies agent instructions as a file, which is not evidence of MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/descrybe-com/descrybe-legal-engine-python",
+        "https://app.descrybe.com/connect"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Vendor SDK materials refer to per-user attribution and audit logs, but do not document the hosted server's logging implementation, contents, retention, or opt-out.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/src/descrybe_legal_engine/templates/DESCRYBE_LEGAL_ENGINE.md",
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/SECURITY_MODEL.md"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation or server code establishes MCP sampling support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://app.descrybe.com/connect",
+        "https://manufact.com/mcp-catalog/descrybe-legal-engine"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation or server code establishes MCP roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://app.descrybe.com/connect",
+        "https://manufact.com/mcp-catalog/descrybe-legal-engine"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth metadata supplied for the endpoint on 2026-10-27.",
+      "description_what_how": "Protected-resource metadata identifies resource https://mcp.descrybe.com/mcp, authorization server https://api.descrybe.com, bearer header authentication, and scope connect:mcp:read. Authorization-server metadata lists code and refresh-token grants, PKCE S256, DCR, and supported token endpoint authentication methods. Endpoint POST evidence was HTTP 400, “Invalid Content-Type header”; no WWW-Authenticate header was supplied.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth authorization code and refresh-token flow are advertised. Token lifetime and revocation endpoint are not included in supplied metadata.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://api.descrybe.com/oauth/register; authorization_code and refresh_token grants; PKCE S256; token endpoint auth methods none, client_secret_basic, client_secret_post; full scopes_supported list: connect:mcp:read. The issuer response contains no token lifetime or revocation endpoint.",
+      "authorization_server": "https://api.descrybe.com",
+      "sources": [
+        "https://mcp.descrybe.com/.well-known/oauth-protected-resource",
+        "https://mcp.descrybe.com/.well-known/oauth-protected-resource/mcp",
+        "https://api.descrybe.com/.well-known/oauth-authorization-server",
+        "https://api.descrybe.com/.well-known/openid-configuration",
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/src/descrybe_legal_engine/auth.py"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The `analyze_legal_question` tool may return clarifying questions, but the material does not show MCP Elicitation protocol support. Vendor guidance says the client should ask the user when results require clarification.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The analysis tool's documented outcomes include readiness or a need for clarification; Manufact's catalogue shows a clarifying_questions field in its reported output schema.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "https://manufact.com/mcp-catalog/descrybe-legal-engine"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The `get_case_pdf` description allows job metadata or preparation status, but no evidence establishes MCP Tasks protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "PDF tool may return URL or job metadata; its schema and asynchronous behavior have not been verified against the endpoint.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "https://manufact.com/mcp-catalog/descrybe-legal-engine"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The Python SDK has local URL, timeout, and scope configuration. That does not establish configuration controls implemented by the hosted MCP server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/src/descrybe_legal_engine/config.py",
+        "https://app.descrybe.com/connect"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The SDK converts MCP tool errors and HTTP 429 responses into typed exceptions. No separate hosted error-reporting capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "SDK handles JSON-RPC errors and tool results with isError; it extracts error text and structured error fields. This describes the client, not the server's complete error formats.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/src/descrybe_legal_engine/mcp.py"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "A subscription is required for service entitlement, but the material does not show an MCP subscription capability or protocol feature.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://app.descrybe.com/connect",
+        "https://descrybe.com/legal/terms"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "PDF documentation mentions possible job metadata or preparation status but does not document MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation or server code establishes MCP cancellation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://app.descrybe.com/connect",
+        "https://manufact.com/mcp-catalog/descrybe-legal-engine"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Server-instruction text reported by third-party catalogue; initialize output not independently retrieved.",
+      "description_what_how": "Manufact's endpoint review displays server instructions for tool selection and user clarification. The same text is presented as server metadata, but the endpoint's initialize response was not captured independently. The public SDK also distributes a separate agent instruction file; it is not established as server-delivered context.",
+      "pre_interaction_context_verbatim": "“Descrybe Legal Engine provides read-only access to structured U.S. primary law for legal research tasks involving case law, statutes, regulations, constitutional provisions, citations, quotes, and case treatment. Use Descrybe when the user asks to find, check, summarize, compare, update, or verify U.S. legal authorities. Use search_cases_by_concept for issue-based or fact-pattern case research, search_case_text for exact words or phrases in opinions, find_case_from_reference for citations, case names, party names, captions, or docket numbers, and search_laws_and_rules for non-case primary law. When a Descrybe case_id is known, use the case-specific tools for summaries, passages, details, treatment, citing cases, quote verification, or PDFs. If a result indicates ambiguity, missing input, unsupported coverage, or asks for user selection or query refinement, briefly ask the user for that information before continuing. Treat Descrybe results as legal research support, not legal advice, and preserve any coverage limits or uncertainty returned by the tools.”",
+      "post_interaction_context_structure": "Manufact reports server instructions and tools capability. The hosted endpoint's initialize response was not independently captured.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://manufact.com/mcp-catalog/descrybe-legal-engine",
+        "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/src/descrybe_legal_engine/templates/DESCRYBE_LEGAL_ENGINE.md"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The vendor describes access as read-only. The third-party Manufact tool snapshot reports readOnlyHint=true, destructiveHint=false, idempotentHint=true, and openWorldHint=false on tools; these annotations are catalogue evidence, not a direct endpoint capture. 2. No server-enforced confirmation flow is documented. The question-analysis tool can return clarifying questions; guidance to ask the user is client-facing. 3. OAuth scope is connect:mcp:read. Vendor SDK guidance requires per-human-user OAuth and says usage, entitlements, rate limits, and audit logs should remain attributable to that user. Inheritance of product roles, admin switches for this endpoint, redirect-URI approval, token expiry, and server-side revocation are not specified in the supplied metadata. 4. No endpoint-level read-only toggle, toolset filter, query-free mode, or region-specific variant is documented. All listed actions are read-only. Client product availability can depend on Microsoft tenant settings and client plans. 5. The vendor states that the connector receives focused requests and authorization, not the entire assistant conversation or unrelated chat/account data. The terms define customer content broadly and permit processing to provide, secure, maintain, troubleshoot, improve services, prevent abuse, and comply with law; no MCP-specific field masking is documented. 6. Tool-reference guidance gives rate-limit handling recommendations, including respecting retry_after_seconds, stopping queued calls for that user, and not evading limits. Exact quota, rate, result-size, and cost-per-call caps are not documented. `get_case_passages` is described as a small ranked list, not a full-opinion fetch. 7. The public SDK sends tool arguments through without documented server-side correction. Manufact reports input schemas with additionalProperties=false; no direct endpoint validation test was performed. 8. SDK documentation refers to per-user audit logs, but server logging content, retention, telemetry, and opt-out are not described. 9. The reviewed list contains no feedback, rating, survey, or report tools; no upsell behavior in results was found in reviewed material. 10. Hosted instructions reported by Manufact steer tool selection, asking the user for missing input, and preserving uncertainty. Official tool-reference descriptions also include recommendations (e.g. use concept search first; resolve a case before known-case tools). The public SDK separately distributes coding-agent integration instructions; these are not shown as server-enforced rules. 11. No agent-memory mechanism is documented. `get_case_pdf` may create or reuse an asset; persistence behavior beyond that is unknown. 12. One hosted endpoint and one flat 13-tool list are documented; no subservers or proxy hierarchy found. 13. No raw API, arbitrary SQL, script execution, or generic request tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[THIRD-PARTY Manufact, 2026-10; displayed as server instructions] “Use Descrybe when the user asks to find, check, summarize, compare, update, or verify U.S. legal authorities.”",
+      "[THIRD-PARTY Manufact, 2026-10; displayed as server instructions] “If a result indicates ambiguity, missing input, unsupported coverage, or asks for user selection or query refinement, briefly ask the user for that information before continuing.”",
+      "[THIRD-PARTY Manufact, 2026-10; displayed as server instructions] “Treat Descrybe results as legal research support, not legal advice, and preserve any coverage limits or uncertainty returned by the tools.”",
+      "[OFFICIAL TOOL REFERENCE] “Use this first for case-law research by legal issue, doctrine, rule, claim, defense, fact pattern, or topic.”",
+      "[OFFICIAL TOOL REFERENCE] “Resolve the case to a case_id before calling this tool.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "A single hosted endpoint with a documented flat list of 13 tools; no hierarchy or subserver structure was found.",
+    "sources": [
+      "https://manufact.com/mcp-catalog/descrybe-legal-engine",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/src/descrybe_legal_engine/templates/DESCRYBE_LEGAL_ENGINE.md",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/SECURITY_MODEL.md",
+      "https://app.descrybe.com/connect",
+      "https://descrybe.com/legal/terms"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "13",
+    "action_count_comment": "The official GitHub tool reference lists 13 baseline tools; the vendor connect page also states 13 research tools. Claude's connector directory and Manufact each report the same 13 names. The account-specific live list may differ; the vendor directs users to `dle list-tools`. No catalogue-only actions were added. `actions.json` contains all 13 official names.",
+    "actions": [
+      {
+        "tool_name": "analyze_legal_question",
+        "description": "Assess whether a broad or fact-dependent legal question is ready for legal research.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_cases_by_concept",
+        "description": "Find cases by legal issue, doctrine, rule, claim, defense, fact pattern, or topic.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "term: string (required); jurisdiction: string (optional); sort: string (optional; enum 2 categories); search_focus: string (optional; enum 2 categories)",
+        "parameter_count": 4,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_laws_and_rules",
+        "description": "Search statutes, regulations, and constitutional provisions by concept, citation, or topic.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "term: string (required); jurisdiction: string (optional); doc_type: string (optional; enum 4 categories)",
+        "parameter_count": 3,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_case_text",
+        "description": "Search judicial opinions for exact words, phrases, quotes, numbers, or uncommon wording.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "term: string (required); jurisdiction: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_case_from_reference",
+        "description": "Resolve citations, case names, docket numbers, short cites, quotes, or mixed references.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "reference: string (required); jurisdiction: string (optional); year: integer (optional); court_hint: string (optional); docket_hint: string (optional); quote_hint: string (optional); context_text: string (optional)",
+        "parameter_count": 7,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "extract_case_references",
+        "description": "Extract and optionally resolve case citations and references from legal text.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "text: string (required); resolve: boolean (optional); section_policy: string (optional; enum 2 categories); max_references: integer (optional)",
+        "parameter_count": 4,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_case_summary",
+        "description": "Retrieve the precomputed standard or simplified summary for a known case.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "case_id: string (required); simplified: boolean (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_case_passages",
+        "description": "Retrieve focused passages from a known case; this is not a full-opinion fetch.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "case_id: string (required); focus: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_case_details",
+        "description": "Retrieve case metadata, summary availability, opinion inventory, and treatment summary.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "case_id: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "check_case_status",
+        "description": "Check a known case for a quick later-treatment/status signal.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "case_id: string (required); court: string (optional)",
+        "parameter_count": 2,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_cases_that_cite",
+        "description": "Find later cases that cite, treat, follow, distinguish, or discuss a known case.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "case_id: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "verify_quote",
+        "description": "Verify whether quoted language appears in a known case.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "case_id: string (required); quote: string (required)",
+        "parameter_count": 2,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_case_pdf",
+        "description": "Create or reuse a generated case PDF asset and return its URL or job metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "case_id: string (required)",
+        "parameter_count": 1,
+        "source": "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The deployed server's complete tool definitions and initialize instructions were not independently captured. The public repository is a client SDK, not the deployed server implementation; catalogue-rendered metadata is not substituted for a direct full endpoint capture.",
+    "human_can_agent_cannot": "The documented MCP tools do not provide the broader Descrybe Platform functions mentioned by the vendor, such as DescrybeLM Research, Descrybe Review, saved work, or in-product source review. `get_case_passages` is explicitly not a full-opinion fetch, and the tool reference says `get_case_pdf` returns a public URL or job metadata rather than PDF bytes. The client can present the URL for human review. Sources: https://app.descrybe.com/connect ; https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md ; https://descrybe.com/user-guide/what-is-descrybe-platform",
+    "sources": [
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+      "https://app.descrybe.com/connect",
+      "https://claude.com/connectors/descrybe-legal-engine",
+      "https://manufact.com/mcp-catalog/descrybe-legal-engine"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The official tool reference recommends `search_cases_by_concept` first for issue-based case research; using `find_case_from_reference` before known-case tools when only a citation/name/docket is known; preferring standard summaries for legal fidelity; and resolving to `case_id` before quote verification. The SDK reference says on rate limits to stop queued calls, respect the supplied delay, resume sequentially with smaller batches, and not switch tools, sessions, profiles, or users to evade a limit. These are client instructions; no server enforcement is evidenced.",
+    "governance_promises": "The vendor connect page says Descrybe “does not receive your entire AI-assistant conversation” and says it receives focused research requests and authorization, not unrelated chat history or general assistant-account data. Terms say Customer Content is not used to train Descrybe-owned models and third-party AI providers are not authorized to train general-purpose models on it; the same terms permit processing for service provision, security, maintenance, troubleshooting, improvement, abuse prevention, and legal compliance. Terms also restrict shared credentials and pooled access absent written consent.",
+    "promises_to_user": "The vendor advertises structured U.S. primary-law sources, authority-ranked results, focused passages and summaries, citation resolution, quote verification, and case-treatment checks. The connect page says one subscription supports the listed assistants and advertises no per-search or AI add-on fees. Terms warn that outputs may be incomplete or erroneous and are not a substitute for reading underlying authority or exercising professional judgment.",
+    "comparison_with_server_logic": "The scope and read-only character of the available tools align with the connector's research-only description. Per-user OAuth and the single read scope are evidenced by metadata and official SDK guidance, but hosted role inheritance, server audit implementation, data deletion/retention, and internal processing are not established by the materials reviewed. Recommendations about tool choice, backoff, and clarifying questions are guidance rather than proven server-enforced rules. Vendor output limitations are expressly stated in the terms.",
+    "sources": [
+      "https://app.descrybe.com/connect",
+      "https://descrybe.com/legal/terms",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/TOOL_REFERENCE.md",
+      "https://github.com/descrybe-com/descrybe-legal-engine-python/blob/main/docs/SECURITY_MODEL.md",
+      "https://mcp.descrybe.com/.well-known/oauth-protected-resource",
+      "https://api.descrybe.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "contradictions": [
+    "The public SDK sends `protocolVersion` 2025-06-18 during initialize, while Manufact reports protocol version 2025-11-25 for the hosted endpoint. The endpoint's negotiated initialize response was not independently captured, so this may reflect client/server version differences.",
+    "The public tool reference calls its 13-tool list a baseline and says the live account-specific list may differ; vendor marketing and catalogues report 13 tools without describing account-level variation."
+  ],
+  "observations_for_research": [
+    "The OAuth scope is read-oriented and matches the vendor's read-only description of the research connector.",
+    "The server's reported instructions and tool descriptions guide agents toward particular research workflows and user clarification, while available public evidence does not show server enforcement of those recommendations."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ and the local official repository snapshot. The public repository is an SDK/client and agent-guidance package, not deployed server code; therefore its client behavior is not attributed to the hosted endpoint. Official tool names came from the vendor tool reference and are corroborated by the vendor connect page, Claude directory, and catalogues. Manufact supplies reported schemas, annotations, server instructions, and protocol version; those catalogue facts are labelled as third-party and were not independently captured from a successful endpoint initialize/tools/list call. Pricing is from the vendor's connect page. Privacy statements cited from official connect page and terms; a separate privacy-policy page was not separately analyzed. Unofficial servers were not used.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.4
+  }
+}

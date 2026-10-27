@@ -1,0 +1,592 @@
+{
+  "server": "microsoft-fabric",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://api.fabric.microsoft.com/v1/mcp/core",
+    "documentation_url_csv": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/microsoft/mcp",
+    "documentation_urls_used": [
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+      "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/what-is-fabric-mcp-server",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/fabric-mcp-servers-list",
+      "https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/",
+      "https://www.microsoft.com/en-us/privacy/privacystatement"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official microsoft/mcp repository contains a separately documented, local-first Fabric MCP server. Microsoft distinguishes it from the hosted Core endpoint: the local server runs as a subprocess and includes documentation, OneLake, core, and Data Factory tools. Its tools are not included in this endpoint's action list. The repository archive was not available in the evidence folder, so its implementation was not analyzed locally.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "150473f1fcfb928445381d0b328df6ee9795735e",
+    "commit_date": "2026-10-26",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "N/A (hosted implementation is closed; the separate local repository is not the deployed server)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Microsoft documents a separate local Fabric MCP Server for API documentation, OneLake, core Fabric, and Data Factory workflows. It is not the input endpoint. https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/pro-dev-local/overview-local-mcp-server",
+      "Microsoft's Fabric server directory lists other hosted workload-specific servers, including Data Warehouse, Eventhouse, Activator, Operations agent, Fabric IQ, and Power BI Authoring. These are distinct servers with separate documentation and tool sets. https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/fabric-mcp-servers-list",
+      "Microsoft Graph MCP is a separate server that the Core setup guide says can resolve user and group identities by email for permission operations. https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+      "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/pro-dev-local/overview-local-mcp-server",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/fabric-mcp-servers-list",
+      "https://github.com/microsoft/mcp"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The reviewed Microsoft materials do not state a separate fee for connecting to or calling the Core MCP endpoint. They require a Fabric tenant, an Entra ID account with Fabric permissions, and suitable Fabric access. Charges for underlying Fabric capacity may apply.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Fabric capacity is offered pay-as-you-go or by reservation; Microsoft also advertises a free trial. The pricing page's rendered price values were placeholders, so no numeric amount is reported.",
+    "pricing_model_details": "Fabric capacity pricing is based on Capacity Units and capacity SKU; Microsoft describes pay-as-you-go, reservation, a one-minute minimum, and possible overage charges. No MCP-specific per-call price, quota, or credit cost was found.",
+    "other_access_restrictions": "Requires an active Fabric tenant, an MCP host supporting Streamable HTTP and the Microsoft Entra ID flow, and an account with Fabric permissions. Workspace creation can be restricted by organization roles. The documentation does not identify an endpoint-specific client allowlist, beta flag, or rate limit.",
+    "restrictions_controlled_by": "Microsoft controls endpoint availability and the OAuth resource; organization administrators and Fabric RBAC determine tenant and user permissions; the MCP host controls its own transport/authentication support and approval settings.",
+    "sources": [
+      "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+      "https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Microsoft's official Core tools reference names 29 tools covering catalog search; workspaces and workspace roles; items and item definitions; bulk item movement; folders; capacities; operation status and results; and item-type guidance. It says each tool maps to a Fabric REST API operation and includes input validation and error handling. The reference does not publish input schemas or annotations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific result and error schemas are NOT FOUND in the available official reference. The endpoint's unauthenticated response was HTTP 401 with JSON errorCode TokenIsMissing, message Access token is required, and isRetriable false.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "https://api.fabric.microsoft.com/v1/mcp/core"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted Core documentation describes tools and API operations but does not document MCP resources or their listing. The endpoint could not be queried for an authenticated MCP capability list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The setup and tools documentation provides example user prompts, but does not state that the server implements MCP prompts or expose prompt definitions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core",
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Microsoft says Fabric records supported Core operations in audit logs under the identity that executes the operation. Documentation does not specify that every MCP tool call is logged, nor describe MCP-specific diagnostic or telemetry fields.",
+      "pre_interaction_context_verbatim": "\"Fabric records supported operations in audit logs using the identity that executes them.\"",
+      "post_interaction_context_structure": "Fabric audit events for supported operations; exact event coverage and event fields are not specified in the Core MCP overview.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/what-is-fabric-mcp-server"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted endpoint documentation does not discuss MCP sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted endpoint documentation does not discuss MCP roots.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 and WWW-Authenticate Bearer error=\"invalid_request\" with resource_metadata pointing to https://api.fabric.microsoft.com/.well-known/oauth-protected-resource/v1/mcp/core. That metadata returned HTTP 200: issuer and authorization server https://login.microsoftonline.com/organizations/v2.0; resource https://api.fabric.microsoft.com; scopes_supported contains https://api.fabric.microsoft.com/.default. Microsoft documents OAuth 2.0 Bearer Token authentication via Microsoft Entra ID. The origin-level protected-resource URL and the two provided authorization-server metadata URLs returned 404. No DCR, PKCE, grant types, token auth methods, lifetime, or revocation facts were present in the supplied metadata.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer error=\"invalid_request\", resource_metadata=\"https://api.fabric.microsoft.com/.well-known/oauth-protected-resource/v1/mcp/core\"\n{\"requestId\":\"233450fa-debb-4513-aeb2-e8c174de26e6\",\"errorCode\":\"TokenIsMissing\",\"message\":\"Access token is required\",\"isRetriable\":false}",
+      "post_interaction_context_structure": "Unauthenticated call response: HTTP 401 JSON object with requestId, errorCode, message, and isRetriable. Protected-resource metadata: issuer, authorization_servers, resource, scopes_supported.",
+      "authorization_mechanism": "Metadata Doc and OAuth 2.0 Bearer Token via Microsoft Entra ID. Supplied protected-resource metadata: issuer=https://login.microsoftonline.com/organizations/v2.0; authorization_servers=[https://login.microsoftonline.com/organizations/v2.0]; resource=https://api.fabric.microsoft.com; scopes_supported=[https://api.fabric.microsoft.com/.default]. Endpoint challenge error=\"invalid_request\". Origin metadata returned HTTP 404; supplied authorization-server authorization-metadata and OpenID-configuration URLs returned HTTP 404. DCR, PKCE, grant types, token auth methods, token lifetime, and revocation: NOT FOUND in supplied metadata or reviewed docs.",
+      "authorization_server": "https://login.microsoftonline.com/organizations/v2.0",
+      "sources": [
+        "https://api.fabric.microsoft.com/v1/mcp/core",
+        "https://api.fabric.microsoft.com/.well-known/oauth-protected-resource",
+        "https://api.fabric.microsoft.com/.well-known/oauth-protected-resource/v1/mcp/core",
+        "https://login.microsoftonline.com/.well-known/oauth-authorization-server/organizations/v2.0",
+        "https://login.microsoftonline.com/.well-known/openid-configuration/organizations/v2.0",
+        "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-enforced MCP elicitation or user confirmation flow is documented. Microsoft instead tells operators to review the MCP client's approval settings before allowing state-changing calls.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+        "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tool list includes Fabric operation-state and operation-result tools for long-running Fabric API operations. The docs do not identify these as MCP Tasks protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The docs describe checking an operation ID until its state is Succeeded, then retrieving the result; MCP Tasks support is not established.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The setup guide documents registering a fixed remote URL, Streamable HTTP transport, and OAuth scope. It does not document server URL parameters, headers, toolset filters, or read-only configuration modes.",
+      "pre_interaction_context_verbatim": "\"Transport — Streamable HTTP\"\n\"Auth scope — https://api.fabric.microsoft.com/.default\"",
+      "post_interaction_context_structure": "Client-side connection configuration is documented; server-side tool configuration options are not.",
+      "sources": [
+        "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tools reference states tools include error handling. The unauthenticated endpoint response provides a structured JSON error, but tool-level error formats, reporting tools, and recovery semantics are not documented.",
+      "pre_interaction_context_verbatim": "{\"requestId\":\"233450fa-debb-4513-aeb2-e8c174de26e6\",\"errorCode\":\"TokenIsMissing\",\"message\":\"Access token is required\",\"isRetriable\":false}",
+      "post_interaction_context_structure": "Observed HTTP 401 JSON error fields: requestId, errorCode, message, isRetriable. Authenticated tool error structures are NOT FOUND.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "https://api.fabric.microsoft.com/v1/mcp/core"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is described in the hosted Core documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted tool list includes get_operation_state and get_operation_result for tracking long-running Fabric operations. The docs do not establish MCP protocol progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "An operation ID is used to check status and retrieve a completed result; exact result schema is not published in the tool reference.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The Core tools reference documents checking operation state and retrieving results, but does not document cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No initialize instructions, skills, UI resources, or other MCP extensions are published for the hosted endpoint in the reviewed documentation. Microsoft describes the endpoint as a remote server that calls Fabric APIs using the authenticated identity.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list includes read operations and state-changing operations, including workspace/item/folder deletion and workspace-role grant, update, and removal. The reference publishes no readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations. 2. No server-enforced confirmation parameter, preview/confirm sequence, or elicitation is documented. Microsoft recommends client-side approval review; workspace deletion is described as permanent and irreversible, and folder deletion requires an empty folder. 3. OAuth uses Microsoft Entra ID and the supplied protected-resource metadata lists https://api.fabric.microsoft.com/.default. Operations inherit the authenticated identity's Fabric permissions. Workspace creation may be restricted by organization role. DCR, PKCE, token lifetime/revocation, and client allowlists are Unknown. 4. No read-only endpoint, toolset filter, query-free mode, sandbox/production split, or region-specific Core endpoint was found in reviewed docs. Other Fabric MCP servers are separately listed. 5. No MCP-specific PII masking or field exclusion is documented. Workspace permissions constrain accessible resources; Microsoft says resource-management tools are not general-purpose table query/modification tools. 6. No endpoint-specific quota, rate limit, bulk cap, or truncation policy was found. Underlying Fabric capacity may incur capacity charges. 7. The tools reference says tools include input validation and error handling, but schemas, rejection policy, coercions, and parameter correction are not published. 8. Microsoft says supported Core operations are recorded in Fabric audit logs under the executing identity; exact event coverage and MCP telemetry are not specified. 9. The 29 official tool names contain no feedback, rating, survey, report, or marketing tool. No MCP upsell result or product-preference instruction was found. 10. No hosted server instructions or skills are published. Documentation guidance recommending least privilege and client approvals is not documented as server-enforced. 11. No memory or behavior-dependent capability is documented. 12. The documented Core server is a flat remote tool surface mapping tools to Fabric REST operations. Other workload servers and the local Fabric server are separate endpoints/variants. No nested AI-agent tool is documented. 13. No raw API request, arbitrary SQL, script execution, or universal escape-hatch tool appears in the official Core list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[Official docs; client/operator guidance, not a server instruction] \"Review and apply least-privilege RBAC roles and implement safeguards before deployment.\"",
+      "[Official docs; client/operator guidance, not a server instruction] \"Review agent-generated tool calls and your client's approval settings before allowing changes.\"",
+      "[Official tools reference] \"Run list_workspaces to get the correct workspace ID.\"",
+      "[Official tools reference] \"Folders must be empty before deletion. Move or delete all items within the folder first.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The hosted Core endpoint is documented as a remote endpoint with a flat list of tools mapped to Fabric REST API operations. Microsoft's local server and workload-specific servers are separate products/endpoints, not documented as dynamically loaded subservers of this endpoint.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+      "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/what-is-fabric-mcp-server",
+      "https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/",
+      "https://api.fabric.microsoft.com/.well-known/oauth-protected-resource/v1/mcp/core"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "29",
+    "action_count_comment": "The official tool list exists at https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server and names 29 tools; it states no numeric total. All 29 names are listed in actions.json. No catalogue-only actions were added. The GitHub MCP Registry page points to Microsoft's separate local Fabric server, not the hosted Core endpoint. The ZBS catalogue reports its isolated package probe exited before returning tools, so it supplies no action names. Composio and Agent Discoverability candidate pages returned 404; Claude's candidate page returned 404; no other catalogue tool counts were available.",
+    "actions": [
+      {
+        "tool_name": "search_catalog",
+        "description": "Search the OneLake catalog across workspaces.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_workspaces",
+        "description": "List workspaces available to the identity.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_workspace",
+        "description": "Get details for a workspace.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_workspace",
+        "description": "Create a Fabric workspace.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_workspace",
+        "description": "Change a workspace name or description.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_workspace",
+        "description": "Delete a workspace and its items.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_workspace_role",
+        "description": "Grant a user workspace access.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_workspace_roles",
+        "description": "List workspace role assignments.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_workspace_role",
+        "description": "Get a role assignment.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_workspace_role",
+        "description": "Change a user's workspace role.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_workspace_role",
+        "description": "Remove a user's workspace access.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_items",
+        "description": "List items in a workspace.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_item",
+        "description": "Get item details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_item",
+        "description": "Create an item in a workspace.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_item",
+        "description": "Change an item name or description.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_item",
+        "description": "Delete an item from a workspace.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_item_definition",
+        "description": "Retrieve an item schema or definition.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_item_definition",
+        "description": "Change an item definition or schema.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_move_items",
+        "description": "Move multiple items to a folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_folder",
+        "description": "Create a workspace folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_folders",
+        "description": "List folders in a workspace.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_folder",
+        "description": "Get folder details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_folder",
+        "description": "Rename a folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_folder",
+        "description": "Delete an empty folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move_folder",
+        "description": "Move a folder to a parent folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_capacities",
+        "description": "List accessible Fabric capacities.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_operation_state",
+        "description": "Check a long-running operation status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_operation_result",
+        "description": "Retrieve a completed operation result.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_knowledge",
+        "description": "Retrieve item-type guidelines and best practices.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted endpoint code and verbatim initialize/tool definitions are not public in the collected evidence. The official reference provides tool names and short summaries but no schemas or initialize instructions, so the requested character-count method cannot be applied.",
+    "human_can_agent_cannot": "Microsoft says Core resource-management tools are not general-purpose tools for querying or modifying data in lakehouse tables; workload-specific servers are listed separately. The setup guide says email-based identity resolution for role operations requires the separate Microsoft Graph MCP integration; without it, provide user principal IDs. The docs also note some advanced Fabric features may not yet have corresponding MCP tools. Sources: https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server ; https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server ; https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core ; https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/fabric-mcp-servers-list",
+    "sources": [
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/fabric-mcp-servers-list",
+      "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/core-remote/get-started-core",
+      "https://github.com/mcp/com.microsoft/microsoft-fabric",
+      "https://index.zbs.gg/en/mcp/com-microsoft-microsoft-fabric/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Microsoft advises operators to review tool calls and client approval settings before changes, apply least-privilege RBAC, and use the correct workspace UUID. The docs do not say these safeguards are enforced by the server. Verbatim: \"Review agent-generated tool calls and your client's approval settings before allowing changes.\" and \"Use the workspace ID (UUID format) in subsequent operations.\"",
+    "governance_promises": "Microsoft documents that operations use the authenticated identity's Fabric permissions and that supported operations are recorded in Fabric audit logs under the executing identity. It warns that clients may perform destructive actions and states workspace deletion permanently removes contained items. It also places responsibility for client/service data handling and compliance on the user. No MCP-specific promises about data retention, AI training, masking, or telemetry were found.",
+    "promises_to_user": "Microsoft describes typed tool operations with input validation and error handling, and says the authenticated identity's Fabric permissions apply. It says resource-management tools do not provide general-purpose lakehouse-table querying or modification.",
+    "comparison_with_server_logic": "The hosted implementation is closed, so enforcement details could not be verified in code. Documentation says permissions apply and supported operations are audited, but does not specify audit coverage or enforcement internals. Client approval and least-privilege are recommendations, not documented server-enforced confirmation gates. The tool list includes destructive operations, consistent with the documented warning that clients can invoke them.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/overview-core-mcp-server",
+      "https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/core-remote/tools-core-mcp-server",
+      "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/what-is-fabric-mcp-server",
+      "https://www.microsoft.com/en-us/privacy/privacystatement"
+    ]
+  },
+  "contradictions": [],
+  "observations_for_research": [
+    "The endpoint advertises a single OAuth .default scope for the Fabric API resource; the supplied metadata does not expose granular MCP-specific scopes, while the documentation describes authorization as inherited Fabric RBAC.",
+    "The official tool reference names every action but does not publish tool input schemas or MCP annotations, so parameter-level comparison and exact pre-interaction context sizing are not possible from the available official evidence.",
+    "The docs describe permanent workspace deletion and client-side review safeguards but do not document a server-side confirmation gate."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, all collected pages, and the supplied OAuth metadata. The Microsoft Learn Core overview, setup guide, and complete official tool reference were available; the endpoint and install path returned 401 without credentials. The Microsoft-owned repository is an official but distinct local server variant; its large archive was not downloaded, and its tool list was excluded from this hosted endpoint. Catalogue candidates were checked; warnings/failed pages were not used as action evidence. Microsoft's general privacy statement was reviewed, but it does not provide MCP-specific retention or AI-training terms.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 9.6
+  }
+}

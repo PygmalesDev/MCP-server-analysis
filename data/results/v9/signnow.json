@@ -1,0 +1,549 @@
+{
+  "server": "signnow",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp-server.signnow.com/mcp",
+    "documentation_url_csv": "https://docs.signnow.com/docs/signnow/mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/signnow/sn-mcp-server",
+    "documentation_urls_used": [
+      "https://docs.signnow.com/docs/mcp-server",
+      "https://docs.signnow.com/docs/mcp-tools",
+      "https://docs.signnow.com/docs/mcp-quick-start",
+      "https://docs.signnow.com/docs/mcp-local-setup",
+      "https://docs.signnow.com/docs/mcp-hosted-setup",
+      "https://docs.signnow.com/docs/mcp-server-security",
+      "https://www.signnow.com/developers/mcp-server",
+      "https://www.signnow.com/features/signnow-plans-and-pricing",
+      "https://legal.signnow.com/privacy-notice",
+      "https://claude.com/connectors/signnow",
+      "https://github.com/signnow/sn-mcp-server"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "SignNow describes the repository as its MCP server and its README refers to the pre-deployed endpoint. The public repo README lists more tools than the hosted tools reference. The prepared repository copy was incomplete, so request handlers, schemas, and exact deployed-code equivalence could not be checked.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "80c7de587367d611fc5c689a625b5a34fc5cd35e",
+    "commit_date": "2026-07-27",
+    "implementation_language": "Python (repository description and topic metadata)",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Local STDIO server from the official repository/package; it exposes the local deployment variant.",
+      "SignNow API Helper MCP is separately documented for API documentation, code generation, and troubleshooting; it is not the input endpoint."
+    ],
+    "sources": [
+      "https://docs.signnow.com/docs/mcp-server",
+      "https://docs.signnow.com/docs/mcp-hosted-setup",
+      "https://docs.signnow.com/docs/api-helper-mcp",
+      "https://github.com/signnow/sn-mcp-server"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "SignNow says the hosted MCP server is included with existing paid plans with no separate tier or add-on. A free trial is also advertised; the documentation does not specify whether trial accounts can connect to hosted MCP.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Official pricing page lists Business at $8/user/month, Business Premium at $15/user/month, Enterprise at $30/user/month (annual billing); Site License at $1.50/signature invite. Monthly billing is higher. Pricing page advertises a 7-day free trial.",
+    "pricing_model_details": "Pricing is subscription/per-user for named plans and per-signature-invite for Site License. Official pricing content states a limit of 100 invites per user/year for standard plans; the MCP-specific pages do not document separate fees or call quotas.",
+    "other_access_restrictions": "Hosted connection requires SignNow account authorization. User permissions are described as scoped to documents and templates. Docs advise reconnecting if access is revoked or a session expires. No MCP-specific admin switch, allowlist, or region restrictions were found.",
+    "restrictions_controlled_by": "SignNow account holder and vendor; organization permissions may also apply.",
+    "sources": [
+      "https://www.signnow.com/developers/mcp-server",
+      "https://docs.signnow.com/docs/mcp-server-security",
+      "https://docs.signnow.com/docs/mcp-hosted-setup",
+      "https://www.signnow.com/features/signnow-plans-and-pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Hosted docs list 20 tools. The official repository README lists 25, including four template shortcut tools and signnow_skills. Claude's connector listing exposes 16 tools. Tool schemas are not published in the hosted reference; it directs users to inspect them through an MCP client.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Docs describe structured JSON results. Individual response schemas and error formats are not published in the hosted reference.",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-tools",
+        "https://github.com/signnow/sn-mcp-server",
+        "https://claude.com/connectors/signnow"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The docs describe upload_document accepting an MCP resource attachment URI. They do not establish whether the server exposes MCP resources of its own.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-tools"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted prompt list or prompt capability declaration was found in the documentation reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-server",
+        "https://docs.signnow.com/docs/mcp-tools"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The security page says the server does not retain data server-side and processes document and template data in runtime memory. MCP request logging and audit logging are not specified.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-server-security"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No sampling capability declaration was found in the hosted documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No roots capability declaration was found in the hosted documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate Bearer resource_metadata=\"https://mcp-server.signnow.com/.well-known/oauth-protected-resource/mcp\". Protected-resource metadata: resource https://mcp-server.signnow.com/mcp; authorization_servers [https://mcp-server.signnow.com/]; bearer_methods_supported [header]; scopes_supported [offline_access, *]. Authorization-server metadata: issuer https://mcp-server.signnow.com/; authorization_endpoint /authorize; token_endpoint /oauth2/token; jwks_uri /.well-known/jwks.json; registration_endpoint /oauth2/register; scopes_supported [offline_access, *]; response_types_supported [code]; grant_types_supported [authorization_code, refresh_token]; code_challenge_methods_supported [S256]; token_endpoint_auth_methods_supported [none, client_secret_post]. Token lifetime and revocation details were not provided.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth-protected HTTP MCP endpoint; bearer token is supported in the header.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; authorization code and refresh token grants; PKCE S256; token auth methods none and client_secret_post; scopes_supported: offline_access, *. Token lifetime and revocation NOT FOUND.",
+      "authorization_server": "https://mcp-server.signnow.com/",
+      "sources": [
+        "https://mcp-server.signnow.com/mcp",
+        "https://mcp-server.signnow.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp-server.signnow.com/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Elicitation capability declaration was found. The send_invite documentation describes a preview and recipient confirmation flow, but does not identify it as server-driven MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-tools"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Tasks capability declaration was found in the hosted docs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Hosted docs describe a fixed endpoint. Configuration options for this endpoint, including tool filtering or read-only modes, were not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-hosted-setup"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Hosted tool error formats are not documented. The hosted setup troubleshooting page mentions 401/403 permission errors and expired or revoked sessions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Error format unknown; connection documentation describes 401 and 403 cases.",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-hosted-setup"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription capability or subscription-specific tools were documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No progress-tracking capability declaration was found for the hosted endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The cancel_invite tool cancels pending SignNow signing invites. MCP request cancellation support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Business-operation cancellation is documented; MCP cancellation behavior is unknown.",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-tools"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint is hosted at a single global URL. Docs say clients connect to that URL; OAuth authorization is performed through the server's authorization endpoints.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool calls return structured JSON according to the overview.",
+      "sources": [
+        "https://docs.signnow.com/docs/mcp-server",
+        "https://docs.signnow.com/docs/mcp-hosted-setup"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Hosted reference distinguishes read-oriented operations by function but provides no readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations. Read tools include listing, retrieval, status, view, and download-link functions; write tools include creation, updates, invites, reminders, cancellation, and embedded-session/link creation. 2. send_invite is described as designed for confirmed sends; the AI typically previews and confirms recipients and sets preview_was_shown=True. This is documented as an AI workflow recommendation; server enforcement is not established. 3. Hosted OAuth metadata declares header bearer transport, scopes offline_access and *, authorization code and refresh token grants, DCR endpoint, and PKCE S256. Hosted docs describe account authorization scoped to documents and templates. Token duration, role inheritance specifics, admin switches, allowlists, and revocation details: Unknown. 4. Hosted docs specify one global endpoint and do not document read-only modes, toolsets, filters, query-free modes, or regional variants. 5. upload_document documents a safe base directory for local file paths (default user's home directory), supported file types, and a 40 MB maximum. No PII masking or field-level redaction is documented. 6. list_documents documents pagination default 50/max 100; list_all_templates default 50; list_contacts default 15/max 100. upload_document max 40 MB. Other quotas, rate limits, time-range caps, and per-call charges: Unknown. 7. Hosted docs describe parameter behavior for selected tools but no general unknown-argument rejection, coercion, or operator override rules. Several tools auto-detect entity type. 8. MCP request logging and audit behavior are not documented. Security docs claim no server-side data retention and runtime-memory processing. 9. No feedback, rating, survey, or reporting action appears in the action inventory. No MCP upsell response is documented. 10. Repository README documents signnow_skills for listing/fetching bundled skill content; hosted tool reference does not list this tool. Docs recommend preview/confirmation before sending; whether hosted server enforces it is unknown. 11. Security docs describe no retained server-side state; cross-session memory behavior is not documented. 12. Official docs describe a single hosted endpoint. The repository also describes STDIO/local deployment and separate API Helper MCP documentation. 13. No raw API request, SQL, script, or arbitrary execution tool appears in the published tool names.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Your AI assistant will typically prompt you to preview the document (via `view_document`) and confirm the recipients before invoking it. Set `preview_was_shown=True` once you have reviewed the preview.",
+      "Use before `send_invite` to resolve a recipient's email address by their name.",
+      "Use it to preview the file before sending an invite.",
+      "Tip: Start with `signnow_skills` (no arguments) to discover available skills, then `list_all_templates` → `create_from_template` → `create_embedded_*` / `send_invite`, then `get_invite_status` and `get_document_download_link`."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "Hosted docs describe one flat hosted tool surface. The separate API Helper MCP is not the input endpoint. The repository README describes an additional skill tool and local transport; its equivalence to the deployed hosted tool set is not fully verified.",
+    "sources": [
+      "https://docs.signnow.com/docs/mcp-tools",
+      "https://docs.signnow.com/docs/mcp-server-security",
+      "https://docs.signnow.com/docs/mcp-hosted-setup",
+      "https://github.com/signnow/sn-mcp-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "25 published names across hosted docs and official repository README; 20 in hosted official reference",
+    "action_count_comment": "The official hosted tool reference at https://docs.signnow.com/docs/mcp-tools names 20 tools and states no numeric total. The official repository README at https://github.com/signnow/sn-mcp-server lists 25 names, including five names absent from that hosted reference: send_invite_from_template, create_embedded_sending_from_template, create_embedded_editor_from_template, create_embedded_invite_from_template, and signnow_skills. These five are included as Official because their names appear in the vendor repository, but their deployed availability is unverified. Claude connector directory lists 16 tools; its subset omits four hosted-reference names and does not expose the five repository-only names. Tedix reports 16 tools, and MCP.so, apis.io, and Manufact provide differing or partial inventories; their counts do not replace official names.",
+    "actions": [
+      {
+        "tool_name": "list_all_templates",
+        "description": "List templates and template groups with simplified metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "limit: integer (optional); offset: integer (optional)",
+        "parameter_count": "2",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_from_template",
+        "description": "Create a document or document group from a template or template group.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_template",
+        "description": "Convert a document or document group into a reusable signing template.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_document",
+        "description": "Upload a supported document from a safe local path, public URL, or MCP resource attachment.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "file_path: string (optional); file_url: string (optional); resource_uri: string (optional)",
+        "parameter_count": "3",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_documents",
+        "description": "Browse documents, document groups, and statuses with filters and pagination.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "filter: enum (optional; 5 categories); expired_filter: enum (optional; 3 categories); folder_id: string (optional); sortby: enum (optional; 3 categories); order: enum (optional; 2 categories); limit: integer (optional); offset: integer (optional)",
+        "parameter_count": "7",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_document",
+        "description": "Get normalized document or document-group structure with field values.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "view_document",
+        "description": "Generate a read-only embedded view link to preview a document or group.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "link_expiration_minutes: integer (optional)",
+        "parameter_count": "1",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_document_fields",
+        "description": "Pre-fill text fields in an individual document.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "rename_entity",
+        "description": "Rename a document, group, template, or template group; entity type is auto-detected.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_document_download_link",
+        "description": "Get a direct download link for a document or merged group output.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_contacts",
+        "description": "Search contacts by name, email, or phone; use to resolve invite recipients.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "per_page: integer (optional)",
+        "parameter_count": "1",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_invite",
+        "description": "Send email signing invites with ordered recipients; supports freeform and self-sign flows.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "preview_was_shown: boolean (optional); self_sign: boolean (optional); role: string (optional); email: string (optional); subject: string (optional); message: string (optional); orders: array (optional)",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_invite_status",
+        "description": "Get invite status and signing steps for a document or group.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_signing_link",
+        "description": "Get a signing link for a document or group awaiting the user’s signature.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_invite_reminder",
+        "description": "Send a reminder to pending signers; optionally target one recipient and override email text.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "email: string (optional); subject: string (optional); message: string (optional)",
+        "parameter_count": "3",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_invite_recipient",
+        "description": "Replace a recipient on a pending field invite; unsupported for freeform and embedded invites.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "current_email: string (required); new_email: string (required); role: string (optional)",
+        "parameter_count": "3",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cancel_invite",
+        "description": "Cancel active pending invites on a document or group.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "reason: string (optional)",
+        "parameter_count": "1",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_embedded_invite",
+        "description": "Create an embedded signing session without email delivery.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_embedded_sending",
+        "description": "Create an embedded sending or management experience.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_embedded_editor",
+        "description": "Create an embedded editor link to place or adjust fields.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.signnow.com/docs/mcp-tools",
+        "source_type": "Official"
+      },
+      {
+        "enabled_by_default": "Yes",
+        "source": "https://github.com/signnow/sn-mcp-server",
+        "source_type": "Official",
+        "tool_name": "send_invite_from_template",
+        "type": "Write",
+        "parameters": "NOT PUBLISHED",
+        "description": "Create a document from a template and send signing invites in one operation.",
+        "parameter_count": "Unknown"
+      },
+      {
+        "enabled_by_default": "Yes",
+        "source": "https://github.com/signnow/sn-mcp-server",
+        "source_type": "Official",
+        "tool_name": "create_embedded_sending_from_template",
+        "type": "Write",
+        "parameters": "NOT PUBLISHED",
+        "description": "Create from a template and return an embedded sending experience.",
+        "parameter_count": "Unknown"
+      },
+      {
+        "enabled_by_default": "Yes",
+        "source": "https://github.com/signnow/sn-mcp-server",
+        "source_type": "Official",
+        "tool_name": "create_embedded_editor_from_template",
+        "type": "Write",
+        "parameters": "NOT PUBLISHED",
+        "description": "Create from a template and return an embedded editor link.",
+        "parameter_count": "Unknown"
+      },
+      {
+        "enabled_by_default": "Yes",
+        "source": "https://github.com/signnow/sn-mcp-server",
+        "source_type": "Official",
+        "tool_name": "create_embedded_invite_from_template",
+        "type": "Write",
+        "parameters": "NOT PUBLISHED",
+        "description": "Create from a template and return an embedded signing session.",
+        "parameter_count": "Unknown"
+      },
+      {
+        "enabled_by_default": "Yes",
+        "source": "https://github.com/signnow/sn-mcp-server",
+        "source_type": "Official",
+        "tool_name": "signnow_skills",
+        "type": "Read",
+        "parameters": "skill_name: string (optional)",
+        "description": "List bundled SignNow skill summaries or fetch a named skill body.",
+        "parameter_count": "1"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Could not compute: the hosted tool definitions and initialize instructions were not available verbatim, and the official repository clone was incomplete.",
+    "human_can_agent_cannot": "The SignNow API documents broader operations such as payment collection and API-level workflows; these are not listed as actions in the hosted MCP tool reference. Product features such as billing, account management, and organization configuration are also outside the published MCP tool set. Sources: https://github.com/signnow/sn-mcp-server and https://docs.signnow.com/docs/mcp-tools",
+    "sources": [
+      "https://docs.signnow.com/docs/mcp-tools",
+      "https://github.com/signnow/sn-mcp-server",
+      "https://claude.com/connectors/signnow",
+      "https://tedix.dev/apps/signnow/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The tool reference says the assistant will typically preview and confirm recipients before sending, then pass preview_was_shown=True. The docs do not establish that the server independently enforces a human confirmation step. It also recommends resolving a recipient through list_contacts before sending.",
+    "governance_promises": "MCP security docs state: “Your data is never used for AI training.” They also state: “The MCP server does not store your data server-side.” Other claims include scoped access to documents and templates, user-initiated actions, credential isolation, HTTPS transport, runtime-memory processing, and disconnect-based revocation. The general Privacy Notice describes broader personal-information processing, including AI model training for service purposes.",
+    "promises_to_user": "The overview says the server enables AI assistants to execute eSignature workflows. Security docs promise no MCP data use for AI training, no server-side data retention, and user ability to disconnect access.",
+    "comparison_with_server_logic": "The tool reference documents selected validation and size limits. The no-training, no-retention, scoped-access, and credential-isolation statements are documentation claims; the prepared code copy was incomplete, so server implementation was not independently verified. The preview and confirmation language is framed as typical assistant behavior, not proven server-side enforcement.",
+    "sources": [
+      "https://docs.signnow.com/docs/mcp-server-security",
+      "https://docs.signnow.com/docs/mcp-tools",
+      "https://legal.signnow.com/privacy-notice"
+    ]
+  },
+  "contradictions": [
+    "Hosted official tool reference lists 20 tools; the official repository README lists 25, adding four template shortcut tools and signnow_skills. The repository is described as the server project and mentions the hosted endpoint, but whether these additional names are deployed at the input endpoint is unverified.",
+    "Claude connector directory lists 16 tools, fewer than the 20 in the hosted tool reference; its published subset omits list_contacts, create_template, upload_document, and view_document.",
+    "The MCP-specific security page says MCP-transmitted data is never used for AI training, while the general Privacy Notice says personal information may be used in AI model training for service purposes. The notices address different scopes; their relationship for MCP data is not clarified."
+  ],
+  "observations_for_research": [
+    "The documentation places a preview and recipient confirmation in the expected assistant workflow and exposes preview_was_shown as an input; the available evidence does not show that confirmation is independently enforced by the server.",
+    "The same product has a global hosted endpoint and a local STDIO deployment. Hosted documentation, the official repository README, and connector directories publish different tool inventories.",
+    "Hosted OAuth scopes include the wildcard string \"*\" alongside offline_access; the docs do not explain the wildcard's permission semantics."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/INDEX.txt, all listed official docs page copies and scripts, official tool reference, pricing and legal search results, and catalogue listings. The official sn-mcp-server clone was absent because the evidence fetch recorded an IncompleteRead; GitHub's README was available in browser search output, but the newest commit API and source files could not be read/pinned, so code handlers, schemas, protocol version, SDK version, annotations, and token count remain unverified. MCP.so, apis.io, Manufact, Tedix, and Claude are third-party catalogues; Claude identifies the connector as Anthropic verified. The SignNow API Helper MCP is documented as a separate server and is excluded from actions.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.8
+  }
+}

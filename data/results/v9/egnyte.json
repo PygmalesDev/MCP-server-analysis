@@ -1,0 +1,631 @@
+{
+  "server": "egnyte",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp-server.egnyte.com/mcp",
+    "documentation_url_csv": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+    "addressing": "global",
+    "repository_url": "https://github.com/egnyte/egnyte-mcp-server",
+    "documentation_urls_used": [
+      "https://developers.egnyte.com/docs/Remote_MCP_Server",
+      "https://developers.egnyte.com/integration/cfs/api-docs/remote-mcp-server",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/49496934262285-Egnyte-MCP-Server-Tool-Access-Controls",
+      "https://egnyte.com/products/ai-connector",
+      "https://egnyte.com/product-tour/mcp-server",
+      "https://www.egnyte.com/pricing?resellerId=6cloudw511555",
+      "https://www.egnyte.com/privacy-policy",
+      "https://www.egnyte.com/data-protection-addendum",
+      "https://claude.com/connectors/egnyte",
+      "https://agentdiscoverability.com/track/chatgpt/egnyte",
+      "https://mcp.tc/i/egnyte"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public egnyte-mcp-server repository is a separate local stdio example exposing one search_for_document_by_name tool, not the hosted OAuth server. Egnyte-for-ai is a separate skills/plugin repository, not server implementation code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "b001578cd4cf1abaf1f57f079ca42292c2784bdf",
+    "commit_date": "2025-05-05",
+    "implementation_language": "Python (public local example)",
+    "mcp_sdk_and_version": "Public local example: mcp[cli]>=1.6.0 with FastMCP API; resolved version not pinned. Hosted implementation: NOT FOUND.",
+    "code_public": "Partially",
+    "license": "N/A (no license file found in the local server repository); the separate egnyte-for-ai repository declares Apache-2.0.",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://github.com/egnyte/egnyte-mcp-server — local stdio example for filename search, separate from the hosted endpoint.",
+      "https://github.com/egnyte/egnyte-for-ai — separately distributed agent skills and platform plugins for the hosted MCP server and optional CLI; not an MCP server."
+    ],
+    "sources": [
+      "https://mcp-server.egnyte.com/mcp",
+      "https://developers.egnyte.com/docs/Remote_MCP_Server",
+      "https://github.com/egnyte/egnyte-mcp-server/blob/b001578cd4cf1abaf1f57f079ca42292c2784bdf/server.py#L9-L38",
+      "https://github.com/egnyte/egnyte-mcp-server/blob/b001578cd4cf1abaf1f57f079ca42292c2784bdf/README.md#L20-L25",
+      "https://github.com/egnyte/egnyte-for-ai"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The official documentation requires an eligible Egnyte plan and identifies an AI Add-On requirement for some legacy plans. It does not state whether MCP itself carries an additional charge.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The official pricing page lists Business at $22 per user/month and Enterprise Lite at $39 per user/month, paid annually; other plans require contacting sales. These are listed software prices, not an MCP-specific fee.",
+    "pricing_model_details": "No MCP-specific per-call price or quota was found. MCP calls inherit Egnyte API rate limits, which vary by plan; some AI APIs have stricter limits. The official reference describes eligible Gen 4 Essential, Elite, Ultimate plans and Gen 3 Platform Team, Business, Enterprise Lite, or Enterprise plans on AFS/CFS. Legacy plan features vary by AI Add-On and configuration.",
+    "other_access_restrictions": "OAuth-compatible MCP client and valid Egnyte user account required. Administrators can enable/disable external MCP access, allow selected apps or custom apps with redirect URLs, and grant tools by user/group. Gen 3 plans without AI Add-On have a reduced tool set. Agent tools require AI Add-On or Gen 4 plan, enabled Agents, and Power User/Admin role. Rate limits follow Egnyte API plan limits.",
+    "restrictions_controlled_by": "Egnyte controls service availability, plan eligibility, OAuth and API rate limits; organization administrators control external-client access, app allowlists, and user/group tool access; Egnyte folder permissions continue to constrain the user.",
+    "sources": [
+      "https://developers.egnyte.com/docs/Remote_MCP_Server",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/49496934262285-Egnyte-MCP-Server-Tool-Access-Controls",
+      "https://www.egnyte.com/pricing?resellerId=6cloudw511555"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted server exposes a documented tool catalog. The official reference categorizes tools by function and Read/Write access; tool availability varies by plan, domain configuration, and admin policy. The listed catalog includes 28 names, with some variants and deprecated Knowledge Base tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific results vary. Documentation describes structured search, file, link, comment, metadata, identity, and AI-agent outputs. Tool failures use MCP error handling; policy-denied tools return an organization-policy message.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "https://helpdesk.egnyte.com/hc/en-us/articles/49496934262285-Egnyte-MCP-Server-Tool-Access-Controls"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted Resources list or Resources capability statement was found in the official documentation or available endpoint evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "https://mcp-server.egnyte.com/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted Prompts list or Prompts capability statement was found in the official documentation or available endpoint evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "https://mcp-server.egnyte.com/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Egnyte documents MCP Server Reports for domain admins to review MCP session activity, including connected apps, tools, and usage. The documentation does not describe MCP protocol logging capability or telemetry settings.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Admin reports provide session-activity information; exact fields, retention, and export format are not fully specified in the material reviewed.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview",
+        "https://egnyte.com/products/ai-connector"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted Sampling capability evidence was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted Roots capability evidence was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Endpoint returned HTTP 401 and advertised Bearer resource metadata at https://mcp-server.egnyte.com/.well-known/oauth-protected-resource. Resource metadata: resource=https://mcp-server.egnyte.com/mcp; bearer_methods_supported=[header]; authorization_servers=[https://mcp-oauth.egnyte.com/egnyte-connect]; tls_client_certificate_bound_access_tokens=false; resource_signing_alg_values_supported=[RS256]. Authorization-server metadata: issuer=https://mcp-oauth.egnyte.com/egnyte-connect; authorization_endpoint=https://mcp-oauth.egnyte.com/external/oauth2/authorize/egnyte-connect; token_endpoint=https://mcp-oauth.egnyte.com/egnyte-connect/oauth2/token; token endpoint auth methods=[client_secret_basic, client_secret_post]; response_types=[code]; grant_types=[authorization_code, refresh_token]; revocation_endpoint=https://mcp-oauth.egnyte.com/egnyte-connect/oauth2/revoke; revocation auth methods=[client_secret_basic, client_secret_post, client_secret_jwt, private_key_jwt, tls_client_auth, self_signed_tls_client_auth]; introspection_endpoint=https://mcp-oauth.egnyte.com/egnyte-connect/oauth2/introspect; introspection auth=[client_secret_basic]; PKCE methods=[S256]; authorization-server tls_client_certificate_bound_access_tokens=true; DPoP algorithms=[RS256, RS384, RS512, PS256, PS384, PS512, ES256, ES384, ES512]; registration_endpoint=https://mcp-oauth.egnyte.com/clients. scopes_supported is absent. OIDC configuration URL returned HTTP 400 with invalid_request: Client ID is required. Token lifetime is not provided.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Bearer-token authorization in HTTP header; endpoint challenge points to protected-resource metadata.",
+      "authorization_mechanism": "OAuth 2.0 authorization-code and refresh-token grants; PKCE S256; Dynamic Client Registration endpoint https://mcp-oauth.egnyte.com/clients. Token endpoint client auth supports client_secret_basic and client_secret_post. Revocation and introspection endpoints are published. No scopes_supported or token lifetime in metadata. Raw endpoint evidence supplied for this analysis: endpoint HTTP 401, WWW-Authenticate: Bearer resource_metadata=\"https://mcp-server.egnyte.com/.well-known/oauth-protected-resource\"; resource metadata HTTP 200 as quoted above; path-suffixed resource metadata returned HTTP 401 with same challenge; authorization-server metadata HTTP 200 as quoted above; OIDC configuration returned HTTP 400: {\"error\":\"invalid_request\",\"error_description\":\"Client ID is required\"}.",
+      "authorization_server": "https://mcp-oauth.egnyte.com/egnyte-connect",
+      "sources": [
+        "https://mcp-server.egnyte.com/mcp",
+        "https://mcp-server.egnyte.com/.well-known/oauth-protected-resource",
+        "https://mcp-server.egnyte.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp-oauth.egnyte.com/.well-known/oauth-authorization-server/egnyte-connect",
+        "https://mcp-oauth.egnyte.com/.well-known/openid-configuration/egnyte-connect",
+        "https://developers.egnyte.com/docs/Remote_MCP_Server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability evidence was found. Documentation describes user confirmation or external-app sign-in during an Egnyte Agent run as a state that cannot be resolved through MCP; it directs the user to the Egnyte web UI.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Agent request status can be AWAITING_USER_CONFIRMATION; documentation identifies it as terminal for MCP clients.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Agent asks are documented as asynchronous operations with status polling, but the docs do not identify use of the MCP Tasks capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Agent calls return request identifiers and status; some AI Assistant domains also use asynchronous status polling.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Administrators can enable external MCP clients and control allowed apps and per-user/group tool access in Egnyte settings. No MCP protocol Configuration capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Admin settings determine connection availability and which tools appear to users.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview",
+        "https://helpdesk.egnyte.com/hc/en-us/articles/49496934262285-Egnyte-MCP-Server-Tool-Access-Controls"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "A request to a disabled tool is refused with a documented organization-policy error. Egnyte also recommends users collect tool name, parameters, verbatim response, Egnyte Request ID, MCP Session ID, and timestamp for support diagnostics.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP tool failures use normal error handling; policy denial is documented as: Tool '<tool name>' is not available under your organization's access policy. Contact your Egnyte admin.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://helpdesk.egnyte.com/hc/en-us/articles/49496934262285-Egnyte-MCP-Server-Tool-Access-Controls",
+        "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP protocol Subscription capability evidence was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Agent request states and polling provide application-level progress information, but protocol Progress capability support was not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Agent status values include PLANNING, IN_PROGRESS, COMPLETED, FAILED, COMPLETED_FAILED, and AWAITING_USER_CONFIRMATION.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation capability or Agent-request cancellation operation was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool descriptions provide usage constraints and workflow guidance. File upload/download can return short-lived single-use signed URLs for a separate client-side HTTP transfer. No hosted initialize instruction text was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Binary upload/download uses signed URL and single-use token data; Agent and AI operations may return request IDs, statuses, responses, and citations.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list classifies tools as Read or Write. Admins can separately restrict those tool types and individual tools; no tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) were documented. The published catalog includes no delete operation. 2. Admin tool-access policy is enforced server-side: disabled tools disappear and calls are refused. Admin settings can also control whether actions require user approval, but per-call confirmation enforcement was not documented. Agent flows awaiting user confirmation cannot be completed through MCP. 3. OAuth is per authenticated Egnyte user and requests are limited to that user's permissions. Admins control domain enablement, allowed apps, custom redirect URLs, and user/group tool policy; group membership changes may take up to an hour to apply. Metadata advertises authorization-code and refresh-token grants, PKCE S256, DCR, and revocation; scopes and token lifetime are absent. 4. No separate read-only endpoint is documented; read/write tools, individual tools, client apps, plans, and Agent availability are configurable. No query-free mode or region-specific endpoint found. 5. Egnyte says content accessed through MCP is not stored or cached by the server and existing user permissions apply. AI client data handling is separately governed by that client's policies. 6. API rate limits apply by plan; some AI APIs have stricter limits. Official docs say fetch truncates at 10,000 characters; text upload tool is limited to 8 MB; binary transfers are recommended below 200 MB. Third-party Agent Discoverability descriptions report advanced search pages of up to 20 results. 7. Hosted schema rejection/coercion behavior was not documented. set_file_metadata replaces values in its namespace; omitting both path and group_id for get_file_content is documented as an error in the vendor skills repo, not the hosted reference. 8. MCP Server Reports show session activity; diagnostic guidance requests Egnyte Request ID and MCP Session ID. Telemetry details, retention period, and opt-out were not found. 9. Official tool list contains no feedback/rating/survey/report-to-vendor action. No tool-result upsell was documented. 10. Tool descriptions give workflow guidance; official external skills/rules are separately published in egnyte-for-ai and are not shown as server-delivered instructions. Examples include preferring AI document tools and confirmation guardrails. 11. No evidence that past agent behavior changes future outputs or tool availability; a third-party catalog description says metadata namespaces may be cached for an MCP session. 12. The documented hosted catalog is a flat tool list, including calls to Egnyte Agents (vendor agents behind tools) and legacy Knowledge Base tools transitioning to Agents. No proxy server or sub-server hierarchy documented. 13. No raw API, arbitrary SQL, script execution, or general request escape-hatch tool appears in the official MCP catalog.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[OFFICIAL DOCS] \"Always call this before using set_file_metadata to ensure you use valid namespace keys and field names.\"",
+      "[OFFICIAL DOCS] \"AWAITING_USER_CONFIRMATION is a final state for MCP clients: the Agent is waiting for a confirmation or an external app sign-in that cannot be given through MCP. Run that Agent in the Egnyte web UI instead.\"",
+      "[OFFICIAL DOCS] \"For reliable transfers, keep uploads under 200 MB; larger files may not transfer reliably depending on connection speed.\"",
+      "[THIRD-PARTY Agent Discoverability, 2026-10] \"REQUIRED: Provide 'intent' parameter (max 15 words) explaining WHY you're calling this tool.\"",
+      "[OFFICIAL GITHUB SKILLS, external to MCP server] \"When activated: act immediately.\"",
+      "[OFFICIAL GITHUB SKILLS, external to MCP server] \"If MCP has no tool for the request, switch to CLI — do not describe it and ask the user to run it themselves.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "",
+    "sources": [
+      "https://developers.egnyte.com/docs/Remote_MCP_Server",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/49496934262285-Egnyte-MCP-Server-Tool-Access-Controls",
+      "https://egnyte.com/products/ai-connector",
+      "https://agentdiscoverability.com/track/chatgpt/egnyte",
+      "https://github.com/egnyte/egnyte-for-ai/blob/5431df18294bcfa497140a17ffb3f1aafe262461/skills/egnyte/SKILL.md",
+      "https://github.com/egnyte/egnyte-for-ai/blob/5431df18294bcfa497140a17ffb3f1aafe262461/rules/egnyte.mdc"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "28 documented catalog names; fewer on some plans/configurations",
+    "action_count_comment": "The official tool reference is https://developers.egnyte.com/docs/Remote_MCP_Server; its current catalog names 28 tools across categories, including two deprecated Knowledge Base tools and a status-tool variant. Gen 3 without AI Add-On has a reduced set; availability also depends on domain configuration. actions.json contains all 28 names in the current reference. Claude's third-party connector page states 25 tools and displays a partial list; Agent Discoverability also reports 25, with a different visible subset. mcp.tc hides names pending sign-in. Composio lists 60 direct Egnyte API toolkit actions, not this MCP endpoint, so they were excluded.",
+    "actions": [
+      {
+        "tool_name": "search",
+        "description": "Search Egnyte file names, content, and metadata with ranked snippets.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required)",
+        "parameter_count": "1",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "advanced_search",
+        "description": "Search files and folders with metadata, date, path, field, and similarity filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query, folder, type, custom_metadata, modified_before, modified_after, uploaded_before, uploaded_after, sort_by, file_query_fields, folder_query_fields, namespaces (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "12",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch",
+        "description": "Fetch a document by identifier; response is truncated to 10,000 characters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required; group_id/entry_id format)",
+        "parameter_count": "1",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ask_document",
+        "description": "Ask Egnyte AI a question about a specific document.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "entry_id, question, include_citations (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "3",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "summarize_document",
+        "description": "Generate an AI summary of a document.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "entry_id (type and requiredness NOT PUBLISHED)",
+        "parameter_count": "1",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ask_ai_assistant",
+        "description": "Ask Egnyte AI Assistant with optional file or folder context; may return asynchronously.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "question, folder_ids, file_entry_ids, search_all_egnyte (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "4",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_ai_assistant_status",
+        "description": "Check an AI Assistant request and retrieve its completed answer and citations.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "execution_id, include_citations (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "2",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_agents",
+        "description": "List active Agents created by or shared with the authenticated user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None required; optional fields NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ask_agent",
+        "description": "Send a question to an Egnyte Agent with optional file or folder context.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "agent_id, question, folder_ids, file_entry_ids (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "4",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_ask_status",
+        "description": "Check an Agent request and retrieve its completed answer and citations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "agent_id, request_id (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "2",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ask_knowledge_base",
+        "description": "Query a Knowledge Base; deprecated during migration to Agents and may return an error after migration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "kb_id, question, include_citations (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "3",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_knowledge_bases",
+        "description": "List Knowledge Bases; deprecated during migration to Agents and may return an error after migration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "sort_by, sort_direction, status, page, size, created_before, created_after (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "7",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_filesystem_by_path",
+        "description": "List files and folders at a path with metadata and optional permissions or statistics.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "path, sort_by, sort_direction, include_perm, list_custom_metadata, count, offset, includeStats (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "8",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_file_content",
+        "description": "Retrieve paginated text content by path or group_id, optionally for a version.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "group_id or path, entry_id, offset, limit (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "4",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_folder",
+        "description": "Create a folder; fails if it exists or parent folders are missing.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "path: string (type and requiredness NOT PUBLISHED)",
+        "parameter_count": "1",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_file",
+        "description": "Upload UTF-8 text file or create a new version; tool limit is 8 MB.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "path, content (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "2",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_upload_url",
+        "description": "Generate a single-use signed URL for binary file upload.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "path (type and requiredness NOT PUBLISHED)",
+        "parameter_count": "1",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_download_url",
+        "description": "Generate a single-use signed URL for binary file download.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "path (type and requiredness NOT PUBLISHED)",
+        "parameter_count": "1",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "set_file_metadata",
+        "description": "Set custom metadata on a file, replacing prior values in the specified namespace.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "group_id or entry_id, namespace, values (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "3",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_metadata_namespaces",
+        "description": "List metadata namespaces and field definitions for the domain.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None required",
+        "parameter_count": "0",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_projects",
+        "description": "List project folders, optionally scoped to a folder identifier.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "folderId (optional; type NOT PUBLISHED)",
+        "parameter_count": "1",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_comments",
+        "description": "List comments for a file or across the domain.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "file_path, start_time, end_time, count, offset (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "5",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_comment",
+        "description": "Retrieve a comment by its identifier.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "comment_id (type and requiredness NOT PUBLISHED)",
+        "parameter_count": "1",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_comment",
+        "description": "Create a comment on an existing file.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "file_path, message (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "2",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_links",
+        "description": "List share links with filtering and pagination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "type, accessibility, path, username, created_before, created_after (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "6",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_link_details",
+        "description": "Retrieve details for a share link.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "link_id (type and requiredness NOT PUBLISHED)",
+        "parameter_count": "1",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_link",
+        "description": "Create a share link for a file or folder.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "path, type, accessibility, expiry_date, password, recipients, protection, send_email, notify (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "9",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "whoami",
+        "description": "Return the authenticated Egnyte username and domain.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None required",
+        "parameter_count": "0",
+        "source": "https://developers.egnyte.com/docs/Remote_MCP_Server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted server initialize/tool definitions were not available verbatim; the public code is a separate one-tool local stdio implementation, not the endpoint's direct local equivalent.",
+    "human_can_agent_cannot": "The MCP catalog does not expose file/folder deletion, moving or renaming, permission grants/revocations, user/group administration, or MCP app/tool-access administration; administrators perform MCP access and tool controls in Egnyte settings. MCP also cannot finish an Agent flow that is waiting for user confirmation or external-app sign-in; the official overview directs that Agent run to Egnyte UI. These are absences from the documented catalog, not a claim that Egnyte software lacks the operations.",
+    "sources": [
+      "https://developers.egnyte.com/docs/Remote_MCP_Server",
+      "https://developers.egnyte.com/integration/cfs/api-docs/remote-mcp-server",
+      "https://claude.com/connectors/egnyte",
+      "https://agentdiscoverability.com/track/chatgpt/egnyte",
+      "https://mcp.tc/i/egnyte",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/49496934262285-Egnyte-MCP-Server-Tool-Access-Controls"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Third-party Agent Discoverability tool descriptions repeatedly say: \"REQUIRED: Provide 'intent' parameter (max 15 words) explaining WHY you're calling this tool.\" The official current reference does not establish that an intent field is server-enforced. Official docs advise using the Egnyte UI for Agent runs that need confirmation or an external app sign-in. Vendor-published skills outside the server recommend confirmations for destructive/externally visible actions and prefer MCP for interactive operations.",
+    "governance_promises": "Egnyte states: \"Egnyte does not store or cache any content accessed through the MCP server.\" It also says access is limited to the authenticated user's permissions and that tools continue to respect folder permissions and domain link-sharing settings. The privacy policy and DPA are general company terms; no separate MCP-specific AI training or retention term was located in the reviewed pages.",
+    "promises_to_user": "Egnyte describes OAuth 2.0 access, preservation of existing permissions, admin-controlled app and tool availability, activity reports, and content not retained by the MCP server. The vendor says available tools vary by plan and domain settings.",
+    "comparison_with_server_logic": "Permission inheritance and tool access control are described as enforced: disabled tools disappear and are refused on invocation. The no-store/no-cache statement is a vendor documentation promise; public deployed code is unavailable to independently verify it. Admin reporting is documented, but retention, event completeness, and telemetry controls are unspecified. Approval settings are described as configurable, but per-action confirmation enforcement is not documented. Tool-description instructions such as intent and workflow advice are not demonstrated as server-enforced.",
+    "sources": [
+      "https://developers.egnyte.com/docs/Remote_MCP_Server",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/43305899030797-Egnyte-MCP-Server-Overview",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/49496934262285-Egnyte-MCP-Server-Tool-Access-Controls",
+      "https://agentdiscoverability.com/track/chatgpt/egnyte",
+      "https://github.com/egnyte/egnyte-for-ai/blob/5431df18294bcfa497140a17ffb3f1aafe262461/rules/egnyte.mdc",
+      "https://www.egnyte.com/privacy-policy",
+      "https://www.egnyte.com/data-protection-addendum"
+    ]
+  },
+  "contradictions": [
+    "Official developer documentation describes a 28-name catalog, while Claude's third-party connector listing and Agent Discoverability each report 25 tools and display different subsets. Their visible lists omit or differ on tools present in the official reference.",
+    "The developer reference describes legacy Knowledge Base tools as deprecated during migration and says migrated domains may return errors; third-party snapshots still list those tools as available. They remain in actions.json because the official reference still names them.",
+    "The official overview describes only browse/search/read-retrieve tools for Platform plans, while the developer reference's Gen 3 baseline list also includes get_upload_url, get_download_url, and whoami. Plan/add-on availability wording is not fully consistent across these official pages.",
+    "The OAuth protected-resource metadata says tls_client_certificate_bound_access_tokens=false, while the authorization-server metadata says tls_client_certificate_bound_access_tokens=true.",
+    "The public egnyte-mcp-server repository exposes one local stdio search tool; it is not the hosted endpoint's catalog and was not used to replace the hosted actions."
+  ],
+  "observations_for_research": [
+    "Tool availability is shaped by multiple layers: plan/add-on, domain-level MCP enablement, client allowlist, user/group tool policy, and Egnyte permissions.",
+    "The server documents application-level asynchronous Agent operations with status polling; this is not evidence of MCP Tasks support.",
+    "The signed-URL upload/download flow delegates binary transfer to the AI client's own network-capable execution environment.",
+    "A vendor-maintained skills repository distributes additional behavioral rules separately from the hosted server's tool descriptions."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "The prepared pages and repository snapshots were checked first. The developer portal's local copy was a sparse JavaScript shell, so its documentation was retrieved through web search indexing; official Help Desk pages returned 403 in the prepared fetch but were readable through browser search/open. The hosted endpoint requires OAuth and did not expose tool definitions without authentication. No deployed hosted source, exact tool schemas, protocol version, initialize instructions, supported scopes, token lifetime, MCP-specific price, or MCP-specific legal terms were found. Unofficial listings were used only to cross-check tool counts and descriptions; Composio's 60-action Egnyte toolkit is a direct API integration and was excluded.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.3
+  }
+}

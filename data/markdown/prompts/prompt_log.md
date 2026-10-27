@@ -266,7 +266,7 @@ Full run of all 186 remaining servers with `prompt_v9` (GPT-6 Luna, effort high)
 | datadog | 23 → 68 tools | 45 tools of non-default toolsets from the official tool reference (as read in v7), enabled_by_default = No. Not re-verified live (web access unavailable on 2026-10-27). |
 | cloudflare | tokens ≈1,000–1,100 `[VENDOR ESTIMATE]` | Descriptions are generated at runtime; exact count from code impossible. |
 
-Excel rebuilt from `data/prompt_v9/` (186 servers, 8,051 actions). Not included: the 4 manual-analysis servers that exist only in v7 (context7, gocardless, launchdarkly, tavily).
+Excel rebuilt from `data/prompt_v9/` (186 servers, 8,051 actions). The 4 manual-analysis servers that at that point existed only in v7 (context7, gocardless, launchdarkly, tavily) were then also run with links_v3 + v9; the final workbook contains all 190 servers (8,102 actions, 2,850 capabilities, 1,148 observations, 7 manual corrections).
 
 **Open points for the next prompt version:** (1) one server reachable under several URLs (canva) - compare OAuth scopes before treating URLs as different servers; (2) vendor renamed (Make/Integromat) - a repository is official if the vendor's docs or its npm package point to it; (3) definition of "Non-standard" structure (34 servers changed in v9).
 

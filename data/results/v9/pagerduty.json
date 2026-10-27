@@ -1,0 +1,934 @@
+{
+  "server": "pagerduty",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.pagerduty.com/mcp",
+    "documentation_url_csv": "https://developer.pagerduty.com/docs/mcp-tooling-remote-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/PagerDuty/pagerduty-mcp-server",
+    "documentation_urls_used": [
+      "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+      "https://docs.pagerduty.com/developer/api/reference/mcp/pagerduty-mcp-api/mcp-root",
+      "https://docs.pagerduty.com/api-specs/mcp.json",
+      "https://support.pagerduty.com/main/changelog/may-mcp-enhancements",
+      "https://www.pagerduty.com/pricing/",
+      "https://www.pagerduty.com/privacy-policy/",
+      "https://www.pagerduty.com/terms-of-service/"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The repository is PagerDuty’s deprecated, archived local stdio server. PagerDuty’s docs identify the hosted remote server as the current service; the hosted implementation is not public. The local code is described here as a separate variant and is not used to populate hosted actions.",
+    "mcp_protocol_version": "2025-06-18 is referenced in the official API specification; the hosted endpoint’s negotiated version was not observed.",
+    "commit_hash": "dcfbdb82e1a63584bf5c37b43007561498b06dc7",
+    "commit_date": "2026-09-04",
+    "implementation_language": "Hosted: NOT FOUND. Archived local server: Python.",
+    "mcp_sdk_and_version": "Hosted: NOT FOUND. Archived local server: mcp[cli] ~= 1.8; FastMCP.",
+    "code_public": "Partially",
+    "license": "Hosted: NOT FOUND. Archived local repository: Apache-2.0.",
+    "release_status": "Hosted: docs present it as the maintained server without a beta or early-access label. GA is not explicitly stated in the hosted MCP docs.",
+    "other_official_servers": [
+      "https://mcp.eu.pagerduty.com/mcp — documented hosted endpoint for EU service-region accounts.",
+      "The archived local server is a separate stdio/local variant, deprecated in the hosted-server documentation; its tools are excluded from this endpoint’s actions."
+    ],
+    "sources": [
+      "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+      "https://docs.pagerduty.com/developer/api/reference/mcp/pagerduty-mcp-api/mcp-root",
+      "https://github.com/PagerDuty/pagerduty-mcp-server",
+      "https://github.com/PagerDuty/pagerduty-mcp-server/blob/dcfbdb82e1a63584bf5c37b43007561498b06dc7/README.md",
+      "https://github.com/PagerDuty/pagerduty-mcp-server/blob/dcfbdb82e1a63584bf5c37b43007561498b06dc7/pyproject.toml"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The official MCP documentation gives no separate MCP price. It requires a PagerDuty account with Advanced Permissions; the pricing page does not establish whether MCP access is available on every plan.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The vendor pricing page lists Incident Management Free (up to 5 users) and Professional at $21 per user/month billed annually or $25 monthly. PD Reliability Platform tiers are listed from $2,800/year; other tiers and custom pricing are shown on the page.",
+    "pricing_model_details": "The pricing page describes platform subscriptions with included Seats, Events, and AI Actions, with additional capacity available through credits. No MCP per-call fee or MCP-specific quota was found.",
+    "other_access_restrictions": "Valid PagerDuty account with Advanced Permissions; user API key or OAuth client/token; remote MCP client required. Docs say some filters require user-level authentication. Tool filtering is not directly available; scoped OAuth can limit which tools succeed. EU accounts should use the EU endpoint.",
+    "restrictions_controlled_by": "PagerDuty controls service availability and authorization; organization administrators control account permissions and OAuth client scopes; users control which credentials they provide.",
+    "sources": [
+      "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+      "https://www.pagerduty.com/pricing/",
+      "https://developer.pagerduty.com/docs/oauth-functionality"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP 2025-06-18 is referenced by the API specification.",
+      "description_what_how": "Hosted Streamable HTTP MCP server. Official documentation groups available operations into incident, service, schedule, team, event-orchestration, alert-grouping, status-page, escalation-policy, user, change-event, and activity browse/manage categories. The API reference shows tools/list and a list_incidents example. Hosted tool schemas are not published in the checked docs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The API reference shows JSON-RPC result objects and documents 400, 401, 403, 429, and 500 errors. Tool-specific hosted result schemas were not published in the checked reference.",
+      "authorization_mechanism": "Metadata Doc; API key or OAuth. Endpoint response: HTTP 401 with WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"Authentication required: the token is invalid or has expired.\", resource_metadata=\"https://mcp.pagerduty.com/.well-known/oauth-protected-resource/mcp\". Protected-resource metadata: authorization_servers=[\"https://app.pagerduty.com/global/oauth/anonymous\"], bearer_methods_supported=[\"header\"], DCR registration_endpoint absent, scopes_supported=[\"incidents.read\",\"extension_schemas.read\",\"subscribers.write\",\"users:sessions.write\",\"recommendations.write\",\"recommendations.read\",\"none\",\"users:contact_methods.read\",\"users.write\",\"templates.read\",\"incident_types.read\",\"jira_cloud_rules.read\",\"workflow_integrations:connections.write\",\"session_configurations.write\",\"addons.write\",\"oncalls.read\",\"standards.write\",\"users:contact_methods.write\",\"users.read\",\"incident_workflows.write\",\"notifications.read\",\"workflow_integrations:connections.read\",\"copilot:chat.write\",\"write\",\"incident_types.write\",\"contextual_data.write\",\"event_orchestrations.read\",\"read\",\"webhook_subscriptions.write\",\"openid\",\"maintenance_windows.write\",\"webhook_subscriptions.read\",\"abilities.read\",\"event_orchestrations.write\",\"ip_allow_lists.write\",\"users:sessions.read\",\"templates.write\",\"status_pages.write\",\"teams.write\",\"status_dashboards.read\",\"event_rules.write\",\"tags.write\",\"services.write\",\"audit_records.read\",\"services.read\",\"oauth_delegations.read\",\"custom_fields.write\",\"analytics.read\",\"pd_advance.write\",\"change_events.read\",\"jira_cloud_accounts.read\",\"change_events.write\",\"jira_cloud_rules.write\",\"standards.read\",\"session_configurations.read\",\"incidents.write\",\"escalation_policies.read\",\"teams.read\",\"event_rules.read\",\"custom_fields.read\",\"maintenance_windows.read\",\"subscribers.read\",\"schedules.write\",\"licenses.read\",\"workflow_integrations.read\",\"event_enrichments.write\",\"incident_workflows:instances.write\",\"event_enrichments.read\",\"extensions.write\",\"incident_workflows.read\",\"priorities.read\",\"copilot:chat.read\",\"extensions.read\",\"addons.read\",\"schedules.read\",\"vendors.read\",\"ip_allow_lists.read\",\"oauth_delegations.write\",\"automation_actions.write\",\"contextual_data.read\",\"status_pages.read\",\"escalation_policies.write\"]. Authorization-server metadata advertises authorization_code, refresh_token, client_credentials, and vendor-specific grants; PKCE S256; token auth methods client_secret_post, client_secret_basic, private_key_jwt; revocation endpoint https://app.pagerduty.com/global/oauth/revoke. Token lifetime not supplied. Official docs state DCR is not supported. They also document API-key header format Authorization: Token token=… and bearer tokens.",
+      "authorization_server": "https://app.pagerduty.com/global/oauth/anonymous",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+        "https://docs.pagerduty.com/developer/api/reference/mcp/pagerduty-mcp-api/mcp-root",
+        "https://mcp.pagerduty.com/.well-known/oauth-protected-resource/mcp",
+        "https://app.pagerduty.com/.well-known/oauth-authorization-server/global/oauth/anonymous",
+        "https://mcp.pagerduty.com/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The hosted documentation and API reference checked describe tools but do not document MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+        "https://docs.pagerduty.com/developer/api/reference/mcp/pagerduty-mcp-api/mcp-root"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted prompt catalogue or prompts/list documentation was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+        "https://docs.pagerduty.com/developer/api/reference/mcp/pagerduty-mcp-api/mcp-root"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted MCP logging capability is documented. The API reference includes PagerDuty activity and log-entry data tools, which concern product data rather than MCP protocol logging.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+        "https://docs.pagerduty.com/developer/api/reference/mcp/pagerduty-mcp-api/mcp-root"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted sampling behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted roots behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP authorization metadata discovery.",
+      "description_what_how": "Endpoint returns 401 and points to protected-resource metadata at the endpoint-path well-known URL. That document identifies the PagerDuty authorization server and header bearer method. OAuth server metadata supports authorization code and client credentials among other grants and advertises S256 PKCE. Official docs say DCR is unsupported and document API keys as an alternative. The base protected-resource URL returned 404 in the supplied evidence; the path-specific URL returned 200. No token lifetime was supplied.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated endpoint response is HTTP 401 with JSON invalid_token error and WWW-Authenticate metadata reference.",
+      "authorization_mechanism": "Metadata Doc; DCR not supported per docs and no registration_endpoint in supplied metadata; authorization_code and client_credentials grants available; PKCE S256; client-secret post/basic and private_key_jwt token authentication; header bearer method; API-key alternative. Full scopes_supported list is recorded in the Tools capability entry. Token lifetime unavailable; revocation endpoint is documented in authorization-server metadata.",
+      "authorization_server": "https://app.pagerduty.com/global/oauth/anonymous",
+      "sources": [
+        "https://mcp.pagerduty.com/mcp",
+        "https://mcp.pagerduty.com/.well-known/oauth-protected-resource",
+        "https://mcp.pagerduty.com/.well-known/oauth-protected-resource/mcp",
+        "https://app.pagerduty.com/.well-known/oauth-authorization-server/global/oauth/anonymous",
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted MCP elicitation flow is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted MCP tasks capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Official setup supports OAuth or API-key authentication and documents a separate EU endpoint. Tool filtering is not directly available; scoped OAuth clients can limit which tools succeed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+        "https://developer.pagerduty.com/docs/oauth-functionality"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The API reference documents JSON-RPC errors and HTTP 400, 401, 403, 429, and 500 responses. It explains 401 authentication failures, 403 permission failures, and 429 rate limiting.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Documented errors contain JSON-RPC error code, message, and optional details; HTTP error schemas include code, message, and errors.",
+      "sources": [
+        "https://docs.pagerduty.com/developer/api/reference/mcp/pagerduty-mcp-api/mcp-root"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted progress notification behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted cancellation behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Streamable HTTP is documented.",
+      "description_what_how": "The hosted service is a remote, PagerDuty-maintained server using Streamable HTTP. The local archived implementation has separate server instructions and code; these are not evidence of instructions sent by the hosted service.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+        "https://github.com/PagerDuty/pagerduty-mcp-server/blob/dcfbdb82e1a63584bf5c37b43007561498b06dc7/pagerduty_mcp/server.py#L32-L38"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official hosted docs divide operations into browse and manage categories but do not publish tool annotations. The archived local variant labels read tools readOnlyHint=true and write tools destructiveHint=true; those annotations are not attributed to the hosted service. 2. No server-enforced confirmation parameter or preview/confirm flow was found in hosted docs. Product approval workflows are available as PagerDuty operations, but their enforcement in this MCP server is not documented. 3. Authentication is API key or OAuth; docs support user-level and account-level credentials and state some filters require user-level auth. OAuth metadata advertises many resource scopes, PKCE S256, token grants, and revocation. Token lifetime, redirect-URI approval rules, and allowlists are Unknown. 4. Hosted docs say tool filtering is not directly available; scoped OAuth can limit which tools succeed. US and EU endpoints are documented. No read-only hosted mode or sandbox endpoint was found. 5. Hosted MCP-specific masking, PII exclusions, and secret-field handling: Unknown. Product permissions apply to authenticated requests, but exact field boundaries are not documented. 6. API reference documents HTTP 429 and rate limiting but no MCP-specific quota. A third-party catalog reports REST API limits, which are not treated as verified MCP limits. No MCP result cap or truncation documentation found. 7. Hosted parameter validation/correction and operator overrides: Unknown; hosted schemas are not published in the checked sources. 8. Vendor logging, MCP audit attribution, and telemetry behavior/opt-out: Unknown. Pricing page includes audit trail reporting as a product capability. 9. No vendor feedback, rating, report, survey, or upsell tool was found in the listed tool names. 10. Hosted initialize instructions and server-delivered skills are not published. User-level guidance includes: “Tool filtering is not directly available for the PagerDuty-hosted server at this point in time. You can, however, limit which tools succeed by using a Scoped OAuth client.” The archived local code advises caution on writes and confirmation for destructive tools; this does not establish hosted behavior. 11. Whether past agent behavior changes future results or available context: Unknown. 12. One documented hosted endpoint per region (US/global and EU); no sub-server hierarchy documented. 13. No raw API, arbitrary SQL, script, or general request tool identified in the 63 names visible in the Claude connector directory listing; its page states 64 total, so one name was not available to inspect.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Tool filtering is not directly available for the PagerDuty-hosted server at this point in time. You can, however, limit which tools succeed by using a Scoped OAuth client."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "PagerDuty documents separate US/global and EU hosted endpoints. The docs do not establish whether they differ in tools or behavior.",
+    "sources": [
+      "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+      "https://docs.pagerduty.com/developer/api/reference/mcp/pagerduty-mcp-api/mcp-root",
+      "https://developer.pagerduty.com/docs/oauth-functionality",
+      "https://www.pagerduty.com/pricing/",
+      "https://claude.com/connectors/pagerduty",
+      "https://github.com/PagerDuty/pagerduty-mcp-server/blob/dcfbdb82e1a63584bf5c37b43007561498b06dc7/pagerduty_mcp/server.py#L32-L63"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "63 listed; directory states 64",
+    "action_count_comment": "The official hosted tool reference is https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server. It names 18 browse/manage groups and enumerates operations within each, but does not publish a complete machine-name list or schemas. The MCP API reference gives a list_incidents example. The Claude connector directory lists 63 exact machine names visible in its page and states “Show all 64 tools”; one name was not available to inspect. actions.json contains those 63 names. Names confirmed verbatim by official sources are marked Official; the remaining names are appended as Third-party (Claude connector directory, 2026-10). The directory describes the connector as made by PagerDuty but is classified as third-party under the required source rules. No MCP-specific tool list or total was stated by PagerDuty.",
+    "actions": [
+      {
+        "tool_name": "add_note_to_incident",
+        "description": "add note to incident in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "add_responders",
+        "description": "add responders in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "add_team_member",
+        "description": "add team member in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "append_event_orchestration_router_rule",
+        "description": "append event orchestration router rule in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_alert_grouping_setting",
+        "description": "create alert grouping setting in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_incident",
+        "description": "create incident in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_schedule",
+        "description": "create schedule in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_schedule_override",
+        "description": "create schedule override in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_service",
+        "description": "create service in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_status_page_post",
+        "description": "create status page post in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_status_page_post_update",
+        "description": "create status page post update in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_team",
+        "description": "create team in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "delete_alert_grouping_setting",
+        "description": "delete alert grouping setting in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "delete_team",
+        "description": "delete team in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_alert_from_incident",
+        "description": "get alert from incident in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_alert_grouping_setting",
+        "description": "get alert grouping setting in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_change_event",
+        "description": "get change event in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_escalation_policy",
+        "description": "get escalation policy in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_event_orchestration",
+        "description": "get event orchestration in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_event_orchestration_global",
+        "description": "get event orchestration global in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_event_orchestration_router",
+        "description": "get event orchestration router in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_event_orchestration_service",
+        "description": "get event orchestration service in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_incident",
+        "description": "get incident in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_incident_workflow",
+        "description": "get incident workflow in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_log_entry",
+        "description": "get log entry in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_outlier_incident",
+        "description": "get outlier incident in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_past_incidents",
+        "description": "get past incidents in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_related_incidents",
+        "description": "get related incidents in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_schedule",
+        "description": "get schedule in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_service",
+        "description": "get service in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_status_page_post",
+        "description": "get status page post in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_team",
+        "description": "get team in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "get_user_data",
+        "description": "get user data in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_alert_grouping_settings",
+        "description": "list alert grouping settings in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_alerts_from_incident",
+        "description": "list alerts from incident in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_change_events",
+        "description": "list change events in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_escalation_policies",
+        "description": "list escalation policies in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_event_orchestrations",
+        "description": "list event orchestrations in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_incident_change_events",
+        "description": "list incident change events in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_incident_notes",
+        "description": "list incident notes in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_incident_workflows",
+        "description": "list incident workflows in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_incidents",
+        "description": "list incidents in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_log_entries",
+        "description": "list log entries in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_oncalls",
+        "description": "list oncalls in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_schedule_users",
+        "description": "list schedule users in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_schedules",
+        "description": "list schedules in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_service_change_events",
+        "description": "list service change events in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_services",
+        "description": "list services in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_status_page_impacts",
+        "description": "list status page impacts in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_status_page_post_updates",
+        "description": "list status page post updates in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_status_page_severities",
+        "description": "list status page severities in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_status_page_statuses",
+        "description": "list status page statuses in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_status_pages",
+        "description": "list status pages in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_team_members",
+        "description": "list team members in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_teams",
+        "description": "list teams in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "list_users",
+        "description": "list users in PagerDuty.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "remove_team_member",
+        "description": "remove team member in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "start_incident_workflow",
+        "description": "start incident workflow in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "update_alert_grouping_setting",
+        "description": "update alert grouping setting in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "update_event_orchestration_router",
+        "description": "update event orchestration router in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "update_schedule",
+        "description": "update schedule in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "update_service",
+        "description": "update service in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "update_team",
+        "description": "update team in PagerDuty.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/connectors/pagerduty",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted server implementation and initialize output are closed/not published. The archived local server is a distinct deprecated variant, so its context is not used to estimate hosted tokens.",
+    "human_can_agent_cannot": "PagerDuty’s broader product and REST API expose capabilities beyond the MCP tool list. Examples include full account configuration and API operations not named in the hosted MCP tool reference; exact omissions cannot be completely enumerated because hosted schemas are not published. Pricing also documents product capabilities such as mobile access, integrations, and AI features without establishing MCP equivalents.",
+    "sources": [
+      "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+      "https://docs.pagerduty.com/developer/api/reference/mcp/pagerduty-mcp-api/mcp-root",
+      "https://claude.com/connectors/pagerduty",
+      "https://www.pagerduty.com/pricing/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Official client guidance says some list_incidents filters require user-level authentication and that scoped OAuth can restrict which tools succeed. No server-enforced confirmation guidance was found for the hosted endpoint.",
+    "governance_promises": "The hosted MCP docs describe OAuth/API-key authentication and a PagerDuty-hosted managed service. They do not state MCP-specific retention, training use, or logging practices. The privacy policy and terms apply broadly to PagerDuty services; they do not specify hosted MCP data handling in the checked passages.",
+    "promises_to_user": "PagerDuty describes the hosted server as maintained by PagerDuty, remotely accessible, and requiring no local installation. The documentation says it supports OAuth and API keys.",
+    "comparison_with_server_logic": "Authentication and endpoint behavior are corroborated by supplied OAuth metadata and the endpoint’s 401 response. Tool filtering guidance describes authorization-based failures rather than a server-side tool-list filter. Other MCP-specific governance claims could not be compared with server implementation because hosted code and initialize output are unavailable.",
+    "sources": [
+      "https://docs.pagerduty.com/ai-automation/advance/pagerduty-mcp-server",
+      "https://www.pagerduty.com/privacy-policy/",
+      "https://www.pagerduty.com/terms-of-service/",
+      "https://mcp.pagerduty.com/.well-known/oauth-protected-resource/mcp",
+      "https://mcp.pagerduty.com/mcp"
+    ]
+  },
+  "contradictions": [
+    "PagerDuty’s hosted tool reference enumerates 18 browse/manage groups and operations but does not state a total. The Claude connector directory says “Show all 64 tools”; only 63 exact machine names were visible in the collected page.",
+    "The supplied protected-resource metadata lists scopes including incidents.write and other write scopes. The hosted docs say a scoped OAuth client can limit which tools succeed, but do not describe a server-wide read-only mode.",
+    "The base protected-resource metadata URL returned HTTP 404, while the endpoint-path URL https://mcp.pagerduty.com/.well-known/oauth-protected-resource/mcp returned HTTP 200 and was referenced by the endpoint’s 401 challenge.",
+    "The archived public local server is deprecated and described by PagerDuty as a different local variant. Its instructions, tool annotations, and tool inventory are not evidence for the hosted endpoint."
+  ],
+  "observations_for_research": [
+    "Authorization scope lists include both broad read/write scopes and resource-specific scopes, while hosted documentation says scoped OAuth can limit which tools succeed.",
+    "PagerDuty documents regional endpoint selection and authorization-based restriction of tool success; it says direct hosted tool filtering is unavailable."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages index and official docs text/HTML, script-rendered page content where supplied, API reference/OpenAPI document, local archived repository, pricing, privacy and terms pages, and listed third-party catalogues. The hosted implementation and tool schemas are not public in the inspected evidence. The archived local repository is deprecated and explicitly treated as a separate server variant. The Claude directory is third-party evidence; its stated 64-tool total exceeds the 63 exact names available in the saved page. Anchor Terminal and Composio describe proxy/catalogue surfaces and were not used to define the action list. OAuth values are from the pre-fetched responses.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 7.9
+  }
+}

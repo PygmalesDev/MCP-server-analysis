@@ -6,11 +6,11 @@ REASONING_EFFORT = "high"
 
 # Which servers to analyse: a list of names from the CSV column "name",
 # or "remaining" = every server in the CSV that is not in chosen_servers.txt, or "chosen" = the 20 manual ones.
-SERVERS = ["context7", "gocardless", "launchdarkly", "tavily"]
+SERVERS = "remaining"
 # Language of free-text fields in the result
 LANGUAGE = "English"
-# Re-analyse servers that already have a file in data/<prompt version>/
-OVERWRITE = True
+# Re-analyse servers that already have a file in data/<prompt version>/ (True overwrites the manual corrections!)
+OVERWRITE = False
 # How many Codex runs at the same time
 PARALLEL = 20
 # Max time for one server, minutes
@@ -28,8 +28,8 @@ CHOSEN_FILE = MANUAL_DIR / "chosen_servers.txt"                # the 20 manually
 LINKS_PROMPT_FILE = PROMPT_DIR / "links_v3.md"                 # step 1: link collection
 PROMPT_FILE = PROMPT_DIR / "prompt_v9.md"                      # step 3: analysis
 RESULT_DIR = DATA / "analysis_result"                          # final Excel workbook
-DATA_DIR = DATA / PROMPT_FILE.stem                             # JSON results, one folder per prompt version
+DATA_DIR = DATA / "results" / PROMPT_FILE.stem.replace("prompt_", "")   # JSON results: data/results/v9 for prompt_v9.md
 # Excel: result folders merged in this order; a server found in a later folder replaces the earlier result
-EXCEL_DATA_DIRS = [DATA / "prompt_v9"]
-PROMPTS_DIR = ROOT / "prompts"                                 # generated prompt per server
+EXCEL_DATA_DIRS = [DATA / "results" / "v9"]
+PROMPTS_DIR = DATA / "prompts"                                 # generated prompt per server (not uploaded to GitHub)
 WORK_DIR = ROOT / "work"                                       # per server: links.json, oauth_metadata.txt, pages/, code/, actions.json

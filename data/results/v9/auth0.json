@@ -1,0 +1,555 @@
+{
+  "server": "auth0",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.auth0.com/v1/mcp",
+    "documentation_url_csv": "https://github.com/auth0/auth0-mcp-server#readme",
+    "addressing": "global",
+    "repository_url": "https://github.com/auth0/auth0-mcp-server",
+    "documentation_urls_used": [
+      "https://github.com/auth0/auth0-mcp-server#readme",
+      "https://auth0.com/docs/get-started/auth0-mcp-server/getting-started-with-auth0-mcp-server",
+      "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+      "https://auth0.com/blog/announcement-auth0-mcp-server-is-here/",
+      "https://auth0.com/blog/auth0-mcp-server-in-vscode/",
+      "https://auth0.com/pricing",
+      "https://auth0.com/privacy",
+      "https://mcp.auth0.com/v1/mcp"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "The public repository is Auth0’s local stdio MCP implementation for the same product. The supplied endpoint is a hosted HTTPS endpoint; the reviewed sources do not establish that this repository’s code runs there. The documented tool reference is used as the best available official evidence for the endpoint because endpoint-specific documentation and metadata were unavailable.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "10390b40dc488fa4b582ba52ce861d33b518a86a",
+    "commit_date": "2026-08-13",
+    "implementation_language": "TypeScript (public local implementation)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.29.0 (public local implementation)",
+    "code_public": "Yes",
+    "license": "MIT (public local implementation)",
+    "release_status": "Beta (public implementation; endpoint-specific release status not found)",
+    "other_official_servers": [
+      "The public repository documents a local stdio server launched through @auth0/auth0-mcp-server; no separate purpose or tool set for the supplied hosted endpoint was found.",
+      "Auth0 Docs MCP is a separate documentation-search service referenced at https://auth0.com/docs/mcp; it is not the tenant-management server."
+    ],
+    "sources": [
+      "https://github.com/auth0/auth0-mcp-server",
+      "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+      "https://auth0.com/docs/get-started/auth0-mcp-server/getting-started-with-auth0-mcp-server",
+      "https://auth0.com/blog/announcement-auth0-mcp-server-is-here/",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/package.json#L1-L82",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/server.json#L1-L35",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/LICENSE#L1-L21"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific price or endpoint access plan was found. The supplied endpoint returned HTTP 401 with a WWW-Authenticate header according to the input evidence; the prefetched endpoint request itself failed DNS resolution, so its authentication challenge could not be independently inspected.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Auth0 pricing page lists Free at $0/month, Essentials at $35/month, Professional at $240/month, and Enterprise with contact sales; plan prices and included limits vary by use case and configuration.",
+    "pricing_model_details": "Auth0 software pricing is plan-based and includes plan-dependent monthly active user and feature limits. No separate fee per MCP call was found.",
+    "other_access_restrictions": "Hosted endpoint requirements, rate limits, roles, allowlists, regions, and tenant enablement were not found. Public local-server documentation requires an Auth0 account and appropriate permissions; local configuration can filter tools and enable read-only mode.",
+    "restrictions_controlled_by": "Hosted endpoint restrictions: Unknown. For the public local server, the tenant’s Auth0 permissions and the person configuring the local server control access and tool filtering.",
+    "sources": [
+      "https://auth0.com/pricing",
+      "https://github.com/auth0/auth0-mcp-server#readme",
+      "https://auth0.com/docs/get-started/auth0-mcp-server/getting-started-with-auth0-mcp-server",
+      "https://mcp.auth0.com/v1/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The official Auth0 MCP tools reference documents 20 tenant-management tools for applications and grants, APIs/resource servers, Actions, logs, and Forms. Tool schemas and annotations are not exposed in that reference. The public local implementation defines 23 tools, including three local setup/onboarding helpers; equivalence to the hosted endpoint is unverified.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Official hosted-endpoint response structure not found. Public local code returns MCP tool results with text content and an isError boolean; caught errors are returned as text prefixed with Error:.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L1-L190",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/index.ts#L1-L80"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The reviewed hosted tool reference does not document MCP resources. The public local server advertises tool and logging capabilities; no resources capability is registered in its server initialization.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP prompts are documented for the hosted endpoint. The local server’s registered request handlers cover tool listing and tool calls; the reviewed initialization does not register prompt handlers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted logging capability details were found. Public local code advertises MCP logging and writes operational messages through its logger; tool calls also produce Heap analytics events (see section D).",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Hosted format unknown. Local server logs operational messages; MCP logging registration is present in its server capabilities.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/utils/analytics.ts#L1-L240"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Not documented for the hosted endpoint. The public local code’s server initialization does not advertise sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Not documented for the hosted endpoint. The public local implementation includes project-path parameters for local onboarding helpers, but no MCP roots capability is declared in server initialization.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/onboarding.ts#L23-L80"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Input evidence reports HTTP 401 and a WWW-Authenticate header for the endpoint. The prefetched POST and OAuth well-known metadata requests all returned DNS resolution errors: `ERROR: <urlopen error [Errno 11001] getaddrinfo failed>`. Therefore no authorization-server URL, registration endpoint, PKCE support, grant types, token-auth methods, scopes_supported, lifetime, or revocation metadata could be extracted. The public local implementation instead uses an Auth0 device authorization flow; it is not confirmed as the hosted endpoint’s flow.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "Endpoint evidence: HTTP 401 with WWW-Authenticate header (reported in input). Raw prefetched values: POST https://mcp.auth0.com/v1/mcp — `ERROR: <urlopen error [Errno 11001] getaddrinfo failed>`; https://mcp.auth0.com/.well-known/oauth-protected-resource — same error; https://mcp.auth0.com/.well-known/oauth-protected-resource/v1/mcp — same error; https://mcp.auth0.com/.well-known/oauth-authorization-server — same error; https://mcp.auth0.com/.well-known/openid-configuration — same error. OAuth mechanism and scopes_supported: NOT FOUND.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.auth0.com/v1/mcp",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/auth/device-auth-flow.ts#L1-L327",
+        "https://auth0.com/blog/announcement-auth0-mcp-server-is-here/"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The hosted endpoint documentation does not describe MCP elicitation. The public local server code reviewed does not register elicitation handlers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted task capability documentation was found. The public local code reviewed does not register task handlers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Hosted configuration options were not found. The public local implementation supports tool patterns and read-only mode through CLI flags or environment variables; CLI flags take precedence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/auth0/auth0-mcp-server#readme",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/commands/run.ts#L1-L150",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/utils/tools.ts#L1-L120"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted error-reporting details were found. The public local server returns tool errors as text results with isError true; operational error logging is also present.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Hosted format unknown; local behavior is described in the Tools entry.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L90-L185"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription capability is documented for the hosted endpoint. The public local code reviewed does not register subscription handlers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted progress capability is documented. The public local server code reviewed does not register progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted cancellation behavior is documented. The public local server code reviewed does not register a cancellation capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L80"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Hosted server instructions and server-card metadata were not found. Public local tool descriptions contain guidance, including onboarding and credential-handling instructions, but hosted correspondence is unverified.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/onboarding.ts#L23-L80",
+        "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/quickstarts.ts#L25-L100"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official hosted reference names read and write operations but publishes no tool annotations. Public local tool definitions mark read-only tools with readOnlyHint true and write tools false; create/update/deploy actions are writes. destructiveHint and idempotentHint are defined for local tools, but hosted annotations are unknown. 2. Hosted confirmation enforcement was not found. Docs recommend reviewing suggested changes before confirming; local tool descriptions do not establish server-enforced confirmation. 3. Hosted scopes, roles, admin switches, allowlists, token lifetime, and revocation were not found because OAuth metadata requests failed. Product docs describe user authentication and permissions generally. 4. Hosted read-only modes, filters, environment separation, and region variants were not found. Local code supports --read-only and --tools; read-only takes priority over tool patterns. 5. Hosted response redaction and data boundaries are undocumented. Local code states it redacts sensitive fields such as client_secret and token as [REDACTED]. 6. Hosted rate limits, quotas, caps, truncation, and per-call costs were not found. Local code limits auth0_save_credentials_to_file to five calls per minute and caps auth0_list_logs take at 100 (default 50). 7. Hosted argument validation is unknown. Local server rejects arguments outside the declared input schema; individual handlers also validate parameters. 8. Hosted logging and telemetry are unknown. Local code sends tool usage and runtime properties to Heap unless AUTH0_MCP_ANALYTICS=false. 9. No vendor feedback/rating tools appear in the official 20-name list. Hosted upsell behavior is unknown. 10. Hosted instructions/skills were not found. Local tool descriptions include behavioral guidance; external Auth0 Agent Skills are documented separately. 11. Hosted memory/state behavior was not found. 12. Hosted architecture beyond this endpoint was not found; local implementation is a flat tool server. 13. No raw API request, arbitrary SQL, or script-execution tool appears in the official tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[LOCAL CODE @10390b40] “Prefer OIDC compliant unless otherwise specified.”",
+      "[LOCAL CODE @10390b40] “After creating, always explicitly tell the user that the client_secret is redacted in this response for security and provide the dashboard URL and API URL from _credentials_access so they know where to view the full secret.”",
+      "[LOCAL CODE @10390b40] “Only supports frameworks listed in the enum. If the user's framework is not supported, inform them that their framework is not yet supported and do NOT proceed with onboarding.”",
+      "[DOCS] “Review before confirming: When Claude suggests changes, review them carefully before confirming.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The official hosted tool reference presents one flat tool list. The endpoint’s implementation and possible dynamic behavior were not independently observed.",
+    "sources": [
+      "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+      "https://auth0.com/docs/get-started/auth0-mcp-server/getting-started-with-auth0-mcp-server",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L55-L185",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/applications.ts#L72-L265",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/onboarding.ts#L23-L80",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/utils/response-masker.ts#L1-L100",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/utils/analytics.ts#L1-L240",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/logs.ts#L1-L100",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/utils/tools.ts#L1-L120",
+      "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "20",
+    "action_count_comment": "Official Auth0 tool reference exists at https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference and names 20 tools; it states no total. No catalogue-only tools were added because catalogue pages describe the local stdio product variant, not verified tools of the supplied hosted endpoint. MCP100 reports 23 local tools (Applications 5, resource servers 4, Actions 5, Logs 2, Forms 4, plus local helpers); Agent Switchboard gives no tool count, and Vetted reports local stdio registry metadata rather than a tool count. The official local code includes three additional local-only helpers absent from the hosted docs list; those are not included here. Parameter schemas below use the public local code as best available same-product evidence and are labeled accordingly where practical.",
+    "actions": [
+      {
+        "tool_name": "auth0_list_applications",
+        "description": "List tenant applications or search by name.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: number (optional); per_page: number (optional); include_totals: boolean (optional)",
+        "parameter_count": "3",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_get_application",
+        "description": "Retrieve one application’s details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "client_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_create_application",
+        "description": "Create an Auth0 application.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); app_type: string (optional; enum 4); description: string; callbacks: string[]; allowed_origins: string[]; allowed_clients: string[]; allowed_logout_urls: string[]; is_first_party: boolean; oidc_conformant: boolean; sso_disabled: boolean; cross_origin_authentication: boolean; logo_uri: string; organization_usage: string (enum 3); organization_require_behavior: string (enum 3); token_endpoint_auth_method: string (enum 3); grant_types: string[]; jwt_configuration: object; refresh_token: object|null; mobile: object; web_origins: string[]; client_metadata: object; encryption_key: object; addons: object; native_social_login: object",
+        "parameter_count": "24",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_update_application",
+        "description": "Update an existing application.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "client_id: string (required); other update fields from create schema are optional",
+        "parameter_count": "Unknown",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_create_application_grant",
+        "description": "Grant an application API access with scopes.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "client_id: string (required); audience: string (required); scope: string[] (required)",
+        "parameter_count": "3",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_list_resource_servers",
+        "description": "List tenant APIs (resource servers).",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: number; per_page: number; include_totals: boolean; fields: string[]; include_fields: boolean",
+        "parameter_count": "5",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_get_resource_server",
+        "description": "Retrieve one API’s details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required)",
+        "parameter_count": "1",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_create_resource_server",
+        "description": "Create an Auth0 API/resource server.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); identifier: string (required); scopes: object[]; signing_alg: string (enum 2); signing_secret: string; allow_offline_access: boolean; token_lifetime: number; token_lifetime_for_web: number; skip_consent_for_verifiable_first_party_clients: boolean; enforce_policies: boolean; client: object; token_dialect: string; token_encryption: object; authorization_details: object[]; consent_policy: string; proof_of_possession: object",
+        "parameter_count": "16",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_update_resource_server",
+        "description": "Update an existing API/resource server.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); name, scopes, signing_alg, signing_secret, allow_offline_access, token_lifetime, token_lifetime_for_web, skip_consent_for_verifiable_first_party_clients, enforce_policies, client, token_dialect, token_encryption, authorization_details, consent_policy, proof_of_possession (optional)",
+        "parameter_count": "16",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_list_actions",
+        "description": "List tenant Actions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: number; per_page: number; include_totals: boolean; trigger_id: string",
+        "parameter_count": "4",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_get_action",
+        "description": "Retrieve one Action’s details and code.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required)",
+        "parameter_count": "1",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_create_action",
+        "description": "Create a tenant Action.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); supported_triggers: object[] (required); code: string (required); runtime: string; dependencies: object[]; secrets: object[]",
+        "parameter_count": "6",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_update_action",
+        "description": "Update an existing Action.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); name; supported_triggers; code; runtime; dependencies; secrets (optional)",
+        "parameter_count": "7",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_deploy_action",
+        "description": "Deploy an Action version.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required)",
+        "parameter_count": "1",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_list_logs",
+        "description": "List and filter tenant logs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "from: string; take: number (1–100; default 50); q: string; sort: string (enum 2); include_fields: boolean; include_totals: boolean",
+        "parameter_count": "6",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_get_log",
+        "description": "Retrieve one log entry by ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required)",
+        "parameter_count": "1",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_list_forms",
+        "description": "List tenant Forms.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: number; per_page: number; include_totals: boolean",
+        "parameter_count": "3",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_get_form",
+        "description": "Retrieve one Form’s details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required)",
+        "parameter_count": "1",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_create_form",
+        "description": "Create an Auth0 Form.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "name: string (required); messages: object; languages: object; translations: object; nodes: object[]; start: object; ending: object; style: object",
+        "parameter_count": "8",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "auth0_update_form",
+        "description": "Update an existing Auth0 Form.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "id: string (required); name; messages; languages; translations; nodes; start; ending; style (optional)",
+        "parameter_count": "9",
+        "source": "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted endpoint tool definitions and initialize instructions were unavailable; the public code is not confirmed to be the deployed hosted implementation. The official hosted docs provide names and prose descriptions but not verbatim tool schemas/instructions.",
+    "human_can_agent_cannot": "The hosted MCP reference covers only the listed application, API/resource-server, Action, log, and Form operations. It does not list user-management operations, application deletion, or a general raw Management API call. The public local code also does not define a user-management or delete-application tool. Humans can use the Auth0 Dashboard and Management API directly for operations beyond the documented MCP tool set; public REST documentation is not used as MCP schema evidence.",
+    "sources": [
+      "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+      "https://auth0.com/docs/get-started/auth0-mcp-server/getting-started-with-auth0-mcp-server",
+      "https://mcp100.dev/mcp/auth0",
+      "https://agentswitchboard.dev/agents/auth0-mcp",
+      "https://vetted.tools/mcp/auth0-mcp",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/applications.ts#L1-L540",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/resource-servers.ts#L1-L280",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/actions.ts#L1-L310",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/logs.ts#L1-L100",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/tools/forms.ts#L1-L220",
+      "https://auth0.com/docs/manage-users/user-search/view-users"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The official tool guide says: “Review before confirming: When Claude suggests changes, review them carefully before confirming.” This is client/user guidance; no hosted server enforcement was documented. The public local code enforces schema allowlisting but not a human approval step.",
+    "governance_promises": "Auth0’s announcement says MCP operations are secured through OAuth 2.0 and scoped permissions. The local README says sensitive values such as client_secret and token are redacted as [REDACTED]. The hosted endpoint’s token handling and redaction behavior could not be verified. The local implementation sends usage analytics to Heap by default, with AUTH0_MCP_ANALYTICS=false as the opt-out.",
+    "promises_to_user": "The product announcement describes secure management without handing over raw API tokens or direct Management API access. The local README says beta software is provided as is without warranties and is not recommended for production workloads.",
+    "comparison_with_server_logic": "The OAuth and security claims are documented for the product, but endpoint-specific implementation evidence is unavailable. Public local code implements sensitive-field redaction, tool argument allowlisting, and optional analytics opt-out. The recommendation to review before confirmation remains client/user guidance in the reviewed evidence.",
+    "sources": [
+      "https://auth0.com/docs/get-started/auth0-mcp-server/auth0-mcp-tools-reference",
+      "https://auth0.com/blog/announcement-auth0-mcp-server-is-here/",
+      "https://github.com/auth0/auth0-mcp-server#readme",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/server.ts#L90-L130",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/utils/response-masker.ts#L1-L100",
+      "https://github.com/auth0/auth0-mcp-server/blob/10390b40dc488fa4b582ba52ce861d33b518a86a/src/utils/analytics.ts#L1-L240"
+    ]
+  },
+  "contradictions": [
+    "The hosted tools reference documents 20 tools. The public local implementation and third-party MCP100 listing show 23 tools, including local-only auth0_save_credentials_to_file, auth0_onboarding, and auth0_get_quickstart_guide; their availability on the supplied hosted endpoint is unverified.",
+    "The getting-started documentation mentions verifying auth0_delete_application, but the official tools reference and public local tool definitions contain no delete-application tool.",
+    "The public local code and README mention saving credentials and onboarding helpers, which are absent from the official hosted tools reference. The reference’s Form list also omits a publish-form tool; the public local code contains no publish-form tool either."
+  ],
+  "observations_for_research": [
+    "The official product documentation describes a local stdio server, while the researched object is a global hosted HTTPS endpoint; public evidence does not tie the hosted deployment to the repository implementation.",
+    "The official hosted tools reference gives names and natural-language descriptions but does not publish schemas or annotations; parameter details were inferred from same-product public local code and may not match the hosted endpoint.",
+    "The documentation recommends client-side review before confirmation; this is distinct from a server-enforced approval mechanism, for which hosted evidence was not found."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, all indexed pages and scripts, the local public repository at commit 10390b40dc488fa4b582ba52ce861d33b518a86a, and supplied OAuth evidence. The docs URL supplied in the input returned HTTP 404; official Auth0 docs pages were found at the URLs cited above. Endpoint-specific page and OAuth metadata fetches failed DNS in the prefetched evidence despite the input’s separate HTTP 401/WWW-Authenticate connection-test note. Pricing was checked on Auth0’s official pricing page. No MCP-specific price or dedicated AI/MCP terms were found. Third-party catalogues were treated as cross-checks only; their listings refer to the local stdio implementation. The privacy-policy URL was identified but MCP-specific processing terms were not located.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 12.5
+  }
+}

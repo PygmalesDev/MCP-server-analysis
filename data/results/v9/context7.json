@@ -1,0 +1,347 @@
+{
+  "server": "context7",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.context7.com/mcp",
+    "documentation_url_csv": "https://context7.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/upstash/context7",
+    "documentation_urls_used": [
+      "https://context7.com/docs/resources/all-clients",
+      "https://context7.com/docs/api-guide",
+      "https://context7.com/docs/overview",
+      "https://context7.com/docs/resources/troubleshooting",
+      "https://context7.com/docs/security/overview",
+      "https://context7.com/docs/security/data-privacy",
+      "https://context7.com/docs/security/auth-and-access-control",
+      "https://context7.com/docs/enterprise",
+      "https://context7.com/docs/enterprise/on-premise",
+      "https://context7.com/docs/howto/usage",
+      "https://context7.com/docs/howto/admin-mcp",
+      "https://context7.com/plans",
+      "https://context7.com/privacy",
+      "https://context7.com/terms"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official @upstash/context7-mcp package is the local stdio implementation and direct local equivalent of the hosted server. Its core tool names, descriptions, and schemas match the hosted documentation. The repository also implements hosted HTTP and OAuth behavior, but deployment identity for the exact hosted binary is not independently confirmed.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "60e59f935f1ee1f25dcaeaddade53f628fb6d4e6",
+    "commit_date": "2026-10-27",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/server 2.3.1; @modelcontextprotocol/node 2.1.1",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.context7.com/mcp/oauth — OAuth-enabled remote route documented by Context7; same Context7 MCP product.",
+      "Context7 Admin MCP is documented as a separate administrative MCP capability for enterprise management; https://context7.com/docs/howto/admin-mcp. Its endpoint URL was not established in the sources reviewed.",
+      "Context7 On-Premise includes a built-in MCP server deployed in the customer's infrastructure; its URL is deployment-specific. https://context7.com/docs/enterprise/on-premise"
+    ],
+    "sources": [
+      "https://context7.com/docs/resources/all-clients",
+      "https://context7.com/docs/security/data-privacy",
+      "https://context7.com/docs/howto/admin-mcp",
+      "https://context7.com/docs/enterprise/on-premise",
+      "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L298-L310",
+      "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/package.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "The hosted MCP endpoint is documented with an API key for higher rate limits; the Free plan includes 1,000 API calls per month. Pro includes 2,000 calls per seat monthly, then $5 per 1,000 additional calls. The docs do not state a separate MCP connection fee.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Free: $0; Pro: $10 per seat per month; Enterprise: published range starts at $30/user/month for small teamspaces and can reach $2.50/user/month for larger organizations. Enterprise custom pricing and self-hosted options are available.",
+    "pricing_model_details": "Free API requests are capped at 1,000 per month, with 20 bonus calls each day after the cap until monthly reset. Pro allocates 2,000 calls per seat monthly; overage is $5 per 1,000 calls. Private-source parsing is separately charged at $5 per 1M tokens. Enterprise pricing varies by volume.",
+    "other_access_restrictions": "API-key authentication is documented for higher rate limits; public documentation says private repositories require Pro or Enterprise. OAuth is supported for remote HTTP clients via /mcp/oauth. No endpoint-specific role, client allowlist, or region restriction was found.",
+    "restrictions_controlled_by": "Vendor; teamspace administrators control teamspace policies, member access, and retrieval scope.",
+    "sources": [
+      "https://context7.com/plans",
+      "https://context7.com/docs/howto/usage",
+      "https://context7.com/docs/resources/all-clients",
+      "https://context7.com/docs/security/auth-and-access-control",
+      "https://context7.com/docs/security/data-privacy"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official hosted documentation lists two tools: resolve-library-id and query-docs. The public code registers both as read-only, idempotent, open-world tools. The endpoint connection test returned HTTP 200 with JSON-RPC; supplied OAuth probe to /mcp returned HTTP 415 because Content-Type was not application/json.",
+      "pre_interaction_context_verbatim": "Use this server to fetch current documentation whenever the user asks about a library, framework, SDK, API, CLI tool, or cloud service — even well-known ones like React, Next.js, Prisma, Express, Tailwind, Django, or Spring Boot. This includes API syntax, configuration, version migration, porting code between libraries, platforms, or SQL dialects, library-specific debugging, setup instructions, and CLI tool usage. Use even when you think you know the answer — your training data may not reflect recent changes. Prefer this over web search for library docs.\n\nDo not use for: refactoring, debugging, or reviewing code that does not depend on a library or platform API, or general programming concepts.",
+      "post_interaction_context_structure": "Tools return text content. resolve-library-id formats matches under “Available Libraries”; query-docs returns documentation context and code examples. Upstream failures can be returned as text with isError set; an empty library match is not itself an error.",
+      "sources": [
+        "https://context7.com/docs/resources/all-clients",
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L298-L300",
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L365-L397",
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L440-L452"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public code advertises resource list capability handlers but registers no resources or templates for the Context7 product.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Empty resource and resource-template lists are supported by the server implementation.",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L279-L296"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public code advertises prompt list capability but registers no MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "An empty prompt list is supported by the server implementation.",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L279-L296"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed product tool documentation does not describe MCP logging notifications. The public package includes telemetry and metrics instrumentation; whether MCP logging is exposed to clients was not established.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts",
+        "https://context7.com/docs/security/data-privacy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling capability is declared in the public server setup. Context7's retrieval documentation says its service sends MCP-formulated queries to LLM providers for reranking; that is server-side product behavior, not MCP sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L279-L305",
+        "https://context7.com/docs/security/data-privacy"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is declared in the public server setup.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L279-L305"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The protected-resource metadata for both the host and /mcp identifies https://clerk.context7.com and https://context7.com as authorization servers, supports bearer tokens in the Authorization header, and lists scopes_supported [\"profile\",\"email\"]. Clerk metadata advertises authorization_code, refresh_token, and device_code grants; PKCE S256; DCR at /oauth/register; token auth methods client_secret_basic, none, client_secret_post; and revocation. Context7 issuer metadata advertises authorization_code, refresh_token, and urn:ietf:params:oauth:grant-type:jwt-bearer, PKCE S256, and registration at /api/oauth/register. The endpoint's own POST probe returned 415, so it did not provide a WWW-Authenticate challenge in that request. Vendor docs direct OAuth clients to /mcp/oauth. Token lifetime not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth metadata documents HTTP bearer authorization. The endpoint has a separate documented OAuth route at /mcp/oauth.",
+      "authorization_mechanism": "Metadata Doc; API key also documented. Raw protected-resource values: resource=https://mcp.context7.com and resource=https://mcp.context7.com/mcp; authorization_servers=[https://clerk.context7.com, https://context7.com]; scopes_supported=[profile,email]; bearer_methods_supported=[header]. Clerk authorization-server metadata: registration_endpoint=https://clerk.context7.com/oauth/register; grant_types_supported=[authorization_code,refresh_token,urn:ietf:params:oauth:grant-type:device_code]; code_challenge_methods_supported=[S256]; token_endpoint_auth_methods_supported=[client_secret_basic,none,client_secret_post]; revocation_endpoint=https://clerk.context7.com/oauth/token/revoke; scopes_supported=[openid,profile,email,public_metadata,private_metadata,offline_access]. Context7 authorization-server metadata: registration_endpoint=https://context7.com/api/oauth/register; grant_types_supported=[authorization_code,refresh_token,urn:ietf:params:oauth:grant-type:jwt-bearer]; code_challenge_methods_supported=[S256]; token_endpoint_auth_methods_supported=[none,client_secret_basic,client_secret_post]; scopes_supported=[profile,email,offline_access]. OIDC metadata also advertises issuer, keys, and supported claims. Token lifetime NOT FOUND. Supplied POST to /mcp returned HTTP 415: Content-Type must be application/json.",
+      "authorization_server": "https://clerk.context7.com and https://context7.com",
+      "sources": [
+        "https://mcp.context7.com/.well-known/oauth-protected-resource",
+        "https://mcp.context7.com/.well-known/oauth-protected-resource/mcp",
+        "https://clerk.context7.com/.well-known/oauth-authorization-server",
+        "https://clerk.context7.com/.well-known/openid-configuration",
+        "https://context7.com/.well-known/oauth-authorization-server",
+        "https://context7.com/.well-known/openid-configuration",
+        "https://context7.com/docs/resources/all-clients"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public code includes an auth sign-in elicitation helper invoked from tool handlers when appropriate. No user confirmation or approval elicitation for the read operations is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The tool handlers may prompt for authentication; precise elicitation payload and conditions are implemented in the auth helper.",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L365-L388",
+        "https://github.com/upstash/context7/tree/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/lib/auth"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Task support is not described by the official hosted tool documentation. The public code reviewed did not establish a task capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://context7.com/docs/resources/all-clients",
+        "https://github.com/upstash/context7/tree/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Clients configure the global HTTP endpoint and may provide an API key in the Authorization header. OAuth clients use /mcp/oauth. Local stdio setup accepts an API key. Teamspace policies configure which documentation source types and libraries may be retrieved.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration occurs in the MCP client or Context7 dashboard; the server documentation does not describe an MCP configuration tool.",
+      "sources": [
+        "https://context7.com/docs/resources/all-clients",
+        "https://context7.com/docs/security/data-privacy",
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L279-L305"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool handlers return text for empty matches and upstream failures; upstream failure results set isError. The public docs provide troubleshooting guidance but no MCP feedback or report tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Text content; upstream errors may set isError=true.",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L369-L382",
+        "https://context7.com/docs/resources/troubleshooting"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No product subscription tool is declared in the public tool registrations. The repository has server-session subscription metrics, which concern protocol/session telemetry rather than a user-facing subscription capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L306-L439",
+        "https://github.com/upstash/context7/tree/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/lib"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public tool handlers perform requests and return results; no progress notifications are declared in the reviewed tool implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L306-L452"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public code contains cancellation handling for requests and batches. Tool documentation does not describe a separate cancellation action.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Request cancellation is handled at the protocol/server layer.",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L235-L279"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Server initialize instructions steer agents toward current library documentation and away from web search. The code also declares list cache hints: static tool, prompt, resource, resource-template, and discovery responses may be reused for an hour.",
+      "pre_interaction_context_verbatim": "Use this server to fetch current documentation whenever the user asks about a library, framework, SDK, API, CLI tool, or cloud service — even well-known ones like React, Next.js, Prisma, Express, Tailwind, Django, or Spring Boot. This includes API syntax, configuration, version migration, porting code between libraries, platforms, or SQL dialects, library-specific debugging, setup instructions, and CLI tool usage. Use even when you think you know the answer — your training data may not reflect recent changes. Prefer this over web search for library docs.\n\nDo not use for: refactoring, debugging, or reviewing code that does not depend on a library or platform API, or general programming concepts.",
+      "post_interaction_context_structure": "Tool and capability-list responses have static cache hints; code comments describe a one-hour reuse window and compatibility with old argument names after schema changes.",
+      "sources": [
+        "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L287-L300"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Both tools are read-only, destructiveHint=false, idempotentHint=true, openWorldHint=true. 2. No confirmation is required for either read operation; auth sign-in elicitation is separate. 3. OAuth/API key auth is documented; product permissions and retrieval policies are teamspace-level. OAuth scopes expose profile/email, not documentation-operation scopes. 4. Hosted route is global; OAuth route is /mcp/oauth. Docs describe teamspace source-type and library filters. No URL toolset/read-only switch was found. 5. Tool descriptions instruct agents to omit secrets, personal data, and proprietary code. Docs say original prompts/code are not sent; only formulated queries, library identifier, optional key, client name/version, transport, and short-lived IP assertion are sent. 6. API call quotas and rate limits are plan-dependent; query-docs docs say long values are trimmed by the API rather than rejected. No MCP result truncation cap established. 7. Code validates strings with schemas and rewrites aliases for legacy argument names; no operator override found. 8. Product docs say MCP queries are used for reranking and anonymous benchmarking, except Enterprise teamspace queries are not retained for benchmarking; API logs are retained 30 days. Code records tool-call and auth telemetry. 9. No feedback/rating/report tool in the complete official list. The tool descriptions steer use toward Context7; no upsell result was identified in these handlers. 10. Instructions and descriptions steer selection, query splitting, and call limits; these are recommendations to the model, not server-enforced. Separate Context7 skills/plugins are distributed outside MCP. 11. No agent-history-dependent behavior documented. Documentation index/library content, policies, and cache may change retrieved results; tool-list cache hint is one hour. 12. The product also documents Context7 Admin MCP and an on-prem deployment; no nested server proxy in the two-tool public list. 13. No raw API, arbitrary SQL, script, or escape-hatch tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Prefer this over web search for library docs.",
+      "Do not use for: refactoring, debugging, or reviewing code that does not depend on a library or platform API, or general programming concepts.",
+      "You MUST call this function before 'Query Documentation' tool to obtain a valid Context7-compatible library ID UNLESS the user explicitly provides a library ID in the format '/org/project' or '/org/project/version' in their query.",
+      "For ambiguous queries, request clarification before proceeding with a best-guess match.",
+      "IMPORTANT: Do not call this tool more than 3 times per question. If you cannot find what you need after 3 calls, use the best result you have.",
+      "Do not call this tool more than 3 times per question.",
+      "The query is sent to the Context7 API for processing. Do not include any sensitive or confidential information such as API keys, passwords, credentials, personal data, or proprietary code in your query."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The Context7 product documents a separate Admin MCP surface in addition to its general documentation-retrieval MCP server, and also offers an on-premise deployment with a deployment-specific MCP URL. The input endpoint itself exposes a flat two-tool list.",
+    "sources": [
+      "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L298-L342",
+      "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L343-L439",
+      "https://context7.com/docs/security/data-privacy",
+      "https://context7.com/docs/security/auth-and-access-control",
+      "https://context7.com/docs/howto/admin-mcp",
+      "https://context7.com/docs/enterprise/on-premise"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "2",
+    "action_count_comment": "The official tool list exists at https://context7.com/docs/resources/all-clients and names exactly 2 tools; no official total beyond those two was stated. No catalogue-only actions were added. Third-party listings reviewed (Glama, MCPwell, MCP Harbor, MCP Toplist, Claude connector directory) report or describe the same two tools; MCPwell's endpoint probe also reported 2. Claimed local versions are not used to expand the input endpoint's action list.",
+    "actions": [
+      {
+        "tool_name": "resolve-library-id",
+        "description": "Find matching libraries and return Context7 IDs, versions, reputation, coverage, and benchmark scores.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required); libraryName: string (required)",
+        "parameter_count": "2",
+        "source": "https://context7.com/docs/resources/all-clients",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query-docs",
+        "description": "Retrieve relevant documentation and code examples for a Context7 library ID and question.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "libraryId: string (required); query: string (required); language: string (optional)",
+        "parameter_count": "3",
+        "source": "https://context7.com/docs/resources/all-clients",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "Approximately 1,952",
+    "token_method": "[LOCAL CODE @60e59f9] Approximate character-count estimate divided by four from the initialize instructions and tool-registration source region; source-region count includes registration implementation text, so this is an estimate rather than a serialized tools/list JSON tokenization.",
+    "human_can_agent_cannot": "The Context7 REST API documents operations beyond this MCP toolset, including refreshing libraries, reading/updating teamspace policies, retrieving usage metrics, adding repositories or documentation sources, and uploading OpenAPI files. Those REST API methods are not MCP actions in the official two-tool list. Sources: https://context7.com/docs/api-guide and its linked API reference pages.",
+    "sources": [
+      "https://context7.com/docs/resources/all-clients",
+      "https://context7.com/docs/api-guide",
+      "https://glama.ai/mcp/connectors/io.github.upstash/context7",
+      "https://mcpwell.com/servers/context7/",
+      "https://www.mcpharbor.app/tools/upstash-context7/",
+      "https://mcptoplist.com/server/io.github.upstash%2Fcontext7",
+      "https://claude.com/connectors/context7"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool descriptions recommend resolving a library ID first, making one query per concept, supplying the programming language, and limiting calls to three per question. These rules are present in descriptions but are not enforced as per-question server quotas. The query description says: “Do not include any sensitive or confidential information such as API keys, passwords, credentials, personal data, or proprietary code in your query.”",
+    "governance_promises": "The privacy page says: “Your full prompts, code, and conversation context remain with your AI assistant and are never sent to Context7.” It says MCP-formulated queries are stored anonymously for retrieval benchmarking, except Enterprise teamspace queries; API logs are retained for 30 days. It says deletion requests are completed within 30 days. Context7 says it does not store customer source files.",
+    "promises_to_user": "Context7 describes results as current documentation and code examples. The docs say library IDs can be version-specific and that selected libraries expose reputation, snippet coverage, benchmark score, and versions.",
+    "comparison_with_server_logic": "The query transmission and omission guidance matches tool input descriptions; the server receives formulated queries and library identifiers. The public package records tool-call telemetry, while the docs separately describe query benchmarking and log retention. Agent-side sensitive-data stripping and the three-call guidance are textual instructions; server-side enforcement was not established. Data retention and deletion claims are documentation statements, not implemented by the MCP tool handlers.",
+    "sources": [
+      "https://context7.com/docs/security/data-privacy",
+      "https://context7.com/docs/resources/all-clients",
+      "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L310-L342",
+      "https://github.com/upstash/context7/blob/60e59f935f1ee1f25dcaeaddade53f628fb6d4e6/packages/mcp/src/index.ts#L417-L430"
+    ]
+  },
+  "contradictions": [
+    "The supplied POST probe to https://mcp.context7.com/mcp returned HTTP 415 with a Content-Type error and no authorization challenge in that response, while the vendor documents the same endpoint for API-key auth and a separate /mcp/oauth route for OAuth. This may reflect the probe request format rather than an auth contradiction.",
+    "The protected-resource metadata lists scopes_supported [profile,email], while the associated authorization-server metadata advertises additional scopes: Clerk lists openid, profile, email, public_metadata, private_metadata, offline_access; Context7 lists profile, email, offline_access. The OAuth docs describe authentication but do not explain this difference.",
+    "The docs describe query-docs values as trimmed by the API rather than rejected, but the precise trimming limit was not found in the reviewed MCP documentation or tool registration."
+  ],
+  "observations_for_research": [
+    "The server's initialize instructions tell the agent to prefer Context7 over web search, which shapes information-source selection.",
+    "Tool descriptions prescribe a resolve-then-query workflow, except when the user supplies a Context7-formatted ID, and recommend clarification for ambiguous library matches.",
+    "A three-call-per-question limit is phrased as a model instruction; the reviewed implementation does not show stateful enforcement of a per-question count.",
+    "Tool list and other static discovery responses carry a one-hour cache hint in the public code.",
+    "The endpoint accepts bearer credentials, while its protected-resource metadata declares general profile/email scopes rather than operation-specific scopes."
+  ],
+  "confidence": "High (open code)",
+  "notes": "Checked links.json, pages/ and the pinned local repository. The supplied documentation URL https://context7.com/docs/mcp returned 404; the official tool list is on /docs/resources/all-clients. Reviewed official docs, pricing, privacy, security, API guide, and the separate Admin MCP page. The local repository is the official package/direct local equivalent, not independently proven byte-for-byte identical to the deployed hosted service. Third-party listings were used as cross-checks only. Unofficial community server listings were found and excluded. The 1,952 token value is an approximate source-region character estimate, not exact serialized JSON tokenization.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.3
+  }
+}

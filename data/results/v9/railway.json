@@ -1,0 +1,800 @@
+{
+  "server": "railway",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.railway.com/",
+    "documentation_url_csv": "https://docs.railway.com/ai/mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/railwayapp/railway-mcp-server",
+    "documentation_urls_used": [
+      "https://docs.railway.com/ai/mcp-server",
+      "https://docs.railway.com/cli/mcp",
+      "https://railway.com/mcp",
+      "https://railway.com/pricing",
+      "https://railway.com/legal/privacy",
+      "https://railway.com/legal/terms",
+      "https://claude.com/connectors/railway",
+      "https://composio.dev/toolkits/railway_mcp",
+      "https://github.com/railwayapp/railway-mcp-server",
+      "https://github.com/railwayapp/railway-skills"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public railway-mcp-server repository is a deprecated npm compatibility shim that launches `railway mcp`; it does not contain the hosted server. Railway documents `railway mcp local` as a distinct in-process server with a different tool set. Railway’s hosted handler is identified by mcp.tc as a path in railwayapp/mono, but no copy of that repository was available in the prepared code folder.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "905708446dba6e7dcd2f48b67f7c14e07d8f567f",
+    "commit_date": "2026-05-23",
+    "implementation_language": "JavaScript (deprecated launcher shim; hosted server language not found)",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT (deprecated shim)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Railway documents `railway mcp local` as a separate in-process GraphQL-backed stdio server for restricted networks. It exposes a different tool set; it is not the input endpoint. https://docs.railway.com/ai/mcp-server",
+      "The Railway documentation site has its own docs-search MCP feature; it is separate from mcp.railway.com. https://docs.railway.com/ai/mcp-server"
+    ],
+    "sources": [
+      "https://docs.railway.com/ai/mcp-server",
+      "https://docs.railway.com/cli/mcp",
+      "https://github.com/railwayapp/railway-mcp-server/blob/905708446dba6e7dcd2f48b67f7c14e07d8f567f/README.md#L1-L34",
+      "https://mcp.tc/i/railway"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "Railway requires an account, but the reviewed sources do not state a separate MCP access fee or MCP-specific call charge.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Railway pricing lists Hobby at $5 minimum usage per month and Pro at $20 minimum usage per month; Enterprise is custom-priced. A new account can receive a 30-day trial with $5 credits.",
+    "pricing_model_details": "The plans include monthly usage credits ($5 Hobby; $20 Pro); usage beyond included amounts is charged according to resource usage. The pricing page does not identify an MCP-specific billing unit.",
+    "other_access_restrictions": "A Railway account is required. The default CLI connection requires a logged-in Railway CLI at version 5.44.0 or later; direct OAuth does not require the CLI. Railway states OAuth users choose accessible workspaces and projects. Project tokens are not accepted.",
+    "restrictions_controlled_by": "Vendor and user; workspace/project access is selected through OAuth and bounded by Railway account permissions.",
+    "sources": [
+      "https://docs.railway.com/ai/mcp-server",
+      "https://docs.railway.com/cli/mcp",
+      "https://railway.com/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official hosted-server documentation names 11 tools. The server selects tools based on the user request; Railway says to use railway-agent for multi-step operations. Catalogue listings report additional tools, documented in E and contradictions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool result and error structure not published in reviewed official documentation.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-endpoint resources capability was documented in the reviewed official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-endpoint MCP prompts capability was documented. The docs provide example user prompts, which are not evidence of server-provided MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted MCP server exposes a get-logs action according to third-party listings, but whether the MCP protocol logging capability is implemented is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://composio.dev/toolkits/railway_mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server sampling capability was documented in reviewed official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server roots capability was documented in reviewed official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Provided endpoint evidence: POST to https://mcp.railway.com returned HTTP 401, WWW-Authenticate Bearer realm=\"mcp\", resource_metadata=\"https://mcp.railway.com/.well-known/oauth-protected-resource\", scope=\"workspace:member\"; body {\"error\":\"Authentication required\"}. Protected-resource metadata (HTTP 200): resource https://mcp.railway.com; authorization_servers [https://backboard.railway.com]; scopes_supported [workspace:member]; bearer_methods_supported [header]. Authorization-server metadata (HTTP 200): issuer https://backboard.railway.com; authorization_endpoint https://backboard.railway.com/oauth/auth; token_endpoint https://backboard.railway.com/oauth/token; jwks_uri https://backboard.railway.com/oauth/jwks; registration_endpoint https://backboard.railway.com/oauth/register; device_authorization_endpoint https://backboard.railway.com/oauth/device/auth; scopes_supported [openid, email, profile, offline_access, workspace:admin, workspace:member, workspace:viewer, project:admin, project:member, project:viewer, notifications, ssh_keys]; response_types_supported [code]; grant_types_supported [authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:device_code]; token_endpoint_auth_methods_supported [client_secret_basic, client_secret_post, none, private_key_jwt]; code_challenge_methods_supported [S256]. OpenID metadata additionally lists token-exchange grant and pushed_authorization_request_endpoint https://backboard.railway.com/oauth/request. Railway docs say OAuth access can be scoped to selected workspaces/projects, tokens are short-lived and revocable. Token lifetime duration and revocation mechanics were not specified. Path-suffixed metadata was not included in the provided evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated endpoint response is JSON with error string; authenticated tool response structure not documented.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration via registration_endpoint; authorization code, refresh token, and device-code grants; PKCE S256. Raw scopes_supported: workspace:member (resource metadata); openid, email, profile, offline_access, workspace:admin, workspace:member, workspace:viewer, project:admin, project:member, project:viewer, notifications, ssh_keys (authorization server). Token endpoint auth methods: client_secret_basic, client_secret_post, none, private_key_jwt. The OpenID document also lists token-exchange grant and pushed authorization requests. Railway docs state OAuth users choose workspace/project access; tokens are short-lived and revocable, without stating durations.",
+      "authorization_server": "https://backboard.railway.com",
+      "sources": [
+        "https://mcp.railway.com/",
+        "https://mcp.railway.com/.well-known/oauth-protected-resource",
+        "https://backboard.railway.com/.well-known/oauth-authorization-server",
+        "https://backboard.railway.com/.well-known/openid-configuration",
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP Elicitation capability was documented. Docs say clients prompt for confirmation for certain destructive tools, which is a client behavior rather than proof of Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server MCP Tasks capability was documented. A railway-agent action is described as natural-language delegation, but that does not establish protocol Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server",
+        "https://composio.dev/toolkits/railway_mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "CLI installer supports remote CLI-proxy, direct OAuth, and a separate local server configuration. The hosted endpoint itself has no documented tool filtering or runtime configuration options.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client configuration examples use the Railway CLI or a direct HTTP URL.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server",
+        "https://docs.railway.com/cli/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP error-reporting capability documented. Railway’s docs refer users to a Central Station feature-request post, outside the server protocol.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The unauthenticated endpoint returns JSON {\"error\":\"Authentication required\"}; authenticated errors are not documented.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://mcp.railway.com/",
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server progress capability documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server cancellation capability documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The railway-agent tool delegates complex multi-step requests to Railway’s infrastructure agent. Third-party listings also describe fetching/searching Railway docs and an AI-generated failed-deployment diagnosis.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.railway.com/ai/mcp-server",
+        "https://composio.dev/toolkits/railway_mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official docs identify read actions (whoami, list-projects, list-services, list/get-feature-flag) and write actions (create-project, set/delete-feature-flag, redeploy, accept-deploy); railway-agent is multi-step. Docs call delete-feature-flag destructive and say accept-deploy is destructive; client prompting is conditional on clients respecting hints. Annotation values are not published. 2. Docs say clients prompt on destructive hints, but do not document server-enforced confirmation for hosted tools. Local-server `confirm: true` preview flow is a different server. 3. OAuth metadata scopes are recorded in C. Docs say user selects workspace/project scopes, tokens are short-lived and revocable, and project tokens are rejected. User/product permission inheritance is implied by access to selected workspaces/projects; details, lifetime, and admin controls are not specified. 4. Hosted docs describe one global endpoint. No hosted read-only mode, tool filter, query-free mode, or per-region endpoint documented. Separate local server has different tools. 5. Docs say access is scoped to selected workspaces/projects; no masking, PII exclusion, or secret redaction behavior documented. Third-party Composio says list-variables returns fully rendered variables; that is catalogue evidence, not official confirmation. 6. Hosted rate limits, quotas, bulk caps, time-range caps, truncation, and per-call charges not found. Pricing page gives software usage billing, not MCP call fees. 7. Hosted parameter validation/correction and operator argument overrides not documented. 8. Railway says the server invokes Railway APIs on the user's behalf and rejects project tokens for billing and audit trails. Hosted MCP-specific audit trail/logging and telemetry details not found. 9. No feedback/rating/report/survey tool found among the official list or catalogue names/descriptions. No upsell behavior found in available descriptions. 10. Hosted instructions are not published verbatim in reviewed official sources. Railway separately publishes agent skills; their local instructions include routing preferences and telemetry conventions but are distributed outside the MCP server. Docs recommend using railway-agent for multi-step operations and client review of destructive actions. 11. Whether previous agent behavior changes future outputs/tools/resources/prompts is unknown. 12. railway-agent delegates work to Railway's own infrastructure agent, but docs do not describe hosted architecture beyond this tool. Local and docs-search servers are distinct endpoints/modes; they are not merged into this endpoint's action list. 13. No universal raw API, SQL, execute, or script tool appears in the official list or third-party listed tools.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Use railway-agent for multi-step operations.",
+      "Your AI assistant selects tools based on your request.",
+      "Review actions requested by the LLM before approving them, especially destructive ones (redeploy, accept-deploy, railway-agent, and the local server's remove_service, delete_domain, remove_tcp_proxy, remove_bucket, and remove_volume)."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The hosted endpoint is documented as a single endpoint and flat tool list. railway-agent delegates operations to a Railway agent, but that alone does not make the MCP structure non-standard under the requested definition. Railway also has distinct local and docs-search MCP surfaces, which are not subservers of this endpoint.",
+    "sources": [
+      "https://docs.railway.com/ai/mcp-server",
+      "https://docs.railway.com/cli/mcp",
+      "https://mcp.railway.com/",
+      "https://mcp.railway.com/.well-known/oauth-protected-resource",
+      "https://composio.dev/toolkits/railway_mcp",
+      "https://github.com/railwayapp/railway-skills"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "47",
+    "action_count_comment": "The official hosted-server list exists at https://docs.railway.com/ai/mcp-server and names 11 tools; no total is stated there. Added 35 catalogue-only names from Composio’s listing (which reports 46 tools total, including the 11 official names) and 1 additional name, deploy-artifact, from the Claude connector directory (which lists 15 tools, including official overlaps). The catalogues disagree with the official list and with each other; catalogue-only names are marked unknown for default enablement. Catalogue display labels were normalized to lowercase kebab case where the listing uses title case. Parameter schemas are not published in the reviewed lists. See contradictions.",
+    "actions": [
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Read",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "whoami",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Read",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "list-projects",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Write",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "create-project",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Read",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "list-services",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Read",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "list-feature-flags",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Read",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "get-feature-flag",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Write",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "set-feature-flag",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Write",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "delete-feature-flag",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Write",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "redeploy",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Write",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "accept-deploy",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Official",
+        "type": "Mixed",
+        "source": "https://docs.railway.com/ai/mcp-server",
+        "tool_name": "railway-agent",
+        "description": "Officially documented hosted MCP tool; description not published.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Yes"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "connect-service-source",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "create-bucket",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "create-deployment",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "create-service",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "create-tcp-proxy",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "create-volume",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "delete-bucket",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "delete-service",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "delete-tcp-proxy",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "delete-volume",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "describe-environment",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "describe-service",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "domain-status",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "environment-status",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "fetch-docs",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "generate-domain",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "get-deployment-diagnosis",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "get-logs",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "get-service-config",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "get-service-metrics",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "get-staged-changes",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "get-status",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "http-error-rate",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "http-requests",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "http-response-time",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "list-deployments",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "list-domains",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "list-tcp-proxies",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "list-variables",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "list-workspaces",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "restart-service",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Read",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "search-docs",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "set-variables",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "update-service",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Composio, 2026-10)",
+        "type": "Write",
+        "source": "https://composio.dev/toolkits/railway_mcp",
+        "tool_name": "update-volume",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      },
+      {
+        "parameters": "NOT PUBLISHED",
+        "source_type": "Third-party (Claude connector directory, 2026-10)",
+        "type": "Write",
+        "source": "https://claude.com/connectors/railway",
+        "tool_name": "deploy-artifact",
+        "description": "Catalogue-reported Railway MCP action; parameter schema not published in listing.",
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No source provides the hosted tool schemas and initialize instructions verbatim; the official docs publish names only, so the requested character-count estimate cannot be computed.",
+    "human_can_agent_cannot": "Railway CLI/API/docs describe local-context operations and broad GraphQL execution via `railway api`; hosted MCP has a narrower documented tool set. Railway documents a separate local MCP server with tools including service/environment creation and removal, variable updates, domains, networking, templates, volumes, and observability, which are not in the official hosted list. The local server is a distinct surface and is not counted in actions. https://docs.railway.com/ai/mcp-server ; https://docs.railway.com/cli/mcp ; https://docs.railway.com/cli/api",
+    "sources": [
+      "https://docs.railway.com/ai/mcp-server",
+      "https://composio.dev/toolkits/railway_mcp",
+      "https://claude.com/connectors/railway",
+      "https://docs.railway.com/cli/mcp",
+      "https://docs.railway.com/cli/api"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Railway says the assistant selects tools based on user request and recommends railway-agent for multi-step operations. It asks users to review LLM-requested actions, particularly destructive ones, and says clients that respect destructive hints will prompt for confirmation. These are recommendations and client-dependent behavior; hosted server-side confirmation is not described.",
+    "governance_promises": "Railway says OAuth users choose accessible workspaces and projects, tokens are short-lived and revocable, project tokens are not accepted, and user identity is required for billing and audit trails. The privacy policy says Railway retains personal data as long as necessary for services or business purposes and describes security measures, but does not specify MCP-specific content handling, retention, or model-training rules.",
+    "promises_to_user": "Docs present Railway MCP as operating Railway APIs on the user's behalf. The CLI connection reuses Railway login credentials; Railway says the editor configuration does not contain a long-lived Railway credential. Direct OAuth is available without CLI installation.",
+    "comparison_with_server_logic": "OAuth scope checks and authentication are evidenced by metadata; the user-scope and short-lived/revocable token statements are documented without code verification. Destructive confirmation depends on client handling of protocol hints; no hosted enforcement mechanism was found. Other data-protection and telemetry statements are general Railway policy and do not describe MCP-specific processing.",
+    "sources": [
+      "https://docs.railway.com/ai/mcp-server",
+      "https://docs.railway.com/cli/mcp",
+      "https://railway.com/legal/privacy",
+      "https://railway.com/legal/terms"
+    ]
+  },
+  "contradictions": [
+    "Official hosted docs list 11 tools, while Composio reports 46 hosted Railway MCP tools and Claude’s connector directory lists 15. Their additional names are included as third-party entries in actions.json; the official list remains the basis for the 11 Official entries.",
+    "Claude’s connector directory says Railway MCP can publish artifacts through Railway Functions and lists deploy-artifact; official Railway hosted-server docs do not list that action. Composio’s 46-tool listing also omits deploy-artifact.",
+    "Composio lists numerous environment, service, networking, storage, logs, and metrics tools that the official hosted list does not name. Official documentation describes many such operations as tools of the separate local MCP server; the available materials do not establish whether Composio’s additional hosted names are current, enabled, or instead reflect another Railway surface.",
+    "OAuth authorization-server metadata advertises workspace and project admin/member/viewer scopes, plus notifications and ssh_keys, while the endpoint protected-resource metadata advertises only workspace:member and the official hosted tool list is much narrower. Metadata scopes describe authorization capabilities and do not establish corresponding MCP tools."
+  ],
+  "observations_for_research": [
+    "Railway offers multiple connection paths to the hosted MCP server: a CLI stdio proxy that reuses CLI login and direct remote HTTP with OAuth.",
+    "Railway documents a distinct local MCP server with substantially different tools and a preview followed by `confirm: true` for writes; these mechanics should not be attributed to the hosted endpoint.",
+    "The hosted tool inventory differs substantially across official docs and third-party listings, making published lists insufficient to establish the complete live tool set."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/ (including tool-list script text), links_check.txt, and available local code. Official hosted docs and OAuth metadata are primary evidence; no hosted tool schemas, initialize instructions, hosted source, protocol version, SDK, or release status were found. The local railway-mcp-server repository is a deprecated MIT shim at commit 905708446dba6e7dcd2f48b67f7c14e07d8f567f, not the deployed implementation. railway-skills is a separate skills/plugin repository, not the hosted MCP server. The prepared CLI repository download was incomplete, so local-server implementation claims are based on official docs, not code. Unofficial/community server listings were absent from links.json. Third-party counts and names are weaker evidence and are labeled as such.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 7.2
+  }
+}

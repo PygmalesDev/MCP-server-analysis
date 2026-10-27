@@ -1,0 +1,633 @@
+{
+  "server": "sharepoint",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://agent365.svc.cloud.microsoft/agents/tenants/<tenantId>/servers/mcp_SharePointRemoteServer",
+    "documentation_url_csv": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+    "addressing": "Per customer (tenant-scoped URL)",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+      "https://learn.microsoft.com/en-us/microsoft-agent-365/tooling-servers-overview",
+      "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/mcp/overview",
+      "https://learn.microsoft.com/en-us/microsoft-agent-365/admin/manage-plugins-skills-mcp-servers",
+      "https://www.microsoft.com/en-us/copilot/pricing/enterprise"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No server source was found. The candidate bap-microsoft/MCP-Platform repository returned 404 in the prepared evidence; no local code was available to compare.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "Preview",
+    "other_official_servers": [
+      "Work IQ MCP is a separate, broader Microsoft 365 endpoint with a generic tool surface; Microsoft recommends it for new projects instead of the workload-specific SharePoint preview server.",
+      "A separate tenant-scoped OneDrive and SharePoint endpoint is documented by a third-party catalogue as /servers/mcp_ODSPRemoteServer; it is a distinct server and not included in this action list."
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+      "https://learn.microsoft.com/en-us/microsoft-agent-365/tooling-servers-overview",
+      "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/mcp/overview",
+      "https://mcpwell.com/servers/microsoft-onedrive-sharepoint/"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "Microsoft does not state a separate price for this MCP endpoint in the reference. A third-party catalogue says it requires a Microsoft 365 Copilot license and Entra app registration; this requirement was not found in the official SharePoint reference.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Microsoft 365 Copilot is listed at $30.00 per user/month, paid yearly, and requires a qualifying Microsoft 365 plan. This is a linked product price, not a confirmed MCP fee.",
+    "pricing_model_details": "The official pricing page also describes Copilot Chat at no additional cost for eligible Microsoft 365 subscriptions and agent use as metered; the SharePoint MCP reference does not specify MCP-specific charges.",
+    "other_access_restrictions": "The endpoint is tenant-scoped and the SharePoint reference marks the feature as preview. Availability may vary by tenant, region, rollout, licensing, admin approval, and policy. Microsoft describes admin approval and Entra consent for governed MCP servers generally; the SharePoint reference does not specify its endpoint's exact consent flow.",
+    "restrictions_controlled_by": "Tenant admin and Microsoft for tenant availability and organizational governance; the endpoint's precise authorization controls are not documented in the SharePoint reference.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+      "https://learn.microsoft.com/en-us/microsoft-agent-365/tooling-servers-overview",
+      "https://learn.microsoft.com/en-us/microsoft-agent-365/admin/manage-plugins-skills-mcp-servers",
+      "https://www.microsoft.com/en-us/copilot/pricing/enterprise",
+      "https://mcpyet.com/mcp/sharepoint/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference lists 35 tools for finding sites, browsing libraries and files, reading and writing files, managing lists and columns, sharing, and setting sensitivity labels. Tool schemas expose parameter names and required/optional status.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND in the reference.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The SharePoint reference documents tools but does not specify MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The SharePoint reference does not specify MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool descriptions mention audit justification for sensitivity-label changes, but the reference does not document server logging or telemetry.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The SharePoint reference does not describe MCP sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The SharePoint reference does not describe MCP roots.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint is tenant-specific and public OAuth metadata was not fetched because the input is a URL template. The SharePoint reference identifies accessible sites and permission-gated sharing-URL metadata, but does not give the endpoint's authorization flow or scopes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FETCHED for the tenant-scoped endpoint; raw OAuth values and scopes_supported are unavailable. The separate Work IQ MCP overview documents Entra OAuth, but that is a different server and is not evidence of this endpoint's OAuth configuration.",
+      "authorization_server": "NOT FOUND for this tenant-scoped endpoint.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/mcp/overview"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The SharePoint reference does not describe MCP elicitation or server-enforced confirmation prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reference documents asynchronous copy and move operations and a checkOperationStatus tool, but does not say that MCP Tasks are used.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs provide a tenant-specific server URL. They do not describe endpoint query parameters, headers, or client-side tool filters.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Error formats and reporting tools are not described in the SharePoint reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The SharePoint reference does not describe MCP resource subscriptions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reference documents asynchronous copy and move actions and checkOperationStatus for tracking their operation tokens; it does not identify this as MCP progress notification support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Operation token is returned by an async operation and passed to checkOperationStatus; detailed result schema is not published.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reference documents operation status checks but does not mention cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server description and tool documentation provide context and usage guidance; no initialize instructions payload is published. Microsoft labels the server preview and says tool names and parameters may change.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Read, write, and destructive operations are exposed. The reference does not publish MCP tool annotations such as readOnlyHint, destructiveHint, idempotentHint, or openWorldHint. 2. No required confirmation parameter or server-enforced confirmation workflow is documented. Client/admin approval is a separate governance control. 3. Endpoint is tenant-scoped; docs say results are limited to sites the user can access and sharing-URL metadata requires existing explicit permission. Exact OAuth scopes, token lifetime, and revocation are not documented. Admin approval and Entra consent are documented for governed MCP servers generally. 4. No read-only endpoint or URL tool filter is documented. File upload/download operations are limited to files under 5 MB; search returns up to 20 by default and folder browsing returns top 20. 5. No PII masking or data filtering is documented. Access boundaries follow user-accessible SharePoint content in the tool descriptions. 6. File size limits are 5 MB; result limits include top 20 sites/search results and folder children. Async copy/move uses an operation token. No rate or per-call cost limits documented. 7. Inputs list required/optional parameters and supported enum values; ETags provide concurrency control on selected changes. Unknown-argument handling or automatic parameter correction is not documented. 8. Sensitivity-label tool asks for justification when downgrading/removing a label; server logging, audit retention, and telemetry are not specified. 9. No feedback, rating, survey, or upsell tool appears in the official 35-tool list. 10. No server-delivered skill or initialize instruction is published. Docs tell users this is preview and recommend against production/new projects; those are documentation instructions. 11. No memory or behavior-dependent tool changes documented. 12. Flat workload-specific SharePoint tool list; other Microsoft MCP endpoints are separate servers. 13. No raw API, arbitrary query, SQL, or script execution tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Use this method only when you have the complete site URL structure. Use findSite when you only know a site name.",
+      "Use checkOperationStatus to monitor progress.",
+      "Use this server for managing sites, lists, list items, columns, document libraries, files, folders, and file sharing."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "A single SharePoint-specific server with one documented tool list; no hierarchy or dynamically loaded toolsets described.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+      "https://learn.microsoft.com/en-us/microsoft-agent-365/admin/manage-plugins-skills-mcp-servers",
+      "https://learn.microsoft.com/en-us/microsoft-agent-365/tooling-servers-overview"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "35",
+    "action_count_comment": "The official SharePoint reference lists 35 named tools; actions.json contains all 35. No official stated numeric total was found. No catalogue-only actions were added: the two collected third-party pages describe a different ODSP endpoint or provide no exact MCP tool names for this SharePoint endpoint. MCPwell reports 7 tools for its distinct ODSP server; that count is not applied here. The separate Work IQ MCP server has 10 generic tools and is not this endpoint.",
+    "actions": [
+      {
+        "tool_name": "findSite",
+        "description": "Finds SharePoint sites that you can access. Returns specific sites that match a search query, or the top 20 relevant sites if you don't provide a query.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "searchQuery: Search query (entire or partial site name). Omit to return top 20 accessible sites. (optional)",
+        "parameter_count": 1,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSiteByPath",
+        "description": "Resolves a SharePoint site by using its exact hostname and server-relative path. Use this method only when you have the complete site URL structure. Use findSite when you only know a site name.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "hostname: Exact hostname (for example, 'contoso.sharepoint.com') (required); serverRelativePath: Server-relative path (for example, 'sites/Marketing'). The leading slash is optional. (required)",
+        "parameter_count": 2,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listSubsites",
+        "description": "Lists all subsites (child sites) of a SharePoint site.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the parent SharePoint site (format: 'hostname,siteCollectionId,webId') (required)",
+        "parameter_count": 1,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listDocumentLibrariesInSite",
+        "description": "Lists document libraries (drives) in the specified SharePoint site.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (default: 'root') (optional)",
+        "parameter_count": 1,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getDefaultDocumentLibraryInSite",
+        "description": "Gets the default document library (drive) in a SharePoint site.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (default: 'root') (optional)",
+        "parameter_count": 1,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getFolderChildren",
+        "description": "Enumerates the top 20 files and folders (DriveItems) contained within a specified parent folder in a document library (drive).",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "documentLibraryId: ID of the document library (drive) (required); parentFolderId: ID of the parent folder (default: 'root'). (optional)",
+        "parameter_count": 2,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findFileOrFolder",
+        "description": "Finds a file or folder (DriveItem) accessible to the user by search query. Searches across all sites and document libraries the user has access to.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "searchQuery: Search query (entire or partial file name) (required)",
+        "parameter_count": 1,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getFileOrFolderMetadata",
+        "description": "Gets metadata of a file or folder (DriveItem) from a specified document library (drive) in SharePoint.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fileOrFolderId: ID of the file or folder (DriveItem) (required); documentLibraryId: ID of the document library (drive) (required)",
+        "parameter_count": 2,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getFileOrFolderMetadataByUrl",
+        "description": "Gets metadata for a file or folder (DriveItem) from a sharing URL. Only users with existing explicit permissions to access the file can get the metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fileOrFolderUrl: URL of the file or folder. The URL isn't redeemed to share it with the user; they must already have explicit access. (required)",
+        "parameter_count": 1,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "readSmallTextFile",
+        "description": "Reads (downloads) a text file smaller than 5 MB from a specific document library (drive).",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fileId: ID of the file (DriveItem) to read or download (required); documentLibraryId: ID of the document library (drive) (required)",
+        "parameter_count": 2,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "readSmallBinaryFile",
+        "description": "Reads a binary file smaller than 5 MB from a specific document library (drive). The file content is returned as a base64-encoded string.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "fileId: ID of the file (DriveItem) to read or download (required); documentLibraryId: ID of the document library (drive) (required)",
+        "parameter_count": 2,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSmallTextFile",
+        "description": "Creates or uploads a text file smaller than 5 MB to a specific document library (drive).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "filename: Name of the file including extension. (required); contentText: Text content of the file. (required); documentLibraryId: ID of the document library (drive) (required); parentFolderId: ID of the parent folder (default: 'root'). (optional)",
+        "parameter_count": 4,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSmallBinaryFile",
+        "description": "Creates a binary file smaller than 5 MB by base64-encoding its content to a specific document library (drive).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "filename: Name of the file including extension. (required); base64Content: Binary file content encoded as a base64 string. (required); documentLibraryId: ID of the document library (drive) (required); parentFolderId: ID of the parent folder (default: 'root'). (optional)",
+        "parameter_count": 4,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createFolder",
+        "description": "Creates a new folder (DriveItem) within a specified document library (drive). If a folder with the same name exists, the system adds a numeric suffix (for example, NewFolder (1)).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "folderName: Name of the folder (required); documentLibraryId: ID of the document library (drive) (required); parentFolderId: ID of the parent folder (default: 'root'). (optional)",
+        "parameter_count": 3,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "renameFileOrFolder",
+        "description": "Renames a file or folder (DriveItem) within a specified document library (drive). The new name must comply with naming conventions.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "documentLibraryId: ID of the document library (drive) (required); fileOrFolderId: ID of the file or folder to rename (required); newFileOrFolderName: The new name (required); etag: ETag for concurrency control (optional)",
+        "parameter_count": 4,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteFileOrFolder",
+        "description": "Deletes a file or folder (DriveItem) from a specified document library (drive).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "documentLibraryId: ID of the document library (drive) (required); fileOrFolderId: ID of the file or folder to delete (required); etag: ETag for concurrency control (optional)",
+        "parameter_count": 3,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "moveFileOrFolder",
+        "description": "Moves a file or folder (DriveItem) to a destination folder. Supports moving across different document libraries (drives) within SharePoint. This operation is asynchronous. Use checkOperationStatus to monitor progress.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "sourcedoclibid: ID of the source document library (drive) (required); sourcefileid: ID of the source file or folder to move (required); destdoclibid: ID of the destination document library (drive) (required); destfolderid: ID of the destination folder (must exist) (required); newfilename: New name for the moved item (optional)",
+        "parameter_count": 5,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "copyFileOrFolder",
+        "description": "Copies a file or folder (DriveItem) to a destination folder. Supports copying across different document libraries within SharePoint. This operation is asynchronous. Use checkOperationStatus to monitor progress.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "sourcedoclibid: ID of the source document library (drive) (required); sourcefileid: ID of the source file or folder to copy (required); destdoclibid: ID of the destination document library (drive) (required); destfolderid: ID of the destination folder (must exist) (required); newfilename: New name for the copied item (optional)",
+        "parameter_count": 5,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "checkOperationStatus",
+        "description": "Checks the status of an asynchronous operation, such as a copy or move, by using the operation token returned from the original operation.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "operationToken: The operation token returned from an async operation like copyFileOrFolder or moveFileOrFolder (required)",
+        "parameter_count": 1,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "uploadFileFromUrl",
+        "description": "Uploads a file from a SharePoint or OneDrive URL to a destination folder in a document library (drive). The file is copied from the source URL, so the original file isn't changed.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "sourceUrl: Source URL (must be a valid SharePoint or OneDrive URL) (required); destinationDocumentLibraryId: ID of the destination document library. Use me for the user's OneDrive (required); destinationFolderId: ID of the destination folder (default: root) (optional); filename: New filename; defaults to the original filename (optional)",
+        "parameter_count": 4,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "shareFileOrFolder",
+        "description": "Sends a sharing invitation to grant read or write permissions on a file or folder (DriveItem) within a specified document library (drive).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "documentLibraryId: ID of the document library (drive) (required); fileOrFolderId: ID of the file or folder to share (required); recipientEmails: Array of email addresses of recipients (required); roles: Array of roles: 'read', 'write' (write grants both read and write) (required); message: Custom message for the invitation email (default: Here's the file we're collaborating on.) (optional); sendInvitation: Whether to send a sharing invitation (default: true) (optional)",
+        "parameter_count": 6,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "setSensitivityLabelOnFile",
+        "description": "Sets the sensitivity label of a file from the specified document library (drive).",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "documentLibraryId: ID of the document library (drive) (required); fileId: ID of the file (DriveItem) (required); sensitivityLabelId: ID of the sensitivity label, or empty string to remove it (required); assignmentMethod: Assignment method: 'standard', 'privileged', 'auto', or 'unknownFutureValue' (default: 'privileged') (optional); justificationText: Justification text for audit purposes; required when downgrading or removing a label (default: 'Changed by MCPServer') (optional)",
+        "parameter_count": 5,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listLists",
+        "description": "Gets all SharePoint lists available on a specific site. Use to discover what lists exist within a site.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (format: 'hostname,siteCollectionId,webId') (required)",
+        "parameter_count": 1,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createList",
+        "description": "Creates a new SharePoint list within a site.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); displayName: Display name of the new list (required); columns: Collection of columns as key-value pairs: [{ Key: 'JobTitle', Value: 'text' }]. Valid types: text, multilineText, number, boolean, dateTime, choice, lookup, personOrGroup, hyperlink, currency, calculated (optional); template: List template type (default: 'genericList'). Options: genericList, documentLibrary, events, tasks, announcements, contacts, links, survey, issueTracking, discussionBoard (optional)",
+        "parameter_count": 4,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteList",
+        "description": "Deletes a SharePoint list from a site. Deletes the entire list container and all items within it. This action can't be undone.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); listId: ID of the list to delete (required); etag: ETag for concurrency control (optional)",
+        "parameter_count": 3,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sendInviteForList",
+        "description": "Sends a sharing invitation to grant permissions on a SharePoint list.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "listId: ID of the SharePoint list to share (required); recipientEmails: Array of email addresses of recipients (required); role: Role: 'read' (view only), 'contribute' (view, add, update, delete items), 'edit' (full edit including list structure) (required); siteUrl: Site URL of the SharePoint site containing the list (optional); sendEmail: Whether to send an email notification (default: true) (optional)",
+        "parameter_count": 5,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listListItems",
+        "description": "Gets items (rows/records) from a specific SharePoint list.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); listId: ID of the SharePoint list (required)",
+        "parameter_count": 2,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getListItem",
+        "description": "Gets a single item (row or record) from a SharePoint list by its ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); listId: ID of the SharePoint list (required); itemId: ID of the specific list item (required)",
+        "parameter_count": 3,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createListItem",
+        "description": "Creates a new item (row or record) in a SharePoint list.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); listId: ID of the SharePoint list (required); fields: Key-value pairs for field values, such as [{ Key: 'Title', Value: 'Software Engineer' }, { Key: 'Department', Value: 'Engineering' }]. The 'Title' field is typically required. (required)",
+        "parameter_count": 3,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateListItem",
+        "description": "Updates an existing item (row or record) in a SharePoint list. Only specified fields are updated; omitted fields keep their values.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); listId: ID of the SharePoint list (required); itemId: ID of the item to update (required); fields: Key-value pairs of fields to update (required); etag: ETag for concurrency control (optional)",
+        "parameter_count": 5,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteListItem",
+        "description": "Deletes an item (row or record) from a SharePoint list.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); listId: ID of the SharePoint list (required); itemId: ID of the item to delete (required); etag: ETag for concurrency control (optional)",
+        "parameter_count": 4,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listColumns",
+        "description": "Gets all columns from a SharePoint list.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); listId: ID of the SharePoint list (required)",
+        "parameter_count": 2,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createColumn",
+        "description": "Creates a new column in a SharePoint list. Supports many column types including text, number, choice, dateTime, boolean, user, lookup, calculated, and more.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); listId: ID of the SharePoint list (required); name: Internal column name (programmatic identifier) (required); columnType: Column type: text, note, number, integer, boolean, dateTime, choice, multichoice, currency, lookup, user, url, calculated, term, multiterm, location, geolocation, thumbnail, counter, computed, contentTypeId, file, attachment, guid, outcomeChoice, approvalStatus (required); columnProperties: Type-specific settings (for example, { \"maxLength\": 255 } for text, { \"choices\": [\"A\",\"B\",\"C\"] } for choice) (optional); description: Description of the column (optional); displayName: Display name shown in UI (defaults to 'name') (optional); required: Make the column required (default: false) (optional); hidden: Hide column from views (default: false) (optional)",
+        "parameter_count": 9,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateColumn",
+        "description": "Updates an existing column in a SharePoint list.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "siteId: ID of the SharePoint site (required); listId: ID of the SharePoint list (required); columnId: ID of the column to update (required); columnType: Column type (required when providing 'columnProperties') (optional); columnProperties: Type-specific properties to update (optional); description: New description (optional); displayName: New display name (optional); hidden: Hide or show column (optional); required: Make column required or optional (optional)",
+        "parameter_count": 9,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteColumn",
+        "description": "Deletes a column from a SharePoint list. Warning: This action removes all data stored in that column for all items.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "Warning: This action removes all data stored in that column for all items.\r\nRequired parameters:\r\n\r\nsiteId: ID of the SharePoint site (optional); listId: ID of the SharePoint list (required); columnId: ID of the column to delete (required)",
+        "parameter_count": 3,
+        "source": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code for this server and no verbatim tools/list or initialize payload; the reference gives tool names, summaries, and parameters, not a complete serialized context.",
+    "human_can_agent_cannot": "The reference does not provide a comprehensive list of SharePoint UI operations absent from MCP. The official tool list documents this server's supported operations; REST/API capabilities were not substituted for MCP parameters. Separate Work IQ MCP provides a different generic Microsoft 365 surface and is not treated as SharePoint MCP functionality.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+      "https://learn.microsoft.com/en-us/microsoft-agent-365/tooling-servers-overview",
+      "https://mcpwell.com/servers/microsoft-onedrive-sharepoint/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The reference says: “Use this method only when you have the complete site URL structure. Use findSite when you only know a site name.” It says “Use checkOperationStatus to monitor progress.” These are tool-use instructions; no public implementation evidence establishes enforcement beyond the described tool behavior.",
+    "governance_promises": "Tool descriptions limit search to accessible sites and require pre-existing explicit permissions for metadata by sharing URL. The reference says sensitivity-label downgrade/removal requires justification. No endpoint-specific retention, training, or telemetry promise was found.",
+    "promises_to_user": "Microsoft calls the capability preview and says its tool names and parameters may change. The same reference says these workload-specific Microsoft 365 tools are intended for backward compatibility and should not be used in production or new projects; it points new projects to Work IQ MCP.",
+    "comparison_with_server_logic": "The accessible-site and explicit-permission boundaries are described in tool behavior; no source code was available for independent enforcement analysis. Sensitivity-label justification is a documented required parameter condition. Preview and backward-compatibility statements are documentation-level guidance.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-sharepoint-tools",
+      "https://learn.microsoft.com/en-us/microsoft-agent-365/tooling-servers-overview"
+    ]
+  },
+  "contradictions": [
+    "The SharePoint reference labels the server preview, while the newer Agent 365 overview groups workload-specific SharePoint MCP among legacy experiences retained for testing and backward compatibility and directs new projects to Work IQ MCP.",
+    "MCPyet says this endpoint requires a Microsoft 365 Copilot license and Entra app registration; the official SharePoint reference does not specify those requirements. Treat the catalogue claim as unverified for this endpoint."
+  ],
+  "observations_for_research": [
+    "The tool surface includes consequential actions such as deletion, file sharing, and sensitivity-label changes alongside read operations; the reference does not publish per-tool MCP annotations.",
+    "The docs combine natural-language usage guidance with hard operational limits, including a 5 MB file threshold and top-20 result limits.",
+    "The tenant-specific URL prevents endpoint-level public OAuth metadata retrieval from the supplied URL template."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared links.json, links_check.txt, pages/INDEX.txt, relevant official SharePoint and Agent 365 pages, pricing pages, and catalogue pages. The candidate GitHub repository returned 404 and code/ contained no source copy or commit record. OAuth was not fetched because the endpoint is a tenant URL template, as recorded in oauth_metadata.txt. Catalogue claims about a Copilot license/Entra app registration were not confirmed in the official SharePoint reference. Tool annotations, initialization instructions, response schemas, exact endpoint OAuth scopes, and endpoint-specific logging were not found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.6
+  }
+}

@@ -1,0 +1,367 @@
+{
+  "server": "parallel",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.parallel.ai/mcp",
+    "documentation_url_csv": "https://docs.parallel.ai/integrations/mcp/quickstart",
+    "addressing": "global",
+    "repository_url": "https://github.com/parallel-web/search-mcp",
+    "documentation_urls_used": [
+      "https://docs.parallel.ai/integrations/mcp/quickstart",
+      "https://docs.parallel.ai/integrations/mcp/quickstart.md",
+      "https://docs.parallel.ai/integrations/mcp/installation.md",
+      "https://docs.parallel.ai/integrations/mcp/programmatic-use.md",
+      "https://docs.parallel.ai/integrations/mcp/search-mcp.md",
+      "https://docs.parallel.ai/integrations/mcp/task-mcp.md",
+      "https://docs.parallel.ai/getting-started/pricing",
+      "https://parallel.ai/pricing",
+      "https://parallel.ai/privacy-policy",
+      "https://parallel.ai/customer-terms",
+      "https://github.com/parallel-web/search-mcp"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository describes the hosted Search MCP, but its contents are documentation, client configuration and setup packages; it does not include the hosted server implementation. The current combined endpoint's tools are therefore taken from its hosted documentation, not inferred from local code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "ac8e207b9fb1d5febb95d95b90c3a107ebdbdcbc",
+    "commit_date": "2026-10-05",
+    "implementation_language": "NOT FOUND (hosted implementation is closed; repository contains documentation/configuration)",
+    "mcp_sdk_and_version": "NOT FOUND (hosted implementation is closed; repository has no server SDK dependency)",
+    "code_public": "Partially",
+    "license": "MIT (public repository only); hosted service is covered by Parallel Customer Terms",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://search.parallel.ai/mcp — legacy standalone Search MCP; provides web_search and web_fetch.",
+      "https://task-mcp.parallel.ai/mcp — legacy standalone Task MCP for asynchronous deep research and list enrichment.",
+      "https://docs.parallel.ai/mcp — documentation-search MCP; searches Parallel documentation and does not call Parallel APIs."
+    ],
+    "sources": [
+      "https://docs.parallel.ai/integrations/mcp/quickstart",
+      "https://docs.parallel.ai/integrations/mcp/search-mcp",
+      "https://docs.parallel.ai/integrations/mcp/task-mcp",
+      "https://docs.parallel.ai/mcp",
+      "https://github.com/parallel-web/search-mcp",
+      "https://github.com/parallel-web/search-mcp/commit/ac8e207b9fb1d5febb95d95b90c3a107ebdbdcbc"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "Anonymous web_search and web_fetch are free with lower rate limits. OAuth or an API key exposes web_research and higher limits; authenticated calls are billed at the underlying API rates. The MCP documentation does not state a separate MCP fee.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Search API pricing: $0.001 per 1,000 turbo/fast requests and $0.005 per 1,000 basic/advanced requests (default 10 results); each additional result and excerpt costs $0.001 per 1,000. The vendor pricing page advertises up to 5,000 requests monthly free across its APIs, but does not specify that allowance as the anonymous MCP rate limit.",
+    "pricing_model_details": "Authenticated usage is billed to the Parallel account at the underlying API rates. Tool results report per-SKU name, count and cost_usd in _meta[\"parallel/usage\"]. Anonymous calls are free and do not report usage.",
+    "other_access_restrictions": "Anonymous access has lower rate limits; exact anonymous limits are not stated in the MCP quickstart. web_research and override settings require OAuth or an API key. OAuth requires a client that supports the flow; API keys can be sent as Bearer authorization or x-api-key. Tool visibility can be set with the tools URL parameter.",
+    "restrictions_controlled_by": "Vendor controls authentication, billing and rate limits; the end user/client operator chooses credentials, tool filters and optional per-connection override settings.",
+    "sources": [
+      "https://docs.parallel.ai/integrations/mcp/quickstart",
+      "https://docs.parallel.ai/getting-started/pricing",
+      "https://parallel.ai/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted server documents web_search and web_fetch without authentication, plus web_research with OAuth or an API key. A tools query parameter can replace the default tool list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "web_search and web_fetch return search/extraction results; web_research returns the full Responses API response, including its id. Authenticated tool results can include per-SKU usage and cost metadata.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation lists tools but does not document MCP resources for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt list or prompt capability is documented for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP logging capability is documented. Anonymous tool arguments may include client_model and session_id for analytics and call correlation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP sampling capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "OAuth is documented; protocol version is not stated.",
+      "description_what_how": "The vendor documents anonymous access, OAuth sign-in via https://mcp.parallel.ai/mcp?login, and API-key authentication using Bearer or x-api-key headers. OAuth gives access to web_research and higher limits. The pre-fetched POST probe returned HTTP 400 with a JSON-RPC parse error; all supplied OAuth well-known metadata URLs returned HTTP 404. The endpoint metadata therefore does not disclose scopes, registration, PKCE, grants, token methods, lifetime or revocation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Authentication failures and OAuth metadata responses were not otherwise specified in the supplied evidence.",
+      "authorization_mechanism": "OAuth sign-in and API key are documented. Raw supplied metadata: POST https://mcp.parallel.ai/mcp returned HTTP 400 with {\"jsonrpc\":\"2.0\",\"id\":null,\"error\":{\"code\":-32700,\"message\":\"Parse error: EOF while parsing a value at line 1 column 0\"}}; GET https://mcp.parallel.ai/.well-known/oauth-protected-resource, https://mcp.parallel.ai/.well-known/oauth-protected-resource/mcp, and https://mcp.parallel.ai/.well-known/oauth-authorization-server each returned HTTP 404 with \"Not found\"; GET https://mcp.parallel.ai/.well-known/openid-configuration returned HTTP 404 with {\"detail\":\"Not Found\"}. No scopes_supported or other OAuth metadata was available.",
+      "authorization_server": "NOT FOUND in supplied public metadata; vendor documents OAuth sign-in at https://mcp.parallel.ai/mcp?login.",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart",
+        "https://docs.parallel.ai/integrations/oauth-provider",
+        "https://mcp.parallel.ai/mcp",
+        "https://mcp.parallel.ai/.well-known/oauth-protected-resource",
+        "https://mcp.parallel.ai/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.parallel.ai/.well-known/oauth-authorization-server",
+        "https://mcp.parallel.ai/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation flow or server-enforced user confirmation is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The current endpoint exposes web_research as a single-call research tool. The vendor directs users to a separate legacy Task MCP or Task API for asynchronous deep research reports and list enrichment.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "web_research returns a completed Responses API response; asynchronous task flows belong to the separate Task MCP/API.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart",
+        "https://docs.parallel.ai/integrations/mcp/task-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tools URL parameter filters the visible tool list. Authenticated clients can send x-parallel-mcp-config to set API request overrides or expose selected API fields as model arguments.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Invalid tool names or repeated tools parameters return HTTP 400. Invalid override header fields or paths may return HTTP 400 at connection time or a tool error at execution.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documentation describes tool argument and override validation errors, but no separate MCP error-reporting capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Invalid arguments produce an error listing accepted arguments; other invalid API values produce a tool error. Unknown tool names in the tools parameter return HTTP 400.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription capability is documented for the endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications are documented. The current web_research tool waits for an answer; asynchronous research is described for the separate Task MCP/API.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart",
+        "https://docs.parallel.ai/integrations/mcp/task-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP request cancellation behavior is documented for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation supplies an agent installation prompt with client detection and integration setup instructions. This prompt is documentation content, not evidence of initialize instructions from the server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://docs.parallel.ai/integrations/mcp/quickstart"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The three documented tools are search, fetch and research operations. Official docs do not publish readOnlyHint, destructiveHint, idempotentHint or openWorldHint annotations; mcp.tc reports read-only labels for the two legacy Search MCP tools, not this endpoint. 2. No server-enforced confirmation or approval workflow is documented. 3. Authentication is anonymous, OAuth, or API key. Product-role inheritance, admin switches, client allowlists, redirect approval, token lifetime and revocation are not documented; supplied OAuth metadata endpoints returned 404. 4. The tools query parameter replaces the default set. Authenticated x-parallel-mcp-config can set hard API request overrides and model_choice fields; no read-only endpoint is documented. Separate legacy Search and Task endpoints remain available. 5. The server receives tool inputs (search queries and requested URLs); no MCP-level PII masking or field redaction is documented. 6. Anonymous access has lower, unspecified MCP rate limits. web_fetch accepts up to 20 URLs; web_search defaults to 10 results. Full-page fetch may yield tens of thousands of tokens. Authenticated costs are reported by SKU in result metadata. 7. Unknown tool arguments are rejected with accepted argument names. Override headers are validated; the server applies override last, preventing the model from changing those values. 8. Anonymous client_model is used for analytics and session_id correlates calls; customer terms also permit usage-data collection and use. MCP-specific audit logging and opt-out details are not documented. 9. No feedback, rating, report, survey or upsell tool/message is listed in the official tool list. Paid account and higher-limit options are described in setup documentation. 10. The hosted docs provide an installation prompt; the public GitHub repository distributes client setup files and a setup skill. No server-delivered skill is documented. 11. web_research can continue a prior response using previous_response_id, inheriting its earlier question and answer; unavailable for organizations with ZDR enabled. 12. The endpoint is a combined hosted server replacing legacy Search and Task endpoints for new installations; Docs MCP is separate. web_research calls the Parallel Responses API. 13. No raw API request, SQL, script or arbitrary-execution tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Searches use `fast` mode unless an override setting specifies a different `mode`.",
+      "Models that aren't sure of their exact name leave it out.",
+      "Leave it out on the first call.",
+      "A tool list replaces the default list, so include every tool the client should see.",
+      "Don't include credentials in the header.",
+      "Source-policy fields are hard filters and can reduce result quality. For flexible preferences, such as \"from the last month\" or \"from nytimes.com\", include the preference in the search objective or queries. Reserve source-policy overrides for requirements that apply to the whole session."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The endpoint supports a configurable tool list, conditionally exposes web_research based on authentication, and accepts per-connection override settings that alter downstream API requests and can expose extra request fields. The vendor also documents separate legacy Search, Task and Docs MCP endpoints.",
+    "sources": [
+      "https://docs.parallel.ai/integrations/mcp/quickstart",
+      "https://docs.parallel.ai/integrations/mcp/installation",
+      "https://docs.parallel.ai/integrations/mcp/task-mcp",
+      "https://docs.parallel.ai/mcp",
+      "https://github.com/parallel-web/search-mcp",
+      "https://parallel.ai/customer-terms"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "3 by default with OAuth or API key; 2 anonymously; configurable using tools=",
+    "action_count_comment": "An official tool list exists at https://docs.parallel.ai/integrations/mcp/quickstart.md: it names three tools, with web_research authentication-required and web_search/web_fetch unauthenticated. No total beyond those three is stated. No catalogue additions were made. Catalogues reviewed describe the legacy Search endpoint (two tools) or an endpoint alias, not additional tools for the input endpoint.",
+    "actions": [
+      {
+        "tool_name": "web_search",
+        "description": "Searches the web and returns excerpts that usually contain enough information to answer the question.",
+        "type": "Read",
+        "enabled_by_default": "Yes (anonymous and authenticated; unless filtered with tools=)",
+        "parameters": "objective: string (required); search_queries: string[] (required); client_model: string (optional; anonymous only); session_id: string (optional; anonymous only)",
+        "parameter_count": "4",
+        "source": "https://docs.parallel.ai/integrations/mcp/quickstart.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "web_fetch",
+        "description": "Reads specific URLs and returns relevant page parts or full-page Markdown.",
+        "type": "Read",
+        "enabled_by_default": "Yes (anonymous and authenticated; unless filtered with tools=)",
+        "parameters": "urls: string[] (required; up to 20); objective: string (optional; max 200 chars); search_queries: string[] (optional); full_content: boolean (optional, default false); allow_live_fetch: boolean (optional, default true); client_model: string (optional; anonymous only); session_id: string (optional; anonymous only)",
+        "parameter_count": "7",
+        "source": "https://docs.parallel.ai/integrations/mcp/quickstart.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "web_research",
+        "description": "Researches one question using Parallel Responses API and returns an answer with citations.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes with OAuth or API key; No anonymously; can be filtered with tools=",
+        "parameters": "input: string (required; max 20,000 chars); reasoning_effort: string (optional; enum 4: low, medium, high, auto; default auto); previous_response_id: string (optional)",
+        "parameter_count": "3",
+        "source": "https://docs.parallel.ai/integrations/mcp/quickstart.md",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted implementation code and verbatim MCP tool definitions/initialize instructions are not public. The official quickstart publishes tool names and argument documentation, but not complete serialized tool definitions or initialize instructions.",
+    "human_can_agent_cannot": "Parallel documents separate Task API/MCP support for asynchronous deep research reports and list enrichment; these operations are not tools on the input endpoint. The broader Parallel platform also exposes other APIs, including image search, monitoring and entity discovery, which are not listed as tools for this endpoint. Sources: https://docs.parallel.ai/integrations/mcp/quickstart; https://docs.parallel.ai/integrations/mcp/task-mcp; https://parallel.ai/pricing",
+    "sources": [
+      "https://docs.parallel.ai/integrations/mcp/quickstart",
+      "https://docs.parallel.ai/getting-started/pricing",
+      "https://glama.ai/mcp/servers/parallel-web/search-mcp",
+      "https://mcp.tc/i/parallel-search",
+      "https://agentatlas.dev/mcp/parallel-search",
+      "https://mcpyet.com/mcp/parallel/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs recommend keeping search objectives focused on one goal, using 2–3 queries, leaving uncertain client_model values out, and reserving hard source-policy overrides for session-wide requirements. These recommendations are guidance; the docs do not say the server enforces them.",
+    "governance_promises": "The vendor says anonymous tools send queries/URLs to Parallel and that the server does not read the rest of the conversation or files. Customer Terms permit use of Customer IP to provide, maintain and improve services, including model training, and permit analysis of Usage Data for operational, development and improvement purposes. They call for commercially reasonable safeguards; the terms say a DPA is needed before processing personal data.",
+    "promises_to_user": "The vendor documents anonymous free access to web_search and web_fetch, higher limits and web_research through authentication, and usage cost metadata for authenticated calls. It cautions that full-content fetches may be long and that generated research outputs are not guaranteed accurate or complete.",
+    "comparison_with_server_logic": "Authentication-dependent tool access, per-call limits, schema validation, hard overrides, and continuation by previous_response_id are described as server behaviors. Privacy and data-use terms are contractual statements; the public repository does not expose backend implementation to verify their enforcement. No MCP-specific retention or deletion mechanism is documented.",
+    "sources": [
+      "https://docs.parallel.ai/integrations/mcp/quickstart",
+      "https://docs.parallel.ai/integrations/mcp/programmatic-use",
+      "https://parallel.ai/privacy-policy",
+      "https://parallel.ai/customer-terms"
+    ]
+  },
+  "contradictions": [
+    "The supplied evidence summary says the endpoint connection test returned HTTP 401, while the separately supplied pre-fetched raw POST to the endpoint returned HTTP 400 with a JSON-RPC parse error. These may reflect different request methods or probes; the raw metadata block is recorded as provided.",
+    "The endpoint documentation supports OAuth sign-in at https://mcp.parallel.ai/mcp?login, but all supplied OAuth well-known metadata URLs returned HTTP 404, so the authorization server, scopes_supported and registration/PKCE details could not be confirmed.",
+    "Third-party catalogue pages reviewed generally describe https://search.parallel.ai/mcp (legacy Search MCP), while the input is https://mcp.parallel.ai/mcp (combined server). Catalogue counts therefore were not used as the input endpoint's official tool count."
+  ],
+  "observations_for_research": [
+    "Authentication changes the visible tool set: anonymous clients receive search and fetch; authenticated clients can also receive single-call research.",
+    "The tools URL parameter can constrain which actions the client sees, while authenticated connection-level overrides can pin downstream API request values after the model supplies arguments.",
+    "A research continuation can carry prior response context through previous_response_id, except for organizations with Zero Data Retention enabled."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages/INDEX.txt and relevant saved official pages, the OAuth responses supplied in the prompt, the pinned official repository and its files, and third-party catalogue pages. The public repository is not the backend implementation. The docs' OAuth provider page was saved as HTTP 404; vendor docs still describe the OAuth flow on the quickstart. Third-party catalogs mainly list the separate legacy Search MCP; they were used to cross-check, not to expand the input endpoint's actions. No official server code, complete MCP initialize output, MCP protocol version, public OAuth scopes or exact anonymous MCP rate limit was found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 7.8
+  }
+}

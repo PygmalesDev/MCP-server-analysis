@@ -1,0 +1,552 @@
+{
+  "server": "clerk",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.clerk.com/mcp",
+    "documentation_url_csv": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+      "https://clerk.com/docs/guides/ai/mcp/agent-feedback",
+      "https://clerk.com/docs/guides/ai/overview",
+      "https://clerk.com/changelog/2026-01-20-clerk-mcp-server",
+      "https://clerk.com/blog/clerk-mcp-server-account-tools",
+      "https://clerk.com/mcp",
+      "https://clerk.com/pricing",
+      "https://mcp.tc/i/clerk",
+      "https://claude.com/connectors/clerk"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official clerk/skills and clerk/cursor-plugin repositories contain agent skills and a Cursor plugin, not the hosted MCP server implementation. They do not establish the server's handlers or tool schemas.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "Public beta (announcement dated 2026-01-20); current status not separately stated in the reviewed MCP docs.",
+    "other_official_servers": [
+      "Clerk's public MCP server documentation lists a separate official feedback-collection MCP development pattern for an organization's own server; it is not the server at mcp.clerk.com/mcp.",
+      "Clerk publishes official skills and a Cursor plugin, which are client-side resources rather than separate MCP endpoints."
+    ],
+    "sources": [
+      "https://mcp.clerk.com/mcp",
+      "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+      "https://clerk.com/changelog/2026-01-20-clerk-mcp-server",
+      "https://github.com/clerk/skills",
+      "https://github.com/clerk/cursor-plugin"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The MCP documentation does not state a separate fee for MCP access. Access requires a Clerk account and OAuth sign-in; product plan requirements for particular operations are not specified on the MCP page.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Clerk lists a Hobby plan at $0, Pro at $25/month or $20/month billed annually, Business at $300/month or $250/month billed annually, and Enterprise at custom pricing. The linked service's feature and usage prices vary by plan.",
+    "pricing_model_details": "The pricing page describes charges based on monthly retained users, add-ons and other product usage. It does not identify an MCP-specific charge or per-tool fee.",
+    "other_access_restrictions": "Clerk account sign-in and workspace selection are required. Tool access depends on granted OAuth permissions and the user's workspace role. The docs describe consent for the requested permissions as an all-or-none approval. Per-call tokens are described as tool-scoped and expiring within five minutes.",
+    "restrictions_controlled_by": "Clerk controls OAuth issuance and server access; workspace roles are controlled by workspace permissions and administrators; the user selects the workspace and approves consent.",
+    "sources": [
+      "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+      "https://clerk.com/blog/clerk-mcp-server-account-tools",
+      "https://clerk.com/mcp",
+      "https://clerk.com/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official page names account-management tools and SDK-snippet tools. It identifies read and change operations and describes selected safeguards. The docs do not publish full tool schemas or initialize output. The official list names 20 tools; mcp.tc reported 23 tools and lists four names absent from the official page, while omitting one official name.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND in official documentation. The docs describe results including application publishable keys, redacted instance configuration, DNS records and verification status, but do not specify MCP result or error envelopes.",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "https://mcp.tc/i/clerk"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official documentation describes tools and retrieved snippets, but does not document MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official documentation gives example user requests but does not document MCP prompt objects.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Clerk says it receives a one-sentence agent-provided context, tool name, success status, user ID and AI client name, version and OAuth client ID for product analytics. It says tool inputs and results are not sent. For get_more_tools, it records the task the agent could not complete. No logging controls, retention period or opt-out are described in the MCP documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Sampling is not addressed in the reviewed official documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Roots are not addressed in the reviewed official documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The provided endpoint response is HTTP 401 and its WWW-Authenticate header advertises Bearer authorization and a protected-resource metadata URL. Both protected-resource documents identify https://clerk.clerk.com as authorization server and list the supported scopes. The provided authorization-server metadata advertises authorization code, refresh-token and token-exchange grants, Dynamic Client Registration, PKCE S256, and token revocation. No token lifetime is specified in that metadata; the official MCP product page separately states per-tool tokens expire within five minutes.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://mcp.clerk.com/.well-known/oauth-protected-resource/mcp\", scope=\"user:org:read applications:read applications:manage users:read users:manage organizations:read application_domains:read application_domains:manage\"",
+      "post_interaction_context_structure": "OAuth bearer access token. The protected-resource metadata lists authorization data in header or body and supports oauth_scope. Authorization server metadata includes authorization, token, revocation, JWKS and registration endpoints.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration supported (registration_endpoint https://clerk.clerk.com/oauth/register); authorization_code, refresh_token and urn:ietf:params:oauth:grant-type:token-exchange grants; PKCE S256; token endpoint auth methods client_secret_basic, none, client_secret_post; resource metadata token introspection endpoint https://clerk.clerk.com/oauth/token with client_secret_post/client_secret_basic; revocation endpoint https://clerk.clerk.com/oauth/token/revoke. authorization-server scopes_supported: openid, profile, email, offline_access, user:org:read, application_domains:manage, application_domains:read, applications:manage, applications:read, organizations:read, users:manage, users:read. Protected-resource scopes_supported: user:org:read, applications:read, applications:manage, users:read, users:manage, organizations:read, application_domains:read, application_domains:manage. Product page says per-tool tokens expire within five minutes. The endpoint challenge scope omits organizations:manage, although authorization-server scopes_supported also omits organizations:manage.",
+      "authorization_server": "https://clerk.clerk.com",
+      "sources": [
+        "https://mcp.clerk.com/mcp",
+        "https://mcp.clerk.com/.well-known/oauth-protected-resource",
+        "https://mcp.clerk.com/.well-known/oauth-protected-resource/mcp",
+        "https://clerk.clerk.com/.well-known/oauth-authorization-server",
+        "https://clerk.clerk.com/.well-known/openid-configuration",
+        "https://clerk.com/mcp",
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed docs describe user approval through OAuth consent and agent/client-side confirmation recommendations for some operations, but do not document MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "https://clerk.com/blog/clerk-mcp-server-account-tools"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed official documentation does not describe MCP Tasks.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Client configuration is documented for a single global Streamable HTTP URL, https://mcp.clerk.com/mcp. The official documentation does not describe server URL parameters, selectable toolsets or a read-only mode.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "https://clerk.com/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "submit_feedback is documented as reporting problems and missing documentation to Clerk. The page says reports describe what the agent tried and what went wrong, include user and workspace IDs, and have recognizable credentials such as keys and tokens redacted before storage. The docs do not specify the MCP error response format.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed documentation does not describe MCP subscription capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed documentation does not describe MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed documentation does not describe MCP cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official page requires Streamable HTTP and says the server does not support SSE. Its instructions include behavioral guidance attached to the submit_feedback and get_more_tools tools. The official docs do not reproduce initialize instructions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND",
+      "sources": [
+        "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Read and write tools are distinguished in the official tool list. The documentation marks changing tools as such; it specifically says production-instance creation is irreversible and requires confirm: true. Tool annotation fields readOnlyHint, destructiveHint, idempotentHint and openWorldHint are not published officially. mcp.tc, a third-party catalogue, reports hints for 23 tools and says the client decides whether to ask before running them.\n2. Server-enforced confirmation: create_production_instance requires confirm: true. Config changes and user creation support dry runs, but the docs do not say dry-run is mandatory. The blog recommends that a well-behaved agent check with the user before setting up production. No MCP Elicitation or approval workflow is documented.\n3. OAuth scopes are listed in C. Docs say the server acts as the signed-in user in the selected workspace and is limited by workspace role. Product page says each tool call receives a tool-scoped token that expires within five minutes. Authorization metadata advertises DCR, PKCE S256 and revocation. Consent is described as all-or-none. No client allowlist or redirect approval policy is documented.\n4. The docs give one endpoint and Streamable HTTP transport; SSE is explicitly unsupported. No read-only endpoint, tool filter, URL parameter, sandbox endpoint or regional variant was found in reviewed official pages. The linked account can include development and production instances.\n5. Official docs say secret keys are never returned and sensitive instance configuration values are redacted. No broader PII masking or user/data path boundary is specified. Feedback reports have recognizable credentials redacted; the tool guidance says not to include secrets, API keys, tokens or end-user personal data.\n6. No MCP-specific rate limits, quotas, bulk caps, truncation limits or per-call charges were found in reviewed docs. Pricing is published for the Clerk product, not MCP calls.\n7. Full MCP schemas and server-side validation/correction behavior are not published. Blog states create_user supports dry-run; docs say configuration updates can be previewed with dry-run. No argument rewriting or operator-default override is documented.\n8. Clerk says tool-call analytics include agent-written one-sentence context, tool name, success status, user ID and AI client name, version and OAuth client ID; tool inputs and results are not sent. get_more_tools records the task the agent could not complete. No opt-out or retention details are documented on the MCP page.\n9. Vendor-interest surfaces include submit_feedback (problem reports to Clerk) and get_more_tools (reports tasks the tools cannot do). The docs instruct the agent when to call them. No rating or survey tool is listed. The docs recommend developers use the MCP server; this is product guidance.\n10. SDK snippet retrieval tools provide code patterns. Officially distributed Clerk skills and Cursor plugin are outside the server. Feedback/get_more_tools instructions are agent-facing text; the docs do not establish enforcement except for documented server-side requirements such as confirm: true.\n11. No persistent agent memory or history-dependent tool availability is documented. Workspace and OAuth selection persist in client authorization until sign-out/reconnection; docs say reconnect and select another workspace to switch.\n12. Standard single hosted endpoint with one documented tool list. No sub-server or proxy architecture documented.\n13. No raw API request, arbitrary SQL, script execution or universal escape-hatch tool is listed in the official list or the catalogue list reviewed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Your agent can call submit_feedback when a Clerk task fails or needs a workaround, or when you ask it to report a problem.",
+      "When your agent calls get_more_tools, the server records the task it couldn't complete, so the Clerk team can see which tools to add next.",
+      "Creating a production instance can't be undone, so the tool requires confirm: true.",
+      "A well-behaved agent checks with you before it sets it."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One global hosted endpoint and a flat documented list of account and SDK snippet tools. The docs also describe SDK snippets, but not dynamically loaded toolsets or sub-servers.",
+    "sources": [
+      "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+      "https://clerk.com/blog/clerk-mcp-server-account-tools",
+      "https://clerk.com/mcp",
+      "https://mcp.tc/i/clerk",
+      "https://clerk.com/pricing"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "24",
+    "action_count_comment": "The official tool list exists at https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server and names 20 tools, with no stated total. mcp.tc reports 23 and lists four additional names not on the official page (enable_organizations, enable_billing, disable_organizations, disable_billing); these are included as third-party-only entries. The catalogue omits the official list_application_feedback, so the union is 24. Claude's connector directory lists only the two SDK snippet tools and is a publisher-verified third-party listing. mcp.tc says it could not recently read a complete tool list and notes its metadata was last checked 2026-10-26. The official list is used as the source for all names it confirms.",
+    "actions": [
+      {
+        "tool_name": "whoami",
+        "description": "Show connected Clerk account, workspace, and granted permissions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_applications",
+        "description": "List applications in the connected workspace.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_application",
+        "description": "Inspect an accessible Clerk application.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_application",
+        "description": "Create an application in the connected workspace.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_instance_config",
+        "description": "Read instance configuration; sensitive values are redacted.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_instance_config_schema",
+        "description": "Read the schema for instance configuration.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "patch_instance_config",
+        "description": "Partially update instance configuration; supports dry-run preview.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "put_instance_config",
+        "description": "Replace entire instance configuration; supports dry-run preview.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_users",
+        "description": "Find users in an instance with filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_user",
+        "description": "Create a user in an instance; supports dry-run.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_domains",
+        "description": "List application domains and required DNS records.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_domain_status",
+        "description": "Read DNS, SSL, and email verification status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "check_domain_dns",
+        "description": "Request a new DNS check for a domain.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_deploy_oauth_providers",
+        "description": "List OAuth providers and identify missing production credentials.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_production_instance",
+        "description": "Create production instance; irreversible and requires confirm=true.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "set_oauth_provider_credentials",
+        "description": "Save production OAuth credentials for a provider.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_application_feedback",
+        "description": "Read feedback reported by agents using the user's own MCP server.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_feedback",
+        "description": "Report problems and missing documentation to the Clerk team.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_more_tools",
+        "description": "Tell Clerk about a task none of the other tools can do.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "clerk_sdk_snippet",
+        "description": "Get a code snippet or bundle for a Clerk feature.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_clerk_sdk_snippets",
+        "description": "List available SDK snippets and bundles, optionally filtered by tag.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enable_organizations",
+        "description": "[mcp.tc] Enable organizations on an instance.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.tc/i/clerk",
+        "source_type": "Third-party (mcp.tc, 2026-10)"
+      },
+      {
+        "tool_name": "enable_billing",
+        "description": "[mcp.tc] Enable billing for organizations and/or users.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.tc/i/clerk",
+        "source_type": "Third-party (mcp.tc, 2026-10)"
+      },
+      {
+        "tool_name": "disable_organizations",
+        "description": "[mcp.tc] Disable organizations on an instance.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.tc/i/clerk",
+        "source_type": "Third-party (mcp.tc, 2026-10)"
+      },
+      {
+        "tool_name": "disable_billing",
+        "description": "[mcp.tc] Disable billing for organizations and/or users.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.tc/i/clerk",
+        "source_type": "Third-party (mcp.tc, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Official docs do not reproduce initialize instructions or full tool definitions/schemas as JSON; hosted public tool schemas were not available in the evidence folder. No token estimate was reconstructed from names or paraphrased descriptions.",
+    "human_can_agent_cannot": "The official blog says the MCP server does not cover everything the Clerk Dashboard does yet. Production OAuth credentials are added in the Clerk Dashboard so secrets stay out of chat; secret keys are accessed from the API keys page or with clerk env pull. The MCP docs describe a subset of app, instance, user, domain, production setup and snippet operations; other Dashboard and REST/API operations are not documented as MCP tools.",
+    "sources": [
+      "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+      "https://clerk.com/blog/clerk-mcp-server-account-tools",
+      "https://mcp.tc/i/clerk",
+      "https://claude.com/connectors/clerk",
+      "https://clerk.com/docs/cli"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The blog says, “A well-behaved agent checks with you before it sets it.” This is agent-facing recommendation; the server-enforced requirement documented for create_production_instance is confirm: true. Docs also say to use dry_run first for configuration changes, while describing dry-run support rather than a mandatory server-side gate.",
+    "governance_promises": "The docs state: “The MCP server never returns your instances' secret keys” and “It also redacts sensitive values when it reads instance configuration.” For analytics, “It doesn't send the tool's inputs or results.” Feedback recognizably credential-like values are redacted before storage. The product page says calls receive a tool-limited token expiring within five minutes.",
+    "promises_to_user": "The product page says users sign in, select a workspace, review requested permissions and approve them; the server acts within the user's workspace role. The docs say users do not need to paste secret keys into client configuration.",
+    "comparison_with_server_logic": "OAuth scope and workspace-role constraints, per-tool token duration, credential redaction and analytics exclusions are documented, but implementation code is not public, so these claims cannot be checked against handlers. confirm: true is documented as required for production-instance creation. The pre-run user confirmation recommendation and dry-run-first advice depend on the agent/client unless the operation's explicit parameter is supplied.",
+    "sources": [
+      "https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server",
+      "https://clerk.com/blog/clerk-mcp-server-account-tools",
+      "https://clerk.com/mcp"
+    ]
+  },
+  "contradictions": [
+    "The official tool list names 20 tools. mcp.tc lists 23 but omits the official list_application_feedback and adds enable_organizations, enable_billing, disable_organizations and disable_billing, which are not named on the official page.",
+    "The endpoint's WWW-Authenticate scope challenge lists user:org:read, applications:read, applications:manage, users:read, users:manage, organizations:read, application_domains:read and application_domains:manage. The protected-resource documents omit organizations:manage too; the authorization-server metadata also omits organizations:manage. No organizations:manage scope is advertised.",
+    "mcp.tc describes access as requiring no sign-in or key, but the official Clerk documentation says all tools require Clerk-account sign-in and provides OAuth setup steps. Prefer the vendor's account of its own endpoint."
+  ],
+  "observations_for_research": [
+    "The vendor describes two different confirmation mechanisms: a server-required confirm: true parameter for irreversible production-instance creation, and agent-facing advice to check with the user before applying it.",
+    "OAuth metadata advertises broad manage scopes, while the vendor says each call receives a token limited to that tool's permissions; the exact tool-to-scope mapping is not fully exposed in the docs.",
+    "The endpoint accepts unauthenticated discovery only to the extent that the protected-resource metadata is public; a direct POST to the MCP endpoint returned HTTP 401 with an OAuth bearer challenge."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared links.json, links_check.txt, pages/ and code/GITHUB_COMMITS.txt. The official repositories present are a skills collection and Cursor plugin, not server source, so code-level handler behavior, MCP SDK/version, schemas, annotations and initialize instructions could not be inspected. mcp.tc is third-party evidence and explicitly warns it could not read a complete tool list; its four catalogue-only tool names are retained after the 20 official names. The Claude connector directory lists only two tools; its listing is publisher-verified but third-party. A guessed standards.new catalogue page returned 404 and was not used. Pricing is sourced from Clerk's official pricing page; no MCP-specific price was found. Unofficial MCP server listings were not found in links.json.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 21.7
+  }
+}

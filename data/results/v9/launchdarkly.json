@@ -1,0 +1,486 @@
+{
+  "server": "launchdarkly",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.launchdarkly.com/mcp/v1",
+    "documentation_url_csv": "https://launchdarkly.com/docs/home/getting-started/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/launchdarkly/mcp-server",
+    "documentation_urls_used": [
+      "https://launchdarkly.com/docs/home/getting-started/mcp",
+      "https://launchdarkly.com/docs/home/getting-started/mcp-hosted",
+      "https://launchdarkly.com/docs/home/getting-started/mcp-local",
+      "https://mcp.launchdarkly.com/mcp/v1/install",
+      "https://mcp.launchdarkly.com/mcp/launchdarkly/install"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repository is LaunchDarkly’s self-managed local MCP server for EU and federal environments. Official docs describe that as a separate variant and recommend the hosted server where available. It is not identified as the code deployed at /mcp/v1.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "e4a35c6f6ec2ec16bfa84cf8e6ea838249c239d5",
+    "commit_date": "2026-10-21",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.26.0",
+    "code_public": "Yes",
+    "license": "MIT (public local server)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.launchdarkly.com/mcp/launchdarkly — hosted MCP server documented for feature flags, AgentControl configs, and observability; its install page reports 174 tools.",
+      "https://mcp.launchdarkly.com/mcp/fm — another official hosted install page; purpose and relationship to /mcp/v1 not established.",
+      "The public local server supports LaunchDarkly EU and federal environments."
+    ],
+    "sources": [
+      "https://mcp.launchdarkly.com/mcp/v1",
+      "https://mcp.launchdarkly.com/mcp/v1/install",
+      "https://launchdarkly.com/docs/home/getting-started/mcp-hosted",
+      "https://launchdarkly.com/docs/home/getting-started/mcp-local",
+      "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+      "https://github.com/launchdarkly/mcp-server/tree/e4a35c6f6ec2ec16bfa84cf8e6ea838249c239d5"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No official MCP-specific price or limit was found. MartechDB reports MCP access is included at no extra cost, but this is third-party reporting.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "The official pricing page lists a $0/month Developer plan. Foundation is pay-as-you-go, with annual-billing examples of $10 per service connection/month and $8.33 per 1,000 client-side MAU/month.",
+    "pricing_model_details": "The Developer plan includes 5,000 AI runs/month. Foundation includes 5,000 AI runs/month; additional runs are listed at $5 per 1,000. These are product-plan prices, not stated MCP fees.",
+    "other_access_restrictions": "OAuth connection. Docs for /mcp/launchdarkly say the connection acts with the authorizing member’s permissions; tokens last two hours, refresh automatically, and require reauthorization every 90 days. Input endpoint /mcp/v1 install instructions also show optional-looking MCP Factory feedback and vent webhook headers; their effect is undocumented.",
+    "restrictions_controlled_by": "Vendor and LaunchDarkly organization administrators through account roles; client-selected URL parameters only affect the visible tool list according to current hosted docs.",
+    "sources": [
+      "https://launchdarkly.com/pricing/",
+      "https://launchdarkly.com/docs/home/getting-started/mcp-hosted",
+      "https://mcp.launchdarkly.com/mcp/v1/install",
+      "https://martechdb.com/vendors/launchdarkly"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint responds to MCP requests (connection test: HTTP 401 JSON-RPC; pre-fetched POST: HTTP 415, JSON required). Its install page does not publish a tool list. MartechDB associates 18 named tools with /mcp/v1. The current official tool reference is for the distinct /mcp/launchdarkly path and states 174 tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Input endpoint returned JSON-RPC during the connection test; tool result and error schemas are not published for /mcp/v1. The current /mcp/launchdarkly reference describes tool results but does not establish the /mcp/v1 result format.",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1",
+        "https://mcp.launchdarkly.com/mcp/v1/install",
+        "https://martechdb.com/vendors/launchdarkly",
+        "https://mcp.launchdarkly.com/mcp/launchdarkly/install"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No resource list or resource behavior for /mcp/v1 was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install",
+        "https://launchdarkly.com/docs/home/getting-started/mcp-hosted"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No prompt list or prompt behavior for /mcp/v1 was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install",
+        "https://launchdarkly.com/docs/home/getting-started/mcp-hosted"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No logging capability for /mcp/v1 is documented. The public local variant has a console logger, but it is a separate server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/launchdarkly/mcp-server/blob/e4a35c6f6ec2ec16bfa84cf8e6ea838249c239d5/src/mcp-server/tools.ts",
+        "https://launchdarkly.com/docs/home/getting-started/mcp-local"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling support for /mcp/v1 was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability for /mcp/v1 was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The pre-fetched protected-resource document at the endpoint path returns resource=https://mcp.launchdarkly.com/mcp/v1 and authorization_servers=[https://mcp.launchdarkly.com/mcp/v1]. The authorization-server document at that path names LaunchDarkly’s app endpoints, supports Dynamic Client Registration, authorization_code, refresh_token, and client_credentials grants, PKCE S256, response_type code, scopes reader and writer, and client_secret_basic, client_secret_post, and none token authentication. The origin-level protected-resource and OpenID configuration URLs returned 404. The supplied POST returned 415 and no WWW-Authenticate header was present in the supplied raw response.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth authorization-code and refresh-token flows are declared; client-credentials grant is also declared. Token lifetime for /mcp/v1 was not provided in its metadata.",
+      "authorization_mechanism": "Metadata Doc and Dynamic Client Registration. Raw protected-resource metadata: HTTP 200, {\"resource\":\"https://mcp.launchdarkly.com/mcp/v1\",\"authorization_servers\":[\"https://mcp.launchdarkly.com/mcp/v1\"]}. Raw authorization-server metadata: HTTP 200; authorization_endpoint=https://app.launchdarkly.com/trust/oauth/authorize; registration_endpoint=https://app.launchdarkly.com/trust/oauth/register/dcr; token_endpoint=https://app.launchdarkly.com/trust/oauth/token; revocation_endpoint=https://app.launchdarkly.com/trust/oauth/revoke; grant_types_supported=[authorization_code,refresh_token,client_credentials]; code_challenge_methods_supported=[S256]; response_types_supported=[code]; token_endpoint_auth_methods_supported=[client_secret_basic,client_secret_post,none]; scopes_supported=[reader,writer]. Token lifetime not stated for this endpoint. Current hosted docs for /mcp/launchdarkly state two-hour access tokens, automatic refresh, and reauthorization every 90 days; that evidence is for the other path.",
+      "authorization_server": "https://mcp.launchdarkly.com/mcp/v1 (issuer); OAuth endpoints are hosted at https://app.launchdarkly.com/trust/oauth/.",
+      "sources": [
+        "https://mcp.launchdarkly.com/.well-known/oauth-protected-resource/mcp/v1",
+        "https://mcp.launchdarkly.com/.well-known/oauth-authorization-server/mcp/v1",
+        "https://mcp.launchdarkly.com/.well-known/oauth-protected-resource",
+        "https://mcp.launchdarkly.com/.well-known/openid-configuration/mcp/v1",
+        "https://mcp.launchdarkly.com/mcp/v1",
+        "https://launchdarkly.com/docs/home/getting-started/mcp-hosted"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation support for /mcp/v1 was documented. Tool descriptions can recommend asking the user or waiting for confirmation, but this is not evidence of server-enforced Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install",
+        "https://mcp.launchdarkly.com/mcp/launchdarkly/install"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No task capability for /mcp/v1 was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint install page publishes client setup and header configuration, including webhook URL and auth-token headers for MCP Factory feedback and vent integrations. The vendor’s current hosted docs describe toolsets and writes URL parameters that change which tools a client sees, while stating these parameters do not constrain account access. Those details refer to /mcp/launchdarkly.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client configuration snippets and environment-variable placeholders; runtime configuration semantics for /mcp/v1 are not documented.",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install",
+        "https://launchdarkly.com/docs/home/getting-started/mcp-hosted"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The connection test reports HTTP 401 with JSON-RPC, while the supplied POST evidence reports HTTP 415 and a JSON content-type requirement. No general /mcp/v1 tool error format was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP error responses observed; tool error result structure unknown.",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription capability for /mcp/v1 was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress notifications for /mcp/v1 were documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation support for /mcp/v1 was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/v1/install"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The current official /mcp/launchdarkly install page exposes server instructions: “IMPORTANT: Before using tools, check if the environment has LaunchDarkly related agent skills or SKILL.md installed, ask the user if they want them installed from https://github.com/launchdarkly/ai-tooling”. This is documentation for the other hosted path, not verified as initialize context from /mcp/v1.",
+      "pre_interaction_context_verbatim": "IMPORTANT: Before using tools, check if the environment has LaunchDarkly related agent skills or SKILL.md installed, ask the user if they want them installed from https://github.com/launchdarkly/ai-tooling",
+      "post_interaction_context_structure": "Server instructions are displayed on the current official /mcp/launchdarkly install page; the /mcp/v1 install page does not show its initialize instructions.",
+      "sources": [
+        "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "https://mcp.launchdarkly.com/mcp/v1/install"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. /mcp/v1 annotations are not published. The current /mcp/launchdarkly reference displays Read-only, Destructive, and Idempotent labels for tools; no OpenWorld label was observed. 2. Endpoint-specific enforcement is unknown. Current-path docs require confirm=true for some destructive operations and recommend readiness checks; other guidance asks clients to request user confirmation. 3. /mcp/v1 OAuth metadata supports reader and writer scopes. Current hosted docs say operations inherit the authorizing member’s role, role changes apply immediately, access tokens last two hours and refresh automatically, and reauthorization is needed every 90 days. 4. Current hosted docs describe toolsets and writes URL parameters as narrowing visible tools only, not account permissions. The local EU/federal variant supports selecting tools in configuration and using a Reader role, but is separate code. 5. No field masking or PII exclusion was found. Current hosted docs warn tool results can contain context attributes, personal data, server-side SDK keys, logs, traces, and session data. 6. Endpoint-specific call quotas, truncation, rate limits, and per-call costs were not found. Current hosted tool descriptions mention response truncation for some operations. 7. Input validation/correction for /mcp/v1 is unknown. Local code uses Zod schemas and forwards parsed arguments, but is a separate variant. 8. Current hosted docs state returned data goes to the client’s model provider; no /mcp/v1 telemetry or audit detail was found. Its install page names MCP Factory feedback and vent webhook headers, but their behavior is undocumented. 9. No feedback/rating tool appears in the 18 reported names. Install headers include feedback/vent webhook identifiers; no actual feedback prompt or upsell was found. 10. Current server instructions recommend checking for and offering LaunchDarkly agent skills before use. Docs also distribute skills separately through GitHub. 11. Persistent agent memory/state behavior is not documented. 12. Several paths exist: /mcp/v1, /mcp/launchdarkly, /mcp/fm, and a separate local EU/federal server; no nested sub-server architecture was established. 13. No raw API/request or arbitrary execution tool is in the reported 18-name list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS /mcp/launchdarkly] “IMPORTANT: Before using tools, check if the environment has LaunchDarkly related agent skills or SKILL.md installed, ask the user if they want them installed from https://github.com/launchdarkly/ai-tooling”",
+      "[DOCS /mcp/launchdarkly] “Always run check-removal-readiness before archiving.”",
+      "[DOCS /mcp/launchdarkly] “Requires confirm=true to execute.”",
+      "[DOCS /mcp/launchdarkly] “Review tool calls before your AI client runs them, especially calls that change or delete data. Don’t set your AI client to approve these calls automatically.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "LaunchDarkly documents multiple hosted paths with distinct install pages, plus a separate local server for EU and federal instances. The available evidence does not establish whether these hosted paths have distinct tool sets at runtime.",
+    "sources": [
+      "https://mcp.launchdarkly.com/mcp/v1/install",
+      "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+      "https://launchdarkly.com/docs/home/getting-started/mcp-hosted",
+      "https://launchdarkly.com/docs/home/getting-started/mcp-local",
+      "https://mcp.launchdarkly.com/mcp/fm/install",
+      "https://github.com/launchdarkly/mcp-server/blob/e4a35c6f6ec2ec16bfa84cf8e6ea838249c239d5/src/mcp-server/tools.ts"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "18 (reported for /mcp/v1; endpoint-specific count not verified)",
+    "action_count_comment": "No official tool list was found for the input endpoint’s install page. MartechDB reports 18 tools for /mcp/v1 and names all 18, based on LaunchDarkly documentation read on 2026-10-02. All 18 names also appear in the official /mcp/launchdarkly install list, so they are marked Official; that current-path list states 174 tools and is not substituted for the input endpoint’s list. Agent Discoverability reports 169 tools for its ChatGPT listing. No distinct catalogue-only names were added. The 18 names and descriptions are in actions.json.",
+    "actions": [
+      {
+        "tool_name": "apply-approval-request",
+        "description": "Apply an already-approved flag approval request.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-approval-requests",
+        "description": "List pending approval requests for a flag in an environment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-approval-request",
+        "description": "Create an approval request for a flag change in an environment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "check-removal-readiness",
+        "description": "Check dependencies, code references, targeting, expiring targets, and environment status before removal.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage-expiring-targets",
+        "description": "List, add, update, or remove expiring targets on a flag.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "copy-flag-config",
+        "description": "Copy a flag's targeting configuration between environments.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-prerequisites",
+        "description": "Add or remove prerequisites for a flag in an environment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-individual-targets",
+        "description": "Add or remove users or contexts from flag targeting.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-targeting-rules",
+        "description": "Add, remove, or modify custom targeting rules for a flag.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-rollout",
+        "description": "Change the default rule (fallthrough) for a flag.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "toggle-flag",
+        "description": "Turn a feature flag's targeting on or off in an environment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-flag-settings",
+        "description": "Update flag name, description, tags, lifecycle, maintainer, defaults, or custom properties.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-flag",
+        "description": "Create a feature flag in a project.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-flag-status-across-envs",
+        "description": "Check a flag's lifecycle status across all environments.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find-stale-flags",
+        "description": "Find feature flags that are candidates for cleanup.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-flag-health",
+        "description": "Get lifecycle, request, targeting, age, and temporary-status information for a flag.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-flag",
+        "description": "Get full flag configuration scoped to an environment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-flags",
+        "description": "Search and browse feature flags in a project.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No deployed code or verbatim tool definitions were available for /mcp/v1. The public local EU/federal code is a different server variant, and current hosted documentation does not reproduce the /mcp/v1 initialize context or complete tool schemas.",
+    "human_can_agent_cannot": "The reported /mcp/v1 list covers feature flags and approvals. LaunchDarkly’s current hosted documentation describes additional AgentControl and observability capabilities on /mcp/launchdarkly, including observability data and AI configuration management; their availability on /mcp/v1 is not established. The local server is documented for flags and AgentControl configs, but is a separate EU/federal variant.",
+    "sources": [
+      "https://mcp.launchdarkly.com/mcp/v1/install",
+      "https://mcp.launchdarkly.com/mcp/launchdarkly/install",
+      "https://martechdb.com/vendors/launchdarkly",
+      "https://agentdiscoverability.com/track/chatgpt/launchdarkly",
+      "https://launchdarkly.com/docs/home/getting-started/mcp-hosted",
+      "https://launchdarkly.com/docs/home/getting-started/mcp-local"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Current hosted docs recommend using a least-privilege member role, reviewing tool calls, and not auto-approving changes. They state toolsets and writes URL parameters only narrow what the client sees; they do not limit account access. These are current /mcp/launchdarkly docs, not verified behavior of /mcp/v1.",
+    "governance_promises": "Current hosted docs say access follows the authorizing member’s permissions and role changes apply immediately. They warn that MCP results are sent to the AI model provider and may include personal context attributes, SDK keys, and observability data; LaunchDarkly says it does not control the client or model provider.",
+    "promises_to_user": "The current hosted endpoint uses OAuth and supports feature flag management, AgentControl configs, and observability. Official docs state access tokens last two hours, refresh automatically, and require reauthorization every 90 days.",
+    "comparison_with_server_logic": "Role inheritance and token behavior are documented for /mcp/launchdarkly but not independently verified for /mcp/v1. Advice to review calls is client-side guidance. The docs explicitly say URL tool filters do not enforce account permissions. Data-sharing statements describe information flows, not masking or retention enforcement by the MCP server.",
+    "sources": [
+      "https://launchdarkly.com/docs/home/getting-started/mcp-hosted",
+      "https://launchdarkly.com/pricing/",
+      "https://mcp.launchdarkly.com/mcp/v1/install"
+    ]
+  },
+  "contradictions": [
+    "Endpoint-path/tool-count discrepancy: the supplied endpoint is /mcp/v1 and its install page does not publish a tool list; MartechDB reports 18 names for it. LaunchDarkly’s current official hosted tool reference is for /mcp/launchdarkly and states “Available Tools (174)”. Agent Discoverability separately reports 169 tools for a ChatGPT listing. These counts refer to different evidence and are not reconciled.",
+    "The protected-resource metadata at the origin without a path suffix returned 404, while the path-qualified /mcp/v1 document returned 200. The path-qualified OpenID configuration returned 404.",
+    "The authorization metadata lists reader and writer scopes; the available evidence does not map either scope to the reported individual tool set."
+  ],
+  "observations_for_research": [
+    "The supplied endpoint’s install page includes configuration headers named for MCP Factory feedback and vent webhooks. Their runtime purpose and whether they are required are not stated.",
+    "The current official hosted endpoint exposes URL parameters that affect tool visibility but explicitly do not restrict underlying account permissions."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/INDEX.txt, all prepared official pages including script extracts, links_check.txt, the local public repository, and the listed catalogues. The official repository is the local EU/federal variant, not the supplied hosted endpoint. The input install page contains setup instructions but no tool list or schemas. MartechDB’s 18-tool listing says its names were read from LaunchDarkly documentation on 2026-10-02 and may be out of date. The separate official /mcp/launchdarkly reference reports 174 tools; its tool schemas were not treated as /mcp/v1 schemas. Unofficial servers were not used.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.5
+  }
+}

@@ -1,0 +1,2858 @@
+{
+  "server": "ramp",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.ramp.com/mcp",
+    "documentation_url_csv": "https://support.ramp.com/ramp-mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/ramp-public/ramp_mcp",
+    "documentation_urls_used": [
+      "https://support.ramp.com/ramp-mcp",
+      "https://agents.ramp.com/docs/reference/agent-tools",
+      "https://agents.ramp.com/docs/guides/connecting",
+      "https://agents.ramp.com/docs/overview/introduction",
+      "https://ramp.com/integrations/ramp-mcp",
+      "https://ramp.com/pricing",
+      "https://support.ramp.com/ramp-pricing-overview/",
+      "https://support.ramp.com/ramp-plus-billing-policy/",
+      "https://support.ramp.com/managing-connected-ai-tools/",
+      "https://ramp.com/legal/privacy-terms/privacy-terms/privacy-policy"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public ramp-public/ramp_mcp repository is an archived local stdio MCP server using Ramp’s Developer API and client-credentials authentication. Ramp’s current hosted endpoint uses browser OAuth and is not identified as running this code. Ramp’s public CLI repository is a separate terminal client, not the hosted MCP implementation.",
+    "mcp_protocol_version": "NOT FOUND for hosted endpoint; archived local server depends on mcp[cli]>=1.3.0",
+    "commit_hash": "b31c0b409cf167c2012e0b12f166397a3f302d2d",
+    "commit_date": "2025-03-20",
+    "implementation_language": "Hosted implementation NOT FOUND; archived local server: Python",
+    "mcp_sdk_and_version": "Hosted implementation NOT FOUND; archived local server: FastMCP from mcp[cli]>=1.3.0",
+    "code_public": "Partially",
+    "license": "Archived local server: MIT; hosted server implementation not public",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://demo-mcp.ramp.com/mcp — sample-data server documented for sandbox/demo use.",
+      "https://mcp.ramp.com/mcp-apps/demo/mcp — sample-data endpoint documented for demo use.",
+      "The archived local stdio server in ramp-public/ramp_mcp is a separate implementation; its README lists 19 tools, with available load tools varying by scopes.",
+      "The Ramp CLI is a separate terminal client, recommended for coding agents; it is not an MCP endpoint."
+    ],
+    "sources": [
+      "https://support.ramp.com/ramp-mcp",
+      "https://agents.ramp.com/docs/reference/agent-tools",
+      "https://agents.ramp.com/docs/guides/connecting",
+      "https://github.com/ramp-public/ramp_mcp/blob/b31c0b409cf167c2012e0b12f166397a3f302d2d/README.md",
+      "https://github.com/ramp-public/ramp_mcp/blob/b31c0b409cf167c2012e0b12f166397a3f302d2d/src/ramp_mcp/__init__.py#L27-L93",
+      "https://github.com/ramp-public/ramp_mcp/blob/b31c0b409cf167c2012e0b12f166397a3f302d2d/pyproject.toml#L1-L10"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate fee for the MCP connection is stated in the reviewed official sources. A Ramp account and access to the chosen AI client are required; ChatGPT setup requires Plus or Pro.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Ramp Free is listed at $0 per user per month. Ramp Plus is paid and billed per user; the reviewed official pricing material did not state its price. Enterprise is contact sales.",
+    "pricing_model_details": "Ramp Plus billing is per eligible active user. Ramp Free is available. Bill Pay may have transaction fees; these are charges for the linked Ramp software, not a stated MCP fee.",
+    "other_access_restrictions": "Company admins can allow all, no, or selected employees to connect. Role-level controls require Ramp Plus. Tools and data depend on the connected user’s permissions, role, admin controls, scopes, client and environment. Custom-client redirect URIs must be allowlisted. ChatGPT setup requires Plus or Pro.",
+    "restrictions_controlled_by": "Ramp vendor and organization admins; the user authorizes their own connection. The AI-client vendor controls its own subscription requirements.",
+    "sources": [
+      "https://support.ramp.com/ramp-mcp",
+      "https://support.ramp.com/managing-connected-ai-tools/",
+      "https://agents.ramp.com/docs/guides/connecting",
+      "https://ramp.com/pricing",
+      "https://support.ramp.com/ramp-pricing-overview/",
+      "https://support.ramp.com/ramp-plus-billing-policy/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Ramp’s canonical reference says its generated list is shared by Ramp MCP and CLI. It states 224 tools; the captured reference contains 226 distinct tool-name headings. Runtime availability depends on identity permissions, admin controls, scopes, client, environment and version. actions.json includes those 226 official names plus 24 catalogue-only names.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Per-tool result formats vary. The reference describes typed rows and other structured results for some tools; a general hosted-server result or error envelope is NOT FOUND.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools",
+        "https://mcp.ramp.com/.well-known/oauth-protected-resource/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No resource list or resource capability declaration for the input endpoint was found in the reviewed official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools",
+        "https://support.ramp.com/ramp-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt list or prompt capability declaration for the input endpoint was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools",
+        "https://support.ramp.com/ramp-mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Ramp says MCP calls are attributed to the signed-in user. Connected AI tools review shows who connected a tool, its status and last-used time; it is described as read-only. MCP protocol logging notifications are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Product audit and connection metadata are documented; MCP logging notification format is Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://support.ramp.com/ramp-mcp",
+        "https://support.ramp.com/managing-connected-ai-tools/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability or server-initiated model-sampling behavior was found in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools",
+        "https://support.ramp.com/ramp-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability or filesystem-root handling was found in the reviewed hosted-server materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools",
+        "https://support.ramp.com/ramp-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 and a Bearer challenge with resource_metadata=https://mcp.ramp.com/.well-known/oauth-protected-resource/mcp. Provided metadata identifies Ramp as the authorization server and advertises bearer tokens in the Authorization header. DCR is advertised at https://mcp.ramp.com/register. The authorization server supports authorization_code and refresh_token grants, PKCE S256, response type code, and token endpoint auth method none. Token endpoint: https://api.ramp.com/developer/v1/token/pkce. Revocation: https://api.ramp.com/developer/v1/token/revoke. Token lifetime: NOT FOUND. scopes_supported: accounting:write, cards:write, trips:write, funds:write, transactions:read, bills:write, reimbursements:write, approvals:write, transactions:write, sourcing:write, trips:read, departments:write, vendors:write, spend_requests:write, departments:read, reimbursements:read, accounting:read, x402:write, treasury:read, cards:read_agentic, ai_spend:read, tasks:read, business:read, bills:read, statements:read, limits:read, users:read, workflows:read, purchase_orders:read, receipts:read, unified_requests:read, sourcing:read, memos:read, vendors:read, limits:write, entities:read, cards:read, receipts:write, merchants:read, comments:write, spend_requests:read, x402_provisioning:write, purchase_orders:write, reporting:read, agent_wallet_policy:read, agent_wallet_policy:write, audit_logs:read, bank_accounts:read, bank_accounts:write, banking_drawdown_requests:write, agent_account_numbers:read.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP 401 challenge: Bearer resource_metadata=\"https://mcp.ramp.com/.well-known/oauth-protected-resource/mcp\"; response body: {\"detail\":\"No access token provided\"}.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; OAuth authorization code and refresh-token grants; PKCE S256; token endpoint authentication method none; bearer token via header. Token lifetime NOT FOUND. Revocation endpoint advertised. Full scopes_supported list is in description_what_how.",
+      "authorization_server": "https://mcp.ramp.com",
+      "sources": [
+        "https://mcp.ramp.com/mcp",
+        "https://mcp.ramp.com/.well-known/oauth-protected-resource",
+        "https://mcp.ramp.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.ramp.com/.well-known/oauth-authorization-server",
+        "https://mcp.ramp.com/.well-known/openid-configuration",
+        "https://agents.ramp.com/docs/guides/connecting"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability declaration or server-driven elicitation flow was found. Tool descriptions sometimes instruct the agent to obtain user confirmation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability declaration was found. Ramp tools include business task and workflow operations, which do not establish MCP Tasks protocol support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Ramp documents production and sample-data endpoints, client setup, redirect-URI allowlisting, employee access controls and tool availability varying with scopes, identity and environment. URL-parameter or header-based tool filters and read-only modes were not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration is described through endpoint selection, OAuth setup and organization controls; a server configuration schema is NOT FOUND.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/guides/connecting",
+        "https://support.ramp.com/ramp-mcp",
+        "https://support.ramp.com/managing-connected-ai-tools/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Ramp documents permission errors, stale tool lists, ETL capacity errors and query responses exceeding 100 rows. The hosted MCP error schema and any MCP error-reporting capability are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Human-readable support and troubleshooting cases are documented; protocol error structure is Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://support.ramp.com/ramp-mcp",
+        "https://agents.ramp.com/docs/guides/connecting"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was found. OAuth connection review and tool access controls are documented separately.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://support.ramp.com/managing-connected-ai-tools/",
+        "https://agents.ramp.com/docs/reference/agent-tools"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notification capability was found. Some business tools return operation status or provide paginated results, which do not establish protocol-level progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability declaration was found. Business cancellation tools, where present, are application actions rather than evidence of protocol request cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reference includes a reporting skill retrieval tool, ramp_reporting_get_skill, and numerous tool descriptions containing detailed agent-use instructions. An initialize-time instructions string for the hosted endpoint was not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reporting-skill tool returns guidance; exact result format and hosted initialize instructions are NOT FOUND.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agents.ramp.com/docs/reference/agent-tools"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The canonical hosted reference lists read and write operations but publishes no MCP annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint). Tool types are listed in actions.json from descriptions and names. 2. User-confirmation patterns appear in tool descriptions and parameters, including preview/confirm flows and required confirmation fields; hosted handler enforcement is not independently inspectable. Product approval workflows apply to transactions, reimbursements and unified requests. 3. OAuth scopes are broad and include read and write scopes. Ramp says the connection inherits the signed-in user’s role and permissions. Admins can set company access, and Ramp Plus adds role-level controls. Custom client redirect URIs require exact allowlisting. Token lifetime is NOT FOUND; revocation endpoint is advertised. 4. Production and sample-data endpoints are documented. Runtime tool access varies by scopes, identity, controls, client and environment. No URL/header tool filters or read-only mode for this endpoint were found. 5. Data access is bounded by the connected user’s Ramp permissions and business context. No general hosted MCP PII masking policy was found. Some tools expose agent card credentials; do not infer that all card secrets are hidden. 6. Support docs say a query over 100 rows returns no rows and should be narrowed; reporting tools separately describe paginated results and some 1,000-row caps. ETL operation capacity errors are documented. Hosted rate limits and per-call prices are NOT FOUND. 7. Tool schemas publish typed parameters and many descriptions require exact IDs or values. Tool descriptions document corrections/constraints, including that one-time funds use permanent increases even if temporary is supplied. Hosted operator-side argument rewriting and unknown-argument handling are NOT FOUND. 8. Ramp says calls are attributed to the signed-in user; admins can review connected-tool identity, status and last use. Audit log tools and audit-log scopes exist. MCP-specific telemetry collection and opt-out are NOT FOUND. 9. The official list includes ramp_submit_agent_nps. Ramp support also suggests asking an AI tool to submit feedback. Runlayer lists submit_feedback, which is not in the canonical names. 10. Agent guidance is embedded in tool descriptions; ramp_reporting_get_skill returns a reporting workflow skill. Ramp separately publishes CLI guidance and skills. Instructions in descriptions are recommendations to the model unless the server’s tool schema/operation enforces them. 11. Hosted cross-call memory or persistent agent personalization is NOT FOUND. The older local server has an ephemeral in-memory SQLite ETL database. 12. The hosted reference is a large shared catalog whose runtime tools depend on identity, scopes, client and environment; this is dynamically variable availability. The old local stdio server is a different architecture and is not the deployed endpoint. 13. No general arbitrary API-request or run-script tool was identified. The catalog contains constrained query tools: ramp_execute_analyst_query is described as read-only SQL with catalog/domain requirements; ramp_reporting_query uses a semantic dataset contract. The legacy local server’s execute_query accepts SQL against its in-memory tables, but that code is not the hosted endpoint.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] \"Call only when the user's current message clearly requests an increase for the specific fund or card and specifies temporary or permanent.\"",
+      "[DOCS] \"Before querying, find and load the relevant reporting skill and follow its guidance.\"",
+      "[DOCS] \"You can also submit feedback directly from any connected AI tool by asking it to \\\"submit feedback to Ramp\\\".\""
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The canonical list is shared across MCP and CLI, while the available tools vary by authenticated identity, scopes, admin controls, client and environment. This creates runtime-dependent tool availability. The hosted server’s internal hierarchy or sub-server architecture is NOT FOUND.",
+    "sources": [
+      "https://agents.ramp.com/docs/reference/agent-tools",
+      "https://agents.ramp.com/docs/guides/connecting",
+      "https://support.ramp.com/ramp-mcp",
+      "https://support.ramp.com/managing-connected-ai-tools/",
+      "https://mcp.ramp.com/.well-known/oauth-protected-resource/mcp",
+      "https://mcp.ramp.com/.well-known/oauth-authorization-server",
+      "https://github.com/ramp-public/ramp_mcp/blob/b31c0b409cf167c2012e0b12f166397a3f302d2d/src/ramp_mcp/__init__.py#L27-L93",
+      "https://github.com/ramp-public/ramp_mcp/blob/b31c0b409cf167c2012e0b12f166397a3f302d2d/src/ramp_mcp/tools.py#L66-L160",
+      "https://github.com/ramp-public/ramp_mcp/blob/b31c0b409cf167c2012e0b12f166397a3f302d2d/src/ramp_mcp/client.py#L10-L82"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "250",
+    "action_count_comment": "The official tool reference exists at https://agents.ramp.com/docs/reference/agent-tools. It states 224 tools; parsing the captured reference found 226 distinct official names. Added 24 catalogue-only names: 22 from Composio’s Ramp MCP toolkit (version 20261018_00; one overlaps Runlayer), plus ramp_token_info and submit_feedback from Runlayer. Catalogue counts: Runlayer 124, Composio 213, mcp.directory 16, Claude connector directory 16 (different endpoint), Gamut lists an older local-server tool set, and Tedix reports zero verified tools. Catalogue-only actions are appended after official actions. Third-party names from the Claude listing and older/different endpoint catalogues were excluded from this endpoint’s action list.",
+    "actions": [
+      {
+        "tool_name": "ramp_get_latest_sync",
+        "description": "Get the most recent accounting sync commit for the acting user's business",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); sync_type: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_sync_commit_failure_details",
+        "description": "Get object-level failure details for an accounting sync commit by UUID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); sync_commit_uuid: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_tracking_categories",
+        "description": "Retrieve active accounting tracking category metadata for transaction coding, such",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); include_hidden: boolean (optional); transaction_uuid: string | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_tracking_category_options",
+        "description": "List specific departments, projects, or other options for a tracking category",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); tracking_category_uuid: string (required); include_hidden: boolean (optional); next_page_cursor: integer | null (optional); page_size: integer (optional); query_string: string | null (optional); reimbursement_uuid: string | null (optional); transaction_uuid: string | null (optional)",
+        "parameter_count": 8,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_mark_ready_to_sync",
+        "description": "Mark objects as ready to sync to your accounting provider",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "object_ids: array (required); object_type: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_fund_x402_wallet",
+        "description": "Fund the business's x402 wallet from a Ramp Checking Account",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "amount: number | string (required); rationale: string (required); source_wallet_account_uuid: string (required); idempotency_key: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_agent_card_creds",
+        "description": "Get a one-time payment token for a fund",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "amount: string (required); currency_code: string (required); fund_id: string (required); merchant_country_code: string (required); merchant_name: string (required); merchant_url: string (required); rationale: string (required); idempotency_key: string | null (optional)",
+        "parameter_count": 8,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_agent_card_funds",
+        "description": "List funds that can be used for agent card payments",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_pay_with_x402",
+        "description": "Pay an x402 payment request from your business's stablecoin balance",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "accepted: object (required); idempotency_key: string (required); rationale: string (required); resource: object (required); extensions: object | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_provision_x402_wallet",
+        "description": "Provision your business's x402 wallet after the user explicitly confirms",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "confirmed: boolean (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_withdraw_x402_wallet",
+        "description": "Withdraw the business's x402 wallet balance to a Ramp Checking Account",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "amount: number | string (required); destination_wallet_account_uuid: string (required); rationale: string (required); idempotency_key: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_execute_analyst_query",
+        "description": "Run read-only SQL for aggregate business analysis",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); sql: string (required); artifact_instance_id: string (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_ai_token_spend_aggregates",
+        "description": "Aggregate AI token usage or estimated cost over a time window, grouped",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "end_at: string (required); metric: string (required); rationale: string (required); start_at: string (required); configuration_ids: array | null (optional); department_uuids: array | null (optional); group_by: array | null (optional); model_compute_tier: array | null (optional); model_context_window: array | null (optional); model_families: array | null (optional); model_fine_tune_source: array | null (optional); model_speed: array | null (optional); model_thinking: array | null (optional); models: array | null (optional); providers: array | null (optional); rollup: string (optional); tag_definition_id: string | null (optional); user_uuids: array | null (optional)",
+        "parameter_count": 18,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_ai_token_spend_connections",
+        "description": "Summarize connected AI providers (admin keys, OpenRouter/LiteLLM gateway connections, and Ramp Router)",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_ai_token_spend_current_spend",
+        "description": "Report the business's actual trailing-30-day Ramp spend on AI vendors (card, bill,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_ai_token_spend_filter_options",
+        "description": "List the dimensions and values available for AI-spend aggregate queries: providers, models,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_analyst_catalog",
+        "description": "Discover available analyst tables and starter SQL for aggregate business analysis",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); artifact_instance_id: string (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_analyst_metric_metadata",
+        "description": "Discover supported analyst metrics and starter SQL for aggregate business analysis",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); artifact_instance_id: string (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_analyst_spend_facts_domain_docs",
+        "description": "Read domain documentation for analyst.spend_facts before using it in an analyst query",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); artifact_instance_id: string (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_analyst_table_domain_docs",
+        "description": "Read domain documentation for an analyst table before using it in an",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "qualified_name: string (required); rationale: string (required); artifact_instance_id: string (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_my_ai_token_spend_aggregates",
+        "description": "Aggregate the acting user's own AI token usage and estimated token cost",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "end_at: string (required); rationale: string (required); start_at: string (required); group_by: array | null (optional); model_compute_tier: array | null (optional); model_context_window: array | null (optional); model_families: array | null (optional); model_fine_tune_source: array | null (optional); model_speed: array | null (optional); model_thinking: array | null (optional); models: array | null (optional); providers: array | null (optional); rollup: string (optional)",
+        "parameter_count": 13,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_approve_or_reject_bill",
+        "description": "Approve or reject a submitted bill that is pending approval",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action_type: string (required); bill_id: string (required); rationale: string (required); reason: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_approve_or_reject_reimbursement",
+        "description": "Approve or reject an employee reimbursement request for an out-of-pocket expense",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action: string (required); rationale: string (required); reimbursement_id: string (required); thoughts: string | null (optional); user_reason: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_approve_or_reject_request",
+        "description": "Approve or reject a pending unified request for spend allocation (fund), purchase",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action: string (required); rationale: string (required); thoughts: string (required); unified_request_id: string | null (required); approval_instance_uuid: string | null (optional); reason: string | null (optional); user_confirmed_admin_approval: boolean (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_approve_or_reject_transaction",
+        "description": "Approve or reject a transaction awaiting your review",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action: string (required); rationale: string (required); thoughts: string (required); transaction_id: string (required); user_reason: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_bills_for_approval",
+        "description": "Get bills that are pending approval from the current user",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); limit: integer (optional); page_cursor: string | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_reimbursements_for_approval",
+        "description": "Get employee reimbursements pending approval by the current user",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); limit: integer (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_requests_to_review",
+        "description": "Get requests that require the current user's review and approval",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); thoughts: string (required); page_size: integer (optional); request_types: array | null (optional); start: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_remind_bill_approvers",
+        "description": "Remind next approvers for bills awaiting approval",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "bill_uuids: array (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_account_numbers",
+        "description": "List agent account numbers",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); page_size: integer | null (optional); start: string | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_accounts",
+        "description": "List bank accounts",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); connection_provider: string | null (optional); page_size: integer | null (optional); start: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_create",
+        "description": "Create a manually connected bank account",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "account_number: string (required); account_subtype: string (required); rationale: string (required); routing_number: string (required); account_name: string | null (optional); idempotency_key: string | null (optional); wire_details: object | null (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_account_balance_history",
+        "description": "Get daily balance history for a specific Ramp Checking Account",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "account_uuid: string (required); rationale: string (required); end_date: string | null (optional); start_date: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_investment_account_balance",
+        "description": "Get the balance of investment accounts for the business",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_managed_portfolio_account_balance",
+        "description": "Get the balance of managed portfolio accounts for the business",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_ramp_business_account_balance",
+        "description": "Get the balance of Ramp Checking Accounts for the business",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_treasury_balance_history",
+        "description": "Get daily balance history across all Treasury accounts for a date range",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "end_date: string (required); rationale: string (required); start_date: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_treasury_document_link",
+        "description": "Get a PDF download link for a monthly Ramp Checking Account statement",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "document_type: string (required); document_uuid: string (required); rationale: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_treasury_documents_download_link",
+        "description": "Get one ZIP download link for selected monthly Ramp Checking Account statements",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "documents: array (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_business_accounts",
+        "description": "List all Ramp Checking Accounts (wallet accounts) for the user's business",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_treasury_accounts",
+        "description": "List all Treasury accounts (Ramp Checking Accounts, Investment Accounts, Managed Portfolios)",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_treasury_documents",
+        "description": "List available monthly Ramp Checking Account statements, including document UUIDs, account names,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "document_type: string (required); rationale: string (required); cursor: string | null (optional); end_date: string | null (optional); start_date: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_wallet_transfers",
+        "description": "List transfers for the user's business Ramp wallet accounts",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); cursor: string | null (optional); from_date: string | null (optional); page_size: integer (optional); to_date: string | null (optional); wallet_account_uuid: string | null (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_request_funds",
+        "description": "Request funds for a banking account",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "amount: object (required); banking_account_id: string (required); external_bank_account_id: string (required); rationale: string (required); agent_account_number_id: string | null (optional); idempotency_key: string | null (optional); memo: string | null (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_create_draft_bill",
+        "description": "Create an unsubmitted draft bill for an existing vendor that is visible",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "draft_bill: object (required); rationale: string (required); vendor_uuid: string (required); idempotency_key: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_create_payee",
+        "description": "Create a vendor with a contact email and country supplied by the",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "contact: object (required); country: string (required); name: string (required); rationale: string (required); owner_user_uuids: array | null (optional); state: string | null (optional); website: string | null (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_bill_amount_summary",
+        "description": "Get aggregate dollar amounts for bills matching the given filters",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); due_date_from: string | null (optional); due_date_to: string | null (optional); max_amount: number | null (optional); min_amount: number | null (optional); payment_status: string | null (optional); vendor_name: string | null (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_bill_comments",
+        "description": "Retrieve comments from a bill's comment thread",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "bill_id: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_bill_details",
+        "description": "Get details for a bill already confirmed to be submitted; submitted bills",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "bill_id: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_bill_history",
+        "description": "Retrieve the full modification and approval history of a bill, including status",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "bill_id: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_bill_invoices",
+        "description": "Retrieve invoice file attachments (PDFs/images) for a submitted bill",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "bill_id: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_bill_metrics",
+        "description": "Returns the count of bills matching specified filters",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); approval_status: string | null (optional); from_due_date: string | null (optional); is_draft: boolean | null (optional); payment_status: string | null (optional); status_summary: string | null (optional); to_due_date: string | null (optional); vendor_name: string | null (optional)",
+        "parameter_count": 8,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_bill_status",
+        "description": "Get the recorded payment and approval status of a specific submitted bill",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "bill_id: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_draft_bill_details",
+        "description": "Get details for an active draft bill that has not been submitted",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "bill_id: string (required); rationale: string (required); return_line_items: boolean (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_recurring_bill",
+        "description": "Retrieve details of a recurring bill template including vendor, amount, recurrence schedule,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); recurring_bill_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_rfx_vendor_responses",
+        "description": "Return all submitted vendor responses for an RFX",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_vendor_agreement",
+        "description": "Retrieve details for a specific vendor agreement/contract by UUID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "payee_agreement_uuid: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_vendor_document_bulk_status",
+        "description": "Get bulk vendor document upload progress and current document review state",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "batch_id: string (required); rationale: string (required); is_w_document: boolean | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_invite_vendors_to_rfx",
+        "description": "Invite vendors to an existing RFX so they can receive and respond",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required); vendors: array (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_bills",
+        "description": "List and filter bills with optional search, pagination, and status filters",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); include_archived: boolean (optional); include_paid: boolean (optional); limit: integer (optional); page_cursor: string | null (optional); query: string | null (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_vendor_agreements",
+        "description": "List and filter vendor agreements/contracts across the business",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); auto_renews: boolean | null (optional); contract_owner_ids: array | null (optional); department_ids: array | null (optional); evaluate_price_benchmarks: boolean (optional); has_end_date: boolean | null (optional); include_archived: boolean (optional); include_vendor_spend: boolean (optional); is_active: boolean | null (optional); is_up_for_renewal: boolean | null (optional); limit: integer (optional); max_days_remaining: integer | null (optional); max_end_date: string | null (optional); max_last_date_to_terminate: string | null (optional); max_start_date: string | null (optional); max_total_value: number | string | null (optional); min_days_remaining: integer | null (optional); min_end_date: string | null (optional); min_last_date_to_terminate: string | null (optional); min_start_date: string | null (optional); min_total_value: number | string | null (optional); payee_agreement_ids: array | null (optional); payee_owner_ids: array | null (optional); payee_uuid: string | null (optional); renewal_status: array | null (optional); sort_ascending: boolean | null (optional); sort_by: string | null (optional); vendor_name: string | null (optional)",
+        "parameter_count": 28,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_revoke_rfx_vendor_invitation",
+        "description": "Remove a vendor from an RFX",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_vendor_invitation_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_bills",
+        "description": "Search submitted and active draft bills by invoice number, payee, payment ID,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); accrual_year_month: string | null (optional); from_due_date: string | null (optional); from_payment_date: string | null (optional); include_archived: boolean (optional); include_drafts: boolean | null (optional); include_paid: boolean | null (optional); invoice_number: string | null (optional); limit: integer (optional); page_cursor: string | null (optional); query: string (optional); status_summaries: array | null (optional); to_due_date: string | null (optional); to_payment_date: string | null (optional)",
+        "parameter_count": 14,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_vendors",
+        "description": "Search for vendors (payees) within the business by name, or browse them",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); include_draft: boolean (optional); is_1099_tracking_enabled: boolean | null (optional); limit: integer (optional); search_term: string | null (optional); tax_1099_year: integer | null (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_set_rfx_vendor_invitation_contact",
+        "description": "Set or replace the contact on an RFX vendor invitation",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "payee_contact_id: string (required); rationale: string (required); rfx_vendor_invitation_id: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_submit_draft_bill",
+        "description": "Submit a DRAFT_READY bill draft so it becomes a bill and enters",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "draft_bill_id: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_draft_bill",
+        "description": "Update a draft bill: its fields, line items, accounting category coding, and",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "provisional_bill: object (required); provisional_bill_id: string (required); rationale: string (required); version: string (required); vendor_payments: array | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_activate_card",
+        "description": "Activate the acting user's own card by its last four digits",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "last_four: string (required); rationale: string (required); confirm_delivery: boolean (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_add_user_to_shared_fund",
+        "description": "Add a human user or standalone agent to a shared fund as",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); spend_allocation_uuid: string (required); agent_id: string | null (optional); enable_sharing_if_needed: boolean (optional); role: string (optional); user_email: string | null (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_archive_spend_allocation",
+        "description": "Archive a fund to prevent spend and hide it from users",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); spend_allocation_uuid: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_edit_user_role_on_shared_fund",
+        "description": "Change a shared-fund user's role between member and co-owner using user_email",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "new_role: string (required); rationale: string (required); spend_allocation_uuid: string (required); user_email: string (required)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_enable_shared_fund_access",
+        "description": "Enable sharing on an existing fund so members can be added to",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); spend_allocation_uuid: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_card_statement_balance",
+        "description": "Get a snapshot of the business's most recent card statement balance —",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_funds",
+        "description": "Retrieve funds (cards or budgets) and their balances, restrictions, locks, owners,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); agent_card_eligible: boolean | null (optional); cursor: string | null (optional); for_transaction_id: string | null (optional); fund_uuid: string | null (optional); fund_uuids: array | null (optional); funds_to_retrieve: string | null (optional); include_members: boolean (optional); include_restrictions: boolean (optional); is_shared: boolean | null (optional); page_size: integer (optional); search_by_fund_display_name: string | null (optional); spend_intent_uuids: array | null (optional); state: string | null (optional); user_uuids: array | null (optional)",
+        "parameter_count": 15,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_issue_one_off_funds",
+        "description": "Issue one-off funds (spend allocations) directly, bypassing approval flows",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "amount: string (required); display_name: string (required); rationale: string (required); user_ids: array (required); categories_blacklist: array | null (optional); categories_whitelist: array | null (optional); default_member_limit_amount: string | null (optional); department_ids: array | null (optional); dynamic_user_group_ids: array | null (optional); entity_id: string | null (optional); interval: string (optional); is_shareable: boolean (optional); location_ids: array | null (optional); lock_date: string | null (optional); member_ids: array | null (optional); user_custom_field_ids: array | null (optional); vendor_blacklist: array | null (optional); vendor_whitelist: array | null (optional)",
+        "parameter_count": 18,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_limit_increase",
+        "description": "Increase the spending limit on a fund (spend allocation) or card",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "amount: number | string (required); rationale: string (required); action: string (optional); card_id: string | null (optional); increase_type: string (optional); reason: string | null (optional); spend_allocation_id: string | null (optional); user_confirmed_increase_type: boolean (optional); user_confirmed_limit_increase: boolean (optional)",
+        "parameter_count": 9,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_cards",
+        "description": "List non-terminated cards for the current user or a visible target cardholder,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); cardholder_user_uuid: string | null (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_lock_or_unlock_card",
+        "description": "Lock or unlock a card the acting user is authorized to manage",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action: string (required); id: string (required); rationale: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_lock_or_unlock_spend_allocation",
+        "description": "Lock or unlock a fund (spend allocation) at the fund level, affecting",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action: string (required); id: string (required); rationale: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_lock_or_unlock_spend_allocation_member",
+        "description": "Lock or unlock a specific member's access to a fund (spend allocation)",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action: string (required); id: string (required); member_id: string (required); rationale: string (required)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_remove_user_from_shared_fund",
+        "description": "Remove a user from a shared fund using user_email",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); spend_allocation_uuid: string (required); user_email: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_submit_fund_request",
+        "description": "Submit a new General Expenses or Virtual Card request for the signed-in",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "amount: string (required); description: string (required); frequency: string (required); name: string (required); rationale: string (required); user_confirmation: string (required); currency: string (optional); request_type: string (optional)",
+        "parameter_count": 8,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_transfer_spend_allocation_ownership",
+        "description": "Transfer ownership of a spend allocation using the current and new owners'",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "current_user_email: string (required); new_user_email: string (required); rationale: string (required); spend_allocation_uuid: string (required)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_unarchive_spend_allocation",
+        "description": "Unarchive a fund so it becomes visible and spendable again",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); spend_allocation_uuid: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_unlock_fraud_locked_card",
+        "description": "Unlock a card that was locked due to a suspicious transaction",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string (required); rationale: string (required); user_confirmed_fraud_whitelist: boolean (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_category_restrictions",
+        "description": "Update spending category restrictions (whitelist or blacklist) on a single fund",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action: string (required); category_ids: array (required); rationale: string (required); spend_allocation_id: string (required)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_fund_entity",
+        "description": "Move existing funds (spend allocations) and their cards to a different business",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "entity_id: string (required); fund_ids: array (required); rationale: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_merchant_restrictions",
+        "description": "Update merchant restrictions (whitelist or blacklist) on a fund (spend allocation)",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action: string (required); merchant_uuids: array (required); rationale: string (required); restriction_type: string (required); spend_allocation_id: string (required)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_spend_allocation_interval",
+        "description": "Update only the spend interval for a spend allocation",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "interval: string (required); rationale: string (required); spend_allocation_uuid: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_agent_wallet_list",
+        "description": "List policy versions for a standalone Agent Wallet",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "agent_id: string (required); rationale: string (required); limit: integer | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_api_key_spend",
+        "description": "List provider API keys and their estimated spend",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "from_date: string (required); rationale: string (required); to_date: string (required); page_size: integer | null (optional); providers: array | null (optional); start: string | null (optional); statuses: array | null (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_audit_logs_list",
+        "description": "Get audit log events",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); agent_names: array | null (optional); event_actor_types: array | null (optional); event_types: array | null (optional); from_date: string | null (optional); object_id: string | null (optional); page_size: integer | null (optional); resource_name: string | null (optional); start: string | null (optional); to_date: string | null (optional); user_ids: array | null (optional)",
+        "parameter_count": 11,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_award_sourcing_event",
+        "description": "Award the winning vendor for a sourcing event, deciding the event and",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "payee_uuid: string (required); rationale: string (required); sourcing_event_id: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_close_sourcing_event",
+        "description": "Close (archive) a sourcing event without awarding a vendor",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); sourcing_event_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_create_draft_spend_request_from_sourcing_event",
+        "description": "Hand off an awarded sourcing event into procurement intake by drafting a",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); sourcing_event_id: string (required); payee_uuid: string | null (optional); rfx_id: string | null (optional); spend_intent_uuid: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_create_rfx",
+        "description": "Create a DRAFT RFX questionnaire, optionally creating its parent sourcing",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "name: string (required); rationale: string (required); sections: array (required); close_date: string | null (optional); description: string | null (optional); response_submission_deadline: string | null (optional); rfx_type: string (optional); sourcing_event_id: string | null (optional); sourcing_event_name: string | null (optional)",
+        "parameter_count": 9,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_daily_usage",
+        "description": "List AI usage and estimated spend grouped by the requested dimensions",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "from_date: string (required); rationale: string (required); to_date: string (required); group_by: array | null (optional); models: array | null (optional); page_size: integer | null (optional); products: array | null (optional); providers: array | null (optional); start: string | null (optional)",
+        "parameter_count": 9,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_delete_spend_program",
+        "description": "Delete (terminate) a spend program",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); spend_intent_uuid: string (required); spend_intent_delete_action: string | null (optional); transfer_to_spend_intent_uuid: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get",
+        "description": "Fetch a statement",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); statement_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_authorized_businesses",
+        "description": "Retrieve the list of businesses that the advisor console user is authorized",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); after: string | null (optional); business_name_filter: string | null (optional); page_size: integer (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_bookings",
+        "description": "Retrieve flight, hotel, and car rental booking summaries for the user",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); booking_reference: string | null (optional); city: string | null (optional); flight_airline: string | null (optional); flight_number: string | null (optional); hotel_name: string | null (optional); include_cars: boolean (optional); include_failed: boolean (optional); include_flights: boolean (optional); include_hotels: boolean (optional); include_past: boolean (optional); limit: integer (optional); travel_date: string | null (optional); traveler_user_id: string | null (optional); verification_mode: boolean (optional)",
+        "parameter_count": 15,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_business_statement_date",
+        "description": "Get the business's statement billing schedule: the next statement close date, the",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_decline_explanation",
+        "description": "Get a detailed explanation of why a card transaction was declined",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); transaction_uuid: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_erp_connection_status",
+        "description": "Get the current ERP/accounting integration connection status for the business",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_expense_workflow_context",
+        "description": "Resolve a transaction or reimbursement UUID to its approval workflow context: the",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reimbursement_uuid: string | null (optional); transaction_uuid: string | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_missing_items_by_user",
+        "description": "Get transactions with missing items (receipts or memos) grouped by user",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); only_missing_receipt: boolean (optional); page_cursor: string | null (optional); page_size: integer (optional); user_limit: integer (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_office_locations",
+        "description": "Retrieve the company's office locations and addresses",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_rfx_detail",
+        "description": "Get the full configuration of one RFX: questionnaire sections and fields,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_rfx_grading_overview",
+        "description": "Get grading outcomes for an RFX: AI-generated grading insights and",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_rfx_response_summary",
+        "description": "Summarize vendor response and grading progress for a specific RFX",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_sourcing_event_context",
+        "description": "Get a compact summary of a sourcing event, its RFXs, and invited",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); sourcing_event_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_user_trips",
+        "description": "Fetch trips for the acting user with optional filters",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); cursor: string | null (optional); page_size: integer | null (optional); status: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_hold",
+        "description": "Place a hold on a vendor",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); vendor_id: string (required); reason: string | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_hold_release",
+        "description": "Release Vendor Hold",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); vendor_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_issue_from_spend_program",
+        "description": "Issue spend allocations from an existing spend program",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); spend_intent_uuid: string (required); department_ids: array | null (optional); display_name: string | null (optional); dynamic_user_group_ids: array | null (optional); issue_to_all_users: boolean (optional); location_ids: array | null (optional); lock_date: string | null (optional); spend_amount: string | null (optional); spend_currency: string | null (optional); spend_interval: string | null (optional); user_custom_field_ids: array | null (optional); user_ids: array | null (optional)",
+        "parameter_count": 13,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_business_entities",
+        "description": "List business entities in the current business",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); name_filter: string | null (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_policies",
+        "description": "List workflow-backed submission, approval, and spend-request policies for the business, with each",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); kinds: array | null (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_sourcing_events",
+        "description": "List sourcing events visible to the acting user",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); page_cursor: string | null (optional); page_size: integer (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_manage_rfx_collaborators",
+        "description": "Add and/or remove collaborators on an existing RFX (RFI, RFP, or RFQ)",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required); add_user_uuids: array | null (optional); remove_user_uuids: array | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_mark_rfx_graded",
+        "description": "Mark a PUBLISHED RFX as graded, which unlocks awarding",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_merchant_list",
+        "description": "List merchants",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); merchant_name: string | null (optional); merchant_url: string | null (optional); page_size: integer | null (optional); start: string | null (optional); transaction_from_date: string | null (optional); transaction_to_date: string | null (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_mpp_creds",
+        "description": "Issue or recover a Stripe MPP credential using an existing fund",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "fund_id: string (required); rationale: string (required); www_authenticate: array (required); body_digest: string | null (optional); idempotency_key: string | null (optional); selected_challenge_id: string | null (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_publish_rfx",
+        "description": "Publish an RFX, sending it externally to every ACTIVE invitation contact",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_reporting_describe_dataset",
+        "description": "Describe one semantic reporting dataset in detail",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "name: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_reporting_get_skill",
+        "description": "Return the Ramp reporting skill: the required workflow for answering analytical questions",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_reporting_list_datasets",
+        "description": "List semantic reporting datasets available to the current user",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_reporting_lookup_search_tags",
+        "description": "Look up search tags for filtering reports",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "lookup_requests: array (required); rationale: string (required); context: string | null (optional); data_source: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_reporting_query",
+        "description": "Use for aggregate questions (totals, trends, top-N, comparisons, breakdowns) over Ramp data",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); report_query: object (required); page_size: integer | null (optional); query_scope: string | null (optional); start: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_reporting_search_catalog",
+        "description": "Search the semantic reporting catalog with a natural-language query",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "nl_query: string (required); rationale: string (required); limit: integer (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_return_rfx_to_draft",
+        "description": "Return a REJECTED RFX to DRAFT so it can be edited and",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_roles",
+        "description": "List custom roles",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": 0,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_flights",
+        "description": "Search for flights and return policy-tagged offers ready to quote",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); airlines: array | null (optional); arrival: string | null (optional); avoid_red_eye_flights: boolean | null (optional); cabin_class: string | array | null (optional); clear_preferences: array | null (optional); cursor: string | null (optional); departure: string | null (optional); departure_date: string | null (optional); include_fare_options: boolean (optional); include_recommendations: boolean (optional); job_id: string | null (optional); limit: integer (optional); max_stops: integer | null (optional); only_split_tickets: boolean | null (optional); outbound_offer_id: string | null (optional); preferred_airlines: array | null (optional); preferred_arrival_time_window: string | null (optional); preferred_departure_time_window: string | null (optional); presentation: object | null (optional); requested_weekday: string | null (optional); required_upgrade_cabin_class: string | null (optional); resume_job_id: string | null (optional); return_date: string | null (optional); return_preferred_arrival_time_window: string | null (optional); return_preferred_departure_time_window: string | null (optional); search_job_id: string | null (optional); sort_key: string | null (optional); traveler_user_id: string | null (optional); trip_id: string | null (optional); wait_for_results: boolean (optional)",
+        "parameter_count": 31,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_merchants",
+        "description": "Search for merchants by name",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "query: string (required); rationale: string (required); limit: integer (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_send_rfx_response_reminder",
+        "description": "Send response reminder emails to invited vendors who have not yet",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required); rfx_vendor_invitation_ids: array | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_set_decline_buffer",
+        "description": "Set or clear decline buffer percentages for business settings, spend programs, or",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "allowed_overage_percent: number | string | null (required); rationale: string (required); target_type: string (required); buffer_application_mode: string | null (optional); target_id: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_set_rfx_cover_sheet",
+        "description": "Set or update the vendor-facing cover sheet on a DRAFT RFX",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required); attachment_ramp_document_ids: array | null (optional); body_markdown: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_set_rfx_pricing_sheet",
+        "description": "Set or update the pricing sheet on a DRAFT RFX during sourcing",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required); attachment_ramp_document_ids: array | null (optional); currency: string | null (optional); guidance_markdown: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_statements_list",
+        "description": "List statements",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); from_date: string | null (optional); page_size: integer | null (optional); start: string | null (optional); to_date: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_submit_agent_nps",
+        "description": "Submit an optional Agent NPS response using a one-time survey token",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); score: integer (required); survey_token: string (required); explanation: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_team_spend",
+        "description": "List Ramp users with estimated AI spend during the requested period",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "from_date: string (required); rationale: string (required); to_date: string (required); is_anomalous: boolean | null (optional); page_size: integer | null (optional); providers: array | null (optional); start: string | null (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_rfx",
+        "description": "Update an RFX's name, description, dates, and questionnaire sections",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); rfx_id: string (required); sections: array (required); close_date: string | null (optional); description: string | null (optional); name: string | null (optional); response_submission_deadline: string | null (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_create_department",
+        "description": "Create a new department in the company",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "department_name: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_departments",
+        "description": "List all departments in the company",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); name_filter: string | null (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_org_chart",
+        "description": "Get org chart for a user, including reporting chain and direct reports",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); user_id: string | null (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_simplified_user_detail",
+        "description": "Get the current user's details",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_users",
+        "description": "List and search users across the entire business",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); department_ids: array | null (optional); include_agents: boolean (optional); location_ids: array | null (optional); name_search: string | null (optional); page_cursor: string | null (optional); page_size: integer (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_rename_department",
+        "description": "Rename an existing department in the company",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "department_id: string (required); department_name: string (required); rationale: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_user",
+        "description": "Match a user name to a Ramp user in the context of",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); search: string (required); transaction_id: string | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_answer_policy_question",
+        "description": "Get an answer to a question about the expense policy or funds",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "question: string (required); rationale: string (required); include_restrictions: boolean (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_attention_feed",
+        "description": "Return the authenticated user's homepage attention feed",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); fanout_timeout_seconds: number (optional); sections: array | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_employee_submission_policy_requirements",
+        "description": "Get the employee-visible expense submission requirements for the caller's business, such as",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_more_tools",
+        "description": "Report a capability that is missing from the available Ramp tools",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "context: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_policy_details",
+        "description": "Fetch detailed metadata for one workflow-backed policy by UUID, including display name,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "kind: string (required); policy_uuid: string (required); rationale: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_policy_workflow_body",
+        "description": "Fetch the published (or a specific historical) workflow body for a workflow-backed",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "kind: string (required); policy_uuid: string (required); rationale: string (required); workflow_uuid: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_policy",
+        "description": "Publish the active policy for a standalone Agent Wallet",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "agent_id: string (required); configurations: array (required); constraints: object (required); policy_version: string (required); rationale: string (required); schema_version: integer (required); approval_mode: string (optional); approval_validity_seconds: integer (optional)",
+        "parameter_count": 8,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_post_comment",
+        "description": "Post a comment on a Ramp object (transaction, bill, reimbursement, etc)",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "message: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_object_typerequired",
+        "description": "string Type of the Ramp object",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": 0,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_object_uuidrequired",
+        "description": "string Ramp Object Uuid rationalerequired string Rationale mention_user_uuids array | null Mention",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": 0,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_help_center_snippets",
+        "description": "Search Ramp's authoritative Help Center documentation for product knowledge and guidance for",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "query: string (required); rationale: string (required); exclude_article_keys: array | null (optional); query_variants: string | array | null (optional); top_k: integer (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_simulate_policy_workflow_for_expense",
+        "description": "Simulate an approval or submission policy workflow against an existing transaction or",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "kind: string (required); policy_uuid: string (required); rationale: string (required); reimbursement_uuid: string | null (optional); transaction_uuid: string | null (optional); workflow_uuid: string | null (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_delete_procurement_draft",
+        "description": "Delete an abandoned procurement draft owned by the acting user",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); spend_request_uuid: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_purchase_order_details",
+        "description": "Get comprehensive details about a specific purchase order",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "purchase_order_id: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_unified_request_details",
+        "description": "Get one spend request the acting user can view",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); unified_request_id: string (required); include_form_details: boolean (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_procurement_requests_draft",
+        "description": "Create or update a procurement draft and return the current visible form",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); answers: array | null (optional); change_request_answers: array | null (optional); clear_change_request_field_ids: array | null (optional); clear_field_ids: array | null (optional); currency: string | null (optional); existing_spend_request_uuid: string | null (optional); internal_memo: string | null (optional); line_items: array | null (optional); request_name: string | null (optional); request_virtual_card: boolean | null (optional); spend_intent_uuid: string | null (optional); spend_request_uuid: string | null (optional)",
+        "parameter_count": 13,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_procurement_requests_get",
+        "description": "Refresh and canonically revalidate a procurement draft's visible form state",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); spend_request_uuid: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_procurement_spend_intents",
+        "description": "List published procurement spend programs the agent can draft against",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); page_size: integer (optional); query: string | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_procurement_submit",
+        "description": "Submit a procurement draft after explicit user confirmation",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "confirmed: boolean (required); rationale: string (required); spend_request_uuid: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_ramp_bulk_close_purchase_orders",
+        "description": "Close one or more purchase orders with a specified reason",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "close_reason: string (required); purchase_order_uuids: array (required); rationale: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_ramp_bulk_reopen_purchase_orders",
+        "description": "Reopen multiple closed purchase orders",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "purchase_order_uuids: array (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_purchase_orders",
+        "description": "Search for purchase orders using structured purchase order filters",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); filters: object | null (optional); include_progress: boolean (optional); limit: integer (optional); page_cursor: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_unified_requests",
+        "description": "Search for unified requests using free-text and structured request filters",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); filters: object | null (optional); limit: integer (optional); page_cursor: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_cancel_reimbursement_payment",
+        "description": "Cancel the payment on a reimbursement that has been approved but not",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reimbursement_uuid: string | null (required); notes: string | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_create_reimbursement_from_receipt",
+        "description": "Create a draft reimbursement from a receipt UUID",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); receipt_uuid: string (required); amount: number | string | null (optional); currency_code: string | null (optional); merchant: string | null (optional); transaction_date: string | null (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_delete_reimbursement",
+        "description": "Delete a reimbursement by UUID",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reimbursement_uuid: string | null (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_duplicate_reimbursement",
+        "description": "Duplicate an existing reimbursement as a new draft",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reimbursement_uuid: string | null (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_edit_reimbursement",
+        "description": "Edit reimbursement fields (amount, currency, date, merchant, memo, funds, accounting categories, split",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reimbursement_uuid: string | null (required); accounting_split_request: object | null (optional); amount: number | string | null (optional); attendee_user_uuids: array | null (optional); currency_code: string | null (optional); custom_record_values: array | null (optional); fund_uuid: string | null (optional); memo: string | null (optional); merchant_name: string | null (optional); merchant_uuid: string | null (optional); reimbursement_date: string | null (optional); tracking_category_selections: array | null (optional); trip_uuid: string | null (optional)",
+        "parameter_count": 14,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_estimate_mileage_reimbursement",
+        "description": "Estimate the reimbursement amount for a given mileage distance based on the",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "distance: number | string (required); rationale: string (required); distance_units: string (optional); transaction_date: string | null (optional); vehicle_mileage_class: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_estimate_per_diem_amount",
+        "description": "Estimate the per diem reimbursement amount for a trip given start/end dates",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "end_date: string (required); rationale: string (required); start_date: string (required); day_data: array | null (optional); deduct_weekends: boolean | null (optional); meals_provided: boolean | null (optional); trip_uuid: string | null (optional)",
+        "parameter_count": 7,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_outstanding_reimbursements_by_currency",
+        "description": "Get approved and failed reimbursements that would be affected by a bank",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "new_currency: string (required); rationale: string (required); entity_uuid: string | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_reimbursement_receipts",
+        "description": "Retrieve receipts attached to a reimbursement",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reimbursement_uuid: string | null (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_reimbursements",
+        "description": "Search and retrieve reimbursements with filters for users, text search,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); from_date: string | null (optional); include_comments: boolean (optional); include_policy_assessment: boolean (optional); include_suggestions: boolean (optional); next_page_cursor: string | null (optional); page_size: integer (optional); reimbursement_uuids: array | null (optional); reimbursements_to_retrieve: string (optional); search_string: string | null (optional); tags: array | null (optional); to_date: string | null (optional)",
+        "parameter_count": 12,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_user_recent_reimbursements",
+        "description": "Get reimbursement history for the current user",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); include_drafts: boolean (optional); include_rejected: boolean (optional); limit: integer | null (optional); up_to_days: integer (optional); use_submitted_date_ordering: boolean (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_resubmit_reimbursement",
+        "description": "Revert a rejected reimbursement back to draft state so it can be",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reimbursement_uuid: string | null (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_reimbursements",
+        "description": "Search reimbursements across a business, optionally filtering to a specific user's reimbursements",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); accounting_sync_status: string | null (optional); filters: object | null (optional); from_date: string | null (optional); from_submitted_date: string | null (optional); next_page_cursor: string | null (optional); page_size: integer (optional); reimbursement_status: array | null (optional); search_string: string | null (optional); to_date: string | null (optional); to_submitted_date: string | null (optional); user_id: integer | null (optional)",
+        "parameter_count": 12,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_user_reimbursements",
+        "description": "Search reimbursements with text-based filters and structured filters",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); accounting_sync_status: string | null (optional); filters: object | null (optional); from_date: string | null (optional); from_submitted_date: string | null (optional); next_page_cursor: string | null (optional); page_size: integer (optional); reimbursement_status: array | null (optional); search_string: string | null (optional); to_date: string | null (optional); to_submitted_date: string | null (optional)",
+        "parameter_count": 11,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_submit_reimbursement",
+        "description": "Submit a draft out-of-pocket reimbursement for approval",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reimbursement_uuid: string | null (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_complete_transaction_revision",
+        "description": "Complete a revision-requested transaction as its cardholder",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reason: string (required); transaction_uuid: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_edit_transaction",
+        "description": "Edit a transaction field (memo, funds, accounting categories, trip, attendees)",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); transaction_uuid: string | null (required); attendee_selections: object | null (optional); fund_uuid: string | null (optional); memo: string | null (optional); tracking_category_selections: array | null (optional); trip_selection: object | null (optional); user_submitted_fields: array | null (optional)",
+        "parameter_count": 8,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_candidate_trips_for_transaction",
+        "description": "Fetch relevant trips for the acting user, with names, dates, status, and",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_full_transaction_metadata",
+        "description": "View all details, memos, funds, and receipts for a specific transaction",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string | null (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_receipt_details",
+        "description": "Get structured extraction data for one or more of the user's own",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); receipt_uuids: array (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_transaction_missing_items",
+        "description": "Check what receipts, memos, or accounting items are missing from a specific",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string | null (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_transaction_suggested_memos",
+        "description": "Get AI-suggested memo/note options for a specific transaction",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "id: string | null (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_transactions",
+        "description": "Search and retrieve individual card transactions and workflow details for the user's",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); transactions_to_retrieve: string (required); card_uuid: string | null (optional); details_to_include_in_response: array | null (optional); filters: object | null (optional); from_date: string | null (optional); include_count: boolean (optional); next_page_cursor: string | null (optional); only_missing_items: boolean (optional); page_size: integer (optional); reason_memo_merchant_or_user_name_text_search: string | null (optional); sort: object | null (optional); state: string | null (optional); to_date: string | null (optional)",
+        "parameter_count": 14,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_unmatched_receipts",
+        "description": "List the user's unmatched receipts (emailed, uploaded, etc.) with receipt UUIDs",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); from_transaction_date: string | null (optional); merchant: string | null (optional); offset: integer (optional); page_size: integer (optional); to_transaction_date: string | null (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_mark_transaction_missing_receipt",
+        "description": "Flag a transaction as having no receipt",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); transaction_uuid: string | null (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_merchant_categories",
+        "description": "List Ramp merchant categories and IDs for Agent Wallet and spend controls",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_provide_no_receipt_reason",
+        "description": "Submit a reason explaining why a transaction has no receipt",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reason: string (required); transaction_uuid: string | null (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_request_receipt_upload_link",
+        "description": "Create a one-time URL to upload a receipt file, for a card",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); transaction_uuid: string | null (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_request_transaction_repayment",
+        "description": "Request that a cardholder repay a transaction",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); reason: string (required); thoughts: string (required); transaction_id: string (required)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_split",
+        "description": "Split a transaction into line items, or update an existing split",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); transaction_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_transaction_amount_limit",
+        "description": "Set a fund's maximum amount for one transaction",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "new_transaction_amount_limit: number | string (required); rationale: string (required); card_id: string | null (optional); spend_allocation_id: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_upload_receipt_file",
+        "description": "Upload a receipt from base64-encoded file content",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "content_type: string (required); file_content_base64: string (required); filename: string (required); rationale: string (required); transaction_uuid: string | null (optional)",
+        "parameter_count": 5,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_add_traveler_loyalty_program",
+        "description": "Compatibility route for callers that have not migrated to SetTravelerLoyaltyProgram",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "loyalty_number: string (required); program_name: string (required); rationale: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_booking_cancellation_details",
+        "description": "Surface cancellation/refund details for the user's existing flight, hotel, or car rental",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "booking_id: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_booking_modification_details",
+        "description": "Surface whether the user's existing flight, hotel, or car rental booking can",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "booking_id: string (required); rationale: string (required); flight_leg_index: integer | null (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_create_trip",
+        "description": "Create a new trip for the acting user",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "are_trip_dates_from_booking_receipt_or_user_input: boolean (required); name: string (required); rationale: string (required); calendar_timezone: string | null (optional); destinations: array | null (optional); end_date: string | null (optional); idempotency_key: string | null (optional); start_date: string | null (optional); trip_purpose: string | null (optional)",
+        "parameter_count": 9,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_booking_details",
+        "description": "Get itinerary, stay, or rental details plus request status, amount, payment timing,",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "booking_id: string (required); rationale: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_flight_booking_locations",
+        "description": "Resolves locations (airports/cities) available for booking a flight from user intent",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "query: string (required); rationale: string (required); limit: integer (optional); location_type: string (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_hotel_rates",
+        "description": "Fetch available room-rate options for one selected hotel from SearchHotels",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "check_in_date: string (required); check_out_date: string (required); hotel_id: string (required); rationale: string (required); filters: object | null (optional); max_recommended_rates: integer (optional); num_adults: integer (optional); search_id: string | null (optional); traveler_user_id: string | null (optional)",
+        "parameter_count": 9,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_pending_travel_requests",
+        "description": "Retrieves travel/booking requests that are pending approval from the current user",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); next_page_cursor: string | null (optional); page_size: integer (optional)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_get_traveler_profile",
+        "description": "Retrieve a traveler profile and saved free-text flight and hotel preferences",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); traveler_user_id: string | null (optional)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_list_traveler_loyalty_programs",
+        "description": "List saved loyalty programs from the user's traveler profile",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required)",
+        "parameter_count": 1,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_remove_traveler_loyalty_program",
+        "description": "Remove a saved loyalty program from the user's traveler profile",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); traveler_loyalty_program_id: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_flight_modifications",
+        "description": "Search replacement flights for an existing booking",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "booking_id: string (required); rationale: string (required); slice_modifications: array (required); airlines: array | null (optional); avoid_red_eye_flights: boolean | null (optional); cabin_class: string | null (optional); clear_preferences: array | null (optional); cursor: string | null (optional); limit: integer (optional); max_stops: integer | null (optional); preferred_arrival_time_window: string | null (optional); preferred_departure_time_window: string | null (optional); selected_outbound_offer_id: string | null (optional)",
+        "parameter_count": 13,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_search_hotel",
+        "description": "Search hotels using the canonical Ramp web inventory and policy flow",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); check_in_date: string | null (optional); check_out_date: string | null (optional); cursor: string | null (optional); filters: object | null (optional); hotel_name: string | null (optional); latitude: number | string | null (optional); limit: integer (optional); location_query: string | null (optional); longitude: number | string | null (optional); num_adults: integer (optional); preferences: string | null (optional); search_id: string | null (optional); sort: object | null (optional); traveler_user_id: string | null (optional); wait_for_results: boolean | null (optional)",
+        "parameter_count": 16,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_set_traveler_loyalty_program",
+        "description": "Set one loyalty program on the user's traveler profile by program name",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "loyalty_number: string (required); program_name: string (required); rationale: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_submit_flight_booking",
+        "description": "Book a selected flight offer",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); action: string (optional); confirm: boolean (optional); expected_total_amount: integer | number | string | null (optional); flight_offer_uuid: string | null (optional); flight_quote_uuid: string | null (optional); include_seat_options: boolean | null (optional); oop_reason: string | null (optional); reason: string | null (optional); request_new_fund: boolean (optional); seat_position: string | null (optional); seat_selection_surface_call_id: string | null (optional); seat_selections: array | null (optional); selection_surface_call_id: string | null (optional); spend_allocation_id: string | null (optional); traveler_user_id: string | null (optional); trip_id: string | null (optional)",
+        "parameter_count": 17,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_submit_flight_cancellation",
+        "description": "Preview or confirm cancellation of an existing flight booking",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "booking_id: string (required); rationale: string (required); confirm: boolean (optional); preview_id: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_submit_flight_modification",
+        "description": "Preview or confirm replacement flights for an existing booking",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "booking_id: string (required); offer_id: string (required); rationale: string (required); confirm: boolean (optional); oop_reason: string | null (optional); preview_id: string | null (optional)",
+        "parameter_count": 6,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_submit_hotel_booking",
+        "description": "Book a selected hotel rate",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "check_in_date: string (required); check_out_date: string (required); hotel_id: string (required); rate_id: string (required); rationale: string (required); confirm: boolean (optional); expected_total_amount: integer | number | string | null (optional); oop_reason: string | null (optional); reason: string | null (optional); request_new_fund: boolean (optional); selection_surface_call_id: string | null (optional); spend_allocation_id: string | null (optional); traveler_user_id: string | null (optional); trip_id: string | null (optional)",
+        "parameter_count": 14,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_submit_hotel_cancellation",
+        "description": "Preview or confirm cancellation of an existing hotel booking",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "booking_id: string (required); rationale: string (required); confirm: boolean (optional); preview_id: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_travel_request_action",
+        "description": "Approve or reject a travel request, or cancel (withdraw) your own unfulfilled",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "action: string (required); booking_request_id: string (required); rationale: string (required); rejection_reason: string | null (optional)",
+        "parameter_count": 4,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_travel_preferences",
+        "description": "Save, change, or remove the acting user's free-text flight and hotel preferences",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); request: string (required)",
+        "parameter_count": 2,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_traveler_loyalty_program",
+        "description": "Compatibility route for callers that still update a saved loyalty program by",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "loyalty_number: string (required); rationale: string (required); traveler_loyalty_program_id: string (required)",
+        "parameter_count": 3,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_update_traveler_profile",
+        "description": "Create or update traveler identity, contact details, and travel document numbers",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "rationale: string (required); avoid_red_eye_flights: boolean | null (optional); date_of_birth: string | null (optional); email: string | null (optional); first_name: string | null (optional); home_airport_code: string | null (optional); id_gender: string | null (optional); known_traveler_number: string | null (optional); last_name: string | null (optional); loyalty_programs: array | null (optional); max_stops: integer | null (optional); middle_name: string | null (optional); name_prefix: string | null (optional); name_suffix: string | null (optional); phone_country_code: string | null (optional); phone_number: string | null (optional); preferred_airlines: array | null (optional); preferred_arrival_time_window: string | null (optional); preferred_cabin_class: string | null (optional); preferred_departure_time_window: string | null (optional); redress_number: string | null (optional); seat_preference: string | null (optional); traveler_user_id: string | null (optional)",
+        "parameter_count": 23,
+        "source": "https://agents.ramp.com/docs/reference/agent-tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ramp_agent_account_numbers",
+        "description": "Retrieve agent account numbers.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_api_keys",
+        "description": "List provider API keys and related details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_create_fund_request",
+        "description": "Create a fund request.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_create_pending_payee",
+        "description": "Create a pending payee.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_drawdown_requests",
+        "description": "Manage banking drawdown requests.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_enroll_business_in_agent_cards",
+        "description": "Enroll a business in agent cards.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_events",
+        "description": "Retrieve Ramp events.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_get_bank_accounts",
+        "description": "Retrieve bank accounts.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_get_policies",
+        "description": "List policies.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_get_procurement_draft",
+        "description": "Retrieve a procurement draft.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_merchants",
+        "description": "List merchants.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_payment_credentials",
+        "description": "Retrieve payment credentials.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_post_bank_accounts",
+        "description": "Create or update bank accounts.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_post_policies",
+        "description": "Create or update policies.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_post_procurement_draft",
+        "description": "Create or update a procurement draft.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_ready_to_sync",
+        "description": "Check whether records are ready to sync.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_release",
+        "description": "Release a Ramp resource.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_statement_id",
+        "description": "Retrieve a statement by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_statements",
+        "description": "List statements.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_team",
+        "description": "Retrieve team information.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_transaction_id",
+        "description": "Retrieve a transaction by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_usage",
+        "description": "Retrieve usage information.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.composio.dev/toolkits/ramp_mcp",
+        "source_type": "Third-party (Composio, 2026-10-18)"
+      },
+      {
+        "tool_name": "ramp_token_info",
+        "description": "Get token information.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.runlayer.com/integrations/mcp/ramp",
+        "source_type": "Third-party (Runlayer, 2026-10)"
+      },
+      {
+        "tool_name": "submit_feedback",
+        "description": "Submit feedback to Ramp about the MCP server interface or problems.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.runlayer.com/integrations/mcp/ramp",
+        "source_type": "Third-party (Runlayer, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "40137 approximate",
+    "token_method": "Approximate characters divided by four from a JSON serialization of the 226 official reference entries’ names, descriptions and parsed parameter schemas; no hosted initialize instructions or annotations were available. Catalogue-only names excluded.",
+    "human_can_agent_cannot": "The support article says chat attachments are not automatically passed to MCP, so a user cannot simply attach a receipt image/PDF and have it forwarded as an MCP input; the current tool reference separately lists receipt upload-link and receipt-file tools, so supported upload paths depend on client and workflow. The support article says bill approvals are unavailable through the AI connection, while the current official tool reference lists ramp_approve_or_reject_bill; availability is therefore unresolved. The complete set of manual-only Ramp product operations was not established.",
+    "sources": [
+      "https://agents.ramp.com/docs/reference/agent-tools",
+      "https://support.ramp.com/ramp-mcp",
+      "https://www.runlayer.com/integrations/mcp/ramp",
+      "https://docs.composio.dev/toolkits/ramp_mcp",
+      "https://mcp.directory/servers/ramp",
+      "https://claude.com/connectors/ramp",
+      "https://www.gamut.so/mcp/payments-finance/ramp",
+      "https://tedix.dev/apps/ramp/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool descriptions instruct agents to obtain explicit user confirmation for selected operations and to follow particular search, reporting and workflow sequences. Ramp recommends the CLI for coding agents. These model-facing instructions are not evidence of server enforcement unless enforced by parameters or the operation itself. Verbatim examples appear in D.",
+    "governance_promises": "Ramp says the connection inherits the signed-in user’s role and permissions and attributes calls to that user. Admins can control which employees connect; Ramp Plus adds role-level controls. The privacy policy says personal-data retention depends on category, product, purpose and legal requirements; customer-directed AI functionality is governed by the applicable agreement and DPA. The integration page says Ramp may share data with subprocessors and other third parties as described in its platform agreement. MCP-specific model-training, prompt retention and masking terms were not found.",
+    "promises_to_user": "\"Your Ramp permissions come with you.\" Ramp describes secure connection and user-attributed actions, and provides production and sample-data connection options.",
+    "comparison_with_server_logic": "Permission inheritance and action attribution are documented product claims; the hosted server code is closed, so handler-level enforcement could not be checked. OAuth metadata objectively establishes the authorization server, grants, PKCE, registration and scopes. Tool descriptions contain additional behavioral guidance, some with confirmation parameters; the docs do not establish enforcement for every instruction. MCP-specific retention or AI-training promises were not found.",
+    "sources": [
+      "https://support.ramp.com/ramp-mcp",
+      "https://agents.ramp.com/docs/guides/connecting",
+      "https://support.ramp.com/managing-connected-ai-tools/",
+      "https://ramp.com/integrations/ramp-mcp",
+      "https://ramp.com/legal/privacy-terms/privacy-terms/privacy-policy",
+      "https://mcp.ramp.com/.well-known/oauth-authorization-server",
+      "https://agents.ramp.com/docs/reference/agent-tools"
+    ]
+  },
+  "contradictions": [
+    "The official tool reference says its snapshot includes 224 tools, but the captured page contains 226 distinct tool-name headings.",
+    "The support article says bill approvals are not available through the AI connection, while the current official tool reference lists ramp_approve_or_reject_bill.",
+    "The support article says Ramp MCP does not expose receipt upload as an MCP tool, while the current official reference lists ramp_request_receipt_upload_link and ramp_upload_receipt_file. The same support article says chat file attachments are not automatically forwarded.",
+    "The official OAuth metadata advertises many write scopes, including cards, bills, reimbursements and transactions, while support documentation describes selected operations as unavailable; the current tool reference includes at least some of those operations.",
+    "Claude’s connector directory lists a read-only Ramp connector at https://ramp-mcp-remote.ramp.com/mcp with 16 tools, including submit_feedback. That is a different host/endpoint from the input endpoint and its tools were not used as input-endpoint actions.",
+    "Third-party catalogues report different inventories: Runlayer 124, Composio 213, and mcp.directory 16. Runlayer and Composio contain names absent from the canonical reference; only those catalogue-only names are marked third-party in actions.json.",
+    "The public ramp-public/ramp_mcp code is a local stdio implementation using client credentials and a demo-by-default environment; the input endpoint is hosted and uses browser OAuth. The public code is not the deployed server."
+  ],
+  "observations_for_research": [
+    "Ramp publishes a shared MCP/CLI tool reference while documenting runtime variation by user identity, scopes, admin controls, connected client and environment.",
+    "The hosted OAuth metadata exposes read and write scopes across financial domains, while actual available tools are described as permission-dependent.",
+    "Agent-facing behavior guidance appears extensively inside tool descriptions, alongside some explicit confirmation parameters and preview-confirm flows.",
+    "Ramp exposes separate production and sample-data endpoints and recommends a distinct CLI for coding-agent workflows.",
+    "The current official tool reference and support article appear to reflect different tool generations for bill approvals and receipt uploads."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/ and both local repositories. The official reference page was parsed for tool headings and schemas; its stated total differs from extracted names. The older ramp_mcp repository was read but is not the hosted server; its relevant tool registration, handlers, API client, pagination, instructions and ephemeral SQLite logic were inspected. The official legal URLs were checked; the privacy policy was also reviewed through Ramp’s official search-indexed page. Official privacy policy was updated 2026-10-13. Catalogue warnings or endpoint mismatches were not used to replace the official tool list. Catalogue-only parameters were unavailable and are marked NOT PUBLISHED.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 10.3
+  }
+}

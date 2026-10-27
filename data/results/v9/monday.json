@@ -1,0 +1,990 @@
+{
+  "server": "monday",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.monday.com/mcp",
+    "documentation_url_csv": "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/mondaycom/mcp",
+    "documentation_urls_used": [
+      "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+      "https://developer.monday.com/api-reference/docs/platform-mcp-tools.md",
+      "https://support.monday.com/hc/en-us/articles/32364501317906-monday-MCP-available-tools",
+      "https://developer.monday.com/api-reference/docs/monday-mcp-security-overview",
+      "https://developer.monday.com/api-reference/docs/control-mcp-access-with-oauth-app",
+      "https://developer.monday.com/api-reference/docs/mcp-dynamic-client-registration",
+      "https://developer.monday.com/api-reference/docs/mcp-dynamic-connectors",
+      "https://developer.monday.com/api-reference/docs/mcp-enterprise-managed-auth",
+      "https://developer.monday.com/api-reference/docs/mcp-api-token",
+      "https://developer.monday.com/api-reference/docs/apps-mcp",
+      "https://monday.com/w/mcp",
+      "https://monday.com/pricing",
+      "https://monday.com/trustcenter/privacy",
+      "https://monday.com/trustcenter/terms"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository documents hosted MCP at this endpoint and provides a separately runnable local stdio implementation using API tokens. It is not evidence that this code runs the hosted service. The local server includes configurable read-only and dynamic API tool modes; its tools were not substituted for the hosted list.",
+    "mcp_protocol_version": "NOT FOUND for hosted endpoint",
+    "commit_hash": "4635c63e9f4556e0f5db73937dfe23e4be108be4",
+    "commit_date": "2026-10-26",
+    "implementation_language": "TypeScript (public local implementation)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.13.2 (declared by local package)",
+    "code_public": "Partially",
+    "license": "MIT (public repository; hosted service license NOT FOUND)",
+    "release_status": "Hosted service status NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.monday.com/sse — legacy SSE endpoint; official docs say it is deprecated and unsupported.",
+      "monday Apps MCP — separate local server for managing monday apps, versions, features, deployments, and environment variables; it is not the input Platform MCP."
+    ],
+    "sources": [
+      "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+      "https://developer.monday.com/api-reference/docs/platform-mcp-tools",
+      "https://developer.monday.com/api-reference/docs/apps-mcp",
+      "https://github.com/mondaycom/mcp",
+      "https://github.com/mondaycom/mcp/blob/4635c63e9f4556e0f5db73937dfe23e4be108be4/packages/monday-api-mcp/package.json",
+      "https://github.com/mondaycom/mcp/blob/4635c63e9f4556e0f5db73937dfe23e4be108be4/packages/monday-api-mcp/src/index.ts"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "monday's MCP page says there is no additional cost for MCP. The MCP documentation says its calls consume the account's daily API call limit. AI-client charges may apply separately.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Plan-based pricing; exact current amounts were not established from the collected official pricing page.",
+    "pricing_model_details": "MCP tool calls count against the account's daily API call limit, as direct API requests do. The official MCP page states that the MCP connection has no additional charge.",
+    "other_access_restrictions": "Access depends on the user's monday permissions, plan features, admin enablement, and AI client. The hosted connector can be restricted to specific workspaces. Custom OAuth can restrict client, users, and scopes. Dynamic connectors require account-admin approval of the connection and redirect URIs.",
+    "restrictions_controlled_by": "monday controls platform/API authorization and admin features; organization admins control connector approval and workspace access; OAuth app owners configure app scopes and allowed users/clients.",
+    "sources": [
+      "https://monday.com/w/mcp",
+      "https://monday.com/pricing",
+      "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+      "https://developer.monday.com/api-reference/docs/control-mcp-access-with-oauth-app",
+      "https://developer.monday.com/api-reference/docs/mcp-dynamic-connectors",
+      "https://developer.monday.com/api-reference/docs/monday-mcp-security-overview"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted Platform MCP exposes more than 60 tools for monday data and operations. The official reference names 64 tools, including four UI component tools described as internally invoked. Schemas may evolve; docs recommend tools/list to retrieve current definitions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Structured tool results from authenticated Platform API calls; exact hosted result/error envelope NOT FOUND.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/platform-mcp-tools",
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+        "https://support.monday.com/hc/en-us/articles/32364501317906-monday-MCP-available-tools"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted Platform MCP resources are documented in the reviewed tool reference or integration guide.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/platform-mcp-tools",
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP prompts are documented in the reviewed official references.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/platform-mcp-tools",
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "monday says internal logging and infrastructure telemetry are used for operational security, troubleshooting, and incident response. Customer self-service export of detailed MCP/API audit logs is not available. The security overview says OAuth tokens are not stored or logged.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/monday-mcp-security-overview"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server sampling support is documented in the reviewed official references.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted-server roots support is documented in the reviewed official references.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 and a WWW-Authenticate Bearer challenge pointing to protected-resource metadata. Both the origin and path-specific metadata identify https://auth.monday.com/mcp as the authorization server and header bearer tokens. That server advertises authorization-code, refresh-token, and JWT-bearer grants; code response; S256 PKCE; client_secret_post, client_secret_basic, and none token authentication; and a registration endpoint for DCR. No scopes_supported value was returned. OIDC configuration at the supplied /mcp path returned 404.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://mcp.monday.com/.well-known/oauth-protected-resource/mcp\"",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "Metadata Doc; OAuth Authorization Code and refresh_token and urn:ietf:params:oauth:grant-type:jwt-bearer; response_types_supported=[\"code\"]; code_challenge_methods_supported=[\"S256\"]; token_endpoint_auth_methods_supported=[\"client_secret_post\",\"client_secret_basic\",\"none\"]; registration_endpoint=https://auth.monday.com/oauth_ms/oauth/register; revocation_endpoint=https://auth.monday.com/oauth_ms/oauth/revoke; client_id_metadata_document_supported=true; bearer_methods_supported=[\"header\"]; scopes_supported NOT RETURNED. The endpoint itself returned HTTP 401 with {\"errors\":[\"Not Authenticated\"]}.",
+      "authorization_server": "https://auth.monday.com/mcp",
+      "sources": [
+        "https://mcp.monday.com/mcp",
+        "https://mcp.monday.com/.well-known/oauth-protected-resource",
+        "https://mcp.monday.com/.well-known/oauth-protected-resource/mcp",
+        "https://auth.monday.com/.well-known/oauth-authorization-server/mcp",
+        "https://developer.monday.com/api-reference/docs/mcp-dynamic-client-registration",
+        "https://developer.monday.com/api-reference/docs/mcp-api-token"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation flow is documented in the reviewed hosted-server references. Dynamic connector approval is an administrative authorization procedure, not documented as MCP elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/mcp-dynamic-connectors",
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability is documented in the reviewed hosted-server references. Some product tools create or manage monday workflows and agents; these are application operations, not documented MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/platform-mcp-tools",
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted clients can specify an Api-Version header. Access and OAuth connector scopes are configured through monday admin and developer settings. URL-based tool filters or hosted read-only mode are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+        "https://developer.monday.com/api-reference/docs/control-mcp-access-with-oauth-app",
+        "https://developer.monday.com/api-reference/docs/mcp-dynamic-connectors"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint's unauthenticated response is JSON {\"errors\":[\"Not Authenticated\"]}; a complete authenticated tool-error format is not documented in the reviewed references.",
+      "pre_interaction_context_verbatim": "{\"errors\":[\"Not Authenticated\"]}",
+      "post_interaction_context_structure": "Endpoint authentication error is a JSON errors array; tool-call errors otherwise Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://mcp.monday.com/mcp",
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented in the reviewed references.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications are documented in the reviewed hosted-server references.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation support is documented in the reviewed hosted-server references.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official list includes UI component tools for interactive tables, charts, battery indicators, and smart assignment; docs describe them as client-specific and internally invoked. Separate Apps MCP and deprecated SSE transport are documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "UI-dependent rendered components for supported clients; other output details NOT FOUND.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.monday.com/api-reference/docs/platform-mcp-tools",
+        "https://support.monday.com/hc/en-us/articles/32364501317906-monday-MCP-available-tools",
+        "https://developer.monday.com/api-reference/docs/apps-mcp",
+        "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official list includes read and write operations; no hosted readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations were found in the reference. 2. No server-enforced confirmation parameter or MCP elicitation documented. Publication/publishing and admin connector approvals are product workflows; docs do not state that all writes require confirmation. 3. OAuth/user context and monday permissions apply. Custom OAuth scopes can narrow the token; supplied metadata has no scopes_supported list. DCR allows admin approval of a connection and redirect URIs. Dynamic connector approval revocation may take effect at token refresh, with an existing access token usable up to 24 hours. Exact token lifetime otherwise Unknown. 4. Streamable HTTP only; /sse is deprecated/unsupported. API version can be pinned with Api-Version. Workspace limits, user/client allowlisting and app scopes are configurable. Public local code has readOnlyMode but is a separate local variant. 5. Docs claim per-user/per-tenant isolation and platform permissions; no field-level PII masking described. OAuth tokens are not stored/logged by server. 6. MCP calls count against daily API call limit; platform rate limits apply. Tool-specific caps/truncation not established. 7. Platform API validates structured inputs; hosted MCP coercion/unknown-argument behavior not specified. 8. monday says internal logging/monitoring and infrastructure telemetry; customer self-service detailed MCP/API audit export unavailable. 9. No feedback, rating, report, survey, or upsell tool appears in the official list. 10. No hosted server-provided skills/instructions documented. External skills exist in the mondaycom/skills repository. Advice to clients about token security and AI guardrails is guidance. 11. Server claims isolated sessions and no shared tenant state; persistent behavior-dependent memory not documented. 12. Platform MCP is documented as a wrapper around the Platform API. Separate Apps MCP has a different product purpose. UI components are in the tool list, with some client-specific availability. 13. all_monday_api exposes arbitrary GraphQL queries and mutations, an API-level escape hatch; docs describe structured API calls and explicitly say the server does not execute arbitrary code.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "The tool set may evolve over time — tools may be added, updated, or deprecated. Use tools/list to ensure your client always has the most up-to-date schemas.",
+      "The monday MCP server exposes more than 60 tools for reading and writing monday.com data.",
+      "These tools render interactive visualizations in supported AI clients."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The Platform MCP has a flat documented tool reference plus four internally invoked UI component tools. monday also publishes a separate Apps MCP for app lifecycle management; it is a different endpoint/server purpose, not a sub-server of the input endpoint.",
+    "sources": [
+      "https://developer.monday.com/api-reference/docs/monday-mcp-security-overview",
+      "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+      "https://developer.monday.com/api-reference/docs/platform-mcp-tools",
+      "https://developer.monday.com/api-reference/docs/control-mcp-access-with-oauth-app",
+      "https://developer.monday.com/api-reference/docs/mcp-dynamic-connectors",
+      "https://developer.monday.com/api-reference/docs/apps-mcp",
+      "https://github.com/mondaycom/mcp/blob/4635c63e9f4556e0f5db73937dfe23e4be108be4/packages/monday-api-mcp/src/index.ts",
+      "https://github.com/mondaycom/mcp/blob/4635c63e9f4556e0f5db73937dfe23e4be108be4/packages/monday-api-mcp/src/utils/args/args.service.ts"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "64 named in official reference",
+    "action_count_comment": "The official reference at https://developer.monday.com/api-reference/docs/platform-mcp-tools names 64 tools; the integration guide states “more than 60” and does not give a precise total. The support article is an older/different list and omits several newer documented tools, including workflows, agent management, and notetaker meetings; it also lists add_content_to_doc where the current reference lists update_doc. Support renders UI tools with hyphenated names while the current reference uses underscores. No catalogue-only actions were added because an official tool list exists. actions.json contains the 64 names from the current official reference. Tool schemas/parameters were not published in that reference.",
+    "actions": [
+      {
+        "tool_name": "create_board",
+        "description": "Create a new board in a workspace",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-board",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_board_info",
+        "description": "Get board metadata, columns, groups, views, and owners",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-board-info",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_board_items_page",
+        "description": "Paginate through all items on a board",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-board-items",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_board_activity",
+        "description": "Retrieve activity logs for a board",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-board-activity",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "board_insights",
+        "description": "Aggregate, filter, and group board data",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/board-insights",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_group",
+        "description": "Create a new group inside a board",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-group",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_column",
+        "description": "Add a new column to a board",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-column",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_column_type_info",
+        "description": "Get schema and settings for a column type",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-column-type-info",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_item",
+        "description": "Create an item, subitem, or duplicate an existing item",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-item",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "change_item_column_values",
+        "description": "Update one or more column values on an item",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/change-item-column-values",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_workspace",
+        "description": "Create a new workspace",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-workspace",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_workspace",
+        "description": "Update an existing workspace's name, kind, or description",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/update-workspace",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_workspaces",
+        "description": "List all workspaces available to the user",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/list-workspaces",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "workspace_info",
+        "description": "Get boards, docs, and folders within a workspace",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/workspace-info",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_folder",
+        "description": "Create a new folder in a workspace",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-folder",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_folder",
+        "description": "Rename, recolor, or move a folder",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/update-folder",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move_object",
+        "description": "Move a board, folder, or overview to a new location",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/move-object",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_doc",
+        "description": "Create a new WorkDoc in a workspace or attached to an item",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-doc",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_doc",
+        "description": "Update content and blocks in an existing doc",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/update-doc",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_docs",
+        "description": "Fetch documents by ID, object ID, or workspace",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/read-docs",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_dashboard",
+        "description": "Create a new dashboard aggregating data from one or more boards",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-dashboard",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_widget",
+        "description": "Add a widget to a dashboard or board view",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-widget",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "all_widgets_schema",
+        "description": "Fetch JSON Schema definitions for all available widget types",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/all-widgets-schema",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_view",
+        "description": "Create a board view (tab) with optional filters and sorting",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-view",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_view",
+        "description": "Update a view's name, filters, or sort order",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/update-view",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_view_table",
+        "description": "Create a table view with column visibility/order and group-by",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-view-table",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_view_table",
+        "description": "Update a table view's settings, filters, sort, or tags",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/update-view-table",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_form",
+        "description": "Create a new WorkForm with a backing board",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-form",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_form",
+        "description": "Retrieve a WorkForm by its token",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-form",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_form",
+        "description": "Update form settings, password, or tags",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/update-form",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "form_questions_editor",
+        "description": "Create, update, or delete questions on a form",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/form-questions-editor",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_form_submission",
+        "description": "Submit a response to a WorkForm",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-form-submission",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_user_context",
+        "description": "Get the current user, account info, and their boards/workspaces",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-user-context",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_users_and_teams",
+        "description": "Fetch users and/or teams by ID or name",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/list-users-and-teams",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_update",
+        "description": "Post a comment or reply on an item",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-update",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_updates",
+        "description": "Retrieve updates (comments) from an item or board",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-updates",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_notification",
+        "description": "Send a bell notification (and optionally email) to a user",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-notification",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search",
+        "description": "Search for boards, documents, forms, and folders",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/mcp-search",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_assets",
+        "description": "Retrieve file metadata and download URLs by asset ID",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-assets",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_asset_upload_url",
+        "description": "Get a presigned URL to upload a file (step 1 of 2)",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-asset-upload-url",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "finalize_asset_upload",
+        "description": "Complete an upload and attach the asset to an item (step 2 of 2)",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/finalize-asset-upload",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_automations",
+        "description": "List automations on a board with their state and config",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/list-automations",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_automations",
+        "description": "Activate, deactivate, or delete an automation",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/manage-automations",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_automation",
+        "description": "Create a board automation from a natural-language description",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-automation",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "plan_workflow",
+        "description": "Plan workflows for a process and return an implementation plan",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/plan-workflow",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_workflow",
+        "description": "Create a new empty workflow in a workspace",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/create-workflow",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_workflow",
+        "description": "Update a workflow draft from a natural-language prompt",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/update-workflow",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "publish_workflow",
+        "description": "Publish a workflow draft to the live version",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/publish-workflow",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_agent",
+        "description": "Full agent lifecycle: create, get, update, delete, activate, deactivate, run",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/manage-agent",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_agent_triggers",
+        "description": "List, add, or remove the triggers that fire an agent",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/manage-agent-triggers",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_agent_skills",
+        "description": "Create skills and attach/detach them from an agent",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/manage-agent-skills",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_agent_knowledge",
+        "description": "Grant, update, or revoke an agent's access to boards and docs",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/manage-agent-knowledge",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "agent_catalog",
+        "description": "Browse available trigger types and skills",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/agent-catalog",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_notetaker_meetings",
+        "description": "Retrieve notetaker meetings with summaries and action items",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-notetaker-meetings",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_monday_dev_sprints_boards",
+        "description": "Discover sprint boards and their associated task boards",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-sprints-boards",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_sprints_metadata",
+        "description": "Get sprint names, dates, goals, and status for a sprints board",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-sprints-metadata",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_sprint_summary",
+        "description": "Get a full summary and analysis of a sprint's performance",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-sprint-summary",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "all_monday_api",
+        "description": "Execute any GraphQL query or mutation against the monday.com API",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/all-monday-api",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_graphql_schema",
+        "description": "Fetch the monday.com GraphQL schema (queries and mutations)",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-graphql-schema",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_type_details",
+        "description": "Get fields, arguments, and metadata for a specific GraphQL type",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/get-type-details",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "show_table",
+        "description": "Renders an interactive table view of board items",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/show-table",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "show_chart",
+        "description": "Renders a pie or bar chart visualization",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/show-chart",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "show_battery",
+        "description": "Renders a battery/progress indicator",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/show-battery",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "show_assign",
+        "description": "Renders a smart assignment interface",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.monday.com/api-reference/docs/show-assign",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No verbatim hosted tools/list response or initialize instructions were available. Public code is a local stdio variant rather than the deployed endpoint; hosted tool definitions were not available to serialize.",
+    "human_can_agent_cannot": "The Platform MCP reference says its tools map to a subset of monday Platform API operations; the full GraphQL API reference documents broader API capabilities. Exact MCP-versus-human feature gaps were not established. The Apps MCP separately manages app development/deployments and is not part of this endpoint.",
+    "sources": [
+      "https://developer.monday.com/api-reference/docs/platform-mcp-tools",
+      "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+      "https://support.monday.com/hc/en-us/articles/32364501317906-monday-MCP-available-tools",
+      "https://developer.monday.com/api-reference/reference",
+      "https://developer.monday.com/api-reference/docs/apps-mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs advise client builders to “Implement AI safeguards” and “Enforce prompt validation, output filtering, and guardrails within the AI client or application layer.” The integration guide recommends using tools/list for current schemas and advises secure token storage, refresh handling, and revocation. These are client/operator responsibilities, not described as server-enforced rules.",
+    "governance_promises": "The security overview claims “No shared state between tenants,” user-scoped permissions, and that “The MCP Server does not store or log customer OAuth tokens.” It says platform rate limits and input validation apply. It also states self-service export of detailed MCP/API audit logs is not currently available.",
+    "promises_to_user": "The product page says MCP works within monday.com account permissions, supports workspace access limits, and has no additional MCP charge. The security overview describes per-user session isolation and Platform API-aligned authorization.",
+    "comparison_with_server_logic": "OAuth metadata objectively confirms bearer-header authorization and the authorization-server endpoints, but exposes no scope list. The endpoint's live HTTP 401 confirms authentication protection. Tenant isolation, user-context enforcement, token non-storage, rate limiting, and logging are vendor documentation claims; hosted server implementation was not public for independent verification. Admin approval and OAuth scope controls are documented configuration mechanisms.",
+    "sources": [
+      "https://developer.monday.com/api-reference/docs/monday-mcp-security-overview",
+      "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+      "https://developer.monday.com/api-reference/docs/control-mcp-access-with-oauth-app",
+      "https://monday.com/w/mcp",
+      "https://mcp.monday.com/mcp"
+    ]
+  },
+  "contradictions": [
+    "The current official tool reference names 64 tools and lists update_doc; the support article lists add_content_to_doc instead and does not list the newer workflow, agent, meeting, or sprint tools.",
+    "The current official reference names the UI tools show_table, show_chart, show_battery, and show_assign; the support article renders them as show-table, show-chart, show-battery, and show-assign. The support article says some UI components are available only in specific clients.",
+    "The OAuth authorization-server metadata advertises a JWT-bearer grant, while the reviewed hosted integration documentation describes OAuth authorization-code flows and API-token authentication; the use of JWT-bearer for this MCP endpoint is not explained."
+  ],
+  "observations_for_research": [
+    "Hosted authentication choices include monday's default connector, custom OAuth, dynamic client registration, enterprise-managed authentication, and personal API tokens; the scopes supported by the authorization server metadata were not returned.",
+    "The official tool reference combines ordinary data access and mutations with high-level workflow/agent tools, a direct GraphQL query/mutation tool, and client-rendered UI tools.",
+    "The official security overview places prompt-injection and output-validation safeguards at the AI client/application layer and states that detailed customer-facing audit exports are unavailable."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared links.json, links_check.txt, collected pages including scripts, and local mondaycom/mcp repository at the pinned commit. Also checked the official pricing, privacy, and terms URLs; no MCP-specific legal terms or exact universal plan prices were established. No unofficial server was listed in links.json. The public repository's README distinguishes the recommended hosted service from the local customizable implementation, so local code is not treated as the deployed hosted service. OAuth metadata was taken from the supplied raw responses; the authorization-server document does not return scopes_supported.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 10.5
+  }
+}

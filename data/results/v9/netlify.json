@@ -1,0 +1,454 @@
+{
+  "server": "netlify",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.netlify.com/mcp",
+    "documentation_url_csv": "https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/",
+    "addressing": "global",
+    "repository_url": "https://github.com/netlify/netlify-mcp",
+    "documentation_urls_used": [
+      "https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/",
+      "https://docs.netlify.com/build/build-with-ai/overview/",
+      "https://www.netlify.com/blog/netlify-mcp-server-ai-agents-deploy-your-code/",
+      "https://www.netlify.com/press/netlify-launches-official-mcp-server-setting-the-standard-for-agent-native-development/",
+      "https://github.com/netlify/netlify-mcp",
+      "https://github.com/netlify/context-and-tools",
+      "https://www.netlify.com/pricing/",
+      "https://www.netlify.com/privacy/",
+      "https://www.netlify.com/legal/terms-of-use/",
+      "https://claude.com/connectors/netlify",
+      "https://martechdb.com/vendors/netlify"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository contains Netlify’s remote server implementation and the @netlify/mcp local package. Netlify’s docs currently direct users to https://netlify-mcp.netlify.app/mcp, while the input endpoint is https://mcp.netlify.com/mcp. The input endpoint’s OAuth metadata and third-party endpoint record establish it as a Netlify-hosted server, but the exact deployed build could not be matched to the repository commit. The repository is used as the official same-product implementation evidence.",
+    "mcp_protocol_version": "2026-07-28 and legacy 2025-era traffic handled by the repository implementation; exact negotiated version for the input endpoint not observed.",
+    "commit_hash": "100cd71496e8e07f6167c8e469b4ab997f35f208",
+    "commit_date": "2026-10-26",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/server 2.2.0; @modelcontextprotocol/core 2.2.0",
+    "code_public": "Yes",
+    "license": "ISC",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://netlify-mcp.netlify.app/mcp — Netlify’s documented hosted remote endpoint; the docs recommend it for the most up-to-date MCP capabilities.",
+      "Local stdio package @netlify/mcp — documented for environments requiring local MCP servers.",
+      "Netlify’s agent skills are distributed separately through netlify/context-and-tools; they are not the same as MCP tools."
+    ],
+    "sources": [
+      "https://docs.netlify.com/build/build-with-ai/agent-setup-guides/agent-setup-overview/",
+      "https://github.com/netlify/netlify-mcp",
+      "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts#L256-L279",
+      "https://martechdb.com/vendors/netlify"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The reviewed materials do not specify a separate MCP access fee. The hosted endpoint uses Netlify account OAuth; the repository’s local package requires a Netlify account.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Netlify offers Free, Personal, Pro, and Enterprise plans; pricing page displays current plan prices and terms.",
+    "pricing_model_details": "MCP-specific per-call pricing, quotas, or credits were not found. Netlify plan entitlements can affect underlying product features, including password protection, team features, and observability data retention.",
+    "other_access_restrictions": "Hosted access requires Netlify OAuth. The server uses the authenticated user’s Netlify access and API permissions. The public repository allows a temporary personal access token for local troubleshooting. No MCP-specific client allowlist or admin switch was found in the reviewed sources.",
+    "restrictions_controlled_by": "Netlify controls endpoint availability and OAuth; the Netlify account and team administrators control underlying account permissions and plan entitlements.",
+    "sources": [
+      "https://mcp.netlify.com/.well-known/oauth-protected-resource",
+      "https://mcp.netlify.com/.well-known/oauth-authorization-server",
+      "https://www.netlify.com/pricing/",
+      "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/README.md"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Tools are exposed through the MCP SDK; repository comments describe 2026-07-28 and legacy 2025-era traffic.",
+      "description_what_how": "The repository registers domain operations as grouped read/write selector tools by default. Verbose mode or detected OpenAI clients receive individual operation tools. It also registers a coding-context tool, Claude-client-specific design import tools, and custom event methods. No authenticated tools/list response from the input endpoint was collected.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Most tool results are text content containing JSON-serialized API results. Some tools return explanatory text; errors may be returned as MCP errors or text content marked isError.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L35-L220",
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts#L256-L279"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP resource registration was found in the analyzed repository handler or tool registration code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP prompt registration was found in the analyzed repository handler. The repository README’s generic mention of prompts is not backed by a prompt registration in the inspected implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts",
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/README.md"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The implementation records server-side operational logs, but no MCP logging capability notification or client-facing logging registration was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Server-side structured logs; this is separate from MCP logging messages delivered to clients.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts",
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp-server/logger.ts"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No server-side MCP sampling requests were found in the analyzed implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No roots capability handling was found in the analyzed implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The supplied OAuth documents report resource https://mcp.netlify.com/mcp, authorization server https://mcp.netlify.com/, and header bearer tokens. Authorization uses authorization_code and refresh_token grants, code response type, query response mode, PKCE S256, dynamic client registration at https://mcp.netlify.com/oauth-server/reg, and token auth methods none, client_secret_post, and client_secret_basic. scopes_supported is exactly [\"offline_access\", \"read\", \"write\", \"claudeai\"]. Token lifetime and revocation details were not supplied.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The endpoint returned HTTP 400 with JSON-RPC error code -32600 and message \"Request body is required\" for an empty-body POST. The OAuth metadata endpoints returned HTTP 200.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; authorization_code and refresh_token; PKCE S256; token endpoint auth methods none, client_secret_post, client_secret_basic; scopes_supported: offline_access, read, write, claudeai; bearer_methods_supported: header; token lifetime and revocation NOT FOUND.",
+      "authorization_server": "https://mcp.netlify.com/",
+      "sources": [
+        "https://mcp.netlify.com/.well-known/oauth-protected-resource",
+        "https://mcp.netlify.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.netlify.com/.well-known/oauth-authorization-server",
+        "https://mcp.netlify.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP elicitation flow was found. The repository-defined tools do not require an MCP elicitation confirmation step.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP Tasks capability registration was found. The Claude Design import flow is asynchronous and exposes a separate status tool, not MCP Tasks.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/design-import/import-claude-design.ts#L374-L431"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The endpoint supports a verbose=true query parameter to switch to granular tools; OpenAI clients are automatically assigned that mode. Repository tool definitions also allow remote/local-specific omissions. No general end-user toolset selector or read-only endpoint configuration was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The configured tool surface changes the tool names and schemas returned by tools/list.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts#L230-L279",
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L35-L120"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The handler emits JSON-RPC errors for request and internal failures. Tool/API errors are logged and rethrown or returned as text content with isError, depending on the tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "JSON-RPC error objects for protocol/request failures; tool results can contain text and isError.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts#L70-L91",
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L121-L220"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Custom event methods, not MCP resource subscriptions.",
+      "description_what_how": "A custom events extension registers event listing, subscription, and unsubscription methods for deploy and form-submission events. It is not the MCP resource subscription capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Event notifications carry projected deploy or form-submission payloads; delivery and filters are managed by server-side event relay code.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts#L256-L279",
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp-server/events/methods.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP progress notifications were found. The Claude Design import instead returns a job ID and instructs the client to poll a status tool.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The import status tool returns processing, done, or failed and may include the design URL.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/design-import/import-claude-design.ts#L374-L431"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP cancellation handling was found in the analyzed implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The server registers a coding-context tool whose description contains a mandatory instruction. It also exposes a custom events protocol and Claude Design import flow. Agent skills are offered separately through Netlify’s context-and-tools repository.",
+      "pre_interaction_context_verbatim": "ALWAYS call when writing code. Required step before creating or editing any type of functions, Netlify sdk/library usage, etc. Use other operations for project management.",
+      "post_interaction_context_structure": "Coding-context output is supplied as text content; the tool can return isError when context retrieval fails.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts#L260-L264",
+        "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/context/register-coding-context-tool.ts#L7-L43",
+        "https://docs.netlify.com/build/build-with-ai/agent-setup-guides/agent-setup-overview/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Default domain tools are grouped into read and write surfaces. Annotations are completed explicitly; grouped tools aggregate the members’ hints. Write tools with no explicit destructive hint receive destructiveHint=true. 2. No server-enforced human confirmation or MCP elicitation flow found. 3. OAuth scopes are offline_access, read, write, claudeai; API calls run using the authenticated Netlify identity. Admin controls, allowlists, token lifetime, and revocation were not found. 4. verbose=true enables granular tool exposure; OpenAI clients are detected and receive granular tools. Repo also distinguishes remote and local tool omissions. No read-only endpoint or toolset URL filter found. 5. Claude Design import only fetches HTTPS URLs on Claude Design hosts, rejects redirects, and caps content at 30 MiB. No general-purpose field masking found. 6. Observability time windows are clamped to plan-dependent retention (typically 24h free, 7 days Pro/Business, 30 days Enterprise); design import has a 30 MiB body cap and 60s fetch timeout. MCP call limits/costs not found. 7. Tool inputs use Zod schemas; repository calls Netlify APIs and surfaces API errors. No general hallucinated-argument alias rewrite found. 8. Server logs request, identity, tool, and error metadata; bearer tokens are masked. Tool argument values are generally summarized by shape, but some application-level logs can include URLs or identifiers. Netlify’s privacy statement says it does not use customer code/content to train AI models unless explicitly opted in. 9. No feedback/rating/report/survey tools found. No MCP upsell messages found. 10. The coding-context description tells agents to always call it before writing code; this instruction is advisory to the client. Netlify also distributes skills separately. 11. No evidence that past agent behavior changes future tools or outputs. Event subscriptions store state for event delivery. 12. The server has a custom event subprotocol and conditionally registered Claude Design import tools; client detection changes tool surface. 13. No generic raw API, SQL, or script-execution escape hatch found in listed MCP tools.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "ALWAYS call when writing code. Required step before creating or editing any type of functions, Netlify sdk/library usage, etc. Use other operations for project management.",
+      "To help your agent build with best practices, check out our agent skills for building and deploying on Netlify."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The tool surface varies by query parameter and detected client. The implementation also registers a custom event subscription protocol and Claude-only design import tools alongside grouped domain tools.",
+    "sources": [
+      "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/tool-utils.ts",
+      "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts",
+      "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/design-import/import-claude-design.ts",
+      "https://www.netlify.com/privacy/"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "10 default; up to 12 when Claude-specific tools are registered; granular mode changes names and schemas rather than adding operations.",
+    "action_count_comment": "No official human-readable per-tool reference or stated total was found. Official names are derived from the public Netlify repository’s default remote registration logic; `actions.json` contains 10 default tools plus two Claude-client-conditional tools. Netlify docs state the hosted endpoint is netlify-mcp.netlify.app/mcp, while the input endpoint is mcp.netlify.com/mcp. Claude’s connector listing names six tool groups, not individual MCP tools. MartechDB reports tool names are not known; Agent Discoverability reports a count of 24 without a usable names list. No catalogue-only tools were added because the official code defines the same-product surface.",
+    "actions": [
+      {
+        "tool_name": "get-netlify-coding-context",
+        "description": "Fetch Netlify coding and deployment guidance for a selected topic.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "creationType: string (required; enum topics loaded from context-and-tools); reference: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/context/register-coding-context-tool.ts#L7-L43",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "netlify-user-services-reader",
+        "description": "Read the authenticated Netlify user profile.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "selectSchema.operation: string (required; get-user); selectSchema.params: object (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L156-L181",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "netlify-deploy-services-reader",
+        "description": "Read deploy details by deploy ID or site ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "selectSchema.operation: string (required; get-deploy, get-deploy-for-site); selectSchema.params: object (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L156-L181",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "netlify-deploy-services-updater",
+        "description": "Deploy the current project directory to a Netlify site.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "selectSchema.operation: string (required; deploy-site); selectSchema.params: object (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L156-L181",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "netlify-team-services-reader",
+        "description": "Read teams and team environment variable metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "selectSchema.operation: string (required; get-teams, get-team, get-team-env-vars); selectSchema.params: object (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L156-L181",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "netlify-project-services-reader",
+        "description": "Read project details, project lists, and form submissions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "selectSchema.operation: string (required; get-project, get-projects, get-forms-for-project, manage-form-submissions); selectSchema.params: object (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L156-L181",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "netlify-project-services-updater",
+        "description": "Create projects and change settings, forms, access, and variables.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "selectSchema.operation: string (required; update-visitor-access-controls, update-forms, update-project-name, manage-env-vars, create-new-project); selectSchema.params: object (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L156-L181",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "netlify-extension-services-reader",
+        "description": "Find extensions and retrieve their details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "selectSchema.operation: string (required; get-extensions, get-full-extension-details); selectSchema.params: object (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L156-L181",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "netlify-extension-services-updater",
+        "description": "Install or uninstall extensions and initialize database setup.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "selectSchema.operation: string (required; change-extension-installation, initialize-database); selectSchema.params: object (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L156-L181",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "netlify-observability-services-reader",
+        "description": "Query edge request metrics, logs, and request details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "selectSchema.operation: string (required; get-counts, get-topk, get-timeseries, get-request-logs, get-request-detail); selectSchema.params: object (optional)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts#L156-L181",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "import-claude-design-from-url",
+        "description": "Import a Claude Design HTML export as a Netlify site and deploy it.",
+        "type": "Write",
+        "enabled_by_default": "No (Claude client detected)",
+        "parameters": "url: string (required); title: string (optional); claude_design_project_id: string (optional); account_slug: string (optional); password: string (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/design-import/import-claude-design.ts#L25-L51",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-design-import-job-status",
+        "description": "Check processing status and live URL for a Claude Design import.",
+        "type": "Read",
+        "enabled_by_default": "No (Claude client detected)",
+        "parameters": "job_id: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/design-import/import-claude-design.ts#L52-L59",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The exact hosted initialize response and runtime tool schemas were not captured; repository schemas are composed dynamically and the input endpoint could not be matched to the pinned build.",
+    "human_can_agent_cannot": "The broader Netlify platform supports many API and dashboard operations beyond this MCP tool surface. No exhaustive human-versus-MCP comparison was published in the reviewed pages. Official product API reference: https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/ .",
+    "sources": [
+      "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/tools/index.ts",
+      "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/netlify/functions/mcp.ts",
+      "https://docs.netlify.com/build/build-with-ai/agent-setup-guides/agent-setup-overview/",
+      "https://claude.com/connectors/netlify",
+      "https://martechdb.com/vendors/netlify",
+      "https://agentdiscoverability.com/track/chatgpt/netlify"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Netlify’s coding-context tool tells the agent: “ALWAYS call when writing code. Required step before creating or editing any type of functions, Netlify sdk/library usage, etc. Use other operations for project management.” This is a tool description, not server-side enforcement. Netlify docs recommend using its agent skills and say to connect the MCP server for Netlify expertise and CLI access.",
+    "governance_promises": "The privacy statement says: “You own your content. Netlify uses it only to operate and improve the service. We do not sell your code or content. We do not use your code or content to train AI models unless you explicitly opt in.” It also describes service data as aggregated and non-identifying metrics. The statement provides no MCP-specific retention period.",
+    "promises_to_user": "Netlify describes the server as providing direct access to its API and CLI so agents can create projects, deploy applications, and manage infrastructure. Its docs recommend the remote server for the most up-to-date capabilities.",
+    "comparison_with_server_logic": "The code description’s mandatory coding-context instruction is not enforced by the server. Privacy commitments are policy statements; the repository logs request metadata and tool call shapes, and some tool-specific logs may contain identifiers or URLs. The code does implement tool input schemas, authenticated Netlify API access, request logging, and the Claude Design import fetch restrictions described above.",
+    "sources": [
+      "https://www.netlify.com/privacy/",
+      "https://www.netlify.com/blog/netlify-mcp-server-ai-agents-deploy-your-code/",
+      "https://docs.netlify.com/build/build-with-ai/agent-setup-guides/agent-setup-overview/",
+      "https://github.com/netlify/netlify-mcp/blob/100cd71496e8e07f6167c8e469b4ab997f35f208/src/context/register-coding-context-tool.ts"
+    ]
+  },
+  "contradictions": [
+    "Netlify’s documentation points to https://netlify-mcp.netlify.app/mcp, but the input endpoint and its pre-fetched OAuth metadata use https://mcp.netlify.com/mcp. MartechDB identifies mcp.netlify.com/mcp as Netlify’s official endpoint; mcp.tc identifies netlify-mcp.netlify.app/mcp as Netlify’s hosted endpoint. The evidence supports two official hostnames but does not establish whether they currently run identical builds.",
+    "The README says the server provides prompts, but the analyzed pinned repository handler contains no MCP prompt registration.",
+    "Agent Discoverability reports 24 tools, whereas official repository logic exposes 10 default grouped tools and two Claude-only tools; the directory does not provide a names list for comparison.",
+    "OAuth metadata advertises claudeai scope, while the public tool registration also changes behavior for OpenAI clients and supports a local package; the metadata does not document client-specific tool exposure."
+  ],
+  "observations_for_research": [
+    "The same underlying operations can be exposed as grouped read/write selectors or as individually named tools based on a query parameter or client detection.",
+    "The code-context tool’s required-use instruction is delivered in a tool description, so the instruction depends on agent compliance.",
+    "The server has a custom event subscription protocol alongside standard MCP tools, while asynchronous design import uses a separate status-polling tool."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/ and code/ copies, including official docs, blog/press pages, pricing, privacy, legal terms, endpoint origin/install guesses and the Netlify repository at commit 100cd71496e8e07f6167c8e469b4ab997f35f208. The docs URL redirects to the agent setup overview; it names no individual tools. The input endpoint’s pre-fetched OAuth metadata was used without re-fetching. Third-party tool directories were cross-checked; no catalogue provided a complete exact machine-name list suitable to supersede the official repository. actions.json records the repository-derived tool registrations; endpoint-build identity is not confirmed.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 6.4
+  }
+}

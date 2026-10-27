@@ -1,0 +1,386 @@
+{
+  "server": "tavily",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.tavily.com/mcp",
+    "documentation_url_csv": "https://docs.tavily.com/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/tavily-ai/tavily-mcp",
+    "documentation_urls_used": [
+      "https://docs.tavily.com/documentation/mcp",
+      "https://docs.tavily.com/documentation/keyless",
+      "https://github.com/tavily-ai/tavily-mcp",
+      "https://docs.tavily.com/mcp"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The public repository is Tavily’s local Node.js stdio server, described as a local installation of the product. It is the direct local equivalent of the hosted server, but the hosted documentation lists five tools while the repository defines six, including tavily_feedback. Hosted availability of that sixth tool is not documented.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc",
+    "commit_date": "2026-10-26",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk 1.32.0",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://docs.tavily.com/mcp is a separate Tavily documentation-search MCP manifest, not the product server. Its tools include search_tavily_docs, query_docs_filesystem_tavily_docs, and submit_feedback; it also exposes a Tavily documentation skill resource."
+    ],
+    "sources": [
+      "https://docs.tavily.com/documentation/mcp",
+      "https://docs.tavily.com/documentation/keyless",
+      "https://github.com/tavily-ai/tavily-mcp",
+      "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/package.json",
+      "https://docs.tavily.com/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "Keyless Search and Extract are free and rate-limited. Other documented product tools require an API key. The hosted MCP also offers OAuth sign-in tied to a Tavily account and API key selection.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Researcher: free, 1,000 API credits/month; Project: $30/month, 4,000 credits/month; Pay As You Go: $0.008/credit; Enterprise: custom pricing. The pricing page also describes Startup and Growth programs.",
+    "pricing_model_details": "API credits are consumed according to request type and complexity. Free monthly credits reset on the first of each month. Keyless access has a separate rate limit; the reviewed pages do not state its numeric cap.",
+    "other_access_restrictions": "Keyless mode is documented for Search and Extract only. Crawl, Map, and Research require an API key. OAuth key selection uses a key named mcp_auth_default where configured; otherwise it falls back to the personal default or first available key. Public client allowlists, org-level switches, and token lifetime were not found.",
+    "restrictions_controlled_by": "Vendor controls endpoint features and keyless limits; Tavily account holder controls API key choice and plan.",
+    "sources": [
+      "https://docs.tavily.com/documentation/keyless",
+      "https://docs.tavily.com/documentation/mcp",
+      "https://www.tavily.com/pricing",
+      "https://help.tavily.com/articles/8816424538-pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted documentation names tavily_search, tavily_extract, tavily_crawl, tavily_map, and tavily_research. The direct local equivalent’s code additionally defines tavily_feedback. Keyless mode is documented to expose Search and Extract.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results are returned as text content. Search and Extract format results and optional request IDs; Crawl, Map, Research, and Feedback each have dedicated text formatters. API errors may return text content with isError true.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.tavily.com/documentation/mcp",
+        "https://docs.tavily.com/documentation/keyless",
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts",
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/format-results.ts"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local product server declares tools capability only and no resource handlers. The separate documentation-search MCP exposes a Tavily documentation skill resource; that is another server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts",
+        "https://docs.tavily.com/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt capability or prompt handlers are declared in the local product server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Local code writes server errors and keyless-mode notice to stderr, and API requests carry session attribution headers. Hosted logging and retention details were not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Local stderr messages; tool errors are returned as text. No hosted audit-log schema was found.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts",
+        "https://docs.tavily.com/documentation/mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling capability or sampling requests are declared in the local server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability or roots handlers are declared in the local server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Provided endpoint returned HTTP 401 with WWW-Authenticate Bearer scope=\"openid offline_access\" and resource metadata at the path-suffixed protected-resource document. That document identifies the resource, authorization server, supported scopes, and bearer-header method. Authorization-server metadata advertises dynamic registration, authorization-code and refresh-token grants, and S256 PKCE. Token lifetime was not published in the supplied metadata.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer scope=\"openid offline_access\", resource_metadata=\"https://mcp.tavily.com/.well-known/oauth-protected-resource/mcp\"",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://mcp.tavily.com/register; grants authorization_code and refresh_token; PKCE S256; token endpoint auth methods none and private_key_jwt; bearer token in header; scopes_supported: openid, offline_access; revocation endpoint https://mcp.tavily.com/revoke with client_secret_post and client_secret_basic methods. The origin protected-resource URL without /mcp returned 404; OpenID configuration returned 404. Token lifetime not stated.",
+      "authorization_server": "https://mcp.tavily.com/",
+      "sources": [
+        "https://mcp.tavily.com/mcp",
+        "https://mcp.tavily.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.tavily.com/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation capability is declared in the local server code. No server-enforced confirmation flow was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability is declared. Research creates an upstream Tavily research job and polls or streams its result inside the tool call; this is not evidence of MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Research returns formatted text; internal polling can return completion, failure, not-found, or timeout messages.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted setup accepts optional DEFAULT_PARAMETERS JSON for requests and documents API-key authentication as an alternative to OAuth. The local equivalent also reads DEFAULT_PARAMETERS from its environment.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration values affect upstream API request parameters; invalid local JSON defaults are ignored with a stderr warning.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://docs.tavily.com/documentation/mcp",
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Local code converts upstream API errors into text results and marks those responses isError true. tavily_feedback is a separate feedback-submission tool. Hosted behavior for every error case is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Text error detail with a tool-specific documentation URL where available; keyless limit responses may contain natural-language instructions.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts",
+        "https://docs.tavily.com/documentation/keyless"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local server code does not declare MCP subscription capability. Tool results are request-response outputs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Research performs internal polling and backoff, but the code does not send MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "No incremental MCP progress messages found; Research returns a final formatted result.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation handler was found. Local research uses timers and an AbortController for its stream request; this is internal request handling, not documented MCP cancellation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The local server has no server-level instructions. Its tool descriptions contain agent-facing guidance, and the hosted documentation separately describes session and optional human-ID attribution headers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool descriptions are sent with tool definitions. Session attribution is sent upstream in headers.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts",
+        "https://docs.tavily.com/documentation/mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Local code defines search, extract, crawl, map, research, and feedback tools; no annotations were found. Docs list five tools; keyless docs specify Search and Extract only. 2. No enforced confirmation mechanism found; feedback score requirements are tool-description guidance. 3. Hosted OAuth scopes are openid and offline_access; product API key selection follows documented personal/team key rules. Role inheritance, client allowlists, redirect approval, and token lifetime: Unknown. 4. Keyless mode is restricted to Search and Extract. DEFAULT_PARAMETERS can set defaults; local code applies these after arguments and therefore overrides supplied values for matching search fields. No hosted toolset/readonly filter or regions found. 5. No result-field PII masking or secrets redaction found in local code. Session and optional human IDs are attribution headers; docs say human IDs are hashed before processing or storing. 6. Research tool description states 20 requests/minute. Keyless is rate-limited without published numeric cap; product calls consume credits. Local formatter truncates raw content in some result formatting. 7. Local code rejects no extra arguments explicitly, normalizes non-array include_domains/exclude_domains and crawl/map path/domain filters to empty arrays, forces search topic to general when country is set, and clears time_range when dates are supplied. 8. Each local process generates an X-Session-Id reused across calls; optional X-Human-Id is forwarded. Authenticated local requests send X-Client-Source: MCP; keyless sends X-Client-Source: tavily-mcp-keyless. Hosted audit retention and telemetry settings: Unknown. 9. Feedback tool submits scores, result IDs/URLs, snippets, and optionally the final answer to Tavily; description urges maximizing useful signal. No other upsell tool found. Keyless limit responses may instruct agents to sign up for a free API key. 10. No server-level instructions or dynamically delivered product skills found in the product code. Agent-facing behavior instructions appear in tool descriptions. Tavily separately provides a docs-search skill resource on its docs MCP. 11. Local session ID persists for process lifetime; no behavior-dependent memory or dynamic tool changes found. 12. Flat tool server; research internally creates and polls an upstream Tavily research job. 13. No arbitrary raw API request, SQL, script, or execution escape hatch found.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Use for news, facts, or data beyond your knowledge cutoff.",
+      "Search category. Use 'general' for almost all searches, including current events and requests that combine news with other information. Use 'news' only when the user explicitly asks for news, headlines, or news coverage.",
+      "Use 'advanced' for LinkedIn, protected sites, or tables/embedded content",
+      "Perform comprehensive research on a given topic or question. Use this tool when you need to gather information from multiple sources to answer a question or complete a task.",
+      "Maximize useful signal whenever you call this tool:",
+      "Per-result urls_scores first — MANDATORY when scoring a search: include an entry for EVERY result in the search response, HELPFUL and WEAK/IRRELEVANT/HARMFUL alike, by id (1 perfect … 0 irrelevant … -1 harmful).",
+      "Never default to 0.7.",
+      "Prefer specific, actionable feedback over a sparse payload."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One flat product tool list. Research internally calls Tavily’s research API and polls or streams the resulting job, but does not proxy another MCP server.",
+    "sources": [
+      "https://docs.tavily.com/documentation/mcp",
+      "https://docs.tavily.com/documentation/keyless",
+      "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts",
+      "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/format-results.ts"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "5 hosted documented tools; 6 in public local equivalent",
+    "action_count_comment": "Official hosted tool list exists at https://docs.tavily.com/documentation/mcp and names five tools; no total is stated. The official public repository defines six tools, including tavily_feedback, absent from the hosted docs list. actions.json includes the five hosted names plus the code-defined feedback tool; feedback availability on the hosted endpoint is not documented. Keyless mode documentation describes two available tools. Third-party catalogues were not needed to supplement the official list; mcp.tc describes tools as unavailable until sign-in, and other catalogue counts were not used as authoritative counts.",
+    "actions": [
+      {
+        "tool_name": "tavily_search",
+        "description": "Search current web information and return snippets and source URLs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required); search_depth: string (optional; enum 4); topic: string (optional; enum 2); time_range: string (optional; enum 4); start_date: string (optional); end_date: string (optional); max_results: number (optional); include_images: boolean (optional); include_image_descriptions: boolean (optional); include_raw_content: boolean (optional); include_domains: string[] (optional); exclude_domains: string[] (optional); country: string (optional); include_favicon: boolean (optional); exact_match: boolean (optional)",
+        "parameter_count": "15",
+        "source": "https://docs.tavily.com/documentation/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tavily_extract",
+        "description": "Extract content from one or more URLs as raw page content.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "urls: string[] (required); extract_depth: string (optional; enum 2); include_images: boolean (optional); format: string (optional; enum 2); include_favicon: boolean (optional); query: string (optional)",
+        "parameter_count": "6",
+        "source": "https://docs.tavily.com/documentation/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tavily_crawl",
+        "description": "Crawl a website from a URL with depth, breadth and filtering controls.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "url: string (required); max_depth: integer (optional); max_breadth: integer (optional); limit: integer (optional); instructions: string (optional); select_paths: string[] (optional); select_domains: string[] (optional); allow_external: boolean (optional); extract_depth: string (optional; enum 2); format: string (optional; enum 2); include_favicon: boolean (optional)",
+        "parameter_count": "11",
+        "source": "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts#L289-L356",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tavily_map",
+        "description": "Map a website structure and return URLs found from the base URL.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "url: string (required); max_depth: integer (optional); max_breadth: integer (optional); limit: integer (optional); instructions: string (optional); select_paths: string[] (optional); select_domains: string[] (optional); allow_external: boolean (optional)",
+        "parameter_count": "8",
+        "source": "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts#L359-L409",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tavily_research",
+        "description": "Run multi-source research and return a detailed synthesized response.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "input: string (required); model: string (optional; enum 3)",
+        "parameter_count": "2",
+        "source": "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts#L412-L428",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tavily_feedback",
+        "description": "Submit structured feedback on a search request or session to Tavily.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "session_id: string (optional, required when request_id absent); request_id: string (optional, required when session_id absent); agent_score: number|string (optional); human_score: number|string (optional); extra_scores: object[] (optional); comment: string (optional); response_delivered: string (optional); used_urls: string[] (optional); used_ids: string[] (optional); used_citations: string[] (optional); urls_scores: object[] (optional)",
+        "parameter_count": "11",
+        "source": "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts#L432-L533",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "4727 (approximate)",
+    "token_method": "[LOCAL CODE] Counted 18,907 characters in the tool-definition source block (src/index.ts lines 159–534) and divided by four; approximate source-text proxy, not a runtime tools/list serialization. No server initialize instructions were found.",
+    "human_can_agent_cannot": "Humans can access Tavily's API endpoints and account dashboard. The MCP exposes the documented search, extract, crawl, map, research, and code-defined feedback operations; no separate unsupported human operations were identified from the reviewed docs. API REST parameters were not treated as MCP parameters.",
+    "sources": [
+      "https://docs.tavily.com/documentation/mcp",
+      "https://docs.tavily.com/documentation/keyless",
+      "https://github.com/tavily-ai/tavily-mcp/blob/514e56cd0f76f3c4c0fb9e1347bc8e48f9028cdc/src/index.ts"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool descriptions recommend when to use Search and Research, constrain when to select news, and prescribe detailed feedback scoring. These are instructions in tool descriptions; local handlers do not enforce the scoring recommendations. Docs describe DEFAULT_PARAMETERS, and local code applies configured values over corresponding search arguments.",
+    "governance_promises": "Keyless documentation says successful keyed and keyless responses are identical. Hosted docs state X-Human-Id is hashed before processing or storing. Privacy policy says client query data may be used to improve future responses unless a contract says otherwise; it also says query information may be shared with third-party search index providers in limited situations when Tavily’s index cannot retrieve requested content.",
+    "promises_to_user": "Keyless access is described as free and requiring no account or API key for Search and Extract. Pricing page states the free plan has 1,000 API credits monthly.",
+    "comparison_with_server_logic": "Keyless feature availability and auth selection are documented; local code implements keyless mode and API-key headers. Human-ID hashing and privacy-policy data-use statements are vendor claims; the local MCP repository does not implement or verify those upstream processing practices. Feedback recommendations are prompt text, not server-enforced confirmation.",
+    "sources": [
+      "https://docs.tavily.com/documentation/keyless",
+      "https://docs.tavily.com/documentation/mcp",
+      "https://www.tavily.com/privacy",
+      "https://www.tavily.com/pricing"
+    ]
+  },
+  "contradictions": [
+    "Hosted product documentation lists five tools, while the official public local equivalent defines six, adding tavily_feedback. The documentation does not establish whether the hosted endpoint exposes that sixth tool.",
+    "The hosted documentation page supplied as the input documentation URL, https://docs.tavily.com/mcp, is a separate documentation-search MCP manifest, not the Tavily product server. Product tool evidence comes from https://docs.tavily.com/documentation/mcp."
+  ],
+  "observations_for_research": [
+    "The feedback tool’s description gives agents detailed scoring and provenance instructions, including a suggested record of results used and the final answer; this is a vendor-directed feedback channel.",
+    "OAuth scopes are generic OpenID scopes rather than tool-specific permissions; docs describe API-key selection as the mechanism determining which account usage is charged.",
+    "The local server’s DEFAULT_PARAMETERS override matching search arguments supplied by the agent, so an operator can determine effective request values through configuration."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked prepared links.json, links_check.txt, pages index and captured official docs/catalogue pages, plus local repository code pinned at the stated commit. Repository is local stdio implementation, not the hosted deployment itself. Official source contains six tool definitions; hosted docs list five, and hosted availability of tavily_feedback is unverified. Catalogue listings were checked for cross-reference but did not establish a more complete official tool list. Unofficial servers in evidence folder were excluded. Token figure is an approximate source-text estimate, not runtime serialized context. Exact MCP protocol version, hosted audit policy, token lifetime, and numeric keyless rate limit were not found in reviewed evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.1
+  }
+}

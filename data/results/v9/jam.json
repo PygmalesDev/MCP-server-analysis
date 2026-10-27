@@ -1,0 +1,618 @@
+{
+  "server": "jam",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.jam.dev/mcp",
+    "documentation_url_csv": "https://jam.dev/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/jamdotdev/skills",
+    "documentation_urls_used": [
+      "https://jam.dev/docs/mcp",
+      "https://jam.dev/docs/jam-mcp",
+      "https://jam.dev/docs/llms.txt",
+      "https://jam.dev/blog/meet-the-new-jam-mcp/",
+      "https://jam.dev/pricing",
+      "https://jam.dev/docs/ai-policy",
+      "https://jam.dev/docs/security",
+      "https://jam.dev/legal/privacy-policy",
+      "https://jam.dev/legal/terms",
+      "https://jam.dev/s/settings/mcp",
+      "https://github.com/jamdotdev/skills",
+      "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/docs/plugin.md",
+      "https://claude.com/connectors/jam",
+      "https://composio.dev/toolkits/jam",
+      "https://mcptest.io/servers/jam/"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public jamdotdev/skills repository contains agent skills, plugin configuration, and a documentation snapshot that identifies the hosted endpoint. It does not contain the deployed MCP server implementation or its tool schemas. Its own documentation says it connects to the hosted server.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "1b7ef5d4bf98afcb6f593ab97df948844093f7df",
+    "commit_date": "2026-10-26",
+    "implementation_language": "NOT FOUND for the server; the public auxiliary plugin repository contains Markdown, JSON, and JavaScript",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT for the public skills/plugin repository; server license NOT FOUND",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [],
+    "sources": [
+      "https://jam.dev/docs/jam-mcp",
+      "https://github.com/jamdotdev/skills",
+      "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/docs/plugin.md",
+      "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/LICENSE"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Jam's official pricing page lists debugging Jams via MCP in the Free plan ($0). The page does not state a separate MCP fee or MCP-specific usage limit.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Free: $0. Team: $14 per creator/month, billed yearly. Enterprise: custom pricing.",
+    "pricing_model_details": "The pricing page lists 30 Jams and 5 Recording Links on Free; Team includes unlimited Jams and 150 Recording Links. Team is priced per creator; the Enterprise price is not published on the page.",
+    "other_access_restrictions": "OAuth sign-in or a personal access token. Official plugin documentation says personal access tokens can be scoped and expire after 7 days, 30 days, 90 days, or one year. MCP mirrors existing Jam workspace and Jam permissions. The official pricing page lists MCP on Free. No MCP-specific rate or call limit was found.",
+    "restrictions_controlled_by": "Jam controls endpoint authorization; workspace admins control membership, roles, SSO, and available workspace features; users manage their own MCP connections and tokens.",
+    "sources": [
+      "https://jam.dev/pricing",
+      "https://jam.dev/docs/jam-mcp",
+      "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/docs/plugin.md",
+      "https://jam.dev/s/settings/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official hosted reference lists 30 tools for reading and searching Jam data, comments and reactions, folder and Jam organization, and Recording Links. The official plugin documentation also names submitFeedback, which is absent from the hosted list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reference describes text, JSON, image, and WebVTT results for specific operations, but does not publish complete MCP result schemas or error formats.",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp",
+        "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/docs/plugin.md"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool reference documents tools but does not describe MCP resources. The endpoint's 401 response prevented unauthenticated protocol discovery.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp",
+        "https://mcp.jam.dev/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-provided MCP prompts are documented. The repository distributes external agent skills, which are distinct from MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp",
+        "https://github.com/jamdotdev/skills"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The product captures console logs in Jam recordings and exposes them through a tool. MCP protocol logging notifications are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The getConsoleLogs tool returns captured Jam console data; MCP logging capability and format are not documented.",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling behavior is documented. getFrames samples video frames as an application tool operation, not documented MCP sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with a Bearer challenge pointing to protected-resource metadata and requesting scopes mcp:read and mcp:write. The metadata identifies https://api.jam.dev as authorization server and lists resource scopes mcp:read and mcp:write. Authorization-server metadata lists authorization_code and refresh_token grants, code response, S256 PKCE, token auth methods none and client_secret_post, DCR registration endpoint, introspection, and revocation. OAuth token lifetime was not found. Official plugin documentation separately states that Jam personal access tokens may expire after 7 days, 30 days, 90 days, or one year.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://mcp.jam.dev/.well-known/oauth-protected-resource\", scope=\"mcp:read mcp:write\"",
+      "post_interaction_context_structure": "HTTP 401 response: {\"error\":\"invalid_token\",\"error_description\":\"Access token is missing or invalid\"}. Protected resource metadata returned HTTP 200 and scopes_supported [\"mcp:read\",\"mcp:write\"]. Authorization server metadata returned HTTP 200 and scopes_supported [\"mcp:read\",\"mcp:write\",\"cli:read\",\"cli:write\"].",
+      "authorization_mechanism": "Metadata Doc; OAuth authorization code with PKCE S256; refresh tokens; Dynamic Client Registration endpoint https://api.jam.dev/oauth/register; token endpoint auth methods none and client_secret_post; supported scopes at the resource: mcp:read, mcp:write; authorization-server scope list: mcp:read, mcp:write, cli:read, cli:write; introspection https://api.jam.dev/oauth/introspect; revocation https://api.jam.dev/oauth/revoke. Token lifetime NOT FOUND. The endpoint-specific protected-resource path returned HTTP 404; OIDC configuration returned HTTP 404. OAuth values are from the supplied pre-fetched responses.",
+      "authorization_server": "https://api.jam.dev",
+      "sources": [
+        "https://mcp.jam.dev/mcp",
+        "https://mcp.jam.dev/.well-known/oauth-protected-resource",
+        "https://mcp.jam.dev/.well-known/oauth-protected-resource/mcp",
+        "https://api.jam.dev/.well-known/oauth-authorization-server",
+        "https://api.jam.dev/.well-known/openid-configuration",
+        "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/docs/plugin.md"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-enforced MCP elicitation mechanism is documented. The reference tells users to approve tool requests in their MCP client.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP Tasks are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted reference documents a single endpoint and standard client URL setup. It does not document URL parameters, request headers for restricting tools, or per-client toolset configuration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The repository's agent skills instruct agents to submit feedback through submitFeedback when a Jam skill, MCP tool, CLI command, or documentation is wrong. Its schema and server-side implementation are not published in the materials reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/skills/jam/SKILL.md"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications are documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://jam.dev/docs/jam-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public repository distributes agent skills and a bundled Cursor rule separately from the hosted server. These can provide behavioral guidance beyond the tool list. No server initialize instructions were published in the evidence reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://github.com/jamdotdev/skills",
+        "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/rules/jam-mcp-delete.mdc"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official docs distinguish read operations from writes and identify deleteJam, deleteComment, and deleteFolder as destructive. Tool annotations are not published. 2. Docs tell clients to approve tool requests; bundled Cursor guidance asks for user approval before destructive calls. Server-enforced confirmation parameters or elicitation were not documented. 3. OAuth scopes are mcp:read and mcp:write. Plugin docs say the server checks permissions for each workspace and Jam on every call and mirrors existing Jam permissions. PAT expiry options are 7 days, 30 days, 90 days, or one year. 4. One global endpoint is documented; no read-only mode, tool filters, sandbox, or regional variants found. 5. Docs say MCP exposes nothing users could not already see in Jam. AI policy says Jam takes steps to de-identify/anonymize content before third-party AI processing; no MCP-specific field masking is described. 6. Pagination/filter parameters are documented for some tools; getFrames overview grids contain 6 to 16 frames based on video length. No API rate limit or MCP call quota found. 7. Full parameter schemas and validation behavior are not published. 8. Plugin docs say creating a Recording Link can emit a webhook to workspace subscribers. Enterprise audit logs cover significant workspace actions, but MCP-specific log semantics and telemetry are not stated. 9. submitFeedback is named in official plugin docs and skills; it sends feedback to Jam's feedback store. No upsell result behavior found. 10. External skills provide workflow guidance; the delete confirmation rule is bundled for Cursor and is not documented as server-enforced. 11. No agent-memory behavior documented. 12. One hosted endpoint is documented. 13. No raw API, SQL, or script-execution tool appears in the official hosted list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Comments your agent posts show a label with the agent's name, such as Claude Code or Cursor, so readers can tell them apart from comments people wrote. Jam asks agents to post one comment when they find the cause of a problem or fix it, and to mention the Jam's creator so they get notified.",
+      "Start with small features or bug fixes. Tell your agent to propose a plan using Jam MCP and verify its plan before moving on to suggested edits.",
+      "When this skill, a Jam MCP tool, a `jam` command or a Jam doc was wrong, tell Jam so it can be fixed.",
+      "Call the `submitFeedback` MCP tool with `body`, `category` and `subject`.",
+      "`deleteJam`, `deleteComment` and `deleteFolder` remove data for good. Jam has no trash. Ask the user and wait for a yes before calling one, and never say the data can be recovered."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The hosted endpoint is documented as one MCP server with a flat tool list. Agent skills in the public repository are separate client-side materials.",
+    "sources": [
+      "https://jam.dev/docs/jam-mcp",
+      "https://jam.dev/docs/ai-policy",
+      "https://jam.dev/pricing",
+      "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/docs/plugin.md",
+      "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/skills/jam/SKILL.md",
+      "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/rules/jam-mcp-delete.mdc"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "31",
+    "action_count_comment": "The official hosted tool reference at https://jam.dev/docs/jam-mcp names 30 tools and states no total. Official plugin docs separately name submitFeedback; it is included as the 31st action because the official source confirms the tool name. No catalogue-only actions were added. Claude's connector directory lists six names, including getScreenshot and analyzeVideo, which differ from the hosted reference; Composio lists 16 proxy/toolkit actions, not a verified inventory of this endpoint. Other catalogues either had no observed inventory or could not authenticate to the server.",
+    "actions": [
+      {
+        "tool_name": "getDetails",
+        "description": "Get a Jam overview and suggested next tools.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getConsoleLogs",
+        "description": "Retrieve captured console logs; supports documented filters and pagination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "logLevel, limit, after (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getNetworkRequests",
+        "description": "List captured network requests; supports documented filters and response bodies.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "statusCode, contentType, host, method, limit, after, bodies (types and requiredness NOT PUBLISHED)",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getUserEvents",
+        "description": "Read recorded clicks, inputs, and page navigation.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getMetadata",
+        "description": "Read custom key-value metadata attached to a Jam.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getScreenshots",
+        "description": "Retrieve screenshots from screenshot Jams.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getVideoTranscript",
+        "description": "Retrieve the spoken transcript from a video Jam.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getVideoChapters",
+        "description": "Retrieve AI-generated chapter markers from a video Jam.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getFrames",
+        "description": "Retrieve sampled or timestamped video frames.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchJams",
+        "description": "Search workspace Jams by text and filters.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listMembers",
+        "description": "List workspace members.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listFolders",
+        "description": "List workspace folders.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createComment",
+        "description": "Add a Markdown comment, optionally mentioning a teammate.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "editComment",
+        "description": "Edit a comment written by the agent.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteComment",
+        "description": "Delete a comment and its attachments.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "addReaction",
+        "description": "Add a reaction to a comment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "removeReaction",
+        "description": "Remove a reaction previously added.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateJam",
+        "description": "Rename a Jam, edit its description, or move it.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteJam",
+        "description": "Delete a Jam; documentation says it cannot be restored.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createFolder",
+        "description": "Create a folder for organizing Jams.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateFolder",
+        "description": "Rename a folder.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteFolder",
+        "description": "Delete a folder and all Jams inside it.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listRecordingLinks",
+        "description": "List recording links with cursor pagination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getRecordingLink",
+        "description": "Retrieve a recording link by public ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listRecordingLinkJams",
+        "description": "List Jams recorded through a link.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createRecordingLink",
+        "description": "Create a reusable recording link.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateRecordingLink",
+        "description": "Edit recording-link settings by public ID.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteRecordingLink",
+        "description": "Revoke a recording link; collected Jams remain.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listRecordingUrls",
+        "description": "List connected recording domains.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getRecordingUrlVerifyLink",
+        "description": "Start connected-domain verification and return human confirmation link.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://jam.dev/docs/jam-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submitFeedback",
+        "description": "Send feedback about Jam tools, skills, CLI, or documentation.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/jamdotdev/jam-plugin/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/docs/plugin.md#L41-L52",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The deployed server's verbatim tool definitions and initialize instructions were not publicly available. The public repository is client-side plugin/skills code, not server code, so a tool-definition token estimate cannot be computed from it.",
+    "human_can_agent_cannot": "A person can record and submit new Jams using Jam's Chrome extension or iOS app; the hosted MCP reference lists no recording or Jam-upload tool. The MCP tool list is focused on reading/organizing existing Jam material, comments, reactions, and Recording Links.",
+    "sources": [
+      "https://jam.dev/docs/jam-mcp",
+      "https://jam.dev/pricing",
+      "https://claude.com/connectors/jam",
+      "https://composio.dev/toolkits/jam",
+      "https://github.com/jamdotdev/skills"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs recommend one Jam at a time to avoid context-window limits and instruct users to have agents propose and verify plans before edits. These are client/user recommendations, not documented server enforcement. The external Cursor rule instructs the agent to obtain approval before destructive tools.",
+    "governance_promises": "Docs say MCP mirrors existing Jam permissions and does not grant new access. Jam's AI policy states: “Third-party AI providers do not train their models on your customer data”; “Vendors may process data temporarily to enable AI features, but Jam limits how long they retain it”; and “Jam takes steps to de-identify and anonymize content before processing.”",
+    "promises_to_user": "Jam says users can disconnect tools in Settings → MCP and that MCP exposes no Jam data beyond what the user could already see in the Jam web or mobile apps.",
+    "comparison_with_server_logic": "Permission mirroring and per-call workspace/Jam permission checks are described in the official plugin documentation. AI data handling is a vendor policy, not behavior verified in public server code. Tool disconnection is a documented user control; destructive confirmation appears in client-side Cursor guidance and is not documented as a server-enforced check.",
+    "sources": [
+      "https://jam.dev/docs/jam-mcp",
+      "https://jam.dev/docs/ai-policy",
+      "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/docs/plugin.md",
+      "https://github.com/jamdotdev/skills/blob/1b7ef5d4bf98afcb6f593ab97df948844093f7df/rules/jam-mcp-delete.mdc"
+    ]
+  },
+  "contradictions": [
+    "The hosted official tool reference lists 30 tools but does not include submitFeedback. The official plugin documentation names submitFeedback and says it writes to Jam's feedback store using mcp:read; the deployed availability and schema are not published.",
+    "Claude's connector directory lists getScreenshot and analyzeVideo, while the current hosted reference lists getScreenshots, getVideoTranscript, getVideoChapters, and getFrames. The hosted official reference is used for actions; the Claude directory's alternate names are not added.",
+    "The protected-resource metadata lists mcp:read and mcp:write. The authorization-server metadata additionally lists cli:read and cli:write; those extra scopes are not listed as supported by the MCP resource.",
+    "The endpoint-specific protected-resource metadata URL returned HTTP 404, while the origin-level protected-resource metadata URL returned HTTP 200."
+  ],
+  "observations_for_research": [
+    "The interface combines read tools with write and destructive operations in one global endpoint; the listed OAuth scopes separate read and write access.",
+    "The official reference includes a tool that returns a human-opened confirmation link for connected recording-domain verification, while it does not document a server-side approval flow for destructive calls.",
+    "Client-side skills and rules distribute workflow and safety instructions separately from the hosted server's published tool reference."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the supplied links.json, links_check.txt, pages/ copies including script text, and local repository copy. The official repository is auxiliary plugin/skills material, not server implementation; therefore implementation details and schemas not documented by Jam remain unknown. The hosted reference provided tool names/descriptions but not complete schemas or annotations. Third-party catalogs were used only to compare names/counts; proxy/toolkit names were not treated as native server actions. OAuth facts use the supplied pre-fetched raw responses.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.1
+  }
+}

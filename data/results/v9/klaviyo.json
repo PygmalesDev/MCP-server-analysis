@@ -1,0 +1,3051 @@
+{
+  "server": "klaviyo",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.klaviyo.com/mcp",
+    "documentation_url_csv": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+      "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server",
+      "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+      "https://developers.klaviyo.com/en/docs/authenticate_",
+      "https://help.klaviyo.com/hc/en-us/articles/46281487065243",
+      "https://help.klaviyo.com/hc/en-us/articles/51798102561435",
+      "https://www.klaviyo.com/legal/ai-faqs",
+      "https://www.klaviyo.com/pricing",
+      "https://claude.com/connectors/klaviyo"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official Klaviyo MCP repository or package was found in the prepared evidence. Several unofficial/community implementations were found and excluded from the server analysis.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND; the current tool reference marks some individual tools Beta.",
+    "other_official_servers": [
+      "Klaviyo documents a local MCP server variant and its environment-variable configuration alongside the hosted server; its repository and endpoint were not identified. https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server",
+      "The Claude directory lists the hosted endpoint with include-mcp-app=true, a connector variant. https://claude.com/connectors/klaviyo"
+    ],
+    "sources": [
+      "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+      "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server",
+      "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+      "https://claude.com/connectors/klaviyo"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP fee or MCP-specific usage charge was found. Connection requires a Klaviyo account; the vendor does not state that MCP access itself is free.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Klaviyo lists a free plan with up to 250 active profiles and 500 monthly email sends; paid plans vary with product, profile count, and usage. The pricing page lists Email from $45/month and Email + SMS from $60/month for the displayed plan configuration.",
+    "pricing_model_details": "The MCP documentation does not identify MCP-specific per-call pricing, credits, quotas, or rate limits. Klaviyo’s underlying plans have product-specific profile, email, and messaging limits.",
+    "other_access_restrictions": "Remote setup is documented for Klaviyo users with Owner, Admin, or Manager roles. Beta tools require beta=true. read-only, user-generated-content, toolsets, core-tools-only, and pagination query parameters affect the hosted tool surface. Listed Claude and ChatGPT apps do not support query parameters.",
+    "restrictions_controlled_by": "Klaviyo controls account roles, available tools, and OAuth authorization; the user/client controls documented connection query parameters where the client supports them.",
+    "sources": [
+      "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server",
+      "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+      "https://www.klaviyo.com/pricing",
+      "https://help.klaviyo.com/hc/en-us/articles/360050759151"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference documents 274 named tools across local and remote availability; 272 are marked available on the hosted server. The table identifies read-only tools, tools that read user-generated content, remote availability, and Beta labels. The documentation states the hosted server loads a core set by default; the exact default core membership is not specified there.",
+      "pre_interaction_context_verbatim": "Report a task the model could not complete with the available tools, so Klaviyo can prioritize new capabilities. Only available if you consent to share prompt intent with Klaviyo.",
+      "post_interaction_context_structure": "Tool outputs and error formats are NOT FOUND in the reviewed official materials.",
+      "authorization_mechanism": "OAuth",
+      "authorization_server": "https://mcp.klaviyo.com",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official hosted-server documentation reviewed describes tools and configuration but does not establish whether MCP resources are exposed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official hosted-server documentation reviewed does not say whether MCP prompts are exposed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Klaviyo says users can use API Logs to inspect MCP-originated API calls, including whether data was read or written and the API calls and payloads. The reviewed sources do not specify log retention or whether every client exposes the same views.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "API Logs show calls, read/write status, and API calls and payloads, according to Klaviyo’s ChatGPT FAQ.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://help.klaviyo.com/hc/en-us/articles/46281487065243"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official evidence found for MCP sampling support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official evidence found for MCP roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with a Bearer challenge pointing to protected-resource metadata for /mcp. Metadata lists the endpoint as its own authorization server and bearer header transport. The authorization-server metadata advertises authorization_code and refresh_token grants, S256 PKCE, dynamic registration, and client_secret_basic, client_secret_post, and none token authentication. scopes_supported and token lifetime are absent from the provided metadata. Revocation endpoint is /token.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth authorization-code flow with query response mode; token and refresh-token grants advertised.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration. Raw values: endpoint HTTP 401; WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.klaviyo.com/.well-known/oauth-protected-resource/mcp\". Protected resource /mcp: {\"resource\":\"https://mcp.klaviyo.com/mcp\",\"authorization_servers\":[\"https://mcp.klaviyo.com\"],\"bearer_methods_supported\":[\"header\"]}. Authorization server: {\"issuer\":\"https://mcp.klaviyo.com\",\"authorization_endpoint\":\"https://mcp.klaviyo.com/authorize\",\"token_endpoint\":\"https://mcp.klaviyo.com/token\",\"registration_endpoint\":\"https://mcp.klaviyo.com/register\",\"response_types_supported\":[\"code\"],\"response_modes_supported\":[\"query\"],\"grant_types_supported\":[\"authorization_code\",\"refresh_token\"],\"token_endpoint_auth_methods_supported\":[\"client_secret_basic\",\"client_secret_post\",\"none\"],\"revocation_endpoint\":\"https://mcp.klaviyo.com/token\",\"code_challenge_methods_supported\":[\"S256\"],\"authorization_response_iss_parameter_supported\":true,\"client_id_metadata_document_supported\":true}. No scopes_supported or token lifetime field was provided.",
+      "authorization_server": "https://mcp.klaviyo.com",
+      "sources": [
+        "https://mcp.klaviyo.com/mcp",
+        "https://mcp.klaviyo.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.klaviyo.com/.well-known/oauth-authorization-server",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found for MCP Elicitation. The report_unsupported_task tool is documented as available only if the user consents to share prompt intent, but the docs do not describe a server-enforced elicitation flow.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official evidence found for MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted server supports query parameters including read-only, disable-tools-with-user-generated-content, core-tools-only, include-output-schemas, beta, toolsets, paginate-lists, and list-page-size. Defaults are documented for these settings; listed Claude and ChatGPT apps cannot set the query parameters.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration changes which tools are exposed and whether output schemas and paginated list results are returned.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "A report_unsupported_task tool lets a model report a task it could not complete, subject to consent to share prompt intent. General MCP error reporting formats are not documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "Report a task the model could not complete with the available tools, so Klaviyo can prioritize new capabilities. Only available if you consent to share prompt intent with Klaviyo.",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found for MCP subscription support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found for MCP progress tracking.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found for MCP cancellation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs include user-facing configuration and safety guidance for clients, including warnings about user-generated content that could be interpreted by an LLM.",
+      "pre_interaction_context_verbatim": "Be sure to carefully review each tool call to ensure your client is not acting on malicious instructions.",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official table labels tools Read Only or not and separately marks user-generated-content access. The reviewed page does not document MCP readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations. 2. read-only=true removes write-capable tools; the docs do not describe a general confirmation flow. One Beta tool, delete_agent_secret, says confirmation is required because dependent tools stop authenticating. Most advice to review calls is client-side guidance. 3. OAuth metadata lists no scopes_supported. Klaviyo account-role eligibility is Owner, Admin, or Manager; the docs do not state MCP token lifetime. The OAuth metadata advertises /token as revocation endpoint. 4. Query controls include read-only, user-generated-content disablement, beta, toolsets, core-tools-only, output schemas, and pagination. Docs describe local and remote variants; no production/sandbox or regional endpoints were found. 5. Klaviyo says the connector is intended for standard marketing data and not highly sensitive data such as card numbers; specific field masking is not documented. Some Beta secret-reading tools return masked values. 6. No MCP-specific call limits, quotas, or result truncation were found. paginate-lists and list-page-size control tool/list and other */list response pagination. 7. No MCP argument correction, coercion, or unknown-argument handling rules found. 8. Klaviyo API Logs can show MCP-originated calls and payloads; telemetry defaults and retention were not found. 9. report_unsupported_task invites reporting limitations to Klaviyo, only with consent to share prompt intent. No other feedback/rating/survey tool was identified. 10. No server-delivered skills identified. Docs give client-facing recommendations, including caution about malicious instructions in user-generated content. 11. No evidence that past agent behavior changes future tool availability or outputs. 12. The reviewed hosted endpoint is documented as one tool server; no nested servers or proxy architecture found. A separate local variant is documented. 13. No universal raw API request, SQL, script, or execution escape hatch identified in the 272 remote-listed tools.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Be sure to carefully review each tool call to ensure your client is not acting on malicious instructions.",
+      "Report a task the model could not complete with the available tools, so Klaviyo can prioritize new capabilities. Only available if you consent to share prompt intent with Klaviyo."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The hosted server is documented as one MCP endpoint with a tool list. The local server variant is separately documented; no hierarchy or proxying of sub-servers was found.",
+    "sources": [
+      "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+      "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server",
+      "https://help.klaviyo.com/hc/en-us/articles/46281487065243",
+      "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "190–272 documented remote tools, with an unquantified default core subset",
+    "action_count_comment": "The official tool list exists at https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools and contains 274 unique tool names across local and remote availability; 272 are marked available remotely. Of those, 82 are marked Beta and require beta=true; 190 non-Beta tools are remote-listed. The docs also say the hosted server loads a core set by default but do not identify the core set or its exact count, so the exact default count is not established. The Claude connector directory is third-party, publisher-verified, and advertises 27 tools; its visible names are a subset of the official list. No catalogue-only action was added.",
+    "actions": [
+      {
+        "tool_name": "add_categories_to_catalog_item",
+        "description": "Add categories to a catalog item.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_items_to_catalog_category",
+        "description": "Add items to a catalog category.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_profiles_to_list",
+        "description": "Add profiles to a list.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "assign_template_to_campaign_message",
+        "description": "Assign an email template to a campaign message.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_create_catalog_items",
+        "description": "Create catalog items in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_create_catalog_variants",
+        "description": "Create catalog variants in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_create_coupon_codes",
+        "description": "Create coupon codes in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_create_events",
+        "description": "Create events for multiple profiles in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_delete_catalog_items",
+        "description": "Delete catalog items in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_delete_catalog_variants",
+        "description": "Delete catalog variants in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_import_profiles",
+        "description": "Import profiles in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_suppress_profiles",
+        "description": "Suppress profiles from marketing in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_unsuppress_profiles",
+        "description": "Unsuppress profiles in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_update_catalog_items",
+        "description": "Update catalog items in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "bulk_update_catalog_variants",
+        "description": "Update catalog variants in bulk.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cancel_campaign_send",
+        "description": "Cancel or revert a campaign send.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "clone_email_template",
+        "description": "Clone an email template.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_agent_knowledge",
+        "description": "Create an agent knowledge entry.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_agent_skill",
+        "description": "Create an agent skill.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_agent_tool",
+        "description": "Create an agent tool.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_back_in_stock_subscription",
+        "description": "Create a back-in-stock subscription.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_brand_button",
+        "description": "Create a brand button.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_brand_color",
+        "description": "Create a brand color.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_brand_logo",
+        "description": "Create a brand logo.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_brand_social_group",
+        "description": "Create a brand social group.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_campaign",
+        "description": "Create a campaign.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_campaign_clone",
+        "description": "Clone a campaign.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_catalog_category",
+        "description": "Create a catalog category.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_catalog_item",
+        "description": "Create a catalog item.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_catalog_variant",
+        "description": "Create a catalog variant.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_coupon",
+        "description": "Create a coupon.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_coupon_code",
+        "description": "Create a coupon code.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_custom_metric",
+        "description": "Create a custom metric.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_customer_agent_response",
+        "description": "Create a customer agent response.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_dnd_email_template",
+        "description": "Create a drag-and-drop (DND) email template with a structured definition.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_email_template",
+        "description": "Create an HTML email template.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_flow",
+        "description": "Create a flow.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_form",
+        "description": "Create a form.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_list",
+        "description": "Create a list.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_or_update_profile",
+        "description": "Create or update a profile.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_profile",
+        "description": "Create a profile.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_push_token",
+        "description": "Create or update a push token.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_segment",
+        "description": "Create a segment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_sending_domain",
+        "description": "Create a sending domain.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_sending_domain_activation_job",
+        "description": "Create a sending domain activation job.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_sending_domain_verification_job",
+        "description": "Create a sending domain verification job.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_tag",
+        "description": "Create a tag.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_tag_group",
+        "description": "Create a tag group.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_template_preview_send_job",
+        "description": "Send a preview of a template to specified recipients.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_text_messaging_configuration",
+        "description": "Create a text messaging configuration.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_text_messaging_sender",
+        "description": "Create a text messaging sender.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_text_messaging_sender_registration",
+        "description": "Create a text messaging sender registration.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_translation",
+        "description": "Create a translation collection for a campaign variation, flow message, template, or universal content.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_universal_content",
+        "description": "Create a universal content block.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_webhook",
+        "description": "Create a webhook.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_agent_knowledge",
+        "description": "Delete an agent knowledge entry.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_agent_secret",
+        "description": "Delete an agent secret. Requires your confirmation, since tools that use the secret will stop authenticating.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_agent_skill",
+        "description": "Delete an agent skill.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_agent_tool",
+        "description": "Delete an agent tool.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_brand_button",
+        "description": "Delete a brand button.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_brand_color",
+        "description": "Delete a brand color.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_brand_logo",
+        "description": "Delete a brand logo.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_brand_social_group",
+        "description": "Delete a brand social group.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_campaign",
+        "description": "Delete a campaign.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_catalog_category",
+        "description": "Delete a catalog category.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_catalog_item",
+        "description": "Delete a catalog item.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_catalog_variant",
+        "description": "Delete a catalog variant.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_coupon",
+        "description": "Delete a coupon.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_coupon_code",
+        "description": "Delete a coupon code.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_custom_metric",
+        "description": "Delete a custom metric.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_email_template",
+        "description": "Delete an email template.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_flow",
+        "description": "Delete a flow.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_form",
+        "description": "Delete a form.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_list",
+        "description": "Delete a list.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_push_token",
+        "description": "Delete a push token.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_segment",
+        "description": "Delete a segment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_sending_domain",
+        "description": "Delete a sending domain.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_tag",
+        "description": "Delete a tag.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_tag_group",
+        "description": "Delete a tag group.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_translation",
+        "description": "Delete a translation collection and all its localized values.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_universal_content",
+        "description": "Delete a universal content block.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_webhook",
+        "description": "Delete a webhook.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_account_details",
+        "description": "Get details of your account.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_knowledge",
+        "description": "Get details of an agent knowledge entry.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_messages_for_customer_agent_conversation",
+        "description": "List messages in a customer agent conversation.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_secret",
+        "description": "Get details of an agent secret. Returns metadata and a masked value only.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_secrets",
+        "description": "List agent secrets. Returns metadata and masked values only.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_skill",
+        "description": "Get details of an agent skill.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_skills",
+        "description": "List agent skills.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_tool",
+        "description": "Get details of an agent tool.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_tools",
+        "description": "List agent tools.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_all_universal_content",
+        "description": "List universal content blocks.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_applications",
+        "description": "List OAuth applications.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_billing_usage",
+        "description": "Get details of a billing usage record.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_button",
+        "description": "Get details of a brand button.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_buttons",
+        "description": "List brand buttons.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_color",
+        "description": "Get details of a brand color.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_colors",
+        "description": "List brand colors.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_email_default",
+        "description": "Get details of a brand email default.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_email_defaults",
+        "description": "List brand email defaults.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_logo",
+        "description": "Get details of a brand logo.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_logos",
+        "description": "List brand logos.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_social_group",
+        "description": "Get details of a brand social group.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_social_groups",
+        "description": "List brand social groups.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_brand_voice",
+        "description": "Get the brand voice.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_create_catalog_items_job",
+        "description": "Get the status of a bulk catalog item create job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_create_catalog_items_jobs",
+        "description": "List bulk catalog item create jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_create_coupon_code_jobs",
+        "description": "List bulk coupon code create jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_create_coupon_codes_job",
+        "description": "Get the status of a bulk coupon code create job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_create_variants_job",
+        "description": "Get the status of a bulk catalog variant create job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_create_variants_jobs",
+        "description": "List bulk catalog variant create jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_delete_catalog_items_job",
+        "description": "Get the status of a bulk catalog item delete job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_delete_catalog_items_jobs",
+        "description": "List bulk catalog item delete jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_delete_variants_job",
+        "description": "Get the status of a bulk catalog variant delete job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_delete_variants_jobs",
+        "description": "List bulk catalog variant delete jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_import_profiles_job",
+        "description": "Get the status of a bulk profile import job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_import_profiles_jobs",
+        "description": "List bulk profile import jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_suppress_profiles_job",
+        "description": "Get the status of a bulk profile suppression job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_suppress_profiles_jobs",
+        "description": "List bulk profile suppression jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_unsuppress_profiles_job",
+        "description": "Get the status of a bulk profile unsuppression job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_unsuppress_profiles_jobs",
+        "description": "List bulk profile unsuppression jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_update_catalog_items_job",
+        "description": "Get the status of a bulk catalog item update job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_update_catalog_items_jobs",
+        "description": "List bulk catalog item update jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_update_variants_job",
+        "description": "Get the status of a bulk catalog variant update job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_bulk_update_variants_jobs",
+        "description": "List bulk catalog variant update jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign",
+        "description": "Get details of a campaign.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_message",
+        "description": "Get details of a campaign message.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_recipient_estimation",
+        "description": "Get the estimated number of recipients for a campaign.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_recipient_estimation_job",
+        "description": "Get the status of a campaign recipient estimation job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_report",
+        "description": "Get a report of your campaign performance.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_send_job",
+        "description": "Get the status of a campaign send job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaigns",
+        "description": "List your campaigns.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_catalog_categories",
+        "description": "List catalog categories.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_catalog_category",
+        "description": "Get details of a catalog category.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_catalog_item",
+        "description": "Get details of a catalog item.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_catalog_items",
+        "description": "List your catalog items.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_catalog_variant",
+        "description": "Get details of a catalog variant.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_catalog_variants",
+        "description": "List catalog variants.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_coupon",
+        "description": "Get details of a coupon.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_coupon_code",
+        "description": "Get details of a coupon code.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_coupon_codes",
+        "description": "List coupon codes.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_coupons",
+        "description": "List coupons.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_custom_metric",
+        "description": "Get details of a custom metric.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_custom_metrics",
+        "description": "List custom metrics.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_customer_agent",
+        "description": "Get details of a customer agent.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_download_for_event_bulk_export_job",
+        "description": "Get the download URL for an event bulk export job.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_download_for_profile_bulk_export_job",
+        "description": "Get the download URL for a profile bulk export job.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_email_template",
+        "description": "Get the details of an email template.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_event",
+        "description": "Get details of an event.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_event_bulk_export_job",
+        "description": "Get the status of an event bulk export job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_events",
+        "description": "List events.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flow",
+        "description": "Get details of a flow.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flow_action",
+        "description": "Get details of a flow action.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flow_message",
+        "description": "Get details of a flow message.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flow_report",
+        "description": "Get a report of your flow performance.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flows",
+        "description": "List your flows.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flows_triggered_by_list",
+        "description": "List flows triggered by a list.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flows_triggered_by_metric",
+        "description": "List flows triggered by a metric.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_flows_triggered_by_segment",
+        "description": "List flows triggered by a segment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_form",
+        "description": "Get details of a form.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_form_version",
+        "description": "Get details of a form version.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_forms",
+        "description": "List forms.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_image",
+        "description": "Get details of an image.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_images",
+        "description": "List images.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_list",
+        "description": "Get details of a list.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_lists",
+        "description": "List your lists.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_mapped_metric",
+        "description": "Get details of a mapped metric.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_mapped_metrics",
+        "description": "List mapped metrics.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_messaging_sender_registration_id_for_text_messaging_sender",
+        "description": "Get the registration ID for a text messaging sender.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_metric",
+        "description": "Get details of an event metric.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_metric_property",
+        "description": "Get details of a metric property.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_metrics",
+        "description": "List event metrics.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_profile",
+        "description": "Get details of a profile.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_profile_bulk_export_job",
+        "description": "Get the status of a profile bulk export job.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_profiles",
+        "description": "List your profiles.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_push_token",
+        "description": "Get details of a push token.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_push_tokens",
+        "description": "List push tokens.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_review",
+        "description": "Get details of a review.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_reviews",
+        "description": "List your reviews.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_secret_ids_for_agent_tool",
+        "description": "List the IDs of the secrets for an agent tool.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_secrets_for_agent_tool",
+        "description": "List the secrets for an agent tool.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_segment",
+        "description": "Get details of a segment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_segments",
+        "description": "List your segments.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_sending_domain",
+        "description": "Get details of a sending domain.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_sending_domains",
+        "description": "List sending domains.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_skills_for_agent_tool",
+        "description": "List the skills for an agent tool.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tag",
+        "description": "Get details of a tag.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tag_group",
+        "description": "Get details of a tag group.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tag_groups",
+        "description": "List tag groups.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tags",
+        "description": "List tags.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_text_messaging_configuration",
+        "description": "Get details of a text messaging configuration.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_text_messaging_sender",
+        "description": "Get details of a text messaging sender.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_text_messaging_sender_registration",
+        "description": "Get details of a text messaging sender registration.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_text_messaging_senders",
+        "description": "List text messaging senders.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tool_ids_for_agent_secret",
+        "description": "List the IDs of the agent tools that use a secret.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_tools_for_agent_secret",
+        "description": "List the agent tools that use a secret.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_translation",
+        "description": "Get a translation collection by ID, optionally including translated values per locale.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_translations",
+        "description": "List all translation collections. Supports filtering by channel, resource type, and resource ID.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_universal_content",
+        "description": "Get details of a universal content block.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_webhook",
+        "description": "Get details of a webhook.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_webhook_topic",
+        "description": "Get details of a webhook topic.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_webhook_topics",
+        "description": "List webhook topics.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_webhooks",
+        "description": "List webhooks.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_agent_knowledge",
+        "description": "List agent knowledge entries.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_billing_usage",
+        "description": "List billing usage records.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_customer_agent_conversations",
+        "description": "List customer agent conversations.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_email_templates",
+        "description": "List your email templates.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "merge_profiles",
+        "description": "Merge two profiles.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_customer_agent_skill_values",
+        "description": "Query customer agent skill values.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_customer_agent_values",
+        "description": "Query customer agent values.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_form_series",
+        "description": "Query form performance over time.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_form_values",
+        "description": "Query form performance values.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_metric_aggregates",
+        "description": "Query and aggregate event data associated with a metric.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_segment_series",
+        "description": "Query segment membership over time.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_segment_values",
+        "description": "Query segment membership values.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "refresh_campaign_recipient_estimation",
+        "description": "Refresh a campaign's recipient estimation.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_categories_from_catalog_item",
+        "description": "Remove categories from a catalog item.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_items_from_catalog_category",
+        "description": "Remove items from a catalog category.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_profiles_from_list",
+        "description": "Remove profiles from a list.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_tag_from_campaigns",
+        "description": "Remove a tag from campaigns.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_tag_from_flows",
+        "description": "Remove a tag from flows.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_tag_from_lists",
+        "description": "Remove a tag from lists.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remove_tag_from_segments",
+        "description": "Remove a tag from segments.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "render_email_template",
+        "description": "Render an email template with provided context.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "report_unsupported_task",
+        "description": "Report a task the model could not complete with the available tools, so Klaviyo can prioritize new capabilities. Only available if you consent to share prompt intent with Klaviyo.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "request_profile_deletion",
+        "description": "Request deletion of a profile's data.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "retrieve_customer_agent_conversation",
+        "description": "Get details of a customer agent conversation.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_campaign",
+        "description": "Send a campaign to its configured audience.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "subscribe_profile_to_marketing",
+        "description": "Subscribe a profile to marketing for a given channel and list.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tag_campaigns",
+        "description": "Add a tag to campaigns.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tag_flows",
+        "description": "Add a tag to flows.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tag_lists",
+        "description": "Add a tag to lists.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tag_segments",
+        "description": "Add a tag to segments.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unsubscribe_profile_from_marketing",
+        "description": "Unsubscribe a profile from marketing for a given channel and list.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_agent_knowledge",
+        "description": "Update an agent knowledge entry.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_agent_skill",
+        "description": "Update an agent skill.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_agent_tool",
+        "description": "Update an agent tool.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_brand_button",
+        "description": "Update a brand button.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_brand_color",
+        "description": "Update a brand color.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_brand_email_default",
+        "description": "Update a brand email default.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_brand_logo",
+        "description": "Update a brand logo.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_brand_social_group",
+        "description": "Update a brand social group.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_brand_voice",
+        "description": "Update the brand voice.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_campaign",
+        "description": "Update a campaign.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_campaign_message",
+        "description": "Update a campaign message.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_catalog_category",
+        "description": "Update a catalog category.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_catalog_item",
+        "description": "Update a catalog item.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_catalog_variant",
+        "description": "Update a catalog variant.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_categories_for_catalog_item",
+        "description": "Update the categories for a catalog item.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_coupon",
+        "description": "Update a coupon.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_coupon_code",
+        "description": "Update a coupon code.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_custom_metric",
+        "description": "Update a custom metric.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_customer_agent",
+        "description": "Update a customer agent.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_customer_agent_conversation",
+        "description": "Update a customer agent conversation.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_dnd_email_template",
+        "description": "Update an existing drag-and-drop (DND) email template.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_email_template",
+        "description": "Update an HTML email template.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_flow",
+        "description": "Update a flow's status.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_flow_action",
+        "description": "Update a flow action.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_image",
+        "description": "Update an image's metadata.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_image_for_campaign_message",
+        "description": "Update the image associated with a campaign message.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_items_for_catalog_category",
+        "description": "Update the items in a catalog category.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_list",
+        "description": "Update a list.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_mapped_metric",
+        "description": "Update a mapped metric.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_profile",
+        "description": "Update a profile.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_review",
+        "description": "Update a review.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_segment",
+        "description": "Update a segment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_tag",
+        "description": "Update a tag.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_tag_group",
+        "description": "Update a tag group.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_translation",
+        "description": "Update translation settings (locales) and/or import translated values for a resource.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_universal_content",
+        "description": "Update a universal content block.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_webhook",
+        "description": "Update a webhook.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_image_from_url",
+        "description": "Upload image from a URL.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim initialize/tool-schema payload was available; the official table provides tool names, descriptions, and flags but not input schemas or initialize instructions.",
+    "human_can_agent_cannot": "The agent cannot perform operations absent from the MCP tool list; Klaviyo’s broader product and APIs include additional capabilities. The vendor states that this connector does not grant AI systems account modification in its Customer Success/Support engagement context; that statement is scoped to that service context. The hosted server tool list separately includes write tools. https://www.klaviyo.com/legal/ai-faqs https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+    "sources": [
+      "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+      "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server",
+      "https://claude.com/connectors/klaviyo",
+      "https://www.klaviyo.com/legal/ai-faqs"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Klaviyo instructs clients: “Be sure to carefully review each tool call to ensure your client is not acting on malicious instructions.” Its ChatGPT FAQ advises users to “always have a human in the loop to review and fact-check AI-generated content.” These are guidance to clients/users; no general server-enforced confirmation mechanism is documented.",
+    "governance_promises": "Klaviyo says the connector is “not intended to access highly sensitive data like credit card numbers or other highly sensitive PII.” It says API Logs can show tool calls, read/write status, and API calls and payloads. For ChatGPT, data retention is governed by OpenAI. For Claude, Klaviyo says processing is governed by the customer's agreements with Anthropic.",
+    "promises_to_user": "Klaviyo describes the server as connecting AI clients to its APIs and account data. For its Customer Success/Support engagement use, Klaviyo says MCP access is limited to data necessary for the requested service, does not permit account modification or automated actions, and is governed by applicable contractual and security commitments.",
+    "comparison_with_server_logic": "The documented read-only query parameter and tool availability flags back the ability to restrict writes. User-generated-content controls disable specific tools, while the malicious-instruction warning remains client guidance. API Logs provide some visibility, but logging defaults and retention are unspecified. The Customer Success/Support read-only statement is scoped to an active support engagement; the public hosted tool list includes write actions, so it does not describe the hosted server generally.",
+    "sources": [
+      "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+      "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server",
+      "https://help.klaviyo.com/hc/en-us/articles/46281487065243",
+      "https://help.klaviyo.com/hc/en-us/articles/51798102561435",
+      "https://www.klaviyo.com/legal/ai-faqs"
+    ]
+  },
+  "contradictions": [
+    "The official tool reference says the hosted server loads a core set by default, while its query-parameter table gives core-tools-only a default of false and says disabling the parameter loads the full listed set. The exact default core set and count are not identified. https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server",
+    "The Klaviyo AI FAQ says MCP in the Customer Success/Support engagement context does not allow account modification or automated actions, while the public hosted tool reference lists write-capable tools. The FAQ statement is limited to its support-engagement context and should not be read as a claim about the general hosted endpoint. https://www.klaviyo.com/legal/ai-faqs https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools",
+    "The publisher-verified Claude connector directory advertises 27 tools, whereas the official tool reference documents 272 tools marked remotely available across its full and Beta surface. Claude's visible list is a subset; its page says 'Show all 27 tools'. https://claude.com/connectors/klaviyo https://developers.klaviyo.com/en/docs/klaviyo_mcp_server_available_tools"
+  ],
+  "observations_for_research": [
+    "The official tool reference distinguishes read-only status, user-generated-content access, and remote availability as separate tool properties.",
+    "The endpoint’s OAuth metadata supports dynamic registration and PKCE but publishes no scopes_supported list; toolsets can filter tools by required API scopes.",
+    "The tool reference labels 82 remote-listed tools Beta and the connection guide provides query parameters for read-only mode, user-generated-content exclusion, tool filtering, and pagination."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/, links_check.txt, and code/GITHUB_COMMITS.txt first. No official code/repository or package was listed. The hosted endpoint and /install returned 401 in the prepared evidence; OAuth metadata was supplied in the prompt and used without refetching. The official tool reference HTML was inspected to extract all 274 distinct names and their remote, read-only, and Beta flags; actions.json contains the 272 remotely marked tools. Pricing, AI FAQ, and help-center sources were searched for access and data governance. Unofficial community implementations were found in the evidence folder and excluded. NOT FOUND items were checked in the official docs, prepared endpoint evidence, and OAuth metadata.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.3
+  }
+}

@@ -1,0 +1,985 @@
+{
+  "server": "ticket-tailor",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.tickettailor.ai/mcp",
+    "documentation_url_csv": "https://developers.tickettailor.com/docs/mcp/",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://developers.tickettailor.com/docs/mcp/",
+      "https://developers.tickettailor.com/docs/mcp/available-tools/",
+      "https://developers.tickettailor.com/docs/mcp/authentication/",
+      "https://developers.tickettailor.com/docs/mcp/usage-examples/",
+      "https://developers.tickettailor.com/docs/mcp/error-handling/",
+      "https://developers.tickettailor.com/docs/mcp/troubleshooting/",
+      "https://www.tickettailor.com/features/ai-mcp-connector",
+      "https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent",
+      "https://www.tickettailor.com/pricing",
+      "https://help.tickettailor.com/en/articles/6731528-how-much-does-ticket-tailor-cost-and-how-will-i-be-charged",
+      "https://www.tickettailor.com/legal/terms-and-conditions",
+      "https://www.tickettailor.com/legal/gdpr/",
+      "https://claude.com/marketplace/connectors/ticket-tailor"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No public Ticket Tailor MCP repository was found in the prepared repository list or official documentation. The official docs describe hosted endpoints and do not identify public server code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://mcp.tickettailor.ai/sse — official SSE endpoint documented alongside /mcp; the docs do not describe a separate tool set."
+    ],
+    "sources": [
+      "https://developers.tickettailor.com/docs/mcp/",
+      "https://developers.tickettailor.com/docs/mcp/available-tools/",
+      "https://claude.com/marketplace/connectors/ticket-tailor"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Ticket Tailor states that AI Assist is free for Ticket Tailor customers. A Claude Pro subscription is required to use the connector through Claude. Issuing tickets through MCP costs one Ticket Tailor usage credit per ticket, including free tickets.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Ticket Tailor advertises free ticketing within stated fair-use limits, pay-as-you-go pricing from £0.60 per paid ticket plus VAT, and prepaid pricing from £0.22 per ticket plus VAT. Payment processor fees may also apply.",
+    "pricing_model_details": "The vendor pricing page describes per-ticket usage pricing and prepaid ticket credits. Official MCP documentation says issuing a ticket via MCP costs one credit per ticket, including a free ticket. The MCP connector itself is described as free.",
+    "other_access_restrictions": "A Ticket Tailor account and API key are required. The vendor help article recommends enabling “Hide personal data from responses”; it warns that otherwise personal data is passed to the AI model. Claude users need Claude Pro.",
+    "restrictions_controlled_by": "Ticket Tailor controls account/API access and product pricing; the customer controls API-key creation and the personal-data hiding setting; the AI client controls its subscription requirements.",
+    "sources": [
+      "https://www.tickettailor.com/features/ai-mcp-connector",
+      "https://developers.tickettailor.com/docs/mcp/authentication/",
+      "https://developers.tickettailor.com/docs/mcp/available-tools/",
+      "https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent",
+      "https://www.tickettailor.com/pricing",
+      "https://help.tickettailor.com/en/articles/6731528-how-much-does-ticket-tailor-cost-and-how-will-i-be-charged"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted MCP server exposes tools for event, ticketing, sales, customer, membership, and reporting operations. The official tool reference describes capabilities but does not enumerate machine tool names or schemas. The Anthropic connector directory lists 65 tools and gives their names; the collected listing exposed all 65 names.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND. Official error-handling documentation describes HTTP-style error cases (401, 403, 400, 422, 404, 409), but does not specify the MCP result envelope.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/available-tools/",
+        "https://developers.tickettailor.com/docs/mcp/error-handling/",
+        "https://claude.com/marketplace/connectors/ticket-tailor"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed official MCP documentation describes tools and account operations but does not document MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/",
+        "https://developers.tickettailor.com/docs/mcp/available-tools/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt definitions are described in the reviewed official MCP documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed MCP docs do not describe server-side MCP call logging, audit records, or customer-facing logs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/",
+        "https://www.tickettailor.com/legal/gdpr/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling behavior is documented in the reviewed official MCP materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots behavior is documented in the reviewed official MCP materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth metadata advertises authorization_code and refresh_token grants; the docs call the flow OAuth 2.1.",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate identifying its protected-resource metadata URL. The supplied protected-resource document advertises bearer tokens in the Authorization header and identifies the endpoint host as the resource and authorization server. The authorization-server metadata advertises issuer https://mcp.tickettailor.ai, authorization endpoint /authorize, token endpoint /token, registration endpoint /register, scope mcp.access, authorization_code and refresh_token grants, PKCE S256, and token authentication methods client_secret_basic, client_secret_post, and none. The metadata does not publish token lifetime. Official docs say to generate a Ticket Tailor API key and enter it in the OAuth prompt.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Bearer token in HTTP Authorization header, as advertised by the protected-resource metadata.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration. Raw supplied values: endpoint POST HTTP 401; WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.tickettailor.ai/.well-known/oauth-protected-resource\". Protected resource HTTP 200: {\"resource\":\"https://mcp.tickettailor.ai\",\"authorization_servers\":[\"https://mcp.tickettailor.ai\"],\"bearer_methods_supported\":[\"header\"]}. Path-suffixed protected-resource URL returned HTTP 404. Authorization-server metadata HTTP 200 advertises issuer https://mcp.tickettailor.ai; authorization_endpoint https://mcp.tickettailor.ai/authorize; token_endpoint https://mcp.tickettailor.ai/token; protected_resources [\"https://mcp.tickettailor.ai\"]; registration_endpoint https://mcp.tickettailor.ai/register; scopes_supported [\"mcp.access\"]; response_types_supported [\"code\"]; response_modes_supported [\"query\"]; grant_types_supported [\"authorization_code\",\"refresh_token\"]; token_endpoint_auth_methods_supported [\"client_secret_basic\",\"client_secret_post\",\"none\"]; revocation_endpoint https://mcp.tickettailor.ai/token; code_challenge_methods_supported [\"S256\"]; authorization_response_iss_parameter_supported true; client_id_metadata_document_supported false. OpenID configuration returned HTTP 404. Metadata does not state token lifetime.",
+      "authorization_server": "https://mcp.tickettailor.ai",
+      "sources": [
+        "https://mcp.tickettailor.ai/mcp",
+        "https://mcp.tickettailor.ai/.well-known/oauth-protected-resource",
+        "https://mcp.tickettailor.ai/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.tickettailor.ai/.well-known/oauth-authorization-server",
+        "https://mcp.tickettailor.ai/.well-known/openid-configuration",
+        "https://developers.tickettailor.com/docs/mcp/authentication/"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation or server-enforced confirmation flow is described in the reviewed official docs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/",
+        "https://developers.tickettailor.com/docs/mcp/available-tools/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP task protocol behavior is documented in the reviewed official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The vendor documents both https://mcp.tickettailor.ai/mcp and https://mcp.tickettailor.ai/sse as client configuration endpoints. Account access is authenticated using an API key entered through the OAuth prompt.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/",
+        "https://developers.tickettailor.com/docs/mcp/authentication/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official docs explain common authentication, validation, and resource error scenarios using HTTP status codes and troubleshooting suggestions. MCP error payload structure is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP error categories and suggested resolutions are documented; exact response bodies are not.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/error-handling/",
+        "https://developers.tickettailor.com/docs/mcp/troubleshooting/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription protocol behavior is documented in the reviewed official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications are documented in the reviewed official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation behavior is documented in the reviewed official materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted connector is available over two documented endpoint paths, /mcp and /sse. Vendor docs also provide example user requests, but no initialize instructions or server-provided instruction text was available in the collected evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.tickettailor.com/docs/mcp/",
+        "https://developers.tickettailor.com/docs/mcp/usage-examples/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official docs describe reads and writes, including create/update/delete operations. No tool annotation values (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are published. 2. No server-enforced confirmation, preview/confirm, elicitation, or approval flow is documented. Usage examples suggest actions but do not establish enforcement. 3. OAuth metadata advertises scope mcp.access only; product docs say the API key is entered in the OAuth prompt. Inheritance of Ticket Tailor user roles, admin toggles, client allowlists, redirect approval, token lifetime, and revocation behavior are not documented; metadata lists /token as revocation endpoint. 4. The docs list /mcp and /sse endpoints, but no read-only mode, toolset filter, query-free mode, environment switch, or regional endpoint. 5. The help article recommends “Hide personal data from responses” to prevent personal data being passed to the AI model. The docs do not specify which fields are masked or whether this is server-side. 6. Issuing tickets through MCP costs one usage credit per ticket, including free tickets. No MCP-specific rate limit, bulk cap, time-range cap, or result truncation is documented. 7. Docs identify required-field/type validation and business-logic errors but do not describe coercion, unknown-argument handling, alias correction, or parameter overrides. 8. No MCP-specific logging, audit trail, or telemetry behavior is documented. 9. No feedback, rating, survey, or vendor-reporting tools appear in the collected 65-name listing. 10. No server-delivered skills or initialize instructions were found; docs give user examples and recommendations. 11. No MCP memory or state affecting future tool availability is documented. 12. One hosted server is documented with two endpoint paths; no hierarchy, proxying, or nested agent is documented. 13. No raw API request, arbitrary SQL, script execution, or equivalent escape-hatch tool appears in the collected tool names.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "IMPORTANT: issuing tickets via the MCP is charged at one credit per issued ticket, even if the ticket is free."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "",
+    "sources": [
+      "https://developers.tickettailor.com/docs/mcp/available-tools/",
+      "https://developers.tickettailor.com/docs/mcp/authentication/",
+      "https://developers.tickettailor.com/docs/mcp/error-handling/",
+      "https://developers.tickettailor.com/docs/mcp/",
+      "https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent",
+      "https://mcp.tickettailor.ai/.well-known/oauth-protected-resource",
+      "https://mcp.tickettailor.ai/.well-known/oauth-authorization-server",
+      "https://claude.com/marketplace/connectors/ticket-tailor"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "65",
+    "action_count_comment": "The official tool reference exists at https://developers.tickettailor.com/docs/mcp/available-tools/ and names capability groups, not machine tool identifiers or a total. The Anthropic connector directory is a third-party listing, marked Anthropic verified, and states “Show all 65 tools”; its collected page exposes 65 names. All 65 are recorded in actions.json as third-party names. The official reference describes membership types, issued memberships, and membership redemptions, but the collected third-party name list does not expose corresponding membership tool names. The Zapier listing shows a partial, human-readable set of actions rather than a stated complete count.",
+    "actions": [
+      {
+        "tool_name": "bundle_create",
+        "description": "Create bundle.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "bundle_delete",
+        "description": "Delete bundle.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "bundle_update",
+        "description": "Update bundle.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "check_in_create",
+        "description": "Create check in.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "check_ins_get",
+        "description": "Get check ins.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "checkout_form_element_by_id_get",
+        "description": "Get checkout form element by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "checkout_form_element_update",
+        "description": "Update checkout form element.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "checkout_form_elements_get",
+        "description": "Get checkout form elements.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "checkout_forms_get",
+        "description": "Get checkout forms.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "discount_by_id_get",
+        "description": "Get discount by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "discount_create",
+        "description": "Create discount.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "discount_delete",
+        "description": "Delete discount.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "discount_update",
+        "description": "Update discount.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "discounts_get",
+        "description": "Get discounts.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_by_id_get",
+        "description": "Get event by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_occurrence_by_id_get",
+        "description": "Get event occurrence by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_occurrence_create",
+        "description": "Create event occurrence.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_occurrence_delete",
+        "description": "Delete event occurrence.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_occurrence_update",
+        "description": "Update event occurrence.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_occurrences_get",
+        "description": "Get event occurrences.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_series_by_id_get",
+        "description": "Get event series by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_series_create",
+        "description": "Create event series.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_series_delete",
+        "description": "Delete event series.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_series_get",
+        "description": "Get event series.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_series_status_change",
+        "description": "Change event series status.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "event_series_update",
+        "description": "Update event series.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "events_get",
+        "description": "Get events.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "hold_by_id_get",
+        "description": "Get hold by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "hold_create",
+        "description": "Create hold.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "hold_delete",
+        "description": "Delete hold.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "hold_update",
+        "description": "Update hold.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "holds_get",
+        "description": "Get holds.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "issued_ticket_by_id_get",
+        "description": "Get issued ticket by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "issued_ticket_create",
+        "description": "Create issued ticket.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "issued_ticket_void",
+        "description": "Void issued ticket.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "issued_tickets_get",
+        "description": "Get issued tickets.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "order_by_id_get",
+        "description": "Get order by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "order_confirm_payment",
+        "description": "Access order confirm.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "order_update",
+        "description": "Update order.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "orders_get",
+        "description": "Get orders.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "override_create",
+        "description": "Create override.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "override_update",
+        "description": "Update override.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "overrides_get",
+        "description": "Get overrides.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "overview_get",
+        "description": "Get overview.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "ping_get",
+        "description": "Get ping.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "product_by_id_get",
+        "description": "Get product by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "product_create",
+        "description": "Create product.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "product_delete",
+        "description": "Delete product.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "product_update",
+        "description": "Update product.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "products_get",
+        "description": "Get products.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "store_get",
+        "description": "Get store.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "store_list",
+        "description": "List store.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "store_update",
+        "description": "Update store.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "ticket_type_create",
+        "description": "Create ticket type.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "ticket_type_delete",
+        "description": "Delete ticket type.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "ticket_type_update",
+        "description": "Update ticket type.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "voucher_by_id_get",
+        "description": "Get voucher by id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "voucher_code_void",
+        "description": "Void voucher code.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "voucher_codes_get",
+        "description": "Get voucher codes.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "voucher_create",
+        "description": "Create voucher.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "voucher_delete",
+        "description": "Delete voucher.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "voucher_update",
+        "description": "Update voucher.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "vouchers_get",
+        "description": "Get vouchers.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "waitlist_signup_delete",
+        "description": "Delete waitlist signup.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "waitlist_signups_get",
+        "description": "Get waitlist signups.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/ticket-tailor",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim complete tool definitions/initialize instructions were available. The third-party directory gives names only, so the tool-definition plus instruction character count cannot be computed.",
+    "human_can_agent_cannot": "The official MCP reference describes broad API-endpoint access, but the published official docs do not give a complete MCP schema or precise comparison against the full Ticket Tailor interface/API. The Anthropic directory's listed 65 tools omit visible membership tool names, although the official MCP reference describes membership types, issued memberships, and redemptions. This is a difference in the published evidence, not proof that those operations are unavailable at runtime. https://developers.tickettailor.com/docs/mcp/available-tools/ ; https://claude.com/marketplace/connectors/ticket-tailor",
+    "sources": [
+      "https://developers.tickettailor.com/docs/mcp/available-tools/",
+      "https://claude.com/marketplace/connectors/ticket-tailor",
+      "https://zapier.com/mcp/ticket-tailor"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The vendor help article recommends: “We'd recommend keeping 'Hide personal data from responses' switched on, otherwise personal data will be passed to the AI model you're using.” It also instructs the user to create an API key and enter it at authentication. The docs do not say these recommendations are enforced by the MCP server.",
+    "governance_promises": "The vendor GDPR page states that Ticket Tailor acts as a data processor for attendee data and says it “won’t do anything with your attendees’ data other than what you need us to in order to provide our service.” The AI connector page says users remain in control and recommends hiding personal information. The help article warns that otherwise personal data is passed to the AI model.",
+    "promises_to_user": "The AI connector page describes the connector as a no-code way to connect Ticket Tailor data to AI tools and states the MCP connector is free for Ticket Tailor customers. It says users can ask questions about box-office data and request changes through natural-language interaction.",
+    "comparison_with_server_logic": "No public implementation code was found to verify these claims. The privacy recommendation is documented as a user setting, while the reviewed MCP docs do not describe what fields it hides or demonstrate server-side enforcement. GDPR statements concern the service's data-processing role and do not specify MCP-call logging, retention, or AI-model handling beyond the help article's warning.",
+    "sources": [
+      "https://www.tickettailor.com/legal/gdpr/",
+      "https://www.tickettailor.com/features/ai-mcp-connector",
+      "https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent",
+      "https://developers.tickettailor.com/docs/mcp/"
+    ]
+  },
+  "contradictions": [
+    "The official tool reference says the MCP server exposes access to all Ticket Tailor API endpoints as tools and lists membership types, issued memberships, and membership redemptions. The Anthropic connector directory states 65 tools, but its collected full name list contains no membership tool names. The available evidence does not establish whether this reflects an incomplete directory listing or a deployed-server difference.",
+    "The official docs describe OAuth 2.1 authentication with a Ticket Tailor API key entered in an OAuth prompt. The endpoint's OAuth metadata separately advertises standard authorization-code and refresh-token grants, Dynamic Client Registration, and scope mcp.access; it does not mention API keys as OAuth scopes or token credentials."
+  ],
+  "observations_for_research": [
+    "The OAuth metadata publishes one broad scope, mcp.access, rather than operation-specific scopes; available evidence does not show how this relates to the Ticket Tailor API key's permissions.",
+    "The vendor documents personal-data hiding as a client/account setting and recommends enabling it before connecting an AI client, but does not document server-side field-level behavior.",
+    "The public tool reference communicates capability categories and an explicit per-issued-ticket usage charge, while exact schemas and annotations are not published there."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages directory (including script-extracted content), and local code directory/commit inventory first. No official public repository or source code was listed. Official docs provide categories and capabilities but not exact tool names or schemas. The Anthropic connector directory is third-party evidence despite its publisher verification and exposes the complete listed set of 65 names; Zapier provides only a partial human-readable action listing. MCP endpoint requests were 401; OAuth metadata and 404 responses were used as supplied. The endpoint's /sse route is documented by the vendor. No unofficial server evidence was included.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.1
+  }
+}

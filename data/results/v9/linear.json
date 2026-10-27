@@ -1,0 +1,666 @@
+{
+  "server": "linear",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.linear.app/mcp",
+    "documentation_url_csv": "https://linear.app/docs/mcp",
+    "addressing": "global",
+    "repository_url": "https://github.com/linear/linear",
+    "documentation_urls_used": [
+      "https://linear.app/docs/mcp",
+      "https://linear.app/integrations/slack",
+      "https://linear.app/changelog/page/5",
+      "https://linear.app/changelog/2026-02-05-linear-mcp-for-product-management",
+      "https://linear.app/changelog/2026-07-02-initiative-properties",
+      "https://linear.app/pricing",
+      "https://linear.app/terms",
+      "https://linear.app/privacy",
+      "https://linear.app/dpa",
+      "https://linear.app/legal/ai-addendum",
+      "https://glama.ai/mcp/connectors/app.linear/linear"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public linear/linear repository is Linear’s API SDK and related developer tooling, not the hosted MCP server. Its contents do not establish the hosted server’s implementation or tool schemas.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "618a737a4e6aa279b7853c650f79f209a5142bbc",
+    "commit_date": "2026-10-21",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "The public SDK repository is MIT licensed; hosted MCP server license is NOT FOUND.",
+    "release_status": "Official docs describe the hosted server as available; no beta label found.",
+    "other_official_servers": [
+      "https://mcp.linear.app/mcp/readonly — official read-only variant; docs say it exposes only read tools.",
+      "https://mcp.linear.app/sse — legacy SSE endpoint described as deprecated; the collected endpoint returned 404."
+    ],
+    "sources": [
+      "https://linear.app/docs/mcp",
+      "https://linear.app/integrations/slack",
+      "https://github.com/linear/linear",
+      "https://github.com/linear/linear/blob/618a737a4e6aa279b7853c650f79f209a5142bbc/LICENSE"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP charge or MCP-specific fee was found in the official material reviewed. The pricing page lists MCP access but does not specify a separate MCP price.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Free plan: $0; Basic: $10 per user/month billed yearly; Business: $16 per user/month billed yearly; Enterprise: custom annual billing.",
+    "pricing_model_details": "Plans include different product features and limits. The pricing page lists MCP access but no MCP-specific usage quota or per-call price.",
+    "other_access_restrictions": "Users authenticate to Linear. The standard endpoint grants read-write access by default; the /readonly endpoint and read-only OAuth scope provide read-only access. The docs describe Okta-managed authorization for supported external clients.",
+    "restrictions_controlled_by": "Linear controls hosted endpoint and OAuth behavior; organization administrators manage Linear permissions and may configure enterprise-managed authentication.",
+    "sources": [
+      "https://linear.app/docs/mcp",
+      "https://linear.app/pricing",
+      "https://linear.app/terms"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted endpoint exposes tools for finding, creating, and updating Linear objects. Official material names a subset; an independent inspection reports 35 tools as of 2026-06-13. The actions file lists identified names and records the coverage limitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results and error structures are not documented in the reviewed official pages.",
+      "sources": [
+        "https://linear.app/docs/mcp",
+        "https://linear.app/integrations/slack",
+        "https://glama.ai/mcp/connectors/app.linear/linear"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The changelog says Linear added broad support for loading Linear resources through URLs. Whether this uses MCP Resources or URL-aware tools is not specified in the reviewed material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/changelog/2026-02-05-linear-mcp-for-product-management"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documentation provides example prompts for users, but does not establish that the server exposes MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP-specific logging or audit behavior was documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp",
+        "https://linear.app/privacy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found describing MCP sampling support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found describing MCP roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth 2.1 with dynamic client registration is documented.",
+      "description_what_how": "Endpoint POST returned HTTP 401 with WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.linear.app/.well-known/oauth-protected-resource/mcp\", scope=\"read write\". Protected-resource metadata lists resource https://mcp.linear.app/mcp, authorization server https://mcp.linear.app, scopes_supported [\"read\",\"write\"], bearer_methods_supported [\"header\"]. Authorization-server metadata lists authorization_endpoint https://mcp.linear.app/authorize, token_endpoint https://mcp.linear.app/token, registration_endpoint https://mcp.linear.app/register, grant_types_supported [\"authorization_code\",\"refresh_token\",\"urn:ietf:params:oauth:grant-type:jwt-bearer\"], code_challenge_methods_supported [\"S256\"], token_endpoint_auth_methods_supported [\"client_secret_basic\",\"client_secret_post\",\"none\"], and revocation_endpoint https://mcp.linear.app/token. OAuth metadata also lists scopes [\"read\",\"write\",\"openid\",\"email\"]. Token lifetime is not stated.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated request receives HTTP 401 and a Bearer challenge with resource metadata and read/write scopes.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; bearer token or Linear API key are also documented. Authorization code, refresh token, and JWT bearer grants are advertised; PKCE S256 is supported. protected-resource scopes_supported: [\"read\",\"write\"]; authorization-server scopes_supported: [\"read\",\"write\",\"openid\",\"email\"]. Token lifetime NOT FOUND; revocation endpoint is https://mcp.linear.app/token.",
+      "authorization_server": "https://mcp.linear.app",
+      "sources": [
+        "https://mcp.linear.app/mcp",
+        "https://mcp.linear.app/.well-known/oauth-protected-resource",
+        "https://mcp.linear.app/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.linear.app/.well-known/oauth-authorization-server",
+        "https://mcp.linear.app/.well-known/openid-configuration",
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found of server-enforced MCP elicitation. Official prompt examples recommend human review before some writes, but do not establish elicitation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found describing MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Documented configuration choices include the /readonly endpoint or the standard endpoint with only the read OAuth scope. Docs also describe direct bearer-token/API-key authentication and enterprise-managed authorization via Okta. No toolset URL parameter or client-side tool filter was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP error-reporting capability was found. The docs mention connection troubleshooting, not a server reporting feature.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found describing MCP subscriptions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications were described.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation support was described.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Linear states that its hosted server follows the authenticated remote MCP spec and uses Streamable HTTP as its primary transport. The SSE endpoint is described as deprecated; the collected endpoint check returned 404. No initialize instructions were obtained.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://linear.app/docs/mcp",
+        "https://linear.app/changelog/2026-02-05-linear-mcp-for-product-management",
+        "https://mcp.linear.app/sse"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official docs describe both read and write tools; the changelog says the server exposes tool annotations. Annotation values and per-tool hints were not available in reviewed evidence. 2. Docs recommend showing proposed changes before creating them in some example prompts; no server-enforced confirmation parameter or approval flow was established. 3. OAuth metadata advertises read/write scopes. Docs state read-only access can use /mcp/readonly or the read scope, and say the underlying token cannot reach write APIs. Product permissions are managed in Linear; Okta-managed authorization is documented. Token lifetime and client allowlists were not found. 4. Read-only modes are documented; no toolset filter, query-free mode, sandbox, or regional endpoint was found. Legacy /sse is deprecated. 5. No MCP-specific masking or PII exclusion behavior was documented. 6. No MCP-specific rate limit, quota, bulk cap, truncation, or per-call charge was found. 7. Changelog documents name-based resolution for issue properties and optional name/email filtering for list_users; detailed validation/correction behavior is unknown. 8. No MCP-specific audit trail or telemetry behavior was documented. 9. Official docs welcome feedback on functionality; no vendor feedback/rating tool or upsell result was identified in reviewed names. 10. Linear added read-only tools to list and retrieve Linear Agent skills; the names are list_agent_skills and get_agent_skill. Other behavioral instructions in examples are recommendations, not demonstrated server enforcement. 11. No evidence found that prior agent behavior changes future tools or results. 12. The server is hosted and centrally managed, with a separate read-only endpoint; no nested server architecture documented. 13. No raw API, arbitrary SQL, script execution, or universal escape hatch was identified among listed tools.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Before creating anything, show the proposed project, milestones, issues, relationships, and any decisions that need review.",
+      "Before applying any changes, show which issues you plan to update and the exact comment you would post to each one, then apply the comments and separately list any notes you skipped.",
+      "If the document is too vague or ambiguous to produce high-quality work, flag the uncertainty and return a proposed outline for review instead of guessing."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Linear documents two hosted endpoints with different access behavior: the global read-write /mcp endpoint and /mcp/readonly, which only exposes read tools.",
+    "sources": [
+      "https://linear.app/docs/mcp",
+      "https://linear.app/integrations/slack",
+      "https://linear.app/changelog/page/5",
+      "https://linear.app/changelog/2026-07-02-initiative-properties",
+      "https://glama.ai/mcp/connectors/app.linear/linear"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "36 identified names; independent listing reports 35 tools",
+    "action_count_comment": "No comprehensive official tool list was found. Linear’s Slack integration page names 7 tools; official changelog pages add named tools and features. The actions file contains 36 identified tool names, including names exposed in Glama’s tool-schema changelog. Glama reports 35 tools in its 2026-06-13 inspection; its count predates later additions, and the complete live list could not be retrieved. Metorial publishes no tool list on its listing page; mcp.tc says its probe did not publish the tool list. No catalogue-only additions beyond names visible in Glama’s changelog were established.",
+    "actions": [
+      {
+        "tool_name": "list_issues",
+        "description": "Find issues using workspace filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/integrations/slack",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_issue",
+        "description": "Retrieve one issue and its details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/integrations/slack",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_issue",
+        "description": "Create an issue or update an existing issue.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/integrations/slack",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_projects",
+        "description": "Browse workspace projects.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/integrations/slack",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project",
+        "description": "Retrieve project details, milestones, and members.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/integrations/slack",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_status_updates",
+        "description": "Read project or initiative status updates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/integrations/slack",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_users",
+        "description": "Look up workspace members.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/integrations/slack",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_cycles",
+        "description": "List cycles, with pagination behavior noted in changelog.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/page/5",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_issue_labels",
+        "description": "List issue labels with pagination.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/page/5",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_milestones",
+        "description": "List project milestones.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-02-05-linear-mcp-for-product-management",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_customer_need",
+        "description": "Save a customer need, including an optional source URL.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_agent_skill",
+        "description": "Retrieve a Linear Agent skill.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_agent_skills",
+        "description": "List Linear Agent skills.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_diff_threads",
+        "description": "Retrieve threads associated with a diff.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "create_attachment",
+        "description": "Create an attachment from supplied content.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "create_attachment_from_upload",
+        "description": "Create an attachment from an uploaded file.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "prepare_attachment_upload",
+        "description": "Prepare an attachment upload.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "list_comments",
+        "description": "List comments for Linear entities.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "save_comment",
+        "description": "Create or update a comment.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "list_documents",
+        "description": "List documents.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "save_document",
+        "description": "Create or update a document.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "save_project",
+        "description": "Create or update a project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "save_status_update",
+        "description": "Create or update a status update.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "delete_status_update",
+        "description": "Delete a status update.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_release",
+        "description": "Retrieve a release.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_release_note",
+        "description": "Retrieve a release note.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_release_notes",
+        "description": "List release notes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_release_pipelines",
+        "description": "List release pipelines.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_releases",
+        "description": "List releases.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_release",
+        "description": "Create or update a release.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_release_note",
+        "description": "Create or update a release note.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://linear.app/changelog/2026-07-02-initiative-properties",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_diff_comment",
+        "description": "Delete a comment on a diff.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "merge_diff",
+        "description": "Merge a diff.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "resolve_diff_thread",
+        "description": "Resolve a diff thread.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "save_diff_comment",
+        "description": "Create or update a comment on a diff.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      },
+      {
+        "tool_name": "submit_diff_review",
+        "description": "Submit a review for a diff.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://glama.ai/mcp/connectors/app.linear/linear",
+        "source_type": "Third-party (Glama, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted implementation is closed and no verbatim complete tool definitions or initialize instructions were available.",
+    "human_can_agent_cannot": "Linear’s product and API expose many operations not established among the MCP tools found, including workspace administration and broad API operations; the public API reference is not used to infer MCP parameters. The server is a documented subset focused on Linear objects, but a complete comparison is unavailable. Sources: https://linear.app/docs/mcp ; https://developers.linear.app/docs",
+    "sources": [
+      "https://linear.app/docs/mcp",
+      "https://linear.app/integrations/slack",
+      "https://linear.app/changelog/page/5",
+      "https://linear.app/changelog/2026-02-05-linear-mcp-for-product-management",
+      "https://linear.app/changelog/2026-07-02-initiative-properties",
+      "https://glama.ai/mcp/connectors/app.linear/linear",
+      "https://marketplace.metorial.com/p/mcplinearapp-mahfvm",
+      "https://mcp.tc/i/linear"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Official example prompts recommend review steps and caution against guessing. These are example instructions for client users; the reviewed evidence does not show that the server enforces them.",
+    "governance_promises": "Linear describes the server as providing access in a “simple and secure way” and says read-only OAuth tokens cannot reach write APIs. The Privacy Policy and DPA provide general service terms; MCP-specific retention or logging commitments were not identified.",
+    "promises_to_user": "Linear says the hosted server is centrally hosted and managed and supports compatible AI clients. Its docs describe read-only access through a dedicated endpoint or scope.",
+    "comparison_with_server_logic": "The read-only boundary is documented as endpoint/scope behavior, but implementation could not be inspected because hosted code is closed. Prompt examples are text-only guidance. The general security claim is not tied to a specific MCP-specific technical control in the reviewed documentation.",
+    "sources": [
+      "https://linear.app/docs/mcp",
+      "https://linear.app/privacy",
+      "https://linear.app/dpa",
+      "https://linear.app/legal/ai-addendum"
+    ]
+  },
+  "contradictions": [
+    "OAuth metadata for the standard endpoint advertises scopes_supported [\"read\",\"write\"], while Linear’s docs state that read-only access may be provided by requesting only the read scope. These are compatible but distinguish the endpoint’s available scopes from a particular authorization grant.",
+    "Glama reported 35 tools in an inspection dated 2026-06-13; the actions file records 36 names identified from official sources and its later tool-schema changelog. This difference reflects different evidence dates and does not establish the exact live total on the analysis date.",
+    "Linear’s changelog says broad support for loading Linear resources through URLs, but the reviewed docs do not clarify whether this is MCP Resources or URL-aware tool behavior."
+  ],
+  "observations_for_research": [
+    "The standard endpoint offers read-write access by default, while the same host exposes a distinct read-only endpoint and scope-based read-only authorization.",
+    "Linear publishes agent skill discovery and retrieval as read-only MCP tools, according to its changelog.",
+    "The hosted implementation is closed, so official docs, changelog entries, OAuth metadata, and independent inspection provide complementary but incomplete evidence."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages/ and code/ folders first. Official docs, client setup pages, relevant changelog entries, pricing and legal pages, public repository, and listed catalogues were reviewed. The vendor’s public repository is an SDK, not hosted MCP code. The /mcp endpoint and /readonly returned 401 without credentials, so no authenticated tool listing or initialize response was obtained. Glama reported 35 tools but did not yield a complete current inventory in the collected page; actions.json lists 36 names found across the reviewed sources and flags third-party-sourced names. The AUP URL returned 404. An unofficial community server was listed but excluded.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.2
+  }
+}

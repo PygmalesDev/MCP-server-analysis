@@ -1,0 +1,792 @@
+{
+  "server": "razorpay",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.razorpay.com/mcp",
+    "documentation_url_csv": "https://razorpay.com/docs/mcp-server/",
+    "addressing": "global",
+    "repository_url": "https://github.com/razorpay/razorpay-mcp-server",
+    "documentation_urls_used": [
+      "https://razorpay.com/docs/mcp-server/",
+      "https://razorpay.com/docs/mcp-server/remote",
+      "https://razorpay.com/docs/mcp-server/local",
+      "https://razorpay.com/docs/mcp-server/configuration/",
+      "https://razorpay.com/docs/mcp-server/tools-reference",
+      "https://razorpay.com/docs/mcp-server/oauth",
+      "https://razorpay.com/docs/mcp-server/faqs",
+      "https://razorpay.com/pricing/",
+      "https://razorpay.com/privacy-policy/",
+      "https://razorpay.com/terms/",
+      "https://claude.com/marketplace/connectors/razorpay"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official public Go repository is the local implementation of Razorpay MCP Server. Razorpay describes hosted Remote and self-hosted Local deployments; the repository does not establish that its code is deployed at the hosted endpoint. Hosted documentation and connector listings describe narrower or different tool availability.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "7950d51d118ca164c32b7cf0cfaa14f34f24849f",
+    "commit_date": "2026-03-26",
+    "implementation_language": "Go",
+    "mcp_sdk_and_version": "github.com/mark3labs/mcp-go v0.43.2",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "Production use stated in FAQ; hosted release stage otherwise NOT FOUND",
+    "other_official_servers": [
+      "https://merchants.agent.razorpay.com/mcp — separate ACE Marketplace server is noted in collected links, but its purpose and relationship were not verifiable from the captured 406 response."
+    ],
+    "sources": [
+      "https://mcp.razorpay.com/mcp",
+      "https://razorpay.com/docs/mcp-server/",
+      "https://razorpay.com/docs/mcp-server/remote",
+      "https://razorpay.com/docs/mcp-server/local",
+      "https://razorpay.com/docs/mcp-server/tools-reference",
+      "https://github.com/razorpay/razorpay-mcp-server",
+      "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/go.mod"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific fee or hosted MCP limit was found in the reviewed official pricing or MCP pages. Access requires a Razorpay account and authorization; the OAuth-protected endpoint responds HTTP 401 without credentials.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Official pricing page describes payment gateway processing at 2% plus GST per successful payment, with no setup or annual maintenance fee. Product-specific and custom pricing may vary.",
+    "pricing_model_details": "Razorpay pricing page states a pay-as-you-go transaction charge; optional value-added services, including Instant Settlements, may have separate pricing. This is linked payment software pricing, not an MCP access charge.",
+    "other_access_restrictions": "Remote setup documentation requires a Razorpay account with API access. The endpoint uses OAuth and hosted docs also describe API-key authentication. Local setup documents API credentials and optional READ_ONLY and TOOLSETS settings. No hosted client allowlist or hosted write-mode parameter was found.",
+    "restrictions_controlled_by": "Vendor controls hosted authentication and endpoint availability; account holder authorizes access. Local server operator controls local toolsets and read-only mode.",
+    "sources": [
+      "https://razorpay.com/pricing/",
+      "https://razorpay.com/docs/mcp-server/remote",
+      "https://razorpay.com/docs/mcp-server/configuration/",
+      "https://mcp.razorpay.com/mcp",
+      "https://razorpay.com/docs/mcp-server/oauth"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official tools reference documents a 35+ tool server and marks remote support per tool. The official repository defines 45 tools across payments, links, orders, refunds, payouts, QR codes, registration links, settlements and checkout integration. The hosted endpoint requires authentication; third-party connector inventories show only 25 tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND for hosted endpoint. Public Go implementation returns MCP tool results and errors; individual handlers generally wrap successful responses as JSON.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://razorpay.com/docs/mcp-server/tools-reference",
+        "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/pkg/razorpay/tools.go",
+        "https://claude.com/marketplace/connectors/razorpay"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Public implementation enables resource capabilities but the examined product server code does not define Razorpay resources. A third-party endpoint scan reports zero resources; live verification there was pending authentication.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/pkg/razorpay/server.go",
+        "https://www.tedix.dev/apps/razorpay/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No product prompts were found in the public server implementation; third-party scan reports zero prompts, pending live authentication.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server",
+        "https://www.tedix.dev/apps/razorpay/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Public code enables MCP logging and observability hooks. Local configuration documents optional LOG_FILE. The hosted privacy policy says logs for MCP interactions are retained for 12 months unless law states otherwise.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/pkg/razorpay/server.go",
+        "https://razorpay.com/docs/mcp-server/configuration/",
+        "https://razorpay.com/privacy-policy/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Sampling support was not found in the public server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Roots support was not found in the public server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Provided endpoint response: HTTP 401 and WWW-Authenticate Bearer resource_metadata=\"https://mcp.razorpay.com/.well-known/oauth-protected-resource\"; body says an API key must be provided. Protected-resource documents list resource https://mcp.razorpay.com and authorization server https://mcp.razorpay.com; bearer method is header. Authorization-server metadata lists authorization_code and refresh_token grants, code response type, client_secret_post token auth and S256 PKCE. It exposes a registration endpoint. No scopes_supported, token lifetime, or revocation endpoint appears in the supplied metadata. OAuth docs explain DCR and give read_only as an example requested scope; they do not establish the endpoint's supported-scope list. Docs also describe API-key setup.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "401 JSON: {\"error\":{\"code\":\"BAD_REQUEST_ERROR\",\"description\":\"Please provide your api key for authentication purposes\"}}",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://mcp.razorpay.com/register; authorization_code and refresh_token grants; response_types_supported=[\"code\"]; token_endpoint_auth_methods_supported=[\"client_secret_post\"]; code_challenge_methods_supported=[\"S256\"]; bearer_methods_supported=[\"header\"]; scopes_supported NOT PRESENT in supplied metadata. Endpoint 401 body requests API key. OAuth guide describes read_only as an example scope, not verified metadata.",
+      "authorization_server": "https://mcp.razorpay.com",
+      "sources": [
+        "https://mcp.razorpay.com/mcp",
+        "https://mcp.razorpay.com/.well-known/oauth-protected-resource",
+        "https://mcp.razorpay.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.razorpay.com/.well-known/oauth-authorization-server",
+        "https://mcp.razorpay.com/.well-known/openid-configuration",
+        "https://razorpay.com/docs/mcp-server/oauth"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Elicitation support was not found in the public server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tasks support was not found in the public server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Local server configuration supports TOOLSETS (default all) and READ_ONLY (default false), plus API key ID and secret and optional LOG_FILE. No corresponding hosted URL parameter or header was found in the reviewed setup pages.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://razorpay.com/docs/mcp-server/configuration/",
+        "https://github.com/razorpay/razorpay-mcp-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Public handlers construct MCP tool error results for invalid arguments and API errors; no separate error-reporting or feedback tool was found in the examined official list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP tool error result in public implementation; hosted format not verified.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server",
+        "https://razorpay.com/docs/mcp-server/tools-reference"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Subscription capability was not found. A registration-link action relates to subscription registration, but is a tool operation rather than MCP subscription support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Progress tracking support was not found in the public server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Cancellation support was not found in the public server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/razorpay/razorpay-mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "OAuth documents and MCP setup instructions provide hosted-server connection guidance. Public source includes a checkout integration toolset that returns generated integration code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for hosted endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://razorpay.com/docs/mcp-server/remote",
+        "https://razorpay.com/docs/mcp-server/oauth",
+        "https://github.com/razorpay/razorpay-mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Public code groups tools into read and write lists; tool annotations mark reads as read-only. No destructive hints or server-side confirmation annotations were verified. 2. No server-enforced confirmation or preview flow was found in the reviewed handlers; authorization happens through account/OAuth access. 3. OAuth metadata identifies one authorization server and header bearer tokens. OAuth guide describes user sign-in and approval. Public OAuth metadata has no supported-scope list, token lifetime, or revocation endpoint. 4. Local mode offers TOOLSETS and READ_ONLY=false by default. Docs describe Remote versus Local and API-key-selected test/live environments. No hosted read-only URL or tool filtering parameter was found. 5. Public code exposes payment card details and saved payment methods; reviewed tool documentation did not state a general PII masking policy. Privacy policy says only information needed for an initiated action/request is processed. 6. No MCP-specific call quota, rate limit, bulk cap, truncation, or per-call price was found. 7. Public handlers validate argument types and required arguments; checkout integration constrains enum values. No general hallucinated-argument alias rewriting or operator-default override was found. 8. Public server enables logging/observability. Privacy policy states MCP logs retained 12 months; details of fields, opt-out, and audit log access were not found. 9. No feedback/rating/survey tool or MCP upsell response was found in the reviewed tool list/code. 10. Checkout helper descriptions direct tool sequencing; this is model-facing text, not an enforced prerequisite. Repo includes skills for tool generation, not a documented hosted skill-delivery feature. 11. No evidence that past agent behavior changes future tools or results. 12. Hosted and local variants have different reported availability; code groups actions by toolset. No nested sub-server or agent-calls-agent evidence found. 13. No raw API request, arbitrary SQL, or script execution tool was found.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "IMPORTANT: Always call this tool FIRST before calling integrate_razorpay_checkout.",
+      "Before calling this tool, you MUST: 1) List the project's files and pass them in the 'files' parameter, 2) Read the relevant dependency file and pass its contents in the corresponding parameter."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Razorpay documents separate hosted Remote and self-hosted Local deployments, with different tool availability. Public code groups tools into selectable toolsets and supports a read-only mode.",
+    "sources": [
+      "https://razorpay.com/docs/mcp-server/tools-reference",
+      "https://razorpay.com/docs/mcp-server/configuration/",
+      "https://razorpay.com/docs/mcp-server/remote",
+      "https://razorpay.com/docs/mcp-server/local",
+      "https://razorpay.com/privacy-policy/",
+      "https://github.com/razorpay/razorpay-mcp-server",
+      "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/pkg/razorpay/integrations/detect_stack_tool.go"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "45 public-code tools; hosted inventory reported as 25 by connector listings",
+    "action_count_comment": "Official tool reference: https://razorpay.com/docs/mcp-server/tools-reference, which states 35+ tools and enumerates its list with remote-support marks. Public same-product Go implementation defines 45 tools; actions.json records all code-defined tools, including those absent from the hosted reference, with hosted enablement unknown where appropriate. Claude’s publisher-verified connector directory lists 25 names; Tedix also reports 25, but its live tool verification was pending OAuth. The connector list is a narrower third-party inventory; no catalogue-only tools were added. Its fetch_payout_with_id name differs from official fetch_payout_by_id. The official tool reference and README also differ on some listed tool coverage.",
+    "actions": [
+      {
+        "tool_name": "capture_payment",
+        "description": "Capture an authorized payment.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_payment",
+        "description": "Fetch payment details by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_payment_card_details",
+        "description": "Fetch card details used for a payment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_all_payments",
+        "description": "List payments with filters and pagination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_payment",
+        "description": "Update payment notes.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "initiate_payment",
+        "description": "Initiate payment using saved method, order and customer details.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/payments.go#L1",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resend_otp",
+        "description": "Resend OTP for payment authentication.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/payments.go#L1",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_otp",
+        "description": "Submit OTP to complete payment authentication.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/payments.go#L1",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_payment_link",
+        "description": "Create a standard payment link.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_payment_link_upi",
+        "description": "Create a UPI payment link.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_all_payment_links",
+        "description": "List payment links.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_payment_link",
+        "description": "Fetch a payment link.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_payment_link",
+        "description": "Send or resend a payment link by SMS/email.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_payment_link",
+        "description": "Update a standard payment link.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_order",
+        "description": "Create an order.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_order",
+        "description": "Fetch order by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_all_orders",
+        "description": "List orders.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_order",
+        "description": "Update an order.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_order_payments",
+        "description": "List payments for an order.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_refund",
+        "description": "Create a refund.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_refund",
+        "description": "Fetch refund by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_all_refunds",
+        "description": "List refunds.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_refund",
+        "description": "Update refund notes.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_multiple_refunds_for_payment",
+        "description": "List refunds for a payment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_specific_refund_for_payment",
+        "description": "Fetch a specific refund for a payment.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_qr_code",
+        "description": "Create a QR code.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_qr_code",
+        "description": "Fetch a QR code by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_all_qr_codes",
+        "description": "List QR codes.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_qr_codes_by_customer_id",
+        "description": "List QR codes by customer ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_qr_codes_by_payment_id",
+        "description": "List QR codes by payment ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_payments_for_qr_code",
+        "description": "List payments for a QR code.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "close_qr_code",
+        "description": "Close a QR code.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_all_settlements",
+        "description": "List settlements.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_settlement_with_id",
+        "description": "Fetch settlement details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_settlement_recon_details",
+        "description": "Fetch settlement reconciliation details.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_instant_settlement",
+        "description": "Create an instant settlement.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_all_instant_settlements",
+        "description": "List instant settlements.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_instant_settlement_with_id",
+        "description": "Fetch instant settlement by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_all_payouts",
+        "description": "List payouts by account number.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_payout_by_id",
+        "description": "Fetch payout by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_tokens",
+        "description": "List saved payment methods by customer or contact.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/tokens.go#L1",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "revoke_token",
+        "description": "Revoke a saved payment method token.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/tokens.go#L1",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_registration_link",
+        "description": "Create a subscription registration link.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/razorpay/razorpay-mcp-server/blob/7950d51d118ca164c32b7cf0cfaa14f34f24849f/registration_links.go#L1",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "detect_stack",
+        "description": "Detect project language/framework for checkout integration.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "integrate_razorpay_checkout",
+        "description": "Generate checkout integration code for supported frameworks.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (hosted defaults unpublished)",
+        "parameters": "NOT PUBLISHED in hosted list; schemas exist in public Go code",
+        "parameter_count": "Unknown",
+        "source": "https://razorpay.com/docs/mcp-server/tools-reference",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Initialize instructions and complete hosted tool definitions were not publicly available; code token count not calculated because the public local implementation is only a partial equivalent of the deployed hosted server.",
+    "human_can_agent_cannot": "The MCP tool reference covers a subset of Razorpay's broader payment products and APIs. The reviewed MCP materials do not document general customer management, subscriptions management, disputes/chargebacks, invoices, or arbitrary API operations as MCP actions; product pages and API references document additional capabilities outside this tool list. No REST-only parameters were imported as MCP parameters.",
+    "sources": [
+      "https://razorpay.com/docs/mcp-server/tools-reference",
+      "https://github.com/razorpay/razorpay-mcp-server",
+      "https://claude.com/marketplace/connectors/razorpay",
+      "https://www.tedix.dev/apps/razorpay/",
+      "https://razorpay.com/pricing/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Checkout helper description instructs the model to call detect_stack first and provide project files/dependency contents. Tool description is advisory context; no server-side sequence enforcement was identified.",
+    "governance_promises": "Privacy policy: “Razorpay will only process the information necessary to execute the specific action or request you initiate through that platform.” It also states MCP logs are retained for 12 months unless otherwise stated by law.",
+    "promises_to_user": "Remote server documentation describes zero infrastructure overhead, automatic updates and high availability. FAQ says the server is designed for production use and advises using test keys for development and live keys for production.",
+    "comparison_with_server_logic": "Tool sequencing appears in a description and was not found enforced in code. Logging is enabled in public code, consistent with the retention statement, though the hosted log fields and opt-out behavior are not described in the reviewed sources. Remote availability promises were not independently assessed.",
+    "sources": [
+      "https://razorpay.com/privacy-policy/",
+      "https://razorpay.com/docs/mcp-server/remote",
+      "https://razorpay.com/docs/mcp-server/faqs",
+      "https://github.com/razorpay/razorpay-mcp-server"
+    ]
+  },
+  "contradictions": [
+    "Official tools reference enumerates remote-supported tools and states 35+; the official repository defines 45 tools, including actions absent from that reference. Hosted enablement for code-only actions is therefore unverified.",
+    "Claude’s publisher-verified directory and Tedix report 25 hosted tools, fewer than the official reference’s broader list; these inventories do not establish that unlisted tools are unavailable to other clients.",
+    "Claude’s directory names fetch_payout_with_id; official docs and public code use fetch_payout_by_id.",
+    "The supplied endpoint’s HTTP 401 error asks for an API key, while OAuth metadata and remote setup docs describe OAuth access."
+  ],
+  "observations_for_research": [
+    "Remote and local deployment are presented as one product but have different tool availability and configuration surfaces.",
+    "The public implementation separates read and write tools and allows local operators to disable writes; equivalent hosted controls were not established.",
+    "A tool description requests a specific call sequence before checkout code generation, while the reviewed code does not enforce that sequence."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/ files including script extracts, and the pinned official repository. The official repository copy is public and its current commit was used; the hosted endpoint’s deployed code is not available. Third-party connector inventories were used only to compare the hosted tool inventory. The separate merchants.agent.razorpay.com endpoint returned HTTP 406 in captured evidence; its features were not treated as evidence for this endpoint. Changelog URL collected at /docs/cli/changelog returned 404. OpenID configuration returned 404. OAuth scopes, hosted initialize instructions, hosted result schemas, hosted retention control, rate limits, and token lifetime/revocation details were not found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 9.4
+  }
+}

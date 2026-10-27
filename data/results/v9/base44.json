@@ -1,0 +1,602 @@
+{
+  "server": "base44",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://app.base44.com/mcp",
+    "documentation_url_csv": "https://docs.base44.com/developers/backend/overview/mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/base44/skills",
+    "documentation_urls_used": [
+      "https://docs.base44.com/developers/backend/overview/mcp-server",
+      "https://docs.base44.com/developers/app-code/sandbox/overview",
+      "https://docs.base44.com/developers/app-code/sandbox/bring-your-own-agent",
+      "https://docs.base44.com/developers/backend/overview/base44-docs-mcp",
+      "https://docs.base44.com/Integrations/app-mcp",
+      "https://docs.base44.com/api-reference/get-mcp-status",
+      "https://docs.base44.com/api-reference/get-mcp-config",
+      "https://docs.base44.com/api-reference/update-mcp-config",
+      "https://docs.base44.com/developers/white-label/skills-and-mcp",
+      "https://docs.base44.com/llms.txt"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public base44/skills repository distributes agent skills and related files; it is not the hosted MCP server implementation. No public source for the deployed server or a direct local equivalent was found.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "061d03659782a90899703eed7b8eb87ce2db05d1",
+    "commit_date": "2026-10-25",
+    "implementation_language": "NOT FOUND for the hosted server; the public repository is a skills distribution, not server implementation.",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT (public skills repository; not the hosted server)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://docs.base44.com/developers/backend/overview/base44-docs-mcp — separate documentation-search MCP server, not the app.base44.com/mcp product server.",
+      "Apps built on Base44 can have separately configured App MCP servers. Owners can choose enabled entities, agents, and custom tools, and configure public or OAuth access: https://docs.base44.com/Integrations/app-mcp."
+    ],
+    "sources": [
+      "https://docs.base44.com/developers/backend/overview/mcp-server",
+      "https://github.com/base44/skills",
+      "https://docs.base44.com/developers/backend/overview/base44-docs-mcp",
+      "https://docs.base44.com/Integrations/app-mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "The MCP server requires a Builder plan or higher. The pricing page lists Builder at $40/month billed annually; Pro $80/month and Elite $160/month annually. Starter and Free are below the documented MCP eligibility threshold.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Free: $0; Starter: $16/month; Builder: $40/month; Pro: $80/month; Elite: $160/month, all shown with annual billing. Monthly billing is selectable on the pricing page, but its rates were not captured in the prepared page text.",
+    "pricing_model_details": "Plan credits are monthly allowances for AI messages and integration actions. The pricing page lists 25 message and 100 integration credits on Free; 100 and 2,000 on Starter; 250 and 10,000 on Builder; 500 and 20,000 on Pro; 1,200 and 50,000 on Elite. No MCP-specific per-call fee was found.",
+    "other_access_restrictions": "OAuth sign-in and workspace selection are required. The connection is limited to the selected workspace and inherits the user's role and project permissions. Sandbox-changing tools require the sandbox:write OAuth permission. Workspace membership is rechecked per request and token refresh. SSO-enforced workspaces revoke access when membership is removed or SSO configuration is rotated.",
+    "restrictions_controlled_by": "Vendor and workspace administrators control plan eligibility, workspace access, SSO, and permissions; the user selects the workspace and approves OAuth.",
+    "sources": [
+      "https://docs.base44.com/developers/backend/overview/mcp-server",
+      "https://base44.com/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official documentation lists 27 tools: 13 project tools, 8 sandbox tools, 4 platform API tools, and 2 internal build-polling tools. The internal tools are described as not intended for direct calls. Platform API operations are discovered from a catalog, described, then called through execute_api.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool schemas and result/error structures are not published in the reviewed official tool list. Build operations may run in the background and return an editor link when ready.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official product-server documentation does not describe MCP resources. Third-party Tedix reports zero resources, but this is not an official live endpoint inspection.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "https://www.tedix.dev/apps/base44/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompts are documented for the product endpoint. Third-party Tedix reports zero prompts; no official endpoint inspection was available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "https://www.tedix.dev/apps/base44/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP-specific action audit log or logging behavior is documented in the reviewed server documentation. The general privacy policy says the platform collects log and usage data, without specifying MCP event fields or retention.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "https://base44.com/about-us/legal/privacy-policy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability is documented for the product server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is documented for the product server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint's protected-resource metadata identifies https://app.base44.com as authorization server, five supported resource scopes, and resource documentation. The authorization-server metadata advertises Dynamic Client Registration, authorization-code, refresh-token, and device-code grants, S256 PKCE, and public-client token authentication. The OAuth flow lets the user select a workspace. The endpoint POST evidence returned HTTP 307 without a WWW-Authenticate value in the supplied raw record; the connection test separately reported HTTP 401 and OAuth protection.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth authorization and token endpoints are published. Token lifetime and revocation details were not found in the supplied metadata or reviewed documentation.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration supported at https://app.base44.com/oauth/register; grants: authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:device_code; PKCE: S256; token endpoint auth methods: none. Protected-resource scopes_supported: apps:read, apps:write, sandbox:write, offline, app:mcp. Authorization-server scopes_supported: apps:read, apps:write, sandbox:write, offline, app:mcp. OpenID configuration additionally lists app:mcp, apps:read, apps:write, email, offline, openid, profile, sandbox:write. Token lifetime/revocation: NOT FOUND. Supplied metadata: /.well-known/oauth-protected-resource = HTTP 404; /.well-known/oauth-protected-resource/mcp = HTTP 200; /.well-known/oauth-authorization-server = HTTP 200; /.well-known/openid-configuration = HTTP 200.",
+      "authorization_server": "https://app.base44.com",
+      "sources": [
+        "https://app.base44.com/.well-known/oauth-protected-resource",
+        "https://app.base44.com/.well-known/oauth-protected-resource/mcp",
+        "https://app.base44.com/.well-known/oauth-authorization-server",
+        "https://app.base44.com/.well-known/openid-configuration",
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation capability is documented. The product may pause a project build on a question for the user in the app editor, which is described through the internal get_app_status tool rather than as MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The internal build-status tool can report that a build is paused on a question; its exact result format is not published.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability is documented. Background app builds and polling tools are product behavior and do not establish implementation of the MCP Tasks protocol capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Background build completion can be polled using documented internal tools; protocol task objects are not described.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted MCP endpoint is configured through client URL and OAuth. Separately, the App MCP product exposes app-level configuration for authentication and served tools via management API; that is a different server surface. Its configuration API is marked beta and applies changes after app deployment.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "App MCP configuration APIs return saved configuration and each tool's published state; these apply to App MCP, not the researched account endpoint.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "https://docs.base44.com/api-reference/get-mcp-config",
+        "https://docs.base44.com/api-reference/update-mcp-config",
+        "https://docs.base44.com/Integrations/app-mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The pre-fetched OAuth resource endpoint returned an HTTPException JSON body for the root well-known URL with error_type, message, detail, traceback, and request_id fields. MCP tool error formats are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth metadata failure body: JSON with error_type, message, detail, traceback, request_id; MCP tool errors: Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://app.base44.com/.well-known/oauth-protected-resource"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented for the product endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documentation describes background project builds and two internal tools for polling build progress and preview URLs. It does not establish MCP protocol progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Build status and preview URL are retrieved by polling tools; exact response schemas are not published.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation capability for MCP requests or background builds is documented for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official server documentation supplies textual usage guidance, including a base44_readme tool called once at conversation start, descriptions of three tool groups, and operational guidance for branch targeting and checkpoints. No initialize instructions text is reproduced.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not applicable; the documented guidance appears in tool descriptions and page text rather than a published initialize payload.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.base44.com/developers/backend/overview/mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list includes read and write operations. It publishes no readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations. update_entity_schema is documented to replace all submitted field definitions, removing omitted fields or constraints. 2. No server-enforced confirmation parameter or MCP Elicitation is documented. The docs recommend calling create_checkpoint after sandbox changes; this is guidance, not a stated gate. 3. OAuth scopes are apps:read, apps:write, sandbox:write, offline, app:mcp. The server acts as the user, inherits workspace/project role permissions, and is confined to the workspace selected during consent. Workspace membership is rechecked per request and token refresh; SSO membership/configuration changes can end access. Registration is dynamic; redirect approval, token lifetime, revocation, and client allowlists are not documented. 4. The endpoint docs do not describe read-only modes, tool filters, or environment modes. A different App MCP surface supports public read-only entity access or OAuth access and configurable entity/agent/custom-tool availability. 5. No MCP-specific PII masking or field redaction is documented. Workspace boundaries and product permissions are documented. Sandbox file tools operate in the app sandbox. 6. No MCP-specific rate limits, quotas, time-range caps, or result truncation are documented. describe_api is limited to up to 10 API operations per call. App MCP config API rate limits concern a different surface: 60 requests/minute/app, with some workspace-specific variation. 7. MCP tool schemas and validation/correction rules are not published. 8. The privacy policy states that Base44 collects platform log and usage data, but does not specify MCP call logging, audit trails, event detail, or MCP telemetry opt-out. 9. No feedback, rating, survey, or reporting tools appear in the official tool list. No MCP upsell result or promotional instruction was found. 10. The official server list includes base44_readme and behavioral guidance about workspace, branches, and checkpoints. The separate public skills repository distributes reusable agent instructions, but is not code for this endpoint. Textual guidance is not documented as server-enforced. 11. No persistence of past agent behavior affecting later outputs/tools is documented. 12. The researched endpoint has project, sandbox, and platform API tool groups; platform API access uses a catalog/describe/execute sequence. Other separate surfaces include Docs MCP and app-specific App MCP. 13. execute_api calls platform operations by method and path, providing a broad API execution surface. run_command runs shell commands inside the app sandbox.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Assistants call it once at the start of a conversation",
+      "Specific MCP clients use 2 more tools internally to poll build progress. They aren't meant to be called directly.",
+      "Changes your assistant makes with sandbox tools are saved to the app right away, but only checkpoints appear in the app's version history. A Restore or Revert in the app editor rolls the app back to the last checkpoint and discards everything written after it. Ask your assistant to call create_checkpoint when it finishes a change.",
+      "The edit_base44_app tool and the sandbox tools work on the app's main branch unless you name another one."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The documented endpoint groups project, sandbox, and platform API tools. The platform API group dynamically discovers operations through a catalog and contract lookup before execution. Base44 also operates separate Docs MCP and App MCP surfaces, which have distinct purposes and tool configuration.",
+    "sources": [
+      "https://docs.base44.com/developers/backend/overview/mcp-server",
+      "https://docs.base44.com/Integrations/app-mcp",
+      "https://docs.base44.com/api-reference/update-mcp-config",
+      "https://base44.com/about-us/legal/privacy-policy",
+      "https://app.base44.com/.well-known/oauth-protected-resource/mcp",
+      "https://app.base44.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "27",
+    "action_count_comment": "The official tool list exists at https://docs.base44.com/developers/backend/overview/mcp-server and names 27 tools: 13 project, 8 sandbox, 4 platform API, and 2 internal polling tools. The docs identify start_checkpoint as rolling out and potentially unavailable to some accounts. No catalogue-only tools were added. Claude's connector directory lists 5 tools and is marked Anthropic verified; Skills Playground lists 5 tools; Tedix reports 5 tools, 0 resources, 0 prompts; Obot describes capabilities but does not enumerate tool names; MCP.so says its tool list is unavailable pending authenticated discovery. Catalogues showing five tools are incomplete relative to the official 27-tool list.",
+    "actions": [
+      {
+        "tool_name": "create_base44_app",
+        "description": "Create a new project from a text description.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "edit_base44_app",
+        "description": "Make changes to an existing project using the app editor AI.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_user_apps",
+        "description": "List projects, optionally filtered by name.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_branches",
+        "description": "List project branches with names, IDs, and status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_entity_schemas",
+        "description": "Get entity schemas for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_entity_schema",
+        "description": "Define a new entity schema for a project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_entity_schema",
+        "description": "Replace fields of an existing entity schema.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_entities",
+        "description": "Query records from an entity in a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_entities",
+        "description": "Create records for an entity.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_entities",
+        "description": "Update records for an entity.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_connectors",
+        "description": "List project connectors and connection status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "initiate_connector_connection",
+        "description": "Connect a third-party connector for a project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "import-claude-design-from-url",
+        "description": "Import a public URL design and start a project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_directory",
+        "description": "List files and directories in the app sandbox.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_file",
+        "description": "Read file contents from the app sandbox.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "grep",
+        "description": "Search sandbox files for a pattern.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "write_file",
+        "description": "Create or overwrite a sandbox file.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "edit_file",
+        "description": "Apply exact string replacements to a sandbox file.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_command",
+        "description": "Run a shell command in the sandbox.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "start_checkpoint",
+        "description": "Start a checkpoint session before a change; rollout may vary.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_checkpoint",
+        "description": "Save a restore point in version history, optionally named.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "base44_readme",
+        "description": "Explain available tools and how to use them together.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_api_catalog",
+        "description": "List platform API operations grouped by area.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describe_api",
+        "description": "Get parameters, request body, and response for up to ten operations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute_api",
+        "description": "Call a platform API operation by method and path.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_app_status",
+        "description": "Internal polling tool for build completion or pending questions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_app_preview_url",
+        "description": "Internal polling tool to retrieve a ready build's preview link.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.base44.com/developers/backend/overview/mcp-server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public source for the deployed endpoint or direct local equivalent, and no verbatim initialize payload or complete tool schemas were available to serialize. The public base44/skills repository is a separate skills distribution, so it was not used to estimate this endpoint's context.",
+    "human_can_agent_cannot": "The documentation says the assistant can reach platform capabilities including deploys, checkpoints, published/preview URLs, analytics, secrets, custom domains, workflows, SEO, and Google Ads through the API catalog and execute_api; these are not listed as dedicated tools. It also says entity records are handled through query_entities, create_entities, and update_entities rather than the platform API. A complete comparison against all human UI features was not published. Sources: https://docs.base44.com/developers/backend/overview/mcp-server and https://docs.base44.com/developers/app-code/sandbox/overview.",
+    "sources": [
+      "https://docs.base44.com/developers/backend/overview/mcp-server",
+      "https://claude.com/marketplace/connectors/base44",
+      "https://skillsplayground.com/connectors/base44/",
+      "https://www.tedix.dev/apps/base44/",
+      "https://obot.ai/mcp-catalog/base44/",
+      "https://mcp.so/servers/base44"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs recommend create_checkpoint after sandbox changes and describe the sequencing of platform API calls. They also say the assistant should call base44_readme once at conversation start. No code for this hosted server was public to verify enforcement.",
+    "governance_promises": "The docs state: \"Every action the assistant takes, including creating, listing, and editing projects, runs in the workspace you pick, and the connection cannot reach any other workspace.\" They also state: \"Base44 re-checks your workspace membership on every request and every token refresh\". The privacy policy says commercially reasonable security measures are used and that no Internet transmission or electronic storage method is completely secure.",
+    "promises_to_user": "The documentation describes workspace-scoped access, role inheritance, and SSO membership checks. It warns that sandbox changes are saved immediately while only checkpoints appear in version history, and that restoring/reverting discards changes after the last checkpoint.",
+    "comparison_with_server_logic": "OAuth metadata supports the published authorization mechanism and scopes. Workspace isolation, role inheritance, membership rechecks, and SSO behavior are official documentation claims; no public deployed-server code was available to independently establish them. The checkpoint warning and recommendation are documentation guidance; the docs do not say the server requires a checkpoint before writes. Privacy/security statements are general platform commitments rather than MCP-specific guarantees.",
+    "sources": [
+      "https://docs.base44.com/developers/backend/overview/mcp-server",
+      "https://base44.com/about-us/legal/privacy-policy",
+      "https://app.base44.com/.well-known/oauth-protected-resource/mcp",
+      "https://app.base44.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "contradictions": [
+    "Claude's connector directory, Skills Playground, and Tedix list five tools, while the official server documentation lists 27, including sandbox and platform API tools and two internal polling tools. These third-party inventories are incomplete relative to the official list.",
+    "The OAuth protected-resource metadata advertises apps:write and sandbox:write, while the documentation says actual actions remain constrained by inherited workspace/project permissions and sandbox-changing tools additionally require sandbox:write. The scopes describe authorization capabilities, not unconditional permission to perform every write."
+  ],
+  "observations_for_research": [
+    "The endpoint exposes an API catalog and execution tool, allowing access to platform operations that do not have dedicated MCP tools.",
+    "The documented workspace selection is fixed for a connection; changing workspaces requires reconnecting and selecting another workspace.",
+    "Sandbox changes are immediate, while version-history restore points require explicit checkpoint creation; documentation recommends checkpointing after changes.",
+    "The two build polling tools are included in the official list but explicitly designated internal and not intended for direct calls."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/ and code/ evidence. The endpoint is OAuth-protected; the supplied endpoint POST returned HTTP 307, while the pre-collected connection test reported HTTP 401. The root protected-resource metadata URL returned 404, and the path-specific metadata URL returned 200. The official repository found is a skills repository, not server code; commit hash/date identify that repository only. No exact schemas, tool annotations, initialize instructions, MCP version, server SDK, tool error format, token lifetime, or MCP-specific pricing/limits were found. Unofficial repositories maorfr/base44-mcp and elirais/base44-mcp-server were identified but not used as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 8.9
+  }
+}

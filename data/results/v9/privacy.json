@@ -1,0 +1,437 @@
+{
+  "server": "privacy",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.privacy.com/",
+    "documentation_url_csv": "https://developers.privacy.com/docs/mcp-server",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://developers.privacy.com/docs/mcp-server",
+      "https://developers.privacy.com/docs/privacy-cli",
+      "https://developers.privacy.com/docs/cards",
+      "https://developers.privacy.com/docs/funding-sources",
+      "https://developers.privacy.com/docs/transactions",
+      "https://developers.privacy.com/llms.txt",
+      "https://www.privacy.com/blog/privacy-mcp-connect-ai-assistant-privacy-account",
+      "https://www.privacy.com/pricing",
+      "https://www.privacy.com/privacy-policy",
+      "https://www.privacy.com/terms",
+      "https://claude.com/connectors/privacy",
+      "https://manufact.com/mcp-catalog/privacy-com",
+      "https://mcp.so/servers/privacy",
+      "https://apis.io/servers/privacy-com/privacy-com/",
+      "https://www.mcpbundles.com/skills/privacy-mcp-452ef77e10"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No public source repository was found or supplied locally. The vendor describes a local server connection via API key, but the available evidence does not establish whether its implementation is the hosted server’s direct local equivalent. The official npm package page returned HTTP 403 and could not be inspected.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "The vendor describes a local MCP server connection using an API key for custom integrations, but does not document a separate endpoint or its tool list: https://www.privacy.com/blog/privacy-mcp-connect-ai-assistant-privacy-account"
+    ],
+    "sources": [
+      "https://developers.privacy.com/docs/mcp-server",
+      "https://www.privacy.com/blog/privacy-mcp-connect-ai-assistant-privacy-account",
+      "https://www.npmjs.com/package/%40privacy-com/privacy-mcp",
+      "https://mcp.privacy.com/"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "The MCP page says a paid Privacy Plan is required for API access. The pricing page lists Plus at $5/month ($60/year billed annually) as the first plan with API Access; Pro is $10/month ($120/year), and Premium is $25/month ($300/year). The Personal plan is $0 and does not list API Access.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Personal: $0; Plus: $5/month or $60/year; Pro: $10/month or $120/year; Premium: $25/month or $300/year.",
+    "pricing_model_details": "Subscription tiers include different monthly card creation limits: 12 Personal, 24 Plus, 36 Pro, 60 Premium. MCP access is linked to the paid plan’s API Access. The pages reviewed do not specify a separate MCP fee or per-call charge.",
+    "other_access_restrictions": "The endpoint requires authentication. OAuth is documented; for clients without MCP OAuth support, the vendor documents using a PRIVACY_API_KEY. No MCP-specific rate limit, client allowlist, region restriction, or admin switch was found.",
+    "restrictions_controlled_by": "Vendor controls plan entitlement and OAuth/API access; the user selects a plan and authorizes account access.",
+    "sources": [
+      "https://developers.privacy.com/docs/mcp-server",
+      "https://www.privacy.com/pricing",
+      "https://www.privacy.com/blog/privacy-mcp-connect-ai-assistant-privacy-account",
+      "https://mcp.privacy.com/.well-known/oauth-protected-resource"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official page lists 10 tools: list_cards, create_card, get_card, get_pan, pause_card, unpause_card, close_card, update_card_memo, update_card_spend_limit, and list_transactions. It publishes brief descriptions and parameter summaries, but no input schemas, annotations, or tool output schemas.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown; the official MCP page does not specify result or error formats.",
+      "authorization_mechanism": "OAuth is the documented hosted flow. The endpoint’s protected-resource metadata identifies authorization server https://api.app.privacy.com. Its authorization-server metadata lists response_types_supported [\"code\"], grant_types_supported [\"authorization_code\",\"refresh_token\"], code_challenge_methods_supported [\"S256\"], scopes_supported [\"mcp:tools\"], token_endpoint_auth_methods_supported [\"none\"], and registration_endpoint https://api.app.privacy.com/oauth/register. It also lists revocation_endpoint https://api.app.privacy.com/oauth/revoke. Token lifetime is not provided. The endpoint returned HTTP 401 with WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"Missing Authorization header\", resource_metadata=\"https://mcp.privacy.com/.well-known/oauth-protected-resource\".",
+      "authorization_server": "https://api.app.privacy.com",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server",
+        "https://mcp.privacy.com/.well-known/oauth-protected-resource",
+        "https://api.app.privacy.com/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool reference does not describe MCP resources. No public implementation code was available to inspect.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool reference does not describe MCP prompts. No public implementation code was available to inspect.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP logging capability or server-side logging behavior is documented in the reviewed MCP materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server",
+        "https://www.privacy.com/privacy-policy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability is described in the official MCP materials; implementation code was not available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is described in the official MCP materials; implementation code was not available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returns HTTP 401 when called without an Authorization header. Protected-resource metadata names the resource as “Privacy MCP Server” and points to https://api.app.privacy.com. OAuth metadata advertises dynamic registration, authorization-code and refresh-token grants, S256 PKCE, the mcp:tools scope, unauthenticated token-endpoint client authentication, and a revocation endpoint. An OpenID configuration request returned HTTP 404. No token lifetime or redirect-URI approval policy was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth metadata is JSON; the endpoint’s unauthenticated response is JSON-RPC error JSON. Authenticated tool response structure is not documented.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; OAuth authorization_code and refresh_token grants; PKCE S256; scope mcp:tools; token endpoint auth method none; revocation endpoint present; token lifetime not published. Raw metadata: {\"resource\":\"https://mcp.privacy.com\",\"authorization_servers\":[\"https://api.app.privacy.com\"],\"resource_name\":\"Privacy MCP Server\"}; authorization server: {\"issuer\":\"https://api.app.privacy.com\",\"authorization_endpoint\":\"https://app.privacy.com/oauth/authorize\",\"token_endpoint\":\"https://api.app.privacy.com/oauth/token\",\"registration_endpoint\":\"https://api.app.privacy.com/oauth/register\",\"revocation_endpoint\":\"https://api.app.privacy.com/oauth/revoke\",\"response_types_supported\":[\"code\"],\"grant_types_supported\":[\"authorization_code\",\"refresh_token\"],\"code_challenge_methods_supported\":[\"S256\"],\"scopes_supported\":[\"mcp:tools\"],\"token_endpoint_auth_methods_supported\":[\"none\"]}.",
+      "authorization_server": "https://api.app.privacy.com",
+      "sources": [
+        "https://mcp.privacy.com/",
+        "https://mcp.privacy.com/.well-known/oauth-protected-resource",
+        "https://api.app.privacy.com/.well-known/oauth-authorization-server",
+        "https://api.app.privacy.com/.well-known/openid-configuration",
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation flow is described. The setup documentation says the user signs in and authorizes access through the client’s OAuth flow; it does not describe per-action elicitation or approval.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks support is described in the official MCP page; implementation code was not available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The vendor documents client setup using the hosted URL, and an API-key environment variable for clients without OAuth support. It does not document endpoint URL parameters or configurable toolsets.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not applicable to configuration",
+      "authorization_mechanism": "OAuth; API key is documented as a fallback for clients that do not support MCP OAuth.",
+      "authorization_server": "https://api.app.privacy.com",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP-specific error reporting tool or error format is documented. The unauthenticated endpoint responds with an invalid_token error.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated request: JSON object with error and error_description; other tool errors are undocumented.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://mcp.privacy.com/",
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented. Tool access is described as requiring a paid Privacy Plan, but this is product-plan entitlement rather than a documented MCP subscription feature.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server",
+        "https://www.privacy.com/pricing"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications are described in the official MCP materials; implementation code was not available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation behavior is described in the official MCP materials; implementation code was not available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official page warns that users are responsible for financial activity conducted through API, CLI, or MCP. It does not publish server initialize instructions.",
+      "pre_interaction_context_verbatim": "\"You are responsible for all financial activity on your Privacy.com account, inclusive of API, CLI or MCP activity.\"",
+      "post_interaction_context_structure": "NOT FOUND",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.privacy.com/docs/mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official tool page marks no read-only/destructive/idempotent/open-world annotations. By operation, list_cards, get_card, get_pan, and list_transactions are reads; create_card, pause_card, unpause_card, close_card, update_card_memo, and update_card_spend_limit write or change state. 2. No server-enforced per-action confirmation, confirm parameter, preview flow, elicitation, or approval workflow is documented. The docs warn that users are responsible for financial activity. 3. OAuth supports the advertised mcp:tools scope; paid-plan API access is required. Inheritance of product roles, organization admin controls, client allowlists, redirect approval and token lifetime are not documented. Revocation endpoint is advertised. 4. No read-only mode, tool filter, query-free mode, sandbox/production split, or regional variant was found in reviewed docs. 5. get_pan returns full PAN, CVV and expiration per the official description; no MCP masking or field-level boundary is documented. 6. Pagination is documented: list_cards page_size 1–100 (default 20); list_transactions page_size 1–1000 (default 20). No MCP rate limit, bulk cap, truncation, or per-call price found. 7. Parameter summaries and enum choices are published; server-side unknown-argument rejection, coercion, corrections, or operator overrides are not documented. 8. MCP-specific audit events, logging, telemetry and opt-out are not documented. 9. The official 10-tool list and Claude listing contain no feedback/rating/report/survey tool. No tool-result upsell or marketing elicitation is documented. 10. The MCP page does not publish server-delivered skills or agent instructions beyond setup and the financial-responsibility warning. 11. No memory or cross-call state behavior documented. 12. No hierarchy, proxying, or nested agent architecture documented for the hosted endpoint. 13. No raw API, arbitrary SQL, script execution, or general escape-hatch tool appears in the official tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "\"You are responsible for all financial activity on your Privacy.com account, inclusive of API, CLI or MCP activity.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The official hosted documentation presents one endpoint with one flat list of 10 tools. No dynamic toolsets or sub-servers are documented.",
+    "sources": [
+      "https://developers.privacy.com/docs/mcp-server",
+      "https://developers.privacy.com/docs/privacy-cli",
+      "https://developers.privacy.com/docs/cards",
+      "https://developers.privacy.com/docs/funding-sources",
+      "https://developers.privacy.com/docs/transactions",
+      "https://api.app.privacy.com/.well-known/oauth-authorization-server",
+      "https://www.privacy.com/pricing"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "10",
+    "action_count_comment": "The official tool list exists at https://developers.privacy.com/docs/mcp-server and names 10 tools; it states no separate total. No catalogue-only tools were added. Claude’s third-party connector directory lists 10 tools; Manufact lists 10. MCP.so does not display a tool list, MCPBundles says authentication is needed to inspect tools, and APIs.io provides no count for this endpoint. Tool names in the two lists with names match the official list.",
+    "actions": [
+      {
+        "tool_name": "list_cards",
+        "description": "List cards with pagination.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: integer (optional); page_size: integer (optional, 1–100; default 20)",
+        "parameter_count": 3,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_card",
+        "description": "Create a virtual card with optional memo, spending limit and state.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "type: enum (required, 3 categories); memo: string (optional); spend_limit: number in dollars (optional); spend_limit_duration: enum (optional, 4 categories); state: enum (optional, 3 categories)",
+        "parameter_count": 5,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_card",
+        "description": "Get details for a card.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "card_token: string (required)",
+        "parameter_count": 1,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_pan",
+        "description": "Retrieve a card’s full number, CVV and expiration.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "card_token: string (required)",
+        "parameter_count": 1,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pause_card",
+        "description": "Temporarily pause a card.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "card_token: string (required)",
+        "parameter_count": 1,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unpause_card",
+        "description": "Reactivate a paused card.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "card_token: string (required)",
+        "parameter_count": 1,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "close_card",
+        "description": "Permanently close a card.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "card_token: string (required)",
+        "parameter_count": 1,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_card_memo",
+        "description": "Update a card’s friendly name.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "card_token: string (required); memo: string (required)",
+        "parameter_count": 2,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_card_spend_limit",
+        "description": "Update a card’s spending limit and optional duration.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "card_token: string (required); spend_limit: number (required); spend_limit_duration: enum (optional, 4 categories)",
+        "parameter_count": 3,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_transactions",
+        "description": "List transactions with optional card, account, date and result filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "card_token: string (optional); account_token: string (optional); begin: date YYYY-MM-DD inclusive (optional); end: date YYYY-MM-DD exclusive (optional); result: enum (optional, 2 categories); page: integer (optional); page_size: integer (optional, 1–1000; default 20)",
+        "parameter_count": 8,
+        "source": "https://developers.privacy.com/docs/mcp-server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim MCP tool-definition JSON and initialize instructions were available; the official docs provide a summarized table rather than serialized definitions.",
+    "human_can_agent_cannot": "The developer API documentation lists operations absent from the MCP tools: share a card by email, list funding sources, and check API status. The broader product supports card features such as Category-Locked and Everywhere Cards, while the MCP create_card type options shown are SINGLE_USE, MERCHANT_LOCKED, and UNLOCKED. The CLI separately documents create-card types SINGLE_USE and MERCHANT_LOCKED. Sources: https://developers.privacy.com/llms.txt; https://developers.privacy.com/docs/mcp-server; https://developers.privacy.com/docs/privacy-cli; https://www.privacy.com/pricing",
+    "sources": [
+      "https://developers.privacy.com/docs/mcp-server",
+      "https://claude.com/connectors/privacy",
+      "https://manufact.com/mcp-catalog/privacy-com",
+      "https://mcp.so/servers/privacy",
+      "https://www.mcpbundles.com/skills/privacy-mcp-452ef77e10",
+      "https://apis.io/servers/privacy-com/privacy-com/",
+      "https://developers.privacy.com/llms.txt"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The documentation tells users to authorize OAuth or provide an API key in unsupported clients; these are connection instructions. The financial-responsibility warning is a statement to the user, not a documented server-side confirmation gate. No behavioral guidance to the AI beyond the warning was found.",
+    "governance_promises": "The blog states: “Privacy has not integrated AI into our platform in any way that accesses, analyzes, or uses your card data or account activity” and “We are not feeding them into AI models.” It describes MCP as a tool users choose to connect to their own assistant. The privacy policy says Privacy collects and uses the minimum data necessary for compliance and service delivery, does not sell user information for advertising or marketing, and describes security controls including encryption and annual PCI/SOC 2 certifications. These are vendor statements; MCP-specific retention or training terms were not found.",
+    "promises_to_user": "The official MCP description says it lets connected AI assistants take actions or retrieve information on the user’s behalf. The blog frames the connection as optional and user-controlled. The vendor warns that users remain responsible for financial activity initiated through MCP.",
+    "comparison_with_server_logic": "The financial responsibility warning is text-only in the reviewed materials; no per-action confirmation mechanism is documented. OAuth is backed by public authorization metadata, and plan gating is stated in official docs/pricing. The blog’s AI-use statements concern Privacy’s platform and data use; they do not specify how a separately connected AI provider processes MCP results.",
+    "sources": [
+      "https://developers.privacy.com/docs/mcp-server",
+      "https://www.privacy.com/blog/privacy-mcp-connect-ai-assistant-privacy-account",
+      "https://www.privacy.com/privacy-policy",
+      "https://www.privacy.com/pricing",
+      "https://api.app.privacy.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "contradictions": [
+    "The MCP docs say paid Privacy Plan/API access is required, and the pricing page places API Access in Plus and above. The blog’s phrase “Customers on our Plus ($5/month) plan and above have API access” is consistent with this, though its nearby wording “API access is required” is less specific about the paid tier.",
+    "The MCP create_card reference lists UNLOCKED as a supported card type, while the CLI create command documents only SINGLE_USE and MERCHANT_LOCKED. These are different documented interfaces; the docs do not explain the discrepancy.",
+    "The MCP tool list lacks share-card, funding-source, and API-status operations that appear in the developer API reference. This is a difference in exposed MCP surface, not evidence that those operations are unavailable through other interfaces."
+  ],
+  "observations_for_research": [
+    "The endpoint is globally addressed and requires OAuth; its metadata advertises one scope, mcp:tools, covering tool access.",
+    "The official tool list includes both card mutation operations and a get_pan tool that returns full payment-card credentials.",
+    "The documentation makes financial accountability explicit but does not document a required confirmation parameter or server-side approval gate for writes."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/INDEX.txt, official MCP page and its script-rendered content, official CLI/docs index, package listing, pricing, privacy policy, terms, and listed catalogues. No public repository was present in code/ or links.json; the npm page returned HTTP 403. The endpoint root and /install returned HTTP 405 to the evidence collection request, while the supplied OAuth metadata and official docs establish the hosted endpoint and OAuth flow. Unofficial GitHub server https://github.com/richardadonnell/privacy-mcp was not used as evidence. MCPBundles could not enumerate tools without authentication; MCP.so had no tool list. No separate MCP terms or changelog was found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.6
+  }
+}

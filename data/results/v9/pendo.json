@@ -1,0 +1,1305 @@
+{
+  "server": "pendo",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://app.pendo.io/mcp/v0/shttp",
+    "documentation_url_csv": "https://support.pendo.io/hc/en-us/articles/41102236924955-Connect-to-the-Pendo-MCP-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/pendo-io/claude-pendo-plugin",
+    "documentation_urls_used": [
+      "https://support.pendo.io/hc/en-us/articles/41102236924955-Connect-to-the-Pendo-MCP-server",
+      "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server",
+      "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+      "https://support.pendo.io/hc/en-us/articles/50293561169435-Authenticate-to-the-Pendo-MCP-server-with-a-service-account",
+      "https://support.pendo.io/hc/en-us/articles/55314910809755-Overview-of-Pendo-AI-skills",
+      "https://support.pendo.io/hc/en-us/articles/27879734620059-Artificial-intelligence-AI-at-Pendo",
+      "https://www.pendo.io/product/mcp/",
+      "https://www.pendo.io/pricing/",
+      "https://www.pendo.io/legal/privacy-policy/"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public pendo-io/claude-pendo-plugin repository contains Claude Code plugins and skills that connect to Pendo MCP; it is not the hosted server implementation. No public MCP server implementation was found.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "182c47c0415a5516d3e65e144ddb7b304922bc64",
+    "commit_date": "2026-10-21",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT (Claude plugin repository; hosted server license NOT FOUND)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Regional instances use https://us1.app.pendo.io/mcp/v0/shttp, https://app.eu.pendo.io/mcp/v0/shttp, https://app.jpn.pendo.io/mcp/v0/shttp, and https://app.au.pendo.io/mcp/v0/shttp; these are regional URLs for the same server.",
+      "https://novus-api.pendo.io/mcp is a separate Novus MCP endpoint referenced in Pendo plugin documentation.",
+      "Pendo’s support-site docs-search MCP is a separate documentation search service, not the product-data server."
+    ],
+    "sources": [
+      "https://github.com/pendo-io/claude-pendo-plugin",
+      "https://support.pendo.io/hc/en-us/articles/41102236924955-Connect-to-the-Pendo-MCP-server",
+      "https://support.pendo.io/hc/en-us/articles/55314910809755-Overview-of-Pendo-AI-skills"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "Pendo’s MCP product page says any paid Pendo customer can access MCP; no separate MCP price or MCP-specific charge was found.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Official pricing page lists Base, Core, and Ultimate plans with custom MAU volume and “Request pricing”; no public prices were stated.",
+    "pricing_model_details": "Plan pricing is quote-based and tied to custom monthly active user volume. The MCP product page states paid-customer access; service accounts require the Pendo API package.",
+    "other_access_restrictions": "Subscription admin enables read-only MCP and separately may enable write tools. Access follows Pendo permissions and regional boundaries. Service accounts require admin setup and are limited to one subscription and selected applications.",
+    "restrictions_controlled_by": "Pendo and subscription admin",
+    "sources": [
+      "https://www.pendo.io/product/mcp/",
+      "https://www.pendo.io/pricing/",
+      "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server",
+      "https://support.pendo.io/hc/en-us/articles/50293561169435-Authenticate-to-the-Pendo-MCP-server-with-a-service-account"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool reference organizes tools by product area and describes data access and write operations. It says most tools are read-only, with some that submit or modify Pendo data. The extracted official tool names are in actions.json.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Structured responses are documented; exact wire-level response and error schemas are NOT FOUND.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint’s protected-resource metadata advertises the mcp:resources scope, but the reviewed docs do not establish whether MCP resources are exposed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://app.pendo.io/.well-known/oauth-protected-resource/mcp/v0/shttp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt capability was documented in the reviewed material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP-specific request logging and audit details were not found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server",
+        "https://www.pendo.io/legal/privacy-policy/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling support was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots support was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The provided endpoint returned HTTP 401 and a WWW-Authenticate header linking to its protected-resource metadata. That document identifies https://app.pendo.io as the authorization server, supports bearer tokens in headers, and advertises scopes mcp:tools and mcp:resources. Authorization-server metadata supports authorization_code, refresh_token, and client_credentials grants; PKCE S256; registration endpoint https://app.pendo.io/oauth/v1/register; token endpoint https://app.pendo.io/oauth/v1/token; and token auth methods client_secret_post, none, private_key_jwt. The well-known root protected-resource document and OpenID configuration returned 404. Service-account docs specify 60-minute access tokens without refresh tokens.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://app.pendo.io/.well-known/oauth-protected-resource/mcp/v0/shttp\", error=\"invalid_token\", error_description=\"the token could not be validated\"",
+      "post_interaction_context_structure": "Authentication failures can return HTTP 401; the supplied response says “the token could not be validated.”",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://app.pendo.io/oauth/v1/register; grants authorization_code, refresh_token, client_credentials; PKCE S256; token auth methods client_secret_post, none, private_key_jwt; scopes_supported: mcp:tools, mcp:resources. Service-account documentation additionally specifies scope read:me for its token request. Interactive OAuth session maximum is subscription-configured; service-account tokens last 60 minutes and have no refresh token. Revocation: service account deletion permanently revokes credentials; interactive token revocation details NOT FOUND.",
+      "authorization_server": "https://app.pendo.io",
+      "sources": [
+        "https://app.pendo.io/mcp/v0/shttp",
+        "https://app.pendo.io/.well-known/oauth-protected-resource",
+        "https://app.pendo.io/.well-known/oauth-protected-resource/mcp/v0/shttp",
+        "https://app.pendo.io/.well-known/oauth-authorization-server",
+        "https://app.pendo.io/.well-known/openid-configuration",
+        "https://support.pendo.io/hc/en-us/articles/50293561169435-Authenticate-to-the-Pendo-MCP-server-with-a-service-account",
+        "https://support.pendo.io/hc/en-us/articles/41102236924955-Connect-to-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation or server-enforced confirmation flow was documented. Client-side tool approval settings are described for Claude.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/41102236924955-Connect-to-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP tasks support was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Subscription admins can enable read-only tools and separately enable write tools in Settings > Subscription settings > AI access. Regional URL selection determines the data region. Service-account setup scopes access to one subscription and selected applications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/41102236924955-Connect-to-the-Pendo-MCP-server",
+        "https://support.pendo.io/hc/en-us/articles/50293561169435-Authenticate-to-the-Pendo-MCP-server-with-a-service-account"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tool reference documents selected input limits and errors for invalid historical metadata requests, but a general MCP error-reporting capability was not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific errors are described; general error schema Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was documented. Pendo subscriptions are product-level scopes for account access, not documented MCP subscriptions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notifications were documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation support was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Server instructions sent during MCP initialization were not available. External Pendo AI skills and plugins provide additional agent workflows, but are distributed separately from the server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://support.pendo.io/hc/en-us/articles/55314910809755-Overview-of-Pendo-AI-skills",
+        "https://github.com/pendo-io/claude-pendo-plugin"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official tool reference describes read and write operations; the overview says read-only tools are enabled by default after MCP is enabled, while write tools require admin opt-in. MCP tool annotations were not published. 2. No server-enforced confirmation parameter or approval flow was documented. Claude connector users can configure tools as “Always allow” or “Needs approval”; this is client-side. 3. Access uses Pendo user permissions or service-account permissions and regional isolation. Admin toggles control MCP and writes. Service accounts are limited to one subscription and selected applications; up to 25 per subscription. Interactive OAuth session duration is configured by an admin and refreshing does not extend it. 4. Five regional endpoints are documented. Read-only/write controls are subscription settings, not documented URL modes. 5. Pendo states data is encrypted in transit, customer data is separated, and the server uses existing permissions. No MCP-specific field masking was found. 6. Tool docs give specific bounds, including date-range maximums, up to 10 property conditions, and guide/query constraints; a general rate limit or MCP call cost was not found. 7. Tool-specific input constraints are documented; general unknown-argument handling or automatic correction was not found. 8. MCP-specific logging, audit trail, telemetry, and opt-out details were not found. 9. Overview asks users to fill out a Pendo MCP Survey. The published tools include feedback submission and feedback analysis functions; no tool descriptions were available here to establish agent-directed feedback wording or upsell results. 10. Pendo separately distributes plugins and skills, including workflows requiring MCP. They are not evidence of server-enforced instructions. 11. No persistence of past agent behavior was documented. 12. Regional server instances and a separate Novus endpoint exist; the input server’s tool reference is grouped by product area. 13. A raw API, arbitrary SQL, or script-execution escape hatch was not found in the official tool reference.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“When a tool supports both, your AI client uses historical metadata unless you ask for current or latest values.”",
+      "“The full segment definition must be provided in a single call; it can't be built incrementally across multiple requests.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Pendo documents region-specific endpoint URLs and a separate Novus MCP endpoint. The input endpoint’s tool list is otherwise presented as one server grouped by product area.",
+    "sources": [
+      "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+      "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server",
+      "https://support.pendo.io/hc/en-us/articles/41102236924955-Connect-to-the-Pendo-MCP-server",
+      "https://support.pendo.io/hc/en-us/articles/50293561169435-Authenticate-to-the-Pendo-MCP-server-with-a-service-account"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "98",
+    "action_count_comment": "Official tool reference exists at https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents. The list saved to actions.json contains 98 extracted official tool-name candidates from that page; no official total was stated. No catalogue-only tools were added. Third-party catalogues were checked for cross-reference, but did not provide a verified additional native tool list. Parameters and concise descriptions are not reproduced in the tool-name extraction file.",
+    "actions": [
+      {
+        "tool_name": "accountMetadataSchema",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "acquisitionTrend",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "addOrchestrateJourneyConditionNode",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "addOrchestrateJourneyEmailNode",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "agentAnalyticsConversationAnalysis",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "agentAnalyticsIssueAnalysis",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "agentAnalyticsKeyMetrics",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "agentAnalyticsTrackedIssueAnalysis",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "agentAnalyticsTrackedUseCaseAnalysis",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "agentAnalyticsUseCaseAnalysis",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "aggregateEntityUsage",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "aggregateGuideMetrics",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "appUsage",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "appUsageTimeSeries",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "buildPendoSegment",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cohortRetentionCurve",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "commandCenterApps",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createFeedbackItem",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createIdeaItem",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createOrchestrateEmail",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createOrchestrateJourneyFromJson",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createOrchestrateJourneyFromTemplate",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createSegment",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deleteSegment",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "devlogEvents",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "entityUsage",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "entityUsageTimeSeries",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generateFeedbackTopics",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getEntity",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getFeedbackInsights",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getFeedbackItems",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getIdeas",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateEmail",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateEmailMetrics",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateEmailVisitors",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateJourney",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateJourneyMetrics",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateJourneyStepMetrics",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateJourneySteps",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateJourneyStepVisitors",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateJourneyVisitors",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateVisitorEmails",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getOrchestrateVisitorJourneyState",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getSegment",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "guideEffectivenessMetrics",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "guidePollResponses",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "guideSetSegment",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "guideSetState",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "guideUsage",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "linkIdeaAndFeedback",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listAccounts",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listAiAgentIssues",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listAiAgents",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listAllApplications",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listBusinessObjectMetadata",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listCountables",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listCustomObjects",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listGuideCategories",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listGuideExperiments",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listGuideOrdering",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listGuides",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listOrchestrateEmails",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listOrchestrateJourneys",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listOrchestrateJourneyTemplates",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listPagesFeaturesAndEvents",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listProductAreas",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listSurveys",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listTrackedIssues",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listTrackedUseCases",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listUseCases",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listVisitors",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "objectAnalyticsActiveCount",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "objectAnalyticsBreakdown",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "objectAnalyticsTimeSeries",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "objectEventBreakdown",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "productAreaMemberActivity",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "queryFunnel",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resolveBusinessObject",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "resolveObjectInstance",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchEntities",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "segmentList",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sessionReplayList",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sessionReplaySummarize",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "setOrchestrateJourneyDescription",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "setOrchestrateJourneyGoal",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "setOrchestrateJourneyName",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "setOrchestrateJourneySchedule",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "setOrchestrateJourneySegment",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "surveyResponses",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "surveyScores",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unlinkIdeaFeedback",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateCommandCenterApp",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateFeedbackItem",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateIdeaItem",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateOrchestrateEmailContent",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "updateSegment",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "visitorActivity",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "visitorMetadataSchema",
+        "description": "Officially documented Pendo MCP tool; see tool reference for its purpose and limits.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public implementation or verbatim initialize/tool-definition payload was available. Public plugin repository contains client skills and configuration, not the hosted server’s pre-interaction context.",
+    "human_can_agent_cannot": "Humans can create and manage service accounts, configure AI access, manage subscriptions, and activate Orchestrate journeys through Pendo interfaces. The documented MCP Orchestrate tools create and configure draft journeys; activation remains in Orchestrate. Source: https://support.pendo.io/hc/en-us/articles/55314910809755-Overview-of-Pendo-AI-skills and https://support.pendo.io/hc/en-us/articles/50293561169435-Authenticate-to-the-Pendo-MCP-server-with-a-service-account",
+    "sources": [
+      "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents",
+      "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server",
+      "https://www.pendo.io/pricing/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The tool guide recommends using metadata schema tools to identify query fields and explains that tools may be combined to answer complex questions. Pendo’s documentation says the AI client can be asked for current metadata when needed. No public server code was available to verify enforcement.",
+    "governance_promises": "Pendo says MCP data is encrypted in transit and handled under the policies governing customer separation and retention. The server uses the same roles, access controls, and regions that apply in Pendo. External clients’ handling of prompts and responses is governed by their own data-use policies and agreements.",
+    "promises_to_user": "Pendo describes the server as a way to query product usage, metadata, guides, and insights from compatible external AI clients. The overview requests feedback through a Pendo MCP Survey.",
+    "comparison_with_server_logic": "Admin toggles, regional routing, OAuth, account permissions, and service-account scope are documented controls. Encryption and customer data separation are governance statements; implementation details were not available in public server code. External-client data handling is explicitly outside Pendo’s MCP-specific control after delivery.",
+    "sources": [
+      "https://support.pendo.io/hc/en-us/articles/51020341547419-Overview-of-the-Pendo-MCP-server",
+      "https://support.pendo.io/hc/en-us/articles/27879734620059-Artificial-intelligence-AI-at-Pendo",
+      "https://support.pendo.io/hc/en-us/articles/42476316360731-Pendo-MCP-tools-for-AI-agents"
+    ]
+  },
+  "contradictions": [
+    "The protected-resource metadata advertises mcp:tools and mcp:resources, while reviewed documentation does not establish whether resources are actually exposed.",
+    "The official overview says read-only tools are enabled by default, while connection instructions require a subscription admin to turn on the read-only MCP toggle before users can connect. The “default” description appears to refer to tool category availability once MCP is enabled."
+  ],
+  "observations_for_research": [
+    "The server exposes both read-only and write-capable tool categories, with separate subscription-admin toggles.",
+    "Regional routing and role inheritance are documented as part of access control; service-account access can be narrowed to selected applications.",
+    "The input endpoint is OAuth-protected and has path-specific protected-resource metadata; the root protected-resource and OpenID configuration URLs returned 404."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared pages, links.json, links_check.txt, local plugin repository, and provided OAuth responses. The local repository is a client-side skills/plugin project, not deployed server code; therefore no deployed implementation language, SDK, line-pinned code behavior, annotations, or tool schemas could be verified. The 98 entries in actions.json are an extraction of camel-case name candidates from the official reference, with no official total stated; review against the article’s full tool tables is still needed before treating the file as a validated complete tool inventory. Catalogue pages were checked but not used as evidence. The official Pendo overview page and input endpoint are documented as Pendo MCP; regional URLs are official documented variants.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": "n/a (answer of an earlier run repaired)"
+  }
+}

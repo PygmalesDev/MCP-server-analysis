@@ -1,0 +1,573 @@
+{
+  "server": "dropbox",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.dropbox.com/mcp",
+    "documentation_url_csv": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+      "https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server",
+      "https://help.dropbox.com/integrations/chatGPT-app",
+      "https://www.dropbox.com/plans?tab=personal",
+      "https://www.dropbox.com/en_GB/resources/mcp-risks",
+      "https://www.dropbox.com/en_GB/resources/mcp-server-best-practices",
+      "https://claude.com/connectors/dropbox",
+      "https://martechdb.com/vendors/dropbox",
+      "https://www.gamut.so/mcp/documents-content/dropbox"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "No public source code for this hosted endpoint was found. Dropbox's public mcp-server-dash repository is a separate Dash server and is not evidence of the code deployed at this endpoint.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "Beta, as described by the Claude connector directory; Dropbox Help does not state a release status.",
+    "other_official_servers": [
+      "Dropbox Dash MCP: https://help.dropbox.com/integrations/set-up-MCP-server; separate server with Dash search and read-only source actions.",
+      "Dropbox API documentation MCP: https://docs.dropboxapi.com/_mcp/server; separate documentation server.",
+      "Dropbox Claude connector endpoint: https://mcp.dropbox.com/claude_app_mcp; Claude directory lists 18 tools, a distinct endpoint from the input URL.",
+      "DocSend MCP: https://docsend.com/mcp; separate product endpoint."
+    ],
+    "sources": [
+      "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+      "https://help.dropbox.com/integrations/set-up-MCP-server",
+      "https://claude.com/connectors/dropbox",
+      "https://docs.dropboxapi.com/_mcp/server"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific fee or limit was found in the Dropbox Help page. The MCP server requires a connected Dropbox account; Dropbox Sign features additionally require a Dropbox account connected to a Dropbox Sign account.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Dropbox plans page lists a Basic free plan and paid plans; plan prices and billing units vary by region and were not captured as stable values here.",
+    "pricing_model_details": "MCP-specific pricing, per-call charges, and call quotas were not found. Dropbox plan features include different file recovery periods; the MCP tool list states supported content size limits for some tools.",
+    "other_access_restrictions": "OAuth connection and user-granted scopes are required. File and Paper access follows the authenticated account's permissions. Paper tools are documented for Claude Code, Cursor, and Codex. Dropbox Sign requires an account connection. No MCP-specific rate limit, client allowlist, or admin enablement requirement was found.",
+    "restrictions_controlled_by": "Dropbox controls OAuth scopes and service availability; the account owner grants access; source-system permissions constrain accessible content.",
+    "sources": [
+      "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+      "https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server",
+      "https://www.dropbox.com/plans?tab=personal"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Dropbox documents 25 named core file tools, and separately describes Dropbox Sign and Paper tool capabilities without publishing their MCP tool names in the Help article. The tools cover file discovery, reading, sharing, modification, recovery, and content conversion.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Dropbox Help describes tool-specific results such as folder contents, file metadata, extracted text, shared-link details, job status, and transcription or Markdown output. Exact JSON schemas and error formats are not published there.",
+      "authorization_mechanism": "OAuth bearer authorization is required. The endpoint's protected-resource metadata identifies resource https://mcp.dropbox.com/mcp; authorization server https://www.dropbox.com; scopes_supported: account_info.read, file_requests.read, file_requests.write, files.content.read, files.content.write, files.metadata.read, files.metadata.write, sharing.read, sharing.write. Authorization-server metadata: authorization_endpoint https://www.dropbox.com/oauth2/authorize; token_endpoint https://api.dropboxapi.com/oauth2/token; revocation_endpoint https://api.dropboxapi.com/2/auth/token/revoke; registration_endpoint https://www.dropbox.com/oauth2/register; grant types authorization_code, client_credentials, refresh_token, device_code, urn:ietf:params:oauth:grant-type:jwt-bearer; PKCE methods plain and S256; token endpoint auth methods client_secret_post, client_secret_basic, none, private_key_jwt. Token lifetime not provided.",
+      "authorization_server": "https://www.dropbox.com",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Dropbox's endpoint documentation does not specify MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Dropbox's endpoint documentation does not specify MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No endpoint-specific logging behavior or logging capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No endpoint-specific sampling behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No endpoint-specific roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate identifying a protected-resource metadata URL and reporting a missing bearer token. The supplied metadata links the resource to Dropbox OAuth. Dropbox says users connect through OAuth and grant access.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://mcp.dropbox.com/.well-known/oauth-protected-resource/mcp\", error=\"invalid_token\", error_description=\"missing bearer token\"",
+      "post_interaction_context_structure": "Unauthenticated request returns HTTP 401 and the text 'missing bearer token'.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration endpoint is advertised. Protected-resource metadata lists the nine scopes in the Tools entry. Authorization-server metadata lists authorization code, client credentials, refresh token, device code, and JWT bearer grants; PKCE plain and S256; token auth methods client_secret_post, client_secret_basic, none, private_key_jwt. Revocation endpoint is advertised. No token lifetime is stated. The origin-level protected-resource metadata URL returned HTTP 429; the path-specific metadata returned HTTP 200.",
+      "authorization_server": "https://www.dropbox.com",
+      "sources": [
+        "https://mcp.dropbox.com/mcp",
+        "https://mcp.dropbox.com/.well-known/oauth-protected-resource",
+        "https://mcp.dropbox.com/.well-known/oauth-protected-resource/mcp",
+        "https://www.dropbox.com/.well-known/oauth-authorization-server",
+        "https://www.dropbox.com/.well-known/openid-configuration",
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP elicitation support is documented. Dropbox says supported apps require review and confirmation for some Dropbox Sign actions; whether the MCP server enforces this via elicitation is unspecified.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Dropbox documents asynchronous processing for large transcript and Markdown operations and background copy, move, delete, or restore operations with a status-check tool. It does not identify MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Background operation status is retrieved through CheckJobStatus; MCP task protocol support is unknown.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint URL and OAuth scopes are documented. Dropbox says changes to app settings, such as adding a scope, require reconnecting. No URL tool filters, read-only mode, or configuration headers are documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No endpoint-specific MCP error reporting capability or error schema is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The unauthenticated endpoint response is HTTP 401 with 'missing bearer token'; other error structures are unknown.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://mcp.dropbox.com/mcp",
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Dropbox documents CheckJobStatus for background copy, move, delete, and folder restore operations, plus asynchronous processing for large transcript and Markdown jobs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "CheckJobStatus returns status for supported background operations; response schema is not published.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Dropbox documents cancellation of pending Dropbox Sign signature requests, but not MCP protocol cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The Help article describes distinct Dropbox Sign and Paper tool capabilities but does not provide their machine names or initialize instructions. Sign covers signature requests; Paper supports reading, creating, editing, reviewing, replacing, and deleting document content.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official tool list documents read and write operations but no MCP tool annotations. Delete moves items to Deleted files and is not described as permanent deletion. 2. Dropbox Sign docs say users must review and confirm sending signature requests, reminders, and cancellations; enforcement mechanism is unspecified. 3. OAuth scopes are account-granted; Dropbox says tools use the authenticated account's existing permissions. OAuth metadata advertises registration, grants, PKCE, and revocation; token lifetime and admin controls were not found. 4. No documented read-only endpoint, toolset filter, or mode parameter for this endpoint. 5. Paper access is limited to documents the user already has permission to access. File text extraction supports files up to 5 MB; CreateFile supports inline content up to 5 MB; GetTranscript and GetMarkdown document supported formats and asynchronous processing for large jobs. 6. ListFolder returns up to 100 items; Search supports pagination; ListFileRevisions returns up to 100 revisions. No MCP rate limit or per-call cost found. 7. Exact schema validation, correction, and operator argument overrides are unknown because code and schemas are not public. 8. MCP-specific logging, audit trail, and telemetry behavior not found. 9. No feedback/rating action in the official named list. Sign tools include user confirmation requirements; no upsell instruction found. 10. No initialize instructions or server-delivered skills found in official docs. 11. No persistent agent memory documented. 12. Flat endpoint tool listing is documented; Sign and Paper are described as additional tool families, but names and dynamic loading behavior are not specified. 13. No raw API, SQL, or script execution tool appears in the official named list.",
+    "behavioural_instructions_to_ai_verbatim": [],
+    "server_structure": "Standard",
+    "server_structure_explanation": "Dropbox documents one hosted endpoint with a flat core tool list. Additional Sign and Paper capabilities are described without tool names or evidence of sub-server delegation.",
+    "sources": [
+      "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+      "https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server",
+      "https://mcp.dropbox.com/.well-known/oauth-protected-resource/mcp",
+      "https://www.dropbox.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "25 named core tools; additional Sign and Paper tools described without names",
+    "action_count_comment": "Dropbox's official tool list is at https://help.dropbox.com/integrations/connect-dropbox-mcp-server and names 25 core tools. It states no total count. The article separately describes Sign and Paper tool families but provides no machine names, so those actions cannot be enumerated in actions.json. No catalogue-only actions were added: the Claude connector listing is for a different documented endpoint path (/claude_app_mcp), and Composio lists a broad Dropbox API toolkit rather than this endpoint's tool list. MartechDB reports 25 tools, matching the official named core list; Gamut describes the endpoint but does not provide a more complete named list.",
+    "actions": [
+      {
+        "tool_name": "ListFolder",
+        "description": "List directory contents and paginate through entries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "GetFileMetadata",
+        "description": "Get basic file information.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "GetFileContent",
+        "description": "Extract text from supported documents up to 5 MB.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "GetUsageAndQuota",
+        "description": "Retrieve current storage usage and quota.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Search",
+        "description": "Search files and folders by name or content.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "CreateFolder",
+        "description": "Create a folder at a Dropbox path.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "CreateFile",
+        "description": "Create a text oriented file from inline UTF-8 content.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "CreateSharedLink",
+        "description": "Create a shared link and optionally invite viewers.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "WhoAmI",
+        "description": "Get authenticated user identity and account context.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Copy",
+        "description": "Copy files or folders to another Dropbox location.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Move",
+        "description": "Move or rename files or folders.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Delete",
+        "description": "Move files or folders to Deleted files.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "CheckJobStatus",
+        "description": "Check background copy, move, delete, or restore status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "DownloadLink",
+        "description": "Create a temporary single use download link.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ListSharedLinks",
+        "description": "List shared links owned by the signed in user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "GetSharedLinkMetadata",
+        "description": "Get shared link audience and settings.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "CreateFileRequest",
+        "description": "Create a file request for a destination folder.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "GetFileRequest",
+        "description": "Get details for a file request by ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ListFileRequests",
+        "description": "List file requests owned by the user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ListFileRevisions",
+        "description": "List file revision history.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "RestoreFileRevision",
+        "description": "Restore an older file revision.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ListRestoreEvents",
+        "description": "List file and folder activity.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "RestoreFolder",
+        "description": "Restore a folder to an earlier point in time.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "GetTranscript",
+        "description": "Transcribe audio or video into timestamped text.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "GetMarkdown",
+        "description": "Convert supported documents to Markdown.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted server is closed source and no verbatim full tool definitions or initialize instructions were available; therefore the tool definition plus instruction character-count method cannot be applied.",
+    "human_can_agent_cannot": "Dropbox Sign features not available via MCP include creating requests from account templates or the template gallery, advanced signer fields, signing-order workflows, AI-generated templates, updating or managing account branding, and multi-step automation. Dropbox Help lists other standalone Dropbox product features and REST API capabilities outside the MCP tool list, but this review does not treat them as MCP actions. Sources: https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server; https://www.dropbox.com/plans?tab=personal",
+    "sources": [
+      "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+      "https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server",
+      "https://martechdb.com/vendors/dropbox",
+      "https://claude.com/connectors/dropbox",
+      "https://www.gamut.so/mcp/documents-content/dropbox"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Dropbox's general MCP security guidance recommends least-privilege scopes, reviewing tool lists, validating parameters, and requiring confirmation for high-impact actions. These are general recommendations and are not documented as enforced endpoint behavior. The Sign-specific article says users must review and confirm specified actions, without describing how the server enforces that requirement.",
+    "governance_promises": "Dropbox says Paper tools use the authenticated account and can access only documents the user already has permission to access. Dropbox's general MCP risks page says access depends on granted scopes, available tools, and source permissions. The endpoint-specific page does not state retention, AI-training, or MCP-call logging policies.",
+    "promises_to_user": "Dropbox describes the integration as securely accessing files, folders, and supported Paper documents inside LLM environments, using existing account permissions.",
+    "comparison_with_server_logic": "Permission inheritance is documented and reflected in the stated OAuth scopes and account-based access, but enforcement internals cannot be inspected. General advice on logging, narrow scopes, and confirmation is guidance, not verified server-side logic. Sign confirmation is stated as a requirement, but enforcement details are unspecified.",
+    "sources": [
+      "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+      "https://www.dropbox.com/en_GB/resources/mcp-risks",
+      "https://www.dropbox.com/en_GB/resources/mcp-server-best-practices",
+      "https://help.dropbox.com/integrations/dropbox-sign-mcp-remote-server"
+    ]
+  },
+  "contradictions": [
+    "The Claude connector directory lists the separate Dropbox endpoint https://mcp.dropbox.com/claude_app_mcp and 18 tools; this is not the input endpoint https://mcp.dropbox.com/mcp. Its tools were not included.",
+    "The endpoint's protected-resource metadata advertises files.content.write and files.metadata.write scopes, while the core official named list includes file and folder write actions; the OAuth scope list also includes file_requests.write, matching CreateFileRequest."
+  ],
+  "observations_for_research": [
+    "Dropbox documents user-permission inheritance and separate scopes for metadata, content, sharing, and file requests; the supplied endpoint metadata does not expose team-level scopes.",
+    "The core list includes reversible deletion to Deleted files, revision restoration, and folder rewind alongside file creation, movement, and sharing.",
+    "Dropbox's documentation presents additional Paper and Dropbox Sign capabilities alongside the core file list but omits their tool names, limiting completeness of the enumerable action inventory."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, all relevant prepared pages and HTML, and the two local Dropbox repositories. No official repository for this hosted endpoint was found. The local Dropbox Dash MCP repository is a separate server and was excluded from actions. Unofficial GitHub Dropbox MCP projects were identified but excluded. OAuth metadata values were supplied in the research prompt; the origin protected-resource URL returned HTTP 429, while the endpoint-path metadata returned HTTP 200. Official Help lists 25 core names but does not publish schemas or names for its Sign and Paper tool families.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.8
+  }
+}

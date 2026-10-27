@@ -1,0 +1,459 @@
+{
+  "server": "demandbase",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://developer.demandbase.com/mcp",
+    "documentation_url_csv": "https://developer.demandbase.com/docs/welcome",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://developer.demandbase.com/docs/mcp",
+      "https://developer.demandbase.com/docs/get-started-with-demandbase-mcp",
+      "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+      "https://developer.demandbase.com/docs/demandbase-mcp-tool-details",
+      "https://developer.demandbase.com/docs/custom-mcp-clients",
+      "https://developer.demandbase.com/docs/instructions",
+      "https://developer.demandbase.com/docs/troubleshoot-demandbase-mcp-and-understand-unsupported-requests",
+      "https://developer.demandbase.com/docs/understanding-demandbase-api-access-and-licensing",
+      "https://support.demandbase.com/hc/en-us/articles/26668967193627-Understanding-the-Demandbase-API-Suite-and-MCP",
+      "https://support.demandbase.com/hc/en-us/articles/4408096198811-Understanding-Permission-Sets"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official public source repository or package was found. The documented hosted server is https://gateway.demandbase.com/mcp/servers/db-mcp; documentation does not establish that it is the same deployment as the supplied developer.demandbase.com/mcp endpoint.",
+    "mcp_protocol_version": "2025-03-26 is shown as an illustrative initialize request; clients are instructed to negotiate and honor the server response.",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "NOT FOUND",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://gateway.demandbase.com/mcp/servers/db-mcp — the hosted Demandbase MCP endpoint documented for client connections; documentation calls this path an example to confirm for each integration."
+    ],
+    "sources": [
+      "https://developer.demandbase.com/mcp",
+      "https://developer.demandbase.com/docs/mcp",
+      "https://developer.demandbase.com/docs/custom-mcp-clients",
+      "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "Demandbase states that an MCP license is required. The official public pricing page does not provide an MCP price; it directs visitors to request a customized plan.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Demandbase pricing is customized; the public page describes a platform fee plus a flat fee per user, without amounts.",
+    "pricing_model_details": "The official MCP tools overview gives per-tool credit defaults and maximums; the pricing page does not state credit prices. A third-party StackMCP listing reports one credit per returned record, one credit per full Account Brief, no charge for zero-result or failed requests, and no charge for repeat queries within five minutes; treat those details as third-party evidence.",
+    "other_access_restrictions": "MCP tenant enablement and a Permission Set with Full Access or Limited Access are required. Availability and data depend on licensing, entitlement, and user permissions. The endpoint requires OAuth bearer authorization.",
+    "restrictions_controlled_by": "Demandbase controls licensing, tenant enablement, endpoint authentication, and entitlements; the customer organization controls assigned Permission Sets.",
+    "sources": [
+      "https://developer.demandbase.com/docs/understanding-demandbase-api-access-and-licensing",
+      "https://developer.demandbase.com/docs/get-started-with-demandbase-mcp",
+      "https://support.demandbase.com/hc/en-us/articles/4408096198811-Understanding-Permission-Sets",
+      "https://www.demandbase.com/pricing/",
+      "https://mcpforgtm.com/tools/demandbase"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Official documentation lists 12 tools across internal tenant data, global B2B intelligence, account intent, keyword-set analysis, buying groups, account briefs, and feedback. The docs direct clients to tools/list for current machine names and schemas. The supplied endpoint itself has only an authorization-required response; the list is documented for Demandbase MCP generally and its gateway endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Custom-client documentation describes JSON-RPC tools/call responses and errors, JSON or SSE transport, and tool-level isError handling. Tool result schemas are not published in full for every tool.",
+      "authorization_mechanism": "Bearer authorization required at supplied endpoint: HTTP 401, WWW-Authenticate: Bearer realm=\"mcp\"; JSON-RPC error {\"code\":-32001,\"message\":\"Authorization required\"}. The supplied endpoint's OAuth protected-resource, authorization-server, and OpenID well-known URLs all returned HTTP 404. For the separately documented gateway host, Demandbase describes OAuth 2.0 Authorization Code with PKCE (S256) and Dynamic Client Registration; example authorization scope is openid profile email. The guide says discovery returns scopes_supported, but does not publish its complete values. It reports a verified 86400-second token example and no refresh token in the tested flow.",
+      "authorization_server": "For documented gateway configuration, authentication.demandbase.com; the supplied endpoint's provided well-known metadata did not identify an authorization server.",
+      "sources": [
+        "https://developer.demandbase.com/mcp",
+        "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The reviewed Demandbase MCP documentation describes tools and their calls but does not state whether the server exposes MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Documentation contains recommended instructions for AI clients, but does not establish that these are MCP prompts served through the protocol.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/instructions",
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The reviewed MCP documentation does not describe server-side MCP call logging, audit records, or telemetry.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/mcp",
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No reviewed official documentation describes MCP sampling support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No reviewed official documentation describes MCP roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The supplied endpoint returns HTTP 401 with a Bearer challenge and JSON-RPC authorization-required error. Its four supplied well-known OAuth/OIDC metadata URLs returned HTTP 404. The separate official custom-client guide documents gateway-host discovery, DCR, Authorization Code with PKCE S256, HTTPS callback allowlisting, and bearer tokens.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer realm=\"mcp\"\n{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32001,\"message\":\"Authorization required\"},\"id\":null}",
+      "post_interaction_context_structure": "OAuth guide example shows a bearer access token, token_type Bearer, expires_in 86400, and scope email openid profile; it says the tested flow did not return a refresh token.",
+      "authorization_mechanism": "Supplied endpoint raw evidence: HTTP 401; WWW-Authenticate: Bearer realm=\"mcp\"; JSON-RPC error code -32001, message Authorization required. Supplied endpoint metadata: /.well-known/oauth-protected-resource, /.well-known/oauth-protected-resource/mcp, /.well-known/oauth-authorization-server, and /.well-known/openid-configuration each HTTP 404. Official gateway guide: OAuth 2.0 DCR plus Authorization Code and PKCE S256; token endpoint auth method none; HTTPS redirect URIs must be allowlisted separately from DCR. Example requested scopes are openid profile email; complete scopes_supported list is not published. Example token expires_in is 86400 seconds; tested flow did not return refresh token.",
+      "authorization_server": "The official gateway guide identifies authentication.demandbase.com as the authorization-server host. It did not establish that this is the authorization server for the supplied developer.demandbase.com endpoint.",
+      "sources": [
+        "https://developer.demandbase.com/mcp",
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The docs recommend that AI agents ask users clarifying questions, but do not say this uses MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/instructions"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No reviewed official documentation describes MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Docs describe tenant enablement and Permission Set access, but do not describe an MCP configuration capability or toolset configuration protocol.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/get-started-with-demandbase-mcp",
+        "https://support.demandbase.com/hc/en-us/articles/4408096198811-Understanding-Permission-Sets"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The client guide instructs clients to inspect JSON-RPC errors and tool-level isError. This documents response handling, not a separate MCP error-reporting capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "JSON-RPC errors and tool-level isError are described; full error schemas are not published.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/custom-mcp-clients",
+        "https://developer.demandbase.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No reviewed official documentation describes MCP subscription support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No reviewed official documentation describes MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No reviewed official documentation describes MCP cancellation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Official docs provide recommended AI-agent instructions outside the server and describe Streamable HTTP sessions, JSON/SSE response handling, and a tools/list discovery flow. The available documentation does not reproduce initialize instructions sent by the server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The client guide describes JSON-RPC POST requests and JSON or SSE responses, session ID preservation when returned, and negotiated protocol-version headers when required.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://developer.demandbase.com/docs/instructions",
+        "https://developer.demandbase.com/docs/custom-mcp-clients"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official overview describes the MCP tools as read-only. The tool reference explicitly calls Rank Keyword Sets and Evaluate Keyword Set read-only. Submit Feedback accepts and records feedback, creating a documented write-like action that conflicts with the general read-only statement. No tool annotations are published in the reviewed docs. 2. No server-enforced confirmation flow is documented. Agent clarification recommendations are client instructions. 3. Docs say MCP respects Demandbase permissions and returns only authorized data; tenant enablement and Full Access or Limited Access Permission Sets are required. Gateway OAuth docs describe DCR, PKCE S256, callback allowlisting, and bearer auth. Supplied endpoint well-known metadata returned 404; scopes_supported values, token revocation, and client allowlists beyond redirect URIs are not established. 4. Docs describe one gateway endpoint example and do not document read-only modes, tool filters, query-free mode, or regional variants. 5. Internal tenant data is permission-scoped. No separate MCP PII masking or secret-redaction rules were found. 6. Official overview publishes per-tool credit default/maximums: generally 5/default and tool-dependent maxima, including 100, 50/page, and one account brief; details vary by tool. StackMCP reports one credit per returned record and several no-charge cases, but that cost detail is third-party. Docs also mention paging and tool-level caps; limits include keyword ranking top 50 and evaluation up to 2,000 keywords. 7. Instructions tell agents to use only schema parameters, avoid invented values, normalize parameters, and resolve configured values first. Enforcement beyond documented validation is not described. 8. MCP-specific logging, audit trails, and telemetry were not found. 9. Submit Feedback can send user-related request context and feedback to Demandbase; its schema accepts originalRequest, feedback, related tool names/prompts, and feedback IDs. No upsell tool or message was found in the official list. 10. Server-delivered instructions were not available. Separate official agent instructions recommend MCP tool selection, clarifying questions, and limitations; the docs present these as client configuration recommendations. 11. The docs describe five-minute result caching for Rank Keyword Sets; whether any past agent behavior changes results or available tools is not documented. 12. No proxy hierarchy or nested server architecture is documented. The supplied endpoint differs from the gateway endpoint named in official setup material. 13. No raw API, SQL, script, or general-purpose escape-hatch tool appears in the official tool inventory.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Use MCP tools for all Demandbase data requests.",
+      "Don't answer from general knowledge when the user requests company, contact, account, or person data.",
+      "If no MCP tool supports the request, explain the limitation instead of forcing a tool call.",
+      "Ask a clarifying question when the user's request doesn't map confidently to the supported parameters of an MCP tool.",
+      "When calling an MCP tool: Populate every required field defined by the tool schema.",
+      "Use only parameters defined by the tool schema.",
+      "Don't invent parameter names, values, identifiers, or unsupported filters.",
+      "If an MCP tool returns no results: Tell the user that no results were found."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The supplied endpoint is developer.demandbase.com/mcp, while official client setup names gateway.demandbase.com/mcp/servers/db-mcp. The docs do not explain whether these are aliases, distinct deployments, or different tool surfaces.",
+    "sources": [
+      "https://developer.demandbase.com/mcp",
+      "https://developer.demandbase.com/docs/mcp",
+      "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+      "https://developer.demandbase.com/docs/demandbase-mcp-tool-details",
+      "https://developer.demandbase.com/docs/instructions",
+      "https://developer.demandbase.com/docs/custom-mcp-clients",
+      "https://developer.demandbase.com/docs/troubleshoot-demandbase-mcp-and-understand-unsupported-requests",
+      "https://mcpforgtm.com/tools/demandbase"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "12",
+    "action_count_comment": "The official tool overview lists 12 tools at https://developer.demandbase.com/docs/demandbase-mcp-tools-overview. It does not publish a machine-name total or full current schemas; it says tools/list is authoritative. The official tool details page publishes parameter information for Retrieve Demandbase Reference Data, Rank Keyword Sets, Evaluate Keyword Set, Create Account Brief, and Submit Feedback. The remaining tools' parameters are not published there. Manufact lists six machine names for the documented gateway endpoint; Agent Discoverability also exposes those six names and client-instruction text. These third-party listings are incomplete relative to the 12-tool official inventory, so no extra catalogue-only actions were added. The public docs do not expose exact machine names for every action; actions.json uses the official tool labels as names where machine identifiers are not published.",
+    "actions": [
+      {
+        "tool_name": "Retrieve Demandbase Reference Data",
+        "description": "Retrieve tenant reference values for filters and follow-on lookups.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "originalRequest: string (required); referenceTypes: array (required; enum 7 categories); accountListFilters: object (optional); keywordFilters: object (optional); queryOptions: object (optional)",
+        "parameter_count": "5",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tool-details",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Search Internal Account Database",
+        "description": "Search and prioritize accounts in the customer’s internal Demandbase tenant.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Search Internal Person Database",
+        "description": "Find known Leads and Contacts in the internal Demandbase tenant.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Search External Global Company Database",
+        "description": "Search external companies using Demandbase global B2B intelligence.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Search External Global People Database",
+        "description": "Search people using Demandbase global B2B intelligence.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Find Net-New Contacts",
+        "description": "Find contacts absent from the customer’s internal Demandbase database.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Account-Level Intent",
+        "description": "Find accounts by configured intent keywords, strength, date, or trending intent.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Rank Keyword Sets",
+        "description": "Rank existing intent keyword sets against a campaign, product, or landing page.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "description: string (optional); keywords: array (conditional); page_url: string (conditional); buying_stage: string (optional; enum 3 categories); limit: integer (optional); page_token: string (optional)",
+        "parameter_count": "6",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tool-details",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Evaluate Keyword Set",
+        "description": "Measure keyword research alignment with CRM opportunity outcomes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: integer (conditional); keywordSetName: string (conditional); intent_research_period_days: integer (optional); opportunity_period_days: integer (optional); lead_time_days: integer (optional); page_size: integer (optional); page_token: string (optional)",
+        "parameter_count": "7",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tool-details",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Buying Group Insights",
+        "description": "Assess account buying group coverage and find people by membership.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Create Account Brief",
+        "description": "Return one consolidated account brief from internal and global data.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "originalRequest: string (required); accountId: string (optional); accountName: string (optional); domain: string (optional)",
+        "parameter_count": "4",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tool-details",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "Submit Feedback",
+        "description": "Submit structured feedback about MCP results or the Demandbase platform.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "originalRequest: string (required); category: string (required; enum 6 categories); feedback: string (required); toolNames: array (optional, max 50); relatedPrompts: array (optional, max 50); feedbackIds: array (optional, max 50)",
+        "parameter_count": "6",
+        "source": "https://developer.demandbase.com/docs/demandbase-mcp-tool-details",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public server code or verbatim complete tools/list plus initialize instructions were available to serialize and count.",
+    "human_can_agent_cannot": "Official troubleshooting docs list unsupported MCP requests: Advertising campaign data; person-level Intent; filtering companies by family-tree or competitor relationships; financial trend analytics (YoY, quarterly trends, CAGR); write/create/update/delete/enrich data; person lists; and person-level engagement windows other than seven days. The docs direct users to make data changes in Demandbase or their internal data sources. These are documented MCP limitations, not assertions that the underlying Demandbase product cannot perform these operations.",
+    "sources": [
+      "https://developer.demandbase.com/docs/demandbase-mcp-tools-overview",
+      "https://developer.demandbase.com/docs/demandbase-mcp-tool-details",
+      "https://developer.demandbase.com/docs/troubleshoot-demandbase-mcp-and-understand-unsupported-requests",
+      "https://manufact.com/mcp-catalog/demandbase",
+      "https://agentdiscoverability.com/track/chatgpt/demandbase"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The separate AI instructions recommend using MCP tools for Demandbase data, asking clarifying questions when parameters are ambiguous, obeying schemas, and not forcing unsupported requests. The documents describe these as recommendations for configuring agents; enforcement by the server is not established.",
+    "governance_promises": "Demandbase says: “Demandbase MCP is read-only. It respects existing Demandbase permissions and returns only data the user is allowed to access.” The troubleshooting page says changes must be made in Demandbase or internal data sources. The Submit Feedback tool nevertheless records submissions and accepts request context.",
+    "promises_to_user": "The official overview describes access to internal tenant data and global B2B intelligence through natural-language requests. The API licensing guide states an MCP subscription provides access to supported data through MCP without separate B2B API or Data Export API licenses.",
+    "comparison_with_server_logic": "Permission inheritance and read-only behavior are documented claims. No public server code was found to independently verify enforcement. The Submit Feedback tool's documented recording behavior is in tension with the broad read-only claim. Behavioral recommendations are client-side guidance; the docs do not claim the server enforces them.",
+    "sources": [
+      "https://developer.demandbase.com/docs/mcp",
+      "https://developer.demandbase.com/docs/instructions",
+      "https://developer.demandbase.com/docs/demandbase-mcp-tool-details",
+      "https://developer.demandbase.com/docs/troubleshoot-demandbase-mcp-and-understand-unsupported-requests",
+      "https://developer.demandbase.com/docs/understanding-demandbase-api-access-and-licensing"
+    ]
+  },
+  "contradictions": [
+    "The official overview describes Demandbase MCP as read-only and the troubleshooting page says write/create/update/delete/enrich operations are unsupported; the official tool details list Submit Feedback, whose successful response says the feedback “has been recorded.” This is a documented write-like exception or a mismatch in the broad read-only description.",
+    "The supplied endpoint is https://developer.demandbase.com/mcp, which returned HTTP 401 and a Bearer challenge; official setup docs identify https://gateway.demandbase.com/mcp/servers/db-mcp as an example endpoint and say the assigned path must be confirmed. The supplied host's provided OAuth well-known URLs returned 404.",
+    "The official MCP overview lists 12 tools, while Manufact lists six machine names for the gateway server. The official docs state that tools/list is authoritative; the catalogue's list is incomplete relative to the official overview."
+  ],
+  "observations_for_research": [
+    "Officially recommended agent instructions are maintained as separate client configuration text, while the public docs do not show equivalent server initialize instructions.",
+    "A dedicated Submit Feedback tool gives the agent a route to transmit user request context and feedback to the vendor; official docs do not describe a consent or confirmation requirement for invoking it.",
+    "Demandbase documents both tenant data and global B2B intelligence, with access constrained by licensing, tenant enablement, and Permission Sets."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/INDEX.txt, official docs copies and script extracts, supplied OAuth metadata, local code folder, pricing and terms pages, and Manufact, Work Insiders, StackMCP/MCP for GTM, and Agent Discoverability listings. No official repository or package was listed. The supplied endpoint's four provided OAuth/OIDC metadata URLs returned 404; separate gateway OAuth details come from the official custom-client guide. August and October support update pages returned 403 and were not used. The public official tool inventory names 12 tools, but exact machine identifiers and full schemas are not available for every tool; tools/list is designated authoritative by Demandbase. Official terms of use concern the website and are not treated as MCP-specific data-processing terms.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.1
+  }
+}

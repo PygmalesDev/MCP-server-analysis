@@ -1,0 +1,359 @@
+{
+  "server": "clarity-ai",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.clarity.ai/mcp",
+    "documentation_url_csv": "https://mcp.clarity.ai/",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://mcp.clarity.ai/",
+      "https://clarity.ai/in-the-news/clarity-ai-brings-compliance-grade-screening-into-claude-and-chatgpt/",
+      "https://claude.com/connectors/clarity-ai"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official public repository was found in the prepared repository list or local code folder. Clarity AI's announcement says Claude, ChatGPT, and custom enterprise agents use one underlying MCP server.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "The guide describes the connector as available today and under active development; no formal GA or beta label found.",
+    "other_official_servers": [
+      "https://clarity-sfdr20-mcp.pro.clarity.ai/mcp — separate Claude connector for SFDR 2.0 fund classification, listed with four tools; it is a different endpoint and product surface."
+    ],
+    "sources": [
+      "https://mcp.clarity.ai/",
+      "https://clarity.ai/in-the-news/clarity-ai-brings-compliance-grade-screening-into-claude-and-chatgpt/",
+      "https://claude.com/connectors/clarity-ai"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific price or charge is published in the guide. Accessed content is subject to the user's Clarity AI license agreement.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Specific plan names and prices were not published in the reviewed sources.",
+    "pricing_model_details": "The connector's data access is governed by each user's existing Clarity AI entitlements and license; no MCP per-call or credit pricing was found.",
+    "other_access_restrictions": "OAuth authorization is required. User account entitlements bound accessible mandates, portfolios, and data modules. The guide reports per-user rate limits without publishing thresholds. It describes approximately 15 minutes of MCP tool inactivity before reauthorization.",
+    "restrictions_controlled_by": "Clarity AI controls account entitlements and rate limits; organization access management is handled through Clarity support, while the user authorizes the connector.",
+    "sources": [
+      "https://mcp.clarity.ai/",
+      "https://mcp.clarity.ai/.well-known/oauth-protected-resource/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official hosted guide lists five read-only tools for portfolios, mandates, compliance reports, breach summaries, and company ESG scores. The assistant selects tools based on the query. The guide does not publish input schemas or MCP annotations.",
+      "pre_interaction_context_verbatim": "Under the hood, the connector exposes the following MCP tools. The AI assistant chooses among them based on your query; you'll see these names appear in tool-call references and in the per-tool permission settings.",
+      "post_interaction_context_structure": "The guide describes returned portfolio, mandate, compliance, breach, and ESG data, but does not specify the MCP result or error schema.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The guide does not document MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The guide does not document MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The guide advises users to retain a copy of AI-generated responses, queries, tool-call references, and timestamps when documenting an issue. It does not describe server-side MCP logging or audit records.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 without an Authorization header and advertised protected-resource metadata at the path-specific well-known URL. That metadata identifies api.clarity.ai as the authorization server and lists clarity:read and clarity:write scopes. The issuer metadata lists authorization-code and refresh-token grants, S256 PKCE, and dynamic client registration. Token lifetime and revocation details were not present in the supplied metadata.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"Missing Authorization header\", resource_metadata=\"https://mcp.clarity.ai/.well-known/oauth-protected-resource/mcp\"",
+      "post_interaction_context_structure": "The endpoint returned JSON error {\"error\":\"invalid_token\",\"error_description\":\"Missing Authorization header\"} when called without authorization.",
+      "authorization_mechanism": "Protected-resource metadata; OAuth authorization code and refresh token grants; Dynamic Client Registration at https://api.clarity.ai/clarity/v1/mcp/register; PKCE S256; token endpoint authentication methods client_secret_post and none; scopes_supported: clarity:read, clarity:write. The pathless protected-resource URL returned HTTP 404; the path-specific URL returned HTTP 200. The issuer's OpenID configuration returned HTTP 401. Token lifetime and revocation: NOT FOUND.",
+      "authorization_server": "https://api.clarity.ai",
+      "sources": [
+        "https://mcp.clarity.ai/mcp",
+        "https://mcp.clarity.ai/.well-known/oauth-protected-resource",
+        "https://mcp.clarity.ai/.well-known/oauth-protected-resource/mcp",
+        "https://api.clarity.ai/.well-known/oauth-authorization-server",
+        "https://api.clarity.ai/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP server-initiated elicitation is documented. The guide describes confirmation prompts as Claude client behavior.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No Tasks capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The guide directs users to the Clarity AI web application for configuration and data management; it does not document MCP configuration operations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The guide gives troubleshooting steps for connection, session expiry, and rate-limit errors, but does not specify MCP error formats or a server error-reporting feature.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Guide-described troubleshooting includes rate-limit errors; MCP error response structure is Unknown.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress-notification capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The guide provides recommendations about using the connector, checking data freshness, and selecting tools. It does not identify these as initialize instructions or publish handshake metadata.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.clarity.ai/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. All five documented tools are read-only; the guide says the connector does not create or edit mandates, portfolios, or thresholds. Tool annotations are not published. 2. Claude prompts for each tool call by default; users can change this in connector settings. The guide identifies this as Anthropic client behavior, not Clarity AI server enforcement. 3. OAuth scopes are clarity:read and clarity:write. The guide says access follows each user's Clarity AI entitlements; org-level restrictions are managed through Clarity support. Approx. 15-minute tool inactivity session expiry is documented; token expiry/revocation and redirect URI approval are not. 4. No read-only switch, tool filters, or environment variants for this endpoint are documented. 5. User entitlement boundaries restrict accessible data; the guide's privacy notice covers portfolio and account data but does not document field masking. 6. Per-user rate limits are enforced; thresholds, bulk caps, and per-call costs are not published. Results may be samples for breach tools, as stated in tool descriptions. 7. Input validation and parameter correction are not documented. 8. Server-side audit logging and telemetry are not documented; the guide asks users to retain details when reporting issues. 9. No feedback, rating, report, or upsell tools are listed. 10. The guide gives behavioral recommendations; it does not document server-delivered skills. 11. Guide says the assistant retains conversation context; recommends a new conversation when switching between portfolios or client reviews. 12. Vendor announcement describes one underlying MCP server across Claude, ChatGPT, and custom enterprise agents; separate SFDR 2.0 endpoint exists. 13. No raw API, SQL, script, or arbitrary execution tool is listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "The AI assistant chooses among them based on your query; you'll see these names appear in tool-call references and in the per-tool permission settings.",
+      "Users must disable web search before querying the connector.",
+      "The primary tool for any compliance check — use this when the user asks whether a portfolio passes or fails a mandate, asks for a compliance score, or asks about threshold values.",
+      "Always search all mandate metrics (not just names) when the user references a thematic area (e.g. \"weapons\", \"carbon\") — multiple mandates may cover the same theme."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The input endpoint is documented as one hosted MCP endpoint with a flat list of five tools. The separate SFDR 2.0 connector is a distinct endpoint, not a sub-server of this endpoint.",
+    "sources": [
+      "https://mcp.clarity.ai/",
+      "https://clarity.ai/in-the-news/clarity-ai-brings-compliance-grade-screening-into-claude-and-chatgpt/",
+      "https://claude.com/connectors/clarity-ai"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "5",
+    "action_count_comment": "The official tool list exists at https://mcp.clarity.ai/ and names five tools; no official total beyond that list is stated. No catalogue-only tools were added. Manufact and Agent Discoverability also report five tools; their names align with the official list. APIs.io provides endpoint discovery but no tool list in the collected page. Claude's connector directory lists a different Clarity AI endpoint with four SFDR 2.0 tools; those tools are excluded because it is a separate server.",
+    "actions": [
+      {
+        "tool_name": "get_all_portfolios",
+        "description": "Retrieves all portfolios in the Clarity AI account with name, ID, AUM, and last accessed date.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.clarity.ai/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_portfolio_compliance_report",
+        "description": "Generates a per-holding compliance breakdown showing failed metrics, margins, and reasons; optionally filters by company.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.clarity.ai/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_all_mandates",
+        "description": "Lists account mandates with names, descriptions, metrics, thresholds, and comparison types.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.clarity.ai/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_mandate_breach_summary",
+        "description": "Returns ranked breaching companies in a portfolio, sorted by breach count and weight; optionally filters by company.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.clarity.ai/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_esg_score_by_company",
+        "description": "Retrieves an overall ESG risk score and E, S, and G pillar subscores for a company in the portfolio.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://mcp.clarity.ai/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code for this endpoint and no verbatim initialize instructions or complete tool definitions with schemas were found; official guide descriptions alone do not supply the full serialized context.",
+    "human_can_agent_cannot": "The web app supports creating and editing mandates, portfolios, and thresholds; the guide says the connector does not. It also directs users to the web application for regulatory reporting and authoritative verification. Source: https://mcp.clarity.ai/",
+    "sources": [
+      "https://mcp.clarity.ai/",
+      "https://manufact.com/mcp-catalog/clarity-ai-2",
+      "https://agentdiscoverability.com/track/chatgpt/clarity-ai",
+      "https://apis.io/servers/clarity-ai/clarity-ai/",
+      "https://claude.com/connectors/clarity-ai"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Guide recommends disabling web search, verifying outputs against the web app, checking tool-call references, and starting a new conversation when switching portfolio reviews. These are user/client recommendations; server enforcement is not documented. It says: \"Users must disable web search before querying the connector.\"",
+    "governance_promises": "The guide says access corresponds to the user's existing platform entitlements and that the connector is read-only. Its data notice says processing of personal data, account credentials, and portfolio/financial data is subject to the Clarity AI Privacy Policy. The MCP guide itself does not specify retention periods or AI-training use.",
+    "promises_to_user": "The connector provides mandate-compliance data and supporting breach evidence through the AI environment. The guide cautions that outputs may lag standard data releases and identifies the Clarity AI web application as the authoritative source of record.",
+    "comparison_with_server_logic": "Read-only behavior and OAuth-protected access are supported by endpoint metadata and the published tool set, although tool annotations and implementation code are unavailable. Entitlement enforcement and per-user rate limits are stated in the guide, with no thresholds or implementation detail. Web-search disabling, output verification, and client permission prompts are guidance or client behavior rather than documented server controls.",
+    "sources": [
+      "https://mcp.clarity.ai/",
+      "https://mcp.clarity.ai/.well-known/oauth-protected-resource/mcp"
+    ]
+  },
+  "contradictions": [
+    "The protected-resource and authorization-server metadata advertise scopes clarity:read and clarity:write, while the official guide describes the connector as read-only and says write functionality is on the roadmap. Metadata scopes do not establish that write tools are exposed.",
+    "Claude's directory lists the separate endpoint https://clarity-sfdr20-mcp.pro.clarity.ai/mcp with four SFDR 2.0 tools; these differ from the five tools documented for the input endpoint and are excluded from its actions."
+  ],
+  "observations_for_research": [
+    "The hosted guide gives explicit tool-selection guidance and per-tool permission-setting context, while the public evidence does not include machine-readable schemas or tool annotations.",
+    "The guide places confirmation controls in the client and allows per-connector approval settings, while OAuth scopes separately advertise read and write capabilities."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/INDEX.txt, official page text and HTML/script captures, local code folder and commit manifest, links_check.txt, and the supplied OAuth responses. The official guide at https://mcp.clarity.ai/ is the source for the five-tool list and includes setup, limits, permissions, disclaimers, and privacy notice. No official repository, published tool schemas, MCP protocol version, SDK, or official pricing page was found. The AIBoardMeeting catalogue URL failed TLS hostname validation and was not used as evidence; the collected unofficial community server was excluded.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.2
+  }
+}

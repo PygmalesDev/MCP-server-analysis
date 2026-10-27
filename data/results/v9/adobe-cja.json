@@ -1,0 +1,601 @@
+{
+  "server": "adobe-cja",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://cja-mcp.adobe.io/mcp",
+    "documentation_url_csv": "https://developer.adobe.com/analytics-mcp/docs/",
+    "addressing": "global",
+    "repository_url": "https://github.com/AdobeDocs/analytics-mcp",
+    "documentation_urls_used": [
+      "https://developer.adobe.com/analytics-mcp/docs/",
+      "https://developer.adobe.com/analytics-mcp/docs/servers/cja/",
+      "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+      "https://developer.adobe.com/analytics-mcp/docs/cja/changelog",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/permissions",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/oauth",
+      "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+      "https://developer.adobe.com/analytics-mcp/docs/cja/skills",
+      "https://github.com/adobe/skills",
+      "https://claude.com/connectors/adobe-cja",
+      "https://www.developersdigest.tech/mcp-servers/adobe-customer-journey-analytics-mcp"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public AdobeDocs repository contains documentation, not the hosted MCP server implementation. Adobe's separate Skills repository distributes client-side agent skills, not the endpoint's server code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "299a95b008560c2b68981ec27bb265b587640f68",
+    "commit_date": "2026-10-20",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A for the closed hosted server; the public repository is a documentation repository.",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://aa-mcp.adobe.io/mcp — Adobe Analytics reporting MCP server.",
+      "https://mcp-gateway.adobe.io/cja/mcp — CJA endpoint shown in general server and OAuth documentation; the CJA-specific server page and client setup guide identify the input endpoint, https://cja-mcp.adobe.io/mcp."
+    ],
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/servers/",
+      "https://developer.adobe.com/analytics-mcp/docs/servers/cja/",
+      "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+      "https://github.com/AdobeDocs/analytics-mcp/tree/299a95b008560c2b68981ec27bb265b587640f68"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Adobe says the Analytics MCP servers have no additional cost for Adobe Analytics and CJA customers. MCP report calls count toward the organization's existing monthly report request allowance.",
+    "linked_software": "Paid",
+    "linked_software_cost": "NOT FOUND; the reviewed official MCP FAQ does not state CJA subscription prices or plan names.",
+    "pricing_model_details": "No MCP-specific charge is documented. Reporting calls consume the existing monthly report request allowance; Adobe says organizations can contact their account team about increasing that allowance.",
+    "other_access_restrictions": "Requires Adobe OAuth and an applicable MCP permission item plus underlying CJA permissions. Read-only access permits discovery and reports; Full Access is required for component creation or updates. Product administrators automatically have full access. Report results are limited to 100 rows per call with no pagination parameter.",
+    "restrictions_controlled_by": "Adobe controls the hosted service and OAuth; organization administrators assign product profiles and permissions; the user's existing product permissions also apply.",
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/permissions",
+      "https://developer.adobe.com/analytics-mcp/docs/cja/reference"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Adobe's official CJA reference documents 27 tools. The changelog additionally names getCalculatedMetricFunctions and validateCalculatedMetric, which are not in that reference; both are included in actions.json as official tools with details unavailable from the reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reference describes reports, component data, and errors, but does not reproduce complete MCP results or error envelopes.",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "https://developer.adobe.com/analytics-mcp/docs/cja/changelog"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint resource list or resource capability declaration was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "https://developer.adobe.com/analytics-mcp/docs/guides/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompts capability or prompt list is documented. Adobe separately distributes CJA agent skills through its Skills repository.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/skills",
+        "https://github.com/adobe/skills"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed MCP documentation does not describe server logging or audit records for tool calls.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/support/faq"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP sampling capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint returned HTTP 401 and WWW-Authenticate: Bearer resource_metadata=https://cja-mcp.adobe.io/.well-known/oauth-protected-resource/mcp. Both protected-resource documents report resource https://cja-mcp.adobe.io/mcp, bearer_methods_supported [header], scopes_supported [openid, AdobeID, additional_info.projectedProductContext], and authorization_servers [https://cja-mcp.adobe.io]. The authorization-server document reports response_types_supported [code], code_challenge_methods_supported [S256], grant_types_supported [authorization_code], token_endpoint_auth_methods_supported [none], registration_endpoint https://cja-mcp.adobe.io/register, token_endpoint https://ims-na1.adobelogin.com/ims/token/v3, authorization_endpoint https://ims-na1.adobelogin.com/ims/authorize/v2, revocation_endpoint https://ims-na1.adobelogin.com/ims/revoke, and scopes_supported [openid, AdobeID, additional_info.projectedProductContext]. OpenID configuration returned HTTP 500 NoResourceFoundException. Adobe docs also describe OAuth DCR for supported clients and server-to-server OAuth; docs say token lifetime is the expires_in value. The metadata does not specify a lifetime.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "401 challenge identifies Bearer resource metadata; authorized response structure is not published in the reviewed material.",
+      "authorization_mechanism": "OAuth protected-resource metadata and authorization-server metadata; authorization_code grant with PKCE S256; client authentication method none; dynamic registration at https://cja-mcp.adobe.io/register. Supported scopes: openid, AdobeID, additional_info.projectedProductContext. Bearer token in header. Revocation endpoint https://ims-na1.adobelogin.com/ims/revoke. Token lifetime not stated in metadata; Adobe says to use expires_in from token response. Adobe docs additionally describe server-to-server client_credentials access tokens.",
+      "authorization_server": "https://cja-mcp.adobe.io (issuer); authorization and token endpoints are hosted at https://ims-na1.adobelogin.com.",
+      "sources": [
+        "https://cja-mcp.adobe.io/mcp",
+        "https://cja-mcp.adobe.io/.well-known/oauth-protected-resource",
+        "https://cja-mcp.adobe.io/.well-known/oauth-protected-resource/mcp",
+        "https://cja-mcp.adobe.io/.well-known/oauth-authorization-server",
+        "https://cja-mcp.adobe.io/.well-known/openid-configuration",
+        "https://developer.adobe.com/analytics-mcp/docs/guides/oauth",
+        "https://developer.adobe.com/analytics-mcp/docs/support/faq"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation capability or server-enforced confirmation dialogue is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Client connection requires OAuth. Adobe's programmatic setup documentation specifies Authorization, x-gw-ims-org-id, and x-api-key headers for CJA. Some tools accept a dataViewId; setDefaultSessionDataViewId stores a session default for up to eight hours.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/guides/oauth",
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Adobe's changelog reports clearer, more actionable tool error responses and a clear HTTP 400 for unsupported protocol versions. Exact MCP error payload schemas are not published.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool errors are documented as improved with more actionable detail; exact format unknown.",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/changelog"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress notification capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The CJA reference exposes describeCja, which returns usage guides for tool workflows, segment and calculated metric definitions, breakdown reporting, and workspace project structures. Separately published skills supply task-oriented instructions to supported clients.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool returns reference guidance; full response structure is not documented.",
+      "sources": [
+        "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "https://developer.adobe.com/analytics-mcp/docs/cja/skills",
+        "https://github.com/adobe/skills"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official reference distinguishes discovery/reporting tools from component creation and updates. It does not publish tool annotations such as readOnlyHint, destructiveHint, idempotentHint, or openWorldHint. 2. No required confirmation parameter or server-enforced preview/confirmation workflow is documented. Tool-specific guide calls and validations are described, but the reference does not say they are enforced prerequisites. 3. OAuth metadata exposes scopes openid, AdobeID, and additional_info.projectedProductContext. Adobe product profiles grant MCP Read-only or MCP Full Access, with underlying CJA permissions also enforced; permissions combine across profiles. Product administrators automatically receive full access. Metadata specifies authorization_code, PKCE S256, DCR, bearer header, and revocation URL; token lifetime is unspecified. 4. Read-only/full-access permission tiers exist. No toolset/readonly URL filter is documented. Adobe says current URLs route requests to the nearest region based on IMS org; one IMS org is active at a time in a client connection. 5. Adobe states the LLM can access the same data the user is authorized to see. CJA governance may label sensitive data and add warnings or labels to exported reports; specific MCP field masking is not documented. 6. MCP calls consume the monthly report request allowance. runReport returns up to 100 rows per call and has no pagination parameter. Lookup tools document pagination and per-call maximums. 7. Public implementation code is unavailable. Official parameter tables define inputs; correction, coercion, unknown-argument rejection, or operator overrides are not documented. 8. Server logging, audit records, telemetry payloads, and opt-out are not documented. 9. The official reference/changelog tool names include no feedback/rating/survey tools; no MCP upsell message is documented. The broader guide instructs customers to assess integration risks. 10. describeCja provides workflow guides; Adobe Skills are separately installed client-side. Documentation contains recommendations to call describeCja before selected workflows, but no hosted code is available to establish enforcement. 11. setDefaultSessionDataViewId stores session state for up to eight hours; tools can use this default. Component search ranking uses recent and frequent personal and organization usage history. 12. Adobe documents separate Adobe Analytics and CJA servers; the CJA endpoint is a flat tool reference. The skills are separate client-side instructions. 13. No raw API request, arbitrary SQL, or script execution tool appears in the official CJA tool reference or changelog.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Call this tool before creating segments, calculated metrics, breakdown reports, or workspace projects to learn the required structures.",
+      "Use this tool to confirm which data view is active before running queries.",
+      "Hidden dimensions are excluded by default.",
+      "Hidden metrics are excluded by default."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The CJA service is documented as one hosted endpoint with a flat collection of tools. Adobe also operates a separate Adobe Analytics endpoint; separately distributed skills run on top of the CJA server.",
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+      "https://developer.adobe.com/analytics-mcp/docs/cja/changelog",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/permissions",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/oauth",
+      "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+      "https://experienceleague.adobe.com/en/docs/analytics-platform/using/cja-privacy/privacy-overview",
+      "https://github.com/adobe/skills"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "29",
+    "action_count_comment": "Adobe's official CJA tool reference is https://developer.adobe.com/analytics-mcp/docs/cja/reference and names 27 tools. Adobe's official changelog also names getCalculatedMetricFunctions and validateCalculatedMetric, absent from that reference; these are added as official tools with unpublished parameters where applicable. No official stated total was found. No catalogue-only tools were added. Claude's Anthropic-verified connector page lists 26 humanized tool names; Developers Digest says 15 tools; Obot documents capabilities but no tool count. Catalogue counts differ from the official docs and changelog.",
+    "actions": [
+      {
+        "tool_name": "describeCja",
+        "description": "The starting point for learning how to use the Customer Journey Analytics MCP tools. Returns focused reference guides covering tool usage, available dimensions and metrics, segm...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "guideType: String (enum) (optional); dataViewId: String (optional)",
+        "parameter_count": 2,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "setDefaultSessionDataViewId",
+        "description": "Sets the default data view ID for the current session. Once set, other tools that accept a `dataViewId` parameter can omit it and the server automatically uses this data view. T...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (required)",
+        "parameter_count": 1,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCurrentDataView",
+        "description": "Returns the data view ID set as the session default with `setDefaultSessionDataViewId`. Use this tool to confirm which data view is active before running queries. Returns an err...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "expansions: String (optional)",
+        "parameter_count": 1,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findDimensions",
+        "description": "Finds dimensions available in a given data view. Use this tool to discover which dimensions exist before running a report, or to find dimensions related to a specific topic. Sup...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (optional); searchQuery: String (optional); page: Integer (optional); limit: Integer (optional); includeHidden: Boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findMetrics",
+        "description": "Finds available standard and custom metrics from the data view. Use this tool to discover which metrics exist before building a report, or to find metrics related to a specific ...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (optional); searchQuery: String (optional); page: Integer (optional); limit: Integer (optional); expansions: String (optional); includeHidden: Boolean (optional)",
+        "parameter_count": 6,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findCalculatedMetrics",
+        "description": "Finds available calculated metrics. Use this tool when specifically looking for calculated metrics rather than standard metrics (use `findMetrics` for those). Useful for browsin...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: Integer (optional); limit: Integer (optional); expansions: String (optional); includeType: String (optional); includeHidden: Boolean (optional)",
+        "parameter_count": 5,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findSegments",
+        "description": "Finds segments available to the user. Returns a paginated list of segments that the current user has access to. Useful for discovering segments to apply as filters in `runReport...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: Integer (required); limit: Integer (required); expansions: String (optional); includeType: String (optional)",
+        "parameter_count": 4,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findDateRanges",
+        "description": "Finds saved date range components available to the user. Returns a paginated list, useful for discovering reusable date ranges or retrieving a date range ID for use in a project...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: Integer (required); limit: Integer (required); expansions: String (optional); includeType: String (optional)",
+        "parameter_count": 4,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findDataViews",
+        "description": "Finds data views accessible to the user. Returns a paginated list, useful for discovering available data views or obtaining a data view ID to set as the session default with `se...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: Integer (required); limit: Integer (required); expansions: String (optional); includeType: String (optional)",
+        "parameter_count": 4,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findProjects",
+        "description": "Finds workspace projects available to the user. Returns a paginated list, useful for discovering existing projects or obtaining a project ID for use with `describeProject` or `u...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: Integer (required); limit: Integer (required); expansions: String (required); includeType: String (optional)",
+        "parameter_count": 4,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "findAudiences",
+        "description": "Lists audiences available to the user. Returns a paginated list of audience components, useful for discovering existing audiences or obtaining an audience ID for use with `descr...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "page: Integer (optional); limit: Integer (optional); expansions: String (required); includeType: String (optional)",
+        "parameter_count": 4,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "runReport",
+        "description": "The primary tool for pulling analytics data from Customer Journey Analytics. Runs a ranked report with support for single or multiple dimensions and metrics over a specified dat...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (optional); dimensionIds: String (required); metricIds: String (required); startDate: String (required); endDate: String (required); page: Integer (required); limit: Integer (optional); segmentIds: String (optional); adhocSegments: List (optional); sort: List (optional); generateRequestOnly: Boolean (optional); breakdowns: List (optional)",
+        "parameter_count": 12,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "searchDimensionItems",
+        "description": "Retrieves the top dimension items for a given dimension. For example, if the dimension is \"Country\", this tool returns items like US, UK, Canada, etc. Also supports keyword sear...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (optional); dimensionId: String (required); startDate: String (required); endDate: String (required); page: Integer (required); limit: Integer (required); searchAnd: String (optional); searchOr: String (optional)",
+        "parameter_count": 8,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describeDimension",
+        "description": "Returns detailed metadata for a given dimension, including its name, description, type, and other properties. Use this tool to understand what a specific dimension represents or...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (optional); dimensionId: String (required)",
+        "parameter_count": 2,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describeMetric",
+        "description": "Returns metadata for a given metric, including its name, description, type, and other properties. Use this tool to understand what a specific metric measures or to review its me...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (optional); metricId: String (required)",
+        "parameter_count": 2,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describeSegment",
+        "description": "Returns metadata for a given segment, including its name, description, definition, and compatibility. Use this tool to understand what a segment filters for, to inspect its defi...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "segmentId: String (required); expansions: String (required)",
+        "parameter_count": 2,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describeCalculatedMetric",
+        "description": "Shows the metric formula and base metrics used for a calculated metric. Use this tool to understand how a calculated metric is constructed, which base metrics it depends on, or ...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: String (required); expansions: String (required)",
+        "parameter_count": 2,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describeProject",
+        "description": "Shows details about a workspace project, including its name, description, owner, and data view. The response automatically includes a `workspaceLink` field with a direct URL to ...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "id: String (required); expansions: String (required)",
+        "parameter_count": 2,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describeAudience",
+        "description": "Returns metadata for a given audience, including its name, description, definition, publishing status, and other properties. Use this tool to understand what an audience targets...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "audienceId: String (required); expansions: String (required)",
+        "parameter_count": 2,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listComponentUsage",
+        "description": "Lists the components of a specified type that are most used in reports, ranked by usage frequency. Use this tool to discover which dimensions, metrics, segments, or other compon...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (optional); componentType: String (required)",
+        "parameter_count": 2,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listFrequentlyUsedWith",
+        "description": "Lists components that are frequently used together in reports with a specified component. Use this tool to discover natural pairings to inform report building. For example, use ...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (optional); componentId: String (required); componentType: String (required)",
+        "parameter_count": 3,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "listSimilarTo",
+        "description": "Lists components that are similar to a specified component. Use this tool to find alternatives or related dimensions, metrics, or segments that serve a similar purpose.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "dataViewId: String (optional); componentId: String (required); componentType: String (required)",
+        "parameter_count": 3,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsertSegment",
+        "description": "Creates a new segment or updates an existing one. If a `segmentId` is provided, updates the existing segment; if omitted, creates a new one. Before calling this tool, call `desc...",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "segmentId: String (optional); segmentBody: Object (required); expansions: String (required)",
+        "parameter_count": 3,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsertCalculatedMetric",
+        "description": "Creates a new calculated metric or updates an existing one. If a `calculatedMetricId` is provided, updates the existing calculated metric; if omitted, creates a new one. Before ...",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "calculatedMetricId: String (optional); metricBody: Object (required); expansions: String (required)",
+        "parameter_count": 3,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "createDateRange",
+        "description": "Creates a new reusable date range component that can be shared and used across projects.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "dateRangeBody: Object (required); expansions: String (required)",
+        "parameter_count": 2,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsertProject",
+        "description": "Creates a new workspace project or updates an existing one. If a `projectId` is provided, updates the existing project; if omitted, creates a new one. Before calling this tool, ...",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "projectId: String (optional); projectBody: Object (required); expansions: String (required)",
+        "parameter_count": 3,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsertAudience",
+        "description": "Creates a new audience or updates an existing one. If an `audienceId` is provided, updates the existing audience; if omitted, creates a new one.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "audienceId: String (optional); audienceBody: Object (required); expansions: String (required)",
+        "parameter_count": 3,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "getCalculatedMetricFunctions",
+        "description": "Discovers available calculated metric functions, optionally filtered by category.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "category: string (optional; enum values NOT PUBLISHED)",
+        "parameter_count": 1,
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/changelog",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "validateCalculatedMetric",
+        "description": "Validates a calculated metric definition before saving.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.adobe.com/analytics-mcp/docs/cja/changelog",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted implementation and verbatim initialize/tool-list payload are unavailable; documentation descriptions cannot establish the actual pre-interaction context.",
+    "human_can_agent_cannot": "Adobe says MCP does not currently make admin changes such as editing data views or managing report suites, and does not support scheduled report delivery; it recommends the CJA UI for scheduled delivery. Adobe's FAQ says runReport lacks pagination and returns at most 100 rows per call. Sources: https://developer.adobe.com/analytics-mcp/docs/support/faq and https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/cja/reference",
+      "https://developer.adobe.com/analytics-mcp/docs/cja/changelog",
+      "https://claude.com/connectors/adobe-cja",
+      "https://www.developersdigest.tech/mcp-servers/adobe-customer-journey-analytics-mcp",
+      "https://obot.ai/mcp-catalog/adobe-customer-journey-analytics/"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Adobe recommends: \"Apply filters or narrow your query scope to work within this limit.\" For malformed project definitions, it says: \"Provide the LLM with an existing valid project as a reference before prompting it to create a new one.\" Adobe also recommends clients call describeCja before selected workflows; the documentation does not establish that these recommendations are server-enforced.",
+    "governance_promises": "Adobe says MCP access is controlled through product profiles and that MCP servers enforce users' existing product permissions. It states the connected LLM \"can access the same data that the user is authorized to see.\" Adobe recommends reviewing the LLM provider's data-handling policies; data use for model training depends on the provider agreement. The CJA governance documentation says sensitive-data labels and policies may surface in data views and exports.",
+    "promises_to_user": "Adobe states the MCP servers make no LLM calls themselves and call only Adobe Analytics and CJA APIs. Adobe says the MCP service has no additional cost for customers, though report calls use the existing allowance.",
+    "comparison_with_server_logic": "Permission enforcement and report row limits are documented server behavior. The FAQ's no-LLM-calls statement is a vendor description of service architecture, but public server code is unavailable for independent verification. Recommendations to review provider terms, test in a sandbox, validate actions, and narrow queries are guidance rather than documented server controls. MCP-specific logging, retention, and telemetry behavior were not found.",
+    "sources": [
+      "https://developer.adobe.com/analytics-mcp/docs/support/faq",
+      "https://developer.adobe.com/analytics-mcp/docs/guides/permissions",
+      "https://developer.adobe.com/analytics-mcp/docs/",
+      "https://experienceleague.adobe.com/en/docs/analytics-platform/using/cja-privacy/privacy-overview"
+    ]
+  },
+  "contradictions": [
+    "Adobe's CJA tool reference describes itself as a complete list and names 27 tools, while the official October 19, 2026 changelog separately announces getCalculatedMetricFunctions and validateCalculatedMetric; the reference does not list either. Both changelog-named tools are included in actions.json.",
+    "Adobe's general server and OAuth documentation show https://mcp-gateway.adobe.io/cja/mcp, while the supplied endpoint, CJA-specific server page, and client setup docs use https://cja-mcp.adobe.io/mcp. The supplied endpoint's own OAuth metadata and HTTP 401 evidence identify the analysis target.",
+    "Claude's connector directory lists 26 humanized tool names, whereas the official reference lists 27 exact names plus the two tools named in the changelog. Developers Digest reports 15 tools. These catalogue totals do not match the official sources."
+  ],
+  "observations_for_research": [
+    "The default session data view is mutable session state and is documented to persist up to eight hours.",
+    "Dimension and metric discovery can use semantic search; results can be ranked by recent and frequent personal and organization usage.",
+    "Adobe documents separate read-only and full-access permission items, with underlying product permissions also applying.",
+    "Some guide tool descriptions direct agents to consult documentation before selected write or multi-step tasks.",
+    "The official reference and changelog disagree on completeness of the current tool inventory."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, all indexed page text and relevant HTML-backed official reference pages, and the local AdobeDocs/analytics-mcp repository. The local repository is documentation-only, not endpoint implementation; the Adobe Skills repository is client-side skills rather than server code. The Adobe tool-reference link had an automated plausibility warning because the page text did not mention the product name, but the page title, description, content, repository path, and CJA-specific docs confirm its relevance. No official CJA price schedule, MCP-specific privacy terms, release-status label, protocol-version declaration, annotations, or hosted initialize output was found. The pre-fetched OpenID configuration returned HTTP 500. Unofficial server evidence was not used.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 8.7
+  }
+}

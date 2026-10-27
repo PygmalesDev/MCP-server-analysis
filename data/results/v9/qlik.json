@@ -1,0 +1,1203 @@
+{
+  "server": "qlik",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "Per tenant: https://<tenant-id>.<region>.qlikcloud.com/api/ai/mcp",
+    "documentation_url_csv": "https://www.qlik.com/us/products/model-context-protocol",
+    "addressing": "per customer",
+    "repository_url": "https://github.com/qlik-oss/agentic-skills",
+    "documentation_urls_used": [
+      "https://www.qlik.com/us/products/model-context-protocol",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Connecting-Qlik-MCP-server.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Administering-Qlik-MCP.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-skills.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/oauth-dynamic-client-registration.htm",
+      "https://help.qlik.com/en-US/evaluation-guides/Content/ai/mcp-security.htm",
+      "https://www.qlik.com/us/news/company/press-room/press-releases/qlik-brings-agentic-analytics-to-general-availability-and-launches-mcp-server-for-third-party-assistants",
+      "https://www.qlik.com/us/da/pricing"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official public repository contains agent skills and plugin materials, not the hosted MCP server implementation or a local equivalent. Its skills document some MCP tool behavior but do not establish how the deployed server is implemented.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "8431a288dcb0efee559e17f8e0bd91ff9e5f2463",
+    "commit_date": "2026-10-26",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "Apache-2.0 for the skills repository; server license NOT FOUND",
+    "release_status": "GA",
+    "other_official_servers": [
+      "Qlik documents official skills and plugins that provide agent guidance for using Qlik MCP; these are not another MCP server endpoint.",
+      "Qlik's Discovery Agent is mentioned in the documentation navigation, but the reviewed material did not identify it as another MCP server."
+    ],
+    "sources": [
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Connecting-Qlik-MCP-server.htm",
+      "https://github.com/qlik-oss/agentic-skills",
+      "https://github.com/qlik-oss/agentic-skills/blob/8431a288dcb0efee559e17f8e0bd91ff9e5f2463/README.md#L1-L8",
+      "https://www.qlik.com/us/news/company/press-room/press-releases/qlik-brings-agentic-analytics-to-general-availability-and-launches-mcp-server-for-third-party-assistants"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "Qlik says the server is available with all Qlik Cloud subscriptions. No separate MCP fee is stated in the reviewed material. MCP and Qlik Answers may share monthly question capacity for customers licensed for Qlik Answers; five billable tool calls consume one question.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Qlik Cloud subscription pricing is plan- and capacity-based; the official pricing page directs Enterprise customers to contact sales and does not state a general price applicable to this tenant-specific service.",
+    "pricing_model_details": "Monthly question quotas depend on the Qlik Cloud subscription. Questions reset monthly and do not carry over. Overage depends on subscription. Each five billable tool calls consume one question; some tools, such as status polling, are non-billable. Limits include 300 MCP tool calls per user per minute and 200 concurrent application sessions loaded into memory per tenant.",
+    "other_access_restrictions": "A tenant administrator must activate access, grant the Qlik MCP: Allowed role permission, and establish the first OAuth connection for each LLM client identity. Tool access also depends on user role, space permissions, capability permissions, tenant licensing, and selected tools. OAuth DCR requires tenant-level configuration.",
+    "restrictions_controlled_by": "Vendor and tenant administrator; user role and space permissions also constrain access.",
+    "sources": [
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Administering-Qlik-MCP.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/oauth-dynamic-client-registration.htm",
+      "https://www.qlik.com/us/da/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The official tool reference lists 88 tool names. Tool access depends on tenant licensing and user permissions; users can customize which tools are available. New tools require re-authentication to appear in the client. The official list does not publish parameter schemas or MCP annotations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The documentation describes tool inputs and outputs as well-defined but does not specify the protocol result or error structure.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The reviewed Qlik MCP documentation lists tools but does not document MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The reviewed Qlik MCP documentation does not state whether MCP prompts are exposed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server.htm"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Qlik's security guide says Qlik does not log MCP content and separately states that Qlik logs an audit trail. It recommends enabling Qlik Cloud audit logging to monitor tool usage patterns; the exact audit event contents and configuration defaults are not specified in the reviewed material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/evaluation-guides/Content/ai/mcp-security.htm"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP sampling support is documented in the reviewed Qlik materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server.htm"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP roots support is documented in the reviewed Qlik materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server.htm"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Qlik documents OAuth 2.0 authorization with user-bound credentials and existing Qlik permissions. The provided OAuth metadata response says: “NOT FETCHED: the input endpoint is not a concrete public URL ((per tenant, probably <tenant>.qlikcloud.com)). It is per customer or not published, so there is no public OAuth metadata to fetch; use the documentation to describe how customers obtain and authorise their endpoint.” Thus no endpoint-level metadata, authorization-server URL, or scopes_supported response was available to compare. Qlik's DCR guidance says newly registered clients initially receive user_default, mcp:execute, and offline_access scopes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "OAuth 2.0. Qlik documents manual OAuth client creation, Client ID Metadata Documents (CIMD), and OAuth Dynamic Client Registration (DCR). DCR-created clients initially receive user_default, mcp:execute, and offline_access. The supplied metadata result is NOT FETCHED because the endpoint is tenant-specific and no concrete host was supplied; it contains no raw HTTP status, WWW-Authenticate header, authorization-server metadata, registration endpoint, PKCE details, grant types, token authentication methods, or scopes_supported list. Qlik describes short-lived tokens and expiry/rotation but gives no duration or revocation endpoint in the reviewed material.",
+      "authorization_server": "Tenant-specific Qlik Cloud OAuth server; exact URL NOT FOUND",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Connecting-Qlik-MCP-server.htm",
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/oauth-dynamic-client-registration.htm",
+        "https://help.qlik.com/en-US/evaluation-guides/Content/ai/mcp-security.htm"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The reviewed Qlik MCP materials do not document MCP Elicitation. OAuth connection approval is documented, but it is a connection authorization step, not documented as MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Connecting-Qlik-MCP-server.htm"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Qlik documents tools that start and monitor reloads, quality computations, and automation runs, but does not document the MCP Tasks capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Tenant administrators configure access, OAuth, role permissions, and licensing. Users can select which tools are available. The documentation does not describe an MCP configuration capability or request-level configuration protocol.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Administering-Qlik-MCP.htm",
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The tool guide notes that permission failures may result in no-access responses, but does not document MCP error formats or error-reporting methods.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The documentation describes monthly question capacity and quota consumption. It does not document MCP subscription notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Administering-Qlik-MCP.htm"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Qlik offers product tools to inspect reload, automation, and data-quality job status. MCP protocol progress notifications are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The tool list includes qlik_cancel_app_reload, which cancels an application reload. MCP request cancellation support is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Qlik distributes separate agent skills and plugins, including an automation skill. The tool documentation describes behavior guidance, but the initialize instructions sent by the hosted server are not available in the reviewed evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-skills.htm",
+        "https://github.com/qlik-oss/agentic-skills"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list mixes read and write operations. The reviewed official docs do not publish MCP tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint). 2. No per-action server-enforced confirmation workflow is documented. OAuth consent and first-connection admin approval govern connection setup, not individual tool actions. 3. OAuth scopes include user_default, mcp:execute, offline_access for DCR-created clients; access inherits the connecting user's Qlik role and space permissions. Tenant admins control role access, DCR settings, and initial client approval. 4. Users can customize available tools; tenant access can be restricted or disabled. No read-only mode, URL toolset parameter, or per-request filter was found. Tenant-specific endpoint uses the tenant's region. 5. Qlik documents server-side Section Access and user entitlements; it says content is not logged by Qlik and returned data is governed by the external LLM provider after it leaves Qlik. No additional MCP-specific masking rule was found. 6. Monthly question quotas depend on subscription; five billable calls consume one question, with some polling tools non-billable. Limits: 300 calls per user per minute and 200 concurrent loaded application sessions per tenant. Dataset sample returns first 10 rows; automation dropdown and multi-select inputs are limited to 10 options each. 7. Tool parameter schemas, unknown-argument handling, coercion, and argument overrides are not published; Unknown. 8. Qlik states it does not log MCP content and separately says Qlik logs audit trails; the exact event fields and telemetry controls are not specified. 9. No vendor feedback/rating/report tool appeared in the official 88-name list. Qlik tool descriptions promote Qlik capabilities, but no dedicated vendor feedback or upsell tool was found. 10. Qlik publishes external agent skills and plugins. Tool-description guidance includes recommendations such as checking values before applying selections and limiting data size; the reviewed evidence does not show those recommendations are server-enforced. 11. Selection state persists across operations until cleared; applying a bookmark changes the current selection state. No evidence that prior agent behavior changes future tool availability. 12. The documented server is a tenant-specific hosted endpoint with a user-customizable flat tool catalog. No sub-server proxying is documented. 13. No arbitrary raw API, SQL, or script execution escape-hatch tool appears in the official list. Script lifecycle tools are specific to Qlik application scripts.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Never aggregate, sum, average, or compute on returned data: values are final.",
+      "Always apply appropriate filters-selections to limit data size and improve performance.",
+      "Use this tool or qlik_search_field_values() BEFORE creating selections-filters to verify that the values exist.",
+      "For high cardinality fields, always use qlik_search_field_values() instead",
+      "You can only delete bookmarks created using Qlik MCP tools.",
+      "You can only update and delete master items created using Qlik MCP tools."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The available documentation describes one tenant endpoint with a configurable list of purpose-built tools; no hierarchy or sub-server arrangement is documented.",
+    "sources": [
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Administering-Qlik-MCP.htm",
+      "https://help.qlik.com/en-US/evaluation-guides/Content/ai/mcp-security.htm",
+      "https://github.com/qlik-oss/agentic-skills/blob/8431a288dcb0efee559e17f8e0bd91ff9e5f2463/community/skills/qlik-sense-app-analysis/references/qlik-mcp-tool-reference.md#L1-L16"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "88",
+    "action_count_comment": "The official tool reference lists 88 tool names at https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm; no separate stated exact total appears on that page. The evaluation guide says “more than 70 tools across 9 categories,” while the detailed tool reference has 14 category headings, so the category count differs across official pages. No catalogue-only tools were added. Glama's collected page does not mention Qlik; the Claude connector directory page did not show a Qlik listing. Parameters are NOT PUBLISHED in the official reference.",
+    "actions": [
+      {
+        "tool_name": "qlik_add_chart",
+        "description": "Add chart in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_add_filter",
+        "description": "Add filter in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_cancel_app_reload",
+        "description": "Cancel app reload in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_clear_selections",
+        "description": "Clear selections in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_app",
+        "description": "Create app in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_automation",
+        "description": "Create automation in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_bookmark",
+        "description": "Create bookmark in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_data_object",
+        "description": "Create data object in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_data_product",
+        "description": "Create data product in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_dimension",
+        "description": "Create dimension in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_glossary",
+        "description": "Create glossary in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_glossary_category",
+        "description": "Create glossary category in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_glossary_term",
+        "description": "Create glossary term in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_glossary_term_links",
+        "description": "Create glossary term links in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_measure",
+        "description": "Create measure in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_create_sheet",
+        "description": "Create sheet in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_delete_automation",
+        "description": "Delete automation in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_delete_bookmark",
+        "description": "Delete bookmark in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_delete_data_product",
+        "description": "Delete data product in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_delete_dimension",
+        "description": "Delete dimension in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_delete_glossary_term",
+        "description": "Delete glossary term in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_delete_measure",
+        "description": "Delete measure in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_describe_app",
+        "description": "Describe app in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_fetch_automation_run",
+        "description": "Fetch automation run in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_automation_by_id",
+        "description": "Retrieve automation by id in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_automation_connector",
+        "description": "Retrieve automation connector in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_automation_connector_webhook_configuration",
+        "description": "Retrieve automation connector webhook configuration in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_automation_inputs",
+        "description": "Retrieve automation inputs in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_automation_run",
+        "description": "Retrieve automation run in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_automation_run_display",
+        "description": "Retrieve automation run display in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_chart_data",
+        "description": "Retrieve chart data in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_chart_info",
+        "description": "Retrieve chart info in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_current_selections",
+        "description": "Retrieve current selections in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_data_model",
+        "description": "Retrieve data model in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_data_product",
+        "description": "Retrieve data product in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_data_product_documentation",
+        "description": "Retrieve data product documentation in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_dataset",
+        "description": "Retrieve dataset in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_dataset_freshness",
+        "description": "Retrieve dataset freshness in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_dataset_memberships",
+        "description": "Retrieve dataset memberships in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_dataset_profile",
+        "description": "Retrieve dataset profile in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_dataset_quality_computation_status",
+        "description": "Retrieve dataset quality computation status in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_dataset_sample",
+        "description": "Retrieve dataset sample in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_dataset_schema",
+        "description": "Retrieve dataset schema in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_dataset_script",
+        "description": "Retrieve dataset script in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_dataset_trust_score",
+        "description": "Retrieve dataset trust score in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_field_values",
+        "description": "Retrieve field values in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_fields",
+        "description": "Retrieve fields in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_full_glossary_export",
+        "description": "Retrieve full glossary export in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_glossary_categories",
+        "description": "Retrieve glossary categories in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_glossary_term",
+        "description": "Retrieve glossary term in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_glossary_term_links",
+        "description": "Retrieve glossary term links in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_lineage",
+        "description": "Retrieve lineage in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_pipeline_project_details",
+        "description": "Retrieve pipeline project details in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_reload_log",
+        "description": "Retrieve reload log in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_reload_status",
+        "description": "Retrieve reload status in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_script",
+        "description": "Retrieve script in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_get_sheet_details",
+        "description": "Retrieve sheet details in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_list_all_automation_runs",
+        "description": "List all automation runs in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_list_automation_connections",
+        "description": "List automation connections in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_list_automation_connectors",
+        "description": "List automation connectors in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_list_automation_runs",
+        "description": "List automation runs in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_list_bookmarks",
+        "description": "List bookmarks in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_list_dimensions",
+        "description": "List dimensions in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_list_measures",
+        "description": "List measures in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_list_sheets",
+        "description": "List sheets in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_search",
+        "description": "Search  in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_search_connection_objects",
+        "description": "Search connection objects in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_search_field_values",
+        "description": "Search field values in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_search_glossary_terms",
+        "description": "Search glossary terms in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_search_knowledgebase_chunks",
+        "description": "Search knowledgebase chunks in Qlik Cloud.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_select_bookmark",
+        "description": "Select bookmark in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_select_values",
+        "description": "Select values in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_start_app_reload",
+        "description": "Start app reload in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_start_automation_run",
+        "description": "Start automation run in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_start_automation_run_interactive",
+        "description": "Start automation run interactive in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_activate_data_product",
+        "description": "Update activate data product in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_automation",
+        "description": "Update automation in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_automation_run_input",
+        "description": "Update automation run input in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_data_product",
+        "description": "Update data product in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_data_product_space",
+        "description": "Update data product space in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_dataset_metadata",
+        "description": "Update dataset metadata in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_dataset_quality",
+        "description": "Update dataset quality in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_deactivate_data_product",
+        "description": "Update deactivate data product in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_dimension",
+        "description": "Update dimension in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_glossary_term",
+        "description": "Update glossary term in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_measure",
+        "description": "Update measure in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_script",
+        "description": "Update script in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "qlik_update_term_status",
+        "description": "Update term status in Qlik Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted server's tool protocol definitions and initialize instructions were not available. The public repository contains agent skills, not server definitions.",
+    "human_can_agent_cannot": "The official skills repository describes importing/managing synonyms through the Qlik vocabulary UI as not available via MCP. Its community guidance says editing a master item, bookmark, or sheet not originally created via MCP may be blocked even where MCP otherwise supports that object type; this is skill-repository guidance rather than hosted server implementation evidence. The MCP tool list exposes specific operations, not all Qlik Cloud UI or API capabilities.",
+    "sources": [
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+      "https://help.qlik.com/en-US/evaluation-guides/Content/ai/mcp.htm",
+      "https://github.com/qlik-oss/agentic-skills/blob/8431a288dcb0efee559e17f8e0bd91ff9e5f2463/community/skills/qlik-talk-to-data/references/mcp-vs-ui-capability-boundary.md#L14-L23"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool documentation instructs agents to verify field values before selections and limit data size; it does not establish server-side enforcement of those recommendations. Qlik separately distributes agent skills. Verbatim examples: “Use this tool or qlik_search_field_values() BEFORE creating selections-filters to verify that the values exist.” and “Always apply appropriate filters-selections to limit data size and improve performance.”",
+    "governance_promises": "Qlik says access uses the connecting user's credentials and permissions, Section Access is enforced server-side, and the MCP server does not log content. It warns that once results reach the external LLM client, that provider controls handling. Exact quotes: “Content logging within Qlik — No content logged” and “Once data is sent to the user's MCP client, it is governed by that provider's policies.”",
+    "promises_to_user": "Qlik describes the server as a governed data-access interface, not an AI inference service; it says there is no privilege-escalation path via MCP and that MCP access is available with all Qlik Cloud subscriptions, subject to tenant activation and permissions.",
+    "comparison_with_server_logic": "OAuth authorization and user permissions are documented controls, and the security guide says Section Access is enforced server-side. Content non-logging and audit-trail claims are documentation statements; implementation details were not available for independent code verification. Agent-facing recommendations in tool descriptions are guidance, not documented server-enforced rules.",
+    "sources": [
+      "https://help.qlik.com/en-US/evaluation-guides/Content/ai/mcp-security.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server-tools.htm",
+      "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Administering-Qlik-MCP.htm"
+    ]
+  },
+  "contradictions": [
+    "The evaluation guide describes more than 70 tools across 9 categories, while the detailed official tool reference lists 88 tool names under 14 category headings. The official reference is the more detailed enumeration.",
+    "Qlik's security guide says MCP does not log content and separately claims an audit trail; the reviewed documentation does not specify which non-content MCP events or fields are retained."
+  ],
+  "observations_for_research": [
+    "Tool availability is user-customizable and can also vary with user permissions, tenant licensing, and connection refresh state.",
+    "OAuth administration supports manual clients, CIMD, and DCR; tenant admins establish trust for each client identity before users connect.",
+    "The server applies product entitlements and Section Access at the Qlik boundary, while Qlik explicitly assigns post-response data handling to the external LLM provider."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared links.json, pages/ and code/ materials, including official tool reference and its script text, deployment and connection docs, DCR and security docs, Qlik pricing page, official skills repository, Glama listing, and Claude connector directory. No public implementation of the hosted MCP server, endpoint OAuth metadata, exact MCP schemas, initialize instructions, protocol version, server SDK, per-action annotation data, or token lifetime was found. The Qlik repository is an official skills repository, not server source. Unofficial/community server material was not used as evidence. actions.json contains the 88 official tool names; parameters are marked NOT PUBLISHED.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 14.8
+  }
+}

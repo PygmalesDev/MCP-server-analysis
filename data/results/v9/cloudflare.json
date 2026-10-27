@@ -1,0 +1,394 @@
+{
+  "server": "cloudflare",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.cloudflare.com/mcp",
+    "documentation_url_csv": "https://developers.cloudflare.com/agents/model-context-protocol/",
+    "addressing": "global",
+    "repository_url": "https://github.com/cloudflare/mcp",
+    "documentation_urls_used": [
+      "https://developers.cloudflare.com/agents/model-context-protocol/",
+      "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+      "https://github.com/cloudflare/mcp",
+      "https://www.cloudflare.com/plans/",
+      "https://www.cloudflare.com/policies/privacy/"
+    ],
+    "open_code_equals_deployed_server": "Yes",
+    "open_code_note": "The public cloudflare/mcp repository README identifies this exact hosted endpoint. It contains the endpoint’s server implementation and documents default Code Mode and query-selected direct-tool modes. The snapshot does not include its runtime-generated OpenAPI tool catalogue.",
+    "mcp_protocol_version": "2026-07-28; also supports stateless requests from 2025 Streamable HTTP clients",
+    "commit_hash": "550e1be82b2227818e6b98fc32a313a59403ae3f",
+    "commit_date": "2026-10-22",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/server 2.3.1",
+    "code_public": "Yes",
+    "license": "Apache-2.0",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://docs.mcp.cloudflare.com/mcp — Cloudflare documentation search server.",
+      "https://containers.mcp.cloudflare.com/mcp — sandbox development environments.",
+      "https://browser.mcp.cloudflare.com/mcp — web-page fetching, Markdown conversion, and screenshots.",
+      "https://dex.mcp.cloudflare.com/mcp — Digital Experience Monitoring.",
+      "https://casb.mcp.cloudflare.com/mcp — Cloudflare One CASB.",
+      "https://agents.cloudflare.com/mcp — Agents SDK documentation."
+    ],
+    "sources": [
+      "https://github.com/cloudflare/mcp",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/package.json",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/LICENSE",
+      "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP access price or MCP-specific quota was found in the reviewed official materials. Underlying Cloudflare products and infrastructure may have their own plan and usage charges.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Cloudflare’s general plans page lists Free ($0/month), Pro ($20/month billed annually or $25/month billed monthly), Business ($200/month billed annually or $250/month billed monthly), and Contract (custom). Product-specific pricing differs.",
+    "pricing_model_details": "The general pricing page describes product charges, including Workers requests and CPU time. It does not specify whether or how the MCP service is separately billed.",
+    "other_access_restrictions": "OAuth or a bearer API token is required. The README says API tokens using Client IP Address Filtering are not currently supported. API operations remain subject to the credential’s permissions and Cloudflare product access.",
+    "restrictions_controlled_by": "Cloudflare controls the hosted service and OAuth; the user or organization controls token permissions and product access.",
+    "sources": [
+      "https://www.cloudflare.com/plans/",
+      "https://github.com/cloudflare/mcp",
+      "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "Default Code Mode exposes docs, search, execute, and whoami. The URL parameter codemode=false selects a direct-tool surface with docs, whoami, and generated API endpoint tools. The generated endpoint catalogue is runtime-produced from Cloudflare’s OpenAPI specification.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results are returned as text; whoami and docs also return structuredContent. Code Mode results default to an approximately 6,000-token cap. Direct endpoint results are uncapped by default.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts#L72-L110",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/tools/non-codemode.ts#L22-L80"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "The Skills extension exposes synchronized Cloudflare skill files as skill:// resources. resources/list lists each skill’s SKILL.md; resources/read returns text or base64 content.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Resource list/read responses include public cache metadata with a one-hour TTL.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/skills/handlers.ts#L1-L78",
+        "https://github.com/cloudflare/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "The reviewed endpoint code does not register MCP prompts. Its skills are served through the separate Skills extension and resources methods.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts#L82-L110",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/skills/handlers.ts#L1-L78"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "The implementation records tool-call metrics, authorization-related events, and sampled response-schema mismatches in Cloudflare Analytics Engine. Code comments specify that response values are not stored in mismatch-event fields.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Metrics are server-side events; they are not returned as MCP tool results.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/metrics.ts#L1-L54",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts#L100-L110"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "No MCP sampling capability was found in the reviewed server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "No roots capability or roots/list handler was found in the reviewed server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "The supplied pre-fetch reports HTTP 401 with Bearer realm OAuth, resource_metadata=https://mcp.cloudflare.com/.well-known/oauth-protected-resource/mcp, and required scopes user:read account:read. That protected-resource document returns HTTP 200, names https://mcp.cloudflare.com as authorization server, and advertises header bearer authentication with scopes user:read and account:read. The authorization-server metadata returns HTTP 200 and advertises issuer https://mcp.cloudflare.com, authorize/token endpoints, and registration endpoint https://mcp.cloudflare.com/register. The supplied authorization-server JSON is cut off within its scopes_supported array, so its full raw scope list cannot be reproduced from the provided evidence. Local code declares DCR, accepts client ID metadata documents, sets access tokens to 3600 seconds and refresh tokens to 30 days, and defines minimal, read-only, and full-access templates with scope step-up. PKCE and grant types were not established by the supplied metadata or examined source.",
+      "pre_interaction_context_verbatim": "HTTP 401; WWW-Authenticate: Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.cloudflare.com/.well-known/oauth-protected-resource/mcp\", scope=\"user:read account:read\"",
+      "post_interaction_context_structure": "Protected resource JSON: resource=https://mcp.cloudflare.com/mcp; authorization_servers=[https://mcp.cloudflare.com]; scopes_supported=[user:read, account:read]; bearer_methods_supported=[header]; resource_name=Cloudflare API MCP Server. Authorization server: issuer=https://mcp.cloudflare.com; authorization_endpoint=https://mcp.cloudflare.com/authorize; token_endpoint=https://mcp.cloudflare.com/token; registration_endpoint=https://mcp.cloudflare.com/register. The supplied raw scopes_supported list is truncated.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration. Grant types and PKCE: NOT FOUND in supplied metadata. Resource required scopes: user:read, account:read. Resource scopes_supported: user:read, account:read. Authorization-server scopes_supported: large catalog, but the supplied JSON is truncated mid-array; full list unavailable in this evidence. bearer_methods_supported: header. access token TTL: 3600 seconds; refresh token TTL: 2,592,000 seconds (30 days), per local code. Revocation endpoint/behavior: NOT FOUND.",
+      "authorization_server": "https://mcp.cloudflare.com",
+      "sources": [
+        "https://mcp.cloudflare.com/mcp",
+        "https://mcp.cloudflare.com/.well-known/oauth-protected-resource",
+        "https://mcp.cloudflare.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.cloudflare.com/.well-known/oauth-authorization-server",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/index.ts#L25-L61",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/auth/scopes.ts"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Yes",
+      "description_what_how": "No endpoint-level MCP elicitation implementation was identified in the reviewed server source. OAuth consent and missing-scope step-up are separate authorization flows.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/scope-challenge.ts"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Yes",
+      "description_what_how": "No MCP Tasks capability or task handler was found in the reviewed public server code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "Clients can select Code Mode, direct tools, optional experimental Forge tools/output schemas, and result truncation through URL query parameters. OAuth scope templates include minimal, read-only, and full-access; default consent starts minimal and may request step-up scopes when needed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The MCP tool surface and result formatting are selected per request.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts#L20-L46",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/auth/scopes.ts"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "Tool errors are returned with isError=true and text content. Missing OAuth scope can produce an insufficient_scope challenge; some clients receive the challenge metadata while others receive explanatory tool-result text.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Errors are MCP tool results containing text and isError; scope challenges may be included in _meta.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/tools/execute.ts#L299-L385",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/scope-challenge.ts"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "The endpoint creates a fresh server per request and does not declare tool-list change notifications. No subscriptions capability was found in the reviewed code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The server declares tools.listChanged=false.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts#L82-L90"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "No progress notification implementation was found in the reviewed endpoint source.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "No",
+      "description_what_how": "No explicit cancellation behavior was identified in the reviewed endpoint-specific handlers; transport/runtime behavior was not established.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Skills extension",
+      "description_what_how": "The endpoint serves Cloudflare skills through skills/list and skills/get and exposes corresponding skill:// resources. The catalogue is synchronized from the cloudflare/skills repository every six hours.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Skills include manifest metadata and content size/digest; resources are cacheable for one hour.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/cloudflare/mcp",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/skills/handlers.ts",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/index.ts#L95-L105"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The default tool set mixes read and write capability: execute is annotated destructiveHint=true, openWorldHint=true, readOnlyHint=false; search and docs are annotated readOnlyHint=false despite read-oriented functions; whoami is readOnlyHint=true and destructiveHint=false. Direct API tools are generated from operations and expose permissions; the supplied generated catalogue is unavailable for per-tool annotation review. 2. The code contains no general user-confirmation gate for mutations. OAuth consent and scope step-up gate permissions, not individual destructive calls. Automatic retries after missing-scope refusal are withheld when earlier requests may have changed resources. 3. OAuth permissions are per-scope; default template is minimal with user:read, offline_access, and account:read. Scopes may be stepped up. User/account tokens are also supported. The code sets 1-hour access and 30-day refresh TTLs. Admin switches and client allowlists: Unknown. 4. codemode=false selects direct tools; truncateToolResult can be controlled by query parameter. Code Mode truncates results by default at about 6,000 tokens; direct tools return whole results by default. Sandbox and production endpoints: Unknown. 5. execute injects the bearer token outside the user-code isolate and restricts outbound hosts to the configured Cloudflare API host. Metrics comments say response values are not recorded in schema-mismatch events. 6. Code Mode truncates large results; docs warn uncapped broad queries may return megabytes. The repository describes exponential retry behavior, but no MCP-specific quota was found. 7. Direct tool arguments are validated against generated schemas; path parameters are required and account_id may be auto-resolved. Code Mode accepts JavaScript and cloudflare.request options; account_id input overrides auto-resolution when supplied. 8. Analytics Engine metrics include userId, tool name, error code and sampled schema-mismatch metadata; source notes no response value in mismatch events. User-Agent identifies cloudflare-mcp and repository. 9. No feedback/rating/survey tool found in the four default action names/descriptions. Generated alternate tool catalogue not available to scan. No upsell messaging identified. 10. Cloudflare skills are served through the Skills extension and synchronized every six hours. The docs tool description instructs its use for Cloudflare product questions; execute description advises using search first. These are descriptions, not server-enforced sequencing. 11. No conversational memory was found. Skills/spec snapshots are synchronized and cached; skills can be cached by clients for one hour. 12. This endpoint has query-selected Code Mode and direct-tool modes; these are two tool surfaces on the same endpoint. Separate Cloudflare product and documentation servers also exist. 13. Code Mode execute is a broad API escape hatch: JavaScript can construct requests via cloudflare.request using GET, POST, PUT, PATCH, or DELETE, while the server constrains outbound destination to the Cloudflare API host and token permissions.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "This tool should be used to answer any question about Cloudflare products or features, including:",
+      "Execute JavaScript code that can read, create, update, or delete resources through the Cloudflare API. First use the 'search' tool to find the right endpoints, then write code using the cloudflare.request() function."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "One endpoint dynamically selects between a compact Code Mode surface and a generated direct API endpoint tool surface using the codemode query parameter. Code Mode executes generated JavaScript in isolated Workers. The endpoint also serves a synchronized Skills extension catalogue.",
+    "sources": [
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/tools/execute.ts",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/auth/scopes.ts",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/metrics.ts",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/skills/handlers.ts"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "4 default; 2,596 reported for direct API mode including docs and whoami (2,594 generated API tools + 2 shared tools)",
+    "action_count_comment": "The official repository tool reference names docs, search, execute, and whoami; code registers all four in default Code Mode. The official Cloudflare server documentation describes docs, search, and execute and reports Code Mode as 2 tools, while its comparison lists 2,594 native API tools. The repository README reports 2,594 endpoint tools and says docs and whoami remain available in both modes. The local repository snapshot does not contain the runtime-generated mcp-tools.json catalogue, so the 2,594 direct API tool names and schemas could not be enumerated here. No catalogue tools were added. Third-party catalogue pages reviewed did not provide a verified native tool list for this endpoint.",
+    "actions": [
+      {
+        "tool_name": "docs",
+        "description": "Search Cloudflare developer documentation for product and feature information.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/tools/docs-search.ts#L45-L58",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search",
+        "description": "Run JavaScript against the pre-resolved Cloudflare OpenAPI specification to find endpoints and schemas.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "code: string (required)",
+        "parameter_count": "1",
+        "source": "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/tools/search.ts#L63-L79",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute",
+        "description": "Run JavaScript that reads or changes Cloudflare resources through the API.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "code: string (required); account_id: string (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/tools/execute.ts#L299-L316",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "whoami",
+        "description": "Return the Cloudflare user or account authenticated by this connection.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "None",
+        "parameter_count": "0",
+        "source": "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/tools/whoami.ts#L7-L10",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "≈1,000–1,100 [VENDOR ESTIMATE]",
+    "token_method": "Not computed: tool descriptions are generated at runtime from the synchronized OpenAPI catalogue, so an exact count from the code is not possible. Value = Cloudflare's own estimate for Code Mode (~1,000 in the documentation, ~1,100 in the repository README at commit 550e1be).",
+    "human_can_agent_cannot": "The reviewed official documentation describes access to the entire Cloudflare API through execute, so no product API operation was identified as categorically unavailable to the agent. Browser dashboard workflows and actions outside the exposed API were not systematically enumerated. Sources: https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/ and https://developers.cloudflare.com/api/",
+    "sources": [
+      "https://github.com/cloudflare/mcp",
+      "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/server.ts",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/README.md"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The execute description says: \"First use the 'search' tool to find the right endpoints\"; the handler does not enforce a preceding search call. The README recommends OAuth and explains when to disable result truncation, but those recommendations are client-side choices.",
+    "governance_promises": "The repository says the API token is injected into the outbound proxy and \"never enters the user code isolate.\" Metrics comments state: \"No blob holds a response value: those are customer data.\" The general Cloudflare Privacy Policy says: \"We will not sell or rent your personal information.\"",
+    "promises_to_user": "The official documentation presents the endpoint as access to the Cloudflare API and developer documentation. The README describes result truncation and per-request OAuth scope step-up.",
+    "comparison_with_server_logic": "Token isolation and host restriction are implemented in the outbound proxy. Scope step-up and unsafe replay prevention are implemented in code. The no-response-value statement applies to the documented schema-mismatch metric fields. The search-first instruction is descriptive and not enforced. The general privacy-policy promise is not an MCP-specific retention or AI-training statement.",
+    "sources": [
+      "https://github.com/cloudflare/mcp",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/tools/execute.ts",
+      "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/src/metrics.ts",
+      "https://www.cloudflare.com/policies/privacy/"
+    ]
+  },
+  "contradictions": [
+    "Official Cloudflare server documentation names three Code Mode tools (docs, search, execute) and reports Code Mode as 2 tools in its comparison; the official repository README and endpoint code also expose whoami, making the default implementation four tools.",
+    "The README describes approximately 2,500 API endpoint tools and its comparison lists 2,594. The exact runtime-generated catalogue was not present in the local repository snapshot, so individual names could not be cross-checked.",
+    "The supplied authorization-server metadata scopes_supported value is truncated mid-array, preventing reproduction of the full advertised scope catalogue from the provided raw response."
+  ],
+  "observations_for_research": [
+    "The endpoint lets the client choose between compact code-execution tools and thousands of generated endpoint-specific tools via a URL query parameter.",
+    "Tool descriptions can steer order of use (search before execute), while the server does not enforce that order.",
+    "The authorization design starts from a minimal scope set and can step up after an API permission refusal; retries are conditioned on whether earlier operations were read-only or refused.",
+    "The server includes a separate identity tool and an independently synchronized Skills extension."
+  ],
+  "confidence": "High (open code)",
+  "notes": "[MANUAL CORRECTION 2026-10-27: token count filled with Cloudflare's own Code Mode estimate (≈1,000–1,100), labelled [VENDOR ESTIMATE]; an exact count from code is not possible because descriptions are generated at runtime] Reviewed links.json, links_check.txt, pages/ and the pinned code/cloudflare__mcp repository snapshot. actions.json contains every default Code Mode action available from the source and parameters; it does not enumerate the 2,594 runtime-generated direct API tools because the generated runtime catalogue is not included in the local copy. Official docs report three Code Mode tools while repository code adds whoami. The OAuth metadata block supplied in the prompt ends mid-scopes_supported array. Other official Cloudflare MCP endpoints are listed in A_general; third-party catalogue pages were not used as action evidence. Pricing and privacy sources reviewed: official plans and privacy-policy pages.",
+  "sources": [
+    "https://github.com/cloudflare/mcp",
+    "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+    "https://www.cloudflare.com/plans/",
+    "https://www.cloudflare.com/policies/privacy/",
+    "https://mcp.cloudflare.com/.well-known/oauth-protected-resource/mcp",
+    "https://mcp.cloudflare.com/.well-known/oauth-authorization-server"
+  ],
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.6
+  },
+  "_manual_corrections": [
+    {
+      "date": "2026-10-27",
+      "by": "manual check (Claude)",
+      "change": "token count filled with Cloudflare's own Code Mode estimate (≈1,000–1,100), labelled [VENDOR ESTIMATE]; an exact count from code is not possible because descriptions are generated at runtime",
+      "sources": [
+        "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+        "https://github.com/cloudflare/mcp/blob/550e1be82b2227818e6b98fc32a313a59403ae3f/README.md"
+      ]
+    }
+  ]
+}

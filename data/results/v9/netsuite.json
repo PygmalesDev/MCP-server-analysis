@@ -1,0 +1,570 @@
+{
+  "server": "netsuite",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://<accountid>.suitetalk.api.netsuite.com/services/mcp/v1/all",
+    "documentation_url_csv": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_0714082142.html",
+    "addressing": "per customer",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_0714082142.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_68095726089.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_98151918001.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_58164021287.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122646.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122702.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_143403258.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023450.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_9002708453.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_1017113407.html",
+      "https://www.oracle.com/legal/terms.html",
+      "http://www.oracle.com/legal/privacy/"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official public NetSuite MCP server repository or package was found in the collected evidence. Community repositories/packages exist but are not evidence of code deployed at this hosted endpoint.",
+    "mcp_protocol_version": "2025-06-18",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "The namespaced endpoint https://<accountid>.suitetalk.api.netsuite.com/services/mcp/v1/suiteapp/com.netsuite.mcpstandardtools returns the MCP Standard Tools SuiteApp tools only. The input /all endpoint returns all available custom tools from SuiteApps and account customization projects.",
+      "NetSuite QuickStart endpoint https://my.quickstartapi.netsuite.com/mcp is listed as a separate endpoint, but its collected page returned HTTP 401 and its purpose/tool set could not be verified."
+    ],
+    "sources": [
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html",
+      "https://my.quickstartapi.netsuite.com/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "The FAQ says the NetSuite AI Connector Service is not a paid feature and the MCP Standard Tools SuiteApp is free. A paid AI-client subscription may be required. Pricing for account-specific custom tools was not found.",
+    "linked_software": "Paid",
+    "linked_software_cost": "NOT FOUND; no plan prices were stated in the reviewed NetSuite pages.",
+    "pricing_model_details": "The FAQ states the connector and standard SuiteApp are free; it notes that the AI client may require a paid subscription. MCP requests consume account concurrency capacity; administrators can allocate concurrency limits per integration record.",
+    "other_access_restrictions": "Requires remote MCP, Streamable HTTP, protocol 2025-06-18, OAuth 2.0 Authorization Code Grant with PKCE, and account features/role permissions. The Administrator role is unsupported. Standard SuiteApp installation and role-specific permissions determine tool availability. Excess requests can return HTTP 429 / Too Many Requests.",
+    "restrictions_controlled_by": "Vendor controls service behavior; account administrators control account features, permissions, installed SuiteApps, integration records and concurrency allocation; users authorize AI clients and may scope tools in the client.",
+    "sources": [
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_9002708453.html"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP; documentation specifies protocol version 2025-06-18.",
+      "description_what_how": "The /all endpoint returns available custom tools exposed by SuiteApps and account customization projects. The official Standard Tools SuiteApp reference names 25 tools; actual /all tools depend on the account's installed/configured tools and the user's role. No input schemas were available in the collected official tool-list pages.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The SuiteApp performs the requested NetSuite operation and returns results to the AI client. Exact MCP result/error envelopes are NOT FOUND.",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html",
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html",
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_143403258.html"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official evidence found that this endpoint exposes MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The optional Companion SuiteApp provides reusable prompt samples outside the MCP tool server. This does not establish support for the MCP prompts capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_84180824601.html",
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Integration records provide an AI Connector Service (MCP) execution log with request time, duration, status, user email, HTTP status, method and URL path. Documented retention is 21 days in production and seven days in sandbox.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Execution log entries are associated with the integration record and filtered by its application ID.",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official evidence found for MCP sampling support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official evidence found for MCP roots support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth 2.0 Authorization Code Grant with PKCE; listed as a client requirement for protocol version 2025-06-18.",
+      "description_what_how": "Account-specific OAuth 2.0 integration records use the NetSuite AI Connector Service scope. The Standard Tool connection guide describes public client and redirect URI settings, authorization-code grant, and user consent. Administrator roles cannot use the service. OAuth metadata was not fetched because the input URL is a customer-specific placeholder.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "OAuth 2.0 Authorization Code Grant with PKCE. Per provided pre-fetch: “NOT FETCHED: the input endpoint is not a concrete public URL ((per account: https://<accountid>.suitetalk.api.netsuite.com/services/mcp/v1/all)). It is per customer or not published, so there is no public OAuth metadata to fetch; use the documentation to describe how customers obtain and authorise their endpoint.” Authorization server, registration endpoint, token methods, lifetime, revocation details and scopes_supported list: NOT FOUND in fetched metadata. Official docs name the NetSuite AI Connector Service scope; the scope's raw identifier was not found.",
+      "authorization_server": "NetSuite account-specific OAuth 2.0 service; exact authorization-server URL NOT FOUND.",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html",
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html",
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_9002708453.html"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP Elicitation capability was documented. Some MCP Apps provide interactive user interfaces, which are a distinct mechanism.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0415010513.html",
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "Connection URL selects either all available tools (/all) or the tools in a specified SuiteApp namespace. Account administrators configure features, integration records, permissions and tool installations; users can select tool namespaces in the client.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The URL namespace determines tool scope; actual visibility also depends on account role permissions.",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html",
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_9002708453.html"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not specified",
+      "description_what_how": "FAQ documents Too Many Requests errors when concurrency limits are exceeded. Other tool-level error structures and codes were not found. Execution logs record status and HTTP status for requests.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP status is logged; detailed error response format is Unknown.",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html",
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress-tracking capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP Apps require a compatible AI client.",
+      "description_what_how": "The Standard Tools SuiteApp includes MCP Apps with interactive UIs, including file cabinet, record selection and report-filter flows. The Companion SuiteApp separately supplies prompt samples and an optional client-uploaded skill file.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "MCP Apps render interactive UI through compatible clients; exact protocol resource structure was not found.",
+      "sources": [
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0415010513.html",
+        "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_84180824601.html"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official reference lists read and write operations, but does not report MCP tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint). The read-only SuiteQL restriction is stated. Standard tools include record creation/update, transformation, file attachment changes, and record-action execution. Sources: tool reference/category pages listed in E.\n2. Server-enforced confirmation for mutations was not found. Oracle advises reviewing and confirming record actions; generic client confirmation is described, and risk guidance recommends clients require confirmation for high-impact operations. These are guidance/client behavior, not documented server enforcement.\n3. OAuth 2.0 Authorization Code Grant with PKCE; integration record scope is NetSuite AI Connector Service. Roles inherit NetSuite permissions; tools are visible according to required permissions. Administrator and full-permission roles are excluded. Consent is obtained per user and AI agent. Token lifetime, revocation mechanics and client allowlists: NOT FOUND.\n4. /all returns all account custom tools; /suiteapp/<applicationid> scopes a connection to one SuiteApp. Admin installs/configures tools; users may scope namespaces in the AI client. No official read-only mode or tool filter URL parameter found. Sandbox and production are referenced; separate endpoint details were not found.\n5. Data access follows NetSuite role permissions. File Cabinet Apps have separate Allowed File Cabinet Access controls for reading/uploading/replacing files; this setting does not filter listing, filename search, path lookup or record attachments. Field masking/PII exclusion was not found.\n6. Concurrency limits are configurable per integration record; over-limit requests can fail with Too Many Requests. Report accounting periods are unsupported and custom filters are unsupported; custom reports using custom segments for column segmentation may return null. No MCP per-call price or universal result cap found.\n7. Documentation says tool parameters are verified and required parameters must be included; client may default or ask when required fields are missing. Further coercion, hallucinated alias correction, unknown-argument rejection and operator overrides were not documented.\n8. MCP calls are logged with timestamp, duration, status, user email, HTTP status, method and path; retention 21 days production / seven days sandbox. Telemetry beyond this logging was not found.\n9. No feedback/rating/report/survey tool appears in the official 25-tool list. No MCP upsell response or marketing elicitation was found.\n10. Server tool descriptions guide invocation; optional Companion SuiteApp prompt samples and an optional SKILL.md are provided separately for upload to a supported client. Documentation includes behavioral advice, but code is closed and enforcement cannot be assessed. No server-delivered skill tool found.\n11. Whether prior agent behavior changes future tools/results: Unknown.\n12. Non-flat configuration: /all combines SuiteApp and account customization project tools; namespaced URLs can expose only one SuiteApp's tools. MCP Apps add interactive UI. Exact per-account composition is dynamic.\n13. ns_runCustomSuiteQL is a raw query tool but officially read-only. No arbitrary REST request, script execution, or unrestricted SQL write escape hatch was found in the listed standard tools.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“Only read-only queries are supported.”",
+      "“Before you execute an action, review and confirm the target record, action, parameters, and expected change.”",
+      "“If the result is uncertain, do not automatically retry the action. Repeating the action can apply the change more than once.”",
+      "“Review the tools used and the outputs generated by the LLM.”",
+      "“Use SuiteQL for complex queries, such as when you need to combine data from multiple tables.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The documented /all endpoint aggregates tools from multiple SuiteApps and account customization projects; namespaced endpoints can return a specific SuiteApp's tools. MCP Apps provide interactive UI flows alongside tools.",
+    "sources": [
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_68095726089.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_98151918001.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122702.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_9002708453.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_1017113407.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "25 documented Standard Tools; /all account-specific total unknown",
+    "action_count_comment": "Official list: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html names 25 Standard Tools (counted from the official list; no total is stated there). The input /all URL is documented to include tools from SuiteApps and account customization projects, so its actual per-account total is not published here. No catalogue-only tools were added. Seamset reports 14 standard tools, differing from the official list; MCP Grade describes a separate community package with 2 tools, not this hosted server. Composio's NetSuite toolkit is a proxy/API toolkit, not evidence for native server tools. The Claude directory page returned 404.",
+    "actions": [
+      {
+        "tool_name": "ns_attachFile",
+        "description": "Attaches an existing File Cabinet file to a NetSuite record.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_detachFile",
+        "description": "Removes a file's attachment from a record without deleting the file.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getFolderByPath",
+        "description": "Lists files and folders directly in a specified folder.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getIdFromPath",
+        "description": "Resolves a file or folder path to its internal ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getPathFromId",
+        "description": "Resolves a file or folder internal ID to its complete path.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_searchFiles",
+        "description": "Searches file names across accessible File Cabinet folders.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_createRecord",
+        "description": "Creates a new NetSuite record.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getRecord",
+        "description": "Retrieves a NetSuite record.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getRecordTransformMetadata",
+        "description": "Lists supported transformations between NetSuite record types.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getRecordTypeMetadata",
+        "description": "Retrieves record type metadata, including available fields and data types.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_transformRecord",
+        "description": "Transforms an existing record into a supported target record type.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_updateRecord",
+        "description": "Updates an existing NetSuite record.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getRecordActionMetadata",
+        "description": "Returns actions available for a record type or specific record.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_98151918001.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_executeRecordAction",
+        "description": "Executes an available action for a specific record.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_98151918001.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getAccountingBooks",
+        "description": "Lists accounting books available for report filtering.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getAccountingContexts",
+        "description": "Lists accounting contexts available for report filtering.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getNexusIds",
+        "description": "Lists nexuses available for report filtering.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getSubsidiaries",
+        "description": "Lists subsidiaries available for report filtering.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_listAllReports",
+        "description": "Lists standard and custom reports in the account.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_runReport",
+        "description": "Runs an accessible report and returns its results.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getSessionInfo",
+        "description": "Returns account, role, features, permissions and preferences for the session.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_58164021287.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_listSavedSearches",
+        "description": "Lists saved searches in the NetSuite account.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122646.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_runSavedSearch",
+        "description": "Runs an existing saved search.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122646.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_runCustomSuiteQL",
+        "description": "Runs a custom, read-only SuiteQL query against NetSuite data.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122702.html",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ns_getSuiteQLMetadata",
+        "description": "Retrieves accessible record, field, data type and join metadata for SuiteQL.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122702.html",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code for the hosted server and no verbatim complete tools/list schemas or initialize instructions were available. The official reference provides names and descriptions but not complete serialized definitions.",
+    "human_can_agent_cannot": "MCP Standard Tools do not document file upload/download or file-content reading as native tools; File Cabinet MCP Apps provide some of these interactive flows. NetSuite functionality outside the installed tools, role permissions, or exposed REST record operations is not available through this tool set. Report tools do not support accounting periods; SuiteQL tool supports read-only queries. Sources: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html, https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html, https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122702.html, https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0415010513.html",
+    "sources": [
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_68095726089.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122629.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_98151918001.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122640.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_58164021287.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122646.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0905122702.html",
+      "https://seamset.com/guides/netsuite-mcp-standard-tools",
+      "https://www.mcpgrade.com/server/netsuite-mcp",
+      "https://composio.dev/toolkits/netsuite"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Guidance includes: “Prefer external AI agents or MCP clients that require explicit user confirmation before executing high-impact actions.” Oracle also recommends reviewing tool use and outputs and using prompts that specify the tools expected. These are recommendations to administrators/users/clients; server-side enforcement of those recommendations was not documented.",
+    "governance_promises": "Oracle says MCP tools run with the user's NetSuite permissions, are not executed with Administrator or full-permission roles, and usage is logged. It says the server obtains explicit consent for each user and AI agent. The FAQ warns that the service has not been assessed for HIPAA and must not process ePHI unless the customer independently determines compliance.",
+    "promises_to_user": "Oracle states that the service and Standard Tools SuiteApp are not paid features. It describes the tools as using existing NetSuite role controls and says installed tools limit available actions.",
+    "comparison_with_server_logic": "Role/permission restrictions, integration logging and concurrency controls are documented as product behavior. Per-user/per-agent consent is described in the risk-control documentation and connection flow. Client-side confirmation and output review are guidance, not server guarantees. No MCP-specific AI-training, data retention outside execution logs, or field-masking promise was found.",
+    "sources": [
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_3200541651.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0902023508.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_9002708453.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_1017113407.html",
+      "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_143403258.html"
+    ]
+  },
+  "contradictions": [
+    "The input endpoint /all returns all tools available from SuiteApps and account customization projects, while the official 25-tool reference covers the MCP Standard Tools SuiteApp. The exact customer-specific /all inventory is therefore not established by the standard list.",
+    "Seamset's third-party guide reports 14 Standard Tools, while the official Oracle list names 25. Its count appears incomplete or reflects another tool-list version; official names were used.",
+    "MCP Grade lists two tools for a community-maintained local npm server; these are not the hosted Oracle endpoint's tools and were excluded.",
+    "The pre-fetched OAuth evidence says no public endpoint metadata was fetched because the account ID is a placeholder. Official docs specify OAuth 2.0 Authorization Code Grant with PKCE, but no fetched scopes_supported list is available for comparison."
+  ],
+  "observations_for_research": [
+    "The /all endpoint permits a customer-specific composite tool surface spanning installed SuiteApps and account customization projects, while an alternate URL can narrow discovery to one SuiteApp.",
+    "Visibility and execution access are separated in the documentation: role permissions may hide tools, while data access and operations remain governed by NetSuite role permissions.",
+    "The standard SuiteApp is managed and automatically updated; Oracle warns updates may change tool behavior, and no version-pinning mechanism was found in reviewed docs.",
+    "Interactive MCP Apps and an optional prompt/skill Companion SuiteApp supplement the flat tools interface."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared pages/INDEX.txt, links.json, links_check.txt, available official documentation snapshots and the provided OAuth metadata record; code/GITHUB_COMMITS.txt had no official repository entries. Official NetSuite product marketing and PDF pages returned HTTP 403 in the evidence capture, so Oracle Help Center documentation was used. No official GitHub repository or package was found. Community repositories/packages were noted but not used as evidence for the hosted endpoint. The official tool overview names the Standard Tools set but does not publish schemas in the captured reference; actions.json records parameters as NOT PUBLISHED. The specified /all URL is per account and its exact tool inventory may vary.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.0
+  }
+}

@@ -1,0 +1,710 @@
+{
+  "server": "airtable",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.airtable.com/mcp",
+    "documentation_url_csv": "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/Airtable/airtable-mcp-cli",
+    "documentation_urls_used": [
+      "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server",
+      "https://airtable.com/developers/agents/mcp/getting-started",
+      "https://airtable.com/developers/agents/mcp/tools",
+      "https://airtable.com/developers/agents/mcp/chatgpt",
+      "https://www.airtable.com/platform/mcp",
+      "https://www.airtable.com/articles/mcp-server-interfaces-automations",
+      "https://www.airtable.com/company/privacy",
+      "https://airtable.com/pricing",
+      "https://mcp.so/servers/airtable",
+      "https://mcp.tc/i/airtable",
+      "https://martechdb.com/vendors/airtable",
+      "https://www.gamut.so/mcp/project-management/airtable",
+      "https://claude.com/connectors/airtable"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public Airtable/airtable-mcp-cli repository is an experimental TypeScript CLI client that discovers tools from the hosted endpoint at runtime; it is not the server implementation. Airtable/skills contains agent skills and plugin configuration, not server code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "6847f24e318e366a2afac4967f72b1b976ea9654",
+    "commit_date": "2026-08-07",
+    "implementation_language": "NOT FOUND for the hosted server; related public CLI is TypeScript.",
+    "mcp_sdk_and_version": "NOT FOUND for the hosted server; related CLI uses @modelcontextprotocol/sdk ^1.12.1.",
+    "code_public": "Partially",
+    "license": "Hosted server license: NOT FOUND. Related CLI and skills repositories are MIT licensed.",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "https://github.com/Airtable/airtable-mcp-cli is an official CLI client for the hosted server, not a separate MCP endpoint.",
+      "https://github.com/Airtable/skills is an official repository of agent skills and plugin configuration that can connect to the same hosted server."
+    ],
+    "sources": [
+      "https://mcp.airtable.com/mcp",
+      "https://airtable.com/developers/agents/mcp/tools",
+      "https://github.com/Airtable/airtable-mcp-cli/blob/6847f24e318e366a2afac4967f72b1b976ea9654/package.json#L1-L27",
+      "https://github.com/Airtable/airtable-mcp-cli/blob/6847f24e318e366a2afac4967f72b1b976ea9654/README.md#L1-L5",
+      "https://github.com/Airtable/airtable-mcp-cli/blob/6847f24e318e366a2afac4967f72b1b976ea9654/src/mcp.ts#L1-L61",
+      "https://github.com/Airtable/skills/blob/812ee67f1fd3d76fb45ff8df40afaa0448602ba8/README.md#L1-L9"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Airtable says MCP is included with all Airtable plans at no additional charge. Calls count against standard Airtable API rate limits.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Free plan: no charge. Team: $20/user/month billed annually. Business: $45/user/month billed annually. Enterprise Scale: custom pricing.",
+    "pricing_model_details": "MCP itself has no added charge. Airtable plans are seat-based; Team and Business charges apply to users with edit permissions for at least one base. MCP usage and created records count toward existing API and base limits.",
+    "other_access_restrictions": "Requires an MCP-compatible client and Airtable authorization. OAuth can be scoped to selected bases, apps, and workspaces; PAT scopes can be limited. Organization administrators may need to allow-list the integration. Calls are subject to standard API limits; record creation is limited to 10 per request.",
+    "restrictions_controlled_by": "Airtable controls service and API limits; organization administrators control third-party integration allow-listing; users and their Airtable roles, granted OAuth selections, and PAT scopes determine access.",
+    "sources": [
+      "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server",
+      "https://airtable.com/developers/agents/mcp/getting-started",
+      "https://airtable.com/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference lists 40 tools for the input endpoint, covering bases, workspaces, schema, records, forms, interfaces, and automations. Tool schemas are not published on the reference page; authenticated live discovery was not performed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND for hosted response schema. Airtable states permission failures return an error as the API would.",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/tools",
+        "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation lists tools but does not describe MCP resources. The related CLI calls listTools and callTool; it does not reveal server resource support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/tools",
+        "https://github.com/Airtable/airtable-mcp-cli/blob/6847f24e318e366a2afac4967f72b1b976ea9654/src/mcp.ts#L48-L61"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP prompt catalog is documented. Official external skills and example prompts exist, but are not evidence of MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/getting-started",
+        "https://github.com/Airtable/skills/blob/812ee67f1fd3d76fb45ff8df40afaa0448602ba8/README.md#L1-L9"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Airtable documents organization audit logs for agent activity. Third-party AI tool actions are attributed to the integration and the person who set it up; Enterprise agent-activity events are described as rolling out. MCP-specific request logging and retention are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Audit events are shown in Airtable organization logs; event fields and coverage depend on the feature and plan.",
+      "sources": [
+        "https://www.airtable.com/articles/fall-release"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP sampling behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/getting-started"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/getting-started"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate Bearer error=\"invalid_token\", error_description=\"Missing Authorization header\", resource_metadata=\"https://mcp.airtable.com/.well-known/oauth-protected-resource\". Protected-resource metadata identifies authorization server https://airtable.com/oauth2/v1, with supported scopes data.records:read, data.records:write, schema.bases:read, schema.bases:write, data.recordComments:read, data.recordComments:write, workspacesAndBases:read; bearer_methods_supported is [\"header\"]. Authorization-server metadata reports registration_endpoint https://airtable.com/oauth2/v1/register, response_types_supported [\"code\"], code_challenge_methods_supported [\"S256\"], token_endpoint_auth_methods_supported [\"client_secret_basic\",\"none\"], resource_indicators_supported true, and the same scopes. Airtable documents OAuth with Dynamic Client Registration and PAT authentication. Token lifetime and revocation timing are not specified in the reviewed metadata; users can remove bases or delete the integration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated endpoint response: HTTP 401; WWW-Authenticate Bearer challenge as quoted above; JSON {\"error\":\"UNAUTHORIZED\",\"message\":\"Unauthorized\"}.",
+      "authorization_mechanism": "OAuth with DCR and authorization-code response; PKCE S256; token endpoint auth methods client_secret_basic and none; bearer token via header. PAT is an alternate method documented by Airtable. Full scopes_supported: data.records:read, data.records:write, schema.bases:read, schema.bases:write, data.recordComments:read, data.recordComments:write, workspacesAndBases:read. Token lifetime and revocation timing: NOT FOUND. User can remove specific bases or delete the integration.",
+      "authorization_server": "https://airtable.com/oauth2/v1",
+      "sources": [
+        "https://mcp.airtable.com/.well-known/oauth-protected-resource",
+        "https://mcp.airtable.com/.well-known/oauth-protected-resource/mcp",
+        "https://airtable.com/.well-known/oauth-authorization-server/oauth2/v1",
+        "https://airtable.com/developers/agents/mcp/getting-started",
+        "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation capability is documented. OAuth consent is a separate authorization flow.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/getting-started"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP task protocol support is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/getting-started"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Configuration is through OAuth consent selections or a PAT with chosen scopes. Documentation gives a read-only scope set and describes managing connected bases, apps, and workspaces.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Authorization choices and errors are handled by the client and Airtable authorization/API services; detailed configuration protocol messages are not documented.",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/getting-started",
+        "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Airtable says updates to fields the user cannot modify return an error like the Airtable API. The hosted docs do not specify a general MCP error schema.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Error response shape is not documented beyond the API-like permission error.",
+      "sources": [
+        "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/getting-started"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notification behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/getting-started"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP request cancellation behavior is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/getting-started"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool descriptions provide agent-facing workflow guidance; for example, the automation instruction tool says AI tools typically call it once per session. Airtable separately publishes installable skills and plugins; these are distributed outside the MCP server.",
+      "pre_interaction_context_verbatim": "Returns the full specification for creating or updating automations — supported triggers and actions, expression language, catalogs, and examples. AI tools typically call this once per session before building an automation.",
+      "post_interaction_context_structure": "Tool returns the full automation creation/update specification; detailed payload schema is not published on the reference page.",
+      "sources": [
+        "https://airtable.com/developers/agents/mcp/tools",
+        "https://github.com/Airtable/skills/blob/812ee67f1fd3d76fb45ff8df40afaa0448602ba8/README.md#L1-L9"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official reference distinguishes actions by their documented behavior, but publishes no readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations. The 40 documented tools include reads and mutations. 2. Server-side gates documented: automations created or updated through MCP remain drafts until reviewed and turned on in Airtable; delete_automation only deletes an automation that is off; active automations must first be turned off in the UI. No general confirmation parameter or MCP elicitation is documented. 3. OAuth scopes and PAT scopes bound access; OAuth allows selecting bases, apps, and workspaces. Permissions mirror Airtable user access; roles and organization integration allow-lists apply. Admin approval of a manually registered OAuth app is documented. Token expiry/revocation details are not published; users can remove bases or delete the integration. 4. Documentation describes scoped read-only access through scopes only: data.records:read, schema.bases:read, data.recordComments:read, workspacesAndBases:read. No URL tool filter, read-only endpoint, region-specific endpoint, or sandbox mode is documented. 5. Access follows existing Airtable permissions, including interface-only visibility boundaries. No MCP-specific PII masking or secret redaction is documented. 6. Calls count against standard API rate limits; create_records_for_table is limited to 10 records per request. Specific hosted result truncation or MCP per-call charges are not documented. 7. Hosted tool input schemas and validation/correction behavior are not published; no operator argument override is documented. 8. Airtable describes agent activity in organization audit logs; third-party AI actions trace to the integration and its installer. Audit event coverage is plan-dependent and rolling out; MCP-specific telemetry and opt-out are not documented. 9. The official 40-tool list has no feedback, rating, report, survey, or vendor-review tool. 10. Tool descriptions include workflow instructions, including preferring get_create_automation_instructions before automation creation; documentation recommends discovery. These are agent-facing descriptions, not evidence of server-enforced behavior. Airtable skills are separately installed. 11. No cross-session server memory affecting outputs or tool availability is documented. 12. One hosted endpoint and one documented flat tool list; no proxy subservers or nested AI agents are documented. 13. No raw API request, arbitrary SQL, script execution, or universal escape-hatch tool appears in the official tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Saves the draft configuration only — it is off until the user reviews and turns it on in the Airtable UI. Prefer calling get_create_automation_instructions first.",
+      "Automations that are on must be turned off in the Airtable UI first.",
+      "AI tools typically call this once per session before building an automation.",
+      "Use list_automations and get_automation first.",
+      "Use list_workspaces first to find the workspace ID where you want to create the base."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted endpoint with a single documented tool list; no endpoint-specific subservers or dynamically loaded toolsets are documented.",
+    "sources": [
+      "https://airtable.com/developers/agents/mcp/tools",
+      "https://airtable.com/developers/agents/mcp/getting-started",
+      "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server",
+      "https://www.airtable.com/articles/fall-release",
+      "https://github.com/Airtable/airtable-mcp-cli/blob/6847f24e318e366a2afac4967f72b1b976ea9654/src/mcp.ts#L48-L61"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "40",
+    "action_count_comment": "The official tool reference at https://airtable.com/developers/agents/mcp/tools names 40 tools and identifies the exact input endpoint. Airtable's support article describes capabilities but does not give a separate total. MartechDB reports 40; mcp.so's rendered description lists 26 across categories while its fetched tool list is unavailable; Gamut lists 9; mcp.tc says live tools are behind sign-in; Claude's connector listing gives no names. No catalogue-only actions were added. The reference does not publish input schemas, so parameters are NOT PUBLISHED. All 40 tools are listed in actions.json.",
+    "actions": [
+      {
+        "tool_name": "create_automation",
+        "description": "Creates an automation draft with trigger and actions.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_automation",
+        "description": "Deletes an automation that is off.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch_automation_input_data",
+        "description": "Fetches dynamic input choices for an automation trigger or action.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_automation",
+        "description": "Gets an automation configuration and deployment status.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_create_automation_instructions",
+        "description": "Returns automation creation and update specifications, catalogs, and examples.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_automations",
+        "description": "Lists automations, deployment status, triggers, and node summaries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "test_automation_webhook_trigger",
+        "description": "Reruns a webhook trigger test to capture its request body schema.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_automation",
+        "description": "Replaces an automation draft configuration.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_base",
+        "description": "Creates a new Airtable base.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_bases",
+        "description": "Lists bases the user can access.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_bases",
+        "description": "Finds bases matching a name.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_field",
+        "description": "Adds a field to an existing table.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_field",
+        "description": "Updates field name, description, options, or formula expression.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_form_schema",
+        "description": "Returns a form layout, fields, requirements, and visibility conditions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_form",
+        "description": "Submits an Airtable form.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_page",
+        "description": "Creates a page with supported page and visualization types.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_interface",
+        "description": "Creates an interface within a base.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_interface",
+        "description": "Deletes an interface and its pages.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_page",
+        "description": "Deletes an interface page.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_records_for_page",
+        "description": "Lists records from an interface page.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_record_for_page",
+        "description": "Gets one record from an interface page.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describe_page_element",
+        "description": "Returns configuration options for a page element type.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describe_page_type",
+        "description": "Returns configuration options for a page type.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_pages_for_base",
+        "description": "Lists interfaces and pages in a base.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_records_for_table",
+        "description": "Creates records in a table.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_records_for_table",
+        "description": "Deletes records from a table by ID.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "display_records_for_table",
+        "description": "Renders records in an interactive widget.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_records_for_table",
+        "description": "Lists table records with optional filtering and sorting.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "revert_action",
+        "description": "Reverts an eligible prior mutation by action ID.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_candidate_linked_records",
+        "description": "Finds candidate records for a linked-record field.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_records",
+        "description": "Searches table records by keyword.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_records_for_table",
+        "description": "Updates specified fields on existing records.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_table",
+        "description": "Creates a table in a base.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_table",
+        "description": "Deletes a table, including records, fields, and views.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_table_schema",
+        "description": "Returns table field names, IDs, types, and configuration.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_views_for_table",
+        "description": "Lists views and optionally reads supported view configuration.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_tables_for_base",
+        "description": "Lists schema for tables in a base.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_table",
+        "description": "Updates a table's name or description.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_workspaces",
+        "description": "Lists workspaces the user can access.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_external_accounts",
+        "description": "Lists connected third-party accounts available to integrations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://airtable.com/developers/agents/mcp/tools",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No hosted initialize instructions or verbatim tool schemas are available. Related public code is a client, not the deployed server; tool definitions were not retrievable from the unauthenticated endpoint.",
+    "human_can_agent_cannot": "MCP cannot turn on automations; turning them on requires review in the Airtable UI. MCP cannot create or edit automation Script actions, add Interface filters, or edit an existing Interface. Field type and select-choice changes are not supported by update_field. Only workspace owners or creators can create bases, and base-level creator permission alone is insufficient. Sources: https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server and https://airtable.com/developers/agents/mcp/tools",
+    "sources": [
+      "https://airtable.com/developers/agents/mcp/tools",
+      "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server",
+      "https://martechdb.com/vendors/airtable",
+      "https://mcp.so/servers/airtable",
+      "https://mcp.tc/i/airtable",
+      "https://www.gamut.so/mcp/project-management/airtable",
+      "https://claude.com/connectors/airtable"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool descriptions instruct agents to call get_create_automation_instructions before building, use list_automations/get_automation before updating, and use list_workspaces before creating a base. Airtable advises users to check permissions and trust connected AI tools. These recommendations are not documented as server-enforced checks.",
+    "governance_promises": "Airtable says the server respects existing permissions: “you can only access data you normally have permission to view or modify.” It says automation drafts remain off until users review and turn them on in the UI. The vendor describes agent activity audit logging and attribution to the third-party integration and the person who set it up.",
+    "promises_to_user": "Airtable states MCP is available on all plans with no additional Airtable charge, supports MCP-compatible clients, and respects user permissions. The vendor also states users can remove specific bases or delete the integration to revoke access.",
+    "comparison_with_server_logic": "Permission inheritance and scoped authorization are documented for the hosted service, as are draft-only automation changes and the inactive-automation deletion restriction. Audit logging is a vendor-documented organization feature with rollout and plan limits; MCP-specific logging details are not specified. Trust and permission-check advice is instructional text, not a documented server-side control.",
+    "sources": [
+      "https://support.airtable.com/articles/9897799762-using-the-airtable-mcp-server",
+      "https://airtable.com/developers/agents/mcp/tools",
+      "https://www.airtable.com/articles/fall-release",
+      "https://www.airtable.com/company/privacy"
+    ]
+  },
+  "contradictions": [
+    "OAuth protected-resource metadata advertises data.recordComments:read and data.recordComments:write scopes, but the official 40-tool reference lists no comment-related tool. This may reflect scopes used elsewhere in the product or capability not described in the reference; the evidence does not resolve the difference.",
+    "Third-party listings expose partial subsets of the official list: Gamut names 9 tools, while MartechDB reports a 40-tool catalog. The official reference names all 40 and remains the action-list source."
+  ],
+  "observations_for_research": [
+    "The published tool descriptions combine action names with agent-facing sequencing advice; the documentation does not establish that this advice is enforced by the server.",
+    "Airtable distributes agent skills separately from the MCP endpoint, and describes those skills as adding domain-specific knowledge for connected models.",
+    "Airtable says tool names, behaviors, and capabilities may change; the related CLI discovers the live catalog at runtime."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed prepared links.json, links_check.txt, pages and code folders, including page6.html and page6.script.txt for the official tool reference; found no official hosted tool schemas or initialize instructions. The endpoint returned HTTP 401 in the supplied evidence. The Airtable CLI and skills repositories were inspected; neither contains deployed server code. Airtable's public privacy policy was reviewed, but no MCP-specific retention or AI-training terms were found. Unofficial community servers were listed in links.json and excluded from evidence. A stale page artifact contained unrelated Experian text; it was not used.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.5
+  }
+}

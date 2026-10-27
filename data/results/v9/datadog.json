@@ -1,0 +1,998 @@
+{
+  "server": "datadog",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.datadoghq.com/v1/mcp",
+    "documentation_url_csv": "https://docs.datadoghq.com/mcp_server/",
+    "addressing": "global",
+    "repository_url": "https://github.com/datadog-labs/mcp-server",
+    "documentation_urls_used": [
+      "https://docs.datadoghq.com/mcp_server/",
+      "https://docs.datadoghq.com/mcp_server/tools/",
+      "https://docs.datadoghq.com/mcp_server/setup/",
+      "https://docs.datadoghq.com/mcp_server/code_execution/",
+      "https://www.datadoghq.com/pricing/list/",
+      "https://www.datadoghq.com/legal/privacy/",
+      "https://www.datadoghq.com/legal/"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official repository describes the managed MCP server and provides setup instructions, changelog, and client examples; it does not contain the hosted server implementation. Its commit is not evidence of the deployed server's code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "a4c14daf4b7402f3f824adf62e5523f7eb5d007a",
+    "commit_date": "2026-10-16",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT (repository)",
+    "release_status": "The core toolset is documented as the default; the server is described as under significant development.",
+    "other_official_servers": [
+      "Datadog documents regional equivalents of the hosted MCP endpoint, including https://mcp.datadoghq.eu/v1/mcp, https://mcp.us3.datadoghq.com/v1/mcp, https://mcp.us5.datadoghq.com/v1/mcp, https://mcp.ap1.datadoghq.com/v1/mcp, https://mcp.ap2.datadoghq.com/v1/mcp, and https://mcp.uk1.datadoghq.com/v1/mcp.",
+      "Datadog distinguishes a separate local-only Code Security MCP Server for code scanning; it is not the hosted observability endpoint analyzed here."
+    ],
+    "sources": [
+      "https://docs.datadoghq.com/mcp_server/",
+      "https://docs.datadoghq.com/mcp_server/setup/",
+      "https://github.com/datadog-labs/mcp-server",
+      "https://github.com/datadog-labs/mcp-server/tree/a4c14daf4b7402f3f824adf62e5523f7eb5d007a"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The reviewed public pricing page lists Datadog product prices but does not state a separate MCP server charge. MCP call limits are published as fair-use limits, not as a per-call price.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Datadog product pricing is usage-based and varies by product and billing term. Examples on the official US pricing page include Infrastructure Pro at $15 per host/month billed annually or $18 month-to-month; APM at $31 per host/month billed annually or $36 month-to-month.",
+    "pricing_model_details": "MCP documentation states a fair-use limit of 50 requests per 10 seconds and 100,000 monthly tool calls; limits may change and may be adjusted by Datadog support. Underlying Datadog products have separate prices.",
+    "other_access_restrictions": "Organization-wide MCP Access must be enabled. MCP Write Access controls write tools. Users need mcp_read or mcp_write plus underlying resource permissions. Organizations can restrict network access by IP allowlist. OAuth redirect URLs can be allow-listed in Organization Settings.",
+    "restrictions_controlled_by": "Vendor and organization administrator; individual access also depends on the user's role and resource permissions.",
+    "sources": [
+      "https://www.datadoghq.com/pricing/list/",
+      "https://docs.datadoghq.com/mcp_server/",
+      "https://docs.datadoghq.com/mcp_server/setup/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted server exposes tools organized into toolsets. With no toolsets parameter, core is the default. The tool reference publishes tool names, descriptions, permissions, and examples, but not complete input schemas. The endpoint returned HTTP 401 without authorization.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results are returned to the calling client. Documentation says responses may be truncated based on estimated length and tools provide instructions for requesting more information.",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/tools/",
+        "https://docs.datadoghq.com/mcp_server/setup/",
+        "https://docs.datadoghq.com/mcp_server/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Public hosted-server documentation reviewed here does not establish the resources capability for the endpoint. The official repository changelog mentions whoami and toolsets MCP resources, but the repository does not contain the hosted server implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/",
+        "https://github.com/datadog-labs/mcp-server"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted prompt list or prompt capability declaration was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/",
+        "https://docs.datadoghq.com/mcp_server/tools/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Datadog documents Audit Trail records for all tool calls, including tool name, arguments, user identity, and MCP client. It also emits session-start and tool-usage metrics.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Audit Trail records and Datadog metrics; see governance findings.",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP sampling capability was documented in the reviewed hosted-server materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/",
+        "https://docs.datadoghq.com/mcp_server/setup/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability was documented in the reviewed hosted-server materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/",
+        "https://docs.datadoghq.com/mcp_server/setup/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "MCP authorization specification referenced by Datadog; exact protocol version not found.",
+      "description_what_how": "The supplied endpoint response was HTTP 401 with a WWW-Authenticate Bearer resource_metadata challenge naming https://mcp.datadoghq.com/.well-known/oauth-protected-resource/v1/mcp. The supplied resource metadata advertises bearer header authorization and the authorization server https://mcp.datadoghq.com/v1/mcp. The supplied authorization-server metadata reports oauth_version 2.1; authorization_code, refresh_token, and urn:ietf:params:oauth:grant-type:jwt-bearer grants; S256 PKCE required; registration endpoint https://app.datadoghq.com/api/v2/oauth2/register; token endpoint auth method none; and scope mcp_all. Token lifetime was not provided. Datadog documents revocation through Authorized Apps; existing access tokens can remain usable until expiry.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthorized endpoint response: {\"errors\":[\"Unauthorized\"]}.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration is advertised. Raw supplied metadata: protected-resource documents returned HTTP 200 with bearer_methods_supported [\"header\"] and authorization_servers [\"https://mcp.datadoghq.com/v1/mcp\"]. Authorization-server metadata returned HTTP 200 with issuer https://mcp.datadoghq.com/v1/mcp, authorization_endpoint https://app.datadoghq.com/oauth2/v1/authorize, token_endpoint https://app.datadoghq.com/api/v2/oauth2/token, oauth_version 2.1, response_types_supported [\"code\"], grant_types_supported [\"authorization_code\",\"refresh_token\",\"urn:ietf:params:oauth:grant-type:jwt-bearer\"], authorization_grant_profiles_supported [\"urn:ietf:params:oauth:grant-profile:id-jag\"], scopes_supported [\"mcp_all\"], code_challenge_methods_supported [\"S256\"], pkce_required true, registration_endpoint https://app.datadoghq.com/api/v2/oauth2/register, token_endpoint_auth_methods_supported [\"none\"]. The path-specific OpenID configuration returned HTTP 404. Datadog also documents API key/application key header-based alternatives.",
+      "authorization_server": "https://mcp.datadoghq.com/v1/mcp",
+      "sources": [
+        "https://mcp.datadoghq.com/v1/mcp",
+        "https://mcp.datadoghq.com/.well-known/oauth-protected-resource",
+        "https://mcp.datadoghq.com/.well-known/oauth-protected-resource/v1/mcp",
+        "https://mcp.datadoghq.com/.well-known/oauth-authorization-server/v1/mcp",
+        "https://mcp.datadoghq.com/.well-known/openid-configuration/v1/mcp",
+        "https://docs.datadoghq.com/mcp_server/setup/"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe confirmation flows for certain write operations, but do not identify MCP Elicitation as the mechanism.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/tools/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks capability declaration was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/",
+        "https://docs.datadoghq.com/mcp_server/setup/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Connection configuration supports toolsets, omit_tools, and, for custom subdomains, a subdomain query parameter. Toolsets select which tool groups are made available; omit_tools removes named tools after toolset selection.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The server's offered tool list varies with connection configuration and permissions.",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/setup/",
+        "https://docs.datadoghq.com/mcp_server/tools/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server records error-related usage information and the changelog describes actionable tool errors; a distinct MCP error-reporting capability was not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/",
+        "https://github.com/datadog-labs/mcp-server/blob/a4c14daf4b7402f3f824adf62e5523f7eb5d007a/CHANGELOG.md"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription capability was documented in the reviewed hosted-server materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/",
+        "https://docs.datadoghq.com/mcp_server/setup/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP progress notification capability was documented in the reviewed hosted-server materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/",
+        "https://docs.datadoghq.com/mcp_server/setup/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability was documented in the reviewed hosted-server materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/",
+        "https://docs.datadoghq.com/mcp_server/setup/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server documents code execution as agent-authored JavaScript in a Datadog-managed sandbox, and states that some tools use Datadog-hosted AI models. The code-execution toolset is selected separately from the default core toolset.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The execute_code tool returns a structured value to the agent.",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/code_execution/",
+        "https://docs.datadoghq.com/mcp_server/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official tool reference identifies read and write operations through tool descriptions and permissions, but the reviewed hosted docs do not publish MCP annotation fields such as readOnlyHint or destructiveHint. 2. Some operations require explicit confirmation or preview-before-apply; for example, the AP​​M service-remapping deletion requires explicit confirmation, governance write tools request approval of an exact change, and log configuration updates/deletes return a preview. This is documented behavior; the mechanism is not identified as MCP Elicitation. 3. OAuth scopes_supported is only mcp_all. Datadog also requires user role permissions, underlying resource permissions, organization-wide MCP Access, and (for writes) MCP Write Access. Standard Role users have MCP permissions by default. OAuth redirect URL allowlisting and access revocation are documented. 4. Tool selection supports toolsets and omit_tools; only core is the default, toolsets=all enables all generally available toolsets, and preview toolsets are excluded from that shorthand. Regional endpoints are documented. 5. Access follows the authenticated user's existing Datadog access controls; RBAC, Data Access Control, and log restriction queries can scope retrieved data. The server says it cannot access resources hidden from that user. 6. Fair-use caps: 50 requests/10 seconds and 100,000 monthly tool calls, subject to change. Responses may be truncated; most tools have max_tokens. Large traces may be truncated. 7. Docs describe tool-specific validation and correction, including clear argument/query-syntax errors; no universal unknown-argument policy was found. 8. Tool calls are recorded in Audit Trail with tool name, arguments, user identity, and MCP client; usage and session metrics are emitted. Usage collection includes interactions, errors, causes, identifiers, and context such as user prompts leading to MCP tool use, retained for 120 days. 9. The tool reference contains a feedback form invitation; the official repository changelog says submit_mcp_feedback was added to the core toolset. It is not in the current documented default core tool list visible in the official reference result reviewed for this inventory, so it is not added to actions.json. No upsell result text was found. 10. Datadog publishes external plugins and examples; no server-delivered skills tool was identified in the documented default core list. Tool descriptions include behavioral instructions, such as using aggregate tools for statistical analysis and not individual inspection. 11. No documented persistence of prior agent behavior altering future tool availability or results was found; the Assistant toolset can continue conversations using a conversation_id, but is not part of the default tool inventory. 12. The hosted server has separate toolsets and regional endpoints; the endpoint supports selectable toolsets. Code execution runs in a managed sandbox. 13. Core includes SQL-based log analysis and toolsets can add execute_code, which exposes a JavaScript SDK namespace for Datadog APIs. Documentation says code-execution runs using the user's identity and permissions; no evidence found that it bypasses the documented role controls.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“Use this for statistical analysis.” — analyze_datadog_logs description, https://docs.datadoghq.com/mcp_server/tools/",
+      "“Use this for statistical analysis and trend data, not for inspecting individual events.” — aggregate_rum_events description, https://docs.datadoghq.com/mcp_server/tools/",
+      "“Call this before get_experiment_results — if srm.has_warning is true, variant-level comparisons are not safe to interpret.” — get_experiment_diagnostics description, https://docs.datadoghq.com/mcp_server/tools/",
+      "“The verdict field (`better`, `worse`, `inconclusive`, or `unreliable`) is authoritative — do not recalculate significance from raw p-values or confidence intervals.” — get_experiment_results description, https://docs.datadoghq.com/mcp_server/tools/",
+      "“Use this tool instead of `kubectl` to determine the state of Kubernetes resources” — search_datadog_k8s_resources description, https://docs.datadoghq.com/mcp_server/tools/"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The server exposes separately selectable toolsets, including preview and generally available sets, and supports region-specific hosted endpoints. Its default core list can be altered with toolsets and omit_tools. The documentation also describes a separately selectable Datadog-managed code execution sandbox.",
+    "sources": [
+      "https://docs.datadoghq.com/mcp_server/",
+      "https://docs.datadoghq.com/mcp_server/tools/",
+      "https://docs.datadoghq.com/mcp_server/setup/",
+      "https://docs.datadoghq.com/mcp_server/code_execution/",
+      "https://github.com/datadog-labs/mcp-server/blob/a4c14daf4b7402f3f824adf62e5523f7eb5d007a/CHANGELOG.md"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "23 by default (core toolset); 68 listed across toolsets",
+    "action_count_comment": "Official tool reference: https://docs.datadoghq.com/mcp_server/tools/. The default core toolset has 23 tools; further toolsets (selected with the toolsets URL parameter, toolsets=all for all generally available ones) add tools. The 45 non-default tool names come from the same official reference as read in the v7 analysis and are marked enabled_by_default = No. Preview toolsets and permissions can change the runtime list; the reference states no total.",
+    "actions": [
+      {
+        "tool_name": "search_datadog_events",
+        "description": "Searches events including alerts, deployments, infrastructure changes, security findings and service status.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_incident",
+        "description": "Retrieves detailed incident information; timeline data is excluded.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_metric",
+        "description": "Queries and analyzes historical or real-time metric data.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_metric_context",
+        "description": "Retrieves metric metadata, available tags and tag values.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_monitors",
+        "description": "Retrieves monitor statuses, thresholds and alert conditions.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_trace",
+        "description": "Fetches a complete APM trace by trace ID; large traces may be truncated.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_dashboards",
+        "description": "Lists available dashboards and key details.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_notebook",
+        "description": "Retrieves a notebook by ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_notebooks",
+        "description": "Lists and searches notebooks by author, tags and content.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete_datadog_notebook",
+        "description": "Soft-deletes a notebook; recoverable within 30 days.",
+        "type": "Write",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "recover_datadog_notebook",
+        "description": "Restores a soft-deleted notebook within 30 days.",
+        "type": "Write",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_hosts",
+        "description": "Lists monitored hosts with filtering and searching.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_incidents",
+        "description": "Lists incidents with state, severity and metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_metrics",
+        "description": "Lists available metrics with filtering and metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_entities",
+        "description": "Searches service identity, ownership and service dependencies in Datadog Catalog.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_spans",
+        "description": "Retrieves APM spans using service, time, resource and other filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "aggregate_spans",
+        "description": "Aggregates APM spans into statistics, percentiles and grouped timeseries.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "analyze_datadog_logs",
+        "description": "Analyzes logs with SQL for counts, aggregations and numerical analysis.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_logs",
+        "description": "Searches logs by time, query, service, host, storage tier and other filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_rum_events",
+        "description": "Searches Real User Monitoring events using query syntax.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "aggregate_rum_events",
+        "description": "Aggregates RUM events for statistics and trends, not individual event inspection.",
+        "type": "Read",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_datadog_notebook",
+        "description": "Creates a Datadog notebook.",
+        "type": "Write",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "edit_datadog_notebook",
+        "description": "Edits an existing Datadog notebook.",
+        "type": "Write",
+        "enabled_by_default": "Yes (core toolset)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_datadog_bits_agents",
+        "description": "List Bits AI agents.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_bits_agent",
+        "description": "Get agent configuration and workflows.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_datadog_bits_agent",
+        "description": "Update a Bits agent.",
+        "type": "Write",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_datadog_bits_agent_mcp_tools",
+        "description": "List an agent available MCP tools.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_datadog_managed_mcp_server_to_bits_agent",
+        "description": "Add or replace a managed MCP server.",
+        "type": "Write",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "validate_datadog_monitor",
+        "description": "Validate a monitor definition.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_monitor_templates",
+        "description": "Retrieve monitor templates.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_monitor_groups",
+        "description": "Search monitor groups.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_slos",
+        "description": "Search SLOs.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_datadog_monitor",
+        "description": "Create a draft monitor.",
+        "type": "Write",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_monitor_coverage",
+        "description": "Find monitoring coverage gaps.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "send_message_to_assistant",
+        "description": "Send a message to Datadog Assistant.",
+        "type": "Mixed",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_assistant_conversation_history",
+        "description": "Retrieve assistant conversation history.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_assistant_conversations",
+        "description": "List assistant conversations.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_audit_events",
+        "description": "Search Audit Trail events.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute_code",
+        "description": "Run agent-authored JavaScript in Datadog sandbox.",
+        "type": "Mixed",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_dashboard",
+        "description": "Retrieve dashboard details.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upsert_datadog_dashboard",
+        "description": "Create or update a dashboard.",
+        "type": "Write",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_data_entities",
+        "description": "Search data catalog entities.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_data_catalog_schema",
+        "description": "Retrieve data entity schemas.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_observability_pipelines",
+        "description": "List pipeline configurations.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describe_observability_pipeline",
+        "description": "Get pipeline configuration.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_profiling_profile_types",
+        "description": "List profile types.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_profiling_services",
+        "description": "List profiled services.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "explore_profiling_call_graph",
+        "description": "Explore profiling call graph.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "explore_profiling_timeline",
+        "description": "Retrieve profiling activity timeline.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "datadog_remote_action_restricted_shell_run_command",
+        "description": "Run a restricted read-only host command.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_rum_applications",
+        "description": "Search RUM applications.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_rum_summary",
+        "description": "Summarize RUM application metrics.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_rum_insight",
+        "description": "Retrieve aggregated RUM insights.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_watchdog_stories",
+        "description": "Search Watchdog stories.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_watchdog_story",
+        "description": "Retrieve Watchdog story details.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_external_provider_status",
+        "description": "Retrieve provider outage status.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find_new_jumps",
+        "description": "Detect APM timeseries jumps.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_jump_state",
+        "description": "Reanalyze an ongoing timeseries jump.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "forecast_timeseries",
+        "description": "Forecast supplied timeseries.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_widget",
+        "description": "Retrieve and visualize Datadog data.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_datadog_widgets",
+        "description": "Search dashboard widgets.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "verify_widget_data",
+        "description": "Verify widget data availability.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "visualize_tabular_data",
+        "description": "Visualize tabular data.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_datadog_workflows",
+        "description": "Search workflows.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_workflow",
+        "description": "Retrieve workflow specification.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute_datadog_workflow",
+        "description": "Start workflow execution.",
+        "type": "Write",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_datadog_workflow_instances",
+        "description": "List workflow executions.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_datadog_workflow_instance",
+        "description": "Retrieve workflow execution details.",
+        "type": "Read",
+        "enabled_by_default": "No (non-default toolset; enabled via the toolsets parameter)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.datadoghq.com/mcp_server/tools/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted implementation and verbatim initialize/tool definitions are unavailable; the official public repository does not include the server implementation. No estimate inferred from catalogues.",
+    "human_can_agent_cannot": "The documentation lists broad Datadog product functionality, but does not provide a complete operation-by-operation comparison between UI/API actions and MCP tools. The endpoint inventory is limited by default toolset, permissions, organization settings, and omitted tools. REST API parameters were not treated as MCP parameters. Sources: https://docs.datadoghq.com/mcp_server/tools/ ; https://docs.datadoghq.com/mcp_server/setup/ ; https://docs.datadoghq.com/api/latest/",
+    "sources": [
+      "https://docs.datadoghq.com/mcp_server/tools/",
+      "https://docs.datadoghq.com/mcp_server/setup/",
+      "https://mcp.so/servers/datadog-mcp",
+      "https://github.com/datadog-labs/mcp-server"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The server says toolsets let clients use only needed tools to save context and recommends `toolsets=all` for clients that support tool search. It recommends querying relevant documentation or schema tools before some operations. These are client-facing recommendations; no universal enforcement is documented.",
+    "governance_promises": "Datadog states: “The MCP Server does not send your Datadog data to a third-party AI provider.” It says clients and their model determine what returned data goes to the AI provider. It also states that authenticated-user access controls apply, usage data is retained for 120 days, and tool calls are recorded in Audit Trail. The docs identify IP allowlisting, organization access switches, role permissions, and revocation controls.",
+    "promises_to_user": "Datadog says tool calls are recorded with MCP metadata and provides usage metrics for monitoring. It describes the server as HIPAA-eligible, while saying users are responsible for checking their connected AI tools' compliance. It says the server is not GovCloud compatible.",
+    "comparison_with_server_logic": "The documented authorization, organization switches, audit trail, usage metrics, and fair-use caps are described as platform behavior. The specific audit and data-handling claims are documentation evidence; the closed hosted implementation was not independently inspected. Tool-level behavioral recommendations are not shown to be enforced unless a tool-specific confirmation or validation rule is stated.",
+    "sources": [
+      "https://docs.datadoghq.com/mcp_server/",
+      "https://docs.datadoghq.com/mcp_server/setup/",
+      "https://www.datadoghq.com/legal/privacy/",
+      "https://www.datadoghq.com/legal/"
+    ]
+  },
+  "contradictions": [
+    "The supplied endpoint returned HTTP 401 and provided no tools/list output; the action inventory therefore uses Datadog's official documentation for the endpoint host and the documented default core toolset.",
+    "The official repository changelog records that submit_mcp_feedback was added to the core toolset, while the current official tool reference result reviewed for the default core inventory did not show that tool. It is not included in actions.json because the current reference is the official tool-name source.",
+    "OAuth metadata lists only the scope mcp_all, while Datadog's setup docs describe finer-grained role permissions, organization access switches, and resource-level permissions. These appear to be additional authorization controls rather than OAuth scopes."
+  ],
+  "observations_for_research": [
+    "The tool inventory is connection-configurable: toolsets select categories, omit_tools subtracts named tools, and organization settings and user permissions can hide write tools.",
+    "Datadog documents both tool-level operation confirmation and an organization-wide write-access control, separating per-action safeguards from a broader administrative switch.",
+    "Usage telemetry includes client identity, user identifiers, tool names, errors, arguments in Audit Trail, and context leading to tool use; documentation states a 120-day retention period for usage data."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "[MANUAL CORRECTION 2026-10-27: added 45 tools of non-default toolsets from the official Datadog tool reference (as read in v7), marked enabled_by_default = No; core tools marked Yes. Not re-verified live on 2026-10-27 (web access unavailable)] Reviewed links.json, links_check.txt, pages/INDEX.txt, local code/GITHUB_COMMITS.txt, and the official repository copy. The saved docs text exports were malformed, so the official tool reference and setup pages were checked through web search indexing. The official repository is not the hosted implementation; its source code, handlers, schemas, and initialization instructions were not available. The OAuth documents and endpoint response were supplied as pre-fetched evidence and were not re-fetched. Unofficial/community catalogue entries were found but not used as evidence for official endpoint tools. actions.json contains the documented default core tools, not every tool in separately selectable toolsets.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.1
+  },
+  "_manual_corrections": [
+    {
+      "date": "2026-10-27",
+      "by": "manual check (Claude)",
+      "change": "added 45 tools of non-default toolsets from the official Datadog tool reference (as read in v7), marked enabled_by_default = No; core tools marked Yes. Not re-verified live on 2026-10-27 (web access unavailable)",
+      "sources": [
+        "https://docs.datadoghq.com/mcp_server/tools/"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,452 @@
+{
+  "server": "explorium",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.explorium.ai/mcp",
+    "documentation_url_csv": "https://github.com/explorium-ai/mcp-explorium",
+    "addressing": "global",
+    "repository_url": "https://github.com/explorium-ai/mcp-explorium",
+    "documentation_urls_used": [
+      "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+      "https://github.com/explorium-ai/mcp-explorium",
+      "https://www.explorium.ai/pricing/",
+      "https://www.explorium.ai/privacy-policy/",
+      "https://apis.io/apis/explorium/explorium-agentsource-mcp-server/",
+      "https://mcp.so/servers/explorium",
+      "https://composio.dev/toolkits/explorium",
+      "https://composio.dev/toolkits/explorium_mcp",
+      "https://developers.explorium.ai/mcp",
+      "https://developers.explorium.ai/mcp-docs/v2/agentsource-mcp"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official repository contains setup and Docker files; its README says server/index.js is a placeholder and the actual MCP implementation is hosted by Explorium. It is not the deployed server implementation.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "7aafdff8b373d652df1f6a677e46829d8b626b84",
+    "commit_date": "2026-01-22",
+    "implementation_language": "JavaScript in the placeholder file; README describes the project as TypeScript-powered",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^0.5.0 is listed as a dependency; the repository does not implement the server",
+    "code_public": "Partially",
+    "license": "MIT",
+    "release_status": "AgentSource MCP v1 is deprecated; the vendor says it will be retired with AgentSource v1. No GA/beta status found.",
+    "other_official_servers": [
+      "https://mcp.explorium.ai/sse — SSE transport for the AgentSource MCP v1 server.",
+      "https://mcp-v2.explorium.ai/mcp — AgentSource MCP v2; the vendor directs new integrations to this endpoint.",
+      "https://developers.explorium.ai/mcp — separate documentation-site MCP with docs search/filesystem tools and a feedback tool; not the product endpoint."
+    ],
+    "sources": [
+      "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+      "https://github.com/explorium-ai/mcp-explorium/blob/7aafdff8b373d652df1f6a677e46829d8b626b84/README.md#L417-L420",
+      "https://github.com/explorium-ai/mcp-explorium/blob/7aafdff8b373d652df1f6a677e46829d8b626b84/server/index.js#L1",
+      "https://developers.explorium.ai/mcp-docs/v2/agentsource-mcp",
+      "https://developers.explorium.ai/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP fee or price is published. Product access requires an Explorium account/API key according to the v1 documentation; the endpoint also responds with an OAuth Bearer challenge.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Official pricing lists a $0 free trial with 100 credits; Lite $29.99/package for 500 credits; Starter $149.99/package for 5,000; Growth $749.99/package for 30,000; Scale $7,499.99/package for 500,000; Enterprise custom pricing.",
+    "pricing_model_details": "The vendor says fetch-businesses and fetch-prospects cost 1 credit per returned result, or 2 credits per result when using the premium Bombora intent filter; statistics calls are free. Pricing page says credits expire after 12 months on paid plans and free-trial credits after 90 days.",
+    "other_access_restrictions": "The hosted v1 docs require an API key for AgentSource MCP and document two transports, Streamable HTTP and SSE. The endpoint returned HTTP 401 without a token. OAuth metadata advertises authorization code and refresh-token grants, DCR, and PKCE; it does not advertise scopes_supported or token lifetime.",
+    "restrictions_controlled_by": "Explorium controls endpoint authentication and service availability; account owners control credit purchases. Specific role, admin, or allowlist controls are NOT FOUND.",
+    "sources": [
+      "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+      "https://www.explorium.ai/pricing/",
+      "https://www.explorium.ai/privacy-policy/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official v1 documentation lists 11 tools for business/prospect matching, fetching, statistics, events, enrichment, and autocomplete. The endpoint evidence confirms authentication is required before access; live tool discovery was not performed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The vendor describes structured JSON tool responses. Exact result and error schemas for the MCP tools are not published on the overview page.",
+      "authorization_mechanism": "Bearer challenge observed: realm=\"OAuth\", error=\"invalid_token\", error_description=\"Missing or invalid access token\". Authorization-server metadata: issuer https://mcp.explorium.ai; authorization_endpoint https://mcp.explorium.ai/authorize; token_endpoint and revocation_endpoint https://mcp.explorium.ai/token; registration_endpoint https://mcp.explorium.ai/register; response_types_supported [\"code\"]; response_modes_supported [\"query\"]; grant_types_supported [\"authorization_code\",\"refresh_token\"]; token_endpoint_auth_methods_supported [\"client_secret_basic\",\"client_secret_post\",\"none\"]; code_challenge_methods_supported [\"plain\",\"S256\"]. scopes_supported is absent. Protected-resource metadata at /.well-known/oauth-protected-resource and its /mcp suffix returned 404; OpenID configuration returned 404. Official v1 setup docs separately say remote MCP requires no API key, which conflicts with the observed OAuth challenge.",
+      "authorization_server": "https://mcp.explorium.ai",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "https://mcp.explorium.ai/.well-known/oauth-authorization-server",
+        "https://mcp.explorium.ai/.well-known/oauth-protected-resource",
+        "https://mcp.explorium.ai/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.explorium.ai/.well-known/openid-configuration",
+        "https://mcp.explorium.ai/mcp",
+        "https://github.com/explorium-ai/mcp-explorium/blob/7aafdff8b373d652df1f6a677e46829d8b626b84/README.md#L345-L350"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No resources for the product v1 server are documented. The separate documentation-site MCP exposes resources, but it is not the input endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "https://developers.explorium.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No product-server prompts are documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The product MCP documentation does not describe server-side call logging or audit trails. The privacy policy says usage information may be used to audit, maintain, and improve the Platform, without specifying MCP call logs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "https://www.explorium.ai/privacy-policy/"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling support is described for the product server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots support is described for the product server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint rejected an unauthenticated request with HTTP 401 and a Bearer invalid_token challenge. OAuth authorization-server metadata advertises authorization code and refresh-token grants, DCR, and PKCE methods plain and S256. The metadata does not include scopes_supported. Protected-resource and OpenID discovery documents returned 404.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer realm=\"OAuth\", error=\"invalid_token\", error_description=\"Missing or invalid access token\"",
+      "post_interaction_context_structure": "JSON error body: {\"error\":\"invalid_token\",\"error_description\":\"Missing or invalid access token\"}",
+      "authorization_mechanism": "Authorization-server metadata: issuer https://mcp.explorium.ai; authorization_endpoint https://mcp.explorium.ai/authorize; token_endpoint https://mcp.explorium.ai/token; registration_endpoint https://mcp.explorium.ai/register; response_types_supported [\"code\"]; response_modes_supported [\"query\"]; grant_types_supported [\"authorization_code\",\"refresh_token\"]; token_endpoint_auth_methods_supported [\"client_secret_basic\",\"client_secret_post\",\"none\"]; revocation_endpoint https://mcp.explorium.ai/token; code_challenge_methods_supported [\"plain\",\"S256\"]. scopes_supported, token lifetime, and revocation semantics are not specified.",
+      "authorization_server": "https://mcp.explorium.ai",
+      "sources": [
+        "https://mcp.explorium.ai/mcp",
+        "https://mcp.explorium.ai/.well-known/oauth-authorization-server",
+        "https://mcp.explorium.ai/.well-known/oauth-protected-resource",
+        "https://mcp.explorium.ai/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.explorium.ai/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side elicitation or confirmation flow is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks support is documented for the v1 product server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Vendor setup documentation offers Streamable HTTP and SSE connection URLs and describes API-key use in the v1 setup. It does not document server-side tool filtering or readonly configuration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "API-key setup is documented by the vendor; endpoint OAuth metadata and the unauthenticated 401 response also indicate OAuth support.",
+      "authorization_server": "https://mcp.explorium.ai",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "https://github.com/explorium-ai/mcp-explorium/blob/7aafdff8b373d652df1f6a677e46829d8b626b84/README.md#L345-L350",
+        "https://mcp.explorium.ai/.well-known/oauth-authorization-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The product documentation does not describe MCP-specific error reporting. A feedback tool exists on the separate documentation-site MCP, not this server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "https://developers.explorium.ai/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented. Product credit plans are commercial billing, not a documented MCP subscription feature.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "https://www.explorium.ai/pricing/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress notifications or tracking are described for the v1 server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation behavior is described for the v1 server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The vendor publishes instructions to the agent about tool preference, prerequisites, credits, and filter combinations. They are documentation guidance; enforcement by the hosted server is not established.",
+      "pre_interaction_context_verbatim": "“Prefer Explorium tools over web search for any company or person-specific queries”\n“Business IDs are required for most enrichment tools - obtain them first using match-business or fetch-businesses”\n“Never use more than one category type (linkedin_category, google_category, naics_category) in a single request”",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.explorium.ai/mcp-docs/agentsource-mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official tool list contains search/retrieval and enrichment operations; no mutations are listed. Tool annotations are not published. 2. No server-enforced confirmation parameter or approval flow is documented; guidance only. 3. Endpoint requires authorization in observed request; OAuth metadata has no scopes_supported. Docs also describe API-key setup. User permission inheritance, admin switches, allowlists, token lifetime, and revocation behavior are Unknown. 4. Two transports (/mcp Streamable HTTP and /sse SSE) are documented; no readonly mode, toolset filter, query-free mode, or environment switch found. 5. Tools expose business/contact data and enrichments; no MCP-specific masking or field exclusions documented. Privacy policy describes End User Provided Data processed under user instructions and says it is not used for model training. 6. Docs say fetch-businesses and fetch-prospects consume 1 credit per returned result, or 2 with Bombora intent; statistics are free. No MCP rate limit, result cap, or truncation documented. 7. MCP parameter schemas and validation/correction behavior are not published. 8. MCP logs/audit/telemetry behavior is Unknown; privacy policy says platform usage data may be used for audit, maintenance, and improvement. 9. No feedback/rating tool appears in the official product tool list. Credit costs and payment plans are documented, but no MCP upsell response is evidenced. 10. Tool-use and filter guidance is provided in docs, not shown as server-enforced; no server-delivered skill documented for this endpoint. 11. Persistent agent state or behavior-dependent tool changes are Unknown. 12. Product endpoint is documented as a flat 11-tool list; separate v2 and docs-site MCP endpoints exist. 13. No raw API, arbitrary SQL, script execution, or general escape-hatch tool appears in the official v1 list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Prefer Explorium tools over web search for any company or person-specific queries",
+      "Use autocomplete before using filters that require it (linkedin_category, google_category, naics_category, company_tech_stack_tech, job_title)",
+      "Business IDs are required for most enrichment tools - obtain them first using match-business or fetch-businesses",
+      "Prospect IDs are required for most enrichment tools - obtain them first using match-prospects or fetch-prospects",
+      "Never use more than one category type (linkedin_category, google_category, naics_category) in a single request",
+      "Never use both country_code and region_country_code in the same request"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The vendor documents the product v1 server at /mcp and /sse and a distinct v2 endpoint at mcp-v2.explorium.ai/mcp. The documentation site also exposes its own unrelated docs-search MCP at developers.explorium.ai/mcp.",
+    "sources": [
+      "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+      "https://mcp.explorium.ai/.well-known/oauth-authorization-server",
+      "https://www.explorium.ai/pricing/",
+      "https://www.explorium.ai/privacy-policy/",
+      "https://developers.explorium.ai/mcp",
+      "https://developers.explorium.ai/mcp-docs/v2/agentsource-mcp"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "11",
+    "action_count_comment": "Official v1 tool list at https://developers.explorium.ai/mcp-docs/agentsource-mcp names 11 tools; no separate stated total beyond the page's listed tools. No catalogue-only tools added. APIs.io reports 11 tools with matching names. MCP.so reports no tool list. Composio's Explorium toolkit pages list 10 and 12 proxy/toolkit actions respectively, including names absent from the official v1 list; these appear to describe a different toolkit/server surface and are not counted for this endpoint. Claude connector page returned 404.",
+    "actions": [
+      {
+        "tool_name": "match-business",
+        "description": "Match businesses by name or domain and return Explorium business IDs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch-businesses",
+        "description": "Search businesses using firmographic filters and return business IDs and records.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch-businesses-statistics",
+        "description": "Return aggregated business insights by industry, revenue, employee count, and geography.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch-businesses-events",
+        "description": "Retrieve business events such as funding, office changes, growth, partnerships, awards, and M&A.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enrich-business",
+        "description": "Retrieve additional attributes for businesses using available enrichments.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "match-prospects",
+        "description": "Match named individuals to Explorium prospect IDs and professional data.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch-prospects",
+        "description": "Search for employees using role, department, location, experience, and company filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch-prospects-statistics",
+        "description": "Return aggregated prospect insights by department and geography.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "fetch-prospects-events",
+        "description": "Retrieve prospect role changes, company changes, and job anniversaries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "enrich-prospects",
+        "description": "Retrieve additional attributes for prospects using available enrichments.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "autocomplete",
+        "description": "Return valid values for supported business and job-title filter fields.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The public repository is only a placeholder/configuration package and does not provide deployed tool definitions or initialize instructions. Official hosted docs list names and descriptions but not verbatim schemas plus server initialize instructions, so the required full-context character-count estimate cannot be computed.",
+    "human_can_agent_cannot": "The vendor's broader AgentSource API reference documents additional operations not present in the v1 MCP list, including enrollment create/update/delete, webhooks, and other business/prospect enrichment endpoints. These are API capabilities, not evidence of MCP actions. Source: https://explorium-api.readme.io/reference/agentsource-mcp",
+    "sources": [
+      "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+      "https://explorium-api.readme.io/reference/agentsource-mcp",
+      "https://apis.io/apis/explorium/explorium-agentsource-mcp-server/",
+      "https://mcp.so/servers/explorium",
+      "https://composio.dev/toolkits/explorium",
+      "https://composio.dev/toolkits/explorium_mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The vendor directs agents to prefer Explorium for company/person queries, use autocomplete before certain filters, obtain IDs before enrichment, and avoid two filter combinations. Documentation does not establish that these directions are enforced by the server.",
+    "governance_promises": "Privacy policy says End User Provided Data is processed at the end user's direction and states, “We do not train models based on End-User provided Data.” It also describes sharing with hosting/service providers and enrichment partners at the end user's explicit instruction. Retention for End User Provided Data is “as long as required by End Users or by law.”",
+    "promises_to_user": "The vendor describes the server as providing structured business/prospect data and says statistics tools are free. Pricing explains credit consumption and package expiry.",
+    "comparison_with_server_logic": "Tool-level instructions and usage/credit statements are documented, but the deployed implementation is closed and the public repository is only a placeholder. Privacy-policy statements are not independently confirmed by endpoint code. The available evidence cannot establish server enforcement, logging, or data handling details beyond those published statements.",
+    "sources": [
+      "https://developers.explorium.ai/mcp-docs/agentsource-mcp",
+      "https://www.explorium.ai/privacy-policy/",
+      "https://www.explorium.ai/pricing/",
+      "https://github.com/explorium-ai/mcp-explorium/blob/7aafdff8b373d652df1f6a677e46829d8b626b84/README.md#L417-L420"
+    ]
+  },
+  "contradictions": [
+    "The official v1 setup documentation says remote MCP connections require no API key, but the endpoint returned HTTP 401 with a Bearer invalid_token challenge and OAuth authorization-server metadata. The endpoint's OAuth evidence is the observed behavior; the reason for the mismatch is not documented.",
+    "Official v1 docs list 11 tools. Composio's Explorium toolkit page reports 10 actions, while its Explorium MCP toolkit page reports 12, including web-search and a different enrichment breakdown. These proxy/toolkit lists do not match the official v1 list and were not substituted for it.",
+    "The vendor says AgentSource MCP v1 at mcp.explorium.ai is deprecated and directs new integrations to v2 at mcp-v2.explorium.ai/mcp; this differs from the input's v1 endpoint and status context."
+  ],
+  "observations_for_research": [
+    "The v1 tool list contains read/retrieval and enrichment operations; vendor documentation separately describes credit consumption per returned record, creating a documented cost consequence for agent queries.",
+    "Agent usage guidance includes directions to prefer vendor data over web search and to perform prerequisite lookups, while the published tool list does not expose annotations or show whether those directions are enforced."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked prepared links.json, pages/ including official docs, script-extracted content, and catalogue pages; checked the local official repository and commit record. The repository is an official setup wrapper with a placeholder server file, not deployed server code. OAuth evidence was supplied in the research input; no OAuth re-fetch was used. Third-party sources are only used for cross-checking tool counts. Unofficial server list was empty. MCP-specific pricing, detailed schemas, annotations, server initialize instructions, retention implementation, and MCP telemetry behavior were not found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.0
+  }
+}

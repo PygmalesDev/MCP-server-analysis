@@ -1,0 +1,892 @@
+{
+  "server": "tableau",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.tableau.com/",
+    "documentation_url_csv": "https://tableau.github.io/tableau-mcp/",
+    "addressing": "global",
+    "repository_url": "https://github.com/tableau/tableau-mcp",
+    "documentation_urls_used": [
+      "https://tableau.github.io/tableau-mcp/",
+      "https://tableau.github.io/tableau-mcp/docs/intro",
+      "https://tableau.github.io/tableau-mcp/docs/getting-started",
+      "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp",
+      "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp/client-integrations",
+      "https://tableau.github.io/tableau-mcp/docs/configuration/mcp-config",
+      "https://tableau.github.io/tableau-mcp/docs/configuration/mcp-config/env-vars",
+      "https://tableau.github.io/tableau-mcp/docs/enterprise/tableau-cloud",
+      "https://tableau.github.io/tableau-mcp/docs/enterprise/tableau-server",
+      "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+      "https://github.com/tableau/tableau-mcp/releases",
+      "https://www.tableau.com/pricing/cloud",
+      "https://martechdb.com/vendors/tableau",
+      "https://apis.io/servers/tableau/tableau/",
+      "https://claude.com/connectors/tableau"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository contains the Tableau MCP Web server used for Cloud and Server deployments; hosted Tableau MCP is a managed service on Tableau Cloud. The reviewed GitHub source lists Web tool names, but the prepared local code folder contained only a failed-clone note, so deployed-binary equivalence, handlers, schemas, and commit-pinned source could not be verified.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "1f4dd347293531e46c1b5508353c6ce1bc66c7dd",
+    "commit_date": "2026-10-26",
+    "implementation_language": "TypeScript (official GitHub repository language listing)",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Yes",
+    "license": "Apache-2.0",
+    "release_status": "GA (hosted managed service described as available to Tableau Cloud customers; no beta label found)",
+    "other_official_servers": [
+      "Self-hosted/local Web server for Tableau Cloud or Tableau Server, configured with the @tableau/mcp-server npm package or source; it is a separate deployment of the same product.",
+      "Tableau Desktop authoring server is a separate local build from the same repository and is not the hosted server at the input endpoint."
+    ],
+    "sources": [
+      "https://tableau.github.io/tableau-mcp/docs/intro",
+      "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp",
+      "https://github.com/tableau/tableau-mcp",
+      "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The official hosted-server page describes availability to Tableau Cloud customers on any SKU, but does not state a separate MCP charge. MartechDB reports no extra charge; this is third-party evidence.",
+    "linked_software": "Paid",
+    "linked_software_cost": "NOT FOUND in accessible official pricing evidence; the official pricing page returned HTTP 403.",
+    "pricing_model_details": "Tableau Cloud SKU and feature entitlements gate some tools; Tableau+ is required for Pulse Insight Briefs and Tableau Knowledge, while Data Management is needed for the full Metadata API surface. Official docs do not establish an MCP-specific fee.",
+    "other_access_restrictions": "Hosted service is for Tableau Cloud, not Tableau Server. Access requires OAuth 2.1 sign-in and is subject to user permissions and site SKU entitlements. Site administrators cannot disable the hosted service itself but can exclude tool groups through site settings.",
+    "restrictions_controlled_by": "Vendor controls hosted availability and pod routing; organization/site administrators control tool group exclusions and user roles; Tableau entitlements and the signed-in user's permissions also constrain use.",
+    "sources": [
+      "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp",
+      "https://tableau.github.io/tableau-mcp/docs/intro",
+      "https://www.tableau.com/pricing/cloud",
+      "https://martechdb.com/vendors/tableau"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official hosted documentation lists tools for data sources, workbooks, views, flows, Pulse, administration, knowledge context, and data apps. It says the hosted service exposes the full tool catalog, subject to SKU entitlements and user permissions. The current official Web tool-name source names 55 tools, more than the 40 rows in the docs table (including a repeated delete-content row).",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The docs describe structured results for some tools, such as list-datasources returning {data, totalAvailable}; general result and error schemas were not available in the inspected materials.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro",
+        "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp",
+        "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Official docs say enabled admin workflow prompts are also exposed as read-only MCP resources at tableau-mcp://admin-workflows/<prompt-name>, with prompt text rendered using default arguments.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Read-only resource text containing the rendered workflow prompt and default arguments.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Six admin workflow prompts are documented. They are user-invoked and gated by the ADMIN_TOOLS_ENABLED site setting. Destructive apply workflows retain dry-run and human-confirmation steps.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Prompt content orchestrates multiple tools; the docs describe inform and apply workflows for stale content, jobs, extract schedules, and user licenses.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted documentation promises that OAuth sign-ins and tool calls are logged through Tableau's standard activity and audit pipelines. Whether MCP logging protocol messages are emitted is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for MCP protocol logging; hosted audit events are described at a high level.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found in the reviewed official hosted documentation or tool-name list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro",
+        "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No evidence found in the reviewed official hosted documentation or tool-name list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro",
+        "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth 2.1 per hosted documentation",
+      "description_what_how": "The endpoint returned HTTP 401 with a Bearer challenge, realm MCP, and resource_metadata URL. Protected-resource metadata identifies https://sso.online.tableau.com as authorization server and header bearer tokens. Authorization-server metadata advertises authorization_code and refresh_token plus Salesforce cloud-to-cloud and JWT bearer grants; PKCE S256; token auth methods none, client_secret_basic, client_secret_post; revocation endpoint; client_id_metadata_document_supported=true. No registration_endpoint or token lifetime was present. scopes_supported: tableau:mcp:datasource:read, tableau:mcp:workbook:read, tableau:mcp:view:read, tableau:mcp:view:download, tableau:mcp:pulse:read, tableau:mcp:insight:create, tableau:mcp:content:read, tableau:mcp:knowledge:read, tableau:mcp:knowledge:write, tableau:mcp:workbook:write, tableau:content:read, tableau:mcp_site_settings:read, tableau:viz_data_service:read, tableau:views:download, tableau:insight_definitions_metrics:read, tableau:insight_metrics:read, tableau:metric_subscriptions:read, tableau:insights:read, tableau:insight_brief:create, tableau:mcp:workbook:create, tableau:workbooks:download, tableau:workbooks:create, tableau:file_uploads:create, tableau:knowledge:read, tableau:knowledge:write, tableau:entitlements:read, tableau:workbooks:update, tableau:packages:read, tableau:projects:read.",
+      "pre_interaction_context_verbatim": "Authorization required. Use OAuth 2.1 flow. See https://tableau.github.io/tableau-mcp/ for details.",
+      "post_interaction_context_structure": "Unauthenticated endpoint response is JSON with error=unauthorized and an error_description; WWW-Authenticate includes Bearer realm, protected-resource metadata URL, and requested scopes.",
+      "authorization_mechanism": "Metadata Doc; endpoint Bearer challenge; protected-resource metadata; authorization server https://sso.online.tableau.com; authorization_code, refresh_token, urn:salesforce:grant-type:cloud-to-cloud, urn:ietf:params:oauth:grant-type:jwt-bearer; PKCE S256; scopes listed in description; revocation endpoint https://sso.online.tableau.com/oauth2/revoke; no registration_endpoint or token lifetime advertised; client_id_metadata_document_supported=true.",
+      "authorization_server": "https://sso.online.tableau.com",
+      "sources": [
+        "https://mcp.tableau.com/.well-known/oauth-protected-resource",
+        "https://sso.online.tableau.com/.well-known/oauth-authorization-server",
+        "https://sso.online.tableau.com/.well-known/openid-configuration",
+        "https://mcp.tableau.com/",
+        "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted docs describe confirmation stages for selected mutating tools, but do not establish MCP Elicitation support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Tasks protocol support found in the reviewed hosted docs. Tableau Prep flow runs return asynchronous jobs, which are product operations and do not by themselves establish MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Hosted site settings can exclude tool groups. The self-hosted configuration documentation describes INCLUDE_TOOLS, EXCLUDE_TOOLS, result caps, and other environment variables; not all self-hosted options are established for the managed endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration changes available tool groups and request/result limits; hosted docs show an EXCLUDE_TOOLS site setting payload.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp",
+        "https://tableau.github.io/tableau-mcp/docs/configuration/mcp-config",
+        "https://tableau.github.io/tableau-mcp/docs/configuration/mcp-config/env-vars"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returns an OAuth-style JSON unauthorized error. Hosted docs say missing SKU entitlements or permissions return an error at call time; detailed tool error formats were not established.",
+      "pre_interaction_context_verbatim": "Authorization required. Use OAuth 2.1 flow. See https://tableau.github.io/tableau-mcp/ for details.",
+      "post_interaction_context_structure": "JSON error object for unauthenticated request; tool error structure unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://mcp.tableau.com/",
+        "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP protocol subscription capability found in the reviewed hosted docs. A tool named list-pulse-metric-subscriptions concerns Tableau product subscriptions, not MCP resource subscriptions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro",
+        "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Flow tools can return asynchronous Tableau jobs, but MCP progress notifications were not documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "A Tableau product tool cancel-flow-run requests cancellation of a flow run. MCP request cancellation support itself was not established.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/intro"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official documentation describes hosted pod-aware routing at one global URL, routing authenticated requests to the correct Tableau Cloud pod based on the OAuth token.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Tool mix: documented tools include reads and mutating operations (flow run/cancel, content deletion, schedule update, user-role update, knowledge writes, workbook/data source publishing in source names). The reviewed docs do not show readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations. 2. Server-enforced confirmation: docs describe preview and confirmation for flow mutations and two-phase content deletion; update schedule and user role are confirm-gated. Whether confirmation tokens are enforced in the hosted build is not verified from handlers. 3. Hosted OAuth authenticates each user as their Tableau Cloud identity; permissions and site roles apply. Admin tools require administrator role; admin tools are controlled by ADMIN_TOOLS_ENABLED in self-host configuration. OAuth metadata does not advertise DCR endpoint or token lifetime. 4. Hosted endpoint is global and pod-aware; hosted service is Cloud-only. Site admins cannot disable the service but can set EXCLUDE_TOOLS. Self-hosted configuration supports include/exclude tool names/groups and result caps. 5. Hosted docs say calls are proxied using the user's access token and Tableau data is not stored by the service. No field-level masking or PII exclusion is stated. 6. Hosted rate limits/call quotas/costs are not found. Self-hosted docs describe configurable result caps; docs describe list-datasources pages up to 1,000 and other tool limits. 7. Hosted validation/correction details are not found. Self-host docs describe parameter limits and error handling, but handler code was unavailable locally. 8. Hosted OAuth sign-ins and tool calls are logged through standard activity/audit pipelines. Self-host docs describe product telemetry and configurable telemetry behavior, but this cannot be attributed to the hosted deployment. 9. No feedback/rating/survey action appears in the official tool-name source. Hosted documentation does not show upsell messages. 10. Docs state pre-built skills are coming soon; no server-delivered skills were established. Workflow prompts and resources can guide agent behavior; tool descriptions include preview/confirmation guidance. 11. No evidence found that past agent behavior changes future hosted outputs or available tools. 12. Pod-aware routing delegates requests to the correct Cloud pod; one global URL is documented. No nested MCP sub-server was found. 13. No universal raw API, SQL, or script execution tool found in the official Web tool-name list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "\"Flow tools are grouped by operation: GET, LIST, then RUN.\"",
+      "\"Mutating tool with preview and confirmation.\"",
+      "\"Destructive -apply workflows keep their dry-run and human-in-the-loop confirmation steps either way.\"",
+      "\"The link should be fetched promptly rather than stored.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The hosted service is documented as a single MCP endpoint with a full tool catalog and pod-aware routing. Routing to a Tableau Cloud pod does not establish multiple MCP sub-servers or distinct tool catalogs.",
+    "sources": [
+      "https://tableau.github.io/tableau-mcp/docs/intro",
+      "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp",
+      "https://tableau.github.io/tableau-mcp/docs/configuration/mcp-config",
+      "https://tableau.github.io/tableau-mcp/docs/configuration/mcp-config/env-vars",
+      "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "55 named by current official Web tool-name source; hosted docs table contains 40 rows including a duplicate, or 39 unique names",
+    "action_count_comment": "The official tool list is https://tableau.github.io/tableau-mcp/docs/intro; its rendered table has 40 rows, with delete-content repeated, for 39 unique tools. The official repository Web name source at https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts names 55 unique tools and is used to add names omitted from the docs table. No catalogue-only tools were added. MartechDB reports 40 documented tools; APIs.io does not list a tool count; Claude directory page was checked but did not expose a separate tool list in the captured evidence. The local repo clone was absent, so parameters and descriptions for code-only names are not fully verified.",
+    "actions": [
+      {
+        "tool_name": "list-datasources",
+        "description": "List datasources.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-extract-refresh-tasks",
+        "description": "List extract refresh tasks.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-cloud-extract-refresh-task",
+        "description": "Update cloud extract refresh task.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "confirm-update-cloud-extract-refresh-task",
+        "description": "Confirm update cloud extract refresh task.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-jobs",
+        "description": "List jobs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-users",
+        "description": "List users.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-workbooks",
+        "description": "List workbooks.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "request-workbook-upload",
+        "description": "Request workbook upload.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "publish-workbook",
+        "description": "Publish workbook.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "request-datasource-upload",
+        "description": "Request datasource upload.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "publish-datasource",
+        "description": "Publish datasource.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-projects",
+        "description": "List projects.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-views",
+        "description": "List views.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-custom-views",
+        "description": "List custom views.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-flows",
+        "description": "List flows.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query-datasource",
+        "description": "Query datasource.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-datasource-metadata",
+        "description": "Get datasource metadata.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-embed-token",
+        "description": "Get embed token.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "record-event",
+        "description": "Record event.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-workbook",
+        "description": "Get workbook.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "download-workbook",
+        "description": "Download workbook.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move-workbook",
+        "description": "Move workbook.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-view",
+        "description": "Get view.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-flow",
+        "description": "Get flow.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-flow-runs",
+        "description": "List flow runs.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-flow-tasks",
+        "description": "List flow tasks.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "describe-flow",
+        "description": "Describe flow.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-flow-task",
+        "description": "Get flow task.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run-flow",
+        "description": "Run flow.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run-flow-task",
+        "description": "Run flow task.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cancel-flow-run",
+        "description": "Cancel flow run.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-view-data",
+        "description": "Get view data.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-view-image",
+        "description": "Get view image.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-custom-view-data",
+        "description": "Get custom view data.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get-custom-view-image",
+        "description": "Get custom view image.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-all-pulse-metric-definitions",
+        "description": "List all pulse metric definitions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-pulse-metric-definitions-from-definition-ids",
+        "description": "List pulse metric definitions from definition ids.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-pulse-metrics-from-metric-definition-id",
+        "description": "List pulse metrics from metric definition id.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-pulse-metrics-from-metric-ids",
+        "description": "List pulse metrics from metric ids.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-pulse-metric-subscriptions",
+        "description": "List pulse metric subscriptions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate-pulse-metric-value-insight-bundle",
+        "description": "Generate pulse metric value insight bundle.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate-pulse-insight-brief",
+        "description": "Generate pulse insight brief.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate-insight-cards",
+        "description": "Generate insight cards.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-content",
+        "description": "Search content.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "revoke-access-token",
+        "description": "Revoke access token.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "reset-consent",
+        "description": "Reset consent.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query-admin-insights",
+        "description": "Query admin insights.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-user",
+        "description": "Update user.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete-content",
+        "description": "Delete content.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "confirm-delete-content",
+        "description": "Confirm delete content.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "render-interactive-viz",
+        "description": "Render interactive viz.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query-knowledge-context",
+        "description": "Query knowledge context.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "inspect-knowledge-context",
+        "description": "Inspect knowledge context.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage-knowledge-context",
+        "description": "Manage knowledge context.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "scaffold-data-app",
+        "description": "Scaffold data app.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://tableau.github.io/tableau-mcp/docs/intro",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No complete verbatim hosted tool definitions or initialize instructions were available; the public source was accessible only as a browser-rendered name list, and local code was missing.",
+    "human_can_agent_cannot": "Product REST/API operations beyond the hosted MCP tools may be available to human users, but a complete operation-by-operation comparison was not established. Hosted docs identify supported tool operations and say the service proxies Tableau REST, VDS, Metadata, Pulse, and Knowledge APIs; they do not define a complete human-versus-agent feature boundary.",
+    "sources": [
+      "https://tableau.github.io/tableau-mcp/docs/intro",
+      "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp",
+      "https://github.com/tableau/tableau-mcp/blob/main/src/tools/web/toolName.ts",
+      "https://martechdb.com/vendors/tableau",
+      "https://apis.io/servers/tableau/tableau/",
+      "https://claude.com/connectors/tableau"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Docs instruct clients to use OAuth and explain permission requirements. Tool descriptions recommend preview/confirmation for selected mutations. Hosted handler enforcement was not verified because the local code copy was missing. Quote: \"The MCP server then makes Tableau REST API calls as that user, so every existing per-user permission and access control is enforced automatically.\"",
+    "governance_promises": "Hosted docs state: \"The hosted service does not store your Tableau data.\" They also state OAuth sign-ins and tool calls are logged through standard activity and audit pipelines, and per-user permissions are respected. No hosted retention period or AI training terms were found in the captured pages.",
+    "promises_to_user": "The service is managed, available on every Tableau Cloud pod, and continuously updated without a client-side upgrade. It is available to Tableau Cloud customers on any SKU, with some tools gated by entitlements.",
+    "comparison_with_server_logic": "The endpoint OAuth challenge and metadata substantiate authentication. Hosted docs describe per-user authorization, audit logging, and no storage, but the implementation was not inspected locally; these remain documented promises rather than independently verified server-side logic. The global endpoint and OAuth metadata support the documented connection model.",
+    "sources": [
+      "https://tableau.github.io/tableau-mcp/docs/hosted-tableau-mcp",
+      "https://tableau.github.io/tableau-mcp/docs/intro",
+      "https://mcp.tableau.com/.well-known/oauth-protected-resource",
+      "https://sso.online.tableau.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "contradictions": [
+    "Official intro table contains 39 unique tool names (40 rows with delete-content repeated), while the official repository's current Web tool-name file names 55 tools. The source file includes additional names such as confirm-delete-content, publish-datasource, move-workbook, and token-management tools; the hosted docs say the full catalog is available, so the docs table appears incomplete or out of sync.",
+    "OAuth scope metadata advertises workbook create/update, file upload, project read, knowledge write, and other capabilities, while the intro tool table omits several matching current code names. The scope list is broader than the docs table and does not establish that every scope maps to a currently enabled tool.",
+    "Prepared code/GITHUB_COMMITS.txt records an incomplete GitHub read and no local repository snapshot, so the repository's exact commit and handler behavior could not be pinned or examined."
+  ],
+  "observations_for_research": [
+    "A single global endpoint routes to customer-specific Cloud pods after authentication; user identity and existing Tableau permissions form the documented authorization context.",
+    "The hosted page describes service-level tool-group exclusion by site administrators while explicitly stating the hosted service itself cannot be disabled by those administrators.",
+    "The documentation tool table and the official repository's Web tool-name file are materially out of sync, so the published table alone understates the public source's named surface.",
+    "OAuth scopes expose operation families and permissions that are not apparent from the incomplete docs tool table."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages/INDEX.txt, captured official docs, hosted endpoint response, and links_check.txt. The official pricing page returned HTTP 403. The prepared code/ folder contained only GITHUB_COMMITS.txt with an IncompleteRead error, so no local source clone, exact commit hash, handlers, parameter schemas, SDK version, or token count could be verified. GitHub's public Web tool-name source and official docs were read in browser; actions.json records all 55 names shown there, with NOT PUBLISHED parameters where schemas were unavailable. MartechDB, APIs.io, and Claude directory were treated only as third-party cross-checks. No unofficial implementation was used as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 13.0
+  }
+}

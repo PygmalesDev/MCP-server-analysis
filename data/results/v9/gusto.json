@@ -1,0 +1,1048 @@
+{
+  "server": "gusto",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://api.gusto.com/v1/mcp",
+    "documentation_url_csv": "https://docs.gusto.com/app-integrations/docs/mcp",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://docs.gusto.com/app-integrations/docs/mcp",
+      "https://docs.gusto.com/app-integrations/docs/mcp.md",
+      "https://gusto.com/product/integrations/gusto-mcp",
+      "https://gusto.com/legal/terms/gusto-mcp",
+      "https://gusto.com/privacyresources/privacy",
+      "https://claude.com/connectors/gusto"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official public repository was found in the prepared evidence or web search. The input endpoint returned HTTP 200 with a JSON-RPC Invalid request response, but its OAuth protected-resource documents returned 404. Gusto’s official docs identify https://mcp.api.gusto.com as the customer-facing production endpoint; its tool list is used here as best available evidence for the input endpoint, with the path discrepancy recorded below.",
+    "mcp_protocol_version": "[DOCS for https://mcp.api.gusto.com] 2025-06-18; Streamable HTTP (POST)",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A (hosted service; governed by Gusto MCP Terms)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "[DOCS] Production endpoint: https://mcp.api.gusto.com",
+      "[DOCS] Demo endpoints: https://mcp.api.gusto-demo.com, /anthropic, and /openai",
+      "[CLAUDE CONNECTOR DIRECTORY] https://mcp.api.gusto.com/anthropic, separately listed with 62 tools",
+      "[DOCS] Separate developer documentation assistant: https://embedded-payroll.readme.io/mcp; not the customer-facing payroll server"
+    ],
+    "sources": [
+      "https://docs.gusto.com/app-integrations/docs/mcp",
+      "https://gusto.com/product/integrations/gusto-mcp",
+      "https://claude.com/connectors/gusto",
+      "https://api.gusto.com/v1/mcp",
+      "https://api.gusto.com/.well-known/oauth-protected-resource",
+      "https://api.gusto.com/.well-known/oauth-protected-resource/v1/mcp"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No current MCP fee or amount is published in the available evidence. Gusto’s MCP Terms reserve the right to charge Service Fees. MCP availability may depend on eligibility criteria or a Service Plan.",
+    "linked_software": "Paid",
+    "linked_software_cost": "NOT FOUND. Gusto’s pricing page returned HTTP 403 in the prepared evidence; no plan prices were verified.",
+    "pricing_model_details": "No per-call MCP charge, credits, or quota price was found. Gusto MCP Terms reserve the right to charge Service Fees. The docs say Claude requires Pro or Max and Cursor requires Pro+; these are client subscription requirements, not stated Gusto MCP fees.",
+    "other_access_restrictions": "Gusto account with primary or global admin permissions; authorized data categories are selected at connection. Gusto may set additional eligibility criteria, including prior enrollment in a Service Plan, and may restrict approved AI providers. Docs cite Claude Pro/Max and Cursor Pro+ requirements.",
+    "restrictions_controlled_by": "Gusto controls MCP eligibility and approved-provider criteria; the Gusto administrator selects the company and data categories; AI-client providers control their own subscription requirements.",
+    "sources": [
+      "https://gusto.com/product/pricing",
+      "https://gusto.com/legal/terms/gusto-mcp",
+      "https://gusto.com/product/integrations/gusto-mcp",
+      "https://docs.gusto.com/app-integrations/docs/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "2025-06-18 stated for the documented endpoint",
+      "description_what_how": "[ENDPOINT https://mcp.api.gusto.com] Official docs list 72 tools in eight categories. Tool schemas and annotations are not published in the reference; parameters are only partly described for list tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Docs describe JSON-RPC 2.0 results with result on success, or error containing code, message, and data. They state that tool results are JSON.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The hosted documentation does not describe MCP resources, and no deployed-server list response was available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No server-provided MCP prompts are documented in the available hosted-server reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not stated",
+      "description_what_how": "Gusto documents tool-call logs with tool name, sanitized parameters, timestamp, and request ID; authentication data and usage metadata are collected. Docs say full conversation history is not logged.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Usage logs can be exported by the user according to the docs; detailed format is not stated.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP sampling capability is described in the available hosted-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP roots capability is described in the available hosted-server documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "2025-06-18 stated for the documented endpoint",
+      "description_what_how": "[DOCS for https://mcp.api.gusto.com] OAuth 2.0 with PKCE; docs list authorization_code and refresh_token grants and say PKCE is required. Gusto’s product page says clients need Dynamic Client Registration support. Users select data categories and, where applicable, a company. The input host’s pre-fetched OAuth documents are not endpoint-specific proof for the documented host: protected-resource URLs on api.gusto.com returned 404.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Docs say access can be revoked or categories changed by disconnecting and reconnecting; token information can be queried with get_token_info.",
+      "authorization_mechanism": "For the documented Gusto MCP endpoint, docs state OAuth 2.0, authorization_code and refresh_token, PKCE required; Gusto product page requires Dynamic Client Registration support. The pre-fetched authorization-server metadata for https://api.gusto.com/ reports issuer https://api.gusto.com/, authorization endpoint https://app.gusto.com/oauth/authorize, token endpoint https://api.gusto.com/oauth/token, revocation endpoint https://api.gusto.com/oauth/revoke, introspection endpoint https://api.gusto.com/oauth/introspect, userinfo endpoint https://api.gusto.com/oauth/userinfo, JWKS https://api.gusto.com/oauth/discovery/keys. Its scopes_supported list is: public, webhook_subscriptions:read, webhook_subscriptions:write, accounting_integrations:read, accounting_integrations:write, accounts:write, access_token:read, company_admin:read, company_admin:write, company_attachments:write, company_attachments:read, company_bank_accounts:read, company_bank_accounts:write, company_federal_taxes:read, company_federal_taxes:write, company_tax_requirements:read, company_tax_requirements:write, company_forms:read, company_forms:sign, company_payment_configs:write, company_payment_configs:read, company_reports:write, company_reports:write:general_ledger, company_reports:read, company_reports:read:tier_2_only, company_reports:write:excludes_sensitive_columns, company_reports:read:excludes_sensitive_columns, company_reports:write:no_pii, company_reports:read:no_pii, company_risk_attributes:write, company_suspensions:read, company_suspensions:write, config_flows:write, contractor_forms:read, contractor_pay_stubs:read, contractors:read, contractors:write, contractors:manage, contractor_documents:read, contractor_documents:write, contractor_payment_methods:read, contractor_payment_methods:read:account_number, contractor_payment_methods:write, cx_portal_access_tokens:write, cx_portal_users_management:write, departments:read, departments:write, earned_wage_access:read, earned_wage_access:write, company_earned_wage_access:read, company_earned_wage_access:manage, earned_wage_access:manage, elevate_employees:read, employee_forms:read, employee_forms:sign, employee_payment_methods:read, employee_payment_methods:read:account_number, employee_payment_methods:write, employee_federal_taxes:read, employee_federal_taxes:write, employee_state_taxes:read, employee_state_taxes:write, flows:write, experts_circle_cases:link, experts_circle_cases:refresh, experts_circle_task_plans:request, external_payrolls:read, external_payrolls:write, garnishments:read, garnishments:write, graphql:internal, information_requests:read:required_questions, information_requests:read, information_requests:write, invoices:read, melio_profile:read, member_portal_access_tokens:write, partner_portal_invitation:write, member_portal_invitation:write, member_portal_invitation:read, member_portal_invitation:internal, company_feature_status:internal, partner_disbursements:read, partner_disbursements:write, partner_external_user_mappings:write, partner_managed_companies:disassociate, partner_managed_companies:manage, partner_managed_companies:read, partner_managed_companies:write, pay_schedules:read, pay_schedules:write, payroll_activity:read, payroll_batches:read, payroll_batches:write, payroll_digests:read, payroll_digests:write, payrolls:read, payrolls:run, payrolls:write, people_batches:read, people_batches:write, plaid:write, plaid_processor:write, reimbursements:read, reimbursements:write, recovery_cases:read, recovery_cases:write, reverse_wire_accounts:read, reverse_wire_accounts:write, signatories:read, signatories:write, signatories:manage, terms_of_services:read, terms_of_services:write, time_off_policies:read, time_off_policies:write, time_sheet:read, time_sheet:write, payroll_syncs:read, payroll_syncs:write, break_policies:read, break_policies:write, overtime_policies:read, overtime_policies:write, employee_time_off_activities:read, holiday_pay_policies:read, holiday_pay_policies:write, health_insurance:read, health_insurance:write, retirement_benefits:read, retirement_benefits:write, workers_compensation:read, workers_compensation:write, employees:read, employees:write, employees:manage, employees_with_ssn:read, employments:read, employments:write, benefits:read, employee_benefits:read:phi, employee_benefits:read, employee_benefits:write:benefit_type_limited, employee_benefits:write, pay_stubs:read, i9_authorizations:read, i9_authorizations:write, i9_authorizations:manage, company_benefits:read:phi, company_benefits:read, company_benefits:write:benefit_type_limited, company_benefits:write, jobs:read, jobs:write, compensations:read, compensations:write, companies:read:limited, companies:read, companies:write, companies:disconnect_app_integration, company_onboarding_status:read, company_onboarding_status:write, secure_gusto_session:create, retirement_plan_applications:create, company_onboarding_status:bulk_read, ach_transactions:read, reverse_wire_transactions:read, time_off_requests:read, time_off_requests:write, time_off_requests:manage, state_wages:read, generated_documents:write, generated_documents:read, events:read, notifications:read, openid, profile, ardius_data:read, ardius_data:write, ardius_system_data:write, kiosk_time_tracking:read, kiosk_time_tracking:update, authentication_service_api:read, authentication_service_api:write, demo_notifications:write, versions:read, gusto_earned_wage_access_clair_api:manage, gusto_wallet_accounts:read, td1_forms:read, td1_forms:write, partner_managed_canadian_companies:manage, equifax_verification:read, integrations:authorize, plaid_fdx:read:accounts, plaid_fdx:read:transactions, plaid_fdx:read:contacts, webhooks_health_check:internal, salary_estimates:read, salary_estimates:write, tax_payments:read, tax_filings:read, tasks:read, w2_adjustments:read, w2_adjustments:write. The metadata response was truncated after the beginning of grant_types_supported; remaining grant types, token-auth methods, registration_endpoint, and token lifetime are not determinable from that response. The scopes are from api.gusto.com, not confirmed as scopes used by mcp.api.gusto.com.",
+      "authorization_server": "For the documented MCP endpoint, docs identify https://mcp.api.gusto.com/oauth/authorize and https://mcp.api.gusto.com/oauth/token. Separately, pre-fetched metadata for api.gusto.com identifies issuer https://api.gusto.com/; its relationship to the documented MCP host is unconfirmed.",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp",
+        "https://gusto.com/product/integrations/gusto-mcp",
+        "https://api.gusto.com/.well-known/oauth-authorization-server",
+        "https://api.gusto.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Elicitation capability is documented. Some tools open secure Gusto or Plaid flows for user input outside chat, but the docs do not identify these as MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Tasks capability is documented. create_reports enqueues report jobs, but the documentation does not describe this as MCP Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not stated",
+      "description_what_how": "At OAuth connection, the user selects accessible data categories and, where applicable, a company. Changing categories requires disconnecting and reconnecting. No toolset URL/header configuration is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "get_token_info reports granted scopes and accessible company resources.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Not stated",
+      "description_what_how": "Docs describe JSON-RPC error objects with code, message, and data; list a 429 rate-limit response with Retry-After and troubleshooting for invalid parameters, insufficient scope, and expired sessions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "JSON-RPC 2.0 error object: code, message, data; rate-limit responses are documented with HTTP 429 and Retry-After.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The docs describe OAuth connection and revocation, but not MCP resource subscriptions or update notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP progress notifications are documented. Report status is polled through get_reports after create_reports.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP request cancellation capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Not stated",
+      "description_what_how": "The hosted docs provide behavioral guidance and name server metadata, but do not expose initialize instructions verbatim. Documented server version is 0.1.0; no MCP UI resources or skills tool is listed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.gusto.com/app-integrations/docs/mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list contains read and write operations, including payroll updates/submission, employee changes, time entry, onboarding and payment-link creation. No readOnlyHint, destructiveHint, idempotentHint, or openWorldHint annotations are published. 2. Docs recommend manual client approval for every call; Gusto’s product page says every write returns for confirmation. Enforcement by the server is not demonstrated. create_company specifically documents confirmed:false then confirmed:true. 3. OAuth access is scoped to chosen data categories; primary/global admin required. Gusto may limit approved AI providers and eligibility; access can be revoked by disconnecting, tokens refresh automatically. Token lifetime not published. 4. Docs name production, demo, and Anthropic/OpenAI routes; no read-only mode, toolset filter, or MCP endpoint URL parameters documented. 5. Docs say tool parameters are sanitized in logs, full conversation history is not logged, and sensitive signatures, SSNs, and bank numbers are handled in secure Gusto/Plaid flows instead of chat. Scope boundaries are selected during OAuth. 6. List tools: page default 1, per default 25/max 100; update_payroll supports up to 100 employees. Rate thresholds unpublished; 429 with Retry-After. 7. Docs advise removing unsupported arguments and provide invalid-parameter troubleshooting; no detailed validation/correction or argument-override behavior documented. 8. Docs describe logs of tool name, sanitized parameters, timestamp, request ID; OAuth tokens, refresh tokens, company ID, request counts, errors, and response times are collected. Terms also authorize collection of query content and possible monitoring. 9. submit_feedback sends feedback about the integration to its team. get_company_onboarding_package returns plans, add-ons, benefits, and Gusto’s recommended package; pay_ein_filing creates a Stripe checkout link. No feedback prompt text beyond the tool description is published. 10. Docs advise clients to require manual confirmation, review calls, verify outputs, isolate the server, and opt out of model training. No initialize instructions or server-delivered skill is published. 11. Persistent agent memory behavior is undocumented. 12. The published tool list is flat; tools can open Gusto/Plaid flows, report work is queued and polled, and time tracking routes to native or third-party systems. Other endpoints have different routes/tool counts. 13. No raw API, SQL, script execution, or general-purpose request tool appears in the official 72-tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] “Do not connect other MCP servers to the same client session that is connected to Gusto.”",
+      "[DOCS] “You should always be prompted to confirm any tool call before it is executed.”",
+      "[DOCS] “Always verify critical information directly in Gusto.”",
+      "[DOCS] “Use the include parameter to request only needed fields”",
+      "[DOCS] “Cache frequently accessed data when possible.”",
+      "[DOCS] `create_company`: “call with `confirmed: false` first to verify the account email, then `confirmed: true` to create.”",
+      "[DOCS] `check_rd_credit_qualification`: “never returns a \"does not qualify\" verdict.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The official production reference presents one flat 72-tool list. Separate demo and client-specific routes, secure external flows, and routing to third-party time tracking are documented, but no dynamic toolset or nested server architecture is described.",
+    "sources": [
+      "https://docs.gusto.com/app-integrations/docs/mcp",
+      "https://gusto.com/product/integrations/gusto-mcp",
+      "https://gusto.com/legal/terms/gusto-mcp"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "72",
+    "action_count_comment": "The official tool reference at https://docs.gusto.com/app-integrations/docs/mcp lists 72 tools; all 72 names are in actions.json. No catalogue-only tools were added because the official list is explicit and complete by its stated total. Counts seen elsewhere are incomplete or for other listings/routes: EveryMCPServer displays 60 of 72; Claude’s directory lists 62 tools at /anthropic; Agentman reports 41; Manufact reports 43. These counts are not substituted for the official list.",
+    "actions": [
+      {
+        "tool_name": "create_company",
+        "description": "Create the user's Gusto company and payroll-admin account during signup (call with",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_company",
+        "description": "Retrieve business profile details: legal name, entity type, EIN, contact info, and",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_company_onboarding_status",
+        "description": "Get the company's onboarding progress: which setup questions remain, whether each is",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_company_onboarding_package",
+        "description": "Get the company's available plans, add-ons, and benefits during onboarding, plus Gusto's",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_onboarding_answer",
+        "description": "Read the current answer for one onboarding question by its key.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "save_company_onboarding_answer",
+        "description": "Save a single onboarding answer; a saved answer can re-route which questions",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_secure_gusto_session",
+        "description": "Open a secure Gusto panel for the user to sign a company",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_account",
+        "description": "Check whether the signed-in account has set a Gusto password, or resend",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_company_members",
+        "description": "Add or update one employee or contractor at a time: basics, compensation,",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "check_plaid_connection_status",
+        "description": "Check whether the company's Plaid-linked payroll funding account has connected and verified.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "connect_bank_via_plaid",
+        "description": "Open a Plaid-hosted flow for the user to connect the company's payroll",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "check_ein_status",
+        "description": "Check whether the company's federal EIN (Form SS-4) filing has been issued",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "file_ein",
+        "description": "Prepare and validate a federal EIN (Form SS-4) filing from company and",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "pay_ein_filing",
+        "description": "Create a Stripe checkout link to pay for a prepared EIN filing.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "check_scorp_election_status",
+        "description": "Check whether the company's Form 2553 S-Corp election filing has been finalized.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "file_scorp_election",
+        "description": "Prepare a Form 2553 S-Corp election filing from formation, tax-year, and shareholder",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "acknowledge_scorp_recommendation",
+        "description": "Mark a Solo S-Corp tax-savings estimate as reviewed, clearing that onboarding step.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "calculate_scorp_tax_savings",
+        "description": "Estimate a single-member LLC owner's potential tax savings from electing S-Corp status,",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "calculate_reasonable_salary",
+        "description": "Calculate an IRS-defensible reasonable W-2 salary for an S-Corp owner from BLS",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "accept_reasonable_salary",
+        "description": "Accept the most recently calculated reasonable-salary estimate as the owner's W-2 salary.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "calculate_rd_tax_credit",
+        "description": "Estimate the federal R&D tax credit a business could claim, from headcount,",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "check_rd_credit_qualification",
+        "description": "Assess whether a business's work could qualify for the federal R&D tax",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_business_info",
+        "description": "Resolve a free-text description into verified NAICS industry codes or BLS occupation",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_workers_comp_class",
+        "description": "Resolve a description of an employee's work into that state's workers' comp",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "look_up_employment_compliance",
+        "description": "Search Gusto's compliance knowledge base for US employment rules (minimum wage, overtime,",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_employment_compliance_knowledge_units",
+        "description": "Read the full text of specific compliance rules found by `look_up_employment_compliance`.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_reports",
+        "description": "Enqueue one or more reports (payroll journal, cash requirements, contractor payments summary,",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_reports",
+        "description": "Check the status of reports queued by `create_reports` and retrieve their CSV",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_payroll",
+        "description": "Get detailed information about a specific payroll, including worker earnings, taxes, deductions,",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_payrolls",
+        "description": "List all payroll runs with filtering (filters by pay period dates by",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_payroll_blockers",
+        "description": "Identify issues preventing a specific payroll from being processed.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_payroll",
+        "description": "Update an unprocessed payroll's hours, earnings, PTO, memos, or payment methods for",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_payroll",
+        "description": "Calculate and submit an existing unprocessed payroll.\r",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employee",
+        "description": "Get detailed information about a specific employee.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_employees",
+        "description": "List all employees with filtering options.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employee_earnings_summary",
+        "description": "Get per-employee earning breakdowns (commissions, bonuses, tips) across processed payrolls in a",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employee_home_address",
+        "description": "Get details for a specific home address record.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_employee_home_addresses",
+        "description": "List all home addresses on file for an employee.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employee_rehire",
+        "description": "Get rehire details for an employee returning after a previous departure.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_employee_work_address",
+        "description": "Get details for a specific work location assignment.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_employee_work_addresses",
+        "description": "List all work locations assigned to an employee.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_employee_custom_fields",
+        "description": "List custom field values set for an employee.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_employee_employment_history",
+        "description": "List an employee's work history: positions held, role changes, and status transitions.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_employee_terminations",
+        "description": "List offboarding and separation records for an employee.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_employee_jobs",
+        "description": "List all job positions held by an employee.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_job_compensations",
+        "description": "Get pay rate history for a job position.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_compensation",
+        "description": "Get details for a specific pay rate record.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_job",
+        "description": "Get details for a specific job position.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_department",
+        "description": "Get details for a specific department.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_departments",
+        "description": "List all departments in the company's org structure.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_location",
+        "description": "Get details for a specific company location.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_locations",
+        "description": "List all company locations.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_custom_fields_schema",
+        "description": "Get the company's custom field definitions.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_earning_types",
+        "description": "List all earning type categories configured for the company.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_contractors",
+        "description": "List all independent contractors with pagination and search.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_contractor",
+        "description": "Get detailed information about a specific contractor.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_contractor_payment",
+        "description": "Get details for a specific contractor payment.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_contractor_payments",
+        "description": "List payments made to contractors within a date range.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_contractor_payment_group",
+        "description": "Get all individual payments within a batched contractor payment run.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_contractor_payment_groups",
+        "description": "List batched contractor payment runs for the company.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_time_off_balances",
+        "description": "Get employees' current time-off balances (available, accrued, used, and pending hours per",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_time_off_request",
+        "description": "Get full detail for a specific time-off request.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_time_off_requests",
+        "description": "List a company's time-off requests, filterable by status, date range, and employee.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_time_sheet",
+        "description": "Get detailed time entries for a specific timesheet (third-party time tracking only).",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_time_records",
+        "description": "List time records for a pay period, routed automatically to the company's",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "record_time",
+        "description": "Record admin-entered time for a single worker over a pay period, routed",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_pay_schedule",
+        "description": "Get details for a specific pay schedule.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_pay_schedules",
+        "description": "List all configured pay schedules for the company.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_pay_periods",
+        "description": "List pay periods with links to their associated payroll runs.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_pay_schedule_assignments",
+        "description": "Show which employees are assigned to which pay schedules.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "page: integer (optional, default 1); per: integer (optional, default 25, max 100); include: string (optional); other filters NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_token_info",
+        "description": "Get the current access token's granted scopes and accessible company resources.\r",
+        "type": "Read",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_feedback",
+        "description": "Submit feedback about the Gusto MCP integration itself (bugs, missing tools, confusing",
+        "type": "Write",
+        "enabled_by_default": "Unknown (data-category permissions; individual defaults not specified)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.gusto.com/app-integrations/docs/mcp",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim tool schemas/initialize instructions were available. The official reference gives names, descriptions, and only shared pagination parameters; it does not provide full serialized tool definitions.",
+    "human_can_agent_cannot": "The MCP tools do not collect signatures or SSNs in chat; users complete those steps in secure Gusto flows. EIN filing payment is provided as a Stripe checkout link. An S-Corp election form still must be mailed by the owner to the IRS. The tool list limits workers’ compensation class lookup to Washington and Wyoming. Gusto’s general product interfaces may support other workflows not represented in the published MCP list; this review does not infer their exact availability.",
+    "sources": [
+      "https://docs.gusto.com/app-integrations/docs/mcp",
+      "https://claude.com/connectors/gusto",
+      "https://everymcpserver.com/servers/gusto-mcp-server",
+      "https://agentman.ai/agentskills/connections/mcp-server/gusto",
+      "https://manufact.com/mcp-catalog/gusto"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Docs ask the client to require manual confirmation, isolate Gusto MCP sessions, use trusted clients, review calls, verify outputs, and opt out of model training. These are client/user recommendations; the docs do not demonstrate server enforcement for all calls. Gusto’s product page states that every write returns for confirmation, but the enforcement mechanism is unspecified.",
+    "governance_promises": "Docs say tool-call parameters are sanitized in logs, full conversation history is not logged, and OAuth tokens are stored securely and revoked on disconnect. They say the user may export tool logs and revoke access. The Gusto MCP Terms authorize collection of query content and possible monitoring, and warn that AI providers may train on or retain transmitted data. The Gusto privacy notice says its third-party AI providers are not permitted to train on personal information.",
+    "promises_to_user": "Gusto describes scoped, least-privilege access, user-selected data categories, and manual confirmation of writes. Its legal terms place responsibility for verifying AI output and human oversight on the employer.",
+    "comparison_with_server_logic": "OAuth-selected categories and the documented confirmed:false/true create_company flow are concrete controls. The docs recommend client confirmation generally, while the product page claims all writes return for confirmation; server-side enforcement was not independently evidenced. Logging and token handling are documentation claims. The MCP Terms’ query-content collection language conflicts with the docs’ statement that full conversation history is not logged.",
+    "sources": [
+      "https://docs.gusto.com/app-integrations/docs/mcp",
+      "https://gusto.com/product/integrations/gusto-mcp",
+      "https://gusto.com/legal/terms/gusto-mcp",
+      "https://gusto.com/privacyresources/privacy"
+    ]
+  },
+  "contradictions": [
+    "The input is https://api.gusto.com/v1/mcp, while Gusto’s official docs identify https://mcp.api.gusto.com. The input returned HTTP 200 with JSON-RPC Invalid request, but its protected-resource metadata paths returned 404 and no input-specific tool list was found. The 72-tool list is therefore best-available evidence from the documented endpoint, not endpoint-specific confirmation.",
+    "The pre-fetched OAuth metadata is for api.gusto.com; the documented MCP host is mcp.api.gusto.com. The metadata scopes and OAuth server details are not verified as the scopes used by the documented MCP endpoint.",
+    "The official docs list 72 tools, while third-party catalogues report partial counts (EveryMCPServer 60/72, Agentman 41, Manufact 43). Claude’s directory lists 62 tools for the separate /anthropic route. These figures do not match the main official list and may reflect partial listings or route differences.",
+    "Gusto MCP docs say full conversation history is not logged, but Gusto MCP Terms authorize collecting the content of queries made through the linked LLM account. The relationship between these statements is not clarified in the available material.",
+    "The Gusto product page says every write returns for confirmation; the technical docs recommend client-side manual confirmation. The available material does not specify how the write confirmation is enforced."
+  ],
+  "observations_for_research": [
+    "The published tool list spans payroll reads and writes, employee administration, time entry, onboarding, tax-form preparation, estimates, and vendor feedback.",
+    "The docs combine OAuth data-category selection with explicit client-side behavioral recommendations and separate secure flows for sensitive information.",
+    "Some tool descriptions include operational constraints or behavioral wording, including two-stage company creation, no SSN collection in chat, and a constrained tax qualification verdict."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/, and code/GITHUB_COMMITS.txt; no official repository was collected or found in web search. The official docs markdown and rendered docs were checked for the complete tool list and supporting sections. Gusto pricing and legal pages initially returned 403 in the prepared copies; web search exposed the official MCP Terms, integration page, and privacy notice used above. Prepared third-party listings include incomplete counts and a separately routed Claude listing; no catalogue-only tools were added. The pre-fetched authorization-server response is truncated after grant_types_supported begins, so omitted metadata fields are not inferred.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.6
+  }
+}

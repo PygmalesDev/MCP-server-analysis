@@ -1,0 +1,652 @@
+{
+  "server": "hubspot",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.hubspot.com/",
+    "documentation_url_csv": "https://developers.hubspot.com/mcp",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+      "https://developers.hubspot.com/docs/build-with-ai/remote-mcp-server.md",
+      "https://developers.hubspot.com/changelog/remote-hubspot-mcp-server-is-now-generally-available?hs_amp=true",
+      "https://developers.hubspot.com/changelog/public-beta-self-service-mcp-auth-apps-for-the-hubspot-remote-mcp-server",
+      "https://www.hubspot.com/pricing/crm?tier=starter",
+      "https://legal.hubspot.com/terms-of-service",
+      "https://legal.hubspot.com/privacy-policy",
+      "https://www.hookmcp.com/tools/hubspot-official-remote/",
+      "https://agentdiscoverability.com/track/chatgpt/hubspot",
+      "https://claude.com/connectors/hubspot"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "No official public source for the hosted CRM MCP server was found. The HubSpot repositories in the evidence folder are API client libraries, not the MCP server implementation.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "GA; the self-service MCP Auth Apps interface was announced as public beta in January 2026.",
+    "other_official_servers": [
+      "HubSpot Developer MCP server: a separate local server for developer-platform app and CMS work; it is not the CRM server analyzed here. https://developers.hubspot.com/docs/developer-tooling/local-development/mcp-server",
+      "https://mcp.hubspot.com/anthropic: official Claude connector URL, documented in the Claude connector directory; this is a different path from the global endpoint in scope."
+    ],
+    "sources": [
+      "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+      "https://developers.hubspot.com/docs/build-with-ai/remote-mcp-server.md",
+      "https://developers.hubspot.com/changelog/remote-hubspot-mcp-server-is-now-generally-available?hs_amp=true",
+      "https://developers.hubspot.com/changelog/public-beta-self-service-mcp-auth-apps-for-the-hubspot-remote-mcp-server",
+      "https://developers.hubspot.com/docs/developer-tooling/local-development/mcp-server",
+      "https://claude.com/connectors/hubspot"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP access charge or MCP-specific price schedule was found in the reviewed official documentation. Access requires a HubSpot account and an authorized connector; some tools depend on subscription or account configuration.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "HubSpot Free Tools: $0/month for up to 2 users. The official CRM pricing page lists Starter from $7/month/seat in the displayed offer; prices and eligibility may vary.",
+    "pricing_model_details": "No MCP per-call charge, MCP credit price, or MCP-specific quota was found. Product subscriptions and account entitlements govern availability of some objects and features.",
+    "other_access_restrictions": "OAuth connector authorization with PKCE is required. Tool availability varies with subscription, user permissions, and account configuration. Sensitive Data settings block activity and conversation access through MCP. A Marketing Hub Professional or Enterprise subscription is required for AEO tools.",
+    "restrictions_controlled_by": "HubSpot controls server-side availability and subscription entitlements; HubSpot account users grant permissions during connector installation; organization configuration and user permissions affect access.",
+    "sources": [
+      "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+      "https://www.hubspot.com/pricing/crm?tier=starter"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted server exposes tools for CRM search and management, campaigns, conversations, marketing email, content, AEO, onboarding, tool guidance, and feedback. The public documentation states availability varies by subscription, permissions, and account configuration; it directs users to get_user_details to check their live access.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "NOT FOUND for the server-wide response envelope. Tool-specific response formats are not fully published in the official reference.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "https://www.hookmcp.com/tools/hubspot-official-remote/"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation or endpoint evidence reviewed here describes MCP resources exposed by the global CRM endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "https://mcp.hubspot.com/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official documentation reviewed here describes MCP prompt templates exposed by the global CRM endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP-specific server logging and audit-event behavior were not documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "https://legal.hubspot.com/privacy-policy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No reviewed official source says whether the hosted MCP server requests sampling from connected clients.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No reviewed official source says whether the hosted MCP server uses MCP roots.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth 2.1 with PKCE is required by the documentation.",
+      "description_what_how": "The endpoint returned HTTP 401 with WWW-Authenticate: Bearer resource_metadata=\"https://mcp.hubspot.com/.well-known/oauth-protected-resource\". The provided protected-resource metadata reports resource https://mcp.hubspot.com, authorization server https://mcp.hubspot.com, scopes_supported [], and resource documentation https://developers.hubspot.com/mcp. The provided authorization-server metadata reports issuer https://mcp.hubspot.com, authorization endpoint /oauth/authorize/user, token endpoint /oauth/v3/token, scopes_supported [], authorization-code response, authorization_code, refresh_token, client_credentials, and jwt-bearer grants, client_secret_post token authentication, and S256 PKCE. No registration_endpoint is present in the supplied metadata. HubSpot documentation describes creating a connector to obtain client credentials and states PKCE is required. The provided OIDC configuration URL returned 404. Token lifetime and revocation behavior were not specified in the provided metadata or reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The endpoint requires bearer authorization; unauthenticated access produced HTTP 401. Token and error response structures beyond OAuth metadata were not examined.",
+      "authorization_mechanism": "Metadata Doc; provided raw values: protected-resource scopes_supported=[]; authorization-server scopes_supported=[]; grant_types_supported=[authorization_code, refresh_token, client_credentials, urn:ietf:params:oauth:grant-type:jwt-bearer]; code_challenge_methods_supported=[S256]; token_endpoint_auth_methods_supported=[client_secret_post]. HubSpot docs require OAuth with PKCE and describe connector-created client credentials. No registration_endpoint in supplied metadata; no token lifetime or revocation data found.",
+      "authorization_server": "https://mcp.hubspot.com",
+      "sources": [
+        "https://mcp.hubspot.com/",
+        "https://mcp.hubspot.com/.well-known/oauth-protected-resource",
+        "https://mcp.hubspot.com/.well-known/oauth-authorization-server",
+        "https://mcp.hubspot.com/.well-known/openid-configuration",
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation support was documented. Tool descriptions in third-party captures recommend asking users for confirmation before some writes; these are agent-facing instructions, not evidence of server-enforced MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "https://agentdiscoverability.com/track/chatgpt/hubspot"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "A tool description captured by a third-party directory describes long-running attribution queries with PROCESSING status and taskId polling. No official MCP Tasks capability declaration was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The third-party tool description reports a PROCESSING response with taskId for some long-running queries; it does not establish MCP Tasks support.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agentdiscoverability.com/track/chatgpt/hubspot"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Users create and configure an MCP connector in HubSpot, including its name, optional description and icon, redirect URL, and OAuth credentials. This is connector configuration; no MCP server toolsets or URL-based filtering configuration was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "https://developers.hubspot.com/changelog/public-beta-self-service-mcp-auth-apps-for-the-hubspot-remote-mcp-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs cover OAuth troubleshooting and the get_user_details tool can report availability states, but no general MCP error-reporting capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth troubleshooting is documented; general MCP error response format is Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "https://www.hookmcp.com/tools/hubspot-official-remote/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No general MCP progress-notification capability was documented. A third-party captured tool description mentions polling long-running attribution queries by taskId.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown as an MCP capability; tool-specific polling behavior is described in the third-party tool capture.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://agentdiscoverability.com/track/chatgpt/hubspot"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP cancellation capability was documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server includes a tool_guidance tool according to the published tool list captured by a third-party directory. It retrieves usage instructions for other tools. No initialize instructions were available in the reviewed official sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool guidance returns tool-specific usage information; general initialize context structure is Unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.hookmcp.com/tools/hubspot-official-remote/",
+        "https://agentdiscoverability.com/track/chatgpt/hubspot"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official docs describe both read and write operations and state all actions respect user permissions. Public tool list capture identifies separate read-oriented tools and management tools; MCP annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) were not published. 2. Official docs do not document server-enforced confirmation flows. Captured tool descriptions tell agents to seek explicit user approval for selected writes; whether the server enforces those instructions is not established. 3. OAuth uses PKCE; scopes_supported is empty in both supplied metadata documents. Docs state available scopes depend on installed tools and user-granted permissions, and existing HubSpot permissions are respected. Token lifetime and revocation details were not found. 4. No read-only mode, toolset filter, query-free mode, or sandbox endpoint was found. Sensitive Data configuration blocks activity and conversation data; account, plan, and user settings affect availability. 5. Sensitive Data blocks activities and conversations through MCP. Conversations inbox visibility follows inbox user/team restrictions; help desk conversations are visible to all users. No general PII masking or field-level redaction behavior was documented. 6. Official tool reference capture reports search_crm_objects up to 200 results/page, get_crm_objects up to 100 IDs/request, and other per-tool constraints. No general MCP rate limit, quota, or per-call cost was found. 7. Official parameter validation behavior was not documented. Captured tool descriptions contain operation-specific prerequisites and parameter guidance; no general unknown-argument or coercion policy was found. 8. MCP-specific audit trail, logging, and telemetry practices were not documented. HubSpot's general privacy policy describes use of information and usage data but does not specify MCP-specific logging. 9. The captured list includes submit_feedback, which sends connector feedback to HubSpot; no vendor upsell message was found in the reviewed tool list. 10. tool_guidance provides on-demand usage instructions. Captured descriptions contain agent-facing behavior rules, including confirmation and sequencing recommendations; no external skill distribution was verified for this endpoint. 11. No evidence that prior agent behavior changes future outputs or available tools/resources/prompts. 12. The documented architecture is a hosted MCP-to-HubSpot API bridge. AEO tools can return tracked AI-engine responses, but no evidence shows a nested HubSpot agent call. 13. No raw API request, arbitrary SQL execution, or script execution tool was found in the captured 32-tool list. query_crm_data is described as HubSpot-specific SQL and its capture says it excludes joins, aliases, subqueries, association traversal, and currency conversion.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] “All actions respect your existing HubSpot user permissions. Users can only view and modify records they have access to in HubSpot.”",
+      "[DOCS] “Run get_user_details after connecting to check which tools and objects are available for your specific account.”",
+      "[THIRD-PARTY HookMCP, 2026-10, reproducing tool descriptions] “For association and association label operations, call tool_guidance first.”",
+      "[THIRD-PARTY Agent Discoverability, 2026-10] “Always show proposed changes in a table and get explicit user approval before creating or updating CRM objects.”",
+      "[THIRD-PARTY Agent Discoverability, 2026-10] “NEVER call without explicit user confirmation of the feedback to send.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One global hosted CRM endpoint is documented as a bridge to HubSpot APIs. The separate Developer MCP server and the /anthropic Claude connector URL are distinct services or paths and are not part of this endpoint's tool list.",
+    "sources": [
+      "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+      "https://www.hookmcp.com/tools/hubspot-official-remote/",
+      "https://agentdiscoverability.com/track/chatgpt/hubspot",
+      "https://legal.hubspot.com/privacy-policy"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "32",
+    "action_count_comment": "The official documentation has an Available tools section but the accessible page copy does not expose a complete named list. HookMCP reports 32 names and attributes them to HubSpot's documentation, checked 2026-10-15; this is the complete action list recorded in actions.json, with names treated as official where documented. No additional catalogue-only actions were added. Claude's directory lists 36 tools for the separate https://mcp.hubspot.com/anthropic connector path, including a Claude-specific import tool; those are not counted for this global endpoint. Agent Discoverability displays a separate 35-tool capture, including query_segments and show_feedback_form; those names were not corroborated for this endpoint in the official docs or HookMCP list. The other captured directory lists 32.",
+    "actions": [
+      {
+        "tool_name": "get_user_details",
+        "description": "Return authenticated user, permissions, object and tool availability.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_organization_details",
+        "description": "Return organization teams, roles, seats, and account information.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "discover_hubspot_schema",
+        "description": "Discover object types and read/write availability in the account.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_crm_objects",
+        "description": "Search and filter CRM records with pagination.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_crm_objects",
+        "description": "Fetch CRM objects by ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_crm_objects",
+        "description": "Create or update CRM objects and activities.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_segment",
+        "description": "Create and manage segments and their records.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_crm_data",
+        "description": "Query CRM data using HubSpot-specific SQL.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_properties",
+        "description": "Find property definitions by keyword.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_properties",
+        "description": "Retrieve CRM property definitions and enumeration values.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_custom_properties",
+        "description": "Create custom CRM properties.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_custom_pipelines",
+        "description": "Create and manage supported CRM pipelines.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_owners",
+        "description": "Find record owners by name, email, or ID.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_campaign_attribution_reports",
+        "description": "Retrieve campaign revenue and deal attribution reports.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_campaign_data",
+        "description": "Read campaign analytics, asset metrics, or contact data.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_campaign_objects",
+        "description": "Create or update campaigns and asset associations.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_conversations",
+        "description": "Search inbox conversations and messages.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_conversation_channel_metadata",
+        "description": "List available inboxes, channels, and channel instances.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_intent_signals",
+        "description": "Search and analyze buyer intent signals.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_marketing_email_analytics",
+        "description": "Retrieve marketing email performance and health analytics.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_marketing_email",
+        "description": "Manage marketing email settings and content.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_content_analytics_report",
+        "description": "Run analytics reports for web pages and blog posts.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_landing_page",
+        "description": "Create, edit, publish, clone, and inspect landing pages.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_website_page",
+        "description": "Create, edit, publish, clone, and inspect website pages.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_aeo_metrics",
+        "description": "Retrieve brand visibility and answer engine optimization metrics.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_aeo_prompts",
+        "description": "Inspect or create tracked prompts and retrieve AI response data.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_aeo_recommendations",
+        "description": "Review brand recommendations and initiate related actions.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "render_asset",
+        "description": "Render a read-only preview card for a content asset.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_blog_post",
+        "description": "Create, update, publish, and inspect blog posts.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_onboarding",
+        "description": "Assess CRM onboarding status and guide onboarding steps.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "tool_guidance",
+        "description": "Retrieve usage guidance for HubSpot MCP tools.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_feedback",
+        "description": "Submit user feedback about the HubSpot connector.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account-dependent; verify with get_user_details)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code for the hosted server and no verbatim complete tool definitions or initialize instructions from an official source were available to serialize.",
+    "human_can_agent_cannot": "The public MCP documentation lists broad CRM, activities, content, analytics, and campaign operations; it does not provide a complete MCP-vs-human feature matrix. Standard HubSpot CRM APIs expose operations and parameters beyond the published MCP list, but REST-only parameters were not used as MCP tool parameters. Sensitive Data settings can block activities and conversations through MCP even though the standard CRM APIs are not subject to that MCP-specific restriction. Sources: https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+    "sources": [
+      "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+      "https://www.hookmcp.com/tools/hubspot-official-remote/",
+      "https://claude.com/connectors/hubspot",
+      "https://agentdiscoverability.com/track/chatgpt/hubspot"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The official guide instructs client developers to use OAuth with PKCE and users to call get_user_details to check account-specific access. Captured third-party tool descriptions instruct agents to call tool_guidance before certain operations and request confirmation before selected writes. The public evidence does not establish whether these agent-facing instructions are enforced by the server.",
+    "governance_promises": "The docs state: “All actions respect your existing HubSpot user permissions. Users can only view and modify records they have access to in HubSpot.” They also state that Sensitive Data blocks activity and conversation access through MCP. HubSpot's customer terms state: “You may opt out of having your Customer Data used for this purpose by updating your settings in your HubSpot account.”",
+    "promises_to_user": "HubSpot describes the remote service as providing secure, granular CRM access and says users authorize the connection and grant permissions based on their HubSpot permissions. The documentation describes access as being on behalf of the authenticated user.",
+    "comparison_with_server_logic": "The documented permission inheritance and Sensitive Data restriction are explicit product/server behavior claims. The 401 response and OAuth metadata support protected access but do not verify authorization behavior after login. Confirmation steps are present in captured tool guidance, but public server code or an endpoint session was unavailable to determine whether the server enforces them. General AI data-use and opt-out terms are HubSpot-wide, not MCP-specific.",
+    "sources": [
+      "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+      "https://legal.hubspot.com/terms-of-service",
+      "https://legal.hubspot.com/privacy-policy",
+      "https://mcp.hubspot.com/.well-known/oauth-protected-resource"
+    ]
+  },
+  "contradictions": [
+    "The provided OAuth documents report scopes_supported as an empty array, while HubSpot's documentation says the connector's available scopes are determined by the tools available at installation and permissions granted by the user. The metadata may omit product-level scopes or the documentation may describe permissions separately from OAuth scopes.",
+    "Claude's directory reports 36 tools for https://mcp.hubspot.com/anthropic, whereas HookMCP attributes 32 tools to the global endpoint. The path and tool counts differ, so the Claude list was not merged into this endpoint's actions.",
+    "Agent Discoverability captures 35 tools, including query_segments and show_feedback_form, not present in the 32-name HookMCP list. The accessible official docs copy does not expose those names, so they were not added as confirmed tools for the input endpoint."
+  ],
+  "observations_for_research": [
+    "Tool availability is account-specific; the server provides get_user_details as a way to inspect permissions and available objects and tools.",
+    "The public documentation says scopes are tied to installed tools and user-granted permissions, while supplied OAuth metadata lists no scopes.",
+    "Several captured tool descriptions provide behavior-shaping instructions such as confirmation steps, sequencing, and limits, while their server-side enforcement could not be verified from public code."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared links.json, links_check.txt, pages/ and code/ evidence. The endpoint itself returned HTTP 401 and linked to the supplied protected-resource metadata; the supplied OIDC configuration returned 404. No official MCP server repository or tool schemas were found. The official docs page copy exposes the Available tools heading but not the full name list; the 32 names in actions.json are attributed to official documentation by HookMCP, a third-party directory, and should be treated as a directory-backed list pending authenticated tools/list verification. Unofficial community repositories were listed in links.json and excluded from evidence. Pricing and HubSpot-wide AI terms are cited where relevant.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.1
+  }
+}

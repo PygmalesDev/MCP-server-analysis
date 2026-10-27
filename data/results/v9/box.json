@@ -1,0 +1,878 @@
+{
+  "server": "box",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.box.com/mcp",
+    "documentation_url_csv": "https://developer.box.com/guides/box-mcp/remote/",
+    "addressing": "global",
+    "repository_url": "https://github.com/box/mcp-server-box-remote",
+    "documentation_urls_used": [
+      "https://developer.box.com/guides/box-mcp/remote/",
+      "https://developer.box.com/guides/box-mcp/setup",
+      "https://developer.box.com/guides/box-mcp/permission-aware-access",
+      "https://developer.box.com/guides/box-mcp/tools",
+      "https://docs.box.com/en/box-mcp/admin-controls",
+      "https://support.box.com/hc/en-us/articles/48273464323987-Connecting-to-Box-from-Third-Party-AI-Apps",
+      "https://developer.box.com/guides/authentication/",
+      "https://developer.box.com/guides/box-mcp/self-hosted/index"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official remote-server repository describes the hosted Box MCP server, but its public copy contains only a README and license, not runtime implementation or tool schemas. It identifies the hosted endpoint and links the complete tool reference. A separate community local/self-hosted server exists and is not evidence of the deployed implementation.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "3e9db736ba6ed3875c81753bec8e7e2f755ecce6",
+    "commit_date": "2025-09-20",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "MIT (repository; no runtime implementation published)",
+    "release_status": "GA",
+    "other_official_servers": [
+      "https://github.com/box-community/mcp-server-box — separate self-hosted/local legacy server; not the hosted endpoint analyzed here."
+    ],
+    "sources": [
+      "https://mcp.box.com/mcp",
+      "https://developer.box.com/guides/box-mcp/tools",
+      "https://github.com/box/mcp-server-box-remote/tree/3e9db736ba6ed3875c81753bec8e7e2f755ecce6",
+      "https://support.box.com/hc/en-us/articles/43974584000659-Announcing-the-new-remote-Box-MCP-Server-GA-release-Aug-2025",
+      "https://developer.box.com/guides/box-mcp/self-hosted/index"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP-server fee was found in the official material reviewed. Box says MCP-related API calls are generally billed against the API call limits in the existing Box plan; registered partner integrations may have non-chargeable API calls. Separately monetized Box AI, Extract, and Doc Gen features remain subject to their standard pricing, entitlements, and limits.",
+    "linked_software": "Paid",
+    "linked_software_cost": "NOT FOUND",
+    "pricing_model_details": "Official pricing page returned HTTP 403 in the evidence collection. Box describes MCP API calls as typically using the API call limits and/or AI units allotted by the existing Box plan; Q&A, Box Extract, and Doc Gen have separate pricing and usage limits. No prices or plan-by-plan limits established.",
+    "other_access_restrictions": "An administrator enables the MCP integration and selects scopes; enterprise-wide or per-integration/platform-app settings control tool availability. Some categories may depend on subscription. Enterprise Advanced is required for documented write-tool security guardrails and the Doc Gen scope. OAuth credentials and a client redirect URI are required.",
+    "restrictions_controlled_by": "Vendor and organization administrator; users authenticate as their Box identity and remain subject to their Box scopes and content permissions.",
+    "sources": [
+      "https://support.box.com/hc/en-us/articles/48273464323987-Connecting-to-Box-from-Third-Party-AI-Apps",
+      "https://developer.box.com/guides/box-mcp/setup",
+      "https://developer.box.com/guides/box-mcp/permission-aware-access",
+      "https://docs.box.com/en/box-mcp/admin-controls",
+      "https://www.box.com/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The official tool reference lists 54 tools across user/authentication, files/folders, search, collaboration, Box AI, Hubs, and Doc Gen. Each has an On/Off default; administrators can configure tool visibility globally or per integration/platform app. The public remote repository does not expose implementation or schemas.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool descriptions say results include file/content information, metadata, search results, Box AI answers and citations when available, URLs, or operation results. Admin-disabled tools are removed from discovery; runtime calls can return an error. Full MCP result envelopes and error schemas are not published in the reviewed tool reference.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools",
+        "https://docs.box.com/en/box-mcp/admin-controls",
+        "https://github.com/box/mcp-server-box-remote/tree/3e9db736ba6ed3875c81753bec8e7e2f755ecce6"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The hosted-server reference documents tools but does not document MCP resources or resource templates.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools",
+        "https://mcp.box.com/mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP prompt list or prompt capability is documented in the reviewed official hosted-server pages.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools",
+        "https://mcp.box.com/mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Box documents administrator reports for MCP tool-call counts per day by user and integration, and per-event platform activity covering content and feature access or changes. These are product audit/usage reports; server-side protocol logging details are not published.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Reports: per-day call counts and per-event activity records; exact schema not reviewed.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.box.com/en/box-mcp/admin-controls",
+        "https://support.box.com/hc/en-us/articles/51414519275283-New-admin-controls-for-the-Box-MCP-server"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No server-side MCP sampling behavior is documented in the reviewed official pages or the public remote repository copy.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools",
+        "https://github.com/box/mcp-server-box-remote/tree/3e9db736ba6ed3875c81753bec8e7e2f755ecce6"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP roots capability is documented in the reviewed official pages or the public remote repository copy.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools",
+        "https://github.com/box/mcp-server-box-remote/tree/3e9db736ba6ed3875c81753bec8e7e2f755ecce6"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "OAuth discovery and protocol negotiation version not stated",
+      "description_what_how": "The endpoint’s POST returned HTTP 401 and a Bearer challenge saying the access token was not found, with resource metadata at https://mcp.box.com/.well-known/oauth-protected-resource. That document reports resource https://mcp.box.com/, resource name “Box Model Context Protocol Server”, authorization server https://api.box.com/, bearer method header, resource documentation URL, and Box Terms of Service as policy/TOS. Authorization-server metadata lists authorization-code and refresh-token grants; PKCE S256; token endpoint authentication client_secret_basic and client_secret_post; authorization endpoint https://account.box.com/api/oauth2/authorize; token endpoint https://api.box.com/oauth2/token; revocation endpoint https://api.box.com/oauth2/revoke. No registration_endpoint or scopes_supported is present in the supplied metadata. Box setup docs name root_readwrite, ai.readwrite, and docgen.readwrite; the latter requires Enterprise Advanced. Access-token lifetime is documented elsewhere as 60 minutes; refresh tokens are valid for 60 days or one use.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthorized request: HTTP 401 with WWW-Authenticate: Bearer realm=\"Service\", error=\"invalid_request\", error_description=\"The access token was not found.\", resource_metadata=\"https://mcp.box.com/.well-known/oauth-protected-resource\".",
+      "authorization_mechanism": "Metadata Doc; OAuth 2.0 authorization_code and refresh_token grants; PKCE S256; token auth client_secret_basic/client_secret_post; bearer token in header; revocation endpoint present. No DCR endpoint or scopes_supported listed. Box setup docs list root_readwrite, ai.readwrite, docgen.readwrite (Enterprise Advanced required for docgen.readwrite). The OAuth metadata gives no token lifetime; Box authentication docs state access tokens last 60 minutes and refresh tokens 60 days or one use.",
+      "authorization_server": "https://api.box.com/",
+      "sources": [
+        "https://mcp.box.com/.well-known/oauth-protected-resource",
+        "https://api.box.com/.well-known/oauth-authorization-server",
+        "https://developer.box.com/guides/box-mcp/setup",
+        "https://developer.box.com/guides/authentication/",
+        "https://mcp.box.com/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Elicitation mechanism is documented in the reviewed official pages or public remote repository copy.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools",
+        "https://github.com/box/mcp-server-box-remote/tree/3e9db736ba6ed3875c81753bec8e7e2f755ecce6"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The Box tool named list_tasks lists Box file tasks. This is a Box product operation, not evidence that the MCP Tasks protocol capability is implemented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Administrators can enable/disable categories and individual tools globally or configure an integration/platform app with a custom tool set. The reference also describes firewall allowlisting needs for temporary upload/download URLs. No endpoint query parameter or request-header tool-filtering mode is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Admin changes can alter the discovered tool list; clients may cache the old list.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.box.com/en/box-mcp/admin-controls",
+        "https://developer.box.com/guides/box-mcp/tools"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Official admin documentation gives examples of errors when a disabled tool is called and says guardrail blocks return a structured error explaining that a security guardrail blocked the action. Complete error formats are not published in the reviewed reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Examples include “Tool has been disabled by the enterprise admin. Contact your enterprise admin for more information.” and structured guardrail-block errors; exact schema varies or is not stated.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.box.com/en/box-mcp/admin-controls"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription protocol capability is documented. Box separately documents usage limits and billing for Box API and AI features.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://support.box.com/hc/en-us/articles/48273464323987-Connecting-to-Box-from-Third-Party-AI-Apps"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP progress notifications are documented in the reviewed official pages or public remote repository copy.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools",
+        "https://github.com/box/mcp-server-box-remote/tree/3e9db736ba6ed3875c81753bec8e7e2f755ecce6"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP cancellation behavior is documented in the reviewed official pages or public remote repository copy.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools",
+        "https://github.com/box/mcp-server-box-remote/tree/3e9db736ba6ed3875c81753bec8e7e2f755ecce6"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Some tools issue temporary single-use URLs for binary file upload or download. The client/agent must make a direct network request to transfer the file; the docs say declarative agents cannot do this and require an agentic code-executing environment. Firewall allowlisting may be needed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Upload/download tools return a temporary URL; exact result schema is not published in the reference.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.box.com/guides/box-mcp/tools"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official reference distinguishes read-only and write tools by category. MCP tool-annotation flags (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are not published; public repository contains no runtime code to inspect.\n2. Server-enforced confirmation flow or confirm parameter not documented. Admin tool configuration changes require admin actions; Box says guardrails evaluate selected write tool requests before execution and block requests outside configured boundaries. No per-action human confirmation step is documented.\n3. OAuth scopes cap what the app can request; identity is the authorizing Box user by default. Box checks user permissions, collaborations, waterfall folder permissions, application scopes, and relevant policies on each request. Admins enable MCP and configure credentials/scopes. Tool availability can be enterprise-wide or customized per integration/platform app. No client allowlist or redirect approval process detail beyond configuring the client-provided redirect URI was found. OAuth metadata has no DCR endpoint or scopes_supported. Metadata includes token revocation; general Box authentication docs say access tokens last 60 minutes and refresh tokens 60 days or one use.\n4. No documented read-only endpoint, URL toolset/filter mode, or query-free mode found. Admins can disable tools or enable read-only category access, with per-app custom settings. The legacy self-hosted server is a separate variant. Upload/download URL tools need direct network access and may require zone-specific firewall domains.\n5. Box states users only access content they already have permission to access; permissions and application scopes are checked in real time. Write guardrails can limit content locations, managed users, and external users. No general PII masking/exclusion scheme is documented.\n6. Tool docs mention up to 1 MB text representation for selected Box AI tools, processing only first 1 MB when a file is larger, and up to 100 tags on file/folder updates. Other tool-specific limits are described in the tool reference. Box AI/Extract/Doc Gen and API-call usage remain subject to plan entitlements and limits; no global MCP call cap or price per call found.\n7. Tool reference documents some input constraints, such as name/description lengths and required IDs, but does not publish MCP input schemas or unknown-argument/coercion behavior. Runtime corrections/overrides cannot be checked because implementation is not public.\n8. Admin Console reports MCP calls per day by user/integration and per-event activity for content/features accessed or changed. Tool-enable changes and guardrail configuration changes are auditable. Vendor telemetry specifics and opt-out behavior not found.\n9. The complete official 54-tool list was searched for feedback/rating/report/survey names; none appears. Box AI tool descriptions mention increased cost for enhanced extract tools, but no unsolicited upsell result is documented. Docs direct users to a Box community forum for feedback.\n10. Tool descriptions include behavioral recommendations: enhanced extraction tools are for when the user asks for them and cost more; use related template/schema tools to find parameters; client must directly transfer binary content using temporary URLs. Box separately distributes agent skills, but they are not MCP tools.\n11. No agent memory or server state affecting future tool availability/results is documented. Admin configuration and Box content/permissions persist and affect later calls.\n12. Hosted endpoint presents the Box remote server. Official docs also describe a separate self-hosted legacy server; it is not evidence for this endpoint. Tool availability can vary by enterprise and connected app configuration.\n13. No raw API request, arbitrary SQL, script execution, or universal escape-hatch tool is listed. search_files_metadata accepts SQL-like metadata queries within a named search tool; this is not an arbitrary API/SQL interface.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“Use only when the user asks for the Enhanced Extract Agent. This tool costs more than the standard Box AI Extract tools.”",
+      "“Use `list_metadata_templates` and `get_metadata_template_schema` to find the `scope`, `template_key`, and `fields`.”",
+      "“The upload and download URL tools require the AI agent to make a direct network request to transfer the file.”",
+      "“Declarative agents can't make these requests, so these tools work only in agentic (code-executing) environments.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted Box MCP endpoint and one official tool reference. Admin configuration can expose different subsets to different integrations, but the documentation does not describe subservers or dynamically loaded toolsets as a distinct architecture.",
+    "sources": [
+      "https://developer.box.com/guides/box-mcp/tools",
+      "https://developer.box.com/guides/box-mcp/permission-aware-access",
+      "https://developer.box.com/guides/box-mcp/setup",
+      "https://docs.box.com/en/box-mcp/admin-controls",
+      "https://support.box.com/hc/en-us/articles/48273464323987-Connecting-to-Box-from-Third-Party-AI-Apps",
+      "https://developer.box.com/guides/authentication/",
+      "https://developer.box.com/guides/box-mcp/self-hosted/index",
+      "https://developer.box.com/ai/agent-skills"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "54 documented tools; 38 marked On and 16 Off in the reference",
+    "action_count_comment": "The official tool list exists at https://developer.box.com/guides/box-mcp/tools and names 54 tools. No separate official total was printed in that reference. The official list is used in actions.json; no catalogue-only actions were added. MartechDB reports 54 tools and says these are Box documentation names; Claude’s Anthropic-verified connector page lists 12 tools, a subset of the official list. Other collected catalogues did not provide an independently verified complete native tool list. The official reference gives descriptions/default status but no parameter schemas.",
+    "actions": [
+      {
+        "tool_name": "who_am_i",
+        "description": "Returns detailed information about the currently authenticated Box user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_download_url",
+        "description": "Issues a temporary, single-use URL for downloading binary files from Box. See [Upload and download URL tools](#upload-and-download-url-tools) for additional configuration details.",
+        "type": "Read",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_file_content",
+        "description": "Returns the content of a file stored in Box.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_file_details",
+        "description": "Returns detailed file information from Box, including metadata, permissions, and version details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_file_preview",
+        "description": "Returns the preview widget for a file stored in Box.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_folder_details",
+        "description": "Retrieves detailed folder information, including metadata, permissions, and collaboration settings.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_folder_content_by_folder_id",
+        "description": "Lists files, folders, and web links in a folder (paginated).  Use `folder_id` \"0\" for the root folder. `id`, `type`, `name`, and `etag` are always returned. Optional field: `limit`.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "copy_file",
+        "description": "Copies an existing file to a destination folder in Box.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "copy_folder",
+        "description": "Copies an existing folder to a destination parent folder in Box.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_folder",
+        "description": "Creates a folder in Box.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_metadata_template",
+        "description": "Creates an enterprise metadata template. Requires the `enterprise` scope, `display_name`, and an optional `fields` array.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_upload_url",
+        "description": "Issues a temporary, single-use URL for uploading binary files to Box. See [Upload and download URL tools](#upload-and-download-url-tools) for additional configuration details.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move_file",
+        "description": "Moves an existing file to a destination folder in Box. The file ID stays the same and `parent_folder_id` is required.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "move_folder",
+        "description": "Moves a folder to a new parent in Box. The folder ID stays the same and `parent_folder_id` is required.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "set_file_metadata",
+        "description": "Creates or updates (upserts) custom metadata on a file for a template. Use `list_metadata_templates` and `get_metadata_template_schema` to find the `scope`, `template_key`, and `fields`.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "set_folder_metadata",
+        "description": "Creates or updates (upserts) custom metadata on a folder for a template. Use `list_metadata_templates` and `get_metadata_template_schema` to find the `scope`, `template_key`, and `fields`.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_file_properties",
+        "description": "Updates file properties, including name, description, tags, and collections. The name can have up to 255 characters, and the file extension is preserved unless you specify otherwise. The description can have up to 256 characters. You can add or update up to 100 tags.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_folder_properties",
+        "description": "Updates folder properties, including name, description, tags, and collections. The name can have up to 255 characters and must not include `/`, `\\`, `.`, `..`, or leading or trailing spaces. The description can have up to 256 characters. You can update up to 100 tags.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_metadata_template",
+        "description": "Updates a metadata template by scope and `template_key` using atomic schema operations (for example, `addField`, `editField`, and `removeField`).",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_file",
+        "description": "Uploads a new file to Box.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "upload_file_version",
+        "description": "Uploads a new file version by providing the entire file contents to update an existing file in Box.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_metadata_template_schema",
+        "description": "Returns the schema and field keys for a metadata template.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_metadata_templates",
+        "description": "Lists available Box metadata templates (enterprise or global).",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_files_keyword",
+        "description": "Searches for files using keywords. Supports metadata filters, file-extension filtering, and field selection.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_files_metadata",
+        "description": "Searches for files using SQL-like metadata queries. Supports complex filtering with parameters, field selection, and folder scoping.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_folders_by_name",
+        "description": "Searches for folders in Box by name using keyword matching.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_file_comments",
+        "description": "Lists all comments on a file.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_item_collaborations",
+        "description": "Lists all existing collaborations on an item.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_tasks",
+        "description": "Lists all tasks for a file, including status, message, and due dates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_file_shared_link",
+        "description": "Creates or updates a shared link for a Box file. Can create open shared links or add collaborators from outside your organization.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_folder_shared_link",
+        "description": "Creates or updates a shared link for a Box folder. Can create open shared links or add collaborators from outside your organization.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_collaboration",
+        "description": "Invites a user or group to a file, folder, or hub. Can create open shared links or add collaborators from outside your organization.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_file_comment",
+        "description": "Creates a comment on a file.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_collaboration",
+        "description": "Updates a file, folder, or hub collaboration. Can create open shared links or add collaborators from outside your organization.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ai_extract_freeform",
+        "description": "Extracts metadata from files using Box AI with natural-language prompts (no fixed template).  Text representation up to 1 MB. Supports documents, PDFs, presentations, and text. Works with one or more `file_ids`.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ai_extract_structured",
+        "description": "Extracts structured key-value metadata from files using the Box AI Enhanced Extract Agent and custom field definitions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ai_extract_structured_from_fields",
+        "description": "Extracts structured metadata from files using Box AI and custom field definitions.  Works with one or more files. Field types include `string`, `date`, `float`, `enum`, and `multiSelect`.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ai_extract_structured_from_fields_enhanced",
+        "description": "Extracts structured metadata from files using the Box AI Enhanced Extract Agent and custom field definitions.  Use only when the user asks for the Enhanced Extract Agent. This tool costs more than the standard Box AI Extract tools. Field types include `string`, `date`, `float`, `enum`, and `multiSelect`.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ai_extract_structured_from_metadata_template",
+        "description": "Extracts structured metadata from files using an existing Box metadata template.  Requires `template_key` and `scope` (for example, `enterprise` or `global`).  Processes the text representation of file content.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ai_extract_structured_from_metadata_template_enhanced",
+        "description": "Extracts structured metadata from files using an existing Box metadata template and the Enhanced Extract Agent.  Use only when the user asks for the Enhanced Extract Agent. This tool costs more than the standard Box AI Extract tools.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ai_qa_hub",
+        "description": "Asks a question about a Box hub and returns an answer based on the hub's content, with citations when available.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ai_qa_multi_file",
+        "description": "Asks a question about multiple files using Box AI, with citations when available.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ai_qa_single_file",
+        "description": "Asks a question about a single file using Box AI, with citations when available.  Text representation up to 1 MB. If the file is larger, only the first 1 MB is processed.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_hub_details",
+        "description": "Retrieves detailed information about a specific hub.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_hub_items",
+        "description": "Gets items (files and folders) associated with a specific hub.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_hubs",
+        "description": "Lists all hubs that the authenticated user can access.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_items_to_hub",
+        "description": "Adds files, folders, or web links to a hub.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "copy_hub",
+        "description": "Creates a copy of an existing hub, including its structure and settings. The original hub is not modified. The new title can have up to 50 characters; if you do not provide one, a default title is used.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_hub",
+        "description": "Creates a hub.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_hub",
+        "description": "Updates the title and description of a hub.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_docgen_template_by_id",
+        "description": "Retrieves details about a Doc Gen template.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_docgen_templates",
+        "description": "Lists all Box Doc Gen templates that the authenticated user can access.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_docgen_batch",
+        "description": "Generates documents from a Doc Gen template by filling placeholder tags with provided data.",
+        "type": "Write",
+        "enabled_by_default": "No",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_docgen_template",
+        "description": "Marks a Box file (`.docx` or `.pptx`) as a Doc Gen template for automated document generation.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.box.com/guides/box-mcp/tools",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The official remote repository contains no runtime tool definitions or initialize instructions; official pages do not reproduce full tools/list or initialize output. Therefore tool-definition characters and instruction tokens cannot be measured from available evidence.",
+    "human_can_agent_cannot": "The 54-tool reference does not list file deletion, folder deletion, or arbitrary Box API operations. Humans can use other Box product/API surfaces for operations not exposed by this MCP tool list; exact human-operation comparison was limited to the MCP reference and Box API overview. Sources: https://developer.box.com/guides/box-mcp/tools and https://developer.box.com/guides/api-calls/",
+    "sources": [
+      "https://developer.box.com/guides/box-mcp/tools",
+      "https://martechdb.com/vendors/box",
+      "https://claude.com/connectors/box",
+      "https://support.box.com/hc/en-us/articles/48273464323987-Connecting-to-Box-from-Third-Party-AI-Apps",
+      "https://github.com/box/mcp-server-box-remote/tree/3e9db736ba6ed3875c81753bec8e7e2f755ecce6"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs instruct users to choose an identity deliberately, request only needed scopes, and avoid using a service account as a hidden superuser for interactive agents. These are setup recommendations, not runtime checks. Box says: “Do not use a service account as a hidden superuser for an interactive agent.” The enhanced extraction tool says to use it only when requested; public implementation is unavailable to determine whether the server enforces that recommendation.",
+    "governance_promises": "Box states: “Connecting any agent platform to Box does not bypass file permissions.” It says the user only sees content accessible to the authenticated user/application and that permission checks, scopes, collaborations, and waterfall permissions apply on each request. It describes selected write guardrails that block requests before they run, and audit reports for MCP calls/activity and settings changes.",
+    "promises_to_user": "Box says content stays in Box unless explicitly returned in a query for the MCP integration; API calls occur at query time, and Box permissions are checked in real time. The vendor notes third-party AI integrations may handle data differently, especially where content is indexed/copied externally.",
+    "comparison_with_server_logic": "Permission-aware behavior and guardrails are documented, including request-time evaluation and blocked writes. Public runtime code is unavailable, so implementation-level verification is not possible. Audit reports and administrator control surfaces are documented as Box product behavior. Pricing/cost guidance is descriptive and plan-dependent; no MCP-specific flat fee or rate schedule was found.",
+    "sources": [
+      "https://developer.box.com/guides/box-mcp/permission-aware-access",
+      "https://docs.box.com/en/box-mcp/admin-controls",
+      "https://support.box.com/hc/en-us/articles/48273464323987-Connecting-to-Box-from-Third-Party-AI-Apps"
+    ]
+  },
+  "contradictions": [
+    "The supplied OAuth protected-resource metadata and authorization-server metadata do not publish scopes_supported or a registration_endpoint, while Box setup documentation names root_readwrite, ai.readwrite, and docgen.readwrite scopes. This is a difference in evidence surfaces, not proof of a runtime mismatch.",
+    "The Claude connector directory lists 12 tools while Box’s official reference lists 54. The connector’s list is a subset, not a replacement for the official list."
+  ],
+  "observations_for_research": [
+    "Box tool defaults and availability are administrator-configurable at enterprise, integration, and platform-app levels; the same endpoint may therefore expose different tool subsets by connected app.",
+    "The official list exposes Box AI operations alongside ordinary file actions and explicitly warns that enhanced extraction tools cost more and should only be used when requested.",
+    "Binary upload/download actions hand the agent a temporary URL and depend on the client making direct network requests, so client execution capability and firewall configuration affect usability.",
+    "Box documents runtime permission enforcement and write guardrails, while the public remote repository does not publish code that would permit independent implementation-level verification."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, collected pages including the official tool reference and its script/HTML material, and the local official repository copy. The official remote repository has a README and license but no runtime implementation. Endpoint and OAuth responses are the supplied pre-fetched evidence; the endpoint returned HTTP 401 without a token. The official pricing and legal pages returned HTTP 403 in the evidence collection; no prices were inferred. Community local-server repositories are separate/unofficial for this endpoint and were not used as action evidence. actions.json contains all 54 names from the official tool reference; schemas were not published there.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 23.4
+  }
+}

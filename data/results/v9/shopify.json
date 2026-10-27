@@ -1,0 +1,337 @@
+{
+  "server": "shopify",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://<shop>.myshopify.com (Storefront); documented path: https://{shop}.myshopify.com/api/mcp",
+    "documentation_url_csv": "https://shopify.dev/docs/apps/build/storefront-mcp/servers/storefront",
+    "addressing": "per customer",
+    "repository_url": "https://github.com/Shopify/Shopify-AI-Toolkit",
+    "documentation_urls_used": [
+      "https://shopify.dev/docs/apps/build/storefront-mcp/servers/storefront",
+      "https://shopify.dev/docs/apps/build/storefront-mcp.md",
+      "https://shopify.dev/changelog/posts/storefront-mcp-cart-tools-are-being-deprecated-in-favour-of-ucp-cart-mcp",
+      "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+      "https://shopify.dev/docs/agents/catalog/storefront-catalog",
+      "https://shopify.dev/docs/agents/carts-and-checkout/cart-mcp",
+      "https://shopify.dev/docs/apps/build/ai-toolkit",
+      "https://shopify.com/pricing",
+      "https://help.shopify.com/en/manual/online-sales-channels/agentic-storefronts/data-privacy",
+      "https://help.shopify.com/en/manual/ai-powered-tools/connecting-ai-tools/considerations",
+      "https://claude.com/connectors/shopify"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public Shopify AI Toolkit is a separate local toolkit for developer resources and UCP workflows; it is not the hosted Storefront MCP implementation. No code for the input endpoint was found.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "a788f6a87cad4be5dfac814605a7288dc9e8f3db",
+    "commit_date": "2026-10-16",
+    "implementation_language": "NOT FOUND for the hosted endpoint",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "N/A for the closed hosted endpoint",
+    "release_status": "Legacy endpoint; catalog and cart tools removed. The remaining policy/FAQ tool is deprecated but documented as continuing to work.",
+    "other_official_servers": [
+      "https://{shop}.myshopify.com/api/ucp/mcp — current merchant-scoped UCP endpoint for Storefront Catalog, Cart, Checkout, and other negotiated capabilities.",
+      "https://setup.shopify.com/mcp — Shopify connector listed in Claude’s directory with a separate 25-tool listing; it is not the per-store Storefront endpoint.",
+      "Shopify Dev MCP — separate local developer documentation server; not the Storefront MCP endpoint."
+    ],
+    "sources": [
+      "https://shopify.dev/docs/apps/build/storefront-mcp/servers/storefront",
+      "https://shopify.dev/docs/apps/build/storefront-mcp.md",
+      "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+      "https://shopify.dev/docs/apps/build/ai-toolkit",
+      "https://claude.com/connectors/shopify"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP fee is documented. Shopify documents no authentication requirement for the remaining policy/FAQ tool, but does not state whether a paid store plan is required to operate the underlying store.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Shopify pricing lists Basic, Grow, Advanced, and Plus plans. The displayed yearly prices are $29, $79, $299, and from $2,300 USD/month respectively; monthly prices shown in its comparison are $39, $105, and $399 USD/month for the first three plans. The Agentic plan is listed at $0/month.",
+    "pricing_model_details": "No MCP-specific per-call or MCP subscription price was found. Store subscription pricing and transaction fees are separate from any undocumented MCP charge.",
+    "other_access_restrictions": "The endpoint is store-specific. Shopify documents the remaining policy/FAQ tool as requiring no authentication. Catalog and cart tools have been removed from this endpoint.",
+    "restrictions_controlled_by": "Shopify controls endpoint availability and tool set; the merchant controls its store and published policy/FAQ content.",
+    "sources": [
+      "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+      "https://shopify.dev/docs/apps/build/storefront-mcp.md",
+      "https://shopify.com/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The policy/FAQ documentation describes one tool, search_shop_policies_and_faqs, with a required query and optional context. The migration page says the existing tool continues to work at /api/mcp.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The documented successful example returns structuredContent with an answer and a sources array of title/URL entries. Error response format is not documented for this endpoint.",
+      "authorization_mechanism": "Not applicable to the documented remaining tool: Shopify says no authentication is required.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+        "https://shopify.dev/docs/apps/build/storefront-mcp.md"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint resources or resource templates are described in the reviewed endpoint documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+        "https://shopify.dev/docs/apps/build/storefront-mcp.md"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompts are described in the reviewed endpoint documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No endpoint logging behavior or MCP logging capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability is documented for the endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability is documented for the endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "No",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Shopify states that no authentication is required for search_shop_policies_and_faqs. OAuth metadata was not fetched because the input host is a per-customer placeholder, not a concrete public URL. The supplied pre-fetch states that OAuth metadata was not fetched for this reason; no authorization server, OAuth scopes, registration endpoint, PKCE, grant types, or token lifetime can be reported.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not applicable to the documented unauthenticated tool; HTTP/MCP error structure is not specified here.",
+      "authorization_mechanism": "Shopify documentation: no authentication required. OAuth metadata: NOT FETCHED for the placeholder store host; scopes_supported and OAuth endpoints unavailable.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side elicitation flow is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP task capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documented endpoint is addressed per store at /api/mcp. No endpoint URL parameters, headers, tool filters, or client configuration options are described in the reviewed endpoint pages.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+        "https://shopify.dev/docs/apps/build/storefront-mcp.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tool documentation provides a successful response example but does not specify an error reporting capability or endpoint error formats.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Successful example: structuredContent.answer plus structuredContent.sources. Error structure: Unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription capability is documented for the endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No progress tracking capability is documented for the endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation capability is documented for the remaining endpoint tool. The legacy cart cancellation operation is not documented as available on this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/apps/build/storefront-mcp.md",
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Shopify's migration documentation maps legacy Storefront MCP functions to UCP endpoints and marks the remaining policy/FAQ tool deprecated while stating it continues to work at /api/mcp.",
+      "pre_interaction_context_verbatim": "\"The existing tool continues to work at `/api/mcp`.\"",
+      "post_interaction_context_structure": "The tool's documented response includes an answer and source links.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://shopify.dev/docs/apps/build/storefront-mcp.md",
+        "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The only currently documented tool is a read/query operation. No tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are published. 2. No server-enforced confirmation mechanism is documented; the remaining tool is read-only. 3. Shopify says the policy/FAQ tool needs no authentication; role inheritance, allowlists, token lifetime, and revocation are not documented for this endpoint. OAuth metadata was not fetched for the placeholder host. 4. The endpoint is per store at /api/mcp. Shopify says catalog and cart tools were removed; no filters, readonly modes, or region variants are documented for this endpoint. 5. The policy/FAQ tool searches store information; endpoint-specific PII masking or data boundaries are not documented. Adjacent agentic storefront privacy docs describe product data and customer/order data sharing for AI channels, not this MCP tool specifically. 6. Endpoint-specific rate limits, quotas, caps, and truncation are not documented. 7. Tool parameters are query:string (required) and context:string (optional); further validation or correction behavior is unknown. 8. Endpoint logging, audit trails, and telemetry are not documented. 9. The single documented remaining tool has no feedback/rating/survey function in its name or description; no endpoint upsell or marketing result behavior is documented. 10. The tool's purpose is described in docs, but no server initialize instructions or bundled server skill is documented. Shopify AI Toolkit and UCP skills are separate client-side resources. 11. Persistent memory or behavior-dependent output is not documented. 12. One store-scoped endpoint and one currently documented tool; no sub-server hierarchy is described. 13. No raw API, SQL, script, or general execution tool is listed.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[DOCS] \"Deprecated. Use Ask MCP for new integrations.\"",
+      "[DOCS] \"The existing tool continues to work at `/api/mcp`.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The reviewed current documentation describes a single store-scoped MCP endpoint with one continuing tool. The UCP endpoint and Shopify's Claude connector are separate server surfaces.",
+    "sources": [
+      "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+      "https://shopify.dev/docs/apps/build/storefront-mcp.md",
+      "https://shopify.dev/changelog/posts/storefront-mcp-cart-tools-are-being-deprecated-in-favour-of-ucp-cart-mcp",
+      "https://help.shopify.com/en/manual/online-sales-channels/agentic-storefronts/data-privacy",
+      "https://shopify.dev/docs/apps/build/ai-toolkit"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "1 currently documented as continuing to work",
+    "action_count_comment": "Official tool documentation exists at https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool and names one continuing tool; no official total is stated. The migration page's historical map names five legacy tools, but identifies catalog/cart operations as removed and says the policy tool continues at /api/mcp. No catalogue-only tools were added. Claude's directory lists 25 tools at the separate https://setup.shopify.com/mcp connector; Agent Discoverability reports 56 for a Shopify ChatGPT plugin. Those counts describe other surfaces, not this per-store endpoint. The mcpyet listing gives no native tool list for this endpoint.",
+    "actions": [
+      {
+        "tool_name": "search_shop_policies_and_faqs",
+        "description": "Answers questions about the store’s policies, products, and services using a query and optional context.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (required); context: string (optional)",
+        "parameter_count": "2",
+        "source": "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No endpoint source code or verbatim tools/list/initialize payload was available to serialize; tool documentation does not reproduce full MCP protocol context.",
+    "human_can_agent_cannot": "This endpoint does not provide catalog search/product details or cart creation and updates now; Shopify directs those functions to UCP at /api/ucp/mcp. Broader Shopify store management is available through Shopify software and through separate integrations, but is not exposed by this endpoint's currently documented tool. The Claude directory lists product, inventory, order, customer, discount, and collection operations at setup.shopify.com/mcp, a distinct connector. Shopify's help documentation also identifies store actions that require Shopify admin or are blocked for connected AI tools, including plan, payment, tax, and domain settings; refunds and order payment actions are also excluded there.",
+    "sources": [
+      "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+      "https://shopify.dev/docs/apps/build/storefront-mcp.md",
+      "https://claude.com/connectors/shopify",
+      "https://help.shopify.com/en/manual/ai-powered-tools/connecting-ai-tools/considerations"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Shopify advises migration to Ask MCP for new integrations. This is documentation guidance; no server-side enforcement of the recommendation is described. Shopify also says that the `context` argument can provide additional information, without documenting enforcement beyond the tool schema.",
+    "governance_promises": "The policy/FAQ tool documentation says no authentication is required but makes no endpoint-specific privacy, retention, or AI-training promise. Adjacent agentic storefront privacy guidance says product data is shared with AI channels and private Shopify admin data remains confidential; it also describes channel controls. These statements concern Catalog/agentic storefront sharing and are not stated as guarantees for this MCP endpoint.",
+    "promises_to_user": "The policy/FAQ tool is presented as answering questions about store policies, products, and services, with returned source titles and URLs. Shopify documents that the legacy tool continues to work at /api/mcp despite being deprecated.",
+    "comparison_with_server_logic": "The tool's documented input and example response support the query and source-link behavior. No public endpoint code was found to verify privacy, retention, filtering, or implementation of the migration guidance. The no-auth claim is explicit documentation; no OAuth metadata was available for the placeholder store URL.",
+    "sources": [
+      "https://shopify.dev/docs/agents/catalog/policy-and-faqs-tool",
+      "https://shopify.dev/docs/apps/build/storefront-mcp.md",
+      "https://help.shopify.com/en/manual/online-sales-channels/agentic-storefronts/data-privacy"
+    ]
+  },
+  "contradictions": [
+    "Shopify's June 2026 changelog said the deprecated get_cart and update_cart tools would be maintained until August 31, 2026; the current migration documentation says the catalog and cart tools on /api/mcp were removed. The current page is the later status, so the announced maintenance period has elapsed.",
+    "The current policy/FAQ tool page calls search_shop_policies_and_faqs deprecated for new integrations, while stating it continues to work at /api/mcp. This is a deprecation status, not a claim that the tool is removed.",
+    "mcpyet describes the per-store endpoint as authenticated by OAuth or token, while Shopify's official policy/FAQ documentation says no authentication is required for that tool. The catalogue is third-party and not used as authoritative evidence.",
+    "Claude's directory lists 25 tools at https://setup.shopify.com/mcp, and Agent Discoverability reports 56 tools for a Shopify ChatGPT plugin. These refer to separately listed connector/plugin surfaces, not the input Storefront endpoint, so their tools are excluded from actions."
+  ],
+  "observations_for_research": [
+    "The documented server surface changed over time: the legacy endpoint's catalog and cart tools were removed, while the policy/FAQ tool remains available but deprecated.",
+    "Shopify now documents merchant-scoped UCP capabilities on a different path, /api/ucp/mcp, and separately documents a global catalog endpoint.",
+    "The same vendor name appears on multiple connector surfaces with different endpoints and tool sets; endpoint identity is necessary when comparing lists."
+  ],
+  "confidence": "Low (third-party / sparse docs)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/INDEX.txt, all collected official page text/script captures, and local Shopify AI Toolkit and ucp-cli repositories. The Shopify AI Toolkit repository is public but is not code for the hosted Storefront MCP endpoint; no matching endpoint implementation, commit, initialize instructions, OAuth metadata, or protocol version was found. Unofficial repositories listed in links.json include HasData/shopify-mcp and shopmanagerai/shopify-mcp; neither was used as evidence. The evidence folder contained no official pricing or legal pages, so current Shopify pricing and relevant Help Center data-sharing guidance were checked on Shopify's official domains. OAuth metadata was not fetched because the endpoint host is a per-store placeholder.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 8.6
+  }
+}

@@ -1,0 +1,696 @@
+{
+  "server": "mintlify",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.mintlify.com/mcp",
+    "documentation_url_csv": "https://www.mintlify.com/docs/mcp",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://www.mintlify.com/docs/ai/mintlify-mcp",
+      "https://mintlify.com/docs/ai/model-context-protocol",
+      "https://www.mintlify.com/blog/improved-admin-mcp",
+      "https://www.mintlify.com/legal/privacy",
+      "https://www.mintlify.com/legal/terms",
+      "https://github.com/mintlify/codex-plugin"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public codex-plugin repository contains a Mintlify reference skill and MCP client configuration for the hosted Admin MCP and a separate Search MCP. It is not server implementation code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Partially",
+    "license": "N/A for server; MIT for the separate Codex plugin",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "The Search MCP runs at https://mintlify.com/docs/mcp (on a documentation site's own domain, at /mcp); it searches and retrieves published pages and is distinct from the Admin MCP."
+    ],
+    "sources": [
+      "https://www.mintlify.com/docs/ai/mintlify-mcp",
+      "https://github.com/mintlify/codex-plugin",
+      "https://mintlify.com/docs/ai/model-context-protocol"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No MCP-specific price or limit was found in the reviewed official MCP documentation. Access requires a Mintlify account with project access; pricing for the underlying service is separate.",
+    "linked_software": "Paid",
+    "linked_software_cost": "NOT FOUND in the collected official pricing evidence.",
+    "pricing_model_details": "The reviewed sources did not establish a price, usage quota, or per-call fee for MCP. The Admin MCP documentation describes project access and permission prerequisites.",
+    "other_access_restrictions": "An interactive OAuth session is required for write operations. Project-scoped connections are limited to granted projects; organization-wide connections can access projects in that organization. Dashboard permissions govern actions. Credentials can read but cannot change content. Redirect domains can be configured in MCP settings.",
+    "restrictions_controlled_by": "Vendor and organization/project administrators",
+    "sources": [
+      "https://www.mintlify.com/docs/ai/mintlify-mcp",
+      "https://www.mintlify.com/pricing",
+      "https://www.mintlify.com/legal/terms"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The official Admin MCP reference documents tools for content, images, comments, navigation, configuration, project management, analytics, workflows, branches, and publishing. The complete extracted official name list is in actions.json.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific results and errors are documented; examples include state results for project-management writes and fields such as navigationErrors, notRendered, and editorUrl.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No Admin MCP resources/list behavior was documented in the reviewed material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No Admin MCP prompts/list behavior was documented in the reviewed material.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP-specific logging behavior was established from the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "https://www.mintlify.com/legal/privacy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No sampling behavior was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No roots behavior was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The supplied endpoint returned HTTP 401 with WWW-Authenticate Bearer resource_metadata=\"https://mcp.mintlify.com/.well-known/oauth-protected-resource\" and error message \"Missing or invalid authorization header\". The supplied protected-resource metadata lists resource https://mcp.mintlify.com, authorization server https://mcp.mintlify.com, bearer method header, and scopes docs:read, docs:write, nav:write, config:write, session:write, deployment:read, deployment:write, members:read, members:write, billing:read, integrations:write, analytics:read, offline_access. Authorization-server metadata lists authorization_code and refresh_token grants, code response type, S256 PKCE, token auth method none, and registration endpoint https://mcp.mintlify.com/oauth/register. Token lifetime and revocation were not supplied.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "HTTP 401 JSON error: {\"error\":{\"code\":\"unauthorized\",\"message\":\"Missing or invalid authorization header\"}}",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://mcp.mintlify.com/oauth/register; authorization code and refresh token grants; PKCE S256; token endpoint auth none; bearer token in header. scopes_supported: docs:read, docs:write, nav:write, config:write, session:write, deployment:read, deployment:write, members:read, members:write, billing:read, integrations:write, analytics:read, offline_access. Token lifetime and revocation: NOT FOUND.",
+      "authorization_server": "https://mcp.mintlify.com",
+      "sources": [
+        "https://mcp.mintlify.com/mcp",
+        "https://mcp.mintlify.com/.well-known/oauth-protected-resource",
+        "https://mcp.mintlify.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.mintlify.com/.well-known/oauth-authorization-server",
+        "https://mcp.mintlify.com/.well-known/openid-configuration",
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Elicitation implementation was documented. Some documentation describes human review of suggestions and advises confirming intended changes, but does not establish server-enforced MCP Elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Tasks support was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The Admin MCP exposes configuration and project-settings tools. The vendor documents an MCP settings area for redirect URI domains and credentials; documentation distinguishes docs.json settings from dashboard settings.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific result structures; write tools return updated state for project-management changes.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The docs describe named errors and structured fields for failures, including user_principal_required, insufficient_scope, navigationErrors, PAGE_SEED_FAILED, notRendered, no_match, and not_unique.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Documented tool-specific error codes and response fields; no single universal format was found.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription capability was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP progress notifications were documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP cancellation behavior was documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The docs document hosted Admin and Search MCP products separately. The Admin MCP acts on project content and settings; Search MCP retrieves published site content.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "https://mintlify.com/docs/ai/model-context-protocol"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official docs describe read and write operations, including destructive delete/discard operations. Tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are not published in the reviewed docs. 2. Server-enforced checks include OAuth, scopes, project roles, branch requirements, and a required OAuth principal for write/comment/branch/publish/discard operations; human approval is required to accept/reject tracked suggestions in the editor. The docs also recommend reviewing large diffs. 3. OAuth scopes are listed in C. Permissions inherit Mintlify dashboard roles and granted project scope; credentials are read-only. Organization admins configure redirect domains and credentials. Token expiry/revocation details were not found. 4. Admin MCP is distinct from the read/search-only site Search MCP endpoint at /mcp. Branch argument determines target branch; project management changes apply immediately to the live project. No request-level read-only filter was documented. 5. Private pages have visibility and role checks; private-page access rejects client and machine-to-machine tokens. No field-level masking or PII exclusion documented. 6. list_nodes pagination uses opaque cursors; edits can accept up to 100 replacements per call; multi-project reads accept up to 25 projects; analytics results paginate. No general rate or cost limit found. 7. Docs describe validation errors and failures, including navigationErrors, notRendered and no_match/not_unique; no parameter auto-correction documented. 8. General privacy/terms describe processing and security, but MCP-specific audit logging and telemetry details were not found. 9. get_analytics_report includes feedback reports, but no agent-facing feedback/rating tool or upsell behavior was found in the official tool list. 10. Separate Codex plugin distributes an external skill; no server-delivered skill tool documented. The guidance to review diffs is advisory. 11. Server does not remember a branch between calls; the client passes branch each time. Other behavior memory not documented. 12. Two distinct official surfaces exist: Admin MCP and site Search MCP; the input endpoint is the Admin MCP. 13. No raw API, arbitrary SQL, or script execution tool appears in the official tool list. query_analytics is documented as read-only SELECT.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Before merging, read the PR diff and skim the rendered preview. Don’t rubber-stamp large changes.",
+      "If your project requires a pull request, Mintlify refuses the edit with a message that explains why and changes nothing. Call create_branch and pass the returned branchName as branch instead.",
+      "You can reply to suggestion threads, but you must accept or reject suggestions in the editor."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "Mintlify documents separate Admin MCP and Search MCP endpoints with different audiences, permissions, and tool sets. The input endpoint is the hosted Admin MCP.",
+    "sources": [
+      "https://www.mintlify.com/docs/ai/mintlify-mcp",
+      "https://www.mintlify.com/blog/improved-admin-mcp",
+      "https://github.com/mintlify/codex-plugin"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "38 official names",
+    "action_count_comment": "The official Admin MCP tool reference exists at https://www.mintlify.com/docs/ai/mintlify-mcp. Extracted 38 distinct names from its documented tool descriptions; no official total was stated. actions.json contains these names. The Claude connector directory lists a 15-tool subset (checkout, save, discard_session, read, search, list_nodes, get_session_state, diff, edit_page, write_page, create_node, update_node, move_node, delete_node, update_config) and describes the connector as partner-listed; those names differ from or are absent in the current official reference and were not added. Runlayer reports 35 captured tools, including proxy/catalogue-only entries such as execute_code and agent_review_settings; its list conflicts with current official documentation and was not treated as the authoritative list. Other catalogues provide varying or incomplete summaries.",
+    "actions": [
+      {
+        "tool_name": "add_comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] add_comment operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "create_branch",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] create_branch operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "create_node",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] create_node operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "delete_node",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] delete_node operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "deployment_status",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] deployment_status operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "diff",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] diff operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "discard",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] discard operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "edit_page",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] edit_page operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "finalize_image_upload",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] finalize_image_upload operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "get_analytics_report",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] get_analytics_report operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "get_analytics_schema",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] get_analytics_schema operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "get_deployment_settings",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] get_deployment_settings operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "get_workflows",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] get_workflows operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "list_branches",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] list_branches operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "list_deployments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] list_deployments operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "list_nodes",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] list_nodes operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "list_repos_and_prs",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] list_repos_and_prs operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "manage_access_auth",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] manage_access_auth operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "manage_custom_domain",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] manage_custom_domain operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "manage_git_source",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] manage_git_source operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "manage_members_sharing",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] manage_members_sharing operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "manage_workflow",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] manage_workflow operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "manage_workflow_prs",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] manage_workflow_prs operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "move_node",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] move_node operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "publish",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] publish operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "query_analytics",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] query_analytics operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "read",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] read operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "read_comments",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] read_comments operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "reply_to_comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] reply_to_comment operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "resolve_comment",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] resolve_comment operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "search",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] search operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "status",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] status operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "suggest_edit",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] suggest_edit operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "update_config",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] update_config operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "update_deployment_settings",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] update_deployment_settings operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "update_node",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] update_node operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "upload_image",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] upload_image operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      },
+      {
+        "tool_name": "write_page",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "source": "https://www.mintlify.com/docs/ai/mintlify-mcp",
+        "description": "[DOCS] write_page operation (details in official Admin MCP reference).",
+        "source_type": "Official",
+        "parameter_count": "Unknown",
+        "parameters": "NOT PUBLISHED"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No server implementation code or verbatim complete tools/list and initialize output was available; the public codex-plugin is client configuration and skills, not server code.",
+    "human_can_agent_cannot": "Humans can accept or reject tracked suggestions in the dashboard editor; the docs say the agent can propose suggestions but acceptance or rejection occurs in the editor. Dashboard-only capabilities not covered by the official MCP tool descriptions were not exhaustively enumerated.",
+    "sources": [
+      "https://www.mintlify.com/docs/ai/mintlify-mcp",
+      "https://claude.com/connectors/mintlify",
+      "https://www.runlayer.com/integrations/mcp/mintlify-com"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs advise: “Before merging, read the PR diff and skim the rendered preview. Don’t rubber-stamp large changes.” This is client/user guidance; no server enforcement is described.",
+    "governance_promises": "The docs state credentials can read content but cannot change it, and edits to tracked suggestions do not change the page until accepted or rejected in the dashboard editor. The terms say Mintlify uses commercially reasonable efforts to maintain security and integrity of the service and customer data.",
+    "promises_to_user": "Mintlify describes project-scoped access, permission checks, branch-aware editing, and updated state returned by project-management write tools.",
+    "comparison_with_server_logic": "OAuth, project scopes, roles, branch requirements, and credential write restrictions are documented as server-enforced. The large-diff review recommendation is advisory. Suggestion acceptance/rejection is a product workflow performed in the dashboard. General security language is contractual and does not specify MCP-specific logging or telemetry.",
+    "sources": [
+      "https://www.mintlify.com/docs/ai/mintlify-mcp",
+      "https://www.mintlify.com/legal/terms",
+      "https://www.mintlify.com/legal/privacy"
+    ]
+  },
+  "contradictions": [
+    "The Claude connector directory lists 15 tools, including checkout, save, and discard_session, while the current official tool reference documents a different, broader list and names discard rather than discard_session. The catalogue subset is not a complete match for the official reference.",
+    "Runlayer reports 35 captured tools and includes execute_code and agent_review_settings, which were not found in the official reference. These catalogue-only names were not included in actions.json.",
+    "OAuth metadata advertises write scopes for billing, integrations, and sessions, but the reviewed official Admin MCP tool reference did not document corresponding billing-write or integration-write tools."
+  ],
+  "observations_for_research": [
+    "The Admin MCP combines project-scoped OAuth with dashboard-role checks and a separate read-only credential mode.",
+    "Content edits are branch-aware, while project-management writes apply directly to the live project.",
+    "Tracked suggestions preserve a human acceptance step, while other documented write tools can alter project content or settings."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the prepared links.json, links_check.txt, pages/ index and collected official docs, blog, legal pages, catalogues and the local codex-plugin repository. The public repository is not server implementation code. The 38 extracted names come from official tool-description text; schemas and complete parameter definitions were not published in the extracted reference, so actions.json marks parameters NOT PUBLISHED. No token estimate could be computed without tools/list or server code. The official pricing page and legal pages were checked; no MCP-specific price was established. Unofficial/community server evidence was not used.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 11.6
+  }
+}

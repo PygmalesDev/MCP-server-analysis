@@ -1,0 +1,699 @@
+{
+  "server": "webflow",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.webflow.com/mcp",
+    "documentation_url_csv": "https://github.com/webflow/mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/webflow/mcp-server",
+    "documentation_urls_used": [
+      "https://developers.webflow.com/mcp/reference/overview",
+      "https://developers.webflow.com/mcp/tools/data-tools.md",
+      "https://developers.webflow.com/mcp/tools/designer-tools.md",
+      "https://developers.webflow.com/mcp/tools/utility-tools.md",
+      "https://developers.webflow.com/mcp/reference/how-it-works.md",
+      "https://developers.webflow.com/mcp/reference/getting-started.md",
+      "https://developers.webflow.com/mcp/reference/skills.md",
+      "https://developers.webflow.com/mcp/skills/skill-migration.md",
+      "https://developers.webflow.com/mcp/faqs.md",
+      "https://developers.webflow.com/mcp/installing/documentation-server.md",
+      "https://webflow.com/pricing",
+      "https://webflow.com/legal/ai-terms",
+      "https://webflow.com/legal/privacy",
+      "https://claude.com/connectors/webflow"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The official repository is a local stdio MCP package using WEBFLOW_TOKEN and a Designer bridge. Its README describes remote installation separately; the source's local handlers are not identified as the implementation deployed at the input /mcp endpoint. The hosted endpoint's tool inventory is therefore taken from current hosted-server documentation.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "124b5caa38baf46ab51edea9220076c9785ceaf7",
+    "commit_date": "2026-10-27",
+    "implementation_language": "Hosted endpoint: NOT FOUND. Official local repository: TypeScript/Node.js.",
+    "mcp_sdk_and_version": "Hosted endpoint: NOT FOUND. Official local repository: @modelcontextprotocol/sdk 1.25.2.",
+    "code_public": "Yes",
+    "license": "MIT (official local repository)",
+    "release_status": "The official MCP 2.0 announcement says available to all users; Campaigns is marked Early Access. No separate formal release-status label found for the endpoint.",
+    "other_official_servers": [
+      "https://mcp.webflow.com/beta/mcp — Webflow Beta MCP server for in-development functionality.",
+      "https://developers.webflow.com/_mcp/server — developer-documentation MCP server for querying Webflow documentation; separate from the product endpoint. A legacy/other documentation endpoint in the evidence set is https://developers.webflow.com/api/fern-docs/mcp.",
+      "The public GitHub package is a separate local stdio MCP implementation, not the input hosted endpoint."
+    ],
+    "sources": [
+      "https://developers.webflow.com/mcp/reference/overview",
+      "https://developers.webflow.com/mcp/reference/getting-started",
+      "https://developers.webflow.com/mcp/installing/beta",
+      "https://developers.webflow.com/mcp/installing/documentation-server",
+      "https://github.com/webflow/mcp-server",
+      "https://github.com/webflow/mcp-server/blob/124b5caa38baf46ab51edea9220076c9785ceaf7/src/index.ts#L1-L56",
+      "https://github.com/webflow/mcp-server/blob/124b5caa38baf46ab51edea9220076c9785ceaf7/package.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Webflow states MCP is available on all Site plans, including free Starter, and the MCP 2.0 announcement says it is available at no additional cost. Some exposed product features require paid add-ons or higher-tier plans.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Official pricing lists Starter as free, Basic at USD 15/month billed yearly, and Premium at USD 25/month billed yearly. Team is listed at USD 2,500/month with an annual contract; Enterprise is custom-priced. Prices are per site where stated, before taxes.",
+    "pricing_model_details": "MCP use itself has no additional Webflow charge and does not use Webflow AI credits; usage may count against the AI client's own plan or credits. Analyze, Optimize, and AEO tools require their corresponding add-ons on paid Site plans. Webflow Cloud has separate usage limits and charges.",
+    "other_access_restrictions": "OAuth authorization is workspace-scoped; the user chooses the site/workspace access, and current Help Center guidance says users with any site role except Reviewer can connect. Access still follows product roles and permissions. Branches require Enterprise; Campaigns requires Early Access. Some canvas tools require an open Designer and connected Bridge App.",
+    "restrictions_controlled_by": "Webflow controls endpoint and product-plan feature availability; workspace/site administrators control user roles and access; the user selects sites/workspace during OAuth; the AI client controls its own usage limits.",
+    "sources": [
+      "https://webflow.com/pricing",
+      "https://webflow.com/updates/introducing-mcp-2-0",
+      "https://help.webflow.com/hc/en-us/articles/52536562285203-Webflow-MCP-server-overview",
+      "https://developers.webflow.com/mcp/reference/how-it-works",
+      "https://developers.webflow.com/mcp/reference/overview"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation lists 37 named tool groups: 30 data tools, 3 Designer-session tools, and 4 utility tools. Their tables enumerate 309 action variants. Data and utility tools are headless; canvas-dependent Designer tools require the Bridge App.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Documentation describes structured tool results and ModeForbidden errors for unavailable Designer modes; exact endpoint error schemas are not published in the reviewed sources.",
+      "sources": [
+        "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "https://developers.webflow.com/mcp/tools/designer-tools.md",
+        "https://developers.webflow.com/mcp/tools/utility-tools.md",
+        "https://developers.webflow.com/mcp/reference/how-it-works.md"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Webflow says the server exposes read-only MCP resources, including the Webflow Guide, which supported clients can reference into agent context.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Read-only content loaded directly into client context; exact resource URI and payload were not found.",
+      "sources": [
+        "https://developers.webflow.com/mcp/reference/how-it-works.md"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted documentation describes a prompt library for users, but does not establish that the product endpoint implements MCP prompt-list/get methods. The public local repository README says that its implementation does not include MCP prompts; that package is a distinct server variant.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "sources": [
+        "https://developers.webflow.com/mcp/examples",
+        "https://github.com/webflow/mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Webflow states that MCP changes are recorded in the site's activity log with agent attribution and that the log can be queried through MCP. This describes product activity logging, not transport or prompt logging.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Site activity records identify MCP changes; exact record schema and retention were not found.",
+      "sources": [
+        "https://developers.webflow.com/mcp/reference/how-it-works.md",
+        "https://developers.webflow.com/mcp/reference/overview",
+        "https://webflow.com/updates/introducing-mcp-2-0"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted documentation or endpoint evidence found for MCP sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "sources": [
+        "https://developers.webflow.com/mcp/reference/how-it-works.md"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted documentation or endpoint evidence found for MCP roots.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "sources": [
+        "https://developers.webflow.com/mcp/reference/how-it-works.md"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 and WWW-Authenticate Bearer with resource_metadata=https://mcp.webflow.com/.well-known/oauth-protected-resource/mcp and invalid_token / Missing or invalid access token. The protected-resource documents report resource https://mcp.webflow.com and https://mcp.webflow.com/mcp, authorization_servers [https://mcp.webflow.com], and bearer_methods_supported [header]. The authorization-server document reports issuer https://mcp.webflow.com; authorization_endpoint https://mcp.webflow.com/oauth/authorize; token_endpoint and revocation_endpoint https://mcp.webflow.com/oauth/token; registration_endpoint https://mcp.webflow.com/oauth/register; response_types_supported [code]; response_modes_supported [query]; grant_types_supported [authorization_code, refresh_token]; token_endpoint_auth_methods_supported [client_secret_basic, client_secret_post, none]; code_challenge_methods_supported [plain, S256]; client_id_metadata_document_supported false. No scopes_supported or token lifetime is published in the provided metadata. The OIDC configuration URL returned 404 Not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated request returns HTTP 401 JSON: {\"error\":\"invalid_token\",\"error_description\":\"Missing or invalid access token\"}.",
+      "authorization_mechanism": "OAuth protected-resource metadata; Dynamic Client Registration at https://mcp.webflow.com/oauth/register; authorization-code and refresh-token grants; PKCE plain and S256; token endpoint client auth basic, post, or none; bearer token in header. scopes_supported absent; token lifetime not stated; revocation endpoint is the token endpoint. Provided OIDC configuration URL returned 404.",
+      "authorization_server": "https://mcp.webflow.com",
+      "sources": [
+        "https://mcp.webflow.com/mcp",
+        "https://mcp.webflow.com/.well-known/oauth-protected-resource",
+        "https://mcp.webflow.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.webflow.com/.well-known/oauth-authorization-server",
+        "https://mcp.webflow.com/.well-known/openid-configuration",
+        "https://developers.webflow.com/mcp/reference/how-it-works.md"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted documentation found for MCP Elicitation. Some separately installed Webflow skills generate previews and ask for confirmation, but those are client-side skill workflows rather than documented endpoint elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "sources": [
+        "https://developers.webflow.com/mcp/reference/skills.md"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Multiple actions start asynchronous work and return task IDs for polling, including campaign generation, asset compression, and branch operations. The documentation does not establish MCP protocol Tasks support; these are documented application-level task flows.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Application-level calls return task IDs and use separate status/poll actions.",
+      "sources": [
+        "https://developers.webflow.com/mcp/tools/data-tools.md"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "OAuth lets the user select sites/workspace access. Docs describe no endpoint URL filters, toolsets, read-only mode, or request configuration that changes the tool set.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration is primarily through client connection and OAuth authorization; server-side filter options were not found.",
+      "sources": [
+        "https://developers.webflow.com/mcp/reference/getting-started.md",
+        "https://help.webflow.com/hc/en-us/articles/52536562285203-Webflow-MCP-server-overview"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Docs identify ModeForbidden when a tool is disallowed by the current Designer mode. Other hosted endpoint error formats, status handling, or error reporting channels were not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "ModeForbidden is named; detailed hosted error payload structure is unknown.",
+      "sources": [
+        "https://developers.webflow.com/mcp/faqs.md",
+        "https://developers.webflow.com/mcp/reference/how-it-works.md"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability evidence found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "sources": [
+        "https://developers.webflow.com/mcp/reference/how-it-works.md"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Application-level long-running operations expose status polling actions. MCP progress notifications were not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Task IDs and polling results for supported asynchronous operations.",
+      "sources": [
+        "https://developers.webflow.com/mcp/tools/data-tools.md"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted documentation found for MCP request cancellation or cancellation of asynchronous tasks.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "sources": [
+        "https://developers.webflow.com/mcp/tools/data-tools.md"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server provides site-specific Agent Instructions and a Webflow Guide resource. Instructions are automatically provided to connected agents and can reference site objects resolved server-side. The Bridge App connects live Designer context for selected canvas actions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Agent Instructions are markdown-based; the Guide is a read-only resource. Exact initialize instructions for the hosted endpoint were not found.",
+      "sources": [
+        "https://developers.webflow.com/mcp/reference/how-it-works.md",
+        "https://developers.webflow.com/mcp/reference/overview"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Hosted docs label tools/actions read, write, or both; formal MCP tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are not published. 2. No general server-enforced confirmation flow documented. A subset of data_apps_tool actions accepts dry_run; separately installed skills can preview and ask for confirmation, which is a client-side workflow. 3. OAuth metadata supports bearer header, DCR, authorization_code and refresh_token, PKCE plain/S256, and basic/post/none token auth; scopes_supported and token lifetime absent. Docs say access follows product roles, including custom roles, and one authorization is workspace-scoped. 4. No documented toolset/read-only/query-free URL mode. Beta endpoint is separate. Designer-only tools require the Bridge App and active Designer; branches require Enterprise; Campaigns requires Early Access. 5. data_apps_tool omits secret environment-variable values but returns non-secret values in plaintext; build/runtime logs are unsanitized and may contain secrets or presigned URLs. No general PII masking statement found. 6. Limits are action-specific: e.g. asset compression is rate-limited to 10 calls/minute/site; several operations have bulk caps and pagination. No general MCP quota or per-call price documented. 7. Official tool docs publish required parameter names, but not complete JSON schemas/types on these pages. Server-side validation/correction and unknown-argument behavior are not documented. 8. Webflow says MCP changes appear in site activity logs with AI attribution; MCP request/prompt telemetry and opt-out were not found. 9. No feedback/rating/survey action found in the documented hosted tool groups. ask_webflow_ai is a Webflow API help tool; the guide recommends workflow guidance. No upsell result behavior documented. 10. Site Agent Instructions are automatically supplied and may guide agents; separate skills are installed in the client. Skills, not the endpoint, can implement validation, previews, and confirmation. 11. Docs describe current site content/instructions resolving server-side; no evidence that past agent behavior changes later outputs or tool availability. 12. The input endpoint presents a flat documented tool-group set. A companion Designer Bridge App supplies live canvas context; separate beta and documentation-search servers exist. 13. No raw arbitrary API request, SQL, or script-execution escape-hatch tool appears in the complete documented list. The local repository is a different implementation; its local-code behavior is described in notes.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[OFFICIAL DOCS, utility tools] “Before starting a task, pull the recommended workflow and best practices for the tools you’re about to use”",
+      "[OFFICIAL DOCS, utility tools] “When a task seems to need a capability you don’t see among the available tools, check here before falling back to a workaround”",
+      "[OFFICIAL DOCS, data tools] “Don't send brandNames, domains, or competitorDomains.”",
+      "[OFFICIAL DOCS, skills] “The skill automatically handles validation, generates a preview of changes, and asks for confirmation before applying updates.”",
+      "[LOCAL CODE @124b5caa] “These tools give you access to the Webflow's Data API. If you are ever unsure about anything Webflow API-related, use the \"ask_webflow_ai\" tool.”",
+      "[LOCAL CODE @124b5caa] “ALWAYS CALL THIS TOOL FIRST BEFORE CALLING ANY OTHER TOOLS.  ALWAYS CALL THIS TOOL FIRST BEFORE CALLING ANY OTHER TOOLS.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "For the input endpoint, documentation presents a flat tool-group set. A companion Designer Bridge App supplies live canvas context for selected operations; beta and documentation-search endpoints are separate official servers.",
+    "sources": [
+      "https://developers.webflow.com/mcp/tools/data-tools.md",
+      "https://developers.webflow.com/mcp/tools/designer-tools.md",
+      "https://developers.webflow.com/mcp/tools/utility-tools.md",
+      "https://developers.webflow.com/mcp/reference/how-it-works.md",
+      "https://developers.webflow.com/mcp/reference/skills.md",
+      "https://developers.webflow.com/mcp/faqs.md",
+      "https://github.com/webflow/mcp-server/blob/124b5caa38baf46ab51edea9220076c9785ceaf7/src/mcp.ts#L28-L45",
+      "https://github.com/webflow/mcp-server/blob/124b5caa38baf46ab51edea9220076c9785ceaf7/src/index.ts#L1-L56",
+      "https://github.com/webflow/mcp-server/blob/124b5caa38baf46ab51edea9220076c9785ceaf7/src/tools/rules.ts"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "37 documented MCP tool groups; 309 named action variants",
+    "action_count_comment": "Official tool reference exists: https://developers.webflow.com/mcp/tools/data-tools.md, https://developers.webflow.com/mcp/tools/designer-tools.md, and https://developers.webflow.com/mcp/tools/utility-tools.md. These name 30 data, 3 Designer, and 4 utility tool groups; their tables contain 309 named action variants. No official overall total is stated. All 37 official group names are in actions.json; required parameter names are included per variant, but types are not published on these reference pages. No catalogue-only tool names were added. Claude's third-party connector page says “Show all 34 tools” but visibly lists 24 names; those listed names are a subset of official names. MartechDB and Agent Discoverability each report 34 tools. mcp.so has no tool list available. The 34-versus-37 difference is recorded under contradictions.",
+    "actions": [
+      {
+        "tool_name": "data_aeo_tool",
+        "description": "Read-only access to [Webflow AEO](https://webflow.com/feature/aeo) (answer engine optimization) analytics for a site: LLM crawler traffic, tracked prompts, prompt executions, brand visibility, citation rate, cited…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "get_bot_traffic [required: site_id, startTime, endTime; types not published]; get_bot_traffic_pages [required: site_id, startTime, endTime; types not published]; get_citation_rate [required: site_id, startTime, endTime, breakdown; types not published]; get_citations [required: site_id, startTime, endTime; types not published]; get_cited_domain_paths [required: site_id, startTime, endTime, domain; types not published]; get_competitor_citations [required: site_id, startTime, endTime; types not published]; get_page_citation_share [required: site_id, startTime, endTime, pageId; types not published]; get_prompt_execution [required: site_id, executionId; types not published]; get_query_guide [required: None; types not published]; get_top_cited_domains [required: site_id, startTime, endTime; types not published]; get_visibility [required: site_id, startTime, endTime; types not published]; get_visibility_breakdown [required: site_id, startTime, endTime, breakdown; types not published]; list_prompt_executions [required: site_id; types not published]; list_prompts [required: site_id; types not published]",
+        "parameter_count": "14 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_agent_instructions_tool",
+        "description": "Manage a site's agent instructions: the markdown-based rules and skills that give agents custom guidance for working on that site. Instructions can reference Webflow…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "search_instructions [required: site_id; types not published]; read_instruction [required: site_id, path; types not published]; create_instruction [required: site_id, kind, path, markdown; types not published]; update_instruction [required: site_id, kind, path; types not published]; delete_instruction [required: site_id, kind, path; types not published]; move_instruction [required: site_id, kind, fromPath, toPath; types not published]; generate_instruction [required: site_id, instruction_type or site_id, task_id; types not published]",
+        "parameter_count": "7 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_analyze_tool",
+        "description": "Read-only access to [Webflow Analyze](https://webflow.com/feature/analyze) report data for a site: traffic over time, ranked pages, ranked dimensions, engagement events, time on page, scroll depth,…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "get_browser_window_height_report [required: site_id, startTime, endTime; types not published]; get_goal_performance [required: site_id, goal_id, startTime, endTime; types not published]; get_page_flow_report [required: site_id, startTime, endTime, direction, metricScope, pageId; types not published]; get_query_guide [required: None; types not published]; get_resolve_event_element_guide [required: None; types not published]; get_scroll_depth_report [required: site_id, startTime, endTime; types not published]; get_time_on_page_report [required: site_id, startTime, endTime, metricScope; types not published]; get_top_dimensions_report [required: site_id, startTime, endTime, dimension, metricScope, limit; types not published]; get_top_events_report [required: site_id, startTime, endTime; types not published]; get_top_pages_report [required: site_id, startTime, endTime, limit; types not published]; get_traffic_report [required: site_id, startTime, endTime, metricScope, bucketTimeZone; types not published]; list_goals [required: site_id; types not published]",
+        "parameter_count": "12 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_apps_tool",
+        "description": "Inspect and manage apps: their GitHub sources, , environment variable metadata, , custom domains, and logs. Apps created through this tool are built from…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_app [required: name, source_url, branch; types not published]; create_environment [required: app_id, branch, mount; types not published]; delete_app [required: app_id; types not published]; delete_environment [required: app_id, env_id; types not published]; delete_variable [required: app_id, env_id, key; types not published]; get_app [required: app_id; types not published]; get_app_domains [required: app_id; types not published]; get_build_logs [required: app_id, env_id, deployment_id; types not published]; get_deployment [required: app_id, env_id, deployment_id; types not published]; get_runtime_logs [required: app_id, env_id; types not published]; list_apps [required: None; types not published]; list_deployments [required: app_id, env_id; types not published]; list_environments [required: app_id; types not published]; list_variables [required: app_id, env_id; types not published]; redeploy [required: app_id, env_id, deployment_id; types not published]; trigger_deployment [required: app_id, env_id; types not published]; update_app [required: app_id; types not published]; update_environment [required: app_id, env_id; types not published]",
+        "parameter_count": "18 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_assets_tool",
+        "description": "Manage a site's assets and asset folders. Uploads are a two-step process: create the asset metadata to get a presigned upload target, then POST…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "compress_assets [required: site_id, asset_ids[; types not published], format]; create_asset [required: site_id, file_name, file_hash; types not published]; create_asset_folder [required: site_id, display_name; types not published]; delete_asset [required: asset_id; types not published]; get_asset [required: asset_id; types not published]; get_asset_folder [required: folder_id; types not published]; get_compression_task [required: site_id, task_id; types not published]; list_asset_folders [required: site_id; types not published]; list_assets [required: site_id; types not published]; list_compression_tasks [required: site_id; types not published]; update_asset [required: asset_id; types not published]; update_asset_folder [required: folder_id; types not published]",
+        "parameter_count": "12 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_campaigns_tool",
+        "description": "Manage [Webflow Campaigns](https://webflow.com/blog/first-look-at-campaigns) Hub sites, campaigns, page variations, and campaign analytics. A campaign is generated from a markdown brief and produces a landing page.…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "bulk_update_page_variations [required: site_id, campaign_id, variations[; types not published]]; create_campaign [required: site_id, markdown_brief, campaign_description; types not published]; create_page_variation [required: site_id, campaign_id, name, slug, summary; types not published]; delete_campaign [required: site_id, campaign_id; types not published]; delete_page_variation [required: site_id, campaign_id, page_variation_id; types not published]; get_campaign [required: site_id, campaign_id; types not published]; get_campaign_task_status [required: site_id, task_id; types not published]; get_engaged_accounts [required: site_id, campaign_id, start_time, end_time, sort_by, sort_direction; types not published]; get_form_submissions_count [required: site_id, campaign_id, start_time, end_time; types not published]; get_opportunity_summary [required: site_id, campaign_id, start_time, end_time; types not published]; get_page_variation_suggestions [required: site_id, campaign_id; types not published]; get_page_variations [required: site_id, campaign_id; types not published]; get_time_series [required: site_id, campaign_id, start_time, end_time, metric_scope; types not published]; list_campaign_hub_sites [required: workspace_id; types not published]; list_campaigns [required: site_id; types not published]; personalize_element [required: site_id, campaign_id, field{name, type}, element_id{component, element}, key; types not published]; personalize_property [required: site_id, campaign_id, field{name, type}, element_id{component, element}, prop_id; types not published]; unlink_delete_personalized_field [required: site_id, campaign_id, field_slug; types not published]; update_campaign [required: site_id, campaign_id; types not published]; update_personalized_field [required: site_id, campaign_id, field_slug, name; types not published]",
+        "parameter_count": "20 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_cms_tool",
+        "description": "Manage a site's CMS: collections, their fields (static, option, and reference), collection field groups, and the items within them. Items are created and updated…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_collection [required: siteId, request{displayName, singularName}; types not published]; create_collection_items [required: collection_id, request{fieldData}; types not published]; create_collection_option_field [required: collection_id, request{type=Option, displayName, metadata}; types not published]; create_collection_reference_field [required: collection_id, request{type, displayName, metadata{collectionId}}; types not published]; create_collection_static_field [required: collection_id, request{type, displayName}; types not published]; delete_collection_field [required: collection_id, field_id; types not published]; delete_collection_items [required: collection_id, request{items[; types not published].id}]; get_collection_details [required: collection_id; types not published]; get_collection_field_groups [required: collection_id; types not published]; get_collection_list [required: siteId; types not published]; list_collection_items [required: collection_id; types not published]; publish_collection_items [required: collection_id, request{itemIds}; types not published]; unpublish_collection_items [required: collection_id, request{items[; types not published].id}]; update_collection_field [required: collection_id, field_id, request; types not published]; update_collection_field_groups [required: collection_id, field_groups[; types not published]]; update_collection_items [required: collection_id, request{items[; types not published].id, fieldData}]",
+        "parameter_count": "16 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_comments_tool",
+        "description": "Read Designer comment threads and their replies (filterable by page, resolution status, and date), look up comment participants by email, and post replies to…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_reply [required: site_id, comment_thread_id, content; types not published]; get_comment_thread [required: site_id, comment_thread_id; types not published]; list_comment_replies [required: site_id, comment_thread_id; types not published]; list_comment_threads [required: site_id; types not published]; search_comment_user_by_email [required: site_id, email; types not published]",
+        "parameter_count": "5 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_component_builder",
+        "description": "Insert component instances onto a page as a child of an element or into a slot of an existing component instance, including recursive trees…",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "insert_in_element [required: build_label, parent_element_id, creation_position, component_schema{name}; types not published]; insert_in_slot [required: build_label, parent_element_id, creation_position, component_schema{name}, slot_name; types not published]",
+        "parameter_count": "2 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_component_props_tool",
+        "description": "Manage a component's prop definitions and the prop values on its instances. Create, update, and remove prop definitions, and set or reset the values…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_prop [required: component_id, props[; types not published]]; get_component_instance_props [required: element_id {component, element}; types not published]; remove_prop [required: component_id, prop_ids; types not published]; reset_all_props_value [required: element_id {component, element}; types not published]; set_component_instance_prop_values [required: element_id, values[; types not published]]; update_prop [required: component_id, props[; types not published].prop_id]",
+        "parameter_count": "6 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_component_tool",
+        "description": "Manage component definitions and instances: get and query components, create blank components, transform elements into components, and insert and unlink instances. Prop definiti...",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_blank_component [required: name; types not published]; duplicate_component [required: source_component_id, name; types not published]; get_all_components [required: *(options)*; types not published]; get_component [required: component_id or name; types not published]; get_parent_component [required: id {component, element}; types not published]; insert_component_instance [required: parent_element_id, component_id, creation_position; types not published]; query_components [required: queries[; types not published]]; set_component_metadata [required: component_id; types not published]; transform_element_to_component [required: id {component, element}, name; types not published]; unlink_component_instance [required: component_instance_id; types not published]; unregister_component [required: component_id; types not published]",
+        "parameter_count": "11 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_component_variants_tool",
+        "description": "Manage a component's variants and the styles scoped to each one. Create, duplicate, delete, reorder, and rename variants, and read or set per-variant style overrides.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_variant [required: component_id, name; types not published]; delete_variant [required: component_id, variant_id; types not published]; duplicate_variant [required: component_id, source_variant_id; types not published]; get_variant_settings [required: component_id, variant_id; types not published]; get_variant_styles [required: variant_id, style_name; types not published]; reorder_variants [required: component_id, variant_ids; types not published]; set_variant_name [required: component_id, variant_id, name; types not published]; set_variant_styles [required: variant_id, style_name; types not published]",
+        "parameter_count": "8 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_element_builder",
+        "description": "Create elements on a page from an element schema, including nested child elements in a single call.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "create_element [required: build_label, parent_element_id, creation_position, element_schema{type}; types not published]",
+        "parameter_count": "1 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_element_settings_tool",
+        "description": "Read and write element-level settings and data bindings. Get and set settings, discover the data sources an element can bind to, and set an…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "get_bindable_sources [required: queries[; types not published] (label, element_id)]; get_settings [required: type, element_id; types not published]; set_dom_id [required: element_id; types not published]; set_settings [required: operations[; types not published]]; set_tag [required: element_id; types not published]; set_visibility [required: element_id; types not published]",
+        "parameter_count": "6 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_element_tool",
+        "description": "Inspect and modify the elements on a page: query the element tree, move and remove elements, and edit text, styles, links, images, heading levels,…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "get_all_elements [required: pageId, siteId; types not published]; get_attributes [required: id {component, element}; types not published]; get_display_name [required: element_id {component, element}; types not published]; move_element [required: id, anchor_element_id, creation_position; types not published]; query_elements [required: queries[; types not published]]; remove_attribute [required: id, attribute_names; types not published]; remove_element [required: id {component, element}; types not published]; set_attributes [required: id, attributes[; types not published]]; set_display_name [required: element_id, display_name; types not published]; set_heading_level [required: id, heading_level; types not published]; set_image_asset [required: id, image_asset_id; types not published]; set_link [required: id, linkType, link; types not published]; set_style [required: id, style_names; types not published]; set_text [required: id, text; types not published]",
+        "parameter_count": "14 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_enterprise_tool",
+        "description": "Manage enterprise site settings: 301 redirects, `robots.txt`, well-known files, and site activity logs.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "add_well_known_file [required: site_id, fileName, fileData, contentType; types not published]; create_301_redirect [required: site_id, fromUrl, toUrl; types not published]; delete_301_redirect [required: site_id, redirect_id; types not published]; delete_robots_txt [required: site_id; types not published]; get_robots_txt [required: site_id; types not published]; list_301_redirects [required: site_id; types not published]; list_site_activity_logs [required: site_id; types not published]; remove_well_known_files [required: site_id, fileNames; types not published]; replace_robots_txt [required: site_id; types not published]; update_301_redirect [required: site_id, redirect_id, fromUrl, toUrl; types not published]; update_robots_txt [required: site_id; types not published]",
+        "parameter_count": "11 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_fonts_tool",
+        "description": "Manage a site's uploaded custom fonts: list and inspect them, register new fonts and replace their files (a two-step upload), update metadata, and remove…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "batch_delete_fonts [required: site_id, items[; types not published]]; create_font [required: site_id, file_name, file_hash, font_family, weight, italic, font_display; types not published]; delete_font [required: site_id, font_id; types not published]; get_font [required: site_id, font_id; types not published]; list_fonts [required: site_id; types not published]; replace_font_file [required: site_id, font_id, file_name, file_hash; types not published]; update_font [required: site_id, font_id; types not published]",
+        "parameter_count": "7 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_forms_tool",
+        "description": "Read a site's forms and manage their submissions: list forms and their schemas, list and retrieve submissions site-wide or per form, update user-hidden submission…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "delete_form_submission [required: site_id, form_submission_id; types not published]; get_form [required: form_id; types not published]; get_form_submission [required: site_id, form_submission_id; types not published]; list_form_submissions [required: site_id, form_id; types not published]; list_forms [required: site_id; types not published]; list_site_form_submissions [required: site_id; types not published]; update_form_submission [required: site_id, form_submission_id, form_submission_data; types not published]",
+        "parameter_count": "7 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_interactions_tool",
+        "description": "Create and manage IX3 interactions, the animations and interactive behavior attached to a page. An interaction carries its triggers and its inline timelines in…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_interaction [required: name, triggers[; types not published], timelines[]]; delete_interaction [required: id; types not published]; get_interaction [required: id; types not published]; guide [required: None; types not published]; list_interactions [required: None; types not published]; update_interaction [required: id; types not published]",
+        "parameter_count": "6 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_localization_tool",
+        "description": "Localize page and component content into secondary locales. Reads from the primary or a secondary locale, but writes only to secondary locales. Also lists…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "get_component_content [required: site_id, component_id; types not published]; get_component_properties [required: site_id, component_id; types not published]; get_page_content [required: page_id; types not published]; list_components [required: site_id; types not published]; update_component_content [required: site_id, component_id, localeId, nodes; types not published]; update_component_properties [required: site_id, component_id, localeId, properties; types not published]; update_static_content [required: page_id, localeId, nodes; types not published]",
+        "parameter_count": "7 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_members_tool",
+        "description": "Manage who has access to a workspace and its sites: list members, grant and revoke site access, invite people to a workspace, change site…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "bulk_update_workspace_roles [required: workspace_id, role, default_site_role; types not published]; grant_site_access [required: site_id, site_role; types not published]; invite_workspace_member [required: workspace_id, email, workspace_role; types not published]; list_site_members [required: site_id; types not published]; list_site_roles [required: workspace_id; types not published]; list_workspace_members [required: workspace_id; types not published]; remove_workspace_member [required: workspace_id, member_id; types not published]; revoke_site_access [required: site_id; types not published]; update_site_role [required: site_id, member_id, site_role; types not published]; update_workspace_role [required: workspace_id, member_id, role, default_site_role; types not published]",
+        "parameter_count": "10 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_optimize_tool",
+        "description": "Read-only access to [Webflow Optimize](https://webflow.com/feature/optimize) results: which optimizations exist, what state they're in, and how one optimization's variations perform overall, by audience segment, or…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "get_optimization_audience_insights [required: optimizeId, optimizationId, intervalStart, intervalEnd, groupBy; types not published]; get_optimization_summary [required: optimizeId, optimizationId, intervalStart, intervalEnd; types not published]; get_optimization_trend [required: optimizeId, optimizationId, intervalStart, intervalEnd, granularity; types not published]; list_dimension_values [required: optimizeId, optimizationId, intervalStart, intervalEnd, dimension; types not published]; list_optimization_dimensions [required: optimizeId, optimizationId, intervalStart, intervalEnd; types not published]; list_optimization_goals [required: optimizeId, optimizationId, intervalStart, intervalEnd; types not published]; list_optimizations [required: optimizeId; types not published]; list_optimize_resources [required: None; types not published]",
+        "parameter_count": "8 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_pages_tool",
+        "description": "List, create, and update a site's pages, manage page branches and their staging previews, and read or write page-level SEO metadata and JSON-LD schema markup.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "bulk_update_pages [required: site_id, pages[; types not published]]; bulk_update_pages_schema_markup [required: site_id, pages[; types not published]]; create_branch [required: site_id, page_id; types not published]; create_page [required: site_id, title, slug; types not published]; delete_branch [required: site_id, branch_id; types not published]; get_branch_conflicts [required: site_id, branch_id; types not published]; get_branch_details [required: site_id, branch_id; types not published]; get_branch_task_status [required: site_id, task_id; types not published]; get_page_metadata [required: page_id; types not published]; list_branches [required: site_id; types not published]; list_pages [required: site_id; types not published]; merge_branch [required: site_id, branch_id; types not published]; publish_branch [required: site_id, branch_id; types not published]; query_pages_schema_markup [required: site_id, pages[; types not published]]; update_branch [required: site_id, branch_id; types not published]; update_page_settings [required: page_id; types not published]",
+        "parameter_count": "16 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_scripts_tool",
+        "description": "Register, apply, update, and remove custom code scripts at the site or page level, and read or write the freeform head and footer custom-code…",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "add_page_script [required: page_id, script_id, location, version; types not published]; add_site_script [required: site_id, script_id, location, version; types not published]; clear_page_scripts [required: page_id; types not published]; clear_site_scripts [required: site_id; types not published]; delete_registered_script [required: site_id, script_id; types not published]; get_page_freeform_code [required: page_id; types not published]; get_page_scripts [required: page_id; types not published]; get_registered_script [required: site_id, script_id; types not published]; get_registered_scripts [required: site_id; types not published]; get_site_freeform_code [required: site_id; types not published]; get_site_scripts [required: site_id; types not published]; register_hosted_script [required: site_id, hosted_location, integrity_hash, version, display_name; types not published]; register_inline_script [required: site_id, source_code, version, display_name; types not published]; remove_page_script [required: page_id, script_id; types not published]; remove_site_script [required: site_id, script_id; types not published]; set_page_freeform_code [required: page_id, location, content; types not published]; set_page_scripts [required: page_id, scripts; types not published]; set_site_freeform_code [required: site_id, location, content; types not published]; set_site_scripts [required: site_id, scripts; types not published]; update_registered_script [required: site_id, script_id; types not published]",
+        "parameter_count": "20 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_sitemap_tool",
+        "description": "Read and set the sitemap indexing status (includeInSitemap) of static pages and CMS collection items, individually or in bulk. Folder, collection-template, and utility pages are...",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "bulk_update_items_sitemap_status [required: collection_id, items[; types not published]]; bulk_update_pages_sitemap_status [required: site_id, pages[; types not published]]; get_item_sitemap_status [required: collection_id, item_id; types not published]; get_page_sitemap_status [required: page_id; types not published]; list_items_sitemap_status [required: collection_id; types not published]; list_pages_sitemap_status [required: site_id; types not published]; update_item_sitemap_status [required: collection_id, item_id, includeInSitemap; types not published]; update_page_sitemap_status [required: page_id, includeInSitemap; types not published]",
+        "parameter_count": "8 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_sites_tool",
+        "description": "List the sites accessible to the authenticated user, get a site's details, and publish a site to its domains.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "get_site [required: site_id; types not published]; list_sites [required: None; types not published]; publish_site [required: site_id; types not published]",
+        "parameter_count": "3 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_style_tool",
+        "description": "Create, query, update, rename, and remove styles (classes and combo classes), and manage the variable modes applied to a style.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_style [required: name, properties[; types not published]]; get_style_variable_modes [required: style_name; types not published]; get_styles [required: query; types not published]; query_styles [required: queries[; types not published]]; remove_all_style_variable_modes [required: style_name; types not published]; remove_style [required: style_name; types not published]; remove_style_variable_mode [required: style_name, variable_collection_id; types not published]; rename_style [required: style_name, new_name; types not published]; set_style_variable_mode [required: style_name, variable_collection_id, mode_id; types not published]; update_style [required: style_name; types not published]",
+        "parameter_count": "10 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_variable_tool",
+        "description": "Create, update, rename, and delete variables (color, font family, number, percentage, size), create collections and modes, and query and reorder collections.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_color_variable [required: variable_collection_id, variable_name, value; types not published]; create_font_family_variable [required: variable_collection_id, variable_name, value; types not published]; create_number_variable [required: variable_collection_id, variable_name, value; types not published]; create_percentage_variable [required: variable_collection_id, variable_name, value; types not published]; create_size_variable [required: variable_collection_id, variable_name, value; types not published]; create_variable_collection [required: name; types not published]; create_variable_mode [required: variable_collection_id, name; types not published]; delete_variable [required: variable_collection_id, variable_id; types not published]; get_variable_collections [required: query; types not published]; get_variables [required: variable_collection_id; types not published]; query_variables [required: queries[; types not published]]; rename_variable [required: variable_collection_id, variable_id, new_name; types not published]; reorder_variable_collection [required: collection_id, anchor_collection_id, position; types not published]; update_color_variable [required: variable_collection_id, variable_id, value; types not published]; update_font_family_variable [required: variable_collection_id, variable_id, value; types not published]; update_number_variable [required: variable_collection_id, variable_id, value; types not published]; update_percentage_variable [required: variable_collection_id, variable_id, value; types not published]; update_size_variable [required: variable_collection_id, variable_id, value; types not published]",
+        "parameter_count": "18 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_webhook_tool",
+        "description": "List, create, retrieve, and delete a site's webhooks.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "create_webhook [required: site_id, trigger_type, url; types not published]; delete_webhook [required: webhook_id; types not published]; get_webhook [required: webhook_id; types not published]; list_webhooks [required: site_id; types not published]",
+        "parameter_count": "4 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "data_whtml_builder",
+        "description": "Insert elements onto a page from HTML and CSS strings.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "insert_whtml [required: build_label, parent_element_id, creation_position, html; types not published]",
+        "parameter_count": "1 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/data-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "asset_tool",
+        "description": "Upload an image to a site's asset library from a public URL. In 2.0 this is the only asset action that still runs through…",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "upload_image_by_url [required: url; types not published]",
+        "parameter_count": "1 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/designer-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "designer_tool",
+        "description": "Interact with the live Designer session: read the current page, mode, branch, selected element, and breakpoints; select elements; navigate the canvas between pages and component...",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "check_if_inside_component_view [required: None; types not published]; close_component_view [required: None; types not published]; create_page_folder [required: page_folder_name; types not published]; get_all_breakpoints [required: None; types not published]; get_branch_parent_page_id [required: None; types not published]; get_current_branch_id [required: None; types not published]; get_current_component [required: None; types not published]; get_current_mode [required: None; types not published]; get_current_page [required: None; types not published]; get_selected_element [required: None; types not published]; list_branches [required: page_id; types not published]; open_canvas [required: component_id or page_id; types not published]; open_component_view [required: component_instance_id {component, element}; types not published]; select_element [required: id {component, element}; types not published]; switch_page [required: page_id; types not published]",
+        "parameter_count": "15 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/designer-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "element_snapshot_tool",
+        "description": "Capture a visual snapshot of a Designer element for debugging and visual feedback. This lets an agent see the current state of a site…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "get_element_snapshot [required: id {component, element}; types not published]",
+        "parameter_count": "1 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/designer-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ask_webflow_ai",
+        "description": "Ask Webflow AI a free-form question about the Webflow API and get an answer back.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "ask_webflow_ai [required: message; types not published]",
+        "parameter_count": "1 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/utility-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_asset_preview",
+        "description": "Get an image preview of a site asset by its asset ID. Downloads the smallest available variant or the original. Image content only, up…",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "get_asset_preview [required: asset_id; types not published]",
+        "parameter_count": "1 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/utility-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_more_tools",
+        "description": "Request a specialized tool for a capability the currently loaded tools don't cover. Use it to reach functionality that isn't already in the tool set.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "get_more_tools [required: brief, category, context; types not published]",
+        "parameter_count": "1 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/utility-tools.md",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "webflow_guide_tool",
+        "description": "Return recommended workflows and best practices for using the Webflow tools. Intended to be called before performing actions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "get_guidelines [required: None; types not published]",
+        "parameter_count": "1 action variants; required parameters shown per action",
+        "source": "https://developers.webflow.com/mcp/tools/utility-tools.md",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The public repository is a distinct local server variant. Hosted documentation does not provide the complete serialized hosted tool schemas and initialize instructions needed for the specified character-count estimate.",
+    "human_can_agent_cannot": "Documented limits include creating new website projects, creating localized CMS items, controlling all element settings and all CMS binding settings, managing remotely hosted Google/Adobe Fonts, editing Classic interactions, and completing the Campaigns steps for connecting marketing forms or pushing assets to ad platforms. A few visual-context actions (snapshot, selection, canvas/page/mode/branch state) need the open Designer and Bridge App. Source: https://developers.webflow.com/mcp/reference/overview and https://developers.webflow.com/mcp/tools/data-tools.md.",
+    "sources": [
+      "https://developers.webflow.com/mcp/tools/data-tools.md",
+      "https://developers.webflow.com/mcp/tools/designer-tools.md",
+      "https://developers.webflow.com/mcp/tools/utility-tools.md",
+      "https://claude.com/connectors/webflow",
+      "https://martechdb.com/vendors/webflow",
+      "https://agentdiscoverability.com/track/chatgpt/webflow",
+      "https://mcp.so/servers/webflow",
+      "https://developers.webflow.com/mcp/reference/overview"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The utility-tool page tells agents to pull recommended workflow guidance before tasks and to use get_more_tools when available tools seem insufficient. Site Agent Instructions guide agent behavior; skills can validate, preview, and request confirmation. These are documented as guidance/client workflows; no general server enforcement is stated.",
+    "governance_promises": "Webflow says it enforces existing roles, including custom roles, and records agent changes in site activity logs. The data_apps_tool page says secret environment variable values are omitted, while warning that build/runtime logs are unsanitized and may contain secrets or presigned URLs. AI Terms state: “Webflow will not (and will not permit its subcontractors to) use them to train, improve, or fine-tune the AI Offerings or any underlying models without Customer’s prior consent.” The reviewed terms do not specifically establish whether all MCP prompts/results fall within that defined AI Offering scope.",
+    "promises_to_user": "Webflow describes the MCP 2.0 service as available at no additional cost and says agents work with existing Webflow permissions. Its overview says agents can make site changes and that site activity logs record them.",
+    "comparison_with_server_logic": "Role enforcement and site activity logging are stated as server/product behavior, but implementation details are not public for the hosted endpoint. Secret omission is documented for data_apps_tool; unsanitized logs are an explicit limitation. Guidance and skill confirmation are not general endpoint-level enforcement. AI Terms make a no-training commitment for covered AI Offerings; MCP-specific applicability is not explicit in the reviewed policy. No endpoint-specific retention or MCP telemetry opt-out statement found.",
+    "sources": [
+      "https://developers.webflow.com/mcp/tools/utility-tools.md",
+      "https://developers.webflow.com/mcp/reference/how-it-works.md",
+      "https://developers.webflow.com/mcp/reference/skills.md",
+      "https://developers.webflow.com/mcp/tools/data-tools.md",
+      "https://webflow.com/legal/ai-terms",
+      "https://webflow.com/legal/privacy",
+      "https://webflow.com/updates/introducing-mcp-2-0"
+    ]
+  },
+  "contradictions": [
+    "The current official tool reference documents 37 tool groups (30 data, 3 Designer, 4 utility), while the Claude connector directory says “Show all 34 tools” and lists 24; MartechDB and Agent Discoverability report 34. The catalogue names shown are a subset of official names, and no extra catalogue-only tools were added.",
+    "The Webflow Help Center overview says Analyze support is site-level only and that page-level analysis, goal reporting, and filtered queries are unavailable. Current official MCP documentation lists page-flow, goal, and query-oriented Analyze actions, including get_goal_performance and get_page_flow_report. The docs appear out of sync.",
+    "The official local repository README says that its implementation does not include MCP prompts or resources, while current hosted-server documentation says the hosted server exposes resources. The repository is a distinct local server variant, so this is a variant difference rather than evidence about the hosted endpoint."
+  ],
+  "observations_for_research": [
+    "Tool-level permission grants every action within a grouped tool, rather than a separately configurable permission for each listed action.",
+    "The documented action inventory has grown and changed across MCP versions; Webflow publishes a migration guide mapping older tool/action names to current names.",
+    "The hosted system combines a remote headless API surface with a live Designer bridge for a subset of visual-context operations."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, pages/ and local repository copies first. The official endpoint returned 401 as supplied; its own protected-resource metadata was used without re-fetching. The repo is official but is a local stdio implementation, not identified as the hosted /mcp server; local code confirms WEBFLOW_TOKEN auth, MCP instructions, a User-Agent header, and separate designer bridge handlers. Help Center URLs were captured as HTTP 403 in the evidence folder, so their content was cross-checked through official web search. Reviewed official docs, pricing, AI Terms, privacy policy, Claude connector directory, MartechDB, Agent Discoverability and mcp.so. Composio's captured toolkit page concerns its general Webflow toolkit, not confirmed tools for this endpoint, and is not used as action evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 16.9
+  }
+}

@@ -1,0 +1,558 @@
+{
+  "server": "gamma",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.gamma.app/mcp",
+    "documentation_url_csv": "https://developers.gamma.app/mcp/gamma-mcp-server",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://developers.gamma.app/mcp/gamma-mcp-server",
+      "https://developers.gamma.app/mcp/mcp-tools-reference",
+      "https://developers.gamma.app/build-with-gamma/connect-your-own-agent",
+      "https://developers.gamma.app/get-started/access-and-pricing",
+      "https://developers.gamma.app/connectors/connectors-and-integrations",
+      "https://developers.gamma.app/llms-full.txt",
+      "https://help.gamma.app/en/articles/13943863-how-do-i-use-gamma-with-outbound-connectors-and-integrations",
+      "https://help.gamma.app/en/articles/11962420-does-gamma-have-an-api",
+      "https://gamma.app/pricing",
+      "https://gamma.app/privacy",
+      "https://gamma.app/terms",
+      "https://claude.com/connectors/gamma"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No official Gamma repository or package for this hosted MCP server was found. Two unofficial community repositories appeared in the search; they were not used as evidence.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "Gamma's REST API at https://public-api.gamma.app/v1.0/ is a separate API surface, not another MCP endpoint. Its capabilities include archive and delete operations that the MCP tool reference does not list."
+    ],
+    "sources": [
+      "https://developers.gamma.app/mcp/gamma-mcp-server",
+      "https://developers.gamma.app/mcp/mcp-tools-reference",
+      "https://developers.gamma.app/build-with-gamma/connect-your-own-agent",
+      "https://help.gamma.app/en/articles/11962420-does-gamma-have-an-api"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Freemium",
+    "mcp_access_cost_details": "MCP access is available on all plans. Generations, edits, and image generation consume credits; reading, searching, and exporting do not. MCP-specific subscription fees or per-call prices were not found.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Gamma provides a Free plan and paid plans. The reviewed official developer pricing page describes plan-dependent limits and credits but does not provide subscription prices.",
+    "pricing_model_details": "Credit charges depend on the action and plan. Standard generations are charged per card and image; agent generations and edits are charged for the AI work performed. The connected user's workspace credits are used. Analytics tools require Pro or above. Credit rates may change.",
+    "other_access_restrictions": "OAuth 2.0 with PKCE and Dynamic Client Registration. Gamma must allowlist the client's redirect URI patterns; new clients request registration. The user selects a workspace and consents. Tool calls use that user's permissions. Plan limits include card caps, concurrent jobs, model availability, and Pro-or-above analytics access.",
+    "restrictions_controlled_by": "Gamma controls client redirect-URI allowlisting and plan limits; the workspace admin controls applicable workspace settings; the user chooses the workspace, consents, and supplies permissions and credits.",
+    "sources": [
+      "https://developers.gamma.app/mcp/gamma-mcp-server",
+      "https://developers.gamma.app/build-with-gamma/connect-your-own-agent",
+      "https://developers.gamma.app/get-started/access-and-pricing",
+      "https://gamma.app/pricing"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference lists 21 tools. They cover content and image generation, template use, status checks, export, editing, browsing and searching content, reading comments, analytics, themes, and folders. Editing tools are conditional on account availability; analytics require Pro or above.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The reference documents structured tool outputs and errors. Errors use {\"error\":\"...\",\"isError\":true}; plan or credit failures may also include planLimitExceeded and live workspace limits. Asynchronous jobs return identifiers and are checked with corresponding status tools.",
+      "authorization_mechanism": "OAuth 2.0 Bearer token; protected-resource metadata is available. OAuth server metadata advertises authorization_code and refresh_token grants, S256 PKCE, Dynamic Client Registration, and token endpoint authentication methods none, client_secret_post, and client_secret_basic. The protected-resource metadata lists scopes_supported [\"generate\", \"gamma:read\"] and bearer_methods_supported [\"header\", \"body\"]. The endpoint returned HTTP 401 and WWW-Authenticate resource_metadata; the supplied error body also says “Provide X-API-KEY or Authorization: Bearer header.” The vendor's MCP docs specify OAuth. Token lifetime and revocation details were not found.",
+      "authorization_server": "https://auth.gamma.app",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "https://developers.gamma.app/build-with-gamma/connect-your-own-agent",
+        "https://mcp.gamma.app/mcp",
+        "https://mcp.gamma.app/.well-known/oauth-protected-resource",
+        "https://mcp.gamma.app/.well-known/oauth-protected-resource/mcp",
+        "https://auth.gamma.app/.well-known/oauth-authorization-server",
+        "https://auth.gamma.app/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool reference does not document MCP resources. A third-party scan reports zero resources but could not authenticate for live discovery.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "https://www.tedix.dev/apps/gamma/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool reference does not document MCP prompts. A third-party scan reports zero prompts but could not authenticate for live discovery.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "https://www.tedix.dev/apps/gamma/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Server-side MCP logging and audit behavior are not documented in the reviewed sources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/gamma-mcp-server",
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Sampling is not documented in the official MCP materials reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/gamma-mcp-server",
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Roots are not documented in the official MCP materials reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/gamma-mcp-server",
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint requires authentication. Protected-resource metadata points to https://auth.gamma.app. The authorization server advertises an authorization endpoint, token endpoint, JWKS URI, and registration endpoint. It supports authorization_code and refresh_token grants, S256 PKCE, and client authentication methods none, client_secret_post, and client_secret_basic. Metadata lists scopes_supported [\"generate\", \"gamma:read\"]. The resource metadata path with /mcp returned 404; OpenID configuration also returned 404. Token lifetime and revocation details were not found.",
+      "pre_interaction_context_verbatim": "HTTP 401; WWW-Authenticate: Bearer resource_metadata=\"https://mcp.gamma.app/.well-known/oauth-protected-resource\"; response body: {\"error\":\"Authentication required\",\"message\":\"Provide X-API-KEY or Authorization: Bearer header\"}",
+      "post_interaction_context_structure": "Unauthenticated requests receive HTTP 401 and a WWW-Authenticate resource_metadata URI. Vendor documentation says revoked Gamma access also returns 401.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration; OAuth 2.0 authorization code and refresh token grants; PKCE S256; token endpoint auth none, client_secret_post, client_secret_basic; scopes_supported: generate, gamma:read; bearer methods: header, body. Endpoint 401 body additionally mentions X-API-KEY. Token lifetime and revocation not found.",
+      "authorization_server": "https://auth.gamma.app",
+      "sources": [
+        "https://mcp.gamma.app/mcp",
+        "https://mcp.gamma.app/.well-known/oauth-protected-resource",
+        "https://mcp.gamma.app/.well-known/oauth-protected-resource/mcp",
+        "https://auth.gamma.app/.well-known/oauth-authorization-server",
+        "https://auth.gamma.app/.well-known/openid-configuration",
+        "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "https://developers.gamma.app/build-with-gamma/connect-your-own-agent"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP Elicitation is not documented in the reviewed official sources. The user does approve OAuth permissions at connection time.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/build-with-gamma/connect-your-own-agent",
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server documents asynchronous generation, edit, image-generation, and export jobs with status tools. Whether these use the MCP Tasks capability is not stated.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Job-start tools return identifiers; matching get_*_status tools report pending, completed, or failed states.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tool inputs configure generation formats, text and image options, themes, folders, layout, sharing, exports, and edits. The docs do not describe MCP-specific server configuration, tool filters, or URL/query modes.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific input parameters are documented in the official reference.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The tools reference documents an error object with error and isError fields. Some plan or credit failures include planLimitExceeded and workspace live limits; job-status tools document machine-readable reason values for failures.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "{\"error\":\"...\",\"isError\":true}; selected failures may also include planLimitExceeded and live limits. Status responses may include error and reason.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented. Gamma plans and credits govern access and use outside MCP protocol subscription features.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "https://developers.gamma.app/get-started/access-and-pricing"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Generation status may report progress, including done, total, percent, and stage counts. Other asynchronous operations expose their state through corresponding status tools.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Status values include pending, completed, and failed; generation progress may include done, total, percent, and stages.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No cancellation operation or mechanism is documented in the official tool reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs state that tools/list responses carry ttlMs: 60000 and cacheScope: \"private\"; hosts supporting SEP-2549 may cache a per-user tool list for up to 60 seconds. The docs also describe asynchronous job IDs and generation IDs accepted by selected tools after completion.",
+      "pre_interaction_context_verbatim": "“tools/list responses carry the cache hints ttlMs: 60000 and cacheScope: \"private\".”",
+      "post_interaction_context_structure": "Private tool-list cache hints; completed generation IDs can be passed in place of a Gamma ID to read, edit, or export.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developers.gamma.app/mcp/mcp-tools-reference"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official tool table labels read-only, destructive, and idempotent properties; 20 tools are read-only or non-destructive according to its columns, while edit_gamma is marked destructive. Tool-level MCP annotations, including openWorldHint, are not documented. 2. No enforced confirmation step is documented. The user consents to OAuth at connection time; generation/edit calls charge credits. 3. OAuth scopes are generate and gamma:read. Calls run as the connected user in their selected workspace; read/export require view access, edit requires edit access. Gamma allowlists redirect URI patterns and reviews new client requests. Token lifetime and revocation are not documented. 4. No read-only MCP mode, toolset filter, or alternate MCP region/endpoint is documented. Plan-based tool availability applies: edit tools may be conditional, analytics require Pro or above; workspace concurrency and card limits vary by plan. 5. Search and reads are limited to Gammas the user can access. Signed thumbnail and export URLs expire; docs advise treating export links as secrets. Field masking or PII exclusion is not documented. 6. Generation, edit, and image operations consume credits; reads, searches, and exports do not. Plan limits include card caps and concurrent jobs; concurrency excess returns 429 with Retry-After. Analytics data may lag about an hour. Export links expire after about one week. 7. Tool schemas and parameter constraints are documented. The reference notes folderIds is deprecated, limited to one entry, and folderId takes precedence when both are sent. Unknown-argument handling and broader coercion/correction behavior are not documented. 8. MCP audit logs, telemetry, and opt-out controls were not found. 9. No feedback, rating, survey, or report tool appears in the official list. Plan/credit limit errors may link to billing settings. 10. Tool guidance is delivered in documentation and tool descriptions; no server instruction or skill-loading tool was found in the reviewed tool reference. 11. Per-user tool-list cache hint is private with a 60-second TTL. Other memory or behavior adaptation is not documented. 12. The reviewed server exposes a flat tool list. Its async operations use status tools; no proxy hierarchy is documented. 13. No raw API, SQL, execute, or script tool is listed. Archive and delete operations are REST-only per Gamma's hosted MCP guide.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "“Use `generate` for a single presentation, document, webpage, or social post; use this only when the user wants several distinct pages within one Gamma.”",
+      "“This tool is asynchronous: it returns immediately with an `imageGenerationId` and `status: pending`. Call `get_image_generation_status` with that ID until the image is ready — do not call `generate_image` again to check progress, as that starts a new, separately billed generation.”",
+      "“This tool is asynchronous: it returns immediately with an `exportId`; the export runs in the background. Call `get_export_status` with that `exportId` to get the download link once it is ready — do not call `export_gamma` again to check progress, as that starts a new export.”",
+      "“Poll it every few seconds rather than in a tight loop.”",
+      "“Use `createdByMe: true` when the user asks for gammas they created — gammas they only have access to, such as shared or collaborated-on gammas, are excluded.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted MCP endpoint and a flat documented tool list. Tools start asynchronous vendor jobs and expose status checks, but the docs do not describe nested servers or dynamically loaded toolsets.",
+    "sources": [
+      "https://developers.gamma.app/mcp/mcp-tools-reference",
+      "https://developers.gamma.app/build-with-gamma/connect-your-own-agent",
+      "https://developers.gamma.app/get-started/access-and-pricing",
+      "https://developers.gamma.app/mcp/gamma-mcp-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "21 documented tools; edit tools may be conditional on connected account availability",
+    "action_count_comment": "The official tool list is https://developers.gamma.app/mcp/mcp-tools-reference. It names 21 tools; no different official total is stated. All 21 official names are in actions.json, with no catalogue-only additions. The Claude connector directory (third-party, publisher-verified) exposes 3 names: generate, get_themes, get_folders. Tedix also reports 3 tools, but notes it could not perform live discovery without OAuth. These directory lists are subsets of the official reference, not replacement lists.",
+    "actions": [
+      {
+        "tool_name": "generate",
+        "description": "Create a presentation, document, webpage, or social post from text.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "inputText: string (required); title: string (optional); textMode: enum 3 (optional); format: enum 4 (optional); numCards: int (optional); cardSplit: enum 2 (optional); themeId, folderId: string (optional); folderIds: array[string] (optional); additionalInstructions: string (optional); exportAs: enum 3 (optional); textOptions, imageOptions, cardOptions, sharingOptions: object (optional)",
+        "parameter_count": "15 top-level",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate_multi_page_gamma",
+        "description": "Create one multi-page Gamma site in a single request.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "pages: array[object] (required, 1–50); title: string (optional); publish: boolean (optional); themeId, folderId: string (optional); folderIds: array[string] (optional); cardOptions, sharingOptions: object (optional); exportAs: enum 3 (optional)",
+        "parameter_count": "9 top-level",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate_from_template",
+        "description": "Create a Gamma by adapting a workspace template.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "gammaId, prompt: string (required); title, themeId: string (optional); imageOptions, textOptions, cardOptions, sharingOptions: object (optional)",
+        "parameter_count": "8",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_generation_status",
+        "description": "Check generation job status and retrieve result details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "generationId: string (required)",
+        "parameter_count": "1",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate_image",
+        "description": "Generate a standalone image from a text prompt.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "prompt: string (required); model, style: string (optional)",
+        "parameter_count": "3",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_image_generation_status",
+        "description": "Check image generation status and retrieve image URL.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "imageGenerationId: string (required)",
+        "parameter_count": "1",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "export_gamma",
+        "description": "Export an existing Gamma to PDF, PPTX, or PNG.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "gammaIdOrUrl: string (required); exportAs: enum 3 (required)",
+        "parameter_count": "2",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_export_status",
+        "description": "Check export job status and retrieve download link.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "exportId: string (required)",
+        "parameter_count": "1",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "edit_gamma",
+        "description": "Edit one page of an existing Gamma using natural language.",
+        "type": "Write",
+        "enabled_by_default": "Conditional: editing available for connected account",
+        "parameters": "gammaIdOrUrl, prompt: string (required); disableConnectors: boolean (optional)",
+        "parameter_count": "3",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_edit_status",
+        "description": "Check edit job status and retrieve change summary.",
+        "type": "Read",
+        "enabled_by_default": "Conditional: editing available for connected account",
+        "parameters": "editId: string (required)",
+        "parameter_count": "1",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_gammas",
+        "description": "Browse or search accessible Gammas and templates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (optional); type: enum 3 (optional); limit: int (optional); createdByMe: boolean (optional); after: string (optional)",
+        "parameter_count": "5",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_gammas",
+        "description": "Search accessible Gamma titles and full body text.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "q: string (required); createdByMe, includeArchived: boolean (optional); updatedAfter, updatedBefore: string (optional); limit: int (optional); after: string (optional)",
+        "parameter_count": "7",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_templates",
+        "description": "Search workspace and official Gamma Explore templates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "q: string (required); limit: int (optional); after: string (optional)",
+        "parameter_count": "3",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_gamma",
+        "description": "Read full content of an accessible Gamma by ID or URL.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "gammaIdOrUrl: string (required)",
+        "parameter_count": "1",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_gamma_comments",
+        "description": "List comment threads and replies on a Gamma.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "gammaId: string (required); limit: int (optional); after: string (optional)",
+        "parameter_count": "3",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_gamma_analytics",
+        "description": "Retrieve Gamma engagement summary analytics.",
+        "type": "Read",
+        "enabled_by_default": "Yes (Pro and above)",
+        "parameters": "gammaId: string (required); from, to: string (optional)",
+        "parameter_count": "3",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_gamma_card_analytics",
+        "description": "Retrieve engagement analytics for each card.",
+        "type": "Read",
+        "enabled_by_default": "Yes (Pro and above)",
+        "parameters": "gammaId: string (required); from, to: string (optional)",
+        "parameter_count": "3",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_gamma_viewer_analytics",
+        "description": "List people who viewed a Gamma.",
+        "type": "Read",
+        "enabled_by_default": "Yes (Pro and above)",
+        "parameters": "gammaId: string (required); from, to: string (optional); limit: int (optional); after: string (optional)",
+        "parameter_count": "5",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_gamma_viewer_detail_analytics",
+        "description": "Retrieve one viewer's detailed Gamma engagement.",
+        "type": "Read",
+        "enabled_by_default": "Yes (Pro and above)",
+        "parameters": "gammaId, userId: string (required); from, to: string (optional)",
+        "parameter_count": "4",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_themes",
+        "description": "Browse or search the Gamma theme library.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (optional); limit: int (optional); after: string (optional)",
+        "parameter_count": "3",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_folders",
+        "description": "Browse or search workspace folders.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "query: string (optional); limit: int (optional); after: string (optional)",
+        "parameter_count": "3",
+        "source": "https://developers.gamma.app/mcp/mcp-tools-reference",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code for the hosted server and no verbatim complete tools/list response or initialize instructions were available. The official docs provide tool descriptions and schemas but not the complete serialized pre-interaction context.",
+    "human_can_agent_cannot": "The MCP guide says archive and delete are REST-only: MCP has no archive or delete tools. The REST API separately documents POST /gammas/{gammaId}/archive and DELETE /gammas/{gammaId}. Gamma's help article also describes broader REST/API control, including creating API keys in account settings; this is outside the MCP tool list.",
+    "sources": [
+      "https://developers.gamma.app/mcp/mcp-tools-reference",
+      "https://developers.gamma.app/build-with-gamma/connect-your-own-agent",
+      "https://developers.gamma.app/llms-full.txt",
+      "https://claude.com/connectors/gamma",
+      "https://www.tedix.dev/apps/gamma/",
+      "https://help.gamma.app/en/articles/11962420-does-gamma-have-an-api"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The official reference instructs clients to poll status tools, avoid tight polling loops, and use selected tools for specific tasks. The documentation does not establish server enforcement of these behavioral recommendations.",
+    "governance_promises": "The guide says every tool call runs as the connected user in the selected workspace, and that search results only include Gammas the user can access. It documents OAuth consent and product permission checks. The vendor's legal and privacy pages returned HTTP 403 in the prepared evidence, so relevant retention, AI-training, and MCP-specific privacy terms could not be reviewed.",
+    "promises_to_user": "Gamma states that reading, searching, and exporting do not consume credits; generations, edits, and images do. The guide states that archive and delete are not available through MCP.",
+    "comparison_with_server_logic": "Permission-bound access, credit charging, plan constraints, and asynchronous status results are documented as operational behavior. Polling advice is instruction text. No public implementation code was available for independent verification. Legal/privacy pages were inaccessible in the prepared evidence.",
+    "sources": [
+      "https://developers.gamma.app/mcp/mcp-tools-reference",
+      "https://developers.gamma.app/build-with-gamma/connect-your-own-agent",
+      "https://developers.gamma.app/get-started/access-and-pricing",
+      "https://gamma.app/privacy",
+      "https://gamma.app/terms",
+      "https://gamma.app/legal"
+    ]
+  },
+  "contradictions": [
+    "The endpoint's supplied 401 body says “Provide X-API-KEY or Authorization: Bearer header,” while the official MCP documentation says all MCP requests require an OAuth 2.0 Bearer token. The body may describe generic endpoint authentication; the docs identify OAuth for the MCP flow.",
+    "OAuth metadata lists scopes_supported as generate and gamma:read, while the documentation describes creation, reading, folder/theme listing, and analytics permissions without mapping each tool to those exact scope strings.",
+    "The Claude connector directory lists only generate, get_themes, and get_folders, while the official MCP tools reference names 21 tools. The directory listing is incomplete relative to the official reference.",
+    "Gamma documentation says archive and delete are REST-only; they are not included in the official MCP tool list."
+  ],
+  "observations_for_research": [
+    "Tool availability varies with the connected account: editing tools may be absent when editing is unavailable, and analytics are plan-gated.",
+    "The server combines user-level OAuth permissions with workspace selection and credits charged to that workspace.",
+    "Several operations start asynchronous jobs, with separate status tools for monitoring. The documentation explicitly warns against repeating certain start calls to check progress because this can start another operation or consume credits.",
+    "Private per-user tool-list caching is documented with a 60-second TTL.",
+    "Some actions available through Gamma's REST API, including archive and delete, are explicitly outside the MCP surface."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, links_check.txt, pages/INDEX.txt, official tool reference and Markdown copy, official documentation copies, and catalogue pages. No official implementation repository or package was present; the possible gamma-app/gamma-docs repository returned 404. Unofficial community repositories were found but not used as evidence. Gamma pricing and legal pages returned HTTP 403 in the prepared evidence; the official developer access/pricing page was used for credit and plan details. The OAuth metadata endpoint with /mcp suffix and the OpenID configuration endpoint returned 404. No MCP-specific token lifetime, revocation, server logging, telemetry, or data-retention details were found.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.3
+  }
+}

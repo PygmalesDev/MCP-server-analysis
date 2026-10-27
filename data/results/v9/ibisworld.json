@@ -1,0 +1,420 @@
+{
+  "server": "ibisworld",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.ibisworld.com/",
+    "documentation_url_csv": "https://help.ibisworld.com/en/articles/16047397-getting-started-with-ibisworld-s-mcp-server",
+    "addressing": "global",
+    "repository_url": "NOT FOUND",
+    "documentation_urls_used": [
+      "https://help.ibisworld.com/en/articles/16047397-getting-started-with-ibisworld-s-mcp-server",
+      "https://help.ibisworld.com/en/articles/16047282-ibisworld-mcp-server-faq",
+      "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+      "https://api.ibisworld.com/docs/tools-references-2269242m0",
+      "https://api.ibisworld.com/docs/llms.txt",
+      "https://claude.com/marketplace/connectors/ibisworld",
+      "https://apis.io/servers/ibisworld/ibisworld/"
+    ],
+    "open_code_equals_deployed_server": "Unknown",
+    "open_code_note": "No public IBISWorld MCP repository was found in the prepared repository list or code folder. The official API documentation describes the hosted MCP service but does not identify its implementation code.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "N/A (closed)",
+    "commit_date": "N/A",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "No",
+    "license": "N/A",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [],
+    "sources": [
+      "https://mcp.ibisworld.com/",
+      "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+      "https://api.ibisworld.com/docs/llms.txt"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "MCP is an additional subscription item with a customized quote based on organization size, expected usage volume, country modules, and product mix. The vendor does not publish a standard MCP price.",
+    "linked_software": "Paid",
+    "linked_software_cost": "IBISWorld licenses and MCP are priced through customized memberships/quotes; individual report prices vary by report type and market. The vendor FAQ gives no MCP subscription price.",
+    "pricing_model_details": "MCP access is enabled on an IBISWorld subscription. A separate paid seat on a supported AI platform is also required for each connecting user. No per-call or credit price is published.",
+    "other_access_restrictions": "MCP must be enabled on the organization's license. Each user signs in with their existing IBISWorld credentials. Returned content is limited to the user's licensed products. Supported platforms listed as of July 2026: Claude, Microsoft Copilot, and ChatGPT. Atlas and other bulk-data tools are not available through MCP.",
+    "restrictions_controlled_by": "Vendor controls subscription enablement and licensed content; the organization controls its IBISWorld subscription and supported AI-platform seats.",
+    "sources": [
+      "https://help.ibisworld.com/en/articles/16047282-ibisworld-mcp-server-faq",
+      "https://help.ibisworld.com/en/articles/8119074-how-much-does-it-cost-to-purchase-one-report",
+      "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference lists eight tools: fetch_metadata, fetch_sections, search_industry, search_industry_region, search_company, search_business_environment, search_procurement, and search_segment_benchmark. It publishes parameter tables. The endpoint returned HTTP 401 in the supplied unauthenticated probe, so its live tools/list response was not inspected.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The official reference describes metadata/section retrieval and domain-specific data searches, but does not publish the MCP result envelope or error schema.",
+      "authorization_mechanism": "OAuth-protected endpoint per supplied probe; unauthenticated POST returned HTTP 401 and WWW-Authenticate specified Bearer, resource_metadata=\"https://mcp.ibisworld.com/.well-known/oauth-protected-resource\", scope=\"mcp:tools openid all_claims identity-resource offline_access\".",
+      "authorization_server": "https://mcp.ibisworld.com",
+      "sources": [
+        "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "https://mcp.ibisworld.com/.well-known/oauth-protected-resource"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed vendor MCP overview and tool reference do not document MCP resources. The authenticated endpoint could not be queried to establish whether resources are exposed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+        "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "https://mcp.ibisworld.com/"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompt templates are documented in the reviewed vendor overview or tools reference. The endpoint could not be queried for prompts/list.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+        "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "https://mcp.ibisworld.com/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The vendor FAQ says it does not capture specific prompts, but tracks which tools were used to generate a response at the account level for subscription compliance and bug detection. It does not specify retention duration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Account-level record of tool usage is described; event fields and retention are not stated.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://help.ibisworld.com/en/articles/16047282-ibisworld-mcp-server-faq"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Sampling is not documented in the reviewed official MCP pages; no authenticated protocol inspection was available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+        "https://api.ibisworld.com/docs/tools-references-2269242m0"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Roots are not documented in the reviewed official MCP pages; no authenticated protocol inspection was available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+        "https://api.ibisworld.com/docs/tools-references-2269242m0"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The supplied endpoint probe returned HTTP 401 with a Bearer challenge and protected-resource metadata URL. The supplied protected-resource document reports bearer_methods_supported=[\"header\"] and scopes_supported=[\"mcp:tools\",\"openid\",\"all_claims\",\"identity-resource\",\"offline_access\"]. The supplied authorization-server metadata reports issuer https://mcp.ibisworld.com; authorization, token, userinfo, logout, revocation, introspection and dynamic registration endpoints; code_challenge_methods_supported=[\"plain\",\"S256\"]; token_endpoint_auth_methods_supported=[\"client_secret_post\",\"client_secret_basic\"]; grant_types_supported=[\"authorization_code\",\"client_credentials\",\"password\",\"refresh_token\",\"implicit\",\"urn:ietf:params:oauth:grant-type:token-exchange\"]. Token lifetime is not reported in the provided metadata.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth 2.0 bearer access token in Authorization header, per protected-resource metadata.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration advertised at https://mcp.ibisworld.com/register. Supplied authorization-server scopes_supported=[\"identity\",\"openid\",\"profile\",\"email\",\"phone\",\"address\",\"roles\",\"all_claims\",\"identity-resource\",\"offline_access\",\"resource\",\"api_resource\",\"mcp\",\"mcp:tools\",\"mcp:resources\"]. Grants: authorization_code, client_credentials, password, refresh_token, implicit, token-exchange. PKCE methods: plain and S256. Client authentication: client_secret_post and client_secret_basic. Revocation endpoint: https://mcp.ibisworld.com/connect/revocation. Token lifetime not stated.",
+      "authorization_server": "https://mcp.ibisworld.com",
+      "sources": [
+        "https://mcp.ibisworld.com/.well-known/oauth-protected-resource",
+        "https://mcp.ibisworld.com/.well-known/oauth-authorization-server",
+        "https://mcp.ibisworld.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP elicitation flow is documented in the reviewed official pages; the endpoint could not be queried for protocol capabilities.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+        "https://api.ibisworld.com/docs/tools-references-2269242m0"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The reviewed official MCP pages do not document task-based protocol operations.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+        "https://api.ibisworld.com/docs/tools-references-2269242m0"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The vendor documents enabling MCP on the subscription and configuring a supported AI-platform connector. Custom workflow behavior is configured through client-side prompts, instructions, and skills; server-side tool filters or URL configuration are not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Not an MCP response capability; configuration is described through subscription and client setup.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://help.ibisworld.com/en/articles/16047397-getting-started-with-ibisworld-s-mcp-server",
+        "https://help.ibisworld.com/en/articles/16047282-ibisworld-mcp-server-faq"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP error-reporting protocol or tool is documented. The vendor invites customers to raise persistent mismatches with their Client Relationship Manager and says tool-use tracking helps catch bugs.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://help.ibisworld.com/en/articles/16047397-getting-started-with-ibisworld-s-mcp-server",
+        "https://help.ibisworld.com/en/articles/16047282-ibisworld-mcp-server-faq"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP access must be enabled on the organization's IBISWorld subscription. Tool data access is bounded by the products in the user's license.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Subscription and user entitlements govern what report content the tools can return.",
+      "authorization_mechanism": "Existing IBISWorld login authenticates the user; MCP must also be enabled on the organization's subscription.",
+      "authorization_server": "https://mcp.ibisworld.com",
+      "sources": [
+        "https://help.ibisworld.com/en/articles/16047282-ibisworld-mcp-server-faq",
+        "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Progress notifications are not documented in the reviewed official MCP pages.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+        "https://api.ibisworld.com/docs/tools-references-2269242m0"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Cancellation is not documented in the reviewed official MCP pages.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://api.ibisworld.com/docs/ibisworld-mcp-7909154f0",
+        "https://api.ibisworld.com/docs/tools-references-2269242m0"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Vendor materials document client-side instructions and reusable skills for guiding agent behavior, but do not show a server-supplied initialize instruction. The getting-started guide recommends data-integrity instructions for agents, projects, and skills.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Client customization may steer subsequent agent responses; no server-supplied instructions payload is published.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://help.ibisworld.com/en/articles/16047397-getting-started-with-ibisworld-s-mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list contains eight data-retrieval/search tools; no read-only or destructive annotations are published. 2. No server-enforced confirmation flow is documented; the listed tools appear read-oriented. 3. OAuth metadata exposes the scopes and grants listed above. Vendor documentation says access inherits the individual IBISWorld login's licensed products; MCP enablement is at account level. Admin switches, allowlists, redirect approval, and token lifetime are not documented. 4. Atlas and bulk-data access are explicitly unavailable through MCP. Read-only modes, toolsets, query-free modes, sandbox/prod, and regional variants are not documented. 5. Vendor says returned material is limited to products in the user's license; field masking and PII handling are not described. 6. No MCP call quotas, rate limits, result truncation, or per-call charges found. MCP quote depends partly on expected usage volume. 7. Tool reference publishes parameter names and types but not detailed validation behavior. 8. FAQ says prompt text is not captured and tool-use tracking is performed at account level for subscription compliance and bug detection; retention and opt-out are not stated. 9. No feedback/rating tool appears in the official tool list. Vendor invites feedback about Atlas support through the Client Relationship Manager. No embedded upsell result behavior was documented. 10. Vendor provides behavioral recommendations for client-side instructions and skills; these are not shown as server-enforced. 11. No persistent server memory behavior documented. 12. One hosted endpoint is documented; no hierarchy or proxying described. 13. No raw API, SQL, or script-execution tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Never fabricate or estimate a figure when a real one is available.",
+      "Never derive or calculate a number that isn't explicitly reported.",
+      "Always cite the source report and publication date.",
+      "Label historical vs. forecast data explicitly.",
+      "Respect geographic scope.",
+      "Never silently blend data across reports.",
+      "If no relevant data exists, say so.",
+      "For any question about industry size, growth drivers, competitive landscape or risk, always call the IBISWorld MCP server before using the web."
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "A single hosted endpoint and one official flat list of eight tools are documented. The user-facing guide describes client-side prompts, instructions, and skills rather than nested servers or dynamically selected server toolsets.",
+    "sources": [
+      "https://api.ibisworld.com/docs/tools-references-2269242m0",
+      "https://help.ibisworld.com/en/articles/16047282-ibisworld-mcp-server-faq",
+      "https://help.ibisworld.com/en/articles/16047397-getting-started-with-ibisworld-s-mcp-server",
+      "https://mcp.ibisworld.com/.well-known/oauth-authorization-server"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "8 official tools; one catalogue-only name discrepancy",
+    "action_count_comment": "The official tool reference at https://api.ibisworld.com/docs/tools-references-2269242m0 names 8 tools and publishes parameter tables; no different official stated total was found. actions.json includes all 8 official names and one additional catalogue-only entry, fetch_chapters, from the Claude connector directory (2026-10). Claude lists 8 names but substitutes fetch_chapters for official fetch_sections. APIs.io identifies the hosted endpoint but lists no tools. The endpoint itself required OAuth, so its authenticated live list could not be checked.",
+    "actions": [
+      {
+        "parameter_count": "1",
+        "enabled_by_default": "Yes",
+        "source": "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "parameters": "title: string (required)",
+        "description": "Retrieve available sections and structure before fetching report content.",
+        "source_type": "Official",
+        "type": "Read",
+        "tool_name": "fetch_metadata"
+      },
+      {
+        "parameter_count": "2",
+        "enabled_by_default": "Yes",
+        "source": "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "parameters": "title: string (required); sections: array (required)",
+        "description": "Retrieve full content for selected sections of an IBISWorld title.",
+        "source_type": "Official",
+        "type": "Read",
+        "tool_name": "fetch_sections"
+      },
+      {
+        "parameter_count": "4",
+        "enabled_by_default": "Yes",
+        "source": "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "parameters": "industryDescription: string (required); country: string (required); language: string (required); dataQuestion: string (optional)",
+        "description": "Search industry market size, growth, drivers, competition, and outlook.",
+        "source_type": "Official",
+        "type": "Read",
+        "tool_name": "search_industry"
+      },
+      {
+        "parameter_count": "5",
+        "enabled_by_default": "Yes",
+        "source": "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "parameters": "industryDescription: string (required); country: string (required); region: string (required); language: string (required); dataQuestion: string (optional)",
+        "description": "Search industry data scoped to a specific state or region.",
+        "source_type": "Official",
+        "type": "Read",
+        "tool_name": "search_industry_region"
+      },
+      {
+        "parameter_count": "4",
+        "enabled_by_default": "Yes",
+        "source": "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "parameters": "companyName: string (required); country: string (required); language: string (required); dataQuestion: string (optional)",
+        "description": "Search company performance, operations, market position, financials, and strategy.",
+        "source_type": "Official",
+        "type": "Read",
+        "tool_name": "search_company"
+      },
+      {
+        "parameter_count": "4",
+        "enabled_by_default": "Yes",
+        "source": "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "parameters": "topic: string (required); country: string (required); language: string (required); dataQuestion: string (optional)",
+        "description": "Search macroeconomic conditions, demographics, regulation, and technology trends.",
+        "source_type": "Official",
+        "type": "Read",
+        "tool_name": "search_business_environment"
+      },
+      {
+        "parameter_count": "4",
+        "enabled_by_default": "Yes",
+        "source": "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "parameters": "productDescription: string (required); country: string (required); language: string (required); dataQuestion: string (optional)",
+        "description": "Search procurement, sourcing, suppliers, pricing, and buying strategies.",
+        "source_type": "Official",
+        "type": "Read",
+        "tool_name": "search_procurement"
+      },
+      {
+        "parameter_count": "4",
+        "enabled_by_default": "Yes",
+        "source": "https://api.ibisworld.com/docs/tools-references-2269242m0",
+        "parameters": "industryDescription: string (required); country: string (required); language: string (required); dataQuestion: string (optional)",
+        "description": "Compare operator size segments and their performance.",
+        "source_type": "Official",
+        "type": "Read",
+        "tool_name": "search_segment_benchmark"
+      },
+      {
+        "parameter_count": "Unknown",
+        "enabled_by_default": "Unknown (not in official list)",
+        "source": "https://claude.com/marketplace/connectors/ibisworld",
+        "parameters": "NOT PUBLISHED",
+        "description": "[Claude connector directory] Fetch report chapters; official list instead names fetch_sections.",
+        "source_type": "Third-party (Claude connector directory, 2026-10)",
+        "type": "Read",
+        "tool_name": "fetch_chapters"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No public code or verbatim initialize/tool payload for the hosted endpoint was available. The API documentation's tool descriptions and parameter tables are not the complete protocol context.",
+    "human_can_agent_cannot": "The MCP FAQ explicitly excludes Atlas and other bulk-data tools. The vendor API documentation also describes API surfaces beyond the MCP tool list, including report downloads in PDF, Word, or PowerPoint; no corresponding MCP action is listed. Availability of those API features depends on the relevant API license.",
+    "sources": [
+      "https://api.ibisworld.com/docs/tools-references-2269242m0",
+      "https://claude.com/marketplace/connectors/ibisworld",
+      "https://apis.io/servers/ibisworld/ibisworld/",
+      "https://help.ibisworld.com/en/articles/16047282-ibisworld-mcp-server-faq",
+      "https://api.ibisworld.com/docs/llms.txt",
+      "https://api.ibisworld.com/docs/download-a-report-21755240e0.md"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The getting-started guide recommends client-side instructions for source use, citations, geographic scope, historical/forecast labeling, and avoiding fabricated or silently blended figures. It recommends that agents call IBISWorld before the web for relevant industry questions. These are deployment instructions for client customization, not documented server enforcement.",
+    "governance_promises": "The FAQ says: “The MCP Server only returns content from the products in your license.” It also says IBISWorld “doesn't capture the specific prompts you submit through MCP”; tool-use tracking is account-level for subscription compliance and bug detection. The vendor says additional MCP terms apply and that security documentation is available from the Client Relationship Manager.",
+    "promises_to_user": "The vendor describes answers as designed to remain grounded and traceable to specific IBISWorld reports, but notes organic citations are not guaranteed. It says the MCP subscription does not extend data access beyond the user's existing licensed products.",
+    "comparison_with_server_logic": "License boundaries are described as tied to the user's login and subscription. Prompt exclusion and account-level tool-use tracking are vendor-stated practices, not independently verifiable from public code. Citation, data-integrity, and source preference rules are instructions for the AI client and are not documented as server-enforced.",
+    "sources": [
+      "https://help.ibisworld.com/en/articles/16047282-ibisworld-mcp-server-faq",
+      "https://help.ibisworld.com/en/articles/16047397-getting-started-with-ibisworld-s-mcp-server"
+    ]
+  },
+  "contradictions": [
+    "The official tool reference names fetch_sections, while the Claude connector directory lists fetch_chapters instead. The catalogue entry is included separately in actions.json as a third-party name not present in the official list; the live authenticated tool list was unavailable to resolve the discrepancy.",
+    "The vendor FAQ says Atlas and other bulk-data tools are not available via MCP, while the API documentation separately describes broader report and data API operations. Those API operations are not added as MCP actions."
+  ],
+  "observations_for_research": [
+    "The setup guide's recommended behavioral rules are delivered through client prompts, instructions, and skills rather than a published server instruction payload.",
+    "The OAuth authorization-server metadata advertises several scopes and grant types, including mcp:resources and dynamic registration, while public MCP documentation names only tools; advertised scopes do not establish that those additional MCP capabilities are implemented."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Searched links.json, links_check.txt, prepared pages and their script extracts, and the code folder. The only GitHub commit file contained no IBISWorld repository. The endpoint returned 401 in the supplied evidence and had no readable install page, so tool annotations, live schemas, initialize instructions, result/error envelopes, and actual enabled status could not be confirmed. The Claude directory is a third-party catalogue even though it labels the connector publisher-verified. APIs.io is also third-party and provides endpoint/transport information but no tool names. The official materials reviewed do not provide protocol version, implementation language, SDK, token lifetime, or detailed MCP terms.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 3.8
+  }
+}

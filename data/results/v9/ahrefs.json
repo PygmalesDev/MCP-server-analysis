@@ -1,0 +1,1687 @@
+{
+  "server": "ahrefs",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://api.ahrefs.com/mcp/mcp",
+    "documentation_url_csv": "https://docs.ahrefs.com/en/mcp/docs/introduction",
+    "addressing": "global",
+    "repository_url": "https://github.com/ahrefs/ahrefs-mcp-server",
+    "documentation_urls_used": [
+      "https://docs.ahrefs.com/en/mcp/docs/introduction",
+      "https://docs.ahrefs.com/en/mcp/docs/tool-categories",
+      "https://help.ahrefs.com/en/articles/13913559-getting-started-with-ahrefs-mcp",
+      "https://ahrefs.com/mcp/",
+      "https://ahrefs.com/pricing/",
+      "https://ahrefs.com/legal/terms",
+      "https://ahrefs.com/legal/privacy-policy"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repository is an explicitly outdated local stdio server using API v3 keys. Ahrefs says local setup is no longer supported; this code is not the hosted OAuth-protected endpoint analyzed here.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "ca0e1e9996739f690287c396a5ad6e92255aec22",
+    "commit_date": "2026-02-19",
+    "implementation_language": "TypeScript (public local variant only)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/sdk ^1.8.0 (public local variant only)",
+    "code_public": "Yes",
+    "license": "MIT (public local variant only)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "The discontinued local stdio package @ahrefs/mcp is a separate server variant; it uses an API key and is explicitly unsupported for new local setups."
+    ],
+    "sources": [
+      "https://api.ahrefs.com/mcp/mcp",
+      "https://docs.ahrefs.com/en/mcp/docs/introduction",
+      "https://docs.ahrefs.com/en/mcp/docs/tool-categories",
+      "https://help.ahrefs.com/en/articles/13913559-getting-started-with-ahrefs-mcp",
+      "https://github.com/ahrefs/ahrefs-mcp-server",
+      "https://github.com/ahrefs/ahrefs-mcp-server/blob/ca0e1e9996739f690287c396a5ad6e92255aec22/package.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Paid",
+    "mcp_access_cost_details": "No separate MCP fee is stated; access requires a paid Lite-or-higher subscription. MCP calls consume shared monthly API units; the help article states a minimum of 50 units per call. The endpoint documentation says new OAuth-created MCP keys default to a 200,000-unit monthly key limit, adjustable by workspace admins.",
+    "linked_software": "Paid",
+    "linked_software_cost": "The pricing page lists Lite at $129/month, Standard at $249/month, Advanced at $449/month, and Enterprise at $1,499/month with annual commitment; listed prices and included limits may vary by billing terms.",
+    "pricing_model_details": "The MCP itself has no additional fee per the help article. API units are shared across MCP, Ahrefs Connect, and direct API v3 usage. The help article lists 200,000 units/month and 100 max rows/request for Lite; 800,000 and 250 for Standard; 2,000,000 and 500 for Advanced; Enterprise is custom with unlimited rows. The introduction says enterprise customers may purchase additional units.",
+    "other_access_restrictions": "Lite plan or higher; plan row limits and monthly API-unit limits apply. OAuth consent is required for account connection. Enterprise customers may also connect using API keys. Workspace admins can change or remove the default OAuth-created key limit.",
+    "restrictions_controlled_by": "Ahrefs controls plan access and per-plan limits; workspace admins control the per-key monthly limit; the account holder authorizes the AI client.",
+    "sources": [
+      "https://docs.ahrefs.com/en/mcp/docs/introduction",
+      "https://help.ahrefs.com/en/articles/13913559-getting-started-with-ahrefs-mcp",
+      "https://ahrefs.com/pricing/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted endpoint exposes tool groups. Official docs say all tools are advertised if the `tools` URL parameter is omitted; comma-separated group names can select groups, and `essentials` is a standalone selection. Documentation and rendering helpers are always included. The docs do not publish individual tool names or schemas. Catalogues list 135 and 140 tools, while the Claude connector directory lists 61.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint. The catalogue lists data retrieval and UI-rendering tools but does not establish the hosted result/error wire format.",
+      "authorization_mechanism": "The endpoint's supplied OAuth metadata advertises scope `apiv3-mcp`. The authorization-server metadata lists authorization code and implicit grants, authorization endpoint https://app.ahrefs.com/web/oauth/authorize, token endpoint https://ahrefs.com/oauth/token, registration endpoint https://api.ahrefs.com/mcp/register, and PKCE method S256. The endpoint POST returned HTTP 400 `Blank input data`; the separate endpoint-existence test reported HTTP 401. Metadata does not provide token lifetime, revocation behavior, or token authentication methods. Docs describe an authorization consent screen and an account API key tagged with `MCP` scope.",
+      "authorization_server": "https://api.ahrefs.com/",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction",
+        "https://docs.ahrefs.com/en/mcp/docs/tool-categories",
+        "https://api.ahrefs.com/.well-known/oauth-protected-resource",
+        "https://api.ahrefs.com/.well-known/oauth-protected-resource/mcp/mcp",
+        "https://api.ahrefs.com/.well-known/oauth-authorization-server",
+        "https://api.ahrefs.com/mcp/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation or metadata found describing MCP resources. The `doc` catalogue tool is a tool, not evidence of MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction",
+        "https://docs.ahrefs.com/en/mcp/docs/tool-categories"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation or metadata found describing MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Hosted logging and audit behavior is not documented in the reviewed MCP materials.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction",
+        "https://ahrefs.com/legal/privacy-policy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation found describing MCP sampling.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation found describing MCP roots.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint is OAuth-protected. The supplied protected-resource metadata identifies resource `https://api.ahrefs.com/`, authorization server `https://api.ahrefs.com/`, and scope `apiv3-mcp`. The supplied authorization-server metadata advertises dynamic registration, code and implicit grants, and S256 PKCE. OIDC configuration returned 404. The endpoint POST returned HTTP 400 `Blank input data`; metadata was pre-fetched and not re-requested.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth metadata JSON; the endpoint's MCP response structure was not obtained.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://api.ahrefs.com/mcp/register; grants `implicit` and `authorization_code`; PKCE `S256`; scope_supported `apiv3-mcp`; authorization endpoint https://app.ahrefs.com/web/oauth/authorize; token endpoint https://ahrefs.com/oauth/token. Token lifetime, revocation endpoint, and token auth methods are not stated in the supplied metadata. The OIDC configuration URL returned 404.",
+      "authorization_server": "https://api.ahrefs.com/",
+      "sources": [
+        "https://api.ahrefs.com/.well-known/oauth-protected-resource",
+        "https://api.ahrefs.com/.well-known/oauth-protected-resource/mcp/mcp",
+        "https://api.ahrefs.com/.well-known/oauth-authorization-server",
+        "https://api.ahrefs.com/.well-known/openid-configuration",
+        "https://docs.ahrefs.com/en/mcp/docs/introduction"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The authorization consent screen is documented, but no MCP Elicitation capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation found describing MCP Tasks.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The hosted endpoint accepts a `tools` query parameter to select available tool groups. If omitted, all groups are advertised. `essentials` must be used alone; unknown groups are rejected. Helpers for documentation and rendering remain included regardless of selected groups.",
+      "pre_interaction_context_verbatim": "\"If you omit the tools parameter, all tools are advertised.\"",
+      "post_interaction_context_structure": "An invalid tool category is documented to reject the connection with an invalid tool category error; response format is not specified.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/tool-categories"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Hosted error reporting behavior is not documented. The legacy local server maps API errors to MCP errors, but it is a different server variant and is not used as evidence for this endpoint.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/tool-categories",
+        "https://github.com/ahrefs/ahrefs-mcp-server/blob/ca0e1e9996739f690287c396a5ad6e92255aec22/src/server.ts"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "A third-party catalogue lists `subscription-info-limits-and-usage`; the official docs include a subscription-info group but do not give the individual tool name. The tool is included in actions.json as catalogue evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/tool-categories",
+        "https://composio.dev/toolkits/ahrefs_mcp"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation found describing MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation found describing request cancellation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/introduction"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The hosted docs describe helper tools for documentation and rendering as always included. A catalogue lists `doc` and three render helpers, but hosted official docs do not expose their exact names or instructions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Catalogue descriptions include interactive data table, scorecard, and time-series chart widgets; hosted output details are not documented.",
+      "authorization_mechanism": "N/A",
+      "authorization_server": "N/A",
+      "sources": [
+        "https://docs.ahrefs.com/en/mcp/docs/tool-categories",
+        "https://composio.dev/toolkits/ahrefs_mcp"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The reviewed hosted docs describe data reports, management, and public endpoint groups; no tool annotations or individual official tool list are published. Catalogue-listed tools are predominantly data reads and UI rendering. 2. No server-enforced confirmation flow or MCP Elicitation documented; OAuth consent is documented for account authorization. 3. Supplied OAuth scope is `apiv3-mcp`; docs say the account connection creates a dedicated API key tagged `MCP` scope. The endpoint docs set a default 200,000-unit/month key limit adjustable by workspace admins. Inherited product role, allowlists, redirect approval, token lifetime, and revocation details: Unknown. 4. Docs document group filters through `?tools=...`; all groups are advertised by default, `essentials` is standalone, unknown groups are rejected. Read-only mode, sandbox/production selection, and regional endpoints: Unknown. 5. No MCP-specific field masking, PII exclusion, or data boundary behavior found. 6. Plan row limits and monthly units apply; help page states minimum 50 units per call. Unit limits are shared with Ahrefs Connect and direct API. No hosted result truncation behavior found. 7. Hosted argument validation/correction behavior: Unknown; unknown tool groups are rejected. 8. Hosted MCP logging/audit/telemetry behavior: Unknown. Account usage can be viewed in settings. 9. No vendor feedback/rating tools identified among the catalogue names/descriptions. No hosted upsell-result behavior or agent marketing instructions found. 10. No server-delivered skills or behavioral instructions found. Documentation gives client setup instructions and tool grouping guidance. 11. Memory/state effects: Unknown. 12. One hosted endpoint with selectable tool groups; no evidence of nested server or proxy architecture. 13. No raw arbitrary API request, SQL, script, or execute tool identified in the catalogue tool list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "\"If you omit the tools parameter, all tools are advertised.\"",
+      "\"essentials is a standalone value, it can't be combined with other groups.\"",
+      "\"If you request a group name that doesn't exist, the connection is rejected with an invalid tool category error. Double-check the spelling against the table above.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "One hosted endpoint with optional tool-group selection is documented; this does not establish a multi-server or nested architecture.",
+    "sources": [
+      "https://docs.ahrefs.com/en/mcp/docs/introduction",
+      "https://docs.ahrefs.com/en/mcp/docs/tool-categories",
+      "https://help.ahrefs.com/en/articles/13913559-getting-started-with-ahrefs-mcp",
+      "https://api.ahrefs.com/.well-known/oauth-protected-resource",
+      "https://api.ahrefs.com/.well-known/oauth-authorization-server",
+      "https://composio.dev/toolkits/ahrefs_mcp",
+      "https://claude.com/connectors/ahrefs",
+      "https://agentdiscoverability.com/track/chatgpt/ahrefs"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "135",
+    "action_count_comment": "Official hosted documentation exists at https://docs.ahrefs.com/en/mcp/docs/tool-categories and documents 17 selectable groups plus always-included documentation/rendering helpers, but it publishes no individual tool names or stated total. actions.json contains the 135 named tools listed by Composio's Ahrefs MCP catalogue. Names are labelled third-party because the official docs do not name them individually. The Claude connector directory lists 61 tools and exposes a partial name list; Agent Discoverability lists 140; these catalogue totals differ. No MCP schemas were published in the inspected official or catalogue text, so parameters are marked NOT PUBLISHED.",
+    "actions": [
+      {
+        "tool_name": "batch-analysis",
+        "description": "Performs a batch analysis of multiple URLs, domains, or subdomains to retrieve selected SEO, backlink, organic, and paid traffic metrics.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-ai-responses",
+        "description": "Provides questions asked to AI assistants and the corresponding AI-generated responses that mention your brand or competitors’ brands, including cited sources and sear...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-ai-responses-entities",
+        "description": "Provides questions asked to AI assistants and the corresponding AI-generated responses that mention your brand or competitors’ brands, including cited sources and sear...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-citations-history-entities",
+        "description": "Provides the historical number of citations for your and competitors' brand URLs in an LLM you specify.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-citations-overview-entities",
+        "description": "Provides the number of citations for your and competitors's brands in an LLM you specify, with filters for locations, query text, URL, and more.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-cited-domains",
+        "description": "Provides domains cited in AI-generated responses that mention your brand or competitors' brands in an LLM you specify, including how many responses referenced each dom...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-cited-domains-entities",
+        "description": "Provides domains cited in AI-generated responses that mention your brand or competitors' brands in an LLM you specify, including how many responses referenced each dom...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-cited-pages",
+        "description": "Provides the pages cited in AI-generated responses that mention your brand or competitors' brands in an LLM you specify, including how many responses referenced each p...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-cited-pages-entities",
+        "description": "Provides the pages cited in AI-generated responses that mention your brand or competitors' brands in an LLM you specify, including how many responses referenced each p...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-impressions-history",
+        "description": "Provides the historical number of impressions for your and competitors's brands in an LLM you specify.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-impressions-history-entities",
+        "description": "Provides the historical number of impressions for your and competitors's brands in an LLM you specify.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-impressions-overview",
+        "description": "Provides the number of impressions for your and competitors's brands in an LLM you specify, with filters for locations, query text, URL, and more.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-impressions-overview-entities",
+        "description": "Provides the number of impressions for your and competitors's brands in an LLM you specify, with filters for locations, query text, URL, and more.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-mentions-history",
+        "description": "Provides the historical number of mentions for your and competitors's brands in an LLM you specify.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-mentions-history-entities",
+        "description": "Provides the historical number of mentions for your and competitors's brands in an LLM you specify.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-mentions-overview",
+        "description": "Provides the number of mentions for your and competitors's brands in an LLM you specify, with filters for locations, query text, URL, and more.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-mentions-overview-entities",
+        "description": "Provides the number of mentions for your and competitors's brands in an LLM you specify, with filters for locations, query text, URL, and more.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-sov-history",
+        "description": "Provides the historical share of voice for your and competitors's brands in an LLM you specify.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-sov-history-entities",
+        "description": "Provides the historical share of voice for your and competitors's brands in an LLM you specify.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-sov-overview",
+        "description": "Provides the share of voice for your and competitors's brands in an LLM you specify, with filters for locations, query text, URL, and more.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "brand-radar-sov-overview-entities",
+        "description": "Provides the share of voice for your and competitors's brands in an LLM you specify, with filters for locations, query text, URL, and more.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "content-helper-topics",
+        "description": "Analyse the pages currently ranking for a keyword and return the core topics they cover, with per-page coverage scores and supporting extracts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "doc",
+        "description": "Full documentation for Ahrefs API v3 and the corresponding MCP tools.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-anonymous-queries",
+        "description": "Returns organic keywords that rank for the project but are not reported by Google Search Console (anonymized queries), with position, traffic, volume, and CPC data.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-ctr-by-position",
+        "description": "Returns Google Search Console CTR (click-through rate) data by keyword position, showing each keyword's average position, CTR percentage, and click count.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-keyword-history",
+        "description": "Returns Google Search Console performance history chart data (clicks, impressions, CTR, position) for specific keywords over time, grouped by daily, weekly, or monthly...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-keywords",
+        "description": "Returns Google Search Console keywords table data with metrics (clicks, impressions, CTR, position) and associated URLs for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-metrics-by-country",
+        "description": "Returns Google Search Console click metrics grouped by country for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-page-history",
+        "description": "Returns Google Search Console performance history chart data (clicks, impressions, CTR, position) for specific pages over time, grouped by daily, weekly, or monthly in...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-pages",
+        "description": "Returns Google Search Console pages table data with metrics (clicks, impressions, CTR, position) and associated keywords for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-pages-history",
+        "description": "Returns Google Search Console pages chart data showing total indexed pages over time for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-performance-by-device",
+        "description": "Returns Google Search Console performance metrics (clicks, impressions, CTR, position) broken down by device type (desktop, mobile, tablet) for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-performance-by-position",
+        "description": "Returns Google Search Console performance metrics (clicks, impressions, keyword count) grouped by position ranges (1-3, 4-10, 11-20, 21-50, 51+) for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-performance-history",
+        "description": "Returns Google Search Console performance chart data (clicks, impressions, CTR, position) for a project over time, grouped by daily, weekly, or monthly intervals.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "gsc-positions-history",
+        "description": "Returns Google Search Console keyword count data grouped by position ranges (1-3, 4-10, 11-20, 21-50, 51+) over time for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "keywords-explorer-matching-terms",
+        "description": "Retrieves keyword ideas and their associated SEO metrics by matching input terms or phrases in a specified country, with extensive support for filtering, sorting, and ...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "keywords-explorer-overview",
+        "description": "Provides an overview of keyword metrics—including search volume, CPC, ranking difficulty, traffic potential, and intent—for specified keywords, domains, or URLs within...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "keywords-explorer-related-terms",
+        "description": "Returns keyword metrics and related terms—such as \"also rank for\" keywords and \"also talk about\" keywords—for a given keyword or keyword list, with filtering and sorti...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "keywords-explorer-search-suggestions",
+        "description": "Provides keyword search suggestions and related keyword metrics (e.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "keywords-explorer-volume-by-country",
+        "description": "Retrieves search volume metrics for a specified keyword broken down by country.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "keywords-explorer-volume-history",
+        "description": "Retrieves historical search volume data for a specified keyword within a given country and date range.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "management-brand-radar-prompts",
+        "description": "Retrieves custom prompts for a specific brand radar report.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "management-brand-radar-reports",
+        "description": "Retrieves the list of custom brand radar reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "management-keyword-list-keywords",
+        "description": "Retrieves keywords from a keyword list.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "management-locations",
+        "description": "Retrieves a list of management locations filtered by country code and optionally by US state.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "management-project-competitors",
+        "description": "Retrieves the list of competitors associated with a specific Rank Tracker project in Ahrefs, using the project's unique identifier.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "management-project-keywords",
+        "description": "Returns all tracked keywords for a specific Rank Tracker project, including associated tracking metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "management-projects",
+        "description": "Retrieves information about existing projects, including ownership, access type, presence of Rank Tracker keywords, and project ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "public-crawler-ip-ranges",
+        "description": "Returns the IP ranges used by the Ahrefs public web crawler, typically for allowlisting or firewall configuration.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "public-crawler-ips",
+        "description": "Returns the list of individual IP addresses currently used by the Ahrefs public web crawler.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "public-domain-rating-free",
+        "description": "Retrieves the domain rating for a specified domain or URL as of today.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "public-domain-rating-top-domains",
+        "description": "Returns the top 1M domains ranked by Ahrefs Domain Rating, together with each domain's current Domain Rating.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "rank-tracker-competitors-domains",
+        "description": "Provides an overview of competitor domains and their share of voice for a specified project and date in Ahrefs Rank Tracker, allowing comparison between current and pr...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "rank-tracker-competitors-overview",
+        "description": "Provides an overview of competitor rankings and keyword metrics for a specified project and date in Ahrefs Rank Tracker, allowing comparison between current and previo...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "rank-tracker-competitors-pages",
+        "description": "Provides an overview of competitor pages and keyword metrics for a specified project and date in Ahrefs Rank Tracker, allowing comparison between current and previous ...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "rank-tracker-competitors-stats",
+        "description": "Provides an overview of competitor metrics for a specified project and date in Ahrefs Rank Tracker.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "rank-tracker-overview",
+        "description": "Provides an overview of tracked keyword rankings and related search metrics for a specified project and date, with support for historical comparison, filtering, column...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "rank-tracker-serp-overview",
+        "description": "Returns SERP overview for a specified keyword in a Rank Tracker project, showing detailed information about each position including title, URL, type, backlink metrics,...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "render-data-table",
+        "description": "Render an interactive data table widget with sorting, search, and pagination.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "render-scorecard",
+        "description": "Render a scorecard widget showing key metrics as a card grid.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "render-time-series-chart",
+        "description": "Render an interactive time series line chart.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "serp-overview",
+        "description": "Returns an overview of the top search results (SERP) for a specified keyword and country, including detailed metrics about each result like position, backlinks, traffi...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-audit-issues",
+        "description": "Returns all issues from your Site Audit crawl.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-audit-page-content",
+        "description": "Returns the HTML and extracted text content of a page from your Site Audit crawl.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-audit-page-explorer",
+        "description": "Returns detailed information about pages discovered in a Site Audit project, including URLs, crawl metadata, and selected on-page metrics.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-audit-projects",
+        "description": "Returns Site Audit project summaries (all projects or a specific project), including health scores, issue counts, and crawled page counts for the latest crawl or a spe...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-ai-responses-count",
+        "description": "Returns how often AI search platforms cite the target, with the number of citation links and distinct cited pages per platform as of a given date.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-all-backlinks",
+        "description": "Retrieves detailed information about all backlinks pointing to a specified URL or domain, with extensive filtering, sorting, selection, and aggregation options.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-anchors",
+        "description": "Retrieves anchor text and associated backlink metrics for a specified domain or URL, with filtering and selection options.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-backlinks-stats",
+        "description": "Provides backlink statistics for a specified URL or domain as of a given date, with options to control protocol and scope.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-broken-backlinks",
+        "description": "Retrieves a list of broken backlinks (i.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-crawled-pages",
+        "description": "Returns a list of pages crawled by Ahrefs for a specified domain or URL, including the page URLs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-domain-rating",
+        "description": "Retrieves the domain rating and related metrics for a specified domain or URL as of a specific date.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-domain-rating-history",
+        "description": "Retrieves the historical domain rating data for a specified domain or URL over a defined date range and grouping interval.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-keywords-history",
+        "description": "Retrieves historical data on the number of organic keywords a specified website or URL has ranked for, segmented by various search position ranges and grouped by a cho...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-linked-anchors-external",
+        "description": "Retrieves data about external anchor text (the clickable words in outbound links) used on a specified domain, subdomain, or URL, including metrics like dofollow link c...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-linked-anchors-internal",
+        "description": "Retrieves internal anchor text data for a given website or URL, detailing how anchor texts are used in links between pages on the same site.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-linked-domains",
+        "description": "Retrieves information about external domains that are linked from a specified target domain or URL, allowing for filtering, field selection, and various scopes of anal...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-metrics",
+        "description": "Provides SEO performance metrics for a specified domain, URL, or site section as of a given date, with options to customize search scope, protocol, country, and search...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-metrics-by-country",
+        "description": "Provides organic and paid search performance metrics for a specified website, broken down by country, for a specific date.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-metrics-history",
+        "description": "Retrieves historical data on key organic and paid search traffic and cost metrics for a specified domain, URL, or path over a selectable date range and grouping interval.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-organic-competitors",
+        "description": "Retrieves a list of organic search competitors for a specified website or URL, providing comparative SEO metrics such as common keywords, traffic estimations, and doma...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-organic-keywords",
+        "description": "Retrieves detailed organic keyword data for a given domain, URL, or path, including rankings, search intent, SERP features, traffic and CPC metrics, with the ability t...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-outlinks-stats",
+        "description": "Retrieves statistical data about the outbound links (outlinks) from a specified URL, domain, or site section.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-pages-by-backlinks",
+        "description": "Returns a list of a site's or URL's best-performing pages, ranked by the number of referring external links, with flexible filtering and sorting options.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-pages-by-internal-links",
+        "description": "Retrieves a site's or page's internal link metrics, allowing analysis of how pages within the given domain or URL are interconnected and which pages receive the most i...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-pages-by-traffic",
+        "description": "Returns the distribution of pages by estimated organic traffic buckets for a specified domain or URL, across all locations or for a specified country.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-pages-history",
+        "description": "Retrieves historical data about pages from a specified domain, URL, or section of a site, grouped by a chosen time interval.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-paid-pages",
+        "description": "Returns detailed metrics about pages on a specified site or URL that are ranking in paid search results, including traffic, keyword data, ad presence, and changes over...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-refdomains-history",
+        "description": "Provides historical data on referring domains linking to a specified target (domain or URL) over a defined date range, with customizable grouping and analysis scope.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-referring-domains",
+        "description": "Retrieves detailed information about referring domains that link to a specified target domain or URL, with flexible filtering, selection, and sorting of backlink-relat...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-top-pages",
+        "description": "Returns a list of the top-performing pages for a specified website or URL, including detailed SEO metrics (such as organic rankings, traffic, top keyword, and changes ...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-total-search-volume-history",
+        "description": "Returns historical totals of search volume for keywords that the specified domain or URL ranks for in the top 10 or top 100 results, across all countries or for a spec...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "site-explorer-url-rating-history",
+        "description": "Retrieves the historical URL rating data for a specified domain or URL over a defined date range, grouped by a chosen time interval.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "social-media-activity-history",
+        "description": "Get the activity history log for posts (published, scheduled, failed, etc.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "social-media-authors",
+        "description": "List users who have created posts in the account.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "social-media-channel-metrics",
+        "description": "Get historical follower count data for connected channels.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "social-media-channels",
+        "description": "List social media channels with their connection status and metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "social-media-post-metrics",
+        "description": "Get engagement metrics (views, likes, etc.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "social-media-posts",
+        "description": "List social media posts with filtering by channel, status, and author.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "subscription-info-limits-and-usage",
+        "description": "Retrieves subscription information including limits and usage statistics for API units, workspace quotas, and API key details.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-browsers",
+        "description": "Returns browser statistics for a Web Analytics project, showing visitor counts, bounce rates, and session durations grouped by browser.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-browsers-chart",
+        "description": "Returns time-series chart data grouped by browser for a Web Analytics project, showing visitor counts, bounce rates, and session durations over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-browser-versions",
+        "description": "Returns browser version statistics for a Web Analytics project, showing visitor counts, bounce rates, and session durations grouped by browser version.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-browser-versions-chart",
+        "description": "Returns time-series chart data grouped by browser version for a Web Analytics project, showing visitor counts, bounce rates, and session durations over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-chart",
+        "description": "Returns time-series chart data for aggregate statistics of a Web Analytics project, with metrics like pageviews, visitors, visits, bounce rate, and session duration at...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-cities",
+        "description": "Returns visitor data grouped by city for a Web Analytics project, showing visitor counts for each location.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-cities-chart",
+        "description": "Returns time-series chart data grouped by city for a Web Analytics project, showing visitor counts over time for each location.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-continents",
+        "description": "Returns visitor data grouped by continent for a Web Analytics project, showing visitor counts for each region.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-continents-chart",
+        "description": "Returns time-series chart data grouped by continent for a Web Analytics project, showing visitor counts over time for each region.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-countries",
+        "description": "Returns visitor data grouped by country for a Web Analytics project, showing visitor counts for each location.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-countries-chart",
+        "description": "Returns time-series chart data grouped by country for a Web Analytics project, showing visitor counts over time for each location.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-devices",
+        "description": "Returns device type statistics for a Web Analytics project, showing visitor counts, bounce rates, and session durations grouped by device type.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-devices-chart",
+        "description": "Returns time-series chart data grouped by device type for a Web Analytics project, showing visitor counts, bounce rates, and session durations over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-entry-pages",
+        "description": "Returns entry page statistics for a Web Analytics project, showing which pages visitors land on first, including visitor counts and entry rates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-entry-pages-chart",
+        "description": "Returns time-series chart data for entry pages of a Web Analytics project, showing visitor counts and entry rates over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-exit-pages",
+        "description": "Returns exit page statistics for a Web Analytics project, showing which pages visitors leave from, including visitor counts and exit rates.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-exit-pages-chart",
+        "description": "Returns time-series chart data for exit pages of a Web Analytics project, showing visitor counts and exit rates over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-languages",
+        "description": "Returns visitor data grouped by browser language for a Web Analytics project, showing visitor counts for each language.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-languages-chart",
+        "description": "Returns time-series chart data grouped by browser language for a Web Analytics project, showing visitor counts over time for each language.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-operating-systems",
+        "description": "Returns operating system statistics for a Web Analytics project, showing visitor counts, bounce rates, and session durations grouped by OS.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-operating-systems-chart",
+        "description": "Returns time-series chart data grouped by operating system for a Web Analytics project, showing visitor counts, bounce rates, and session durations over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-operating-systems-versions",
+        "description": "Returns OS version statistics for a Web Analytics project, showing visitor counts, bounce rates, and session durations grouped by OS version.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-operating-systems-versions-chart",
+        "description": "Returns time-series chart data grouped by OS version for a Web Analytics project, showing visitor counts, bounce rates, and session durations over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-referrers",
+        "description": "Returns referrer statistics for a Web Analytics project, showing visitor counts, bounce rates, and session durations grouped by referrer URL.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-referrers-chart",
+        "description": "Returns time-series chart data grouped by referrer for a Web Analytics project, showing visitor counts, bounce rates, and session durations over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-source-channels",
+        "description": "Returns traffic grouped by source channel (e.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-source-channels-chart",
+        "description": "Returns time-series chart data grouped by source channel (e.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-sources",
+        "description": "Returns traffic source breakdown for a Web Analytics project, showing visitor counts, bounce rates, and session durations grouped by referral source.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-sources-chart",
+        "description": "Returns time-series chart data for traffic sources of a Web Analytics project, showing how visitor counts, bounce rates, and session durations change over time for eac...",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-stats",
+        "description": "Returns aggregate statistics for a Web Analytics project, including total visitors, bounce rate, and average session duration without any dimension grouping.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-top-pages",
+        "description": "Returns the most visited pages for a Web Analytics project, including pageview counts, visitor counts, bounce rates, and average page visit durations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-top-pages-chart",
+        "description": "Returns time-series chart data for the most visited pages of a Web Analytics project, showing how pageviews, visitors, and other metrics change over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-utm-params",
+        "description": "Returns statistics for a specified UTM paramater for a Web Analytics project, showing visitor counts, bounce rates, and session durations grouped by utm_source.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      },
+      {
+        "tool_name": "web-analytics-utm-params-chart",
+        "description": "Returns time-series chart data grouped by a specified UTM param for a Web Analytics project, showing visitor counts, bounce rates, and session durations over time.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://composio.dev/toolkits/ahrefs_mcp",
+        "source_type": "Third-party (Composio, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The only public code is a separate, outdated local server; hosted tool definitions and initialize instructions were not available verbatim.",
+    "human_can_agent_cannot": "The full Ahrefs software includes additional features beyond the documented MCP tool groups, such as site auditing, content tooling, social media management, and other products. The hosted docs do not provide an exhaustive human-versus-MCP operation matrix, so specific unavailable operations are NOT FOUND. The public REST API reference documents additional API endpoints but its parameters were not treated as MCP tool parameters.",
+    "sources": [
+      "https://docs.ahrefs.com/en/mcp/docs/tool-categories",
+      "https://composio.dev/toolkits/ahrefs_mcp",
+      "https://claude.com/connectors/ahrefs",
+      "https://agentdiscoverability.com/track/chatgpt/ahrefs",
+      "https://ahrefs.com/pricing/",
+      "https://docs.ahrefs.com/docs/api/reference/introduction"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs instruct clients to choose `tools` groups and warn that unsupported group names are rejected. They do not state that the server enforces recommendations to the AI beyond connection/configuration validation. The external endpoint is described as unsupported for use through custom scripts, bridges, or standalone HTTP/JSON-RPC clients.",
+    "governance_promises": "The help article says: \"Your data is only shared with the AI client you have specifically configured on your local machine.\" This is a vendor statement, not a described server-side data-protection mechanism. The general privacy policy and terms were reviewed; no MCP-specific retention, training, or masking statement was located.",
+    "promises_to_user": "The introduction describes the hosted server as allowing AI agents to securely access Ahrefs API data. It documents OAuth authorization and dedicated MCP-tagged API keys, plus usage tracking and configurable per-key unit limits.",
+    "comparison_with_server_logic": "OAuth metadata substantiates protected-resource authorization and the docs describe consent and key limits. The per-key limit is configurable by workspace admins. No inspected source describes technical enforcement of the help article's data-sharing promise, data masking, retention, or AI-training policy specifically for MCP.",
+    "sources": [
+      "https://docs.ahrefs.com/en/mcp/docs/introduction",
+      "https://docs.ahrefs.com/en/mcp/docs/tool-categories",
+      "https://help.ahrefs.com/en/articles/13913559-getting-started-with-ahrefs-mcp",
+      "https://ahrefs.com/legal/terms",
+      "https://ahrefs.com/legal/privacy-policy"
+    ]
+  },
+  "contradictions": [
+    "Tool counts differ across catalogues: Composio lists 135, Agent Discoverability lists 140, and Claude's connector directory states 61 tools. Official Ahrefs docs provide tool groups but no individual names or total, so these totals cannot be reconciled against an official manifest.",
+    "The supplied OAuth metadata advertises scope `apiv3-mcp`, while Ahrefs docs describe API keys tagged with `MCP` scope. The supplied authorization-server metadata also advertises the implicit grant alongside authorization code and S256 PKCE.",
+    "The endpoint POST response in the supplied metadata was HTTP 400 `Blank input data`, whereas the separate connection test reported HTTP 401. These are distinct probes and neither supplied an MCP tool manifest."
+  ],
+  "observations_for_research": [
+    "Ahrefs documents a URL query parameter that controls groups of advertised tools, with all groups on by default and an `essentials` preset.",
+    "Tool-group selection is a client-facing exposure control; the docs state that documentation and rendering helpers remain available regardless of selection.",
+    "The endpoint is metered through shared API units and has plan-dependent result-row caps; OAuth-created MCP keys have an adjustable monthly unit limit."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Reviewed the supplied links.json, links_check.txt, pages/ bundle, OAuth metadata, and local public repository. The repo is an archived/outdated local stdio implementation, not the deployed hosted server; no hosted implementation code was found. The NPM page returned HTTP 403 in the evidence bundle. Official hosted pages publish tool groups but no complete individual list or schemas; actions.json therefore uses catalogue names/descriptions and marks parameters NOT PUBLISHED. Catalogue disagreement is recorded above. The official docs-search pages concern documentation, not the product endpoint.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 5.1
+  }
+}

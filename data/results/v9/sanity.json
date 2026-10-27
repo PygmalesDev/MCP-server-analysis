@@ -1,0 +1,896 @@
+{
+  "server": "sanity",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.sanity.io/mcp",
+    "documentation_url_csv": "https://mcp.sanity.io",
+    "addressing": "global",
+    "repository_url": "https://github.com/sanity-io/sanity-mcp-server",
+    "documentation_urls_used": [
+      "https://www.sanity.io/docs/ai/mcp-server",
+      "https://www.sanity.io/blog/sanity-remote-mcp-server-is-generally-available",
+      "https://www.sanity.io/blog/introducing-sanity-model-context-protocol-server",
+      "https://www.sanity.io/pricing?library=true&previewmode=true",
+      "https://www.sanity.io/docs/platform-management/how-ai-credits-work",
+      "https://www.sanity.io/legal/tos",
+      "https://github.com/sanity-io/sanity-mcp-server",
+      "https://claude.com/marketplace/connectors/sanity"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "Sanity's public repository is an archived, deprecated local MCP server (@sanity/mcp-server). Its README directs users to the hosted remote server; it is not the deployed code for this endpoint. No hosted-server implementation was found.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "64b95d18bb94eebdc62d26cd24abf53c04b8e955",
+    "commit_date": "2026-02-06",
+    "implementation_language": "NOT FOUND",
+    "mcp_sdk_and_version": "NOT FOUND",
+    "code_public": "Yes",
+    "license": "NOT FOUND",
+    "release_status": "GA",
+    "other_official_servers": [
+      "https://github.com/sanity-io/sanity-mcp-server — deprecated archived local MCP server; README says to use the hosted server.",
+      "Sanity Context MCP is documented as a separate server for contextual information; its tool list was excluded from this endpoint's actions."
+    ],
+    "sources": [
+      "https://www.sanity.io/docs/ai/mcp-server",
+      "https://www.sanity.io/docs/changelog/e75b1d45-03be-4fa6-994b-248750b3fa9f",
+      "https://github.com/sanity-io/sanity-mcp-server",
+      "https://www.sanity.io/docs/ai/sanity-context-mcp"
+    ],
+    "commit_note": "commit hash/date filled in by the research script (latest commit on the default branch)"
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "No separate MCP fee is stated. Sanity says the remote server is available to all Sanity projects; a Sanity account and authorization are required.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Free: $0/month; Growth: $15 per seat/month; Enterprise: custom pricing.",
+    "pricing_model_details": "Sanity's pricing page describes monthly project plans and per-seat Growth billing. The MCP documentation says generate_image and transform_image consume AI credits; most other MCP tools do not. Credit costs vary by action.",
+    "other_access_restrictions": "OAuth is the default. A bearer API token can be configured instead, and calls then use that token's role and permissions. Manually configured OAuth sessions typically expire after seven days. No MCP-specific paid tier or per-call price was found.",
+    "restrictions_controlled_by": "Vendor and Sanity project/organization permission configuration",
+    "sources": [
+      "https://www.sanity.io/docs/ai/mcp-server",
+      "https://www.sanity.io/pricing?library=true&previewmode=true",
+      "https://www.sanity.io/docs/platform-management/how-ai-credits-work"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official documentation lists 54 tools for content, schemas, releases, projects, datasets, media libraries, documentation, development rules, and feedback. Their availability at the input endpoint is supported by its authentication challenge and official endpoint documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-specific results and errors are not reproduced as a complete tools/call transcript in the documentation. Individual descriptions document operation IDs, result fields, and error behavior for several tools.",
+      "authorization_mechanism": "OAuth by default or bearer API token. The input endpoint returned HTTP 401 with WWW-Authenticate error=\"invalid_token\", error_description=\"Missing Authorization header\", and a resource_metadata link to its protected-resource document.",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server",
+        "https://mcp.sanity.io/mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP resource list or explicit resource capability declaration was found in the hosted documentation or supplied endpoint evidence.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server",
+        "https://mcp.sanity.io"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP prompts/list or prompts/get capability is documented. Sanity's listed development-rule tools return guidance, but are documented as tools rather than MCP prompts.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The materials reviewed do not specify MCP-call logging, audit event format, or an MCP logging capability. General Sanity plan features include audit history and request logs, but their connection to MCP calls is not stated.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server",
+        "https://www.sanity.io/pricing?library=true&previewmode=true"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP sampling support is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP roots capability is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returns an OAuth bearer challenge. Supplied protected-resource metadata names https://mcp.sanity.io as the authorization server, declares scopes_supported [\"global\"] and bearer_methods_supported [\"header\"]. Authorization-server metadata declares authorization_code and refresh_token grants, S256 PKCE, token endpoint authentication methods client_secret_basic, client_secret_post, and none, plus a registration endpoint. OpenID configuration returned 404. Docs also describe bearer API-token authentication.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"Missing Authorization header\", resource_metadata=\"https://mcp.sanity.io/.well-known/oauth-protected-resource/mcp\"",
+      "post_interaction_context_structure": "The endpoint's unauthenticated response is JSON: {\"error\":\"invalid_token\",\"error_description\":\"Missing Authorization header\"}. Token response format and token lifetime are not specified in the supplied metadata; docs say manually configured OAuth sessions typically expire after seven days.",
+      "authorization_mechanism": "OAuth protected-resource metadata and Dynamic Client Registration are advertised. Authorization Code and Refresh Token grants; PKCE S256; token auth methods client_secret_basic, client_secret_post, none; scopes_supported: global. Revocation endpoint https://mcp.sanity.io/revoke; registration endpoint https://mcp.sanity.io/register. Docs additionally permit a bearer API token whose role and permissions govern tool calls.",
+      "authorization_server": "https://mcp.sanity.io",
+      "sources": [
+        "https://mcp.sanity.io/mcp",
+        "https://mcp.sanity.io/.well-known/oauth-protected-resource",
+        "https://mcp.sanity.io/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.sanity.io/.well-known/oauth-authorization-server",
+        "https://mcp.sanity.io/.well-known/openid-configuration",
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP Elicitation support or server-triggered confirmation interaction is documented. The installation OAuth flow requires user authorization, but that is separate from tool-call elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe asynchronous asset operations returning operation IDs and a status-check tool, but do not declare the MCP Tasks capability.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Asset upload tools return operation IDs; assets_upload_status checks one to 20 operations. This is documented tool behavior, not evidence of MCP Tasks support.",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP configuration capability is documented. Clients configure the endpoint URL and may supply an Authorization header.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool list includes give_sanity_feedback, which submits feedback to Sanity about tool or development issues. Tool-specific descriptions also document selected error conditions and recovery guidance.",
+      "pre_interaction_context_verbatim": "Submit feedback about Sanity when you encounter issues while working with a Sanity codebase or project.",
+      "post_interaction_context_structure": "The feedback tool accepts a detailed report; when feedback concerns a Media Library, its description requests mediaLibraryId and, if known, organizationId.",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP subscription capability is documented. Software plans and AI-credit pricing are described separately.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server",
+        "https://www.sanity.io/pricing?library=true&previewmode=true",
+        "https://www.sanity.io/docs/platform-management/how-ai-credits-work"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The docs describe asynchronous uploads, polling intervals, and operation status, but do not document MCP progress notifications.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Asset operation status is retrieved using operation IDs; docs recommend waiting at least pollAfterMs between checks.",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No MCP request-cancellation capability is documented. The asset-operation documentation does not describe canceling an upload through MCP.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The server exposes on-demand documentation and development-rule tools. Sanity describes the hosted server as Streamable HTTP and says it is continuously updated. No initialize instructions text was published in the materials reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The documentation describes tool-specific result fields, including upload operation IDs, asset references, schema identifiers, and tool-specific errors.",
+      "sources": [
+        "https://www.sanity.io/docs/ai/mcp-server",
+        "https://www.sanity.io/blog/sanity-remote-mcp-server-is-generally-available",
+        "https://github.com/sanity-io/sanity-mcp-server"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. The official list includes reads, writes, and destructive operations. The hosted docs do not publish tool annotations such as readOnlyHint, destructiveHint, idempotentHint, or openWorldHint. 2. No server-enforced general confirmation flow is documented. Docs recommend draft/release workflows and describe writes that take effect immediately, including cdnAccessPolicy edits. 3. OAuth scope metadata advertises only global; docs say calls follow the user's Sanity role or API-token permissions. OAuth sessions typically expire after seven days. 4. No read-only endpoint, URL tool filter, or MCP sandbox mode is documented. Writes often stage as drafts or release versions; release scheduling and deletion are outside the documented MCP tools. 5. Media Library patching is limited to documented fields and schema validation; no general PII masking or secret-redaction policy is documented. 6. Asset status checks accept 1–20 operation IDs; dataset document patching is capped at 25 documents per call; dataset file uploads are capped at 50 MiB; query results larger than 64 KiB are rejected. Upload docs mention source size and fetch-time limits, without numeric values. AI image generation and transformation consume AI credits. 7. Media Library writes are schema-validated; invalid edits and certain system fields are rejected. Docs do not specify unknown-argument handling or operator overrides. 8. Sanity plan pages advertise audit history and request logs, but MCP-specific logging behavior is not stated. 9. give_sanity_feedback asks agents to submit issue/workflow feedback to Sanity. No separate rating or survey tool is listed; AI-credit charges and upgrade links are documented in product pricing/error guidance. 10. get_sanity_rules/list_sanity_rules expose development rules through tools. Tool descriptions also instruct agents on sequencing, batching, and retry checks; whether those recommendations are enforced is tool-specific. 11. No agent-history-dependent behavior is documented. 12. This endpoint's documented tool list is flat; separate Sanity Context MCP is a distinct server. Asset operations use asynchronous operation IDs. 13. run_sanity_cli is a restricted command interface, not a raw shell: docs say it cannot access files, prompt, run in the background, or change authentication. query_documents accepts GROQ, while CLI/API calls are not described as arbitrary raw HTTP access.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Check the destination before repeating an upload whose outcome is unknown.",
+      "Honor HTTP Retry-After when rate limited.",
+      "Use `list_workspace_schemas` when several schema sources are available, then pass the advertised `schemaId` to inspect that exact schema.",
+      "Do not patch the published or draft ID first because that creates an unrelated draft.",
+      "For unfamiliar GROQ syntax, functions, or query patterns, fetch get_sanity_rules({rules: [\"groq\"]}) before proceeding.",
+      "Use this when: An MCP tool returned an unexpected error or confusing result"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The input endpoint is documented as one hosted MCP server with a flat list of tools. A separate Sanity Context MCP exists, but is not part of this endpoint.",
+    "sources": [
+      "https://www.sanity.io/docs/ai/mcp-server",
+      "https://www.sanity.io/blog/sanity-remote-mcp-server-is-generally-available",
+      "https://www.sanity.io/pricing?library=true&previewmode=true",
+      "https://www.sanity.io/docs/ai/sanity-context-mcp"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "59",
+    "action_count_comment": "The official tool reference at https://www.sanity.io/docs/ai/mcp-server names 54 tools; no total is stated there. The official GA announcement describes the server as having 40+ tools. Five additional names were added from the Claude connector directory (2026-10), which says “Show all 31 tools”; its captured page exposes 23 names, with five not present in the official list. Those additional names are marked third-party. mcptest.io and MCP.so did not expose tool inventories in the captured pages. The OpenMCP listing describes a separate proxy server and was excluded.",
+    "actions": [
+      {
+        "tool_name": "dataset_assets_upload_from_web_chatgpt",
+        "description": "Start asynchronous upload of a ChatGPT web attachment to a dataset.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dataset_assets_upload_from_url",
+        "description": "Start asynchronous image or file upload from a public URL to a dataset.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_upload_from_url",
+        "description": "Start asynchronous image, video, or file upload to a Media Library.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_assets_upload_from_url",
+        "description": "Deprecated; documentation says it does not start an upload.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "assets_upload_status",
+        "description": "Check status for one to 20 asset uploads by operation ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_upload_from_file",
+        "description": "Prepare one-use upload URL for a local or private Media Library asset.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dataset_assets_upload_from_file",
+        "description": "Prepare one-use upload URL for a local or private dataset asset.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_schema",
+        "description": "Fetch deployed schema using workspace selection and source precedence.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_workspace_schemas",
+        "description": "List deployed schemas grouped by schema source.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deploy_schema",
+        "description": "Deploy schema types to Sanity Cloud.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "deploy_studio",
+        "description": "Deploy managed Studio bound to an MCP-managed schema.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_documents",
+        "description": "Create draft documents or release versions from structured content.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_version",
+        "description": "Create a version document for a specific release.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "patch_documents",
+        "description": "Patch documents in a draft or release version.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_documents",
+        "description": "Run a GROQ query against Sanity documents.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "generate_image",
+        "description": "Trigger asynchronous AI image generation for a document field.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "transform_image",
+        "description": "Trigger asynchronous AI transformation of an existing image.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_document",
+        "description": "Fetch one document by exact ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "documents_validate",
+        "description": "Validate documents against deployed schema without modifying them.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "publish_documents",
+        "description": "Publish draft documents.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "unpublish_documents",
+        "description": "Move published documents back to drafts.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "discard_drafts",
+        "description": "Delete drafts while retaining published documents.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "version_discard",
+        "description": "Discard document versions from a release.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_organizations",
+        "description": "List organizations accessible to the authenticated user.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_projects",
+        "description": "List Sanity projects associated with the account.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_project_studios",
+        "description": "Retrieve Studio applications linked to a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_project",
+        "description": "Create project initialized with a dataset and API tokens.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cors_origins_list",
+        "description": "List configured CORS origins for a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "add_cors_origin",
+        "description": "Add CORS origins to a project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "cors_origins_delete",
+        "description": "Delete CORS origins from a project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "whoami",
+        "description": "Return authenticated account and MCP authentication method.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_datasets",
+        "description": "List datasets in a project.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_dataset",
+        "description": "Create dataset with specified name and access settings.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update_dataset",
+        "description": "Modify dataset name or access control settings.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_release",
+        "description": "Create release for grouping content changes; does not schedule it.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_releases",
+        "description": "List releases in a dataset with optional state filtering.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_embeddings_indices",
+        "description": "List embedding indices available for a dataset.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "semantic_search",
+        "description": "Search semantically on an embeddings index.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_list",
+        "description": "List Media Libraries in an organization.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_get_schema",
+        "description": "Get Media Library document types or field definitions.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_query_documents",
+        "description": "Run GROQ query against Media Library documents.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_get_document",
+        "description": "Fetch one Media Library document by exact ID.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_create_documents",
+        "description": "Create Media Library documents; only collections are supported.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_patch_documents",
+        "description": "Patch documented safe subset of Media Library fields.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_publish_documents",
+        "description": "Publish Media Library asset drafts.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_discard_drafts",
+        "description": "Discard Media Library asset drafts.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_list_asset_references",
+        "description": "List documents referencing a Media Library asset.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "media_library_link_assets",
+        "description": "Create usable project-document references for Media Library assets.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_sanity_cli",
+        "description": "Run limited Sanity CLI commands without shell or filesystem access.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search_docs",
+        "description": "Search Sanity documentation.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "read_docs",
+        "description": "Fetch a Sanity documentation article.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list_sanity_rules",
+        "description": "List available Sanity development rules.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_sanity_rules",
+        "description": "Load selected Sanity development rules.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "give_sanity_feedback",
+        "description": "Submit feedback about Sanity MCP or development experience.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.sanity.io/docs/ai/mcp-server",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_documents_from_json",
+        "description": "Create documents from JSON content.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/sanity",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "create_documents_from_markdown",
+        "description": "Create documents from Markdown content.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/sanity",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "migration_guide",
+        "description": "Retrieve migration guidance.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/sanity",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "patch_document_from_json",
+        "description": "Patch a document using JSON content.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/sanity",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      },
+      {
+        "tool_name": "patch_document_from_markdown",
+        "description": "Patch a document using Markdown content.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (not in official list)",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://claude.com/marketplace/connectors/sanity",
+        "source_type": "Third-party (Claude connector directory, 2026-10)"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "No deployed-server code or verbatim complete tools/list and initialize payload was available; documentation lists names and descriptions, not full definitions and schemas.",
+    "human_can_agent_cannot": "The documented MCP tools do not schedule, publish, archive, or delete a content release; Sanity says these must be done in Studio or via the HTTP Actions API. The Media Library MCP tools do not support folder placement or version-graph management; docs direct users to the Media Library app. The server's CLI tool cannot change authentication or access the filesystem. Sources: https://www.sanity.io/docs/ai/mcp-server",
+    "sources": [
+      "https://www.sanity.io/docs/ai/mcp-server",
+      "https://www.sanity.io/blog/sanity-remote-mcp-server-is-generally-available",
+      "https://claude.com/marketplace/connectors/sanity",
+      "https://mcptest.io/servers/sanity/",
+      "https://mcp.so/servers/sanity"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "Tool descriptions recommend checking destinations before upload retries, honoring Retry-After, batching status checks, creating release versions before patching, and loading GROQ rules for unfamiliar syntax. These instructions are provided in tool descriptions; the documentation does not state that every recommendation is enforced by the server.",
+    "governance_promises": "Sanity says calls use the authenticated user's role or token permissions. The Terms say Subscriber Data may be processed as needed to provide the Service and that Service Usage Data may be used for Sanity's business purposes. The reviewed MCP docs do not make MCP-specific retention, AI-training, or audit-logging promises.",
+    "promises_to_user": "Sanity describes the remote server as hosted on its infrastructure, OAuth-enabled, continuously updated, and available without a local install. Its MCP page says edits respect the deployed schema and that most MCP tools do not consume AI credits.",
+    "comparison_with_server_logic": "Permission inheritance is described for bearer-token calls. Media Library schema checks and field restrictions are documented as enforced behaviors. OAuth session expiry and rate-limit guidance are documented; the latter is advice to clients. Hosted, continuously updated operation is a product claim, not a tool-level governance mechanism. General audit logs are listed as plan features, with no MCP-specific linkage stated.",
+    "sources": [
+      "https://www.sanity.io/docs/ai/mcp-server",
+      "https://www.sanity.io/blog/sanity-remote-mcp-server-is-generally-available",
+      "https://www.sanity.io/mcp",
+      "https://www.sanity.io/legal/tos",
+      "https://www.sanity.io/pricing?library=true&previewmode=true"
+    ]
+  },
+  "contradictions": [
+    "The official tool reference documents 54 tools, while the Claude connector directory reports 31 and exposes 23 names in the captured page. The directory's five additional visible names—create_documents_from_json, create_documents_from_markdown, migration_guide, patch_document_from_json, and patch_document_from_markdown—are not in the official list; they are retained as third-party-only entries.",
+    "The OAuth protected-resource documents advertise scopes_supported [\"global\"], while product documentation says calls use the user's role/token permissions. The materials do not explain how the global OAuth scope maps to Sanity product roles."
+  ],
+  "observations_for_research": [
+    "The official tool descriptions include operational sequencing and retry guidance that can influence agent call patterns even where general confirmation is not documented.",
+    "Several write tools use drafts or release versions, while some Media Library fields take effect immediately; this yields different staging behavior within the same server.",
+    "The docs describe two AI-credit-consuming tools and separately describe server calls that generally do not consume credits."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the provided links.json, pages/ text, script text and HTML, links_check.txt, and the public GitHub repository page. The official repository is an archived deprecated local server, not code for the hosted endpoint; the repository was not present in the local code folder, and its commit and implementation details were not used. The official docs page publishes tool names and descriptions but not complete schemas or hosted initialize instructions. The supplied OAuth metadata was used without re-fetching. Unofficial/proxy listings were excluded from actions; OpenMCP's listing is a separate proxy. Pricing and legal findings reflect the captured official pages.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 23.0
+  }
+}

@@ -1,0 +1,781 @@
+{
+  "server": "mongodb",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.mongodb.com/mcp",
+    "documentation_url_csv": "https://www.mongodb.com/docs/mcp-server/",
+    "addressing": "global",
+    "repository_url": "https://github.com/mongodb-js/mongodb-mcp-server",
+    "documentation_urls_used": [
+      "https://www.mongodb.com/docs/mcp-server/",
+      "https://www.mongodb.com/docs/mcp-server/overview/",
+      "https://www.mongodb.com/docs/mcp-server/get-started/",
+      "https://www.mongodb.com/docs/mcp-server/tools/",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/access-models/",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/manage-ai-client-access",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/security",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/rate-limits",
+      "https://www.mongodb.com/products/updates/now-ga-mongodb-atlas-managed-mcp-server/"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repository contains the local stdio MCP server and a stdio proxy client for MongoDB's Remote MCP server. It does not establish that this repository is the implementation deployed at mcp.mongodb.com/mcp. Local-code facts below are identified as such and are not treated as hosted-server guarantees.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "1b117c7c3cfdd5a6cc84b78792de23220fd03fe7",
+    "commit_date": "2026-10-23",
+    "implementation_language": "TypeScript (public local implementation)",
+    "mcp_sdk_and_version": "@modelcontextprotocol/server ^2.3.1 and @modelcontextprotocol/client ^2.3.1 (public local implementation)",
+    "code_public": "Yes",
+    "license": "Apache-2.0 (public local implementation)",
+    "release_status": "GA for Atlas Managed MCP Server (announced 2026-08-13)",
+    "other_official_servers": [
+      "Local MongoDB MCP Server: separately installed stdio server with local configuration and tool availability differences.",
+      "mongodb-atlas-mcp-remote: public stdio proxy client that forwards to MongoDB Remote MCP using OAuth2 client credentials; not the hosted server itself."
+    ],
+    "sources": [
+      "https://mcp.mongodb.com/mcp",
+      "https://www.mongodb.com/docs/mcp-server/tools/",
+      "https://www.mongodb.com/products/updates/now-ga-mongodb-atlas-managed-mcp-server/",
+      "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/mongodb-atlas-mcp-remote/package.json",
+      "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/core/package.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "MongoDB does not state a separate charge for using the managed MCP endpoint in the reviewed documentation. Atlas resource usage remains subject to Atlas pricing.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Atlas Free: $0/hour. Flex: $0.011/hour, up to $30/month on the pricing page reviewed. Dedicated: listed from $0.08/hour, starting at $56.94/month; actual charges depend on configuration and usage.",
+    "pricing_model_details": "MCP request limits are 2,000 requests per minute per IP and 500 per minute per user. Programmatic access service accounts allow up to 100 active access tokens each; tokens are valid for one hour. Running Atlas Stream Processing processors incur charges.",
+    "other_access_restrictions": "User-delegated access is disabled by default at the organization level, except for organizations Atlas creates when a new user signs up. Programmatic configurations can have assigned roles, optional IP access lists, and a read-only setting that is preselected at creation. The endpoint returned HTTP 401 without authorization.",
+    "restrictions_controlled_by": "MongoDB controls endpoint and service limits; organization owners configure user-delegated access; organization or project owners provision programmatic access and its roles/settings; Atlas roles constrain operations.",
+    "sources": [
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/access-models/",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/rate-limits",
+      "https://www.mongodb.com/docs/atlas/billing/atlas-flex-costs/",
+      "https://www.mongodb.com/pricing",
+      "https://mcp.mongodb.com/mcp"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official tool reference marks managed availability for Atlas and database tools and lists Assistant tools separately. `actions.json` records 43 official names: 41 marked available for Atlas Managed and two Assistant tools listed without a managed/local availability column.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The tool reference documents tool purposes but not the hosted tools/list schemas or complete result envelopes. The unauthenticated endpoint returned HTTP 401 with JSON error, reason, and detail fields.",
+      "authorization_mechanism": "OAuth-protected resource. POST to the endpoint returned HTTP 401 and `WWW-Authenticate: Bearer realm=\"mcp\", resource_metadata=\"https://mcp.mongodb.com/.well-known/oauth-protected-resource\"`. Resource metadata: `resource=https://mcp.mongodb.com`; `authorization_servers=[https://authorize.mongodb.com]`; `scopes_supported=[]`. Endpoint-path metadata returned HTTP 401 with the same challenge.",
+      "authorization_server": "https://authorize.mongodb.com/.well-known/oauth-authorization-server reports issuer https://authorize.mongodb.com; authorization endpoint https://cloud.mongodb.com/oauth/authorize; token endpoint https://authorize.mongodb.com/tokens; JWKS https://authorize.mongodb.com/jwks; revocation endpoint https://authorize.mongodb.com/tokens/revoke; code response; authorization_code, client_credentials, refresh_token, and token-exchange grants; PKCE S256; client auth methods none, client_secret_basic, client_secret_post, private_key_jwt; `client_id_metadata_document_supported=true`. No `registration_endpoint` is listed. The OIDC configuration URL returned 404.",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/tools/",
+        "https://mcp.mongodb.com/mcp",
+        "https://mcp.mongodb.com/.well-known/oauth-protected-resource",
+        "https://mcp.mongodb.com/.well-known/oauth-protected-resource/mcp",
+        "https://authorize.mongodb.com/.well-known/oauth-authorization-server",
+        "https://authorize.mongodb.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The public local server documents an exported-data resource, but the reviewed hosted-server documentation does not establish whether the managed endpoint exposes MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted endpoint.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/tools/",
+        "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/tools-mongodb"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted prompt capability was identified in the reviewed endpoint documentation or tool reference.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/",
+        "https://www.mongodb.com/docs/mcp-server/tools/"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Atlas documents audit events for some underlying operations. It says these events attribute operations to the authorizing user in user-delegated access and to a Service Account in programmatic access; it does not say every MCP tool call is recorded.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Atlas audit events may be generated by underlying operations; direct MCP-call logging is not documented as universal.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/remote-mcp/access-models/",
+        "https://www.mongodb.com/docs/mcp-server/remote-mcp/security"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted sampling capability was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/",
+        "https://www.mongodb.com/docs/mcp-server/tools/"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted roots capability was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/",
+        "https://www.mongodb.com/docs/mcp-server/tools/"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint challenged unauthenticated access with a Bearer resource-metadata URL. The metadata names MongoDB's authorization server. Its OAuth metadata lists authorization-code and client-credentials flows, among others; actual access is further governed by Atlas identities, roles, and configuration.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unauthenticated request: HTTP 401 JSON `{ \"error\": 401, \"reason\": \"Unauthorized\", \"detail\": \"You are not authorized for this resource.\" }`. OAuth metadata reports an empty supported-scope list.",
+      "authorization_mechanism": "Metadata Doc: protected-resource metadata advertises `https://authorize.mongodb.com` and an empty `scopes_supported` array. OAuth server metadata: authorization_code, client_credentials, refresh_token, and `urn:ietf:params:oauth:grant-type:token-exchange`; PKCE S256; auth methods none, client_secret_basic, client_secret_post, private_key_jwt; no registration endpoint listed; client-ID metadata documents supported. Token lifetimes vary by access model: programmatic access tokens are documented as one hour; delegated token lifetime was not found. Revocation endpoint is https://authorize.mongodb.com/tokens/revoke.",
+      "authorization_server": "https://authorize.mongodb.com",
+      "sources": [
+        "https://mcp.mongodb.com/mcp",
+        "https://mcp.mongodb.com/.well-known/oauth-protected-resource",
+        "https://mcp.mongodb.com/.well-known/oauth-protected-resource/mcp",
+        "https://authorize.mongodb.com/.well-known/oauth-authorization-server",
+        "https://authorize.mongodb.com/.well-known/openid-configuration",
+        "https://www.mongodb.com/docs/mcp-server/remote-mcp/access-models/",
+        "https://www.mongodb.com/docs/mcp-server/remote-mcp/rate-limits"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MongoDB documents confirmation prompts for some risky operations, including aggregation pipelines using `$out` or `$merge`. The prompt depends on the AI client supporting elicitation; without it, the operation runs without prompting. The public local implementation also contains elicitation logic, but is not the deployed endpoint.",
+      "pre_interaction_context_verbatim": "\"The MCP Server also triggers a confirmation prompt when an aggregation pipeline contains a $out or $merge stage.\"",
+      "post_interaction_context_structure": "If the supported client elicits and the user declines, the server returns an error and does not perform the operation. Without client elicitation support, the pipeline executes without the confirmation prompt.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/remote-mcp/security",
+        "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/core/src/toolBase.ts#L609-L619",
+        "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/tools-mongodb/src/mongodbTool.ts#L212-L219"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP Tasks capability was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/",
+        "https://www.mongodb.com/docs/mcp-server/tools/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Managed access is configured through Atlas access models: organization-level enablement and access mode for user-delegated clients, or per-configuration roles, optional IP access list, and read-only setting for programmatic access. Local-server flags such as `readOnly` and `disabledTools` are not attributed to the hosted endpoint.",
+      "pre_interaction_context_verbatim": "\"Atlas preselects read-only when you create an MCP configuration.\"",
+      "post_interaction_context_structure": "Configuration affects available operations and permissions; Atlas documents that write tools are not available to an agent when a programmatic MCP configuration is read-only.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/remote-mcp/access-models/",
+        "https://www.mongodb.com/docs/mcp-server/remote-mcp/manage-ai-client-access",
+        "https://www.mongodb.com/docs/mcp-server/local-mcp/configuration/options/"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No dedicated hosted error-reporting MCP capability was found. The public local implementation has logging and telemetry code, which does not establish hosted endpoint behavior.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The endpoint's unauthenticated response is a JSON error object; other hosted tool error formats were not found.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://mcp.mongodb.com/mcp",
+        "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/core/src/toolBase.ts#L970-L1018"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted MCP subscription capability was found. Atlas resources consumed through the server may incur their normal product charges.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/tools/",
+        "https://www.mongodb.com/docs/atlas/billing/atlas-flex-costs/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The hosted tool documentation describes polling `atlas-inspect-cluster` until a cluster reaches IDLE after creation. This is a tool-level workflow, not evidence of MCP progress notifications.",
+      "pre_interaction_context_verbatim": "\"The tool returns immediately. Use atlas-inspect-cluster to poll until the cluster state reaches IDLE.\"",
+      "post_interaction_context_structure": "Cluster creation returns immediately; users or agents can poll the cluster state with a separate tool.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/tools/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No hosted cancellation capability or behavior was found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/",
+        "https://www.mongodb.com/docs/mcp-server/tools/"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The documentation describes MongoDB Assistant knowledge search tools that can retrieve MongoDB documentation and curated guidance. It does not mark these tools in the Atlas Managed/Local availability columns.",
+      "pre_interaction_context_verbatim": "\"The knowledge base includes official MongoDB documentation, curated expert guidance, and other resources provided by MongoDB.\"",
+      "post_interaction_context_structure": "Assistant tools return knowledge-source listings or search results; hosted response schemas were not published in the reviewed documentation.",
+      "authorization_mechanism": "NOT APPLICABLE",
+      "authorization_server": "NOT APPLICABLE",
+      "sources": [
+        "https://www.mongodb.com/docs/mcp-server/tools/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official hosted docs list read, write, and destructive actions. No hosted tool-annotation values were found. The public local code declares readOnlyHint/destructiveHint annotations, but is a different deployment. 2. Hosted docs describe elicitation confirmation for `$out`/`$merge`; it depends on client support and is not guaranteed. Atlas roles and read-only settings enforce permissions. 3. OAuth metadata reports empty scopes_supported; access models instead rely on Atlas user roles or assigned Service Account roles. User-delegated access uses individual identity; programmatic tokens last one hour, with up to 100 active tokens per service account. Atlas documents revocation and access ending when valid tokens cease working. Organization enablement is disabled by default except the stated new-organization exception. 4. Programmatic configurations support read-only and optional IP allowlists; user-delegated access has organization-level read-only/read-write modes. Local-only configuration includes tool disabling and other flags; no hosted URL toolset filter was found. 5. Hosted security docs say Atlas does not share credentials with the AI client; short-lived credentials are used for the data-plane connection. Local code and docs describe credential redaction/storage, but do not establish deployed endpoint handling. 6. Hosted limits: 2,000 requests/minute/IP and 500/minute/user. Performance Advisor slow-query samples are capped at 50. Stream Processing processors incur charges. 7. Hosted parameter validation/correction behavior was not found. Public local code uses strict Zod input schemas; this is not confirmed for the hosted deployment. 8. Atlas says it does not record individual tool calls universally; operations that produce audit events attribute them to the user or Service Account. Public local code includes telemetry, but that behavior cannot be transferred to hosted. 9. No feedback, rating, survey, or report tool appears in the listed action names/descriptions. MongoDB privacy policy generally discusses surveys and chatbot input/output, but no MCP-specific telemetry/retention terms were found. 10. Assistant knowledge tools provide guidance; no hosted initialize instructions were published. Local code and separate MongoDB agent skills are not evidence of hosted instructions. 11. Past agent behavior changing future outputs/tools/resources: Unknown. 12. Atlas Managed and Local are distinct deployment variants and have different tool availability; same managed endpoint supports user-delegated and programmatic access models. 13. No raw API request, arbitrary SQL, or script-execution tool appears in the listed hosted tools. `aggregate` can write using `$out`/`$merge`, subject to permissions and client confirmation behavior.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "The official tool reference says to use `atlas-inspect-cluster` to poll after cluster creation until the cluster state reaches IDLE.",
+      "The official tool reference says to resolve region names or codes with `atlas-get-regions` before creating or upgrading a cluster.",
+      "The official tool reference says vector and lexical search indexes must be dropped and recreated to update them."
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "MongoDB publishes distinct Atlas Managed and Local server variants with different tool availability, plus two access models for the managed endpoint. The tool reference marks most Atlas and database tool availability per variant; local Atlas deployment tools are explicitly local-only.",
+    "sources": [
+      "https://www.mongodb.com/docs/mcp-server/tools/",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/access-models/",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/security",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/rate-limits",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/manage-ai-client-access",
+      "https://www.mongodb.com/legal/privacy/privacy-policy",
+      "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/core/src/toolBase.ts#L463-L489",
+      "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/core/src/toolBase.ts#L609-L619",
+      "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/core/src/toolBase.ts#L820-L831",
+      "https://github.com/mongodb-js/mongodb-mcp-server/blob/1b117c7c3cfdd5a6cc84b78792de23220fd03fe7/packages/mongodb-atlas-mcp-remote/package.json"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "43",
+    "action_count_comment": "The official tool reference exists at https://www.mongodb.com/docs/mcp-server/tools/. `actions.json` contains 41 tools whose official tables mark Atlas Managed availability, plus the two official Assistant tools listed in a separate table without an Atlas Managed/Local availability column. No catalogue-only tools were added. The official reference does not state a total. Glama and Composio listings were checked as cross-checks; their surfaced tools do not replace the official managed availability table. The exact hosted schemas/parameters are not published in the reviewed tool reference, so parameters are marked NOT PUBLISHED.",
+    "actions": [
+      {
+        "tool_name": "atlas-list-orgs",
+        "description": "Returns a list of Atlas organizations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-list-projects",
+        "description": "Returns a list of Atlas projects.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-create-project",
+        "description": "Creates a new Atlas project.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-list-clusters",
+        "description": "Returns list of Atlas clusters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-inspect-cluster",
+        "description": "Returns information about a specific Atlas cluster.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-create-free-cluster",
+        "description": "Creates a free Atlas cluster.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-get-regions",
+        "description": "Returns the supported Atlas regions for a cloud provider ( AWS , AZURE , or GCP ), including each region's code and human-readable location. Use",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-upgrade-cluster",
+        "description": "Supports the following Atlas cluster upgrades: Free to Flex Free to M10 Flex to M10 You can optionally specify the target region and provider .",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-create-cluster",
+        "description": "Creates a dedicated Atlas cluster with M10–M80 instance sizes. Supports replica set and single-shard cluster types in one to three regions. clusterType defaults to REPLICASET",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-pause-resume-cluster",
+        "description": "Pauses or resumes a dedicated (M10+) Atlas cluster. Free and Flex clusters cannot be paused. Pause : Makes the cluster unavailable for connections and stops",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-inspect-access-list",
+        "description": "Returns information about the IP and CIDR ranges that can access an Atlas cluster.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-list-db-users",
+        "description": "Returns a list of Atlas database users.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-create-db-user",
+        "description": "Creates an Atlas database user.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-list-alerts",
+        "description": "Returns a list of triggered alerts for an Atlas project. These are alerts Atlas has raised, not the alert configurations that define them. Defaults to",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-get-performance-advisor",
+        "description": "Returns Performance Advisor recommendations for an Atlas cluster. Supports operations for suggested indexes, drop index suggestions, slow query logs, and schema suggestions. Requires Project Read",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-load-sample-dataset",
+        "description": "Loads a sample dataset into an Atlas cluster.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "remote-atlas-connect",
+        "description": "Connects to an Atlas cluster on the Remote MCP Server.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-streams-discover",
+        "description": "Returns information about an Atlas Stream Processing workspace, processor, public connection, or privatelink networking connection. On the Remote MCP Server, the Atlas Stream Processing tools",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-streams-build",
+        "description": "Creates an Atlas Stream Processing workspace, processor, public connection, or privatelink networking connection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-streams-manage",
+        "description": "Manages an Atlas Stream Processing workspace, processor, or public connection. The MongoDB MCP Server can: Start, stop, or update a processor. Update a workspace. Update",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "atlas-streams-teardown",
+        "description": "Deletes an Atlas Stream Processing workspace, processor, public connection, or privatelink networking connection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "find",
+        "description": "Runs a MongoDB database query.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "aggregate",
+        "description": "Runs a MongoDB aggregation pipeline.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "aggregate-db",
+        "description": "Runs a MongoDB aggregation pipeline at the database level.",
+        "type": "Mixed",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "count",
+        "description": "Returns the number of documents in a collection.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "explain",
+        "description": "Returns statistics describing the execution of the winning plan chosen by the query optimizer for the evaluated method.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "insert-many",
+        "description": "Adds documents to a collection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-index",
+        "description": "Creates an index on a collection. This tool supports creating vector search indexes and lexical search indexes.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "drop-index",
+        "description": "Drop an index for the provided database and collection. This tool supports dropping vector search indexes and lexical search indexes.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "update-many",
+        "description": "Modifies multiple documents in a collection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "rename-collection",
+        "description": "Changes the name of a collection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create-collection",
+        "description": "Creates a new collection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "delete-many",
+        "description": "Removes documents from a collection.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "drop-collection",
+        "description": "Deletes a collection from a database.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "drop-database",
+        "description": "Deletes a database.",
+        "type": "Write",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-databases",
+        "description": "Returns a list of all databases available through the current connection.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-collections",
+        "description": "Returns a list of collections in a database.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "collection-indexes",
+        "description": "Returns information about collection indexes, including vector search indexes and lexical search indexes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "collection-schema",
+        "description": "Returns collection schema information.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "collection-storage-size",
+        "description": "Returns collection size in megabytes.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "db-stats",
+        "description": "Returns database statistics.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "list-knowledge-sources",
+        "description": "Lists data sources and search filters available in MongoDB Assistant.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "search-knowledge",
+        "description": "Searches MongoDB Assistant knowledge, with data source and version filters.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://www.mongodb.com/docs/mcp-server/tools/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted tool definitions and initialize instructions were not available verbatim. Public code is a separate local implementation and was not used to estimate the hosted endpoint's context.",
+    "human_can_agent_cannot": "Atlas administrators can manage organization settings and MCP configurations through Atlas UI/API; these administration surfaces are not listed as MCP tools. The official reference also documents local-only Atlas deployment tools, which are not part of this managed endpoint inventory. Sources: https://www.mongodb.com/docs/mcp-server/remote-mcp/manage-ai-client-access ; https://www.mongodb.com/docs/api/doc/atlas-admin-api-v2/group/endpoint-remote-mcp-configurations ; https://www.mongodb.com/docs/mcp-server/tools/",
+    "sources": [
+      "https://www.mongodb.com/docs/mcp-server/tools/",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/access-models/",
+      "https://glama.ai/mcp/servers/%40mongodb-js/mongodb-mcp-server/tools/list-collections",
+      "https://composio.dev/toolkits/mongodb_mcp"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "MongoDB documents recommendations to use least-privilege roles, read-only access where appropriate, and clients supporting elicitation. The confirmation prompt for `$out`/`$merge` depends on the AI client supporting elicitation; without support, MongoDB says the pipeline runs without asking for confirmation. The tool reference also recommends polling cluster creation with `atlas-inspect-cluster`.",
+    "governance_promises": "MongoDB states: \"Atlas never shares your credentials with the AI client.\" For user-delegated access, the AI client cannot exceed the user's Atlas permissions. Programmatic configurations have assigned roles, an optional IP access list, and read-only settings. Atlas says it does not record every individual MCP tool call; audit events are generated for some operations and attribute the event to the user or Service Account. General privacy policy covers product usage and chatbot inputs/outputs, but a specific MCP retention or AI-training promise was not found.",
+    "promises_to_user": "MongoDB describes managed access as OAuth-based, with user-delegated actions attributed to the authorizing user and organization controls for enablement, read-only mode, and revocation. It describes the service as GA and MongoDB-hosted, requiring no MCP infrastructure for users to host.",
+    "comparison_with_server_logic": "Atlas role checks, read-only configuration, organization enablement, IP access lists, token expiry, and rate limits are documented as service-side controls. Elicitation confirmation depends on the client and is not guaranteed. Audit attribution applies to audit events rather than every tool call. The general privacy policy does not specify MCP-specific retention, masking, or training behavior.",
+    "sources": [
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/security",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/access-models/",
+      "https://www.mongodb.com/docs/mcp-server/remote-mcp/rate-limits",
+      "https://www.mongodb.com/products/updates/now-ga-mongodb-atlas-managed-mcp-server/",
+      "https://www.mongodb.com/legal/privacy/privacy-policy"
+    ]
+  },
+  "contradictions": [
+    "OAuth protected-resource metadata reports `scopes_supported: []`, while hosted documentation describes access restrictions through Atlas roles and read-only modes. These may be separate authorization layers; the metadata does not expose scopes for the product permissions.",
+    "The official tool reference marks 41 tools as available for Atlas Managed, but lists the two Assistant tools in a separate table without a managed/local availability indication. They are included in `actions.json` as officially listed names; their hosted availability is not explicitly marked.",
+    "The hosted security documentation says `$out`/`$merge` confirmation depends on client elicitation support and that the operation runs without a prompt when support is absent. Therefore the documented confirmation is conditional rather than an unconditional server-enforced approval step."
+  ],
+  "observations_for_research": [
+    "The managed server supports two access models: user-delegated access that attributes audit events to the authorizing user, and programmatic access attributed to a Service Account.",
+    "Hosted Atlas permission controls can hide write tools in read-only programmatic configurations, while a read-labeled aggregation tool can still express writes through `$out` or `$merge`; authorization and conditional elicitation govern that path.",
+    "The endpoint's OAuth metadata exposes an authorization server but advertises no supported scopes, while product access policies are described separately through Atlas roles and configuration."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "The evidence folder, tool reference HTML/text, OAuth responses supplied in the prompt, and pinned public repository were checked. The hosted endpoint itself returned 401, so its initialize instructions and live tools/list output could not be inspected. The public MongoDB repository is the local distribution and a remote proxy client, not confirmed as deployed endpoint code. Public tool schemas for the hosted server were not found. npm returned HTTP 403. Pricing and general privacy sources are official; no MCP-specific pricing, retention, or training terms were found. A community-maintained unofficial repository was listed in links.json and excluded from evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 10.2
+  }
+}

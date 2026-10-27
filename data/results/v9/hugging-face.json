@@ -1,0 +1,456 @@
+{
+  "server": "hugging-face",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://huggingface.co/mcp",
+    "documentation_url_csv": "https://huggingface.co/docs/hub/en/hf-mcp-server",
+    "addressing": "global",
+    "repository_url": "https://github.com/huggingface/hf-mcp-server",
+    "documentation_urls_used": [
+      "https://huggingface.co/docs/hub/en/agents-mcp",
+      "https://huggingface.co/docs/hub/spaces-mcp-servers",
+      "https://huggingface.co/changelog/hf-mcp-server",
+      "https://huggingface.co/changelog/mcp-improvements-jul-26",
+      "https://huggingface.co/settings/mcp",
+      "https://huggingface.co/pricing",
+      "https://huggingface.co/pro",
+      "https://huggingface.co/privacy",
+      "https://huggingface.co/terms-of-service",
+      "https://claude.com/connectors/hugging-face"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The official repository implements the Hub MCP product, including HTTP and local transports. It is a direct product equivalent, but the available evidence does not tie the hosted deployment to this exact commit. The hosted tool inventory can also vary by account configuration and selected Spaces.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "e011f515912ac353a7339b2afa0fcb23c8d0b17c",
+    "commit_date": "2026-10-26",
+    "implementation_language": "TypeScript",
+    "mcp_sdk_and_version": "@modelcontextprotocol/server 2.3.1; @modelcontextprotocol/client 2.3.1; @modelcontextprotocol/node 2.1.1",
+    "code_public": "Yes",
+    "license": "MIT",
+    "release_status": "Experimental; the June 2025 launch announcement calls the feature experimental.",
+    "other_official_servers": [
+      "Hugging Face documents an Inference Endpoints MCP server as a separate product endpoint; it is not the Hub endpoint analyzed here. https://huggingface.co/docs/inference-endpoints/mcp"
+    ],
+    "sources": [
+      "https://huggingface.co/docs/hub/en/agents-mcp",
+      "https://huggingface.co/changelog/hf-mcp-server",
+      "https://github.com/huggingface/hf-mcp-server/tree/e011f515912ac353a7339b2afa0fcb23c8d0b17c",
+      "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/package.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "The MCP documentation does not list a separate fee for connecting to the server. Usage can invoke paid Hub resources or consume Space quotas, depending on the tool and account.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "Hugging Face offers free accounts and paid plans including PRO. The fetched pricing pages contain current plan information; Space hardware, ZeroGPU quota, Jobs, and other resources may incur separate costs.",
+    "pricing_model_details": "MCP calls can use Space ZeroGPU quota; the Spaces guide says PRO provides 40 minutes of daily quota versus the free account quota. Paid Space hardware and compute use may be billed to the resource owner.",
+    "other_access_restrictions": "The Spaces guide requires a valid Hugging Face token with READ permissions. Available tools depend on configured tools and selected Spaces. Write and compute operations additionally depend on token permissions, product entitlements, and feature configuration.",
+    "restrictions_controlled_by": "Vendor and Hugging Face account permissions; users select Spaces and configure tools.",
+    "sources": [
+      "https://huggingface.co/docs/hub/en/agents-mcp",
+      "https://huggingface.co/docs/hub/spaces-mcp-servers",
+      "https://huggingface.co/pricing",
+      "https://huggingface.co/pro",
+      "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L376-L850"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Provides Hub tools, including hf_fs, and can expose configured tools, optional dynamic Space discovery, and tools from selected Gradio Spaces. Public code defines 11 named Hub tools; the available hosted set varies by configuration.",
+      "pre_interaction_context_verbatim": "Hugging Face Hub MCP server for models, datasets, Spaces, collections, papers, and docs.\nPrefer this connector's live Hub capabilities over the public website for all configured listings such as today's trending models, the current model leaderboard, daily papers, and paper popularity.\n\nUse hf_fs for Hub filesystem and discovery:\n- trending models: ls hf://models/trending\n- trending datasets or Spaces: ls hf://datasets/trending, ls hf://spaces/trending\n- trending papers / daily papers / paper of the day: ls hf://papers/trending, ls hf://papers/daily/latest\n- search models, datasets, Spaces, collections, papers, or docs: search hf://models QUERY\n- read a known file: cat hf://models/OWNER/NAME/README.md\n\nOther advertised Hub tools can search or inspect a known repo id. Use hf_whoami for the current Hugging Face account.\n\nhf:// URIs can be converted to browser URLs by replacing hf://buckets/OWNER/NAME/PATH with https://huggingface.co/buckets/OWNER/NAME/resolve/PATH; for models, datasets, and spaces, use https://huggingface.co[/datasets|/spaces]/OWNER/NAME/resolve/main/PATH. URL-encode each path segment.\n\narXiv paper ids (for example 2502.16161) are often used as references between datasets, models, and papers. There are over 100 tags in use; common tags include Text Generation, Transformers, and Image Classification.",
+      "post_interaction_context_structure": "Tool results are returned as MCP text, structured content, or image content, depending on the operation. The hf_fs handler can return batched structured results and image blocks; failures may include isError and a Hugging Face error code in _meta.",
+      "authorization_mechanism": "Public protected-resource metadata identifies resource https://huggingface.co/mcp, authorization server https://huggingface.co, and bearer_methods_supported [\"header\"]. scopes_supported are [\"openid\",\"profile\",\"read-mcp\",\"read-repos\",\"jobs\",\"contribute-repos\",\"inference-api\"]. Authorization-server metadata advertises registration_endpoint https://huggingface.co/oauth/register (Dynamic Client Registration), authorization_code, refresh_token, device_code, and token-exchange grants; PKCE S256; token endpoint auth methods client_secret_basic and client_secret_post. Metadata does not specify token lifetime or revocation policy.",
+      "authorization_server": "https://huggingface.co",
+      "sources": [
+        "https://huggingface.co/docs/hub/en/agents-mcp",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/server-instructions.ts#L1-L22",
+        "https://huggingface.co/.well-known/oauth-protected-resource",
+        "https://huggingface.co/.well-known/oauth-protected-resource/mcp",
+        "https://huggingface.co/.well-known/oauth-authorization-server",
+        "https://huggingface.co/.well-known/openid-configuration",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L376-L850"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The repository implements skill resources and Gradio MCP App resources. hf_fs also returns Hub content as tool results; that is separate from MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Skill resources are registered when a skill catalog exists; MCP App resources may accompany proxied Gradio tools.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L850-L875",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/skills/skill-resources.ts",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/gradio-endpoint-connector.ts#L323-L350"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP prompts registration was found in the public server implementation reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Public code logs tool queries and aggregate call outcomes and includes transport analytics for connections, client metadata, and protocol events. Some tool parameters are redacted before logging.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Logging and telemetry are server-side; they are not a standard tool result field.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L410-L850",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/transport/base-transport.ts#L140-L230",
+        "https://huggingface.co/privacy"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP sampling requests were found in the public server implementation reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No roots capability registration was found in the public server implementation reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The provided metadata supports bearer tokens in the Authorization header and identifies Hugging Face as the authorization server. The endpoint POST response reported HTTP 400 with JSON-RPC error code -32600 and message \"Session ID required\"; no WWW-Authenticate header was included in the supplied response.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "OAuth metadata is JSON. The endpoint's supplied POST response is a JSON-RPC error object.",
+      "authorization_mechanism": "Metadata Doc; Dynamic Client Registration at https://huggingface.co/oauth/register; authorization code, refresh token, device-code, and token-exchange grants; PKCE S256; client_secret_basic and client_secret_post token authentication; scopes_supported [\"openid\",\"profile\",\"read-mcp\",\"read-repos\",\"jobs\",\"contribute-repos\",\"inference-api\"]. Token lifetime and revocation are NOT FOUND in supplied metadata.",
+      "authorization_server": "https://huggingface.co",
+      "sources": [
+        "https://huggingface.co/.well-known/oauth-protected-resource",
+        "https://huggingface.co/.well-known/oauth-protected-resource/mcp",
+        "https://huggingface.co/.well-known/oauth-authorization-server",
+        "https://huggingface.co/.well-known/openid-configuration",
+        "https://huggingface.co/mcp"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP elicitation capability was found. The Spaces guide describes a user confirming a Space addition in Hub settings; this is a configuration action, not server-enforced MCP elicitation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts",
+        "https://huggingface.co/docs/hub/spaces-mcp-servers"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The implementation has Jobs tools and progress relay code, but no MCP Tasks capability registration was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Jobs return structured/text results and may report progress; Jobs are Hub operations, not MCP Tasks.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L649-L706",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/utils/progress-relay.ts"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Users configure selected Spaces and client setup in Hub MCP settings. Public code also reads tool-selection settings and request headers, including image-content and Gradio behavior flags.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration affects which tools are registered and how some results are processed.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://huggingface.co/settings/mcp",
+        "https://huggingface.co/docs/hub/en/agents-mcp",
+        "https://huggingface.co/docs/hub/spaces-mcp-servers",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L354-L375"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Handlers return MCP tool errors and, for hf_fs, structured recoverable error metadata. Transport code tracks error events.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Errors can use isError, text content, and _meta with a Hugging Face error code and retry guidance.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L550-L605",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/transport/base-transport.ts#L160-L180"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription capability was found in the public server implementation reviewed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Jobs, sandbox, and dynamic Space handlers pass progress callbacks through MCP request context when available.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Progress notifications are sent through the MCP context; final tool responses use structured and text content.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L649-L850",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/utils/progress-relay.ts"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The hf_fs handler passes the MCP request abort signal into its operation runner and records interrupted batches as cancelled or failed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Interrupted operations can return error metadata; exact behavior depends on the tool and underlying operation.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L526-L605"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The server sends initialize instructions that direct agents toward hf_fs and live Hub listings; skills and Gradio MCP App resources can extend context.",
+      "pre_interaction_context_verbatim": "Use hf_fs for Hub filesystem and discovery:",
+      "post_interaction_context_structure": "Initialize instructions are text. Skills are exposed as resources when the catalog is available.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/server-instructions.ts#L1-L22",
+        "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L850-L875"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Public code defines read-only tools and write-capable tools, with tool annotations including readOnlyHint, destructiveHint, idempotentHint, and openWorldHint. 2. No general confirmation parameter or MCP elicitation gate was found for writes; Spaces are added through a user confirmation step in Hub settings. 3. Metadata lists scopes openid, profile, read-mcp, read-repos, jobs, contribute-repos, inference-api. Tools use the authenticated token and Hub permissions; exact role inheritance, client allowlist, redirect approval, token lifetime, and revocation policy are NOT FOUND. 4. The Claude connector directory shows a URL variant with ?login&gradio=none; public code checks gradio=none to disable dynamic Space invocation while allowing schema inspection. Selected Spaces and tools are configurable. Environment separation and regions: NOT FOUND. 5. hf_whoami states it never returns credential values. Sandbox parameters are redacted in logs; hf_fs image bytes are excluded from query logs. No general PII masking policy found. 6. Code applies operation/result caps and output budgets in individual tools; dataset preview is clamped to 1–100 rows; repository search accepts a maximum of 100 results per selected type; repo details accepts up to 10 IDs. Jobs and paid resources may incur account costs. 7. Schemas and parsers validate types, command grammar, URI shapes, and selected options. Write parsing rejects unknown/extra command arguments and requires content for put; no general alias rewriting or operator override of model arguments was found. 8. Code logs tool queries and outcomes and collects transport/client analytics. Some values are redacted, but a complete data-retention or telemetry opt-out policy for MCP is NOT FOUND. 9. The official guide asks users to send feedback through a Hugging Face discussion; the Jul 2026 changelog invites feedback. No feedback/rating MCP tool was found in the 11 code-defined names. 10. Initialize instructions steer agents to hf_fs and current Hub listings. A separate MCP Skill resource implementation exists. The docs recommend that clients refresh after adding Spaces. 11. Public code includes in-memory skill catalog caching; prior agent behavior is not documented as changing future tools or results. 12. The server dynamically exposes or proxies community Gradio Space tools and supports resource proxying; it is therefore a configurable, multi-tool surface. 13. hf_sandbox_exec is a shell-command execution tool within a sandbox; hf_fs and hf_fs_write provide filesystem-like command interfaces. No unrestricted arbitrary API request tool was identified in the reviewed action list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Prefer this connector's live Hub capabilities over the public website for all configured listings such as today's trending models, the current model leaderboard, daily papers, and paper popularity.",
+      "Use hf_fs for Hub filesystem and discovery:",
+      "Other advertised Hub tools can search or inspect a known repo id. Use hf_whoami for the current Hugging Face account.",
+      "Try them and feed back whether they improve your improve your experience"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The tool set is configurable and can include dynamically discovered or selected Gradio Space tools proxied through the Hub server, with additional proxied MCP App resources.",
+    "sources": [
+      "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L354-L850",
+      "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/hf-fs-write-contract.ts#L1-L110",
+      "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/jobs/jobs-tool.ts#L438-L462",
+      "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/sandbox-tool.ts#L767-L1415",
+      "https://huggingface.co/docs/hub/en/agents-mcp",
+      "https://huggingface.co/docs/hub/spaces-mcp-servers",
+      "https://huggingface.co/changelog/mcp-improvements-jul-26",
+      "https://claude.com/connectors/hugging-face"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "11 named Hub tools in public code, plus a variable number of configured or proxied Space tools",
+    "action_count_comment": "An official overview exists at https://huggingface.co/docs/hub/en/agents-mcp and names tool categories rather than a complete machine-readable inventory. The public code at e011f515912ac353a7339b2afa0fcb23c8d0b17c defines 11 native Hub tool names, recorded in actions.json. The hosted tool set varies with account configuration, selected Spaces, and dynamic Space behavior, so 11 is not a guaranteed endpoint default count. No catalogue-only actions were added. The Claude connector directory lists 10 legacy tool names; these differ from the current code-defined inventory and are recorded as a version/surface discrepancy rather than added as current hosted tools.",
+    "actions": [
+      {
+        "tool_name": "hf_whoami",
+        "description": "Inspect authenticated Hugging Face account, memberships, and credential access metadata.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "none",
+        "parameter_count": "0",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L376-L401",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hub_repo_search",
+        "description": "Search Hub models, datasets, or Spaces with filters and sorting.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account/tool selection settings)",
+        "parameters": "query: string (optional); repo_types: array<enum model,dataset,space> (optional); author: string (optional); filters: string[] (optional); sort: enum 5 (optional); limit: number 1-100 (optional)",
+        "parameter_count": "6",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/repo-search.ts#L23-L69",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_repo",
+        "description": "Create or duplicate a model, dataset, Space, or bucket repository.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account/tool selection settings)",
+        "parameters": "uri: string (required); source_uri: string (optional); private: boolean (optional); sdk: enum 4 (optional); hardware: string (optional)",
+        "parameter_count": "5",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/create-repo.ts#L36-L78",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hub_repo_details",
+        "description": "Inspect model, dataset, or Space details; preview dataset structure and rows.",
+        "type": "Read",
+        "enabled_by_default": "Unknown (account/tool selection settings)",
+        "parameters": "repo_ids: string[] (required, 1-10); repo_type: enum 3 (optional); operations: enum array 3 (optional); config: string (optional); split: string (optional); offset: integer (optional); limit: integer (optional, clamped 1-100)",
+        "parameter_count": "7",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/hub-inspect.ts#L10-L58",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hf_fs",
+        "description": "Browse and search Hub repositories, collections, papers, documentation, and files.",
+        "type": "Read",
+        "enabled_by_default": "Yes (documented as main built-in tool)",
+        "parameters": "operations: operation objects (required; batch up to source-defined cap; commands and arguments vary)",
+        "parameter_count": "1",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/hf-fs.ts#L251-L271",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hf_fs_write",
+        "description": "Write or delete files in Hub repositories using filesystem commands.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (feature flag and granted write scope)",
+        "parameters": "cmd: enum operation (required); args: string[] (required; command-specific)",
+        "parameter_count": "2",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/hf-fs-write-contract.ts#L1-L110",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hf_jobs",
+        "description": "Submit, inspect, monitor, cancel, or schedule Hugging Face Jobs.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (account/tool selection settings)",
+        "parameters": "operation: enum operation names (optional); args: object (optional; operation-specific)",
+        "parameter_count": "2",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/jobs/jobs-tool.ts#L438-L462",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hf_sandbox",
+        "description": "Create and manage isolated execution sandboxes.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account/tool selection settings)",
+        "parameters": "cmd: string (required); args: string[] (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/sandbox-tool.ts#L767-L783",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hf_sandbox_exec",
+        "description": "Execute shell commands in a sandbox.",
+        "type": "Write",
+        "enabled_by_default": "Unknown (account/tool selection settings)",
+        "parameters": "cmd: string (required); args: string[] (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/sandbox-tool.ts#L1201-L1217",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "hf_sandbox_fs",
+        "description": "Manage files within a sandbox.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (account/tool selection settings)",
+        "parameters": "cmd: string (required); args: string[] (optional)",
+        "parameter_count": "2",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/sandbox-tool.ts#L1392-L1408",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "dynamic_space",
+        "description": "Discover, inspect, or invoke tools exposed by Gradio Spaces.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown (account settings; may be disabled by gradio=none)",
+        "parameters": "operation: enum (discover, search, inspect, view_parameters, invoke; optional); space_name: string (optional); tool_name: string (optional); parameters: object (optional)",
+        "parameter_count": "4",
+        "source": "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/mcp/src/space/dynamic-space-tool.ts#L145-L220",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The initialize instructions are available in public code, but the hosted tool inventory is configuration-dependent and no complete hosted tools/list serialization was available to count characters for a reproducible aggregate estimate.",
+    "human_can_agent_cannot": "The Hub web interface and APIs include many account, organization, billing, moderation, settings, and administrative operations beyond the MCP action list. MCP supports a subset: repository search/details, file operations, repository creation, jobs, sandboxes, and configured Space tools. Exact exclusions vary with user permissions and enabled tools. Sources: https://huggingface.co/docs/hub/en/agents-mcp ; https://huggingface.co/docs/hub/api ; https://huggingface.co/docs/hub/en/agents",
+    "sources": [
+      "https://huggingface.co/docs/hub/en/agents-mcp",
+      "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L376-L850",
+      "https://claude.com/connectors/hugging-face"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The initialize instructions say: \"Prefer this connector's live Hub capabilities over the public website for all configured listings such as today's trending models, the current model leaderboard, daily papers, and paper popularity.\" This is agent guidance, not a server-enforced routing policy. The docs suggest restarting or refreshing clients after adding Space tools.",
+    "governance_promises": "The hf_whoami description says it is \"Read-only and never returns credential values.\" The public code's whoami annotation is readOnlyHint true and returns account/credential access metadata without token values. The Spaces guide says a READ token is needed to use MCP tools; code also defines write and compute tools subject to scope and product permissions.",
+    "promises_to_user": "The official launch announcement describes integration with MCP-compatible assistants and community Gradio apps; it calls the feature experimental. The July 2026 changelog says the hf_fs tool provides a single interface to repositories, storage, documentation, papers, and more.",
+    "comparison_with_server_logic": "The whoami credential-hiding statement is reflected in code and its read-only annotation. Tool-use preferences in initialize instructions are descriptive only. The documentation's broad examples coexist with configuration-dependent tool availability. Write and compute operations have separate code paths, scopes, and product permissions; there is no universal confirmation workflow evidenced.",
+    "sources": [
+      "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/server-instructions.ts#L1-L22",
+      "https://github.com/huggingface/hf-mcp-server/blob/e011f515912ac353a7339b2afa0fcb23c8d0b17c/packages/app/src/server/mcp-server.ts#L376-L401",
+      "https://huggingface.co/docs/hub/spaces-mcp-servers",
+      "https://huggingface.co/changelog/hf-mcp-server",
+      "https://huggingface.co/changelog/mcp-improvements-jul-26"
+    ]
+  },
+  "contradictions": [
+    "The Claude connector directory lists 10 tool names (hf_whoami, space_search, model_search, model_details, paper_search, dataset_search, dataset_details, hf_doc_search, and two Gradio app tools), while the current official repository defines an 11-name Hub tool inventory centered on hf_fs, repository search/details, Jobs, sandbox, and dynamic Space operations. The connector listing may reflect a different configuration or earlier tool surface; it is third-party evidence and was not used as the current official action inventory.",
+    "The official overview describes built-in hf_fs as the main tool, while its tool categories also describe repository contribution, sandboxes, and Jobs. Public code includes further named tools and the effective set varies with account and settings; the overview is not a complete fixed tool list.",
+    "The OAuth scopes include contribute-repos and jobs, while documentation highlights a READ token for using MCP tools. These statements describe general access and specific write/compute capabilities respectively; the metadata alone does not establish which tools a given token can invoke."
+  ],
+  "observations_for_research": [
+    "A single endpoint can present a user-configured inventory, selected Space tools, and dynamic Space discovery; available actions therefore depend on the account and settings.",
+    "The server's initialize instructions explicitly prefer its live Hub results over the public website for current rankings and listings.",
+    "Public code marks some potentially consequential tools as destructiveHint true while actual execution still depends on Hub permissions, product controls, and the operation chosen."
+  ],
+  "confidence": "High (open code)",
+  "notes": "Reviewed links.json, pages/ and the official repository pinned at e011f515912ac353a7339b2afa0fcb23c8d0b17c. The supplied endpoint POST response was HTTP 400, JSON-RPC -32600 \"Session ID required\"; no WWW-Authenticate value was supplied. Official docs do not publish a complete fixed tool list or a hosted tools/list response. Code analysis is of the official product implementation but not proven to be the exact deployed build. Catalogues and Claude connector were used only to cross-check; their tool names do not match the current code inventory. MCP-specific token lifetime, revocation, telemetry opt-out, and retention were not found in the reviewed sources.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 24.0
+  }
+}

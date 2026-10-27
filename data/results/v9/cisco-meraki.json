@@ -1,0 +1,352 @@
+{
+  "server": "cisco-meraki",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://mcp.meraki.com/mcp",
+    "documentation_url_csv": "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+    "addressing": "global",
+    "repository_url": "https://github.com/CiscoDevNet/cisco-meraki-mcp-official",
+    "documentation_urls_used": [
+      "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+      "https://developer.cisco.com/meraki/api-v1/ai-toolkit-sdks-overview/",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "Cisco describes a Cisco-hosted service and a separate self-hosted, open-source server as providing the same core MCP functionality. The endpoint is Cisco-hosted; the public repository is the local implementation, not the deployed service. It documents the same two core tools and read-only design, but the hosted service is Cisco-managed and has hosted-specific environment and IP-restriction limits.",
+    "mcp_protocol_version": "The public implementation delegates protocol handling to its MCP SDK. Its protocol-version test lists SDK-supported versions 2024-11-05, 2025-03-26, 2025-06-18, and 2025-11-25 (as of mcp 1.26.0); the hosted endpoint’s negotiated version was not supplied.",
+    "commit_hash": "c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b",
+    "commit_date": "2026-07-28",
+    "implementation_language": "Python 3.14+",
+    "mcp_sdk_and_version": "FastMCP >=3.4.2; package depends on meraki==4.3.0",
+    "code_public": "Yes",
+    "license": "Apache-2.0",
+    "release_status": "Beta",
+    "other_official_servers": [
+      "Self-hosted, open-source Meraki MCP server: same core functionality; supports Meraki environments beyond Meraki.com. The docs do not publish a separate endpoint URL."
+    ],
+    "sources": [
+      "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+      "https://developer.cisco.com/meraki/api-v1/ai-toolkit-sdks-overview/",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/pyproject.toml#L17-L43",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/tests/unit/test_protocol_version_http.py#L20-L26"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "The documentation lists prerequisites and authentication but no MCP-specific charge, plan, or usage price.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Meraki products use paid licensing or subscriptions; public sources reviewed did not provide a single applicable price for this account and product mix.",
+    "pricing_model_details": "Official product materials describe subscription and co-termination licensing, with terms varying by product and license. No MCP call charge or separate MCP quota was found.",
+    "other_access_restrictions": "Requires a Meraki Dashboard account and API key. Hosted service supports Meraki.com only, does not support OAuth, and currently does not enforce organization Dashboard API IP restrictions. Published API limit: 10 requests/second per organization, with exponential backoff on 429 responses.",
+    "restrictions_controlled_by": "Cisco controls hosted-service availability and implementation; the organization controls API-key permissions and Dashboard access. The user/client supplies the key.",
+    "sources": [
+      "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+      "https://meraki.cisco.com/product-collateral/meraki-wireless-cloud-family-datasheet-managed-wireless-access-points/?file=",
+      "https://meraki.cisco.com/wp-content/uploads/2023/05/vMX-datasheet-20230421-english.pdf"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Tools capability; the available protocol version is negotiated by the MCP SDK.",
+      "description_what_how": "The official hosted documentation names two tools: semantic_search, which returns ranked capability IDs for natural-language queries, and execute_api, which executes a selected read-only capability. The public local implementation registers both tools. Tool annotations mark both read-only; semantic_search is idempotent and closed-world, while execute_api is marked non-idempotent and open-world. No destructive-hint annotation is declared.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "semantic_search returns a results array containing capability_id, intent, product_scope, risk_tier, tags, and required_parameters. execute_api returns a typed success envelope with capability_id, product, and data, or an error envelope with error, recovery_suggestion, and optional capability_id.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/cisco_meraki_mcp.py#L48-L104",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/tools/semantic_search.py#L43-L91",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/tools/execute_api.py#L72-L85",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/contracts/search.py#L57-L100",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/contracts/execute.py#L41-L91"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Resources capability; exact hosted resource listing not supplied.",
+      "description_what_how": "The public implementation registers info://service, which returns JSON metadata containing the server name, package version, and description. Hosted resource availability was not independently enumerated.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "A JSON string with name, version, and description.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/cisco_meraki_mcp.py#L69-L74",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/resources.py#L23-L50"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No prompt registration appears in the public implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted service.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/cisco_meraki_mcp.py"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The public implementation logs tool invocations, request/session correlation IDs, endpoint method and path, scope, and summarized outcomes. It intentionally avoids logging resolved URLs containing caller values and redacts configured parameters. Hosted logging and retention practices were not specified in the reviewed MCP page.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Server-side structured log records; tool calls may also emit MCP log notifications with a summary.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/tools/logging.py",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/tools/execute_api.py#L42-L47"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No sampling requests or sampling capability registration appears in the public implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted service.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/cisco_meraki_mcp.py"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No roots capability or roots-related client request appears in the public implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted service.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/cisco_meraki_mcp.py"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The hosted service uses a Meraki Dashboard API key supplied as a bearer token. Documentation says OAuth is not supported. Supplied metadata responses: POST https://mcp.meraki.com/mcp returned HTTP 400, “Invalid Content-Type header”; https://mcp.meraki.com/.well-known/oauth-protected-resource returned HTTP 404, “Not Found”; https://mcp.meraki.com/.well-known/oauth-protected-resource/mcp returned HTTP 404, “Not Found”; https://mcp.meraki.com/.well-known/oauth-authorization-server returned HTTP 404, “Not Found”; https://mcp.meraki.com/.well-known/openid-configuration returned HTTP 404, “Not Found”. No WWW-Authenticate header, OAuth authorization server, scopes, registration metadata, grant types, PKCE, token lifetime, or revocation data were supplied. The API-key bearer mechanism is separate from OAuth.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Missing or invalid credentials produce an error result; successful calls use the caller-supplied key to authenticate Dashboard API requests.",
+      "authorization_mechanism": "API key / bearer token. Official docs: Authorization: Bearer <MERAKI_DASHBOARD_API_KEY>. OAuth is not supported. Raw supplied metadata: endpoint POST HTTP 400 “Invalid Content-Type header”; protected-resource origin and path documents HTTP 404 “Not Found”; authorization-server document HTTP 404 “Not Found”; openid-configuration HTTP 404 “Not Found”. No OAuth scopes_supported or authorization-server URL found.",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+        "https://mcp.meraki.com/mcp",
+        "https://mcp.meraki.com/.well-known/oauth-protected-resource",
+        "https://mcp.meraki.com/.well-known/oauth-protected-resource/mcp",
+        "https://mcp.meraki.com/.well-known/oauth-authorization-server",
+        "https://mcp.meraki.com/.well-known/openid-configuration",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/providers/meraki_credentials.py"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No server-initiated elicitation flow appears in the public implementation. The explicit-approval language is an instruction to the agent, not an MCP elicitation enforcement mechanism.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted service.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/resources.py#L25-L38"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP task registration appears in the public implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted service.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/cisco_meraki_mcp.py"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "",
+      "description_what_how": "Hosted setup documentation provides client configuration examples and an environment variable for the API key. In the public implementation, operators configure transport, host, port, logging, and embedding/search settings through command-line options or environment settings. No hosted toolset-selection or read-only URL mode is documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Configuration is supplied out of band through client settings, environment variables, and server operator settings.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/config/settings.py"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "The implementation returns structured operational errors and recovery suggestions, but no MCP error-reporting or vendor-feedback tool is registered.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool-level errors include a summary and recovery_suggestion; this is operational error handling, not a feedback submission facility.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/contracts/execute.py#L76-L91",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/cisco_meraki_mcp.py#L48-L104"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No MCP subscription capability appears in the public implementation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted service.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/cisco_meraki_mcp.py"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No progress-notification implementation appears in the public tool handlers.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted service.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/tools/execute_api.py",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/tools/semantic_search.py"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "No (public code)",
+      "depends_on_mcp_version": "",
+      "description_what_how": "No server-specific cancellation handling appears in the public implementation; transport-level SDK behavior was not assessed.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown for the hosted service.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/cisco_meraki_mcp.py"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Server initialize instructions are protocol-provided context.",
+      "description_what_how": "The public implementation supplies initialize instructions that constrain the agent to read operations, give an identifier-discovery sequence, direct the agent to semantic_search for other operations, and warn that paginated calls return one page.",
+      "pre_interaction_context_verbatim": "Only perform read operations. Deny requests for create, update, delete, reboot, or other state-changing operations. Do not attempt alternative means to achieve a non-read operation without explicit user approval. Call execute_api directly with capability_id=\"getOrganizations\" to discover accessible organization IDs. Call execute_api directly with capability_id=\"getOrganizationNetworks\" after selecting an organization to discover its network IDs. For all other operations, use semantic_search to discover the relevant Meraki Dashboard API capability, then call execute_api with the selected capability_id and required parameters. For paginated API operations, execute_api returns one page only. Request a bounded page size when supported; do not pass total_pages or claim the result represents the complete dataset.",
+      "post_interaction_context_structure": "Initialize instructions are plain text context. The service also exposes an info://service resource.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/resources.py#L23-L50",
+        "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/service_factory.py"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Both tools are annotated readOnlyHint=true. semantic_search also has idempotentHint=true and openWorldHint=false; execute_api has idempotentHint=false and openWorldHint=true. No destructiveHint is set. 2. No server-enforced user-confirmation flow is documented. The server instruction asks for explicit approval before alternative non-read operations, but the implementation rejects non-GET operations; no write confirmation parameter exists. 3. Authentication is a bearer API key, not OAuth. The key inherits the caller's Dashboard permissions; docs recommend a read-only key. No token lifetime, revocation, client allowlist, or redirect-URI approval is documented. 4. The hosted service is read-only and supports Meraki.com only; no toolset filters or read-only URL modes are documented. Dashboard API IP restrictions are not enforced by the hosted service. 5. The local code redacts caller values from logs and rejects decoded parent-directory segments in string parameters; no broader MCP data masking is documented. 6. Docs publish 10 requests/second per organization and exponential backoff for 429s. Calls return one page only; total_pages is rejected. Tool search top_k is limited to 1–20 (default 5). 7. Code validates required parameters and rejects non-GET operations, total_pages, and traversal-like parameter values. No evidence of argument alias rewriting or operator-default override was found. 8. Local code logs invocation summaries and correlation identifiers, redacts configured parameter values, and emits tool notifications. Hosted logging, retention, and telemetry details were not found. 9. The official two-tool list contains no feedback, rating, report, survey, or upsell action. No marketing response was found. 10. Agent guidance is delivered through initialize instructions and tool descriptions. These instructions shape behavior, while GET-only enforcement and request validation are implemented server-side. No MCP skill-loading tool was found. 11. The local implementation builds an in-memory vector index at startup; per-request stateless HTTP is configured. No evidence that past agent behavior changes later results or available tools. 12. One flat tool list, plus a service-info resource; no nested MCP servers documented. 13. No raw API/request, SQL, script, or arbitrary execution tool is documented. execute_api chooses a capability from the bundled API catalog and applies GET-only validation.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[LOCAL CODE @c1d00eaf, initialize instructions] “Only perform read operations. Deny requests for create, update, delete, reboot, or other state-changing operations. Do not attempt alternative means to achieve a non-read operation without explicit user approval.”",
+      "[LOCAL CODE @c1d00eaf, semantic_search description] “Do NOT call with vague or single-word queries.”",
+      "[LOCAL CODE @c1d00eaf, semantic_search description] “Follow up with execute_api using the capability_id from these results.”",
+      "[LOCAL CODE @c1d00eaf, execute_api description] “Do NOT invent a capability_id.”",
+      "[LOCAL CODE @c1d00eaf, initialize instructions] “For paginated API operations, execute_api returns one page only. Request a bounded page size when supported; do not pass total_pages or claim the result represents the complete dataset.”",
+      "[OFFICIAL DOCS] “Give the agent an API key associated with read-only Dashboard access to ensure it cannot make changes.”"
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The documented tool surface is a flat list of two tools. The search-then-execute workflow and service-info resource do not introduce sub-servers or dynamically loaded toolsets.",
+    "sources": [
+      "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/resources.py#L25-L38",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/tools/semantic_search.py#L43-L91",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/tools/execute_api.py#L72-L190",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/providers/request_validation.py#L35-L100",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/tools/logging.py",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/main.py"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "2",
+    "action_count_comment": "The official tool list exists at https://developer.cisco.com/meraki/api-v1/mcp-server/ and names 2 tools; no separate official total is stated. The public local implementation registers the same two tools. No catalogue-only tools were added. Glama’s listing is for an unofficial MSPbots implementation and was not used as evidence for the Cisco-hosted endpoint.",
+    "actions": [
+      {
+        "tool_name": "semantic_search",
+        "description": "Search Meraki Dashboard API capabilities with a natural-language query and return ranked capability_id results.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE @c1d00eaf] query: string (required); top_k: integer (optional, default 5, range 1-20)",
+        "parameter_count": "2",
+        "source": "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "execute_api",
+        "description": "Execute a read-only Meraki Dashboard API capability selected from semantic_search.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "[LOCAL CODE @c1d00eaf] capability_id: string (required); parameters: object<string, string|integer|boolean> (optional)",
+        "parameter_count": "2",
+        "source": "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "526",
+    "token_method": "[LOCAL CODE @c1d00eaf] Serialized the two tool names, descriptions, input schemas, annotations, and initialize instructions as JSON; estimated tokens as characters divided by 4 (2,102 characters ÷ 4, rounded up).",
+    "human_can_agent_cannot": "The MCP server exposes read operations only. A human with suitable Dashboard permissions can make configuration changes, reboot devices, or perform other write operations through Dashboard/API workflows; the MCP tool surface cannot perform these operations. The full Dashboard API provides operations beyond this MCP server’s curated GET-only capability set.",
+    "sources": [
+      "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+      "https://developer.cisco.com/meraki/api-v1/ai-toolkit-sdks-overview/",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/contracts/search.py#L57-L100",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/contracts/execute.py#L41-L91"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The docs recommend specific prompts and client setup. The tool description recommends detailed, actionable search queries; the local code also directs against vague queries. The guidance to use a read-only API key is a user-side safeguard; the server’s GET-only checks provide an additional server-side boundary.",
+    "governance_promises": "The docs state: “The Meraki MCP server supports only read operations.” They also warn that the hosted server “does not currently enforce your organization's Dashboard API IP restrictions.” Use of the service is subject to Cisco Networking MCP Server Terms, Cisco Baseline API License Terms, Cisco Acceptable Use Policy, Meraki Cloud Service Offer Description, and Cisco General Terms. Specific retention, AI-training, or data-processing promises were not found in the reviewed MCP page.",
+    "promises_to_user": "Cisco describes hosted and self-hosted versions as providing the same core MCP functionality, with hosted service managed by Cisco. The server is in beta and its features, schemas, supported capabilities, and configuration may change, including incompatibly.",
+    "comparison_with_server_logic": "The read-only promise is reflected in the local implementation’s GET-operation guard. The one-page pagination instruction is also enforced by rejecting total_pages. The hosted IP-restriction limitation is explicitly documented and means requests may pass through from Cisco-hosted egress IPs. Other privacy and retention details were not found, so they cannot be compared against implementation behavior.",
+    "sources": [
+      "https://developer.cisco.com/meraki/api-v1/mcp-server/",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/providers/request_validation.py#L35-L100",
+      "https://github.com/CiscoDevNet/cisco-meraki-mcp-official/blob/c1d00eaf8f4455ccb6bf5ffdc0189fe0f40b1a5b/cisco_meraki_mcp/resources.py#L25-L38"
+    ]
+  },
+  "contradictions": [
+    "The official docs state the server supports read operations only, consistent with the two listed tools and public local code. The Glama catalogue page found during research describes a separate, unofficial MSPbots Meraki server with optional write tools; those tools are not part of the Cisco-hosted endpoint and were excluded.",
+    "The hosted endpoint evidence supplied by the research script reports HTTP 400 “Invalid Content-Type header” for its OAuth metadata POST attempt, while the vendor docs describe API-key bearer authentication and state OAuth is not supported. The origin and path OAuth metadata URLs returned HTTP 404, consistent with no published OAuth metadata."
+  ],
+  "observations_for_research": [
+    "The interface compresses a large API surface into natural-language capability search followed by a generic capability executor, rather than listing a separate MCP tool for each API operation.",
+    "Read-only behavior is layered: instructions guide the agent, tool descriptions describe the workflow, and the local implementation checks the selected SDK operation’s GET prefix.",
+    "The hosted service’s API-key authentication relies on the permissions attached to the key. The docs advise read-only credentials while also warning that agents might use the key outside MCP.",
+    "Search ranking weights organization-scoped capabilities above network and device scopes in the public implementation, which can shape which APIs the agent discovers first."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages/INDEX.txt, official documentation text and HTML, links_check.txt, and the local CiscoDevNet repository at the pinned commit. The official docs provide the tool names and descriptions; the local repository provides schemas and implementation details for the corresponding self-hosted version, which Cisco says has the same core functionality. No MCP-specific price, detailed privacy/retention terms, or OAuth metadata was found. The Glama listing and Cisco Code Exchange community repository describe unofficial alternatives and were not used as evidence for the official endpoint.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 4.0
+  }
+}

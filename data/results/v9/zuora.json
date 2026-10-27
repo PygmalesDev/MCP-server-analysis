@@ -1,0 +1,1238 @@
+{
+  "server": "zuora",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://api.zuora.com/mcp",
+    "documentation_url_csv": "https://www.zuora.com/resource/zuora-mcp-servers-putting-trusted-finance-information-at-your-fingertips/",
+    "addressing": "global",
+    "repository_url": "https://github.com/zuora/zuora-coding-agent",
+    "documentation_urls_used": [
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/resources-reference-for-zuora-mcp",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server/identify-your-mcp-server-endpoint",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server/remote-mcp-configurations-for-multi-org-and-multi-entity-tenants",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-local-mcp-server/enable-zuora-ai",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server/configure-zuora-remote-mcp-clients/install-zuora-mcp-server-in-chatgpt",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server/configure-zuora-remote-mcp-clients/install-zuora-mcp-server-in-claude-desktop-or-web",
+      "https://docs.zuora.com/en/basics/use-of-ai-in-zuora/ai-commitments",
+      "https://docs.zuora.com/en/basics/use-of-ai-in-zuora/zuoras-approach-to-ai",
+      "https://www.zuora.com/frequently-asked-questions/",
+      "https://developer.zuora.com/docs/ai/mcp-install"
+    ],
+    "open_code_equals_deployed_server": "No",
+    "open_code_note": "The public repository is a coding-agent plugin containing skills, reference material, and a local MCP configuration that runs the separate zuora-mcp@latest package. It is not the hosted server implementation. Zuora documents local and remote servers as supporting the same operations.",
+    "mcp_protocol_version": "Standard MCP specification; exact protocol version NOT FOUND",
+    "commit_hash": "0170bf27c9a93739b9bb38a6b94e7ad56550a65d",
+    "commit_date": "2026-09-28",
+    "implementation_language": "NOT FOUND for the hosted server; the public repository is a plugin with supporting scripts and materials",
+    "mcp_sdk_and_version": "NOT FOUND for the hosted server",
+    "code_public": "Partially",
+    "license": "MIT (public coding-agent plugin repository)",
+    "release_status": "Standard documentation; exact hosted MCP release status NOT FOUND",
+    "other_official_servers": [
+      "Zuora documents local and remote MCP servers as supporting the same set of operations.",
+      "The endpoint guide lists production endpoints https://na.zuora.com/mcp, https://zuora.com/mcp, https://eu.zuora.com/mcp, and https://ap.zuora.com/mcp, plus sandbox endpoints https://apisandbox.zuora.com/mcp, https://sandbox.na.zuora.com/mcp, https://test.zuora.com/mcp, https://sandbox.eu.zuora.com/mcp, https://test.eu.zuora.com/mcp, and https://test.ap.zuora.com/mcp."
+    ],
+    "sources": [
+      "https://github.com/zuora/zuora-coding-agent/tree/0170bf27c9a93739b9bb38a6b94e7ad56550a65d",
+      "https://github.com/zuora/zuora-coding-agent/blob/0170bf27c9a93739b9bb38a6b94e7ad56550a65d/README.md#L1-L17",
+      "https://github.com/zuora/zuora-coding-agent/blob/0170bf27c9a93739b9bb38a6b94e7ad56550a65d/.mcp.json#L1-L13",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server/identify-your-mcp-server-endpoint"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Unknown",
+    "mcp_access_cost_details": "No separate MCP price or MCP-specific limits were found in the official materials reviewed. Access requires a Zuora tenant with Zuora AI enabled and OAuth authorization.",
+    "linked_software": "Paid",
+    "linked_software_cost": "Zuora pricing depends on products, scope, transaction volume, business model, regions, and implementation needs; the vendor directs buyers to request a commercial proposal.",
+    "pricing_model_details": "Official FAQ describes product and scope-based pricing but gives no amounts or MCP-specific per-call price.",
+    "other_access_restrictions": "Tenant AI must be enabled by an organization administrator. Tenant permission mode controls access: Read-Only prevents write actions; Read-Write permits write actions subject to the external MCP client's behavior. OAuth authorization and the authorizing user's product permissions apply.",
+    "restrictions_controlled_by": "Vendor and OneID organization administrator; user permissions and tenant configuration also constrain access. The MCP client controls whether it prompts for write approval.",
+    "sources": [
+      "https://www.zuora.com/frequently-asked-questions/",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-local-mcp-server/enable-zuora-ai"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference names 91 tools and assigns each a Read, Write, or Mixed permission classification. Write availability depends on tenant mode. The reference does not publish input schemas.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results and error structure are NOT FOUND in the reviewed official reference.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "An official resource reference lists 12 guides for analytics queries, product catalog, orders, querying, and revenue operations. It does not specify the wire-level resource URI or content format.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/resources-reference-for-zuora-mcp"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No official prompt list or prompt capability documentation was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "MCP-specific logging behavior, retention, and audit event details were not found in the reviewed documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No sampling capability documentation was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No roots capability documentation was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The endpoint returned HTTP 401 with `WWW-Authenticate: Bearer realm=\"Zuora API\"` and a JSON error stating `Missing Bearer token` (code `90000011`). The protected-resource document for the endpoint origin returned resource `https://api.zuora.com`, authorization server `https://one.zuora.com`, scope `mcp-server`, and bearer method `header`. The path-suffixed protected-resource URL returned HTTP 404. The authorization-server document advertises authorization_code, client_credentials, and refresh_token grants; PKCE S256; client authentication methods client_secret_basic, client_secret_post, client_secret_jwt, private_key_jwt, and none; and client ID metadata document support. No registration_endpoint or token lifetime is present in the supplied metadata.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "401 JSON: {\"success\":false,\"reasons\":[{\"message\":\"Missing Bearer token\",\"code\":\"90000011\"}]}",
+      "authorization_mechanism": "OAuth 2.0 bearer token in header; protected-resource metadata supports scope `mcp-server`. Authorization server metadata advertises authorization_code, client_credentials, refresh_token; PKCE S256; client auth methods client_secret_basic, client_secret_post, client_secret_jwt, private_key_jwt, none; client ID metadata document support; no registration_endpoint or token lifetime advertised. Revocation and introspection endpoints are advertised.",
+      "authorization_server": "https://one.zuora.com",
+      "sources": [
+        "https://api.zuora.com/mcp",
+        "https://api.zuora.com/.well-known/oauth-protected-resource",
+        "https://api.zuora.com/.well-known/oauth-protected-resource/mcp",
+        "https://one.zuora.com/.well-known/oauth-authorization-server",
+        "https://one.zuora.com/.well-known/openid-configuration"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No server-side MCP elicitation support was documented. Product write approval in the Zuora AI experience is distinguished from approval through external MCP clients.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tools manage asynchronous product jobs, including Data Query, reports, and meters, but MCP Tasks capability itself is not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Product job operations are named in the tool reference; MCP Tasks wire protocol is unknown.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Tenant-level AI enablement and Read-Only/Read-Write modes are configured in OneID Command Center. Claude Desktop documentation also describes optional per-tool permission configuration in the client.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-local-mcp-server/enable-zuora-ai",
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server/configure-zuora-remote-mcp-clients/install-zuora-mcp-server-in-claude-desktop-or-web"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No dedicated MCP error-reporting capability was documented. The tool list includes `submit_mcp_feedback`, described as submitting confirmed feedback for the server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "The endpoint's unauthenticated response is JSON with success false and a reasons array.",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "https://api.zuora.com/mcp"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "No subscription-change notifications or subscription capability documentation was found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Some product tools track job or meter-run status; MCP-level progress notifications were not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Some product operations cancel business objects or jobs; MCP request cancellation support was not documented.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "Zuora documents local and hosted server variants, resources for task guidance, and region-specific server URLs. The server overview describes access to tenant data, APIs, SDKs, and supporting documentation.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "",
+      "authorization_server": "",
+      "sources": [
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server",
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/resources-reference-for-zuora-mcp",
+        "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server/identify-your-mcp-server-endpoint"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official list classifies tools as Read, Write, or Mixed. No MCP tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) are published. 2. Zuora states it cannot enforce the Zuora AI product's per-action approval step for external MCP writes; approval depends on the calling client. 3. OAuth scope is `mcp-server`; remote access inherits the authorizing user's permissions. OneID tenant AI permission controls Read-Only or Read-Write. Multi-Org access follows integration-user org permissions; Multi-Entity authorization selects an entity. OAuth metadata lists grants and revocation/introspection endpoints but no token lifetime. 4. Docs list regional production and sandbox URLs; tenant modes include Read-Only. No URL toolset/filter or query-free parameter documented. 5. Documentation says access follows tenant/user permissions and selected org/entity; field masking or MCP-specific PII exclusion is not documented. 6. MCP-specific rate limits, quotas, result caps, truncation, and per-call charges not found. 7. Input schemas and validation/correction behavior not published. 8. MCP-specific logging, auditing, and telemetry details not found. 9. `submit_mcp_feedback` submits confirmed MCP feedback; no rating/survey tool listed. 10. Official resources provide task guidance; the reference recommends asking built-in AI about tool usage. The docs do not establish server-enforced behavior for those recommendations. 11. Server-side memory or behavior-dependent tool changes not documented. 12. Flat official tool list; remote and local variants are documented as supporting the same operations, with endpoints varying by region/environment. 13. No general raw REST/API execution tool appears in the official list; `zuora_graphql` is classified Read and described for GraphQL exploration and queries.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "Use the built-in AI capabilities to explore the server's available features and tools. For example, ask \"What can I do with the manage_workflow tool?\" You can also request guidance on using a specific tool or Zuora feature, such as \"Give me five useful prompts for working with invoices.\""
+    ],
+    "server_structure": "Standard",
+    "server_structure_explanation": "The official reference presents one flat list of 91 tools. Zuora also documents regional/environment endpoints and local/remote variants, but says the local and remote servers support the same operations.",
+    "sources": [
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-local-mcp-server/enable-zuora-ai",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server/remote-mcp-configurations-for-multi-org-and-multi-entity-tenants",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/configure-zuora-remote-mcp-server/configure-zuora-remote-mcp-clients/install-zuora-mcp-server-in-claude-desktop-or-web"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "91",
+    "action_count_comment": "The official tool reference lists 91 tools and states that they cover 330+ operations; the full list is in actions.json. The supplied endpoint host api.zuora.com is absent from the official regional endpoint table, but the endpoint path is /mcp and its OAuth metadata identifies it as a protected Zuora resource; the official /mcp reference is the best available tool list. No catalogue-only actions were added. APIs.io lists a different endpoint, https://developer.zuora.com/mcp, without a Zuora tool list; Pipedream's page is a proxy page with tools not loaded in the captured copy. No catalogue count for this endpoint was available.",
+    "actions": [
+      {
+        "tool_name": "ask_zuora",
+        "description": "Expert assistant on Zuora's product suite.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "sdk_upgrade",
+        "description": "SDK version information, changelogs, and upgrade guidance.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "zuora_codegen",
+        "description": "Code generation guidance with API discovery.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "ping",
+        "description": "Checks whether the Zuora MCP server is available and responding.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_account_summary",
+        "description": "Account details with financial summary.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "query_objects",
+        "description": "Query Zuora object types with filtering and sorting.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_data_queries",
+        "description": "Submit and manage Data Query jobs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_reports",
+        "description": "Search, list, export, and manage reports.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_system_health",
+        "description": "Retrieve API volume, failures, and summaries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_reports",
+        "description": "Runs a report.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "submit_mcp_feedback",
+        "description": "Submits confirmed MCP feedback for the Zuora MCP server.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "zuora_graphql",
+        "description": "Explores GraphQL types, filters, inputs, and query structures, and runs GraphQL queries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_products",
+        "description": "Create products in the product catalog.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_product_rate_plans",
+        "description": "Create rate plans under products.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_product_rate_plan_charges",
+        "description": "Create charges.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "create_subscriptions",
+        "description": "Create subscriptions through the Orders API.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_subscriptions",
+        "description": "Suspend, resume, renew, cancel, and preview subscriptions.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_subscription_amendments",
+        "description": "Add, update, and remove products.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_orders",
+        "description": "Preview, create, update, and cancel orders.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_billing_previews",
+        "description": "Generate and retrieve billing previews.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_bill_runs",
+        "description": "Create, post, cancel, and delete bill runs.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_invoice_schedules",
+        "description": "Create and manage invoice schedules.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_fulfillments",
+        "description": "Creates, updates, and deletes fulfillments and fulfillment items.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_invoices",
+        "description": "Create, post, reverse, write off, and email invoices.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_credit_memos",
+        "description": "Create, post, apply, and reverse credit memos.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_debit_memos",
+        "description": "Create, post, and write off debit memos.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_billing_documents",
+        "description": "Generate billing documents and manage PDFs.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_taxation_items",
+        "description": "Create, update, and delete taxation items.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_summary_statements",
+        "description": "Create summary statement runs.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_delivery_adjustments",
+        "description": "Preview, create, and cancel adjustments.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_payments",
+        "description": "Create, apply, unapply, cancel, refund, and transfer payments.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_refunds",
+        "description": "Delete, update, and cancel refunds.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_payment_runs",
+        "description": "Create, update, and delete payment runs.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_payment_schedule_items",
+        "description": "Retry, cancel, and skip payment schedule items.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_payment_schedules",
+        "description": "Creates, updates, deletes, and cancels payment schedules, and adds items to payment schedules.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_customer_accounts",
+        "description": "Retrieves customer account settings and creates, updates, and deletes customer accounts.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_contacts",
+        "description": "Create, update, delete, and transfer contacts.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_accounting_codes",
+        "description": "List, create, activate, and deactivate accounting codes.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_accounting_periods",
+        "description": "List, create, close, and reopen accounting periods.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_journal_runs",
+        "description": "Create, cancel, and delete journal runs.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_summary_journal_entries",
+        "description": "Create, update, and cancel summary journal entries.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_revenue_reports",
+        "description": "List, run, and download revenue reports.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "summarize_revenue_report",
+        "description": "Summarizes revenue report output.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_o2r_data_backfill",
+        "description": "Manage O2R data backfill jobs.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_o2r_regenerate",
+        "description": "Regenerate transactions and revenue recognition events.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_revenue_switch_allocation",
+        "description": "Retrieves revenue switch allocation information.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_contract_modification",
+        "description": "Retrieves contract modification details and analyzes TCV changes, pricing by line, and carve impacts.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_revenue_job_summary",
+        "description": "Collects revenue job metrics and lists failed revenue job runs.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "simulate_revenue_impact",
+        "description": "Simulates revenue impact, including TCV, revenue by quarter, and remaining performance obligations.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_stage_validation",
+        "description": "Lists, searches, and retrieves field information and validation rules, and saves stage validation rules.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "get_rule_set",
+        "description": "Retrieves rule set information.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_vc",
+        "description": "Retrieves VC types and applies VC actions.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_defer_and_release",
+        "description": "Defers revenue for revenue contracts and releases revenue for revenue contracts.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_apply_hold",
+        "description": "Applies holds at the contract, line, and POB levels.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_release_hold",
+        "description": "Releases holds at the contract, line, and POB levels.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_allocate_action",
+        "description": "Runs allocation actions.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_open_close_rc",
+        "description": "Opens and closes revenue contracts.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_edit_line",
+        "description": "Edits revenue contract lines.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_switch_allocation",
+        "description": "Switches revenue allocation.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_apply_impairment",
+        "description": "Applies impairment actions.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_edit_pob_attributes",
+        "description": "Edits POB attributes at the revenue contract and POB levels.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_switch_lead_line",
+        "description": "Switches the lead line.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_un_freeze_rc",
+        "description": "Unfreezes revenue contracts.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_link_delink",
+        "description": "Links and delinks revenue contracts, POBs, and lines.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_generate_forecast",
+        "description": "Generates revenue forecasts.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_settings",
+        "description": "Retrieve and update tenant settings.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_analytics",
+        "description": "Validates analytics access, lists datasets, retrieves dataset schemas, and executes analytics queries.",
+        "type": "Read",
+        "enabled_by_default": "Yes",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_decision_tree",
+        "description": "Creates and updates decision trees.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_custom_function",
+        "description": "Creates and updates custom functions for workflows.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_workflows",
+        "description": "List, export, import, and update workflows.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_workflow_tasks",
+        "description": "List, get, update, and rerun workflow tasks.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "run_workflows",
+        "description": "Run workflows and check run status.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_attachments",
+        "description": "Get, list, create, and update attachments.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_sequence_sets",
+        "description": "List, create, and update sequence sets.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_bulk_actions",
+        "description": "Bulk create, update, and delete objects.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_custom_fields",
+        "description": "Lists custom field namespaces, types, and fields, and creates or updates custom fields.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_decision_table",
+        "description": "Creates and updates decision tables.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_custom_policies",
+        "description": "Creates custom policy drafts for features and entitlements.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_custom_object_definitions",
+        "description": "Define and manage schemas.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_custom_object_records",
+        "description": "Create, read, update, and delete custom object records.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_usage",
+        "description": "Upload, create, update, and query usage records.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_mediation_meters",
+        "description": "Retrieves and validates meters, lists related connections, event stores, and schemas, and creates meters for usage metering.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_e_invoicing_config",
+        "description": "Manage service providers, regions, and templates.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_e_invoicing_documents",
+        "description": "Generate and sync e-invoices.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_commerce_products",
+        "description": "Create, update, and delete commerce products.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_commerce_context_attributes",
+        "description": "Lists context attributes and creates or updates attribute values for Dynamic Pricing.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_commerce_plans",
+        "description": "Creates, updates, and deletes commerce plans for Dynamic Pricing.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_commerce_charges",
+        "description": "Queries, creates, updates, and deletes commerce charges, and updates tier prices for Dynamic Pricing.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_omnichannel_subscriptions",
+        "description": "Manage omnichannel subscriptions.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_meters_run",
+        "description": "Provides run guidance, executes meter runs, tracks run status and history, queries event stores, retrieves run summaries and records, manages prefetch operations, and ingests usage events.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "manage_meters_audit",
+        "description": "Provides audit guidance, retrieves audit trail entries and audit export information, and creates audit exports.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "Hosted server definitions and initialize instructions were not available verbatim; the public repository is a coding-agent plugin, not the hosted server code.",
+    "human_can_agent_cannot": "NOT FOUND: the reviewed sources do not provide a complete comparison of all human product operations against MCP-exposed operations. MCP tool names describe broad subsets, and exact tool schemas were not published in the tool reference.",
+    "sources": [
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server",
+      "https://apis.io/servers/zuora/zuora/",
+      "https://mcp.pipedream.com/app/zuora"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The reference encourages using built-in AI to explore tools and ask for guidance. External MCP write approvals are client-dependent; Zuora says it cannot enforce the in-product per-action approval step for external MCP actions.",
+    "governance_promises": "AI Commitments state: \"Zuora and the AI Providers will not use Customer Data to train, re-train, improve, or fine-tune any AI models.\" It also states: \"Customer Data will not be transferred outside of the Customer’s approved AWS data center.\"",
+    "promises_to_user": "The server overview says remote access inherits permissions of the authorizing user along with tenant-level Zuora AI permission. Zuora's AI approach describes transparency, privacy, and security principles.",
+    "comparison_with_server_logic": "Permission inheritance and tenant-level modes are documented as access controls. External write approval is explicitly left to the MCP client. AI Commitments provide vendor-level data-use and residency commitments, but the reviewed MCP documentation does not expose implementation details that independently verify these controls at tool-call level.",
+    "sources": [
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server",
+      "https://docs.zuora.com/en/basics/use-of-ai-in-zuora/ai-commitments",
+      "https://docs.zuora.com/en/basics/use-of-ai-in-zuora/zuoras-approach-to-ai",
+      "https://docs.zuora.com/en/zuora-ai/zuora-mcp-server/zuora-mcp-server/tools-reference-for-zuora-mcp"
+    ]
+  },
+  "contradictions": [
+    "The supplied endpoint is https://api.zuora.com/mcp, while Zuora's official endpoint guide lists regional and sandbox /mcp hosts but not api.zuora.com. No endpoint-specific tool list was found, so the documented official /mcp tool list is used as best-available evidence.",
+    "The official tool reference describes 91 tools and 330+ operations, while the supplied endpoint's OAuth scope metadata advertises only `mcp-server` and does not enumerate individual tool permissions. The scope cannot be mapped to the listed read/write classifications from available evidence."
+  ],
+  "observations_for_research": [
+    "Zuora exposes tenant-level Read-Only and Read-Write modes. Its documentation distinguishes approval in Zuora's own AI experience from third-party MCP client approval.",
+    "The official tool reference names `submit_mcp_feedback` and describes it as submitting confirmed feedback for the MCP server.",
+    "Zuora documents regional production and sandbox endpoints, but the supplied global-addressed host is not present in its endpoint table."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked the prepared links.json, pages/INDEX.txt and captured official pages, tool-reference text, scripts and HTML, local repository, commit metadata, and plausibility report. The repository is the official Zuora Coding Agent plugin; its .mcp.json invokes a separately installed zuora-mcp@latest package, and the hosted implementation is not present there. Tool schemas, hosted initialize instructions, exact protocol version, and endpoint-specific tool list were not found. APIs.io describes developer.zuora.com/mcp, a different endpoint; Pipedream is a proxy listing with unavailable action details. Unofficial third-party Zuora MCP projects were present in links.json and were not used as evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 6.7
+  }
+}

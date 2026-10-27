@@ -1,0 +1,523 @@
+{
+  "server": "wordpress-com",
+  "analysis_date": "2026-10-27",
+  "status": "Draft",
+  "analyst_method": "LLM via Codex, prompt v9",
+  "A_general": {
+    "endpoint": "https://public-api.wordpress.com/wpcom/v2/mcp/v1",
+    "documentation_url_csv": "https://developer.wordpress.com/docs/mcp/connect-custom-mcp-client/",
+    "addressing": "global",
+    "repository_url": "https://github.com/Automattic/mcp-wpcom-remote",
+    "documentation_urls_used": [
+      "https://developer.wordpress.com/docs/mcp/",
+      "https://developer.wordpress.com/docs/mcp/connect-custom-mcp-client/",
+      "https://developer.wordpress.com/docs/mcp/tools-reference/",
+      "https://wordpress.com/support/mcp/",
+      "https://wordpress.com/support/mcp/mcp-capabilities/",
+      "https://wordpress.com/blog/2026/01/22/connect-ai-agents-to-wordpress-oauth-2-1/"
+    ],
+    "open_code_equals_deployed_server": "Partially",
+    "open_code_note": "The public TypeScript repository is an Automattic-maintained local stdio proxy/wrapper configured for the hosted endpoint. It delegates to the separate @automattic/mcp-wordpress-remote package; the public repository does not contain the hosted server implementation or its tool definitions. Hosted tool facts therefore come from the official tool reference.",
+    "mcp_protocol_version": "NOT FOUND",
+    "commit_hash": "6310891e51cc168cde15cc461fb451c1da325c89",
+    "commit_date": "2026-10-20",
+    "implementation_language": "TypeScript (local proxy)",
+    "mcp_sdk_and_version": "The repository delegates MCP implementation to @automattic/mcp-wordpress-remote; its locked dependency tree includes @modelcontextprotocol/sdk 1.31.0. The hosted server SDK/version is not published.",
+    "code_public": "Partially",
+    "license": "GPL v2 or later (local proxy)",
+    "release_status": "NOT FOUND",
+    "other_official_servers": [
+      "WordPress.com documentation describes the same hosted MCP endpoint for WordPress.com-hosted and Jetpack-connected self-hosted sites; it states there is no separate Jetpack MCP server."
+    ],
+    "sources": [
+      "https://developer.wordpress.com/docs/mcp/",
+      "https://developer.wordpress.com/docs/mcp/tools-reference/",
+      "https://github.com/Automattic/mcp-wpcom-remote/tree/6310891e51cc168cde15cc461fb451c1da325c89",
+      "https://github.com/Automattic/mcp-wpcom-remote/blob/6310891e51cc168cde15cc461fb451c1da325c89/src/proxy.ts#L1-L24",
+      "https://github.com/Automattic/mcp-wpcom-remote/blob/6310891e51cc168cde15cc461fb451c1da325c89/package.json"
+    ]
+  },
+  "B_access_pricing": {
+    "mcp_access_cost": "Free",
+    "mcp_access_cost_details": "Official support says MCP is available on every WordPress.com site, including free sites, and Jetpack-connected self-hosted sites need no Jetpack plan. No separate MCP fee is documented.",
+    "linked_software": "Freemium",
+    "linked_software_cost": "WordPress.com offers a free plan and paid plans. The official pricing page showed Personal from US$4/month billed annually or US$2.75/month billed every three years; prices and terms vary by billing period and plan.",
+    "pricing_model_details": "MCP access itself is not priced per call or seat in the reviewed documentation. Site capabilities can depend on plan, hosting platform, user permissions, and enabled tool settings; some operations are plan-gated.",
+    "other_access_restrictions": "Requires a WordPress.com account, MCP enabled in account or site settings, and an MCP client. Tools vary by site plan, hosting platform, user role, and tool toggles. Users can disable MCP per site and configure read/write tools. Jetpack-connected sites are supported.",
+    "restrictions_controlled_by": "Vendor and WordPress.com account/site administrators; the user's site role also limits access.",
+    "sources": [
+      "https://wordpress.com/support/mcp/",
+      "https://developer.wordpress.com/docs/mcp/tools-reference/",
+      "https://wordpress.com/pricing/",
+      "https://wordpress.com/support/plan-features/"
+    ]
+  },
+  "C_capabilities": [
+    {
+      "capability": "Tools",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "NOT FOUND",
+      "description_what_how": "The official reference documents eight STRAP facade tools, which expose operation catalogs and schemas through action-based calls, and eleven standalone tools. The listed set is connection-dependent; the docs direct clients to tools/list for the definitive set.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool results and operation schemas are returned by the server; exact result schemas are not fully published in the reference. The reference says to call each tool for exact input and output schemas.",
+      "authorization_mechanism": "OAuth 2.1. The supplied endpoint probe returned HTTP 401 and WWW-Authenticate: Bearer resource_metadata=\"https://public-api.wordpress.com/.well-known/oauth-protected-resource?resource=wpcom/v2/mcp/v1\". Supplied protected-resource metadata lists authorization_servers=[\"https://public-api.wordpress.com\"], bearer_methods_supported=[\"header\"], scopes_supported=[\"global\",\"auth\",\"openid\",\"profile\",\"email\",\"users\",\"sites\",\"posts\",\"comments\",\"taxonomy\",\"follow\",\"sharing\",\"freshly-pressed\",\"notifications\",\"insights\",\"read\",\"stats\",\"media\",\"menus\",\"batch\",\"videos\"], resource_owner_registration_endpoint=\"https://developer.wordpress.com/apps/new/\", and introspection_endpoint=\"https://public-api.wordpress.com/oauth2-1/token-info\". The path-specific protected-resource document returns the same values. Docs describe DCR at POST /oauth2-1/register and authorization-code flow with PKCE; public clients use token_endpoint_auth_method \"none\" and exact registered redirect URIs. The docs say PKCE is required for public clients. Grant examples include authorization_code and refresh_token. Token lifetime and revocation details were not found. The local proxy defaults to scope global; the custom-client guide's example authorization URL uses scope=auth.",
+      "authorization_server": "https://public-api.wordpress.com",
+      "sources": [
+        "https://public-api.wordpress.com/wpcom/v2/mcp/v1",
+        "https://public-api.wordpress.com/.well-known/oauth-protected-resource",
+        "https://public-api.wordpress.com/.well-known/oauth-protected-resource/wpcom/v2/mcp/v1",
+        "https://developer.wordpress.com/docs/mcp/connect-custom-mcp-client/",
+        "https://github.com/Automattic/mcp-wpcom-remote/blob/6310891e51cc168cde15cc461fb451c1da325c89/src/proxy.ts#L13-L24"
+      ]
+    },
+    {
+      "capability": "Resources",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The public code is only a proxy and hosted documentation reviewed here does not establish whether the hosted endpoint serves MCP resources.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/",
+        "https://github.com/Automattic/mcp-wpcom-remote/tree/6310891e51cc168cde15cc461fb451c1da325c89"
+      ]
+    },
+    {
+      "capability": "Prompts",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The hosted docs reviewed do not describe MCP prompts. The public wrapper does not implement the upstream hosted server.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/",
+        "https://github.com/Automattic/mcp-wpcom-remote/tree/6310891e51cc168cde15cc461fb451c1da325c89"
+      ]
+    },
+    {
+      "capability": "Logging",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The local proxy uses the upstream package logger and logs endpoint, OAuth mode, callback port, and scopes. Hosted endpoint logging, retention, and audit access were not found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Local proxy log messages; hosted server log format is unknown.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://github.com/Automattic/mcp-wpcom-remote/blob/6310891e51cc168cde15cc461fb451c1da325c89/src/proxy.ts#L32-L56"
+      ]
+    },
+    {
+      "capability": "Sampling",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation or server implementation evidence found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/",
+        "https://github.com/Automattic/mcp-wpcom-remote/tree/6310891e51cc168cde15cc461fb451c1da325c89"
+      ]
+    },
+    {
+      "capability": "Roots",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No hosted documentation or server implementation evidence found.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/",
+        "https://github.com/Automattic/mcp-wpcom-remote/tree/6310891e51cc168cde15cc461fb451c1da325c89"
+      ]
+    },
+    {
+      "capability": "Authorization",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint rejects unauthenticated requests with HTTP 401 and Bearer resource metadata discovery. WordPress.com documents OAuth 2.1, dynamic client registration, authorization code with PKCE for public clients, bearer-token calls, and redirect URI matching.",
+      "pre_interaction_context_verbatim": "WWW-Authenticate: Bearer resource_metadata=\"https://public-api.wordpress.com/.well-known/oauth-protected-resource?resource=wpcom/v2/mcp/v1\"",
+      "post_interaction_context_structure": "OAuth authorization redirects to a registered redirect URI with an authorization code; token endpoint returns access_token and may include expires_in and refresh_token. The endpoint requires Authorization: Bearer.",
+      "authorization_mechanism": "Protected-resource metadata: resource=https://public-api.wordpress.com/wpcom/v2/mcp/v1; authorization_servers=[\"https://public-api.wordpress.com\"]; scopes_supported=[\"global\",\"auth\",\"openid\",\"profile\",\"email\",\"users\",\"sites\",\"posts\",\"comments\",\"taxonomy\",\"follow\",\"sharing\",\"freshly-pressed\",\"notifications\",\"insights\",\"read\",\"stats\",\"media\",\"menus\",\"batch\",\"videos\"]; bearer_methods_supported=[\"header\"]; resource_owner_registration_endpoint=https://developer.wordpress.com/apps/new/; introspection_endpoint=https://public-api.wordpress.com/oauth2-1/token-info. Both supplied metadata URLs returned HTTP 200 and the same JSON. Authorization server discovery documents were not successfully retrieved in the supplied prefetch. The client guide documents DCR at /oauth2-1/register, /oauth2-1/authorize, /oauth2-1/token, authorization_code plus refresh_token example, PKCE S256 (required for public clients), and token endpoint auth method none for public clients. Token lifetime and revocation specifics were not found.",
+      "authorization_server": "https://public-api.wordpress.com",
+      "sources": [
+        "https://public-api.wordpress.com/wpcom/v2/mcp/v1",
+        "https://public-api.wordpress.com/.well-known/oauth-protected-resource",
+        "https://public-api.wordpress.com/.well-known/oauth-protected-resource/wpcom/v2/mcp/v1",
+        "https://developer.wordpress.com/docs/mcp/connect-custom-mcp-client/"
+      ]
+    },
+    {
+      "capability": "Elicitation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The server reference prescribes user confirmation for writes, but no MCP Elicitation protocol implementation was documented. Confirmation through agent/client dialogue is described separately.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "https://wordpress.com/support/mcp/"
+      ]
+    },
+    {
+      "capability": "Tasks",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP Tasks capability is documented. Some individual operations, such as newsletter subscriber import, are described as background work, but this does not establish protocol Tasks support.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/tools-reference/"
+      ]
+    },
+    {
+      "capability": "Configuration",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "Account preferences enable MCP and customize read/write tools; per-site exceptions and site-level overrides also apply. The tool catalog can vary by site plan, hosting platform, user role, and settings. The local wrapper accepts environment overrides for endpoint, OAuth, callback, config directory, and logging.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Tool availability is reflected in the connection's tools/list response; exact configuration protocol is not published.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://wordpress.com/support/mcp/",
+        "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "https://github.com/Automattic/mcp-wpcom-remote/blob/6310891e51cc168cde15cc461fb451c1da325c89/README.md"
+      ]
+    },
+    {
+      "capability": "Error Reporting",
+      "implemented": "Partially",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The endpoint returns a REST-style unauthorized error body. The tool reference documents operation-specific errors and disabled-operation reasons, but a complete common error schema was not found.",
+      "pre_interaction_context_verbatim": "{\"code\":\"rest_unauthorized\",\"message\":\"Authentication required.\",\"data\":{\"status\":401}}",
+      "post_interaction_context_structure": "At least endpoint authorization errors use JSON with code, message, and data.status. Operation-specific error schema is not fully documented.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://public-api.wordpress.com/wpcom/v2/mcp/v1",
+        "https://developer.wordpress.com/docs/mcp/tools-reference/"
+      ]
+    },
+    {
+      "capability": "Subscription",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP subscription capability is described. The server provides business operations involving WordPress.com subscriptions, which are ordinary tools rather than MCP resource subscriptions.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/tools-reference/"
+      ]
+    },
+    {
+      "capability": "Progress Tracking",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP progress notifications are documented. Some operations return identifiers for background work, but protocol-level progress support was not established.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/tools-reference/"
+      ]
+    },
+    {
+      "capability": "Cancellation",
+      "implemented": "Unknown",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "No MCP request cancellation capability is described in the hosted documentation or public proxy code.",
+      "pre_interaction_context_verbatim": "NOT AVAILABLE",
+      "post_interaction_context_structure": "Unknown",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/",
+        "https://github.com/Automattic/mcp-wpcom-remote/tree/6310891e51cc168cde15cc461fb451c1da325c89"
+      ]
+    },
+    {
+      "capability": "Other",
+      "implemented": "Yes",
+      "depends_on_mcp_version": "Unknown",
+      "description_what_how": "The tools are organized as STRAP facades plus standalone tools. Facades expose action-based operation discovery and schema lookup; the server documentation also provides behavioral runbooks and safety guidance.",
+      "pre_interaction_context_verbatim": "STRAP facade tools: A single MCP tool that wraps a family of related operations behind one entry point. Facades use a uniform action-based interface (action: list | describe | execute) so AI agents discover what’s available, fetch parameter schemas, and execute operations through one tool.",
+      "post_interaction_context_structure": "Facade results include operation listings, descriptions, disabled-operation reasons, or operation outputs. The schema for a specific operation is fetched via action describe.",
+      "authorization_mechanism": "NOT FOUND",
+      "authorization_server": "NOT FOUND",
+      "sources": [
+        "https://developer.wordpress.com/docs/mcp/tools-reference/"
+      ]
+    }
+  ],
+  "D_server_side_logic": {
+    "additional_logic": "1. Official docs distinguish read and write tools and describe operations as Read or Write; no hosted tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) were found. 2. Docs require user_confirmed: true for write/update/delete operations and describe a user confirmation flow. For destructive operations, agents are instructed to fetch and present the item before confirmation. DNS changes require fetching current records and describing the diff. These instructions are documented as a protocol; the reviewed docs do not show whether every operation enforces the confirmation parameter server-side. Site creation has a runbook and confirmation sequence; subscription move uses preview plus state_token. 3. OAuth scopes from supplied metadata are global, auth, openid, profile, email, users, sites, posts, comments, taxonomy, follow, sharing, freshly-pressed, notifications, insights, read, stats, media, menus, batch, videos. Docs say site role permissions restrict tools. Account and site tool toggles, site exceptions, and admin-configured site overrides control availability; site settings take precedence. DCR, PKCE and redirect URI matching are documented. Token lifetime, revocation, and client allowlists were not found. 4. Account and site controls provide read/write groups, tool-level selection and site exclusion; authorization offers Full access, Read only, and Keep existing access. No URL query tool filter, distinct read-only endpoint, or region endpoint was documented. 5. Docs describe protected post passwords as never returned, protected content empty except with context=edit, media upload grants and HTTPS requirements, and rejection of private/internal source URLs for media. Facade operations can restrict included result fields. 6. Limits include 100 newsletter addresses per call, one import per site at a time, a free-site total cap of 100 imported subscribers, and a 50 MB media source URL cap. Tool-specific limits also include length and date range caps. Exact server-wide rate limits and per-call cost were not found. 7. The facades expose operation-specific schemas via describe; docs describe refusals for invalid locales, unsupported site settings, unavailable plan features, and DNS constraints. Generic unknown-argument handling and coercion behavior were not found. The local wrapper applies defaults only if the environment variable is unset; user overrides are preserved. 8. Site activity.get exposes product activity entries, including user actions; whether MCP calls are identified as such is not documented. The local wrapper logs endpoint/auth configuration; hosted MCP telemetry details were not found. 9. The standalone wpcom-mcp-send-feedback tool sends feature requests, bug reports, or feedback to the development team. wpcom-plans-list returns plan pricing and features; checkout tools generate purchase links, with payment in browser. These are vendor-directed feedback and commerce functions. 10. The tool reference includes agent-facing behavioral recommendations, safety sequences, and a site.instructions runbook. Docs also refer to external Agent Skills in Studio, separate from this server. Whether server instructions are sent at initialize was not found. 11. Persistent account/site configuration and tool settings affect future tool availability; no agent-specific behavioral memory was documented. 12. The server uses one global endpoint and one catalog for WordPress.com and Jetpack-connected sites, organized as facades and standalone tools. It does not document nested MCP servers. 13. No universal raw API request, SQL, or script execution tool appears in the official list.",
+    "behavioural_instructions_to_ai_verbatim": [
+      "[Official tool reference] “All write, update, and delete operations require user confirmation. The agent must (1) describe exactly what it plans to do, (2) ask the user for explicit confirmation, and (3) include the user’s confirmation as user_confirmed: true in the execute params. Write operations are never auto-executed.”",
+      "[Official tool reference] “Call wpcom-mcp-site-editor-context first (theme.active, theme.presets) so content uses theme-aligned preset slugs (e.g. \"primary\", \"large\") instead of hard-coded colors and sizes.”",
+      "[Official tool reference] “All operations support an optional include_fields parameter to limit which fields are returned. Use it to keep responses context-efficient.”",
+      "[Official tool reference] “The workflow is: call site.instructions once to get the runbook, ask the user for a title, derive and check the subdomain, show the resulting URL, then provision only after the user confirms.”",
+      "[Official tool reference] “Before any of them, fetch the current records with wpcom-mcp-account → domains.dns_records and describe the diff to the user.”"
+    ],
+    "server_structure": "Non-standard",
+    "server_structure_explanation": "The official reference describes eight STRAP facade tools that each expose multiple operations through action-based discovery, schema description, and execution, alongside standalone tools. Thus the MCP catalog is a small set of operation families rather than one tool per operation.",
+    "sources": [
+      "https://developer.wordpress.com/docs/mcp/tools-reference/",
+      "https://wordpress.com/support/mcp/",
+      "https://github.com/Automattic/mcp-wpcom-remote/blob/6310891e51cc168cde15cc461fb451c1da325c89/src/proxy.ts#L13-L56"
+    ]
+  },
+  "E_aggregated": {
+    "action_count": "19",
+    "action_count_comment": "The official tool reference exists at https://developer.wordpress.com/docs/mcp/tools-reference/. It names eight STRAP facade tools and eleven standalone tools (19 total); it does not state a total count. All 19 official names are included in actions.json. The reference says the live tools/list may vary by plan, platform, permissions, and settings. APIs.io reported no tool list; MCP.so presents a server overview without a tool list; mcp.tc's listing is based on public metadata and reports an authenticated endpoint but no native tools; the Claude connector listing is third-party and not used to replace the official names. No catalogue-only tool was added.",
+    "actions": [
+      {
+        "tool_name": "wpcom-mcp-content-authoring",
+        "description": "Create, read, update, and delete site content, media, taxonomies, patterns, and search.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "STRAP facade: action enum list|describe|execute; operation; params; wpcom_site; optional include_fields.",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-mcp-site-editor-context",
+        "description": "Read theme presets, applied styles, and registered block types.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "STRAP facade: action enum list|describe|get; operation; params; wpcom_site; optional include_fields.",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-mcp-account",
+        "description": "Read and manage the authenticated user profile, domains, subscriptions, billing, and security.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "STRAP facade: action enum list|describe|execute; operation; params; optional include_fields.",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-mcp-site",
+        "description": "Manage site settings, statistics, plugins, activity, themes, backups, security, and Jetpack modules.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "STRAP facade: action enum list|describe|execute; operation; params; wpcom_site; optional include_fields.",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-mcp-user-management",
+        "description": "Manage site users and collaborators.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "STRAP facade: action enum list|describe|execute; operation; params; wpcom_site; optional include_fields.",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-mcp-plugin-management",
+        "description": "Manage installed plugins.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "STRAP facade: action enum list|describe|execute; operation; params; wpcom_site; optional include_fields.",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-mcp-site-editing",
+        "description": "Manage site templates, navigation, widgets, and global styles.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "STRAP facade: action enum list|describe|execute; operation; params; wpcom_site; optional include_fields.",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-mcp-create-site",
+        "description": "Get creation runbook, check a subdomain, and provision a site.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "STRAP facade: action enum list|describe|execute; operation; params; optional include_fields.",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-user-sites",
+        "description": "List accessible WordPress.com and Jetpack-connected sites.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-domain-purchase",
+        "description": "Search available domains and generate registration checkout links.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-domain-update-dns-records",
+        "description": "Add or remove DNS records for a managed custom domain.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-domain-restore-default-dns-records",
+        "description": "Restore default WordPress.com A records or www CNAME.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-domain-update-nameservers",
+        "description": "Set nameservers for a managed custom domain.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-domain-set-mail-service",
+        "description": "Configure DNS for a supported external mail service.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-checkout-url",
+        "description": "Generate a preconfigured checkout URL; payment occurs in browser.",
+        "type": "Mixed",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-plans-list",
+        "description": "List plans, prices, and per-tier features.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-ai-agent-sites-list",
+        "description": "Discover public sites whose owners enabled AI Agent Access.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-mcp-jetpack-search-voice",
+        "description": "Search an opted-in public blog and return results with voice guidelines.",
+        "type": "Read",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      },
+      {
+        "tool_name": "wpcom-mcp-send-feedback",
+        "description": "Send a feature request, bug report, or general feedback to the development team.",
+        "type": "Write",
+        "enabled_by_default": "Unknown",
+        "parameters": "NOT PUBLISHED",
+        "parameter_count": "Unknown",
+        "source": "https://developer.wordpress.com/docs/mcp/tools-reference/",
+        "source_type": "Official"
+      }
+    ],
+    "pre_interaction_tokens": "NOT DETERMINABLE",
+    "token_method": "The hosted tool definitions and initialize instructions were not available verbatim. The public code is a proxy wrapper and does not contain hosted definitions; no token estimate can be computed from it.",
+    "human_can_agent_cannot": "The MCP reference describes checkout-link generation for domain registration and products, while payment is completed in the browser; the agent cannot complete that payment through the MCP tool. MCP operations are also a documented subset of WordPress.com functionality: the REST API reference exposes API namespaces and endpoints beyond those named in the MCP reference, but a complete human-versus-MCP operation comparison was not available. Sources: https://developer.wordpress.com/docs/mcp/tools-reference/ ; https://developer.wordpress.com/docs/api/",
+    "sources": [
+      "https://developer.wordpress.com/docs/mcp/tools-reference/",
+      "https://wordpress.com/support/mcp/mcp-capabilities/",
+      "https://claude.com/connectors/wordpress-com",
+      "https://apis.io/servers/automattic/wordpress-com/",
+      "https://mcp.so/servers/wordpress-com",
+      "https://mcp.tc/i/wordpress-com"
+    ]
+  },
+  "F_documentation": {
+    "implementation_hints_not_enforced": "The tool reference says to use the site editor context before authoring, prefer targeted section edits, inspect _content_warnings after saves, and fetch current DNS records before DNS changes. It also directs agents to ask for confirmation and pass user_confirmed: true. These are explicit agent instructions; independent server-side enforcement of every sequence is not established by the reviewed sources.",
+    "governance_promises": "The support page states: “MCP respects the user role permissions on your site.” It also states: “The MCP server does not share any data with the AI model unless you explicitly choose to send it. It also does not use data from MCP tools to train AI models; the data is used once as part of the original request.” The blog says access can be revoked from MCP settings. These statements describe WordPress.com's service and data handling; the reviewed public proxy does not implement the hosted permission or retention logic.",
+    "promises_to_user": "The vendor says MCP is available on free WordPress.com sites, uses the same server for Jetpack-connected sites, and lets users control access with account and site-level settings.",
+    "comparison_with_server_logic": "Role permissions and tool availability controls are documented. Account/site toggles, exceptions, and read/write groups provide user configuration. Confirmation is stated as required in the tool reference; the official sources reviewed do not disclose enough implementation detail to verify all enforcement paths. Data-use and no-training statements are vendor documentation, not behaviors demonstrated by the public proxy code.",
+    "sources": [
+      "https://wordpress.com/support/mcp/",
+      "https://developer.wordpress.com/docs/mcp/tools-reference/",
+      "https://wordpress.com/blog/2026/01/22/connect-ai-agents-to-wordpress-oauth-2-1/",
+      "https://developer.wordpress.com/docs/mcp/"
+    ]
+  },
+  "contradictions": [
+    "The local proxy defaults OAUTH_SCOPES to \"global\" [LOCAL CODE], while the custom-client guide's authorization URL example uses scope=auth [DOCS]. Both scopes appear in the supplied metadata's scopes_supported list; the sources do not explain which scope is appropriate for full MCP access.",
+    "The local proxy comments and README describe OAuth 2.1 with PKCE and dynamic registration, while the supplied metadata only identifies the authorization server and resource-owner registration endpoint; it does not itself expose authorization-server discovery or registration_endpoint. The client guide supplies the registration endpoint separately."
+  ],
+  "observations_for_research": [
+    "The facade design lets the server publish fewer top-level tools while agents discover operation names and schemas through additional calls.",
+    "Tool availability and scope are shaped by layered account preferences, per-site overrides, user role permissions, site plan, and hosting platform.",
+    "The official tool reference includes a feedback submission tool and commerce-oriented tools that expose plan prices or checkout URLs."
+  ],
+  "confidence": "Medium (official docs + metadata)",
+  "notes": "Checked links.json, links_check.txt, pages/ including official tool-reference and support pages and their script extracts, supplied OAuth metadata, and the local Automattic/mcp-wpcom-remote repository. The endpoint itself returned HTTP 401 with resource metadata. The local repo is the proxy, not hosted server source; the upstream implementation package is separate. OAuth authorization-server discovery attempts in the supplied prefetch failed, so authorization server details beyond the resource metadata and official client guide are not independently confirmed. Official pricing page was checked for software costs. Unofficial or directory sources were not used as primary evidence.",
+  "_run": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "prompt": "prompt_v9.md",
+    "links_prompt": "links_v3.md",
+    "date": "2026-10-27",
+    "duration_min": 14.7
+  }
+}
