@@ -1,0 +1,1218 @@
+{
+  "server": "grafana",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-12; re-analysed 2026-10-23 (new commit in the repository)",
+  "md_file": "02_grafana.md",
+  "servers": {
+    "code_repo": "https://github.com/grafana/mcp-grafana (open server; the cloud server at the CSV endpoint is not fully published)",
+    "docs_used": "https://grafana.com/docs/grafana/latest/developer-resources/mcp/ (open server, from CSV); https://grafana.com/docs/grafana-cloud/ai-tools/mcp-servers/cloud-mcp/ (cloud server)",
+    "open_eq_deployed": "Partially",
+    "mcp_version": "go-sdk v1.8.0 supports 2026-07-28 (latest, default), 2025-11-25, 2025-06-18, 2025-03-26, 2024-11-05",
+    "commit_hash": "e97cd4479eb40d25bc8d466db1651c29ce0c783e",
+    "commit_date": "2026-10-23",
+    "language": "Go (module github.com/grafana/mcp-grafana/v2, go 1.26.10)",
+    "sdk": "github.com/modelcontextprotocol/go-sdk v1.8.0 (official)",
+    "code_public": "Partially",
+    "license": "Apache 2.0 (open server); cloud server closed",
+    "access": "Freemium",
+    "server_cost": "Open server free. Cloud: each connected user counts as an \"active AI user\" of Grafana Assistant. Free plan: up to 3 active AI users/month (40M tokens each) + 25M tokens for service accounts, blocked above the limit. Pro: $20 per active AI user (40M tokens included), extra tokens $2 per 1M. Simple data queries consume no tokens, Assistant functions do.",
+    "linked_sw": "Open source + paid cloud",
+    "linked_cost": "Grafana OSS free; Grafana Cloud Free $0, Pro from $19/month + usage, Enterprise from $25,000/year",
+    "pricing": "Cloud MCP is billed via Grafana Assistant (active AI users + tokens); see server cost. Grafana Cloud itself: usage-based tiers.",
+    "restrictions": "Grafana >= 9.0. Cloud: Grafana Cloud only, Assistant available on the stack, Assistant terms accepted; role \"Assistant Cloud MCP User\" (Editor+ by default); Write may need \"Assistant Admin\"; OAuth consent screen with Read / Query / Write levels (Write needs scope grafana:write). Rate limits not documented; default request timeout to Grafana 10 s.",
+    "restricted_by": "Grafana administrator (RBAC), server operator (flags --enabled-tools, --disable-write, --disable-query ...), user (cloud OAuth consent screen)",
+    "governance_logic": "1) Operator modes: --disable-write (removes writing tools; grafana_api_request GET-only), --disable-query, category toggles (12 categories off by default). 2) The server classifies query languages by danger (SQL and InfluxQL count as writing). 3) Server instructions change with the configuration. 4) Unknown arguments rejected with a list of valid names; automatic type coercion. 5) Loki cost limiter (--loki-guardrail-mode off|shadow|enforce: selector, 24 h range, 100 GiB scan; rejects with a rewrite hint; off by default). 6) Enforced Loki matchers (the AI can only narrow; fail closed; warns about bypasses). 7) Response size limits (Loki 10 lines default, max 100, +1 line to signal truncation); economical dashboard tools. 8) HTTP security: Host/Origin checks, no cross-domain redirects, URL whitelist. 9) Required RBAC permissions declared in _meta, checked by Grafana (403). 10) Metrics/tracing; arguments in spans only with a flag. No human confirmation (cloud: only the OAuth consent screen).",
+    "structure": "Standard",
+    "structure_note": "Flat but modular: 34 categories switched on/off by flags; no hierarchy of sub-servers. Cloud: Tempo tools are proxied from the MCP servers of Tempo data sources. A universal tool (grafana_api_request) covers the whole Grafana API.",
+    "actions_comment": "119 tools in the open code, 79 enabled by default; several are multi-operation; grafana_api_request reaches any API endpoint. Cloud server: list in the docs incomplete (by category), without grafana_api_request, plus Assistant tools.",
+    "tokens": "~27,000 by default (79 tools ~26,600 + instructions ~460); ~40,000 with everything enabled",
+    "token_method": "Length of the reconstructed tools/list JSON / 4 characters per token (+-30 %)",
+    "agent_cannot": "With grafana_api_request (default): almost nothing beyond the token's RBAC rights; the real boundary is RBAC. Without it (or in the cloud server): no tools to delete dashboards, folders or data sources, to manage users, teams, service accounts and roles (admin tools read only), organisation settings, remove/disable plugins, change resource permissions. Browser-only: visual panel editing, Explore UI (agent can only get a deeplink or a panel image).",
+    "docs_recs": "Give the service account only the necessary permissions (Editor is \"less restrictive\"). Use --include-args-in-spans only outside production / without personal data. Do not expose the server without --server-auth-token; use TLS. For URL overrides deploy behind an authenticating proxy and restrict outbound network access. Disable bypasses (--disable-api, --disable-rendering, --disable-assistant) for Loki restrictions to work. Cloud: for read-only untick both Write and Query (\"clearing only Write access still allows raw SQL\"). No recommendations on human confirmation.",
+    "gov_promises": "Anonymous usage statistics ON by default (every 4 h: tools called, error counts, configuration; not arguments, queries, logs, credentials, instance URL; coarse region/network added from IP; opt-out --usage-stats=disabled or DO_NOT_TRACK=1). SQL: \"credentials are never seen by the MCP server\". Cloud: \"Grafana doesn't train AI models on your PromQL, LogQL queries, investigation content, or prompt payload data\"; LLM providers (Anthropic, Google Vertex AI, Amazon Bedrock) with zero retention; conversations kept 30/90/180 days (default 90); up to 30 days after deletion; employee access restricted and audited. Reversibility: dashboard versions exist, no one-command rollback; delete_annotation is \"Permanently delete\".",
+    "user_promises": "Feature list \"for informational purposes only and does not represent a roadmap or commitment\"; deeplinks \"instead of relying on LLM URL guessing\"",
+    "promises_vs_logic": "Statistics statements match the code (usagestats/), but on-by-default means data is sent without explicit consent. Loki restrictions are implemented and honestly documented together with their bypasses.",
+    "sources": "https://github.com/grafana/mcp-grafana/tree/e97cd4479eb40d25bc8d466db1651c29ce0c783e\nhttps://grafana.com/docs/grafana/latest/developer-resources/mcp/\nhttps://grafana.com/docs/grafana-cloud/ai-tools/mcp-servers/cloud-mcp/\nhttps://grafana.com/docs/grafana-cloud/ai-tools/mcp-servers/register-oauth-client\nhttps://grafana.com/pricing/\nhttps://grafana.com/docs/grafana-cloud/platform/pricing-and-usage/assistant/\nhttps://grafana.com/docs/grafana-cloud/platform/grafana-assistant/privacy-and-security/privacy/\nhttps://grafana.com/docs/grafana/latest/developer-resources/mcp/anonymous-usage-statistics/\nhttps://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/",
+    "notes": "The CSV endpoint is the cloud server (separate hosted product, not fully published); the code analysis refers to the open server. Latest release tag v2.1.1. Actions sheet: tool list generated from the appendix 02b (type from readOnlyHint of all variants; description = first sentence of the verbatim description)."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "119 unique tools (34 categories), 79 enabled by default; some have read-only variants (grafana_api_request x3, generate_deeplink x2, agento11y_* x2). Every tool has annotations title/readOnlyHint/destructiveHint/idempotentHint/openWorldHint and _meta grafana.com/requiredPermissions.",
+      "pre": "@file:02b_grafana_pre_interaction_context.md",
+      "post": "Function result serialised to a JSON string in one text block; strings as is; get_panel_image returns PNG (base64). Some tools add AI hints (query_loki_logs: metadata on line count/truncation and hints for empty results).",
+      "src": "tools.go:480-485; permissions.go; cmd/mcp-grafana/main.go:532-575, 595-612; tools/loki.go:496-511"
+    },
+    "Resources": {
+      "impl": "Yes",
+      "desc": "3 HTML resources of MCP Apps (interactive UI inside the client): ui://mcp-grafana/panel-viewer.html, ui://grafana/metrics.html, ui://grafana/trace.html; linked to tools via _meta.ui.resourceUri",
+      "post": "MIME text/html;profile=mcp-app",
+      "src": "ui_apps.go:11-29, ui_metrics.go:11, ui_trace.go:11"
+    },
+    "Prompts": {
+      "impl": "No",
+      "desc": "Not found in the code (no AddPrompt)"
+    },
+    "Logging": {
+      "impl": "No",
+      "desc": "No MCP log notifications; logs to stderr (slog) and optionally OpenTelemetry; slow-request log --slow-request-threshold",
+      "src": "README:1315-1390"
+    },
+    "Sampling": {
+      "impl": "No"
+    },
+    "Roots": {
+      "impl": "No"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "Open server: optional static Bearer token --server-auth-token for the MCP server itself (security error logged if missing on a non-loopback address); access to Grafana via service account token, login/password, Grafana Cloud on-behalf-of tokens, forwarded cookies/headers. No own OAuth server. Cloud: OAuth 2.1 in the browser; some clients need manual client ID/secret registration; consent screen with rights selection; token 1 h, auto-refresh for 30 days; revocation in Settings -> Connectors -> MCP clients.",
+      "auth_mech": "Several methods",
+      "auth_server": "Grafana (cloud); none in the open server",
+      "src": "README:453-459, 668-800; mcpgrafana.go:289-304; cloud-mcp docs; register-oauth-client docs"
+    },
+    "Elicitation": {
+      "impl": "No",
+      "desc": "Not found; alerting_rules_write contains the text instruction \"Ask if context conflicts\" (a request to the AI, not MCP Elicitation)"
+    },
+    "Tasks": {
+      "impl": "No",
+      "desc": "Not found; ask_assistant blocks the call until the answer (up to 5 min)",
+      "src": "README:163"
+    },
+    "Configuration": {
+      "impl": "Yes",
+      "desc": "Dozens of flags and environment variables: categories, read-only, query-free, Loki restrictions, TLS, proxy, multi-organisation (--dynamic-multi-org adds orgId to every tool), statistics, --instructions-append",
+      "src": "README:429-667; tools.go:130-147"
+    },
+    "Error Reporting": {
+      "impl": "Yes",
+      "desc": "Tool error -> isError: true + text; unknown argument -> isError with the list of valid names (\"self-correcting for LLM callers\"); HardError / no authorization -> JSON-RPC error; panic -> internal error",
+      "post": "Error text",
+      "src": "tools.go:426-443; tools_param_validation.go; main.go:624-637"
+    },
+    "Subscription": {
+      "impl": "No"
+    },
+    "Progress Tracking": {
+      "impl": "No",
+      "desc": "No NotifyProgress"
+    },
+    "Cancellation": {
+      "impl": "Partially",
+      "desc": "No explicit handling; handlers receive context.Context from go-sdk, through which the SDK can abort a request (not verified by running)",
+      "src": "tools.go:340"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "OpenTelemetry tracing incl. W3C trace context from request _meta; Prometheus metrics; anonymous usage statistics (on by default)",
+      "src": "tools.go:344; README:1252-1402"
+    }
+  },
+  "actions": [
+    {
+      "tool": "list_teams",
+      "desc": "Search for Grafana teams by a query string.",
+      "type": "Read",
+      "default": "No",
+      "params": "query: string",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/admin.go#L36"
+    },
+    {
+      "tool": "list_users_by_org",
+      "desc": "List users in the Grafana organization, optionally filtered by a search query.",
+      "type": "Read",
+      "default": "No",
+      "params": "query: string; limit: int; page: int",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/admin.go#L103"
+    },
+    {
+      "tool": "list_all_roles",
+      "desc": "List all roles in Grafana.",
+      "type": "Read",
+      "default": "No",
+      "params": "delegatableOnly: bool",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/admin.go#L135"
+    },
+    {
+      "tool": "get_role_details",
+      "desc": "Get detailed information about a specific Grafana role by its UID, including permissions, metadata, and configuration.",
+      "type": "Read",
+      "default": "No",
+      "params": "roleUID: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/admin.go#L162"
+    },
+    {
+      "tool": "get_role_assignments",
+      "desc": "List all assignments for a specific role, showing which users, teams, and service accounts have been assigned this role.",
+      "type": "Read",
+      "default": "No",
+      "params": "roleUID: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/admin.go#L189"
+    },
+    {
+      "tool": "list_user_roles",
+      "desc": "List all roles assigned to one or more users.",
+      "type": "Read",
+      "default": "No",
+      "params": "userIds: []int64 (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/admin.go#L217"
+    },
+    {
+      "tool": "list_team_roles",
+      "desc": "List all roles assigned to one or more teams.",
+      "type": "Read",
+      "default": "No",
+      "params": "teamIds: []int64 (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/admin.go#L245"
+    },
+    {
+      "tool": "get_resource_permissions",
+      "desc": "List all permissions set on a specific Grafana resource (e.g., dashboard, datasource, folder) by its type and ID.",
+      "type": "Read",
+      "default": "No",
+      "params": "resource: string (req.); resourceId: string (req.)",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/admin.go#L273"
+    },
+    {
+      "tool": "get_resource_description",
+      "desc": "List available permissions and assignment capabilities for a Grafana resource type.",
+      "type": "Read",
+      "default": "No",
+      "params": "resourceType: string, enum 6 (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/admin.go#L303"
+    },
+    {
+      "tool": "agento11y_manage_conversations",
+      "desc": "List, search, and fetch LLM conversations from Grafana Agent Observability (the grafana-agento11y-app plugin).",
+      "type": "Read",
+      "default": "No",
+      "params": "operation: string, enum 3 (req.); conversation_id: string; filters: string; start_time: string; end_time: string; limit: int; cursor: string",
+      "n_params": 7,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/agento11y.go#L444"
+    },
+    {
+      "tool": "agento11y_manage_generations",
+      "desc": "Fetch a single LLM generation and its evaluation scores from Grafana Agent Observability (the grafana-agento11y-app plugin).",
+      "type": "Read",
+      "default": "No",
+      "params": "operation: string, enum 2 (req.); generation_id: string (req.); limit: int; cursor: string",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/agento11y.go#L476"
+    },
+    {
+      "tool": "agento11y_manage_evaluators",
+      "desc": "Manage Agent Observability evaluators",
+      "type": "Mixed",
+      "default": "No",
+      "params": "scope: string, enum 2; provider: string; limit: int; cursor: string; operation: string, enum 11 (req.); evaluator_id: string; template_id: string; definition: map[string]any; generation_id: string",
+      "n_params": 9,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/agento11y.go#L762"
+    },
+    {
+      "tool": "agento11y_manage_eval_rules",
+      "desc": "Manage Agent Observability eval rules and guards",
+      "type": "Mixed",
+      "default": "No",
+      "params": "limit: int; cursor: string; operation: string, enum 11 (req.); rule_id: string; definition: map[string]any",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/agento11y.go#L774"
+    },
+    {
+      "tool": "agento11y_manage_eval_collections",
+      "desc": "Manage Agent Observability saved conversations and collections",
+      "type": "Mixed",
+      "default": "No",
+      "params": "source: string, enum 2; limit: int; cursor: string; operation: string, enum 13 (req.); saved_id: string; collection_id: string; conversation_id: string; name: string; description: *string; tags: map[string]string; saved_ids: []string",
+      "n_params": 11,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/agento11y.go#L786"
+    },
+    {
+      "tool": "agento11y_manage_experiments",
+      "desc": "Manage Agent Observability experiments",
+      "type": "Mixed",
+      "default": "No",
+      "params": "suite_id: string; status: string, enum 4; source: string, enum 2; created_by: string; tag: []string; from: string; to: string; completed_from: string; completed_to: string; order: string, enum 2; limit: int; cursor: string; row_limit: int; operation: string, enum 11 (req.); experiment_id: string; trial_id: string; name: *string; description: *string; tags: *[]string; metadata: map[string]any",
+      "n_params": 20,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/agento11y.go#L798"
+    },
+    {
+      "tool": "agento11y_manage_test_suites",
+      "desc": "Manage Agent Observability test suites",
+      "type": "Mixed",
+      "default": "No",
+      "params": "limit: int; cursor: string; operation: string, enum 10 (req.); suite_id: string; version: string; test_case_id: string; name: *string; description: *string; tags: *[]string; changelog: string; empty_draft: bool; category: string; input: map[string]any; expected: map[string]any; metadata: map[string]any; artifact_refs: []Agento11yArtifactRef",
+      "n_params": 16,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/agento11y.go#L810"
+    },
+    {
+      "tool": "agento11y_manage_agents",
+      "desc": "Read the agent catalog of Grafana Agent Observability (the grafana-agento11y-app plugin): which agents send telemetry, what their system prompts and tools are, how their prompt versions evolved, and how each version scored.",
+      "type": "Read",
+      "default": "No",
+      "params": "operation: string, enum 4 (req.); agent_name: *string; version: string; name_prefix: string; start_time: string; end_time: string; limit: int; cursor: string",
+      "n_params": 8,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/agento11y_agents.go#L297"
+    },
+    {
+      "tool": "alerting_rules_read",
+      "desc": "List and inspect Grafana alert rules with filtering capabilities.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "rule_limit: int; label_selectors: []string; limit_alerts: int; search_folder: string; search_rule_name: string; states: []string; rule_type: string, enum 2; matchers: []string; operation: string, enum 3 (req.); rule_uid: string; datasource_uid: *string; folder_uid: string; rule_group: string",
+      "n_params": 13,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/alerting.go#L37"
+    },
+    {
+      "tool": "alerting_rules_write",
+      "desc": "Create, update, and delete Grafana alert rules.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "rule_limit: int; label_selectors: []string; limit_alerts: int; search_folder: string; search_rule_name: string; states: []string; rule_type: string, enum 2; matchers: []string; managed_by: string, enum 2; namespace: string; expression: string; evaluation_interval: string; operation: string, enum 6 (req.); rule_uid: string; datasource_uid: *string; title: string; rule_group: string; folder_uid: string; condition: string; data: []map[string]any; no_data_state: string; exec_err_state: string; for: string; keep_firing_for: string; is_paused: bool; notification_settings: map[string]any; record: map[string]any; missing_series_evals_to_resolve: int64; annotations: map[string]string; labels: map[string]string; org_id: int64; disable_provenance: *bool",
+      "n_params": 32,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/alerting.go#L51"
+    },
+    {
+      "tool": "alerting_manage_routing",
+      "desc": "Manage Grafana alerting routing configuration, including notification policies, contact points and time intervals.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "operation: string, enum 5 (req.); datasource_uid: *string; name: *string; contact_point_title: *string; time_interval_name: *string; limit: int",
+      "n_params": 6,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/alerting_routing.go#L156"
+    },
+    {
+      "tool": "alerting_routing_write",
+      "desc": "Create Grafana-managed contact points for alert notifications using operation 'create_contact_point'.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "managed_by: string, enum 2; datasource_uid: string; operation: string, enum 1 (req.); name: string (req.); type: string (req.); settings: map[string]any (req.); uid: string; disable_resolve_message: bool; disable_provenance: *bool",
+      "n_params": 9,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/alerting_routing.go#L236"
+    },
+    {
+      "tool": "alerting_silences_read",
+      "desc": "List and inspect Grafana alerting silences.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "operation: string, enum 2 (req.); silence_id: *string; rule_uid: *string; matchers: []SilenceMatcherParam",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/alerting_silences.go#L416"
+    },
+    {
+      "tool": "alerting_silences_write",
+      "desc": "Create, update, and delete Grafana alerting silences.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "operation: string, enum 5 (req.); silence_id: *string; rule_uid: *string; matchers: []SilenceMatcherParam; starts_at: *string; ends_at: *string; comment: *string; created_by: *string",
+      "n_params": 8,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/alerting_silences.go#L428"
+    },
+    {
+      "tool": "get_annotations",
+      "desc": "Fetch Grafana annotations using filters such as dashboard UID, time range and tags.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "from: *int64; to: *int64; limit: *int64; alertUid: *string; dashboardUid: *string; panelId: *int64; userId: *int64; type: *string; tags: []string; matchAny: *bool",
+      "n_params": 10,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/annotations.go#L56"
+    },
+    {
+      "tool": "create_annotation",
+      "desc": "Create a new annotation on a dashboard or panel.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "dashboardUid: string; panelId: int64; time: int64; timeEnd: int64; tags: []string; text: string; data: map[string]any; format: string, enum 1; what: string; when: int64; graphiteData: string",
+      "n_params": 11,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/annotations.go#L133"
+    },
+    {
+      "tool": "update_annotation",
+      "desc": "Updates the provided properties of an annotation by ID.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "id: int64; text: *string; time: *int64; timeEnd: *int64; tags: []string; data: map[string]any",
+      "n_params": 6,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/annotations.go#L187"
+    },
+    {
+      "tool": "delete_annotation",
+      "desc": "Permanently delete an annotation by ID.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "id: int64 (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/annotations.go#L228"
+    },
+    {
+      "tool": "get_annotation_tags",
+      "desc": "Returns annotation tags with optional filtering by tag name.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "tag: *string; limit: *int64",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/annotations.go#L269"
+    },
+    {
+      "tool": "grafana_api_request",
+      "desc": "Make an authenticated HTTP request to the Grafana API.",
+      "type": "Mixed",
+      "default": "Yes",
+      "params": "endpoint: string (req.); method: string, enum 5; body: string; headers: map[string]string; jq: string",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/api.go#L208"
+    },
+    {
+      "tool": "get_assertions",
+      "desc": "Get assertion summary for a given entity with its type, name, env, site, namespace, and a time range",
+      "type": "Read",
+      "default": "Yes",
+      "params": "startTime: string (req.); endTime: string (req.); entityType: string; entityName: string; env: string; site: string; namespace: string",
+      "n_params": 7,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/asserts.go#L143"
+    },
+    {
+      "tool": "ask_assistant",
+      "desc": "Send a message to Grafana Assistant and wait for the full text reply.",
+      "type": "Write",
+      "default": "No",
+      "params": "prompt: string (req.); contextId: string",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/assistant.go#L176"
+    },
+    {
+      "tool": "query_cloud_logging",
+      "desc": "Query logs from a Google Cloud Logging datasource using the Cloud Logging query language.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); projectId: string (req.); filter: string; bucketId: string; viewId: string; start: string; end: string; limit: int",
+      "n_params": 8,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/cloudlogging.go#L370"
+    },
+    {
+      "tool": "list_cloud_logging_projects",
+      "desc": "List the GCP project IDs the Google Cloud Logging datasource's credentials can read logs from (at most 100; 'query' narrows the list).",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); query: string",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/cloudlogging.go#L411"
+    },
+    {
+      "tool": "list_cloud_logging_buckets",
+      "desc": "List the log buckets in a GCP project, as '<location>/buckets/<name>' (e.g. global/buckets/_Default).",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); projectId: string (req.)",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/cloudlogging.go#L443"
+    },
+    {
+      "tool": "list_cloud_logging_views",
+      "desc": "List the log views in a log bucket (e.g. _AllLogs, _Default).",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); projectId: string (req.); bucketId: string (req.)",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/cloudlogging.go#L480"
+    },
+    {
+      "tool": "query_cloudwatch",
+      "desc": "Query AWS CloudWatch metrics via Grafana.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); namespace: string (req.); metricName: string (req.); dimensions: map[string]string; statistic: string; period: int; start: string; end: string; region: string (req.); accountId: string",
+      "n_params": 10,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/cloudwatch.go#L303"
+    },
+    {
+      "tool": "list_cloudwatch_namespaces",
+      "desc": "List available CloudWatch namespaces (AWS/EC2, AWS/ECS, AWS/RDS, etc.).",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); region: string (req.); accountId: string",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/cloudwatch.go#L419"
+    },
+    {
+      "tool": "list_cloudwatch_metrics",
+      "desc": "List metrics for a CloudWatch namespace.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); namespace: string (req.); region: string (req.); accountId: string",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/cloudwatch.go#L482"
+    },
+    {
+      "tool": "list_cloudwatch_dimensions",
+      "desc": "List dimension keys for a CloudWatch metric.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); namespace: string (req.); metricName: string (req.); region: string (req.); accountId: string",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/cloudwatch.go#L547"
+    },
+    {
+      "tool": "list_cloudwatch_dimension_values",
+      "desc": "List values for a CloudWatch dimension key (e.g. the specific cluster names behind a ClusterName dimension).",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); namespace: string (req.); metricName: string (req.); dimensionKey: string (req.); region: string (req.); accountId: string",
+      "n_params": 6,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/cloudwatch.go#L615"
+    },
+    {
+      "tool": "suggest_loki_alloy_label_config",
+      "desc": "Generates an Alloy loki.process snippet enforcing an approved label set via stage.label_keep, with optional log-level normalisation and soft-enforcement placeholders.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "approvedLabels: []string (req.); requiredLabels: []string; normalizeLogLevel: bool; componentName: string; forwardTo: string",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/config.go#L115"
+    },
+    {
+      "tool": "get_dashboard_by_uid",
+      "desc": "Retrieves the complete dashboard, including panels, variables, and settings, for a specific dashboard identified by its UID.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "uid: string (req.); version: *int64",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/dashboard.go#L906"
+    },
+    {
+      "tool": "update_dashboard",
+      "desc": "Create or update a dashboard.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "dashboard: map[string]interface{}; uid: string; operations: []PatchOperation; folderUid: string; message: string; overwrite: bool; userId: int64",
+      "n_params": 7,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/dashboard.go#L921"
+    },
+    {
+      "tool": "get_dashboard_panel_queries",
+      "desc": "Retrieve panel queries from a Grafana dashboard.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "uid: string (req.); panelId: *int; variables: map[string]string; start: string; end: string",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/dashboard.go#L1003"
+    },
+    {
+      "tool": "get_dashboard_property",
+      "desc": "Get specific parts of a dashboard using JSONPath expressions to minimize context window usage.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "uid: string (req.); jsonPath: string (req.)",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/dashboard.go#L1056"
+    },
+    {
+      "tool": "get_dashboard_summary",
+      "desc": "Get a compact summary of a dashboard including title, panel count, panel types, variables, and other metadata without the full JSON.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "uid: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/dashboard.go#L1172"
+    },
+    {
+      "tool": "list_dashboard_versions",
+      "desc": "List saved versions of a Grafana dashboard.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "uid: string (req.); limit: int; start: int",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/dashboard_versions.go#L77"
+    },
+    {
+      "tool": "list_datasources",
+      "desc": "List all configured datasources in Grafana.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "type: string; name: string; limit: int; offset: int",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/datasources.go#L440"
+    },
+    {
+      "tool": "create_datasource",
+      "desc": "Create a datasource in two steps.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "name: string (req.); type: string (req.); url: string; access: string; database: string; basicAuth: bool; withCredentials: bool; isDefault: bool; fields: map[string]any; schemaReviewed: bool",
+      "n_params": 10,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/datasources.go#L452"
+    },
+    {
+      "tool": "update_datasource",
+      "desc": "Update non-secret datasource fields by UID in two steps.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "uid: string (req.); name: *string; url: *string; access: *string; database: *string; basicAuth: *bool; isDefault: *bool; jsonData: map[string]interface{}; fields: map[string]any; schemaReviewed: bool",
+      "n_params": 10,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/datasources.go#L464"
+    },
+    {
+      "tool": "get_datasource",
+      "desc": "Retrieves detailed information about a specific datasource by UID or name.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "uid: string; name: string",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/datasources.go#L549"
+    },
+    {
+      "tool": "check_datasources_health",
+      "desc": "Check datasource health.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "type: string; uids: []string; offset: int",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/datasources.go#L909"
+    },
+    {
+      "tool": "search_docs",
+      "desc": "Search Grafana documentation.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query: string; product: string; limit: int",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/docs.go#L162"
+    },
+    {
+      "tool": "get_doc",
+      "desc": "Fetch a Grafana documentation page.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "url: string (req.); outline_only: bool; section: string; offset: int; limit: int",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/docs.go#L232"
+    },
+    {
+      "tool": "query_elasticsearch",
+      "desc": "Executes a search query against an Elasticsearch or OpenSearch datasource and retrieves matching documents.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); index: string (req.); query: string (req.); startTime: string; endTime: string; limit: int",
+      "n_params": 6,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/elasticsearch.go#L51"
+    },
+    {
+      "tool": "get_query_examples",
+      "desc": "Get example queries for a specific datasource type.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceType: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/examples.go#L292"
+    },
+    {
+      "tool": "create_folder",
+      "desc": "Create a Grafana folder.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "title: string (req.); uid: string; parentUid: string",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/folder.go#L43"
+    },
+    {
+      "tool": "query_graphite",
+      "desc": "Executes a Graphite render API query against a Graphite datasource and returns matching metric series with their datapoints.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); target: string (req.); from: string; until: string; maxDataPoints: int",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/graphite.go#L243"
+    },
+    {
+      "tool": "list_graphite_metrics",
+      "desc": "Discover available metric paths in a Graphite datasource by browsing the metric tree.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); query: string (req.)",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/graphite.go#L321"
+    },
+    {
+      "tool": "list_graphite_tags",
+      "desc": "List available tag names in a Graphite datasource that uses tag-based metrics.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); prefix: string",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/graphite.go#L371"
+    },
+    {
+      "tool": "query_graphite_density",
+      "desc": "Analyses metric data density for one or more Graphite series over a time window.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); target: string (req.); from: string; until: string",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/graphite.go#L513"
+    },
+    {
+      "tool": "list_incidents",
+      "desc": "List Grafana incidents.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "limit: int; drill: bool; status: string; includeCustomFields: bool",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/incident.go#L150"
+    },
+    {
+      "tool": "create_incident",
+      "desc": "Create a new Grafana incident.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "title: string (req.); severity: string (req.); roomPrefix: string (req.); isDrill: bool; status: string; attachCaption: string; attachUrl: string; labels: []incident.IncidentLabel; customFields: []IncidentCustomFieldInput",
+      "n_params": 9,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/incident.go#L215"
+    },
+    {
+      "tool": "add_activity_to_incident",
+      "desc": "Add a note (userNote activity) to an existing incident's timeline using its ID.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "incidentId: string (req.); body: string (req.); eventTime: string",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/incident.go#L247"
+    },
+    {
+      "tool": "get_incident",
+      "desc": "Get a single incident by ID.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "id: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/incident.go#L287"
+    },
+    {
+      "tool": "update_incident",
+      "desc": "Update an existing Grafana incident by ID.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "incidentId: string (req.); status: string; severity: string; title: string; customFields: []IncidentCustomFieldInput",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/incident.go#L379"
+    },
+    {
+      "tool": "list_incident_custom_fields",
+      "desc": "List the custom fields configured for Grafana incidents, including their type and, for select fields, the options that may be chosen.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "includeArchived: bool",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/incident_custom_fields.go#L92"
+    },
+    {
+      "tool": "query_influxdb",
+      "desc": "Query an InfluxDB datasource via Grafana.",
+      "type": "Write",
+      "default": "No",
+      "params": "datasourceUid: string (req.); query: string (req.); dialect: string; start: string; end: string; maxDataPoints: int",
+      "n_params": 6,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/influxdb.go#L208"
+    },
+    {
+      "tool": "list_loki_label_names",
+      "desc": "Lists all available label/field names (keys) found in logs within a specified Loki or VictoriaLogs datasource and time range.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); matcher: string; startRfc3339: string; endRfc3339: string",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/loki.go#L249"
+    },
+    {
+      "tool": "list_loki_label_values",
+      "desc": "Retrieves all unique values associated with a specific `labelName` within a Loki or VictoriaLogs datasource and time range.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); labelName: string (req.); matcher: string; startRfc3339: string; endRfc3339: string",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/loki.go#L300"
+    },
+    {
+      "tool": "query_loki_logs",
+      "desc": "Executes a log query against a Loki or VictoriaLogs datasource and returns matching log entries (or metric samples on Loki).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); logql: string (req.); startRfc3339: string; endRfc3339: string; limit: int; direction: string; queryType: string; stepSeconds: int; format: string, enum 2",
+      "n_params": 9,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/loki.go#L963"
+    },
+    {
+      "tool": "query_loki_stats",
+      "desc": "Retrieves index-level statistics about log streams matching a given selector within a Loki or VictoriaLogs datasource and time range.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); logql: string (req.); startRfc3339: string; endRfc3339: string",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/loki.go#L1082"
+    },
+    {
+      "tool": "query_loki_patterns",
+      "desc": "Retrieves detected log patterns from a Loki datasource for a given stream selector and time range.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); logql: string (req.); startRfc3339: string; endRfc3339: string; step: string",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/loki.go#L1134"
+    },
+    {
+      "tool": "analyze_loki_labels",
+      "desc": "Audits a Loki label strategy and optionally diagnoses query performance.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string; labels: []LabelDescriptor; selector: string; maxLabels: int; startRfc3339: string; endRfc3339: string; expectedBaseLabels: []string; perfMetrics: *QueryPerfMetrics",
+      "n_params": 8,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/loki_label_analyzer.go#L1006"
+    },
+    {
+      "tool": "generate_deeplink",
+      "desc": "Generate deeplink URLs for Grafana resources.",
+      "type": "Mixed",
+      "default": "Yes",
+      "params": "resourceType: string (req.); dashboardUid: *string; provisioningPreview: *DeeplinkProvisioningPreview; datasourceUid: *string; panelId: *int; queries: []map[string]interface{}; queryParams: map[string]string; timeRange: *TimeRange; shorten: bool",
+      "n_params": 9,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/navigation.go#L314"
+    },
+    {
+      "tool": "list_oncall_schedules",
+      "desc": "List Grafana OnCall schedules, optionally filtering by team ID.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "teamId: string; scheduleId: string; page: int",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/oncall.go#L200"
+    },
+    {
+      "tool": "get_oncall_shift",
+      "desc": "Get detailed information for a specific Grafana OnCall shift using its ID.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "shiftId: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/oncall.go#L253"
+    },
+    {
+      "tool": "get_current_oncall_users",
+      "desc": "Get the list of users currently on-call for a specific Grafana OnCall schedule ID.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "scheduleId: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/oncall.go#L324"
+    },
+    {
+      "tool": "list_oncall_teams",
+      "desc": "List teams configured in Grafana OnCall.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "page: int",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/oncall.go#L380"
+    },
+    {
+      "tool": "list_oncall_users",
+      "desc": "List users from Grafana OnCall.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "userId: string; username: string; page: int",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/oncall.go#L453"
+    },
+    {
+      "tool": "list_alert_groups",
+      "desc": "List alert groups from Grafana OnCall with filtering options.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "page: int; id: string; routeId: string; integrationId: string; state: string; teamId: string; startedAt: string; labels: []string; name: string",
+      "n_params": 9,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/oncall.go#L545"
+    },
+    {
+      "tool": "get_alert_group",
+      "desc": "Get a specific alert group from Grafana OnCall by its ID.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "alertGroupId: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/oncall.go#L619"
+    },
+    {
+      "tool": "update_alert_group",
+      "desc": "Update the state of a Grafana OnCall alert group: acknowledge, unacknowledge, resolve, or unresolve it by ID.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "alertGroupId: string (req.); state: string (req.)",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/oncall.go#L727"
+    },
+    {
+      "tool": "get_plugin",
+      "desc": "Check whether a Grafana plugin is installed and retrieve its details (name, version, type, enabled status).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "pluginId: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/plugins.go#L124"
+    },
+    {
+      "tool": "install_plugin",
+      "desc": "Install a Grafana plugin by its plugin ID.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "pluginId: string (req.); version: string",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/plugins.go#L257"
+    },
+    {
+      "tool": "search_plugin_information",
+      "desc": "Search the Grafana plugin catalog by keyword, purpose, or partial name (e.g. 'azure monitoring', 'loki', 'database').",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/plugins.go#L426"
+    },
+    {
+      "tool": "list_prometheus_metric_metadata",
+      "desc": "List Prometheus metric metadata.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); limit: int; limitPerMetric: int; metric: string; projectName: string",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/prometheus.go#L58"
+    },
+    {
+      "tool": "query_prometheus",
+      "desc": "Query a PromQL-compatible datasource (Prometheus, Thanos, Mimir, Cloud Monitoring, etc.) using a PromQL expression.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); expr: string (req.); startTime: string; endTime: string (req.); stepSeconds: int; queryType: string; projectName: string",
+      "n_params": 7,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/prometheus.go#L290"
+    },
+    {
+      "tool": "list_prometheus_metric_names",
+      "desc": "Lists metric names in a PromQL-compatible datasource (Prometheus, Thanos, Mimir, Cloud Monitoring, etc.).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); regex: string; limit: int; page: int; startRfc3339: string; endRfc3339: string; projectName: string",
+      "n_params": 7,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/prometheus.go#L367"
+    },
+    {
+      "tool": "list_prometheus_label_names",
+      "desc": "List label names in a PromQL-compatible datasource (Prometheus, Thanos, Mimir, Cloud Monitoring, etc.).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); matches: []Selector; startRfc3339: string; endRfc3339: string; limit: int; projectName: string",
+      "n_params": 6,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/prometheus.go#L517"
+    },
+    {
+      "tool": "list_prometheus_label_values",
+      "desc": "Gets the values for a specific label name in a PromQL-compatible datasource (Prometheus, Thanos, Mimir, Cloud Monitoring, etc.).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); labelName: string (req.); matches: []Selector; startRfc3339: string; endRfc3339: string; limit: int; projectName: string",
+      "n_params": 7,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/prometheus.go#L574"
+    },
+    {
+      "tool": "query_prometheus_histogram",
+      "desc": "Query Prometheus histogram percentiles from classic histogram '_bucket' series.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); metric: string (req.); percentile: float64 (req.); labels: string; rateInterval: string; startTime: string; endTime: string; stepSeconds: int; projectName: string",
+      "n_params": 9,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/prometheus.go#L727"
+    },
+    {
+      "tool": "list_provisioning_repositories",
+      "desc": "List provisioning repositories (e.g. git-sync sources) configured for this Grafana instance.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "none",
+      "n_params": 0,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/provisioning.go#L159"
+    },
+    {
+      "tool": "validate_provisioning_file",
+      "desc": "Validate a file in a provisioning repository at a given branch or commit by dry-run applying it.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "repo: string (req.); path: string (req.); ref: string",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/provisioning.go#L384"
+    },
+    {
+      "tool": "list_pyroscope_label_names",
+      "desc": "Lists all available label names (keys) found in profiles within a specified Pyroscope datasource, time range, and optional label matchers.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "data_source_uid: string (req.); matchers: string; start_rfc_3339: string; end_rfc_3339: string",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/pyroscope.go#L44"
+    },
+    {
+      "tool": "list_pyroscope_label_values",
+      "desc": "Lists all available label values for a particular label name found in profiles within a specified Pyroscope datasource, time range, and optional label matchers.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "data_source_uid: string (req.); name: string (req.); matchers: string; start_rfc_3339: string; end_rfc_3339: string",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/pyroscope.go#L106"
+    },
+    {
+      "tool": "list_pyroscope_profile_types",
+      "desc": "Lists all available profile types available in a specified Pyroscope datasource and time range.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "data_source_uid: string (req.); start_rfc_3339: string; end_rfc_3339: string",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/pyroscope.go#L184"
+    },
+    {
+      "tool": "query_pyroscope",
+      "desc": "Unified Pyroscope query tool for fetching profiles or metrics from Pyroscope.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "data_source_uid: string (req.); profile_type: string (req.); query_type: string; format: string; matchers: string; group_by: []string; step: float64; max_node_depth: int; start_rfc_3339: string; end_rfc_3339: string",
+      "n_params": 10,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/pyroscope.go#L640"
+    },
+    {
+      "tool": "query_quickwit",
+      "desc": "Executes a search query against a Quickwit datasource and retrieves matching documents.",
+      "type": "Read",
+      "default": "No",
+      "params": "datasourceUid: string (req.); index: string; query: string (req.); startTime: string; endTime: string; limit: int",
+      "n_params": 6,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/quickwit.go#L257"
+    },
+    {
+      "tool": "get_panel_image",
+      "desc": "Render a Grafana dashboard panel, full dashboard or Explore view as a PNG image.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "dashboardUid: string; panelId: *int; width: *int; height: *int; timeRange: *RenderTimeRange; variables: map[string]StringOrSlice; theme: *string; scale: *int; timeout: *int; provisioningPreview: *ProvisioningPreview; explore: *RenderExplore",
+      "n_params": 11,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/rendering.go#L507"
+    },
+    {
+      "tool": "run_panel_query",
+      "desc": "Executes one or more dashboard panel queries with optional time range and variable overrides.",
+      "type": "Read",
+      "default": "No",
+      "params": "dashboardUid: string (req.); panelIds: []int (req.); queryIndex: *int; start: string; end: string; variables: map[string]string; datasourceUid: string; datasourceType: string",
+      "n_params": 8,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/run_panel_query.go#L1197"
+    },
+    {
+      "tool": "search_dashboards",
+      "desc": "Search Grafana dashboards by query and/or folderUid, tag, and starred.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query: string; folderUid: string; tag: []string; starred: bool; limit: int; page: int",
+      "n_params": 6,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/search.go#L115"
+    },
+    {
+      "tool": "search_folders",
+      "desc": "Search for Grafana folders by a query string.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query: string",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/search.go#L148"
+    },
+    {
+      "tool": "list_snapshots",
+      "desc": "List Grafana dashboard snapshots with optional query and result limit filters.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query: string; limit: *int",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/snapshot.go#L226"
+    },
+    {
+      "tool": "get_snapshot",
+      "desc": "Get a Grafana snapshot by key, including snapshot metadata and dashboard payload.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "key: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/snapshot.go#L238"
+    },
+    {
+      "tool": "create_snapshot",
+      "desc": "Create a Grafana snapshot from a full dashboard payload.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "dashboard: map[string]any (req.); name: string; expires: *int64; external: *bool; key: string; deleteKey: string",
+      "n_params": 6,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/snapshot.go#L250"
+    },
+    {
+      "tool": "delete_snapshot",
+      "desc": "Delete a Grafana snapshot by snapshot key.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "key: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/snapshot.go#L262"
+    },
+    {
+      "tool": "query_sql",
+      "desc": "Query a supported SQL datasource (ClickHouse, Snowflake, Athena, MySQL, PostgreSQL, MSSQL) via Grafana.",
+      "type": "Write",
+      "default": "No",
+      "params": "not parsed (embedded struct QuerySQLParams)",
+      "n_params": "Unknown",
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/sql_tools.go#L265"
+    },
+    {
+      "tool": "list_sql_databases",
+      "desc": "List databases, schemas, or catalogs from a supported SQL datasource.",
+      "type": "Read",
+      "default": "No",
+      "params": "not parsed (embedded struct ListSQLDatabasesParams)",
+      "n_params": "Unknown",
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/sql_tools.go#L283"
+    },
+    {
+      "tool": "list_sql_tables",
+      "desc": "List tables from a supported SQL datasource (ClickHouse, Snowflake, Athena, MySQL, PostgreSQL, MSSQL).",
+      "type": "Read",
+      "default": "No",
+      "params": "not parsed (embedded struct ListSQLTablesParams)",
+      "n_params": "Unknown",
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/sql_tools.go#L295"
+    },
+    {
+      "tool": "describe_sql_table",
+      "desc": "Get column schema for a table in a supported SQL datasource (ClickHouse, Snowflake, Athena, MySQL, PostgreSQL, MSSQL).",
+      "type": "Read",
+      "default": "No",
+      "params": "not parsed (embedded struct DescribeSQLTableParams)",
+      "n_params": "Unknown",
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/sql_tools.go#L307"
+    },
+    {
+      "tool": "search_tempo_traces",
+      "desc": "Search for traces using TraceQL queries",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); query: string (req.); start: string; end: string",
+      "n_params": 4,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/tempo.go#L699"
+    },
+    {
+      "tool": "query_tempo_metrics",
+      "desc": "Compute trace-derived metrics using a TraceQL metrics query.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); query: string (req.); type: string, enum 2; start: string; end: string",
+      "n_params": 5,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/tempo.go#L711"
+    },
+    {
+      "tool": "get_tempo_trace",
+      "desc": "Retrieve a specific trace by ID",
+      "type": "Read",
+      "default": "Yes",
+      "params": "focus_span_id: *string; datasourceUid: string (req.); trace_id: string (req.)",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/tempo.go#L723"
+    },
+    {
+      "tool": "diff_tempo_traces",
+      "desc": "Compare two complete traces.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); base_trace_id: string (req.); compare_trace_id: string (req.); base_start: string; base_end: string; compare_start: string; compare_end: string; format: string, enum 3",
+      "n_params": 8,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/tempo.go#L736"
+    },
+    {
+      "tool": "list_tempo_attribute_names",
+      "desc": "List available attribute names for TraceQL queries.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); scope: string",
+      "n_params": 2,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/tempo.go#L748"
+    },
+    {
+      "tool": "list_tempo_attribute_values",
+      "desc": "List values for a fully scoped attribute name (e.g. resource.service.name).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "datasourceUid: string (req.); name: string (req.); filter-query: string",
+      "n_params": 3,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/tempo.go#L760"
+    },
+    {
+      "tool": "get_tempo_traceql_docs",
+      "desc": "Retrieve TraceQL reference documentation with examples, covering attribute filters, aggregates, structural operators, and metrics queries.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "topic: string, enum 4 (req.)",
+      "n_params": 1,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/tempo.go#L772"
+    },
+    {
+      "tool": "user_info",
+      "desc": "Get information about the current Grafana identity: login, email, name, whether it is a Grafana (server) admin, the current organization, and the organizations it can access (with roles).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "none",
+      "n_params": 0,
+      "src": "https://github.com/grafana/mcp-grafana/blob/e97cd4479eb40d25bc8d466db1651c29ce0c783e/tools/user.go#L45"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "The most \"governed\" of the first three servers: many server-side mechanisms (read-only/query-free modes, classification of query languages by danger, enforced filters, a cost limiter, URL whitelists).",
+      "src": "README:505-656, 1404-1454"
+    },
+    {
+      "type": "New design option",
+      "text": "A universal tool as a bypass of targeted restrictions: grafana_api_request (\"Similar to 'gh api'\") makes the other 118 tools convenient shortcuts; restrictions of individual tools do not work while it is enabled.",
+      "src": "tools/api.go:208-261"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Responsibility is split: the server declares the required permissions (_meta), Grafana checks them. Security depends on how narrowly the administrator configured the token.",
+      "src": "permissions.go:9-41"
+    },
+    {
+      "type": "New design option",
+      "text": "The server description for the AI depends on the configuration (dynamic instructions), so the same model sees a different \"world\" with different clients.",
+      "src": "cmd/mcp-grafana/main.go:112-122, 532-575"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Context size as a design problem: about 27,000 tokens by default; the server addresses it with categories and economical tools.",
+      "src": "README:238-239"
+    },
+    {
+      "type": "Other",
+      "text": "Commercial model of the cloud version: every connected user counts as a paid \"active AI user\".",
+      "src": "https://grafana.com/docs/grafana-cloud/platform/pricing-and-usage/assistant/"
+    }
+  ]
+}

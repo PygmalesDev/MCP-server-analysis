@@ -1,0 +1,351 @@
+{
+  "server": "gocardless",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-13",
+  "md_file": "06_gocardless.md",
+  "servers": {
+    "code_repo": "Not published",
+    "docs_used": "https://docs.gocardless.com/docs/developer-resources/mcp (CSV link redirects here); https://support.gocardless.com/hc/en-gb/articles/26830050176028-Use-AI-to-manage-your-account",
+    "open_eq_deployed": "Unknown",
+    "mcp_version": "Not published",
+    "commit_hash": "Not applicable (closed code)",
+    "commit_date": "Documentation snapshot 2026-10-13",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Proprietary",
+    "access": "Free",
+    "server_cost": "\"The CLI, MCP and MCP Data are provided free of charge\", but \"GoCardless reserves the right to charge in the future\" (terms 2.3)",
+    "linked_sw": "Paid",
+    "linked_cost": "Per transaction: Standard 1% + 20p (max £4), international 2% + 20p; Advanced 1.25% + 20p (max £5); Pro 1.4% + 20p (max £5.60); Custom by agreement; no subscription fee except add-ons (£50 and £150/month)",
+    "pricing": "Transaction fees for the payment service; MCP free",
+    "restrictions": "Claude requires Pro, Max, Team or Enterprise (free AI plans \"typically don't support MCPs\"); on Team/Enterprise the Owner adds the connector first. Rights chosen by the user at sign-in (everything, read-only or specific actions); intersected with the user's dashboard role; bulk limits (e.g. max 25 payments at a time); access expires periodically. Live and Sandbox are separate connections. Rate limits not documented.",
+    "restricted_by": "User (rights at sign-in), dashboard administrator (roles), GoCardless (limits, masking)",
+    "governance_logic": "According to the documentation (closed code): 1) Money-moving actions need explicit confirmation after a preview (mechanism not disclosed). 2) Masking of e-mail, phone, postcode, ID numbers before the AI sees them; bank details never passed. 3) Granular rights at sign-in (down to \"refunds only\") intersected with the user role. 4) Bulk limits (<= 25 payments per call). 5) All MCP actions logged in Events with source \"App (GoCardless MCP)\". 6) Separate Sandbox and Live connections and terms. 7) Access expires periodically; API tokens discouraged.",
+    "structure": "Standard",
+    "structure_note": "Two purposes in one server: integration help (no account access) and account management (after sign-in)",
+    "actions_comment": "24 according to Composio (human-readable names; not officially confirmed). Support also mentions payment \"retry\", not in the catalogue.",
+    "tokens": "Cannot be determined",
+    "token_method": "Descriptions not published",
+    "agent_cannot": "Create customers and mandates directly (only payment links); manage account settings, users, webhooks; run Sandbox scenario simulators; see unmasked personal data and bank details; act outside the rights chosen at sign-in.",
+    "docs_recs": "\"Never share your API keys with your LLM\"; use the sandbox during development; review generated code; give the AI only the necessary rights; test writing actions in Sandbox first; give the exact resource and amount and read the preview; check the AI provider's policy (free plans: \"conversations may be used for AI training\"); add \"For any prompt that mentions GoCardless, use the GoCardless MCP\" to prompts; agents without human review carry \"extra risk\" and the user is responsible for their actions.",
+    "gov_promises": "Masking of sensitive data, bank details never passed; log of all actions in Events. Terms: liability capped at £50 (9.5); processing personal data via MCP prohibited (4.1.5); the AI provider must use data only for the answer and delete it immediately (4.2.1, 4.2.4); the user is liable for breaches by the provider (4.3); no guarantee against \"bias or hallucinations\" (7.3); no guaranteed availability (2.4).",
+    "user_promises": "Two functions - \"integration guidance and account management\"; possibility to request a missing feature",
+    "promises_vs_logic": "Confirmation, masking, limits and log cannot be verified (closed code). Internal contradiction: the terms prohibit processing personal data via MCP, but the server returns customer data (masked). The requirement that the AI provider delete data immediately cannot be ensured by the user.",
+    "sources": "https://docs.gocardless.com/docs/developer-resources/mcp\nhttps://support.gocardless.com/hc/en-gb/articles/26830050176028-Use-AI-to-manage-your-account\nhttps://docs.gocardless.com/docs/developer-resources/mcp/terms\nhttps://docs.gocardless.com/docs/developer-resources/mcp/terms-sandbox\nhttps://mcp.gocardless.com/.well-known/oauth-protected-resource\nhttps://mcp.gocardless.com/.well-known/oauth-authorization-server\nhttps://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork\nhttps://gocardless.com/pricing/\nhttps://developer.gocardless.com/api-reference",
+    "notes": "CSV endpoint https://mcp.gocardless.com/mcp; docs give https://mcp.gocardless.com. The open-source gocardless-mcp by jmceleney on glama.ai is unofficial and not part of the analysis. Tool names in the catalogue are human-readable; real tools/list names may differ."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "24 tools according to Composio: 16 reading, 7 writing, 1 feedback; required scope given for each writing tool (payments:write, refunds:write, mandates:write, subscriptions:write, payment_links:write)",
+      "pre": "Not published verbatim",
+      "post": "Not documented; sensitive fields masked before the AI sees them (e-mail, phone, postcode, ID numbers); bank details never passed",
+      "src": "Composio; Support article"
+    },
+    "Resources": {
+      "impl": "Unknown",
+      "desc": "Not documented; the tool \"Read gocardless resource\" returns documentation, guides and code examples (resource function implemented as a tool)",
+      "src": "Composio"
+    },
+    "Prompts": {
+      "impl": "Unknown",
+      "desc": "Not documented; the tool \"Integrate with gocardless\" gives an overview of integration options",
+      "src": "Composio"
+    },
+    "Logging": {
+      "impl": "Unknown",
+      "desc": "Not documented as MCP logging; product-side event log (see D)"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "Browser sign-in; OAuth metadata documents published; Dynamic Client Registration (registration_endpoint https://mcp.gocardless.com/register); grant_types authorization_code; PKCE S256; token_endpoint_auth_methods none (public clients); scopes_supported not given. Revocation: Settings -> Connected apps -> Revoke access.",
+      "auth_mech": "Dynamic Client Registration",
+      "auth_server": "https://mcp.gocardless.com",
+      "src": "https://mcp.gocardless.com/.well-known/oauth-protected-resource; https://mcp.gocardless.com/.well-known/oauth-authorization-server; Support article"
+    },
+    "Elicitation": {
+      "impl": "Yes",
+      "desc": "Confirmation exists, mechanism not specified: \"Higher-risk write actions, such as creating a payment, show a preview and wait for explicit confirmation before proceeding\"; \"read the confirmation preview before approving\". Whether MCP Elicitation, a two-step tool or client confirmation is used is not stated.",
+      "post": "Preview of the action (content not documented)",
+      "src": "Support article; Developer docs"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Partially",
+      "desc": "Choice of environment (Live/Sandbox) and set of rights at sign-in",
+      "src": "Developer docs; Support article"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "\"Get environment\" reports Sandbox or Live and how to switch; \"Submit feedback\" - session rating 1 to 5",
+      "src": "Composio"
+    }
+  },
+  "actions": [
+    {
+      "tool": "Create payment",
+      "desc": "Create a payment (moves money); preview + confirmation; scope payments:write",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Cancel payment",
+      "desc": "Cancel a payment; scope payments:write",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Create refund",
+      "desc": "Create a refund (moves money); scope refunds:write",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Create subscription",
+      "desc": "Create a recurring subscription (moves money regularly); scope subscriptions:write",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Cancel mandate",
+      "desc": "Cancel a Direct Debit mandate; scope mandates:write",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Create payment link",
+      "desc": "Create a payment link; scope payment_links:write",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Create payment template link",
+      "desc": "Create a payment template link; scope payment_links:write",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Get customer",
+      "desc": "Get a customer",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Get mandate",
+      "desc": "Get a mandate",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Get payment",
+      "desc": "Get a payment",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Get payout",
+      "desc": "Get a payout",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Get refund",
+      "desc": "Get a refund",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Get subscription",
+      "desc": "Get a subscription",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Get environment",
+      "desc": "Report whether the connection is Sandbox or Live and how to switch",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "List customers",
+      "desc": "List customers",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "List events",
+      "desc": "List events (change log)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "List mandates",
+      "desc": "List mandates",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "List payments",
+      "desc": "List payments (filters, counting)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "List payouts",
+      "desc": "List payouts",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "List refunds",
+      "desc": "List refunds",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "List subscriptions",
+      "desc": "List subscriptions",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Integrate with gocardless",
+      "desc": "Overview of integration options (no account access)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Read gocardless resource",
+      "desc": "Read documentation, guides and code examples (no account data)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    },
+    {
+      "tool": "Submit feedback",
+      "desc": "Send a session rating from 1 to 5 to GoCardless",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (filters by status, customer, mandate, subscription, currency, date according to Composio)",
+      "n_params": "Unknown",
+      "src": "https://composio.dev/toolkits/gocardless_mcp/framework/claude-cowork"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "The most developed protection model for financial actions: server-side confirmation, granular rights at sign-in, masking, limits, a log with the source marked, a separate sandbox.",
+      "src": "Support article"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Legal shift of responsibility to the user: liability cap of £50; the user is liable for the AI provider and for the agents' actions.",
+      "src": "MCP Terms 4.3, 9.5"
+    },
+    {
+      "type": "New design option",
+      "text": "Data masking: the server decides what the AI sees - not found in the other analysed servers.",
+      "src": "Support article"
+    },
+    {
+      "type": "New design option",
+      "text": "The user chooses the rights at sign-in (not the administrator, not a fixed set); they can be changed only by reconnecting.",
+      "src": "Support article"
+    },
+    {
+      "type": "Other",
+      "text": "Collection of ratings (\"Submit feedback\" 1-5), like Tavily and Lucid.",
+      "src": "Composio"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "server": "motion",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-14; re-analysed 2026-10-23 (new commit in the repository)",
+  "md_file": "10_motion.md",
+  "servers": {
+    "code_repo": "Server closed; skills/plugin/installer: https://github.com/motiondivision/ai-kit",
+    "docs_used": "https://motion.dev/docs/ai-kit (from CSV); https://mcp.motion.dev/mcp (server page); https://motion.dev/plus",
+    "open_eq_deployed": "No",
+    "mcp_version": "2025-06-18 (stated by the server)",
+    "commit_hash": "0ebeb5313a069986376430f665415252e223d1d4 (ai-kit repository; server not applicable)",
+    "commit_date": "2026-10-23",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Server proprietary; ai-kit MIT",
+    "access": "Freemium",
+    "server_cost": "Free server: \"Documentation search is free. No token, account or configuration is required.\" Motion+ (separate endpoint /plus): one-time purchase per developer (\"Pay once\", \"Yours forever\"; amount did not load); annual Pro add-on (AI agent Ultramotion)",
+    "linked_sw": "Open source",
+    "linked_cost": "Motion library free (MIT)",
+    "pricing": "Free documentation search; one-time Motion+ license; annual Pro add-on",
+    "restrictions": "Paid features need Motion+ sign-in; the performance audit only profiles a \"running local site\"",
+    "restricted_by": "Motion (license tiers)",
+    "governance_logic": "1) Monetisation via tool responses: \"the rest is tiered, and the tools say so when you reach them\" - the free tool tells the agent about paid features. 2) Two servers by access level (free / plus). 3) The performance evaluation methodology (MotionScore) is defined and changed on the server side and delivered at call time. 4) Behaviour rules in skills.",
+    "structure": "Non-standard",
+    "structure_note": "Two servers (free / plus) plus skills and a reviewer agent (plugins/motion/agents/motion-reviewer.md) in a separate repository",
+    "actions_comment": "Free server: 1 (search-motion-docs). Plus: not published (at least 4 groups: audit, example source code, springs, transition editor)",
+    "tokens": "Cannot be determined (minimal with one tool)",
+    "token_method": "Description not published",
+    "agent_cannot": "Without Motion+: generate springs, run the audit, get example and Motion UI source code; the agent cannot buy a license.",
+    "docs_recs": "None",
+    "gov_promises": "Data processing and telemetry not described; the Motion+ audit analyses the user's project source code - what is sent to the server is not described.",
+    "user_promises": "\"Hand-written advice by the creator of Motion\"; \"Nothing gets pasted into chat\" (about sign-in)",
+    "promises_vs_logic": "Cannot be compared (closed code, no governance statements)",
+    "sources": "https://motion.dev/docs/ai-kit\nhttps://mcp.motion.dev/mcp\nhttps://github.com/motiondivision/ai-kit/tree/0ebeb5313a069986376430f665415252e223d1d4\nhttps://motion.dev/plus",
+    "notes": "Not the Motion calendar (usemotion.com). Endpoints: free https://mcp.motion.dev (CSV: /mcp), paid https://mcp.motion.dev/plus. Direct requests from our environment were blocked by the network policy (the CSV records HTTP 200 without sign-in)."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "Free server: 1 tool search-motion-docs (examples, compatibility etc. also via it: \"there is no separate tool\"). Paid server: MotionScore audit, source code of 450-510+ examples and Motion UI, spring generation, saved transitions (names not published).",
+      "pre": "Not published verbatim",
+      "post": "Not documented; the audit methodology is \"served live to your agent from the Motion+ MCP server\"",
+      "src": "https://mcp.motion.dev/mcp; ai-kit SKILL.md, README"
+    },
+    "Resources": {
+      "impl": "Unknown"
+    },
+    "Prompts": {
+      "impl": "Unknown"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Partially",
+      "desc": "Free server: none. Plus: sign-in from the editor (\"Ask Cursor to sign you in and it hands you a link. Nothing gets pasted into chat\")",
+      "auth_mech": "—",
+      "src": "https://motion.dev/docs/ai-kit; ai-kit"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Unknown"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Unknown"
+    }
+  },
+  "actions": [
+    {
+      "tool": "search-motion-docs",
+      "desc": "Search the Motion documentation (also used for examples and compatibility questions); tells the agent about paid features when it reaches them",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.motion.dev/mcp"
+    }
+  ],
+  "observations": [
+    {
+      "type": "New design option",
+      "text": "Freemium inside MCP: the free server itself tells the agent about paid features - a sales channel through the agent.",
+      "src": "ai-kit SKILL.md"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "A minimal server (1 tool); the main logic is in skills on the client side.",
+      "src": "https://mcp.motion.dev/mcp; ai-kit"
+    },
+    {
+      "type": "New design option",
+      "text": "A methodology loaded from the server can change without updating the client.",
+      "src": "ai-kit README"
+    }
+  ]
+}

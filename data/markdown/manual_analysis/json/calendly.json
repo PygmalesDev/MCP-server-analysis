@@ -1,0 +1,440 @@
+{
+  "server": "calendly",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-15",
+  "md_file": "14_calendly.md",
+  "servers": {
+    "code_repo": "Not published (\"Self-hosting or local deployment is not supported\")",
+    "docs_used": "https://developer.calendly.com/calendly-mcp-server (from CSV); https://developer.calendly.com/docs/mcp/supported-tools",
+    "open_eq_deployed": "Unknown",
+    "mcp_version": "Not published",
+    "commit_hash": "Not applicable (closed code)",
+    "commit_date": "Documentation snapshot 2026-10-15",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Proprietary",
+    "access": "Unknown",
+    "server_cost": "No price given",
+    "linked_sw": "Freemium",
+    "linked_cost": "Free; Standard $10; Teams $16 per seat/month; Enterprise from $15,000/year (50+ seats)",
+    "pricing": "Per-seat plans; some tools depend on the plan",
+    "restrictions": "meetings-create_invitee (booking) requires a paid plan; routing forms Teams and above. OAuth via DCR only (no personal tokens, no pre-registered apps); DCR \"heavily validated and rate-limited\"; other limits not given.",
+    "restricted_by": "Calendly (plans, client policy)",
+    "governance_logic": "1) Separate read and write scopes, assigned by the server. 2) Strict client policy: DCR only, no secrets, exact redirect URIs. 3) Server-side skills loaded on demand control the agent's behaviour. 4) Plan restrictions at tool level. 5) No confirmation of individual actions; only consent at sign-in.",
+    "structure": "Standard",
+    "structure_note": "Flat set of tools mirroring REST API v2, plus 2 skill tools",
+    "actions_comment": "36: 34 correspond to REST API v2 (23 GET, 11 POST/PATCH/PUT/DELETE), 2 skill tools",
+    "tokens": "Cannot be determined",
+    "token_method": "Descriptions not published",
+    "agent_cannot": "Delete event types; remove organisation members (only invitations); webhooks, calendar integrations, payments, workflows; Data Deletion API (Enterprise).",
+    "docs_recs": "No recommendations on confirming actions.",
+    "gov_promises": "Nothing about data, only a link to the privacy notice. The agent sees invitee data (third parties) and routing form answers.",
+    "user_promises": "Works with any client that supports DCR",
+    "promises_vs_logic": "Cannot be compared (closed code, no governance statements)",
+    "sources": "https://developer.calendly.com/calendly-mcp-server\nhttps://developer.calendly.com/docs/mcp/supported-tools\nhttps://mcp.calendly.com/.well-known/oauth-protected-resource\nhttps://calendly.com/.well-known/oauth-authorization-server\nhttps://calendly.com/pricing",
+    "notes": "Endpoint https://mcp.calendly.com (CSV with trailing slash). Tool annotations present (title, readOnlyHint, destructiveHint, idempotentHint). Descriptions in the docs are paraphrased."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "36 tools: 34 correspond to REST API v2, 2 skill tools; annotations title, readOnlyHint, destructiveHint, idempotentHint",
+      "pre": "Not published verbatim",
+      "post": "Not documented",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    "Resources": {
+      "impl": "Unknown"
+    },
+    "Prompts": {
+      "impl": "Unknown"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "OAuth 2.1 Authorization Code + PKCE S256; metadata documents (https://mcp.calendly.com/.well-known/oauth-protected-resource, https://calendly.com/.well-known/oauth-authorization-server); DCR (https://calendly.com/oauth/register), token_endpoint_auth_method none, preregistration not supported; scopes mcp:scheduling:read, mcp:scheduling:write assigned by the server; exact HTTPS redirect URIs only; consent: \"Connect to Calendly\" button",
+      "auth_mech": "Dynamic Client Registration",
+      "auth_server": "calendly.com",
+      "src": "https://developer.calendly.com/calendly-mcp-server"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Unknown"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "Skills via tools: list_calendly_skills, load_calendly_skill - the server itself delivers skill instructions to the agent (\"No REST equivalent\")",
+      "post": "Skill text",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    }
+  },
+  "actions": [
+    {
+      "tool": "event_types-create_event_type",
+      "desc": "Create an event type (POST)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "event_types-update_event_type",
+      "desc": "Update an event type (PATCH)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "event_types-list_event_types",
+      "desc": "List event types (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "event_types-get_event_type",
+      "desc": "Get an event type (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "event_types-list_event_type_available_times",
+      "desc": "List available times of an event type (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "event_types-list_event_type_availability_schedule",
+      "desc": "Get the availability schedule of an event type (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "event_types-update_event_type_availability_schedule",
+      "desc": "Update the availability schedule of an event type (PUT)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "locations-list_user_meeting_locations",
+      "desc": "List the user's meeting locations (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "meetings-list_events",
+      "desc": "List scheduled meetings (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "meetings-get_event",
+      "desc": "Get a meeting (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "meetings-cancel_event",
+      "desc": "Cancel a meeting (affects invitees) (POST)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "meetings-create_invitee",
+      "desc": "Book a meeting for an invitee (paid plan required) (POST)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "meetings-list_event_invitees",
+      "desc": "List the invitees of a meeting (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "meetings-get_event_invitee",
+      "desc": "Get an invitee (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "meetings-create_invitee_no_show",
+      "desc": "Mark an invitee as no-show (POST)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "meetings-get_invitee_no_show",
+      "desc": "Get a no-show record (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "meetings-delete_invitee_no_show",
+      "desc": "Delete a no-show record (DELETE)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "scheduling_links-create_single_use_scheduling_link",
+      "desc": "Create a single-use scheduling link (POST)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "shares-create_share",
+      "desc": "Create a share (POST)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "availability-list_user_availability_schedules",
+      "desc": "List the user's availability schedules (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "availability-get_user_availability_schedule",
+      "desc": "Get an availability schedule (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "availability-list_user_busy_times",
+      "desc": "List the user's busy times (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "routing_forms-list_routing_forms",
+      "desc": "List routing forms (Teams+) (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "routing_forms-get_routing_form",
+      "desc": "Get a routing form (Teams+) (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "routing_forms-list_routing_form_submissions",
+      "desc": "List routing form submissions (Teams+) (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "routing_forms-get_routing_form_submission",
+      "desc": "Get a routing form submission (Teams+) (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "users-get_current_user",
+      "desc": "Get the current user (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "users-get_user",
+      "desc": "Get a user (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "organizations-get_organization",
+      "desc": "Get the organisation (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "organizations-list_organization_memberships",
+      "desc": "List organisation memberships (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "organizations-get_organization_membership",
+      "desc": "Get an organisation membership (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "organizations-list_organization_invitations",
+      "desc": "List organisation invitations (GET)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "organizations-create_organization_invitation",
+      "desc": "Invite a person to the organisation (POST)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "organizations-revoke_organization_invitation",
+      "desc": "Revoke an organisation invitation (DELETE)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "list_calendly_skills",
+      "desc": "List the server-side skills (instructions for the agent)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "tool": "load_calendly_skill",
+      "desc": "Load a server-side skill (instructions for the agent; no REST equivalent)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    }
+  ],
+  "observations": [
+    {
+      "type": "New design option",
+      "text": "Server-side skills (load_calendly_skill): the vendor delivers instructions to the agent via MCP, not via external files (compare Lucid and Airwallex with skills outside the server).",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Actions with consequences for third parties (booking, cancelling meetings, organisation invitations) without server-side confirmation.",
+      "src": "https://developer.calendly.com/docs/mcp/supported-tools"
+    },
+    {
+      "type": "Other",
+      "text": "Strict and standard authorization (DCR only, PKCE, no secrets).",
+      "src": "https://developer.calendly.com/calendly-mcp-server"
+    }
+  ]
+}

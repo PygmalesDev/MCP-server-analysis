@@ -1,0 +1,516 @@
+{
+  "server": "basic-memory",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-12; re-analysed 2026-10-23 (new commit in the repository)",
+  "md_file": "03_basic_memory.md",
+  "servers": {
+    "code_repo": "https://github.com/basicmachines-co/basic-memory",
+    "docs_used": "https://docs.basicmemory.com/cloud/cloud-guide (from CSV); https://docs.basicmemory.com/reference/mcp-tools-reference",
+    "open_eq_deployed": "Partially",
+    "mcp_version": "Python SDK mcp 2.3.0: 2024-11-05, 2025-03-26, 2025-06-18, 2025-11-25 (initialize handshake) and 2026-07-28 (stateless); latest 2026-07-28",
+    "commit_hash": "9b47a7cd4784ca3a4df5d85437bdbd2db2dee587",
+    "commit_date": "2026-10-23",
+    "language": "Python >= 3.12",
+    "sdk": "FastMCP 4.1.3 (on top of the official mcp 2.3.0)",
+    "code_public": "Partially",
+    "license": "AGPL-3.0 (cloud parts partly closed)",
+    "access": "Freemium",
+    "server_cost": "Local: free (\"Free to run locally\"). Cloud: active subscription required. Team $15 per seat/month ($13 from 10 seats, $12 from 20); Business $30 per seat/month; Agent Infrastructure custom; 7-day trial.",
+    "linked_sw": "Open source + paid cloud",
+    "linked_cost": "Program open source (AGPL-3.0); cloud subscription as above (README still describes the old \"$15.00/mo ... One plan, no tiers\" with OSS discount code BMFOSS)",
+    "pricing": "Per seat per month (Team / Business), Agent Infrastructure: credits / metered usage. Cloud built on WorkOS AuthKit, Neon Postgres, Tigris S3, Polar.sh.",
+    "restrictions": "Cloud: subscription (\"Active subscription required\"). User settings in ~/.basic-memory/config.json: project deletion off by default (enable_project_delete=false), POSIX tools can be hidden, overwriting notes forbidden by default. Cloud: ZIP upload up to 100 MB; .env and similar files are not uploaded.",
+    "restricted_by": "Basic Machines (subscription); user (local config)",
+    "governance_logic": "1) Behaviour rules only in server instructions (check recent_activity before answering; offer to save and wait for agreement; \"Do not create notes unprompted\") - not enforced by code. 2) Overwrite protection: ALREADY_EXISTS unless overwrite=true. 3) Optimistic locking with expected_checksum (REVISION_CONFLICT). 4) Dangerous operations need explicit parameters: recursive=true for folder deletion; project deletion hidden unless enable_project_delete. 5) Project boundaries incl. symlinks (OUTSIDE_PROJECT). 6) Memory: past writes come back in future sessions; similar-notes hints after writing. 7) Built-in manual for the AI (memory://man). 8) Client-specific behaviour (search/fetch only for OpenAI). 9) Silent auto-update of CLI installs every 24 h. No permission checks locally, no protocol-level human confirmation, no rate limits.",
+    "structure": "Standard",
+    "structure_note": "Flat, one server; tool groups switched by FastMCP tags; transition period with old and new (bm_*) sets visible at the same time; local <-> cloud routing by project/workspace.",
+    "actions_comment": "37 visible by default (39 registered, 2 project-deletion tools hidden; 2 more defined but not registered); about 15 actions that differ in meaning (old/new duplicates, OpenAI wrappers). Several tools contain multiple operations (bm_edit 7 commands, bm_project list/create/recent).",
+    "tokens": "~11,400 (tools + resources + prompts ~10,900, instructions ~520)",
+    "token_method": "Length of the reconstructed description / 4 characters per token (+-30 %); about half is duplicate old tools",
+    "agent_cannot": "Import from ChatGPT, Claude, documents, memory.json (CLI only). Cloud: snapshots and restore, push/pull sync (bisync), ZIP upload, sharing, subscription, teams and workspaces (except list_workspaces). Database maintenance: reindex, prune, orphans, doctor, update. Delete a project unless the user enabled it. Cloud web app: comments and suggested edits (partly via review_note in the cloud MCP).",
+    "docs_recs": "\"Deletion is irreversible for active project storage\"; \"Back up any local files you need before running the destructive command\". Agents should not write CriticMarkup directly. Pass workspace for a clean deletion of cloud data from a local session. No separate confirmation step before destructive actions is described.",
+    "gov_promises": "Local: \"Notes and content never leave your device\". Cloud: \"We don't train AI models\", encrypted at rest and in transit, servers in the USA, data kept 30 days after cancellation (backups up to 90 days), \"We don't sell your data\". CLI telemetry on by default (anonymous CLI -> cloud funnel events to Umami Cloud; no file contents, titles, IP, tool calls; opt-out BASIC_MEMORY_NO_PROMOS=1); Logfire off by default. Reversibility: \"No lock-in ... Export to local Markdown any time\"; cloud snapshots and point-in-time restore; no versions for local notes. Diagnostics read-only, secrets masked.",
+    "user_promises": "\"Your AI never forgets again\"; \"Every tool is annotated with MCP behavior hints ... so agents can pick the right one without trial-and-error\"; \"Cancel anytime, your data stays yours\"",
+    "promises_vs_logic": "Annotation promise kept (all tools annotated). \"Do not create notes unprompted\" exists only as text in the instructions; the code does not enforce it. \"Notes never leave your device\" consistent with the code when the cloud is off; CLI telemetry sends events only (analytics.py).",
+    "sources": "https://github.com/basicmachines-co/basic-memory/tree/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587\nhttps://docs.basicmemory.com/cloud/cloud-guide\nhttps://docs.basicmemory.com/reference/mcp-tools-reference\nhttps://docs.basicmemory.com/cloud/routing\nhttps://basicmemory.com/pricing\nhttps://basicmemory.com/privacy",
+    "notes": "The CSV endpoint is the cloud server; it has closed extras (review_note, open_basic_memory, review_mode, workspace). The code analysis refers to the open server. Actions sheet: generated from the appendix 03b (type from readOnlyHint; description = first sentence of the verbatim description)."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "41 tool functions in the code: 2 not registered (search_notes_ui, read_note_ui), 2 hidden by default (delete_project, bm_project_delete), 37 visible. New bm_* tools are registered next to the old ones they replace, so most actions appear twice. All tools have readOnly/destructive/idempotent/openWorld annotations.",
+      "pre": "@file:03b_basic_memory_pre_interaction_context.md",
+      "post": "Text (Markdown) by default, JSON with output_format=\"json\". bm_write appends up to 3 similar notes (similarity >= 0.70, \"advisory and does not block the write\"). bm_read returns a checksum for a safe later write. Empty list -> block \"[]\".",
+      "src": "src/basic_memory/mcp/tools/__init__.py; server.py:243-275; similar_notes.py; empty_results.py; README:566-568"
+    },
+    "Resources": {
+      "impl": "Yes",
+      "desc": "5: memory://ai_assistant_guide, memory://man, memory://man/{ref*}, memory://{project}/{path*}, memory://{workspace}/{project}/info",
+      "pre": "@section:03b_basic_memory_pre_interaction_context.md|## 3. Resources",
+      "post": "Markdown (text/markdown)"
+    },
+    "Prompts": {
+      "impl": "Yes",
+      "desc": "4: continue_conversation, getting_started, recent_activity, search_knowledge_base",
+      "pre": "@section:03b_basic_memory_pre_interaction_context.md|## 4. Prompts",
+      "post": "A hint text for the AI"
+    },
+    "Logging": {
+      "impl": "Partially",
+      "desc": "Only in project management tools: context.info(\"Listing all available projects\"), \"Creating project: ...\", \"Deleting project: ...\" sent as MCP log notifications",
+      "src": "mcp/tools/project_management.py:389, 616, 848"
+    },
+    "Sampling": {
+      "impl": "No"
+    },
+    "Roots": {
+      "impl": "No"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "Local (stdio): none (access = file access). Cloud: OAuth browser sign-in via WorkOS AuthKit, subscription checked at sign-in. The local server can call the cloud with an API key or an OAuth token (key takes precedence). DCR / metadata not documented.",
+      "auth_mech": "Several methods",
+      "auth_server": "WorkOS AuthKit (cloud)",
+      "src": "cloud-guide; README:147; mcp/tools/utils.py:229"
+    },
+    "Elicitation": {
+      "impl": "No",
+      "desc": "Not found; instead the instructions ask the AI to offer and \"wait for them to agree before writing anything\"",
+      "src": "server.py:243-275"
+    },
+    "Tasks": {
+      "impl": "No",
+      "desc": "Not found; cloud project deletion runs asynchronously in the background, but not via MCP Tasks",
+      "src": "cloud-guide"
+    },
+    "Configuration": {
+      "impl": "Yes",
+      "desc": "~/.basic-memory/config.json and environment variables: default_project, enable_posix_tools (on), enable_project_delete (off), write_note_overwrite_default (off) etc.; tool-group visibility via FastMCP tags at startup",
+      "src": "server.py:36-52, 125-129; config_models.py:196, 591-618"
+    },
+    "Error Reporting": {
+      "impl": "Yes",
+      "desc": "Refusal system: isError: true + code NOT_FOUND, AMBIGUOUS, ALREADY_EXISTS, REVISION_CONFLICT, INVALID_ARGUMENTS, OUTSIDE_PROJECT, LOCKED, UNSUPPORTED, PARTIAL_FAILURE, OUTCOME_UNKNOWN, UNAVAILABLE + \"Try instead: ...\"",
+      "post": "Text \"CODE: message\\nTry instead: ...\" or JSON {\"error\",\"message\",\"try_instead\"}",
+      "src": "mcp/refusals.py:1-80"
+    },
+    "Subscription": {
+      "impl": "No"
+    },
+    "Progress Tracking": {
+      "impl": "No"
+    },
+    "Cancellation": {
+      "impl": "No"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "Client dependency: middleware remembers the client name; search/fetch (for ChatGPT) work only for the OpenAI client, others get \"Use search_notes instead\"",
+      "src": "mcp/client_info.py; mcp/tools/chatgpt_tools.py:28-38, 172-174"
+    }
+  },
+  "actions": [
+    {
+      "tool": "basic_memory_diagnostics",
+      "desc": "Return version, system, and configuration diagnostics for Basic Memory.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "none",
+      "n_params": 0,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/basic_memory_diagnostics.py#L34"
+    },
+    {
+      "tool": "build_context",
+      "desc": "Build context from a memory:// URI to continue conversations naturally.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "url: MemoryUrl (req.); project: Optional[str]; project_id: Optional[str]; depth: str; timeframe: Optional[TimeFrame]; page: int; page_size: int; max_related: int; output_format: Literal['json', 'text']; compact: bool",
+      "n_params": 10,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/build_context.py#L213"
+    },
+    {
+      "tool": "search",
+      "desc": "OpenAI/ChatGPT connector search adapter (works only for the OpenAI client; others get \"Use search_notes instead\")",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query: str (req.)",
+      "n_params": 1,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/chatgpt_tools.py#L158"
+    },
+    {
+      "tool": "fetch",
+      "desc": "OpenAI/ChatGPT connector fetch adapter (works only for the OpenAI client)",
+      "type": "Read",
+      "default": "Yes",
+      "params": "id: str (req.)",
+      "n_params": 1,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/chatgpt_tools.py#L248"
+    },
+    {
+      "tool": "bm_context",
+      "desc": "Follow the Basic Memory knowledge graph from a note: the note, its observations, and the notes its relations reach, up to `depth` hops (1-5).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "identifier: str (req.); depth: int; since: str; max_related: int; compact: bool; page: int; page_size: int; output_format: Literal['text', 'json']; project: str",
+      "n_params": 9,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/context.py#L52"
+    },
+    {
+      "tool": "bm_delete",
+      "desc": "Delete a Basic Memory note (`identifier`) or a directory (`path`).",
+      "type": "Write",
+      "default": "Yes",
+      "params": "identifier: str; path: str; recursive: bool; expected_checksum: str; output_format: Literal['text', 'json']; project: str",
+      "n_params": 6,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/delete.py#L45"
+    },
+    {
+      "tool": "delete_note",
+      "desc": "Delete a note or directory by title, permalink, or path.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "identifier: str (req.); is_directory: bool; project: Optional[str]; project_id: Optional[str]; output_format: Literal['text', 'json']",
+      "n_params": 5,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/delete_note.py#L153"
+    },
+    {
+      "tool": "bm_edit",
+      "desc": "Change part of an existing Basic Memory note.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "identifier: str (req.); command: EditCommand (req.); content: str; section: str; find_text: str; expected_replacements: int; replace_subsections: bool; metadata: dict[str, Any]; expected_checksum: str; output_format: Literal['text', 'json']; project: str",
+      "n_params": 11,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/edit.py#L61"
+    },
+    {
+      "tool": "edit_note",
+      "desc": "Edit a note in place.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "identifier: str (req.); operation: str (req.); content: str (req.); project: Optional[str]; workspace: Optional[str]; project_id: Optional[str]; section: Optional[str]; find_text: Optional[str]; expected_replacements: Optional[int]; replace_subsections: Optional[bool]; metadata: Optional[dict[str, Any]]; expected_checksum: str; output_format: Literal['text', 'json']",
+      "n_params": 13,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/edit_note.py#L465"
+    },
+    {
+      "tool": "bm_find",
+      "desc": "Find files in a Basic Memory project, recursively.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "path: str; name: str; filters: dict[str, Any]; fields: list[str]; depth: int; page: int; page_size: int; output_format: Literal['text', 'json']; project: str",
+      "n_params": 9,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/find_files.py#L61"
+    },
+    {
+      "tool": "list_directory",
+      "desc": "List directory contents with filtering and depth control.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "dir_name: str; depth: int; file_name_glob: Optional[str]; sort: DirectorySortOrder; page: int; page_size: int; output_format: Literal['text', 'json']; project: Optional[str]; project_id: Optional[str]",
+      "n_params": 9,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/list_directory.py#L31"
+    },
+    {
+      "tool": "bm_list",
+      "desc": "List one folder of a Basic Memory project: its subfolders, then its files with title, date and id.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "path: str; glob: str; sort: DirectorySortOrder; page: int; page_size: int; output_format: Literal['text', 'json']; project: str",
+      "n_params": 7,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/listing.py#L49"
+    },
+    {
+      "tool": "bm_move",
+      "desc": "Move or rename a Basic Memory note (`identifier`) or a directory (`path`) within its project.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "destination: str (req.); identifier: str; path: str; expected_checksum: str; output_format: Literal['text', 'json']; project: str",
+      "n_params": 6,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/move.py#L52"
+    },
+    {
+      "tool": "move_note",
+      "desc": "Move a note, or a whole directory with is_directory=true, to a new path within the same project; cross-project moves are refused.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "identifier: str (req.); destination_path: str; destination_folder: Optional[str]; is_directory: bool; project: Optional[str]; project_id: Optional[str]; output_format: Literal['text', 'json']",
+      "n_params": 7,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/move_note.py#L364"
+    },
+    {
+      "tool": "bm_schema",
+      "desc": "Basic Memory note schemas (Picoschema).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "command: SchemaCommand (req.); note_type: str; identifier: str; threshold: float; output_format: Literal['text', 'json']; project: str",
+      "n_params": 6,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/note_schemas.py#L45"
+    },
+    {
+      "tool": "cat",
+      "desc": "Print a note's content.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "identifier: str (req.); start_line: Optional[int]; end_line: Optional[int]; section: Optional[str]; max_tokens: Optional[int]; include_frontmatter: bool; project: Optional[str]; project_id: Optional[str]",
+      "n_params": 8,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/posix_tools.py#L91"
+    },
+    {
+      "tool": "grep",
+      "desc": "Search note content in one project and return matching notes.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "pattern: str (req.); semantic: bool; page: int; page_size: int; project: Optional[str]; project_id: Optional[str]; context_lines: int; max_matches: int",
+      "n_params": 8,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/posix_tools.py#L243"
+    },
+    {
+      "tool": "ls",
+      "desc": "List one directory level.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "path: str; page: int; page_size: int; project: Optional[str]; project_id: Optional[str]",
+      "n_params": 5,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/posix_tools.py#L364"
+    },
+    {
+      "tool": "find",
+      "desc": "Recursively list files by name glob or metadata predicates (e.g. \"status=active\").",
+      "type": "Read",
+      "default": "Yes",
+      "params": "path: str; name: Optional[str]; depth: int; page: int; page_size: int; meta: Optional[list[str]]; fields: Optional[list[str]]; project: Optional[str]; project_id: Optional[str]",
+      "n_params": 9,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/posix_tools.py#L731"
+    },
+    {
+      "tool": "tail",
+      "desc": "Show recently changed notes.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "timeframe: str; lines: int; project: Optional[str]; project_id: Optional[str]",
+      "n_params": 4,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/posix_tools.py#L912"
+    },
+    {
+      "tool": "man",
+      "desc": "Look up a manual page or search the manual.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "page: Optional[str]; query: Optional[str]; project: Optional[str]; project_id: Optional[str]",
+      "n_params": 4,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/posix_tools.py#L990"
+    },
+    {
+      "tool": "list_memory_projects",
+      "desc": "List all available projects with their status.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "output_format: Literal['text', 'json']",
+      "n_params": 1,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/project_management.py#L369"
+    },
+    {
+      "tool": "create_memory_project",
+      "desc": "Create a new Basic Memory project.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "project_name: str (req.); project_path: str (req.); set_default: bool; workspace: str; output_format: Literal['text', 'json']",
+      "n_params": 5,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/project_management.py#L559"
+    },
+    {
+      "tool": "delete_project",
+      "desc": "Delete a Basic Memory project (hidden until the user sets enable_project_delete)",
+      "type": "Write",
+      "default": "No",
+      "params": "project_name: str (req.); delete_notes: bool; workspace: str; output_format: Literal['text', 'json']",
+      "n_params": 4,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/project_management.py#L789"
+    },
+    {
+      "tool": "bm_project",
+      "desc": "Basic Memory projects: list, create, recent activity (operations list/create/recent)",
+      "type": "Mixed",
+      "default": "Yes",
+      "params": "command: ProjectCommand (req.); name: str; path: str; set_default: bool; workspace: str; since: str; items: list[ItemKind]; page: int; page_size: int; output_format: Literal['text', 'json']; project: str",
+      "n_params": 11,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/projects.py#L62"
+    },
+    {
+      "tool": "bm_project_delete",
+      "desc": "Remove a Basic Memory project (hidden until the user sets enable_project_delete)",
+      "type": "Write",
+      "default": "No",
+      "params": "name: str (req.); delete_notes: bool; workspace: str; output_format: Literal['text', 'json']",
+      "n_params": 4,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/projects.py#L163"
+    },
+    {
+      "tool": "bm_search",
+      "desc": "Search a Basic Memory project, ranked by relevance.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query: str; mode: SearchMode; filters: dict[str, Any]; note_types: StringList; items: list[ItemKind]; categories: StringList; since: str; lines: int; max_matches: int; identifier: str; path: str; compact: bool; valid_at: str; valid_overlaps: str; time_kind: str; min_similarity: float; projects: StringList; all_projects: bool; page: int; page_size: int; output_format: Literal['text', 'json']; project: str",
+      "n_params": 22,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/ranked_search.py#L103"
+    },
+    {
+      "tool": "bm_read",
+      "desc": "Read a Basic Memory note or file by path, permalink, memory:// URL or exact title.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "identifier: str (req.); section: str; start_line: int; end_line: int; max_tokens: int; include_frontmatter: bool; include_content: bool; output_format: Literal['text', 'json']; project: str",
+      "n_params": 9,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/read.py#L58"
+    },
+    {
+      "tool": "read_content",
+      "desc": "Read a file's raw bytes by path, permalink, or memory:// URL, without knowledge-graph processing.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "path: str (req.); project: Optional[str]; project_id: Optional[str]",
+      "n_params": 3,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/read_content.py#L55"
+    },
+    {
+      "tool": "read_note",
+      "desc": "Read a markdown note by title or permalink, optionally a numbered line range.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "identifier: str (req.); project: Optional[str]; project_id: Optional[str]; page: int; page_size: int; output_format: Literal['text', 'json']; include_frontmatter: bool; start_line: int; end_line: int; include_content: bool",
+      "n_params": 10,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/read_note.py#L89"
+    },
+    {
+      "tool": "recent_activity",
+      "desc": "Get recent activity for one project.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "type: Union[str, List[str]]; depth: int; timeframe: TimeFrame; page: int; page_size: int; project: Optional[str]; project_id: Optional[str]; output_format: Literal['text', 'json']",
+      "n_params": 8,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/recent_activity.py#L55"
+    },
+    {
+      "tool": "schema_validate",
+      "desc": "Validate notes against their Picoschema definitions.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "note_type: Optional[str]; identifier: Optional[str]; project: Optional[str]; project_id: Optional[str]; output_format: Literal['text', 'json']",
+      "n_params": 5,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/schema.py#L267"
+    },
+    {
+      "tool": "schema_infer",
+      "desc": "Analyze existing notes of one type and suggest a Picoschema definition.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "note_type: str (req.); threshold: float; project: Optional[str]; project_id: Optional[str]; output_format: Literal['text', 'json']",
+      "n_params": 5,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/schema.py#L403"
+    },
+    {
+      "tool": "schema_diff",
+      "desc": "Detect drift between a schema definition and actual note usage.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "note_type: str (req.); project: Optional[str]; project_id: Optional[str]; output_format: Literal['text', 'json']",
+      "n_params": 4,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/schema.py#L527"
+    },
+    {
+      "tool": "search_notes",
+      "desc": "Search notes, observations, and relations in one project, or in several with `projects` / `search_all_projects`.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query: Optional[str]; project: Optional[str]; project_id: Optional[str]; search_all_projects: bool; projects: Optional[List[str]]; page: int; page_size: int; search_type: str; output_format: Literal['text', 'json']; note_types: List[str]; entity_types: List[str]; categories: List[str]; after_date: Optional[str]; metadata_filters: Dict[str, Any]; tags: List[str]; status: Optional[str]; min_similarity: Optional[float]; valid_at: Optional[str]; valid_overlaps: Optional[str]; time_kind: Optional[str]; compact: bool",
+      "n_params": 21,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/search.py#L1128"
+    },
+    {
+      "tool": "search_notes_ui",
+      "desc": "Search notes and return an embedded MCP-UI resource (raw HTML); not registered (import commented out, \"TODO: re-enable\")",
+      "type": "Read",
+      "default": "No",
+      "params": "query: str (req.); project: Optional[str]; project_id: Optional[str]; page: int; page_size: int; search_type: Optional[str]; note_types: List[str]; entity_types: List[str]; after_date: Optional[str]; metadata_filters: Optional[Dict[str, Any]]; tags: Optional[List[str]]; status: Optional[str]",
+      "n_params": 12,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/ui_sdk.py#L32"
+    },
+    {
+      "tool": "read_note_ui",
+      "desc": "Read a note and return an embedded MCP-UI resource (raw HTML); not registered (import commented out, \"TODO: re-enable\")",
+      "type": "Read",
+      "default": "No",
+      "params": "identifier: str (req.); project: Optional[str]; project_id: Optional[str]",
+      "n_params": 3,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/ui_sdk.py#L113"
+    },
+    {
+      "tool": "view_note",
+      "desc": "Read a note (same resolution as read_note) and return it wrapped in an instruction to display it to the user as a markdown artifact.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "identifier: str (req.); project: Optional[str]; project_id: Optional[str]",
+      "n_params": 3,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/view_note.py#L29"
+    },
+    {
+      "tool": "list_workspaces",
+      "desc": "List available cloud workspaces (tenant_id, type, role, and name).",
+      "type": "Read",
+      "default": "Yes",
+      "params": "output_format: Literal['text', 'json']",
+      "n_params": 1,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/workspaces.py#L58"
+    },
+    {
+      "tool": "bm_write",
+      "desc": "Create or replace a Basic Memory note.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "content: str (req.); identifier: str; title: str; directory: str; note_type: NoteType; tags: list[str]; metadata: dict[str, Any]; overwrite: bool; expected_checksum: str; output_format: Literal['text', 'json']; project: str",
+      "n_params": 11,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/write.py#L86"
+    },
+    {
+      "tool": "write_note",
+      "desc": "Create a markdown note.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "title: str (req.); content: str (req.); directory: str (req.); project: Optional[str]; workspace: Optional[str]; project_id: Optional[str]; tags: list[str]; note_type: str; metadata: dict[str, Any]; overwrite: bool; expected_checksum: str; output_format: Literal['text', 'json']",
+      "n_params": 12,
+      "src": "https://github.com/basicmachines-co/basic-memory/blob/9b47a7cd4784ca3a4df5d85437bdbd2db2dee587/src/basic_memory/mcp/tools/write_note.py#L106"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "A memory server changes the agent's future behaviour by its nature (item \"Does past agent behaviour change future outputs?\"); it also pushes towards it with similar-notes hints and the advice to start with recent_activity.",
+      "src": "similar_notes.py; server.py:243-275"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Governance through texts, not code: \"Do not create notes unprompted\" is only in the instructions, while overwriting, folder deletion, project deletion and project boundaries are enforced in code - a mixed model.",
+      "src": "server.py:237-275; config_models.py:591-618"
+    },
+    {
+      "type": "New design option",
+      "text": "The transition period doubles the context: about 37 visible tools for about 15 different actions, almost half of the tokens are duplicates.",
+      "src": "03b_basic_memory_pre_interaction_context.md"
+    },
+    {
+      "type": "New design option",
+      "text": "Behaviour depends on the client: tools for OpenAI silently behave differently for other clients.",
+      "src": "mcp/tools/chatgpt_tools.py:28-38"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Open code != cloud: the cloud has additional closed tools (review, Pocketbook UI).",
+      "src": "https://docs.basicmemory.com/reference/mcp-tools-reference"
+    },
+    {
+      "type": "New design option",
+      "text": "Auto-update without user involvement can change the tool surface between sessions.",
+      "src": "README:601-614"
+    }
+  ]
+}

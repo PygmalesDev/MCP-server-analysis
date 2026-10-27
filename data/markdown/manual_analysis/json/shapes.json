@@ -1,0 +1,439 @@
+{
+  "server": "shapes",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-12",
+  "md_file": "04_shapes.md",
+  "servers": {
+    "code_repo": "Not published",
+    "docs_used": "https://shapes.co/mcp (from CSV); https://mcp.shapes.co/ (technical page); https://claude.com/connectors/shapes",
+    "open_eq_deployed": "Unknown",
+    "mcp_version": "Not published (requires sign-in)",
+    "commit_hash": "Not applicable (closed code)",
+    "commit_date": "Documentation snapshot 2026-10-12",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Proprietary",
+    "access": "Paid",
+    "server_cost": "No separate price; only for existing Shapes customers (\"Existing Shapes customers can connect directly\"), others contact sales",
+    "linked_sw": "Paid",
+    "linked_cost": "Core $8 per seat/month, Plus $12 per seat/month (billed annually), minimum subscription (size not given); Surveys, Performance and Compensation modules priced on request",
+    "pricing": "Per-seat SaaS subscription; MCP not mentioned in the plan feature lists",
+    "restrictions": "OAuth sign-in with each employee's own Shapes account; \"Your existing Shapes permissions carry through to every Claude conversation\"; the Claude connector is set up by the organisation's administrator. Rate limits not documented.",
+    "restricted_by": "Customer's Shapes HR administrators (permissions); Shapes (subscription)",
+    "governance_logic": "According to the documentation (not verifiable): 1) Read-only at the level of the whole server - no writing tools at all. 2) User permissions carry over (\"you can only access data you're authorized to see\"), filtering on the Shapes side. 3) Aggregating tools compute statistics instead of returning raw records. 4) Separate \"my\" tools for the user's own data. Human confirmation, confidence scores, logging not described.",
+    "structure": "Standard",
+    "structure_note": "Flat set of tools (according to the documentation)",
+    "actions_comment": "35 according to mcp.shapes.co (\"35+ tools\"), all read-only",
+    "tokens": "Cannot be determined",
+    "token_method": "Tool descriptions not published",
+    "agent_cannot": "Any changes: create or change an employee, book time off, answer a survey, carry out a review, upload or sign a document (Docs & eSign). Compensation: promised \"compensation gaps\" analysis but no salary tool in the list (possibly via employee fields - unconfirmed). Shapes AI functions (Vibe Views, Shapes Agents, Workflows).",
+    "docs_recs": "None explicit; no recommendations on human confirmation (not needed, read-only) or on handling personal data in an AI chat.",
+    "gov_promises": "\"Shapes is SOC2 certified and GDPR compliant so your people data stays protected, always\"; \"Your permissions carry over\" / \"No one sees more than they should\". Privacy policy: AI features may use unnamed third-party LLM providers; data stored in Israel, EEA, UK, USA etc.; Shapes may train models on product usage data after removing personal data; customer data governed by a DPA and the \"AI Modules Schedule\". HR data received by the AI client goes to the AI provider - not mentioned in the MCP documentation.",
+    "user_promises": "\"Connect in minutes. No engineering required.\"; the AI can answer about \"attrition risk, headcount, and compensation gaps\"",
+    "promises_vs_logic": "Read-only confirmed by the tool names (only list_, get_, aggregate_, search_, read_). Compensation analysis not confirmed by the tool list.",
+    "sources": "https://shapes.co/mcp\nhttps://mcp.shapes.co/\nhttps://mcp.shapes.co/.well-known/oauth-protected-resource\nhttps://mcp.shapes.co/.well-known/oauth-authorization-server\nhttps://shapes.co/pricing\nhttps://shapes.co/privacy-policy\nhttps://claude.com/connectors/shapes\nhttps://getknit.dev/mcp-servers/shapes",
+    "notes": "Closed code, server returns 401 without sign-in, so tools/list is unavailable. The landing page gives http:// instead of https:// (probably a typo). Company: DreamTeam HR Apps Ltd. (d/b/a Shapes). Not to be confused with the third-party Knit wrapper with 25 writing actions."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "35 tools, \"All tools are read-only - no data is modified through the MCP server\": employees 8, performance reviews 7, time off 8, surveys 4, attendance 2, working time policies 1, knowledge base 2, helpdesk 3; aggregate_* tools compute statistics",
+      "pre": "Not published verbatim; only the tool names are known",
+      "post": "Not documented; lists of records and aggregates (\"counts, percentages, and distributions\")",
+      "src": "https://mcp.shapes.co/"
+    },
+    "Resources": {
+      "impl": "Unknown",
+      "desc": "Not documented; the only OAuth scope mcp:tools indirectly suggests tools only",
+      "src": "https://mcp.shapes.co/.well-known/oauth-protected-resource"
+    },
+    "Prompts": {
+      "impl": "Unknown",
+      "desc": "The page mentions \"built-in skills\"; implementation not stated",
+      "src": "https://mcp.shapes.co/"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "OAuth 2.0 + PKCE; metadata documents published; Dynamic Client Registration (registration_endpoint https://mcp.shapes.co/register); grant types authorization_code, refresh_token; PKCE S256; only scope mcp:tools",
+      "auth_mech": "Dynamic Client Registration",
+      "auth_server": "https://mcp.shapes.co (sign-in with a Shapes account)",
+      "src": "https://mcp.shapes.co/.well-known/oauth-protected-resource; https://mcp.shapes.co/.well-known/oauth-authorization-server"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "No",
+      "desc": "No user settings (\"No API keys required\")",
+      "src": "https://mcp.shapes.co/"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Unknown"
+    }
+  },
+  "actions": [
+    {
+      "tool": "list_employees",
+      "desc": "List employees",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "aggregate_employees",
+      "desc": "Compute statistics about employees (counts, percentages, distributions)",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "get_current_employee",
+      "desc": "Get the signed-in employee's own record",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "get_reporting_chain",
+      "desc": "Get an employee's reporting chain",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_entities",
+      "desc": "List company entities",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_employee_field_types",
+      "desc": "List employee profile field types",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_employee_field_value_changes",
+      "desc": "List the history of changes to employee field values",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_profile_pictures",
+      "desc": "List employee profile pictures",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_performance_review_cycles",
+      "desc": "List performance review cycles",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_performance_review_participations",
+      "desc": "List participations in performance reviews",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_performance_review_reviewers",
+      "desc": "List reviewers of performance reviews",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_my_performance_review_participations",
+      "desc": "List the user's own performance review participations",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_my_performance_review_reviews",
+      "desc": "List the reviews the user has to write or has written",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "aggregate_performance_review_cycles",
+      "desc": "Compute statistics about performance review cycles",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "aggregate_performance_review_participations",
+      "desc": "Compute statistics about performance review participations",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_time_away_bookings",
+      "desc": "List time-off bookings",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_time_away_balances",
+      "desc": "List time-off balances",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_time_away_reasons",
+      "desc": "List time-off reasons (types)",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_time_away_reason_policies",
+      "desc": "List policies per time-off reason",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_time_away_policy_assignments",
+      "desc": "List assignments of time-off policies to employees",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_time_away_days_grants",
+      "desc": "List grants of time-off days",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_time_away_holidays",
+      "desc": "List public holidays",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "aggregate_time_away_bookings",
+      "desc": "Compute statistics about time-off bookings",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_surveys",
+      "desc": "List surveys",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_survey_participations",
+      "desc": "List survey participations",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_my_survey_participations",
+      "desc": "List the user's own survey participations",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "aggregate_survey_participations",
+      "desc": "Compute statistics about survey participations",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_attendances",
+      "desc": "List attendance records",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_attendance_submissions",
+      "desc": "List attendance submissions",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_time_management_policies",
+      "desc": "List working time management policies",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_knowledge_base_files",
+      "desc": "List knowledge base files",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "search_knowledge_base",
+      "desc": "Search the knowledge base",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "list_helpdesk_collections",
+      "desc": "List helpdesk collections",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "search_helpdesk",
+      "desc": "Search helpdesk articles",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    },
+    {
+      "tool": "read_helpdesk_article",
+      "desc": "Read a helpdesk article",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.shapes.co/"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "The \"safest\" design: read-only server with permissions inherited from the user. The risks shift to confidentiality rather than actions: the AI sees sensitive HR data (examples mention \"gender breakdown\", birthdays, time-off balances).",
+      "src": "https://mcp.shapes.co/; https://shapes.co/mcp"
+    },
+    {
+      "type": "New design option",
+      "text": "Aggregating tools: the server computes statistics itself instead of giving the AI raw records.",
+      "src": "aggregate_* tools"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Third-party wrappers (Knit) with write rights exist in parallel with the official server; the research must distinguish the official server from intermediaries.",
+      "src": "https://getknit.dev/mcp-servers/shapes"
+    },
+    {
+      "type": "Other",
+      "text": "Closed code + OAuth: without a customer account a researcher cannot obtain even the tool descriptions.",
+      "src": "HTTP 401 on https://mcp.shapes.co/mcp"
+    }
+  ]
+}

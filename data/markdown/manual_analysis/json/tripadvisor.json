@@ -1,0 +1,145 @@
+{
+  "server": "tripadvisor",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-14",
+  "md_file": "12_tripadvisor.md",
+  "servers": {
+    "code_repo": "Not published",
+    "docs_used": "No official documentation; https://claude.com/connectors/tripadvisor (connector card); https://mcpservers.org/remote-mcp-servers/tripadvisor (third-party catalogue)",
+    "open_eq_deployed": "Unknown",
+    "mcp_version": "Not published",
+    "commit_hash": "Not applicable (closed code)",
+    "commit_date": "Documentation snapshot 2026-10-14",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Proprietary",
+    "access": "Unknown",
+    "server_cost": "No price given; connector available in Claude (web, desktop, mobile, Code, API)",
+    "linked_sw": "Unknown",
+    "linked_cost": "Tripadvisor is free for travellers",
+    "pricing": "Not documented",
+    "restrictions": "Endpoint returns 403 without sign-in (CSV); authorization method not documented",
+    "restricted_by": "Unknown",
+    "governance_logic": "Clarification of ambiguous places before searching; read only, no booking; everything else not documented.",
+    "structure": "Standard",
+    "structure_note": "According to the available information; hosted on a separate platform (\"ai-mcp-extensibility\" on tamg.cloud) behind mcp.tripadvisor.ai",
+    "actions_comment": "Not published; 4 functions according to the description (hotel search, hotel details, prices and availability, places nearby)",
+    "tokens": "Cannot be determined",
+    "token_method": "Tool list not published",
+    "agent_cannot": "Book; work with restaurants and attractions (hotels only); write reviews; manage Trips.",
+    "docs_recs": "None (practically no documentation)",
+    "gov_promises": "Practically none; the privacy policy in the connector card is the 2019 version.",
+    "user_promises": "\"Find your perfect hotel based on Tripadvisor reviews\", \"ground accommodation planning in real-time data and other travelers' opinions\"",
+    "promises_vs_logic": "Cannot be compared (no documentation, closed code)",
+    "sources": "https://claude.com/connectors/tripadvisor\nhttps://mcpservers.org/remote-mcp-servers/tripadvisor",
+    "notes": "CSV has no documentation link. The catalogue gives a different address: https://production.ai-mcp-extensibility-prd.tamg.cloud/ogMvjY4De1G7CiHanMOAgddl/mcp (tamg = TripAdvisor Media Group). Unofficial tripadvisor-mcp servers on GitHub (pab1it0, hhw67865) not included. Support: TripadvisorDataSupport@tripadvisor.com."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "Read only (\"Read (listed as read-only)\", \"Interactive\"): hotel search in an area; details, photos, reviews, ratings, availability, prices, places nearby; tools work with location/hotel IDs",
+      "pre": "Not published",
+      "post": "Not documented",
+      "src": "https://claude.com/connectors/tripadvisor"
+    },
+    "Resources": {
+      "impl": "Unknown"
+    },
+    "Prompts": {
+      "impl": "Unknown"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Unknown",
+      "desc": "Not documented; OAuth metadata not available"
+    },
+    "Elicitation": {
+      "impl": "Unknown",
+      "desc": "Elicitation-like behaviour according to the description: for an ambiguous place (\"Springfield\") the connector asks for clarification before searching; mechanism not stated",
+      "src": "https://claude.com/connectors/tripadvisor"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Unknown"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "\"Interactive\" label on the connector card - probably an interactive interface (MCP Apps?) in the client window",
+      "src": "https://claude.com/connectors/tripadvisor"
+    }
+  },
+  "actions": [
+    {
+      "tool": "Not published (hotel search)",
+      "desc": "Search for hotels in an area (asks for clarification of ambiguous place names)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (works with location/hotel IDs)",
+      "n_params": "Unknown",
+      "src": "https://claude.com/connectors/tripadvisor; https://mcpservers.org/remote-mcp-servers/tripadvisor"
+    },
+    {
+      "tool": "Not published (hotel details)",
+      "desc": "Get hotel details: photos, reviews, ratings",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (works with location/hotel IDs)",
+      "n_params": "Unknown",
+      "src": "https://claude.com/connectors/tripadvisor; https://mcpservers.org/remote-mcp-servers/tripadvisor"
+    },
+    {
+      "tool": "Not published (prices and availability)",
+      "desc": "Get hotel prices and availability",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (works with location/hotel IDs)",
+      "n_params": "Unknown",
+      "src": "https://claude.com/connectors/tripadvisor; https://mcpservers.org/remote-mcp-servers/tripadvisor"
+    },
+    {
+      "tool": "Not published (places nearby)",
+      "desc": "Find places near a hotel",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (works with location/hotel IDs)",
+      "n_params": "Unknown",
+      "src": "https://claude.com/connectors/tripadvisor; https://mcpservers.org/remote-mcp-servers/tripadvisor"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Other",
+      "text": "Minimal transparency: an official server without documentation; the address from the CSV is a facade over hosting on another domain.",
+      "src": "CSV; mcpservers.org"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "A server in the vendor's interest: results rely on Tripadvisor ratings and reviews; how hotels are ranked (incl. possible paid placements) is not described.",
+      "src": "https://claude.com/connectors/tripadvisor"
+    }
+  ]
+}

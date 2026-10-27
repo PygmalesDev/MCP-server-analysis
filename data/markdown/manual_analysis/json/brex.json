@@ -1,0 +1,516 @@
+{
+  "server": "brex",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-15",
+  "md_file": "13_brex.md",
+  "servers": {
+    "code_repo": "Not published",
+    "docs_used": "https://developer.brex.com/docs/mcp (from CSV)",
+    "open_eq_deployed": "Unknown",
+    "mcp_version": "Not published",
+    "commit_hash": "Not applicable (closed code)",
+    "commit_date": "Documentation snapshot 2026-10-15",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Proprietary",
+    "access": "Free",
+    "server_cost": "No separate price; requires the Developer API agreement accepted by an admin and the beta \"Brex in AI assistants\" enabled",
+    "linked_sw": "Freemium",
+    "linked_cost": "Essentials $0/user/month; Premium $12; Enterprise and Smart Card on request",
+    "pricing": "Per-user plans",
+    "restrictions": "Account or card admin accepts the Developer API agreement and enables the beta; access = the user's Brex capabilities; some tools need separate rights (viewing expenses, bills, accounting ...); brex-analytics admins only. Beta: tools \"may change\". Rate limits not documented.",
+    "restricted_by": "Brex administrator (agreement, beta, roles), Brex",
+    "governance_logic": "1) Every tool requires its own capability; without it the tool does not work. 2) Card PAN, CVV and expiry hidden at server level. 3) Money operations excluded (\"approvals and card management are not yet available via MCP\") - but write scopes cards and expenses.bill exist. 4) Tool deprecation (query_expense_analytics -> brex-analytics). 5) No server-side confirmation declared; recommended in the client.",
+    "structure": "Standard",
+    "structure_note": "Standard; brex-analytics is an analytical \"super-tool\" for admins (free-form questions about expenses, banking, accounting)",
+    "actions_comment": "Docs: 44 active + 1 deprecated (query_expense_analytics). The tool table in the manual analysis lists 43 active names + the deprecated one.",
+    "tokens": "Cannot be determined",
+    "token_method": "Descriptions not published",
+    "agent_cannot": "Approve expenses; issue or block cards, change limits; pay bills and make transfers; see card details.",
+    "docs_recs": "Configure confirmation before actions in the assistant; prefer OAuth; use restricted tokens; keep tokens in environment variables; review the API logs in the dashboard.",
+    "gov_promises": "PAN/CVV/expiry not disclosed; rights = the user's capabilities. Nothing about data storage or use by the AI provider.",
+    "user_promises": "Not stated beyond the tool list (beta)",
+    "promises_vs_logic": "\"Card management not available\" does not match the write scope cards - either requested in advance or the documentation is behind.",
+    "sources": "https://developer.brex.com/docs/mcp\nhttps://api.brex.com/.well-known/oauth-protected-resource/mcp\nhttps://www.brex.com/pricing",
+    "notes": "Endpoint https://api.brex.com/mcp (beta). OAuth scopes are broader than the documented tools (cards, expenses.bill)."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "44 tools (+1 deprecated), mostly reading; writing: expense memos (bulk), receipts by URL, expense attendees, assigning expenses to a limit, feedback",
+      "pre": "Not published",
+      "post": "Card number, CVV and expiry not returned, only metadata (name, status, limits); exports asynchronous: start_expense_download -> get_expense_download_result (URL)",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    "Resources": {
+      "impl": "Unknown"
+    },
+    "Prompts": {
+      "impl": "Unknown"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "(1) OAuth (recommended): metadata document, DCR (RFC 7591); sessions viewable and revocable (Settings -> Personal settings -> Connected integrations). (2) API token (admins) as Bearer, restricted tokens recommended. Scopes: openid, offline_access, email, users.readonly, departments.readonly, locations.readonly, titles.readonly, legal_entities.readonly, cards.readonly, cards, companies.readonly, budgets.readonly, travel.trips.readonly, expenses.card.readonly, expenses.card, expenses.bill, accounts.cash.readonly, vendors.readonly, accounting.integration.read, accounting.record.read, fields.read, field_values.read",
+      "auth_mech": "Several methods",
+      "auth_server": "https://accounts-api.brex.com/oauth2/default (metadata also lists https://api.brex.com)",
+      "src": "https://developer.brex.com/docs/mcp; https://api.brex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Partially",
+      "desc": "Own implementation: asynchronous expense export with two tools (not MCP Tasks)",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    "Configuration": {
+      "impl": "Unknown"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Unknown"
+    }
+  },
+  "actions": [
+    {
+      "tool": "get_user_myself",
+      "desc": "Get the current user [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_user_by_id",
+      "desc": "Get user by id [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_users_by_name_or_email",
+      "desc": "List users by name or email [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_users",
+      "desc": "List users [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_cost_centers",
+      "desc": "List cost centers [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_departments",
+      "desc": "List departments [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_locations",
+      "desc": "List locations [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_legal_entities",
+      "desc": "List legal entities [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_titles",
+      "desc": "List titles [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_roles",
+      "desc": "List roles [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "update_expense_memo",
+      "desc": "Update the memo of expenses (also in bulk) [right: All users]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "upload_card_expense_receipt_from_urls",
+      "desc": "Attach receipts to a card expense from URLs [right: All users]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "replace_attendees_for_card_expense",
+      "desc": "Replace the attendees of a card expense [right: All users]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "assign_limit_for_card_expenses",
+      "desc": "Assign card expenses to a limit [right: All users]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_reimbursement_payout_date",
+      "desc": "Get reimbursement payout date [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_expense_download_result",
+      "desc": "Get the result (URL) of an expense export [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_merchants",
+      "desc": "List merchants [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_merchant_categories",
+      "desc": "List merchant categories [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_expense_categories",
+      "desc": "List expense categories [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_cards",
+      "desc": "List cards (metadata only) [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_my_limits",
+      "desc": "List my limits [right: All users]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "submit_feedback",
+      "desc": "Send feedback to Brex [right: All users]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_expenses",
+      "desc": "List expenses [right: View expenses]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_expense_by_id",
+      "desc": "Get expense by id [right: View expenses]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "start_expense_download",
+      "desc": "Start an asynchronous expense export [right: View expenses]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_reward_points",
+      "desc": "Get reward points [right: Rewards]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_card_by_id",
+      "desc": "Get card metadata (no PAN, CVV or expiry) [right: Cards and limits]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_expense_policy",
+      "desc": "Get expense policy [right: Policy]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_business_accounts",
+      "desc": "List business accounts [right: Accounts and balances]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_business_account",
+      "desc": "Get business account [right: Accounts and balances]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_banking_transactions",
+      "desc": "List banking transactions [right: Accounts and balances]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_banking_transaction",
+      "desc": "Get banking transaction [right: Accounts and balances]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_bills",
+      "desc": "List bills [right: Vendor bills]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_bill_by_id",
+      "desc": "Get bill by id [right: Vendor bills]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_vendor_by_id",
+      "desc": "Get vendor by id [right: Vendor bills]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_vendors",
+      "desc": "List vendors [right: All vendors]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "get_active_integration",
+      "desc": "Get active integration [right: Accounting]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_accounting_records",
+      "desc": "List accounting records [right: Accounting]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_gl_accounts",
+      "desc": "List gl accounts [right: Accounting]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_trips",
+      "desc": "List trips [right: Travel]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_bookings",
+      "desc": "List bookings [right: Travel]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "list_group_events",
+      "desc": "List group events [right: Travel]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "brex-analytics",
+      "desc": "Free-form analytical questions about expenses, banking, accounting (admins only) [right: Admins only]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "tool": "query_expense_analytics",
+      "desc": "Expense analytics (deprecated in favour of brex-analytics) [right: Admins only]",
+      "type": "Read",
+      "default": "No",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://developer.brex.com/docs/mcp"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "A financial server \"with spare rights\": the OAuth scopes are broader than the documented tools.",
+      "src": "https://api.brex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Hiding of sensitive card fields - like GoCardless's masking.",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "type": "New design option",
+      "text": "A separate analytical \"agent tool\" for admins (brex-analytics): free-form questions instead of fixed queries.",
+      "src": "https://developer.brex.com/docs/mcp"
+    },
+    {
+      "type": "Other",
+      "text": "Two access mechanisms (OAuth and API token) with different recommendations.",
+      "src": "https://developer.brex.com/docs/mcp"
+    }
+  ]
+}

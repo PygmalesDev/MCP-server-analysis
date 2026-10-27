@@ -1,0 +1,131 @@
+{
+  "server": "recurly",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-16",
+  "md_file": "19_recurly.md",
+  "servers": {
+    "code_repo": "Not published",
+    "docs_used": "https://docs.recurly.com/docs/compass-public-mcp-server (from CSV)",
+    "open_eq_deployed": "Unknown",
+    "mcp_version": "Not published",
+    "commit_hash": "Not applicable (closed code)",
+    "commit_date": "Documentation snapshot 2026-10-16",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Proprietary",
+    "access": "Unknown",
+    "server_cost": "No separate price; early access only, \"available on all Recurly subscription plans at general release\"",
+    "linked_sw": "Paid",
+    "linked_cost": "Starter $249/month + 0.9% of billing volume (first $40K per month free); All-Access from <1% (minimum $1M volume); Engage from $1,600/month; RevRec from $850/month",
+    "pricing": "Monthly fee + percentage of billing volume",
+    "restrictions": "Recurly site with the MCP feature flag enabled and rights on the site; tokens expire after 30 days; early access only",
+    "restricted_by": "Recurly (feature flag, early access)",
+    "governance_logic": "The server is a facade for the vendor's own AI agents (Knowledge Agent, Coding Agent) - \"exposes Recurly's agents to compatible AI tools\". Site-level feature flag controls early access. The Cursor example lists both tools in autoApprove (no confirmation).",
+    "structure": "Non-standard",
+    "structure_note": "Thin MCP facade over internal vendor AI agents (each tool = one agent)",
+    "actions_comment": "2 tools",
+    "tokens": "Cannot be determined (small with 2 tools)",
+    "token_method": "Full tools/list not published",
+    "agent_cannot": "Any operations with account data: subscribers, subscriptions, invoices, payments, plans, reports (neither reading nor writing documented).",
+    "docs_recs": "None; the autoApprove example effectively recommends turning off confirmation.",
+    "gov_promises": "Not described; sign-in requires a Recurly account with site rights although the tools only work with documentation.",
+    "user_promises": "Brings \"Recurly knowledge\" into developer tools",
+    "promises_vs_logic": "Cannot be compared (closed code)",
+    "sources": "https://docs.recurly.com/docs/compass-public-mcp-server\nhttps://mcp.recurly.com/.well-known/oauth-protected-resource\nhttps://recurly.com/pricing/",
+    "notes": "Endpoint https://mcp.recurly.com/mcp (Streamable HTTP). Tool descriptions quoted in the documentation."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "2 tools, each an interface to a Recurly agent: docs_search (Knowledge Agent), api_reference_search (Coding Agent)",
+      "pre": "docs_search: \"Searches Recurly's documentation knowledge base to answer questions and surface relevant content\"; api_reference_search: \"Provides code examples, parameter references, library guidance, and explanations to help you get code running faster\" (quoted in the docs; match with tools/list not verifiable)",
+      "post": "Not documented",
+      "src": "https://docs.recurly.com/docs/compass-public-mcp-server"
+    },
+    "Resources": {
+      "impl": "Unknown"
+    },
+    "Prompts": {
+      "impl": "Unknown"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "OAuth (Recurly sign-in); protected resource metadata published; scope mcp:tools; tokens expire after 30 days",
+      "auth_mech": "Metadata Doc",
+      "auth_server": "https://oauth.recurly.com",
+      "src": "https://mcp.recurly.com/.well-known/oauth-protected-resource"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Unknown"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Unknown"
+    }
+  },
+  "actions": [
+    {
+      "tool": "docs_search",
+      "desc": "Search the Recurly documentation (Knowledge Agent)",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published (probably the question text)",
+      "n_params": "Unknown",
+      "src": "https://docs.recurly.com/docs/compass-public-mcp-server"
+    },
+    {
+      "tool": "api_reference_search",
+      "desc": "API reference, code examples and library guidance (Coding Agent)",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://docs.recurly.com/docs/compass-public-mcp-server"
+    }
+  ],
+  "observations": [
+    {
+      "type": "New design option",
+      "text": "\"An agent behind the tool\": MCP is a thin wrapper around the vendor's internal AI agents (like Braze's Operator); the external AI talks to the internal one.",
+      "src": "https://docs.recurly.com/docs/compass-public-mcp-server"
+    },
+    {
+      "type": "Other",
+      "text": "Authorization broader than necessary: reading public documentation requires sign-in to an account with site rights - possibly groundwork for future data tools.",
+      "src": "https://docs.recurly.com/docs/compass-public-mcp-server"
+    },
+    {
+      "type": "New design option",
+      "text": "Early access via a feature flag - the vendor opens the feature gradually.",
+      "src": "https://docs.recurly.com/docs/compass-public-mcp-server"
+    }
+  ]
+}

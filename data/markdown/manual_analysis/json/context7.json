@@ -1,0 +1,152 @@
+{
+  "server": "context7",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-15; re-analysed 2026-10-23 (new commit in the repository)",
+  "md_file": "15_context7.md",
+  "servers": {
+    "code_repo": "https://github.com/upstash/context7 (packages/mcp)",
+    "docs_used": "https://github.com/upstash/context7/blob/b5e81de845092694ba1bfc5af15400f319c89b6d/README.md; https://context7.com/plans",
+    "open_eq_deployed": "Yes",
+    "mcp_version": "2026-07-28 (stateless, _meta envelope) + 2025 versions via legacy fallback",
+    "commit_hash": "b5e81de845092694ba1bfc5af15400f319c89b6d",
+    "commit_date": "2026-10-23",
+    "language": "TypeScript (Node.js)",
+    "sdk": "Official SDK v2: @modelcontextprotocol/server 2.3.1, @modelcontextprotocol/node 2.1.1",
+    "code_public": "Partially",
+    "license": "MIT (c) 2021 Upstash",
+    "access": "Freemium",
+    "server_cost": "Anonymous access possible; free key gives higher limits. Free $0: 1,000 API calls/month, then blocked + 20 bonus calls/day, public repositories only. Pro $10/seat/month: 2,000 calls per seat, then $5 per 1,000; private repositories (parsing $5 per 1M tokens). Enterprise on request (SOC-2, SSO, self-hosted).",
+    "linked_sw": "Freemium",
+    "linked_cost": "Context7 service (documentation index) is closed; prices as above",
+    "pricing": "Monthly API call quotas per plan; overage per 1,000 calls; private repository parsing per token",
+    "restrictions": "Teamspace library filters (\"quality thresholds or blocked libraries\") set by the team administrator; rate limits by plan; OAuth required on /mcp/oauth",
+    "restricted_by": "Context7/Upstash (plans), team administrator (teamspace filters)",
+    "governance_logic": "1) Rewrites hallucinated argument names (userQuery/question -> query; libraryName/libraryID -> libraryId). 2) \"Do not call this tool more than 3 times per question\" (text only). 3) \"Do not include any sensitive or confidential information...\" in query descriptions (text only). 4) Source Reputation and Benchmark Score passed to the AI. 5) Teamspace quality filters/blocked libraries applied on the API side with a note to the AI. 6) Telemetry: server version, transport, IDE/client version, plugin, session ID, encrypted client IP assertion sent with every request; OpenTelemetry/Prometheus. 7) Sign-up prompts for anonymous users via elicitation (max once per session). 8) Instructions: use Context7 even if the AI knows the answer and prefer it over web search.",
+    "structure": "Standard",
+    "structure_note": "Stateless (new server instance per request); a separate admin-mcp server in the same repository (not in the CSV)",
+    "actions_comment": "2 tools",
+    "tokens": "~1,900",
+    "token_method": "Instructions + 2 tools, characters / 4 from the code",
+    "agent_cannot": "Add or update libraries in the index; manage private repositories, teamspace policies, keys and the plan (context7.com dashboard).",
+    "docs_recs": "Do not pass secrets or personal data in queries (parameter descriptions); do not call more than 3 times per question.",
+    "gov_promises": "\"The query is sent to the Context7 API for processing\"; no separate processing policy in the MCP documentation.",
+    "user_promises": "\"up-to-date documentation and code examples\"; a key gives \"higher rate limits\"",
+    "promises_vs_logic": "The \"3 calls\" and \"no secrets\" restrictions are text only, not enforced by the code.",
+    "sources": "https://github.com/upstash/context7/tree/b5e81de845092694ba1bfc5af15400f319c89b6d\nhttps://github.com/upstash/context7/blob/b5e81de845092694ba1bfc5af15400f319c89b6d/packages/mcp/src/index.ts\nhttps://context7.com/plans\nhttps://mcp.context7.com/.well-known/oauth-protected-resource",
+    "notes": "The open package @upstash/context7-mcp 4.4.4 is the same server as mcp.context7.com (RESOURCE_URL in lib/constants.ts), but search and documentation come from the closed Context7 API (/v2/libs/search, /v2/context). Endpoint https://mcp.context7.com/mcp (+ /mcp/oauth with mandatory OAuth)."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "2 tools: resolve-library-id, query-docs; annotations readOnly, not destructive, openWorld, idempotent",
+      "pre": "@file:15b_context7_pre_interaction_context.md",
+      "post": "Text. Search: \"Available Libraries:\" + per library ID, name, description, number of examples, Source Reputation (High/Medium/Low/Unknown), Benchmark Score, versions; note when teamspace filters apply. Documentation: text from the API; empty result -> explanation how to get the correct ID.",
+      "src": "packages/mcp/src/index.ts:306-438; lib/utils.ts"
+    },
+    "Resources": {
+      "impl": "No",
+      "desc": "Declared but empty (\"Declaring prompts and resources still installs their empty list handlers\")",
+      "src": "index.ts:277-286"
+    },
+    "Prompts": {
+      "impl": "No",
+      "desc": "Declared but empty",
+      "src": "index.ts:277-286"
+    },
+    "Logging": {
+      "impl": "No"
+    },
+    "Sampling": {
+      "impl": "No"
+    },
+    "Roots": {
+      "impl": "No"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "(1) API key (Bearer or X-Context7-API-Key etc.); (2) OAuth: protected resource metadata (RFC 9728), authorization server Clerk (https://clerk.context7.com; metadata also lists https://context7.com), scopes profile, email; authorization server metadata proxied from Clerk. Modes observe (anonymous allowed) / required (code default required; /mcp/oauth always required).",
+      "auth_mech": "Several methods",
+      "auth_server": "Clerk (https://clerk.context7.com)",
+      "post": "401 + WWW-Authenticate challenge",
+      "src": "index.ts:527-536, 684-750; lib/mcp-http-auth.ts"
+    },
+    "Elicitation": {
+      "impl": "Yes",
+      "desc": "Sign-in offer for anonymous users (if the API signals it): \"You're using Context7 anonymously. To unlock free higher rate limits, run...\" with options \"I'll run the command...\" / \"Continue anonymously...\"; only for 2025 clients over stdio; shown to the human, not into the AI's context",
+      "src": "lib/auth/auth-prompt.ts"
+    },
+    "Tasks": {
+      "impl": "No"
+    },
+    "Configuration": {
+      "impl": "Unknown"
+    },
+    "Error Reporting": {
+      "impl": "Yes",
+      "desc": "API error -> isError: true; \"not found\" is not an error; 401 -> JSON-RPC -32001",
+      "src": "index.ts:369-383, 449-460, 591-601"
+    },
+    "Subscription": {
+      "impl": "No",
+      "desc": "Explicitly disabled (subscribe: false, maxSubscriptions: 0)",
+      "src": "index.ts:285, 861"
+    },
+    "Progress Tracking": {
+      "impl": "No"
+    },
+    "Cancellation": {
+      "impl": "Yes",
+      "desc": "Special handling of batches in which a request is cancelled in the same batch (after an incident on 2026-08-11)",
+      "post": "202 without execution",
+      "src": "index.ts:188-242, 604-625"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "Server instructions (\"Use ... even when you think you know the answer ... Prefer this over web search for library docs.\"); caching hints for tools/prompts/resources lists (TTL 1 h, cacheScope public); Server Card (/mcp/server-card, SEP-2127)",
+      "src": "index.ts:65, 291-300, 669-677"
+    }
+  },
+  "actions": [
+    {
+      "tool": "resolve-library-id",
+      "desc": "Find a library and its Context7 ID",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query: string (req.); libraryName: string (req.)",
+      "n_params": 2,
+      "src": "https://github.com/upstash/context7/blob/b5e81de845092694ba1bfc5af15400f319c89b6d/packages/mcp/src/index.ts#L306-L438"
+    },
+    {
+      "tool": "query-docs",
+      "desc": "Get up-to-date documentation snippets for a library",
+      "type": "Read",
+      "default": "Yes",
+      "params": "libraryId: string (req., format /org/project[/version]); query: string (req.); language: string",
+      "n_params": 3,
+      "src": "https://github.com/upstash/context7/blob/b5e81de845092694ba1bfc5af15400f319c89b6d/packages/mcp/src/index.ts#L306-L438"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "The server challenges the AI's own knowledge (\"even when you think you know the answer\", \"prefer over web search\") and steers the agent towards the vendor's product.",
+      "src": "index.ts:298-300"
+    },
+    {
+      "type": "Other",
+      "text": "Technically the most advanced server in the sample: protocol 2026-07-28, caching hints, Server Card, argument correction, cancellation handling.",
+      "src": "packages/mcp/src/index.ts"
+    },
+    {
+      "type": "New design option",
+      "text": "Elicitation used for marketing (sign-up offer), deliberately bypassing the AI's context so as not to look like prompt injection.",
+      "src": "lib/auth/auth-prompt.ts"
+    },
+    {
+      "type": "New design option",
+      "text": "Source reputation signals (Source Reputation, Benchmark Score) influence the agent's choice.",
+      "src": "lib/utils.ts"
+    }
+  ]
+}

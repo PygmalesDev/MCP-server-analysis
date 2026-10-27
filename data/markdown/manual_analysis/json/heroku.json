@@ -1,0 +1,451 @@
+{
+  "server": "heroku",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-15",
+  "md_file": "16_heroku.md",
+  "servers": {
+    "code_repo": "https://github.com/heroku/heroku-mcp-server (local stdio server; the remote server at the CSV endpoint is closed)",
+    "docs_used": "https://devcenter.heroku.com/articles/heroku-mcp-server (from CSV); https://devcenter.heroku.com/articles/heroku-remote-mcp-server; https://www.heroku.com/blog/heroku-remote-mcp-server/",
+    "open_eq_deployed": "No",
+    "mcp_version": "Local: @modelcontextprotocol/sdk 1.32.1 (TypeScript SDK v1, up to 2025-11-25); remote: not published",
+    "commit_hash": "4afcbe1a042b78e81385280ac5adaeb0000dba6e",
+    "commit_date": "2026-10-12",
+    "language": "TypeScript",
+    "sdk": "@modelcontextprotocol/sdk 1.32.1 (official, McpServer class)",
+    "code_public": "Partially",
+    "license": "Apache 2.0 (local, (c) 2025 Heroku); remote closed",
+    "access": "Free",
+    "server_cost": "Free (Apache 2.0 code; remote: no price given)",
+    "linked_sw": "Paid",
+    "linked_cost": "No free plan: Eco dyno $5/month (sleeps), Basic $7, Standard-1X $25, Performance-M $250; Postgres Essential-0 $5/month",
+    "pricing": "Pay per dyno and add-on",
+    "restrictions": "Rights = the Heroku account's rights (local: CLI token / HEROKU_API_KEY; remote: OAuth). Local: Heroku CLI >= 10.8.1. Remote in Claude Team/Enterprise: only users with the permission can add the server. Status: \"currently in early development\".",
+    "restricted_by": "Heroku (account rights)",
+    "governance_logic": "1) Wrapper around the Heroku CLI in REPL mode; CLI restarted on timeout. 2) Error text tells the AI to \"Ignore any Heroku CLI command suggestions\" and use only MCP tools. 3) File path validation in deploy_one_off_dyno. 4) AI tools registered only with the plugin. 5) No restrictions on dangerous actions: pg_psql runs any SQL, pg_kill kills DB processes, pg_upgrade only has a confirm parameter filled by the AI; no read-only mode, no annotations. 6) Logging hook stub \"(not-implemented)\".",
+    "structure": "Standard",
+    "structure_note": "Flat; the local (open) and remote (closed) servers are different implementations",
+    "actions_comment": "Local: 36 (33 without the AI plugin). Docs list transfer_app, which is not in the code. Remote: not published (\"first set of tools\": apps, teams/spaces, add-on marketplace).",
+    "tokens": "~4,000 (local)",
+    "token_method": "~2,900 for descriptions + the app.json JSON schema embedded in deploy_to_heroku; characters / 4",
+    "agent_cannot": "Delete apps and add-ons; manage domains, config vars, collaborators, billing; roll back releases. The remote server started with an even smaller set.",
+    "docs_recs": "Use heroku mcp:start so as not to expose the API key. Nothing about confirming dangerous actions (SQL, scaling).",
+    "gov_promises": "Remote: \"enhanced security\", \"full control over which applications can access your resources\", consent to the tool set - no technical details.",
+    "user_promises": "\"Secure and authenticated access to Heroku Platform APIs\"",
+    "promises_vs_logic": "Security promises are general; the local code has no protection for dangerous tools (arbitrary SQL, pg_kill).",
+    "sources": "https://github.com/heroku/heroku-mcp-server/tree/4afcbe1a042b78e81385280ac5adaeb0000dba6e\nhttps://devcenter.heroku.com/articles/heroku-mcp-server\nhttps://devcenter.heroku.com/articles/heroku-remote-mcp-server\nhttps://www.heroku.com/blog/heroku-remote-mcp-server/\nhttps://mcp.heroku.com/.well-known/oauth-protected-resource\nhttps://mcp.heroku.com/.well-known/oauth-authorization-server\nhttps://www.heroku.com/pricing/",
+    "notes": "The CSV endpoint is the remote server (closed); the code analysis and the Actions sheet refer to the local server (package version 1.2.12). Actions generated from the appendix 16b; types derived from tool names (no annotations) and corrected by hand."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "Local: 36 tools (33 + 3 AI tools registered only with @heroku/plugin-ai); no annotations; capabilities.tools.listChanged: true. Remote: not published.",
+      "pre": "@file:16b_heroku_pre_interaction_context.md",
+      "post": "Heroku CLI text output as is; on error isError and the prefix \"[Heroku MCP Server Error] Please use available tools to resolve this issue. Ignore any Heroku CLI command suggestions ...\"",
+      "src": "src/index.ts:46-108; src/utils/handle-cli-output.ts"
+    },
+    "Resources": {
+      "impl": "Yes",
+      "desc": "heroku_dev_center -> loads https://devcenter.heroku.com/llms.txt",
+      "post": "Text",
+      "src": "src/resources/dev-center-resource.ts"
+    },
+    "Prompts": {
+      "impl": "No"
+    },
+    "Logging": {
+      "impl": "No",
+      "desc": "Not found; logging hook stub \"(not-implemented)\"",
+      "src": "src/index.ts:119-126"
+    },
+    "Sampling": {
+      "impl": "No"
+    },
+    "Roots": {
+      "impl": "No"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "Local: Heroku CLI token or HEROKU_API_KEY (no authorization to the MCP server itself). Remote: OAuth 2.0 via id.heroku.com; metadata documents; DCR (https://mcp.heroku.com/reg); grants authorization_code, refresh_token, device_code; PKCE S256; scopes openid, offline_access; the user can \"consent to which tools a client can access\".",
+      "auth_mech": "Dynamic Client Registration",
+      "auth_server": "https://mcp.heroku.com (sign-in via id.heroku.com)",
+      "src": "https://mcp.heroku.com/.well-known/oauth-protected-resource; https://mcp.heroku.com/.well-known/oauth-authorization-server; Heroku blog"
+    },
+    "Elicitation": {
+      "impl": "No"
+    },
+    "Tasks": {
+      "impl": "No"
+    },
+    "Configuration": {
+      "impl": "Yes",
+      "desc": "MCP_SERVER_REQUEST_TIMEOUT (15 s by default)",
+      "src": "src/index.ts:34-36"
+    },
+    "Error Reporting": {
+      "impl": "Yes",
+      "desc": "isError with the redirecting prefix; fatal CLI errors -> process exits",
+      "src": "src/index.ts:39-43; handle-cli-output.ts"
+    },
+    "Subscription": {
+      "impl": "No"
+    },
+    "Progress Tracking": {
+      "impl": "No"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Unknown"
+    }
+  },
+  "actions": [
+    {
+      "tool": "list_addons",
+      "desc": "List add-ons: all apps or specific app, detailed metadata",
+      "type": "Read",
+      "default": "Yes",
+      "params": "all: boolean; app: string",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/addons.ts#L36"
+    },
+    {
+      "tool": "get_addon_info",
+      "desc": "Get add-on details: plan, state, billing",
+      "type": "Read",
+      "default": "Yes",
+      "params": "addon: string (req.); app: string",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/addons.ts#L77"
+    },
+    {
+      "tool": "create_addon",
+      "desc": "Create add-on: specify service, plan, custom names",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string (req.); as: string; name: string; serviceAndPlan: string (req.)",
+      "n_params": 4,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/addons.ts#L115"
+    },
+    {
+      "tool": "list_addon_services",
+      "desc": "List available add-on services and features",
+      "type": "Read",
+      "default": "Yes",
+      "params": "json: boolean",
+      "n_params": 1,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/addons.ts#L157"
+    },
+    {
+      "tool": "list_addon_plans",
+      "desc": "List service plans: features, pricing, availability",
+      "type": "Read",
+      "default": "Yes",
+      "params": "service: string (req.); json: boolean",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/addons.ts#L194"
+    },
+    {
+      "tool": "list_ai_available_models",
+      "desc": "List available AI inference models (registered only if the @heroku/plugin-ai plugin is installed)",
+      "type": "Read",
+      "default": "No",
+      "params": "none",
+      "n_params": 0,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/ai.ts#L19"
+    },
+    {
+      "tool": "provision_ai_model",
+      "desc": "Provision AI model access for app (registered only if the @heroku/plugin-ai plugin is installed)",
+      "type": "Write",
+      "default": "No",
+      "params": "app: string (req.); modelName: string (req.); as: string",
+      "n_params": 3,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/ai.ts#L60"
+    },
+    {
+      "tool": "make_ai_inference",
+      "desc": "Make inference request to Heroku AI API (registered only if the @heroku/plugin-ai plugin is installed)",
+      "type": "Write",
+      "default": "No",
+      "params": "app: string (req.); modelResource: string (req.); json: boolean; output: string",
+      "n_params": 4,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/ai.ts#L164"
+    },
+    {
+      "tool": "list_apps",
+      "desc": "List Heroku apps: owned, collaborator access, team/space filtering",
+      "type": "Read",
+      "default": "Yes",
+      "params": "all: boolean; personal: boolean; space: string; team: string",
+      "n_params": 4,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/apps.ts#L32"
+    },
+    {
+      "tool": "get_app_info",
+      "desc": "Get app details: config, dynos, addons, access, domains",
+      "type": "Read",
+      "default": "Yes",
+      "params": "app: string (req.); json: boolean",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/apps.ts#L72"
+    },
+    {
+      "tool": "create_app",
+      "desc": "Create app: custom name, region (US/EU), team, private space",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string; region: enum[us, eu]; space: string; team: string",
+      "n_params": 4,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/apps.ts#L112"
+    },
+    {
+      "tool": "rename_app",
+      "desc": "Rename app: validate and update app name",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string (req.); newName: string (req.)",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/apps.ts#L152"
+    },
+    {
+      "tool": "pg_psql",
+      "desc": "Execute any SQL queries: analyze, debug, modify schema, manage data (no read-only mode)",
+      "type": "Mixed",
+      "default": "Yes",
+      "params": "command: string; file: string; credential: string; app: string (req.); database: string",
+      "n_params": 5,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L157"
+    },
+    {
+      "tool": "pg_info",
+      "desc": "View database status: config, metrics, resources, health",
+      "type": "Read",
+      "default": "Yes",
+      "params": "app: string (req.); database: string",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L185"
+    },
+    {
+      "tool": "pg_ps",
+      "desc": "Monitor active queries: progress, resources, performance",
+      "type": "Read",
+      "default": "Yes",
+      "params": "app: string (req.); verbose: boolean; database: string",
+      "n_params": 3,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L210"
+    },
+    {
+      "tool": "pg_locks",
+      "desc": "Analyze locks: blocked queries, deadlocks, concurrency",
+      "type": "Read",
+      "default": "Yes",
+      "params": "app: string (req.); truncate: boolean; database: string",
+      "n_params": 3,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L236"
+    },
+    {
+      "tool": "pg_outliers",
+      "desc": "Find resource-heavy queries: performance, patterns, optimization",
+      "type": "Read",
+      "default": "Yes",
+      "params": "app: string (req.); num: number; reset: boolean; truncate: boolean; database: string",
+      "n_params": 5,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L262"
+    },
+    {
+      "tool": "pg_credentials",
+      "desc": "Manage access: credentials, permissions, security, monitoring",
+      "type": "Mixed",
+      "default": "Yes",
+      "params": "app: string (req.); database: string",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L290"
+    },
+    {
+      "tool": "pg_kill",
+      "desc": "Stop processes: stuck queries, blocking transactions, runaway operations",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string (req.); pid: number (req.); force: boolean; database: string",
+      "n_params": 4,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L315"
+    },
+    {
+      "tool": "pg_maintenance",
+      "desc": "Track maintenance: windows, schedules, progress, planning",
+      "type": "Mixed",
+      "default": "Yes",
+      "params": "app: string (req.); database: string",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L344"
+    },
+    {
+      "tool": "pg_backups",
+      "desc": "Manage backups: schedules, status, verification, recovery",
+      "type": "Mixed",
+      "default": "Yes",
+      "params": "app: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L369"
+    },
+    {
+      "tool": "pg_upgrade",
+      "desc": "Upgrade PostgreSQL: version migration, compatibility, safety (only a confirm parameter filled in by the AI)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string (req.); version: string; confirm: string; database: string",
+      "n_params": 4,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/data.ts#L393"
+    },
+    {
+      "tool": "deploy_to_heroku",
+      "desc": "Deploy an app to Heroku (\"Use for all deployments.\"; the description embeds the app.json JSON schema)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "name: string (req.); rootUri: string (req.); tarballUri: string; teamId: string; spaceId: string; internalRouting: boolean; env: record; appJson: string (req.)",
+      "n_params": 8,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/deploy-to-heroku.ts#L642"
+    },
+    {
+      "tool": "get_app_logs",
+      "desc": "App logs: monitor/debug/filter by dyno/process/source",
+      "type": "Read",
+      "default": "Yes",
+      "params": "app: string (req.); dynoName: string; source: string; processType: string",
+      "n_params": 4,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/logs.ts#L32"
+    },
+    {
+      "tool": "maintenance_on",
+      "desc": "Enable maintenance mode and redirect traffic for a Heroku app",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/maintenance.ts#L32"
+    },
+    {
+      "tool": "maintenance_off",
+      "desc": "Disable maintenance mode and restore normal app operations",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string (req.)",
+      "n_params": 1,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/maintenance.ts#L57"
+    },
+    {
+      "tool": "pipelines_create",
+      "desc": "Creates new Heroku deployment pipeline with configurable stages, apps, and team settings",
+      "type": "Write",
+      "default": "Yes",
+      "params": "name: string (req.); stage: enum[development, staging, production] (req.); app: string; team: string",
+      "n_params": 4,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/pipelines.ts#L67"
+    },
+    {
+      "tool": "pipelines_promote",
+      "desc": "Promotes apps between pipeline stages with configurable target applications",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string (req.); to: string",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/pipelines.ts#L94"
+    },
+    {
+      "tool": "pipelines_list",
+      "desc": "Lists accessible Heroku pipelines with ownership and configuration details",
+      "type": "Read",
+      "default": "Yes",
+      "params": "json: boolean",
+      "n_params": 1,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/pipelines.ts#L119"
+    },
+    {
+      "tool": "pipelines_info",
+      "desc": "Displays detailed pipeline configuration, stages, and connected applications",
+      "type": "Read",
+      "default": "Yes",
+      "params": "pipeline: string (req.); json: boolean",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/pipelines.ts#L143"
+    },
+    {
+      "tool": "ps_list",
+      "desc": "List and monitor Heroku app dynos.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "app: string (req.); json: boolean",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/ps.ts#L54"
+    },
+    {
+      "tool": "ps_scale",
+      "desc": "Scale Heroku app dynos.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string (req.); dyno: string",
+      "n_params": 2,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/ps.ts#L79"
+    },
+    {
+      "tool": "ps_restart",
+      "desc": "Restart Heroku app processes.",
+      "type": "Write",
+      "default": "Yes",
+      "params": "app: string",
+      "n_params": 1,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/ps.ts#L104"
+    },
+    {
+      "tool": "list_private_spaces",
+      "desc": "Lists Heroku Private Spaces with CIDR blocks, regions, compliance and capacity details.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "json: boolean",
+      "n_params": 1,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/spaces.ts#L33"
+    },
+    {
+      "tool": "list_teams",
+      "desc": "Lists accessible Heroku Teams.",
+      "type": "Read",
+      "default": "Yes",
+      "params": "json: boolean",
+      "n_params": 1,
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/teams.ts#L39"
+    },
+    {
+      "tool": "deploy_one_off_dyno",
+      "desc": "Run code/commands in a Heroku one-off dyno (paths validated: no .., no absolute paths, no shell metacharacters)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "name: string, 5-30 chars (req.); command: string (req.); sources: array of {relativePath, contents}; further parameters see deploy-to-heroku.ts:680",
+      "n_params": "Unknown",
+      "src": "https://github.com/heroku/heroku-mcp-server/blob/4afcbe1a042b78e81385280ac5adaeb0000dba6e/src/tools/deploy-to-heroku.ts#L749"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "Dangerous tools without protection: arbitrary SQL in the production database and killing processes - no annotations, no read-only mode, no server-side confirmation. Sharp contrast with Grafana, where raw SQL is disabled in read-only mode.",
+      "src": "16b_heroku_pre_interaction_context.md"
+    },
+    {
+      "type": "New design option",
+      "text": "A server as a wrapper around the CLI: the agent's capabilities are a subset of the CLI.",
+      "src": "src/repl/heroku-cli-repl.ts"
+    },
+    {
+      "type": "Other",
+      "text": "Divergence between documentation and code (transfer_app is documented but does not exist).",
+      "src": "https://devcenter.heroku.com/articles/heroku-mcp-server"
+    },
+    {
+      "type": "New design option",
+      "text": "Device code grant in the remote server's OAuth - sign-in without a browser on the same device.",
+      "src": "https://mcp.heroku.com/.well-known/oauth-authorization-server"
+    }
+  ]
+}

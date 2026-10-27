@@ -1,0 +1,459 @@
+{
+  "server": "airwallex",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-13",
+  "md_file": "07_airwallex.md",
+  "servers": {
+    "code_repo": "Server closed; plugins and skills: https://github.com/airwallex/airwallex-marketplace",
+    "docs_used": "https://www.airwallex.com/docs/developer-tools/ai/agentos (from CSV, incl. the .md version); https://www.airwallex.com/docs/developer-tools/ai/developer-connector.md",
+    "open_eq_deployed": "No",
+    "mcp_version": "Not published",
+    "commit_hash": "877551077786664d1cbeb32013443291c66e69e6 (skills repository; server not applicable)",
+    "commit_date": "2026-10-14",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Server proprietary; skills/plugins Apache 2.0",
+    "access": "Unknown",
+    "server_cost": "No separate price for MCP given",
+    "linked_sw": "Paid",
+    "linked_cost": "EU plans: Explore €0 (with deposits/balance >= €10,000/month, otherwise €19/month), Grow €49/month, Accelerate custom; FX markup 0.5% (major currencies) / 1% (others); Core API included in Explore, fees may apply for additional access",
+    "pricing": "Monthly plan + FX markups for the financial platform",
+    "restrictions": "OAuth to the production account with user-selected scopes (\"grant only the OAuth scopes your use case needs\"); no outgoing money operations (no write scopes for transfers/FX/payouts); Airwallex user rights and roles. Production only (sandbox is the separate Developer MCP). AgentOS skills are beta. Rate limits not documented.",
+    "restricted_by": "Airwallex (scope set, money-out ban), user (scopes at sign-in)",
+    "governance_logic": "1) Money-out ban at the level of rights: only read scopes for transfers and conversions (\"AgentOS components do not initiate money-out actions\"). 2) Writing tools annotated so that clients ask for confirmation (confirmation shown by the client). 3) Environment (production) declared in the server instructions. 4) Production only; sandbox is a separate server. 5) Rules in skills outside the server: never fabricate, stop and ask; name the environment and get explicit confirmation before irreversible operations; show the full payload before a write; \"Do not provide financial advice\"; CLI --dry-run -> confirm -> --confirm. 6) Feedback scope devx.feedback_write; skills tell the agent to offer feedback itself (with consent, no sensitive data).",
+    "structure": "Non-standard",
+    "structure_note": "Ecosystem of three separate servers by purpose and environment (AgentOS production / Developer sandbox / Docs) plus a common skills layer that works via MCP and CLI",
+    "actions_comment": "Exact number not published; reconstructed from OAuth scopes: 23 read and 12 write scopes (incl. feedback) + documentation search. The 12 tools in the Claude catalogue belong to the Developer MCP, not AgentOS.",
+    "tokens": "Cannot be determined",
+    "token_method": "Tool list not published",
+    "agent_cannot": "Transfers, payouts, currency exchange (dashboard only, \"FX conversion: Airwallex Dashboard only\"); get card number/CVV; delete a draft invoice, credit notes (CLI/dashboard only); work in the sandbox via AgentOS (needs the Developer MCP).",
+    "docs_recs": "Turn off auto-approval modes (\"Auto-Run\", \"Dangerously Skip Permissions\"); confirm writes in the Airwallex web or mobile app; treat untrusted documents and web pages as prompt injection risk and review every tool call; do not paste API tokens; new chat for sensitive tasks; use a frontier model; install only trusted MCP servers alongside; do not add the agent to shared channels (Slack); grant only the necessary scopes.",
+    "gov_promises": "\"AgentOS components do not initiate money-out actions\" (confirmed by scopes). Writing tools annotated for confirmation. No privacy section in the MCP docs (link to Terms of Service). \"Agent outputs are probabilistic\". Logging of agent actions not described.",
+    "user_promises": "Tools so that agents \"act on a production Airwallex account\"; support for Claude Code, Claude Cowork, Cursor, Codex and others",
+    "promises_vs_logic": "\"No money-out\" confirmed by public OAuth metadata (no write scopes for transfers and FX). Annotations and instructions cannot be verified without signing in.",
+    "sources": "https://www.airwallex.com/docs/developer-tools/ai/agentos\nhttps://www.airwallex.com/docs/developer-tools/ai/agentos.md\nhttps://www.airwallex.com/docs/developer-tools/ai/developer-connector.md\nhttps://github.com/airwallex/airwallex-marketplace/tree/877551077786664d1cbeb32013443291c66e69e6\nhttps://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp\nhttps://mcp.airwallex.com/.well-known/oauth-authorization-server/mcp\nhttps://www.airwallex.com/de/pricing\nhttps://www.airwallex.com/docs/developer-tools/partner-connections/oauth-permissions\nhttps://claude.com/marketplace/connectors/airwallex",
+    "notes": "Tool list not published anywhere (\"Discover tool names from your MCP client's tool list. Do not assume names\"); actions reconstructed from the OAuth scopes. Meaning of pa_view not published (probably Payment Acceptance)."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "Exact list not published. According to scopes - reading: balances, contacts/beneficiaries, conversions, global accounts, cardholders, cards, card transactions, pa_view, payment links, account details, transfers, billing (9 objects), expenses, vendor bills, vendors; writing: contacts, cardholders, cards, payment links, billing (7 objects), feedback; plus documentation search.",
+      "pre": "Not published; \"The server annotates write tools (create, update, or delete) so clients can prompt for confirmation\"",
+      "post": "Not documented",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp; agentos.md"
+    },
+    "Resources": {
+      "impl": "Unknown",
+      "desc": "Not documented; external skills instead of prompts"
+    },
+    "Prompts": {
+      "impl": "Unknown",
+      "desc": "Not documented; external skills instead"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "OAuth to the production account; metadata documents published; Dynamic Client Registration (registration_endpoint https://mcp.airwallex.com/mcp/register); grant types authorization_code, refresh_token; PKCE S256; client auth client_secret_post, client_secret_basic, private_key_jwt, none; 35 scopes (23 r:, 12 w:). Tokens refreshed automatically; a persistent 401 means the grant was revoked.",
+      "auth_mech": "Dynamic Client Registration",
+      "auth_server": "https://mcp.airwallex.com/mcp",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp; https://mcp.airwallex.com/.well-known/oauth-authorization-server/mcp; skills/awx-best-practices/SKILL.md"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Partially",
+      "desc": "Choice of scopes at authorization",
+      "src": "agentos docs"
+    },
+    "Error Reporting": {
+      "impl": "Unknown",
+      "desc": "Not documented (skills advise \"Show full error, ask user\")"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "Server instructions: \"The server declares its environment (sandbox vs production) in its instructions on connect\"; components \"explicitly instructed not to execute\" money-out operations (text not published)",
+      "src": "surface-quickstart.md; agentos.md"
+    }
+  },
+  "actions": [
+    {
+      "tool": "Not published (scope r:awx_action:balances_view)",
+      "desc": "View balances",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:contact_management_view)",
+      "desc": "View contacts / beneficiaries",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:conversions_view)",
+      "desc": "View currency conversions",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:global_accounts_view)",
+      "desc": "View global accounts",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:issuing_cardholders_view)",
+      "desc": "View cardholders",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:issuing_cards_view)",
+      "desc": "View cards",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:issuing_transactions_view)",
+      "desc": "View card transactions",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:pa_view)",
+      "desc": "View pa_view data (probably Payment Acceptance; meaning not published)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:payment_links_view)",
+      "desc": "View payment links",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:settings.account_details_view)",
+      "desc": "View account details",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:awx_action:transfers_view)",
+      "desc": "View transfers (read only; no write scope for transfers)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:billing.customer_view)",
+      "desc": "View billing customers",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:billing.discount_view)",
+      "desc": "View billing discounts",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:billing.invoice_view)",
+      "desc": "View invoices",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:billing.payment_source_view)",
+      "desc": "View payment methods",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:billing.price_view)",
+      "desc": "View prices",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:billing.product_view)",
+      "desc": "View products",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:billing.subscription_view)",
+      "desc": "View subscriptions",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:billing.transaction_view)",
+      "desc": "View billing transactions",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:billing.usage_metering_view)",
+      "desc": "View usage metering",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:expense_management.expense:api_view)",
+      "desc": "View expenses",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:spend.bills:api_view)",
+      "desc": "View vendor bills",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope r:org_action:spend.vendors:api_view)",
+      "desc": "View vendors",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:awx_action:contact_management_edit)",
+      "desc": "Create / change a beneficiary (contact)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:awx_action:devx.feedback_write)",
+      "desc": "Send feedback to the Airwallex developers (skills tell the agent to offer it)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:awx_action:issuing_cardholders_edit)",
+      "desc": "Create / change a cardholder",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:awx_action:issuing_cards_edit)",
+      "desc": "Issue, change, block or close a card (closing is \"Permanent\")",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:awx_action:payment_links_edit)",
+      "desc": "Create / change payment links",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:org_action:billing.customer_edit)",
+      "desc": "Create / change billing customers",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:org_action:billing.discount_edit)",
+      "desc": "Create / change discounts",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:org_action:billing.invoice_edit)",
+      "desc": "Create, finalize, void invoices, mark as paid",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:org_action:billing.price_edit)",
+      "desc": "Create / change prices",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:org_action:billing.product_edit)",
+      "desc": "Create / change products",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:org_action:billing.subscription_edit)",
+      "desc": "Create / change / cancel subscriptions",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (scope w:org_action:billing.usage_metering_edit)",
+      "desc": "Record usage metering",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "tool": "Not published (documentation search)",
+      "desc": "Search the Airwallex documentation",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (skills mention a mandatory request_id UUIDv4 for some tools)",
+      "n_params": "Unknown",
+      "src": "https://www.airwallex.com/docs/developer-tools/ai/agentos"
+    }
+  ],
+  "observations": [
+    {
+      "type": "New design option",
+      "text": "A restriction via OAuth scopes can be checked from outside without the code; a good objective indicator for comparing servers (collect /.well-known/oauth-protected-resource for all servers).",
+      "src": "https://mcp.airwallex.com/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Money operations are excluded by design - unlike GoCardless, where they are allowed with confirmation.",
+      "src": "agentos.md; OAuth scopes"
+    },
+    {
+      "type": "Other",
+      "text": "The most detailed set of agent security recommendations (prompt injection, frontier model, shared channels), but these are recommendations, not mechanisms.",
+      "src": "https://www.airwallex.com/docs/developer-tools/ai/agentos"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Behaviour rules and the ban on financial advice are in skills, outside the server.",
+      "src": "skills/awx-best-practices/SKILL.md"
+    },
+    {
+      "type": "New design option",
+      "text": "The agent is asked to initiate product feedback itself (with the user's consent).",
+      "src": "references/feedback.md"
+    },
+    {
+      "type": "New design option",
+      "text": "Separation by environment at the level of separate servers (production / sandbox / docs).",
+      "src": "developer-connector.md"
+    }
+  ]
+}

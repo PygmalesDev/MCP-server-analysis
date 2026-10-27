@@ -1,0 +1,495 @@
+{
+  "server": "lucid",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-13; re-analysed 2026-10-22 (new commit in the repository)",
+  "md_file": "05_lucid.md",
+  "servers": {
+    "code_repo": "https://github.com/lucidsoftware/lucid-mcp-server (skills and plugins only; the server code is closed)",
+    "docs_used": "https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server; https://community.lucid.co/product-questions-3/available-actions-with-the-lucid-mcp-server-13985; https://lucid.co/mcp-server",
+    "open_eq_deployed": "No",
+    "mcp_version": "Not published",
+    "commit_hash": "f3827e4cd2d449463350cd0d725e35d6d2ecd082 (skills repository; server code not applicable)",
+    "commit_date": "2026-10-22",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Server proprietary; skills/plugins repository MIT (c) 2026 Lucid Software, Inc.",
+    "access": "Freemium",
+    "server_cost": "No separate fee; available on Free, Individual, Team and Enterprise plans, not for FedRAMP accounts",
+    "linked_sw": "Freemium",
+    "linked_cost": "Lucidchart/Lucidspark proprietary SaaS with a free plan; exact prices could not be checked (pricing page needs JavaScript; manual check: https://lucid.app/pricing/lucidchart)",
+    "pricing": "Plan-based SaaS; API key access for Team/Enterprise marked as premium",
+    "restrictions": "Team/Enterprise: the administrator must enable MCP (Admin -> Security -> Feature controls / AI controls -> MCP access); enabling allows any AI client (cannot be limited to specific clients). The server sees all documents the user can access in their account, not other accounts. Reduced endpoints /readonly and /repositories. Not for FedRAMP.",
+    "restricted_by": "Lucid account administrator; Lucid (plans, FedRAMP); user (choice of endpoint)",
+    "governance_logic": "1) Different endpoints = different rights (/mcp/readonly, /mcp/repositories) instead of scopes. 2) Validation before action (lucid_validate_diagram_specification; creation tools require reading a reference resource first). 3) lucid_run_script: \"Changes are atomic and time-limited\". 4) lucid_submit_feedback sends feedback to Airfocus with user ID, account ID and client user agent. 5) Behaviour rules moved to skills outside the server (\"Confirm before destructive actions, bulk changes, broad permission changes, or anonymous share links\") - not enforced by the server. 6) Skill \"visualizations\" promotes Lucid over Mermaid/ASCII/Markdown tables. 7) Pass-through: no storage of documents, prompts or queries.",
+    "structure": "Non-standard",
+    "structure_note": "One service via three endpoints with different tool sets (full / read-only / repositories only), plus a separate layer of skills/plugins distributed outside the server.",
+    "actions_comment": "35 in Composio (2026-10-12), 30 in Scalekit; combined list 40 names; only lucid_submit_feedback officially confirmed. The set changes over time.",
+    "tokens": "Cannot be determined",
+    "token_method": "Descriptions not published; catalogues call them \"long\" with \"detailed usage rules\"",
+    "agent_cannot": "Create data-linked diagrams that update automatically; export to Visio (PNG only); create diagrams from templates, delete tabs (unconfirmed); access documents outside the own account; administer the account and user rights.",
+    "docs_recs": "Skill lucid: confirm deletion, bulk changes, permission changes and anonymous links; read the document before editing; do not invent IDs (instructions for the AI, not server checks). The Help Center gives no recommendations on human review. The API key is advertised for working without confirmations (\"no runtime approval prompt\").",
+    "gov_promises": "\"The server acts as a pass-through - it does not retain document content, user prompts, or queries. Your credentials are never shared outside your Lucid account\"; \"It cannot access documents owned or created by users outside your account\"; feedback goes to Airfocus with user/account ID \"only when the feedback tool is called\"; AI clients are \"Non-Lucid Applications\" governed by the AI provider contract.",
+    "user_promises": "\"Connect your AI tools to Lucid to intelligently search for files, create visuals, and share with your team\"; \"compatible with any MCP client\"; the action list in the community post is called \"exhaustive\"",
+    "promises_vs_logic": "\"Pass-through\" cannot be verified (closed code). The read-only endpoint is described, but its exact tool set is not named.",
+    "sources": "https://github.com/lucidsoftware/lucid-mcp-server/tree/f3827e4cd2d449463350cd0d725e35d6d2ecd082\nhttps://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server\nhttps://community.lucid.co/product-questions-3/available-actions-with-the-lucid-mcp-server-13985\nhttps://composio.dev/toolkits/lucid_mcp/framework/hermes-agent.md\nhttps://www.scalekit.com/connectors/lucidmcp",
+    "notes": "The CSV link points to a repository without server code (skills and plugin configs only). Tool names come from two third-party catalogues whose lists differ (35 vs 30). OAuth metadata could not be checked (robots.txt)."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "30-35 tools according to third-party catalogues (combined 40 names): reading, creating, editing, deleting shapes, sharing, comments, export, running JavaScript in a document (lucid_run_script, Scalekit only). Annotations not published. Separate read-only endpoint.",
+      "pre": "Not published verbatim; short paraphrases in Composio and Scalekit",
+      "post": "Not documented. Scalekit: search returns up to 200 results; fetch returns structured content (pages, blocks, lines); export_document_as_png returns a PNG image",
+      "src": "https://composio.dev/toolkits/lucid_mcp/framework/hermes-agent.md; https://www.scalekit.com/connectors/lucidmcp"
+    },
+    "Resources": {
+      "impl": "Yes",
+      "desc": "Probably: the skill says \"Read any required lucid://... resource before calling a tool that requires it\"; tool get_mcp_resource reads a resource by URI (e.g. diagram specifications)",
+      "src": "skills/lucid/SKILL.md; Composio"
+    },
+    "Prompts": {
+      "impl": "Unknown",
+      "desc": "Not documented; Lucid distributes skills (client instructions outside the server) instead"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "OAuth 2.0 with Dynamic Client Registration; the user confirms access on first connection. Alternative for Team/Enterprise: API key without confirmation prompts. OAuth metadata could not be checked (robots.txt).",
+      "auth_mech": "Several methods",
+      "auth_server": "Lucid",
+      "src": "README; Help Center"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Partially",
+      "desc": "Choice of endpoint (full / readonly / repositories); enabled/disabled by the administrator",
+      "src": "Help Center"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "MCP Apps: lucid_create_embed and lucid_create_embed_session_token - \"internal tool for the MCP Apps extension\" (embedding an interactive Lucid document in the AI client window)",
+      "src": "Composio; Scalekit"
+    }
+  },
+  "actions": [
+    {
+      "tool": "search",
+      "desc": "Search Lucid documents (up to 200 results)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "query (req.); other parameters not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "fetch",
+      "desc": "Fetch the structured content of a document (pages, blocks, lines)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_search_document",
+      "desc": "Search within a document",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_get_document_metadata",
+      "desc": "Get document metadata",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_fetch_item_image",
+      "desc": "Fetch the image of an item",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "lucid_list_folder_contents",
+      "desc": "List the contents of a folder",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "get_mcp_resource",
+      "desc": "Read an MCP resource by URI (e.g. diagram specifications)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_shape_library",
+      "desc": "Look up the shape library",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_shape_details",
+      "desc": "Get details of a shape",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "lucid_copy_document_style",
+      "desc": "Copy the style of a document",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Scalekit only"
+    },
+    {
+      "tool": "lucid_load_script_documentation",
+      "desc": "Load the documentation for document scripts",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Scalekit only"
+    },
+    {
+      "tool": "lucid_list_integrations",
+      "desc": "List integrations",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "lucid_create_diagram_from_specification",
+      "desc": "Create a diagram from a JSON specification (requires reading a reference resource first)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "lucid_create_diagram_from_mermaid",
+      "desc": "Create a diagram from Mermaid code",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Scalekit only"
+    },
+    {
+      "tool": "lucid_validate_diagram_specification",
+      "desc": "Validate a diagram JSON specification for structural errors before creation",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Scalekit only"
+    },
+    {
+      "tool": "lucid_create_erd",
+      "desc": "Create an ER diagram",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_create_mind_map",
+      "desc": "Create a mind map",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_create_org_chart",
+      "desc": "Create an org chart",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_create_sequence_diagram",
+      "desc": "Create a sequence diagram (requires reading a reference resource first)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "lucid_add_block",
+      "desc": "Add a block (shape) to a document",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "block_type (req.); document_id (req.); other parameters not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_add_line",
+      "desc": "Add a line to a document",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "lucid_edit_item",
+      "desc": "Edit an item in a document",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "lucid_delete_items",
+      "desc": "Delete items from a document (\"permanently\")",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_add_dynamic_table",
+      "desc": "Add a dynamic table",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_add_items_to_dynamic_table",
+      "desc": "Add items to a dynamic table",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_edit_dynamic_table_metadata",
+      "desc": "Edit the metadata of a dynamic table",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_import_integration_cards",
+      "desc": "Import integration cards (e.g. Jira)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_run_script",
+      "desc": "Run JavaScript on a document (\"Changes are atomic and time-limited\")",
+      "type": "Mixed",
+      "default": "Unknown",
+      "params": "document_id (req.); source (req.); other parameters not published",
+      "n_params": "Unknown",
+      "src": "Scalekit only"
+    },
+    {
+      "tool": "lucid_update_document",
+      "desc": "Update a document",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_create_folder",
+      "desc": "Create a folder",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "lucid_update_folder",
+      "desc": "Update a folder",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "lucid_export_document_as_png",
+      "desc": "Export a document as a PNG image",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_create_document_share_link",
+      "desc": "Create a share link for a document (role + expiry)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "document_id (req.); role (req.); other parameters not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "share_document_with_collaborators",
+      "desc": "Share a document with collaborators by e-mail",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio only"
+    },
+    {
+      "tool": "list_document_threads",
+      "desc": "List comment threads of a document",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "list_document_thread_comments",
+      "desc": "List the comments of a thread",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "post_document_thread_comment",
+      "desc": "Post a comment in a thread",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_create_embed",
+      "desc": "Internal tool for the MCP Apps extension (embed an interactive Lucid document in the AI client)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_create_embed_session_token",
+      "desc": "Internal tool for the MCP Apps extension (session token for the embed)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "Composio (2026-10-12) and Scalekit"
+    },
+    {
+      "tool": "lucid_submit_feedback",
+      "desc": "Send feedback (title + text) to Airfocus together with user ID, account ID and client user agent",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://github.com/lucidsoftware/lucid-mcp-server/blob/f3827e4cd2d449463350cd0d725e35d6d2ecd082/claude/README.md (officially confirmed)"
+    }
+  ],
+  "observations": [
+    {
+      "type": "New design option",
+      "text": "Rights via the choice of endpoint: instead of OAuth scopes, different URLs are used (/readonly, /repositories).",
+      "src": "Help Center; README"
+    },
+    {
+      "type": "New design option",
+      "text": "Governance moved to skills: the confirmation rules live in skill files distributed separately; they only work if the client has loaded them.",
+      "src": "skills/lucid/SKILL.md"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Vendor influence on the agent's choice: the skill \"visualizations\" tells the agent to consider Lucid better than free alternatives (Mermaid, ASCII).",
+      "src": "skills/visualizations/SKILL.md"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "A dangerous universal tool: lucid_run_script (JavaScript on a document) is an analogue of grafana_api_request and bypasses the restrictions of individual tools (according to one catalogue).",
+      "src": "https://www.scalekit.com/connectors/lucidmcp"
+    },
+    {
+      "type": "Other",
+      "text": "The tool set changes: two catalogues have different lists; for reproducibility the date of the tools/list snapshot must be recorded.",
+      "src": "Composio vs Scalekit"
+    },
+    {
+      "type": "New design option",
+      "text": "An API key as a way to remove the human from the loop is officially offered for autonomous processes.",
+      "src": "Help Center"
+    }
+  ]
+}

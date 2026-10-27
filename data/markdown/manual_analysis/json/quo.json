@@ -1,0 +1,185 @@
+{
+  "server": "quo",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-14",
+  "md_file": "11_quo.md",
+  "servers": {
+    "code_repo": "Not published",
+    "docs_used": "https://support.quo.com/core-concepts/integrations/mcp (from CSV); https://claude.com/connectors/quo",
+    "open_eq_deployed": "Unknown",
+    "mcp_version": "Not published",
+    "commit_hash": "Not applicable (closed code)",
+    "commit_date": "Documentation snapshot 2026-10-14",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Proprietary",
+    "access": "Free",
+    "server_cost": "\"ChatGPT / Claude MCP\" included in all plans at no extra charge; sending SMS via the AI assistant needs pre-paid credits",
+    "linked_sw": "Paid",
+    "linked_cost": "Starter $19/$15, Business $33/$23, Scale $47/$35 per user/month (monthly/annual); automation credits (1,000 free = 10 Sona AI agent calls; packages $25-$199/month); automated SMS via API $0.01 per segment",
+    "pricing": "Per-user plans + credits for automation and SMS",
+    "restrictions": "Clients: Claude all users, ChatGPT Plus and Pro, Grok users. SMS only with pre-paid credits. Transcripts only on numbers where enabled.",
+    "restricted_by": "Quo (plans, credits)",
+    "governance_logic": "1) Pre-paid credits limit SMS sending by the agent. 2) OAuth scopes broader than the documentation (write:calls, read:agents, write:agents) - needs checking. 3) Confirmation before sending, bulk limits and logging not described.",
+    "structure": "Standard",
+    "structure_note": "According to the available information",
+    "actions_comment": "Not published; 6 capability groups in the docs (summaries, sending SMS, messages/inboxes, calls/transcripts, contacts, missed calls); scopes also point to call writing and AI agents",
+    "tokens": "Cannot be determined",
+    "token_method": "Tool list not published",
+    "agent_cannot": "Make calls (not stated in docs, although write:calls exists); manage numbers, users, billing; send SMS without credits.",
+    "docs_recs": "None; nothing about confirming messages before sending.",
+    "gov_promises": "Not described in the MCP docs (link to the privacy policy). The agent has access to customer conversations and call transcripts (third-party personal data).",
+    "user_promises": "\"Surface call insights and missed opportunities\"",
+    "promises_vs_logic": "OAuth scopes reveal more capabilities (calls, AI agents) than the documentation describes.",
+    "sources": "https://support.quo.com/core-concepts/integrations/mcp\nhttps://claude.com/connectors/quo\nhttps://mcp.quo.com/.well-known/oauth-protected-resource\nhttps://mcp.quo.com/.well-known/oauth-authorization-server\nhttps://www.quo.com/pricing\nhttps://quo.com/privacy\nhttps://quo.com/blog/next-chapter/",
+    "notes": "Quo = formerly OpenPhone. Official connector for Claude, ChatGPT, Grok. Actions reconstructed from documentation capability groups and OAuth scopes."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "Conversation summaries; sending SMS to one or several people; message history and inboxes (filters by contact, date, topic); call history and voicemail transcripts; search, add, change contacts; missed calls. Exact names not published.",
+      "pre": "Not published",
+      "post": "Not documented",
+      "src": "https://support.quo.com/core-concepts/integrations/mcp"
+    },
+    "Resources": {
+      "impl": "Unknown"
+    },
+    "Prompts": {
+      "impl": "Unknown"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "OAuth; metadata documents published; DCR (https://mcp.quo.com/register); grants authorization_code, refresh_token; PKCE S256; client methods client_secret_basic, client_secret_post, none; 8 scopes: read:conversations, write:conversations, read:calls, write:calls, write:contacts, read:account, read:agents, write:agents",
+      "auth_mech": "Dynamic Client Registration",
+      "auth_server": "https://mcp.quo.com",
+      "src": "https://mcp.quo.com/.well-known/oauth-protected-resource; https://mcp.quo.com/.well-known/oauth-authorization-server"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Unknown"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Unknown"
+    }
+  },
+  "actions": [
+    {
+      "tool": "Not published (conversation summaries)",
+      "desc": "Summarise conversations",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://support.quo.com/core-concepts/integrations/mcp"
+    },
+    {
+      "tool": "Not published (send SMS)",
+      "desc": "Send SMS to one or several people on behalf of the company (needs pre-paid credits)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://support.quo.com/core-concepts/integrations/mcp"
+    },
+    {
+      "tool": "Not published (messages / inboxes)",
+      "desc": "Read message history and inboxes (filters by contact, date, topic)",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://support.quo.com/core-concepts/integrations/mcp"
+    },
+    {
+      "tool": "Not published (calls / transcripts)",
+      "desc": "Read call history and voicemail transcripts",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://support.quo.com/core-concepts/integrations/mcp"
+    },
+    {
+      "tool": "Not published (contacts)",
+      "desc": "Search, add and change contacts",
+      "type": "Mixed",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://support.quo.com/core-concepts/integrations/mcp"
+    },
+    {
+      "tool": "Not published (missed calls)",
+      "desc": "List missed calls",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://support.quo.com/core-concepts/integrations/mcp"
+    },
+    {
+      "tool": "Not published (scope write:calls)",
+      "desc": "Write access to calls - not described in the documentation (needs checking)",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.quo.com/.well-known/oauth-protected-resource"
+    },
+    {
+      "tool": "Not published (scopes read:agents / write:agents)",
+      "desc": "Access to Quo AI agents (e.g. Sona) - not described in the documentation (needs checking)",
+      "type": "Mixed",
+      "default": "Unknown",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.quo.com/.well-known/oauth-protected-resource"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "The agent communicates with external people on behalf of the company (SMS, bulk sends) without a described confirmation step - one of the riskiest real-world actions in this set.",
+      "src": "https://support.quo.com/core-concepts/integrations/mcp"
+    },
+    {
+      "type": "Other",
+      "text": "Divergence between scopes and documentation: the OAuth metadata reveals more capabilities than described.",
+      "src": "https://mcp.quo.com/.well-known/oauth-protected-resource"
+    },
+    {
+      "type": "New design option",
+      "text": "Paying for the agent's actions with credits - an economic limiter.",
+      "src": "https://support.quo.com/core-concepts/integrations/mcp"
+    }
+  ]
+}

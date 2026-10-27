@@ -1,0 +1,191 @@
+{
+  "server": "tavily",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-12; re-analysed 2026-10-15 (new commit in the repository)",
+  "md_file": "01_tavily.md",
+  "servers": {
+    "code_repo": "https://github.com/tavily-ai/tavily-mcp (local stdio version only; the remote server's code is not published)",
+    "docs_used": "https://docs.tavily.com/documentation/mcp (the CSV link https://docs.tavily.com/mcp now serves the documentation MCP server, not a page)",
+    "open_eq_deployed": "Partially",
+    "mcp_version": "SDK supports 2025-11-25 (latest), 2025-06-18, 2025-03-26, 2024-11-05, 2024-10-07; not 2026-07-28",
+    "commit_hash": "688b0f78d518d507cb31b94d9cc0e44c6eadd7c0",
+    "commit_date": "2026-10-15",
+    "language": "TypeScript (Node.js >= 20)",
+    "sdk": "@modelcontextprotocol/sdk 1.31.0 (low-level Server class)",
+    "code_public": "Partially",
+    "license": "MIT (local version only)",
+    "access": "Freemium",
+    "server_cost": "The MCP server itself is free (MIT code); you pay for the Tavily API calls it makes",
+    "linked_sw": "Paid",
+    "linked_cost": "Free: 1,000 credits/month; PAYG $0.008/credit; Project 4,000 cr./$30; Bootstrap 15,000/$100; Startup 38,000/$220; Growth 100,000/$500; Enterprise custom",
+    "pricing": "Credits. Search: basic/fast/ultra-fast = 1 credit, advanced = 2. Extract: 1 credit per 5 successful URLs (advanced 2). Map: 1 credit per 10 pages (with instructions 2). Crawl = Map + Extract. Research: mini 4-110, pro 15-250 credits per request.",
+    "restrictions": "Keyless mode (no key): free, rate-limited, only Search and Extract; Crawl/Map/Research need a key. Rate limits: development key 100 req/min, production key 1,000/min; Crawl 100/min; Research 20/min. Production key only with a paid plan or PAYGO. With OAuth the key `mcp_auth_default` is used (personal before team), else `default`, else the first one.",
+    "restricted_by": "Tavily (API side); the MCP server adds only research timeouts",
+    "governance_logic": "1) DEFAULT_PARAMETERS set by the operator REPLACE the AI's search parameters (not only fill gaps), silently. 2) Parameter correction: country forces topic=general; dates remove time_range; empty values removed. 3) crawl hard-codes chunks_per_source=3. 4) crawl output truncated to the first 200 characters per page. 5) research: polling 2 s x1.5 up to 10 s, limit 5/15 min, automatic switch to streaming; incomplete report -> error. 6) X-Session-Id / X-Human-Id / X-Client-Source headers on every request (vendor analytics). 7) tavily_feedback tool instructs the agent to rate every result and send its final answer to Tavily. 8) Keyless limit responses return commercial options (x402 payment, sign-up, bonus credits for answering questions) as normal text. No permission checks, human confirmation or domain restrictions.",
+    "structure": "Standard",
+    "structure_note": "Flat: one process -> 6 tools, each a wrapper around one REST endpoint of api.tavily.com. No hierarchy, no sub-servers.",
+    "actions_comment": "6 in the local code; 5 in the remote server documentation (without tavily_feedback)",
+    "tokens": "~3,300",
+    "token_method": "Length of the JSON tool descriptions / 4 characters per token (+-30 %, model-dependent); no server instructions",
+    "agent_cannot": "Search API parameters not exposed: include_answer, auto_parameters, chunks_per_source, include_domains_mode, language, filter_by_language, include_published_date, filter_by_published_date, include_usage, safe_search. Cannot change chunks_per_source in crawl (fixed 3). Cannot view credit usage, manage keys, plan or team (web dashboard only). Cannot get the full page text in crawl (only 200 characters).",
+    "docs_recs": "Use an opaque user ID, not an e-mail (\"prefer opaque identifiers ... over raw PII\"). The official OpenAI example sets \"require_approval\": \"never\" (human confirmation off). The API key is suggested in the URL (?tavilyApiKey=...) without a risk warning. No recommendations on human confirmation.",
+    "gov_promises": "Human ID hashed with SHA-256 before storage, raw ID not stored. Privacy policy: Tavily may use parts of request data to improve future responses (legitimate interest; EU users can object by e-mail); queries may be passed to third-party search indexes (e.g. Google); data kept while the account exists; deletion on request. Nothing on logging of agent actions or reversibility.",
+    "user_promises": "\"real-time web search\", \"seamless experience without requiring local installation\"; identifiers help Tavily \"better understand multi-step interactions and improve response quality\"",
+    "promises_vs_logic": "Hashing of the human ID cannot be verified from the code (API side). The server forwards X-Human-Id only if it is set (consistent).",
+    "sources": "https://github.com/tavily-ai/tavily-mcp/tree/688b0f78d518d507cb31b94d9cc0e44c6eadd7c0\nhttps://docs.tavily.com/documentation/mcp\nhttps://docs.tavily.com/documentation/api-credits\nhttps://docs.tavily.com/documentation/rate-limits\nhttps://docs.tavily.com/documentation/keyless\nhttps://docs.tavily.com/documentation/api-reference/endpoint/search\nhttps://www.tavily.com/privacy",
+    "notes": "The CSV endpoint is the remote server (closed code); the code analysis refers to the local version. Package version 0.2.23 in package.json, but the server reports 0.2.22. Last change to the server code: 08dfecd (2026-10-15)."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "6 tools: tavily_search, tavily_extract, tavily_crawl, tavily_map, tavily_research, tavily_feedback; each wraps one REST endpoint of api.tavily.com. No server instructions, no annotations (readOnlyHint etc.).",
+      "pre": "@file:01b_tavily_pre_interaction_context.md",
+      "post": "Always one block type: \"text\". Search/Extract: Request ID, Answer, Detailed Results (Title/ID/URL/Content/Raw Content/Favicon per result), Images. Crawl: Crawl Results, Base URL, URL + first 200 characters per page. Map: list of URLs. Research: finished report text. Feedback: \"Feedback submitted (feedback_id: ...)\".",
+      "src": "src/index.ts:56-63, 75-85, 158-531, 1052-1107; src/format-results.ts"
+    },
+    "Resources": {
+      "impl": "No"
+    },
+    "Prompts": {
+      "impl": "No"
+    },
+    "Logging": {
+      "impl": "No",
+      "desc": "Logs only to stderr (console.error); no MCP log notifications",
+      "src": "src/index.ts:100, 109, 699"
+    },
+    "Sampling": {
+      "impl": "No"
+    },
+    "Roots": {
+      "impl": "No"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "Remote: (1) key in the URL ?tavilyApiKey=...; (2) key in the Authorization: Bearer header; (3) OAuth (metadata discovery -> client registration -> authorization -> token request). Local: API key from TAVILY_API_KEY, sent as Authorization: Bearer and as api_key in the body.",
+      "auth_mech": "Several methods",
+      "auth_server": "Tavily (address and token lifetime not documented)",
+      "src": "README lines 18-39, 106-147; https://docs.tavily.com/documentation/mcp; src/index.ts:93, 724"
+    },
+    "Elicitation": {
+      "impl": "No"
+    },
+    "Tasks": {
+      "impl": "No",
+      "desc": "The long tavily_research runs inside one call: the server polls the API itself (2->10 s, up to 5 min for mini, 15 min for pro/auto). MCP Tasks are not used.",
+      "src": "src/index.ts:779-854"
+    },
+    "Configuration": {
+      "impl": "Yes",
+      "desc": "TAVILY_API_KEY; DEFAULT_PARAMETERS (JSON defaults for search, override the AI); TAVILY_HUMAN_ID (-> X-Human-Id header); flag --list-tools. Remote: the same via headers.",
+      "src": "src/index.ts:16-18, 118-148, 1153-1165; README"
+    },
+    "Error Reporting": {
+      "impl": "Yes",
+      "desc": "API error -> isError: true with \"Tavily API error: <detail>\\nDocumentation: <link>\". Unknown tool -> JSON-RPC MethodNotFound. Keyless-mode errors (limit, key needed) are returned as ordinary successful text without isError.",
+      "post": "Keyless error text: message, \"Retry after: Ns\" and \"Continuation options\": payment by the agent via x402, sign-up link, bonus credits for answering questions",
+      "src": "src/index.ts:652-688, 1026-1050"
+    },
+    "Subscription": {
+      "impl": "No"
+    },
+    "Progress Tracking": {
+      "impl": "No",
+      "desc": "No progress notifications even for research of up to 15 minutes"
+    },
+    "Cancellation": {
+      "impl": "No",
+      "desc": "Handlers do not handle a cancellation signal; HTTP requests to Tavily continue",
+      "src": "src/index.ts:536-692"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "Every request is tagged with X-Session-Id (random UUID per process), X-Client-Source: MCP and, if set, X-Human-Id",
+      "src": "src/index.ts:19, 87-97"
+    }
+  },
+  "actions": [
+    {
+      "tool": "tavily_search",
+      "desc": "Search the internet",
+      "type": "Read",
+      "default": "Yes",
+      "params": "query (string, req.); search_depth (enum, 4: basic/advanced/fast/ultra-fast); topic (enum, 2: general/news); time_range (enum, 4: day/week/month/year); start_date, end_date (string YYYY-MM-DD); max_results (number 5-20); include_images, include_image_descriptions, include_raw_content, include_favicon, exact_match (boolean); include_domains, exclude_domains (array of string); country (string)",
+      "n_params": 15,
+      "src": "src/index.ts:158-531"
+    },
+    {
+      "tool": "tavily_extract",
+      "desc": "Extract the content of web pages",
+      "type": "Read",
+      "default": "Yes",
+      "params": "urls (array, req.); extract_depth (enum, 2); include_images, include_favicon (boolean); format (enum, 2: markdown/text); query (string)",
+      "n_params": 6,
+      "src": "src/index.ts:158-531"
+    },
+    {
+      "tool": "tavily_crawl",
+      "desc": "Crawl a website",
+      "type": "Read",
+      "default": "Yes",
+      "params": "url (req.); max_depth, max_breadth, limit (integer >= 1); instructions (string); select_paths, select_domains (array of regex); allow_external (boolean); extract_depth (enum, 2); format (enum, 2); include_favicon (boolean)",
+      "n_params": 11,
+      "src": "src/index.ts:158-531"
+    },
+    {
+      "tool": "tavily_map",
+      "desc": "Build a site map",
+      "type": "Read",
+      "default": "Yes",
+      "params": "url (req.); max_depth, max_breadth, limit (integer); instructions (string); select_paths, select_domains (array); allow_external (boolean)",
+      "n_params": 8,
+      "src": "src/index.ts:158-531"
+    },
+    {
+      "tool": "tavily_research",
+      "desc": "Research a topic (multi-step research by Tavily's agent)",
+      "type": "Read",
+      "default": "Yes",
+      "params": "input (string, req.); model (enum, 3: mini/pro/auto)",
+      "n_params": 2,
+      "src": "src/index.ts:158-531"
+    },
+    {
+      "tool": "tavily_feedback",
+      "desc": "Send Tavily a rating of the search results, including the agent's final answer to the user",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "session_id / request_id (string, at least one); agent_score, human_score (number|string); extra_scores (array of {label, value}); comment, response_delivered (string); used_urls, used_ids, used_citations (array of string); urls_scores (array of {id, url, agent_score, scores, comment})",
+      "n_params": 11,
+      "src": "src/index.ts:431-531 (local code only; not in the remote server documentation)"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "Vendor interests are built into the tool descriptions: tavily_feedback asks the agent to send Tavily ratings and its final answer to the user, so the agent works as a free data labeller for the vendor.",
+      "src": "src/index.ts:431-531"
+    },
+    {
+      "type": "New design option",
+      "text": "Commercial offers inside tool responses: in keyless mode the agent is offered payment (x402) and bonus credits for answering questions. These texts arrive as an ordinary result, not as an error, so the agent may take them as an instruction.",
+      "src": "src/index.ts:1026-1050"
+    },
+    {
+      "type": "New design option",
+      "text": "The operator can override the agent: DEFAULT_PARAMETERS replaces the parameters chosen by the AI, and the AI is not told about it.",
+      "src": "src/index.ts:727-732"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Open code != deployed service: the tool sets of the local version and of the remote endpoint differ.",
+      "src": "https://docs.tavily.com/documentation/mcp"
+    },
+    {
+      "type": "Other",
+      "text": "Behavioural hints in the descriptions: \"Use for news, facts, or data beyond your knowledge cutoff\", \"Use 'news' only when the user explicitly asks for news\".",
+      "src": "01b_tavily_pre_interaction_context.md"
+    }
+  ]
+}

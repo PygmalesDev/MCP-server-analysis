@@ -1,0 +1,547 @@
+{
+  "server": "clickup",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-14",
+  "md_file": "09_clickup.md",
+  "servers": {
+    "code_repo": "Not published",
+    "docs_used": "https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server (from CSV); https://developer.clickup.com/docs/mcp-tools",
+    "open_eq_deployed": "Unknown",
+    "mcp_version": "Not published",
+    "commit_hash": "Not applicable (closed code)",
+    "commit_date": "Documentation snapshot 2026-10-14",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Proprietary",
+    "access": "Free",
+    "server_cost": "Available on all plans, no separate fee; MCP does not consume AI credits",
+    "linked_sw": "Freemium",
+    "linked_cost": "Free Forever $0; Unlimited $7 (annual) / $10 (monthly) per user; Business $12/$19; Enterprise on request. The same page also shows Core $9, Business $17, Max $100 (contradictory). Everything AI add-on $28 per user/month.",
+    "pricing": "Per-user plans; MCP call limits depend on the plan and the Everything AI add-on",
+    "restrictions": "Calls per rolling 24 h without Everything AI: Free 100, Core/Unlimited 300, Business 1,000, Business Plus 2,500, Enterprise 5,000, Enterprise Plus 25,000 - per workspace and per AI client separately; initialize and tools/list not counted; with the add-on - public API limits; RATE_LIMIT_EXCEEDED with retryAfter, cannot be reset. OAuth only (no personal API keys); rights = the user's ClickUp rights; AI fair use policy.",
+    "restricted_by": "ClickUp (plans, limits, fair use), workspace administrator (user rights)",
+    "governance_logic": "1) Daily call limits per AI client and workspace (plan-dependent). 2) Deletion restricted \"as a safety measure for now\" - but the tool list contains \"Delete task\" (the assistant \"may confirm\") - contradiction. 3) The user's ClickUp rights are inherited. 4) Server-side confirmation and agent action log not described. 5) Connected Search not available via MCP.",
+    "structure": "Standard",
+    "structure_note": "Flat set of tools",
+    "actions_comment": "48 according to the Supported Tools page (human-readable names)",
+    "tokens": "Cannot be determined",
+    "token_method": "Descriptions not published",
+    "agent_cannot": "Delete lists, folders, spaces, documents, comments (only tasks); manage members and rights; automations; goals, dashboards, whiteboards; Connected Search across external apps.",
+    "docs_recs": "No explicit recommendations on human confirmation (except \"may confirm\" before deleting a task).",
+    "gov_promises": "Only links to security, privacy and AI fair use policies; no specific promises about data passed to the AI.",
+    "user_promises": "\"available on all plans\"; limits \"may change\", \"future restrictions\" possible",
+    "promises_vs_logic": "The \"no deletion\" statement contradicts the tool \"Delete task\".",
+    "sources": "https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server\nhttps://developer.clickup.com/docs/mcp-tools\nhttps://mcp.clickup.com/.well-known/oauth-protected-resource\nhttps://mcp.clickup.com/.well-known/oauth-authorization-server\nhttps://clickup.com/pricing\nhttps://developer.clickup.com/llms.txt",
+    "notes": "Endpoint https://mcp.clickup.com/mcp; data from https://api.clickup.com (resource_server_origin). Tool names are human-readable (docs); exact tools/list not available without sign-in."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "48 tools: search, tasks (incl. bulk), attachments, comments, tags, links and dependencies, moving, time tracking, hierarchy, members, chat (sending messages), documents, time-in-status reports",
+      "pre": "Not published verbatim",
+      "post": "Not documented; on limit: RATE_LIMIT_EXCEEDED + retryAfter",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    "Resources": {
+      "impl": "Unknown"
+    },
+    "Prompts": {
+      "impl": "Unknown"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "OAuth 2.1 + PKCE only; metadata documents published; Dynamic Client Registration (https://mcp.clickup.com/oauth/register); grant authorization_code; PKCE S256; token_endpoint_auth_methods none; scopes read, write; resource indicators supported",
+      "auth_mech": "Dynamic Client Registration",
+      "auth_server": "https://mcp.clickup.com",
+      "src": "https://mcp.clickup.com/.well-known/oauth-protected-resource; https://mcp.clickup.com/.well-known/oauth-authorization-server"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Unknown"
+    },
+    "Error Reporting": {
+      "impl": "Partially",
+      "desc": "RATE_LIMIT_EXCEEDED with retryAfter",
+      "src": "connect page"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Unknown"
+    }
+  },
+  "actions": [
+    {
+      "tool": "Search Workspace",
+      "desc": "Search the workspace [Search]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Search tasks by task type",
+      "desc": "Search tasks by task type [Search]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Search tasks by tag",
+      "desc": "Search tasks by tag [Search]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Create Task",
+      "desc": "Create a task [Tasks]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Task",
+      "desc": "Get a task [Tasks]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Update Task",
+      "desc": "Update a task (status, assignees, due date, priority ...) [Tasks]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Set Custom Fields",
+      "desc": "Set custom fields of a task [Tasks]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Delete task",
+      "desc": "Delete a task (the assistant \"may confirm\" first; contradicts \"no deletion\" on the main page) [Tasks]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Create Bulk Tasks",
+      "desc": "Create many tasks at once [Bulk]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Update Bulk Tasks",
+      "desc": "Update many tasks at once [Bulk]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Attach File to Task",
+      "desc": "Attach a file to a task [Attachments]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Task Comments",
+      "desc": "Get task comments [Comments]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Threaded Replies",
+      "desc": "Get threaded replies [Comments]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Create Task Comment",
+      "desc": "Create a task comment (with @mentions - writes to people) [Comments]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Add Tag to Task",
+      "desc": "Add a tag to a task [Tags]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Remove Tag from Task",
+      "desc": "Remove a tag from a task [Tags]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Add task link",
+      "desc": "Add a link between tasks [Links]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Remove task link",
+      "desc": "Remove a link between tasks [Links]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Add dependency",
+      "desc": "Add a task dependency [Links]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Remove dependency",
+      "desc": "Remove a task dependency [Links]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Move task to a new List",
+      "desc": "Move a task to another list [Moving]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Add task to another List",
+      "desc": "Add a task to an additional list [Moving]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Task Time Entries",
+      "desc": "Get time entries of a task [Time tracking]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get time entries for multiple tasks",
+      "desc": "Get time entries of several tasks [Time tracking]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Start Time Tracking",
+      "desc": "Start time tracking [Time tracking]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Stop Time Tracking",
+      "desc": "Stop time tracking [Time tracking]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Add Time Entry",
+      "desc": "Add a time entry [Time tracking]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Current Time Entry",
+      "desc": "Get the running time entry [Time tracking]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Workspace Hierarchy",
+      "desc": "Get the workspace hierarchy [Hierarchy]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Create List",
+      "desc": "Create a list [Hierarchy]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Create List in Folder",
+      "desc": "Create a list in a folder [Hierarchy]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get List",
+      "desc": "Get a list [Hierarchy]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Update List",
+      "desc": "Update a list [Hierarchy]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Folder",
+      "desc": "Get a folder [Hierarchy]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Create Folder",
+      "desc": "Create a folder [Hierarchy]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Update Folder",
+      "desc": "Update a folder [Hierarchy]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Workspace Members",
+      "desc": "Get workspace members [Members]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Find Member by Name",
+      "desc": "Find a member by name [Members]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Resolve Assignees",
+      "desc": "Resolve assignee names to IDs [Members]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Chat Channels",
+      "desc": "List chat channels [Chat]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Send Chat Message",
+      "desc": "Send a chat message on behalf of the user [Chat]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Create Document",
+      "desc": "Create a document [Documents]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "List Document Pages",
+      "desc": "List document pages [Documents]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Document Pages",
+      "desc": "Get document pages [Documents]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Create Document Page",
+      "desc": "Create a document page [Documents]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Update Document Page",
+      "desc": "Update a document page [Documents]",
+      "type": "Write",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Time in Status for a task",
+      "desc": "Time in status for a task [Reports]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    },
+    {
+      "tool": "Get Time in Status for tasks in a List",
+      "desc": "Time in status for the tasks of a list [Reports]",
+      "type": "Read",
+      "default": "Unknown",
+      "params": "Not published (from descriptions: name, description, assignees, due date, priority, status, custom fields)",
+      "n_params": "Unknown",
+      "src": "https://developer.clickup.com/docs/mcp-tools"
+    }
+  ],
+  "observations": [
+    {
+      "type": "New design option",
+      "text": "A limit per AI client (not only per user) restricts the volume of the agent's work.",
+      "src": "connect page (rate limits)"
+    },
+    {
+      "type": "Other",
+      "text": "The contradiction \"no deletion\" / \"Delete task\" shows that the documentation and the actual tool set diverge.",
+      "src": "connect page vs Supported Tools"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "The agent can write to people on behalf of the user (chat, comments with @mentions).",
+      "src": "Supported Tools"
+    }
+  ]
+}

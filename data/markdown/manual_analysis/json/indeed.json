@@ -1,0 +1,149 @@
+{
+  "server": "indeed",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-16",
+  "md_file": "17_indeed.md",
+  "servers": {
+    "code_repo": "Not published",
+    "docs_used": "https://docs.indeed.com/mcp/ (from CSV)",
+    "open_eq_deployed": "Unknown",
+    "mcp_version": "Not published",
+    "commit_hash": "Not applicable (closed code)",
+    "commit_date": "Documentation snapshot 2026-10-16",
+    "language": "Not published",
+    "sdk": "Not published",
+    "code_public": "No",
+    "license": "Proprietary",
+    "access": "Free",
+    "server_cost": "Free for job seekers (no prices given); Indeed account required",
+    "linked_sw": "Freemium",
+    "linked_cost": "Indeed is free for job seekers",
+    "pricing": "Not documented",
+    "restrictions": "Claude Connector only (Claude.ai, Claude Desktop); Indeed account required; countries not specified; beta",
+    "restricted_by": "Indeed",
+    "governance_logic": "Scopes mirror the tool set exactly (read only, separate scope for the profile/resume); a separate endpoint for one AI client (/claude/mcp). Everything else not documented.",
+    "structure": "Standard",
+    "structure_note": "Flat; endpoint path specific to Claude",
+    "actions_comment": "4 (human-readable names in the docs)",
+    "tokens": "Cannot be determined",
+    "token_method": "Descriptions not published",
+    "agent_cannot": "Apply for jobs (only links); edit the resume; correspond with employers; save jobs, subscribe to alerts; employer functions.",
+    "docs_recs": "None",
+    "gov_promises": "Indeed Terms of Service and Privacy Policy \"plus any third-party terms that apply to the AI or LLM model used\"; not stated that the resume is passed to the AI provider.",
+    "user_promises": "\"Real-time access to Indeed's job marketplace\"",
+    "promises_vs_logic": "Cannot be compared (closed code)",
+    "sources": "https://docs.indeed.com/mcp/\nhttps://mcp.indeed.com/.well-known/oauth-protected-resource/claude/mcp",
+    "notes": "Endpoint https://mcp.indeed.com/claude/mcp (separate path for Claude). Beta."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "4: Job Search (title, keywords, location, employment type -> titles, companies, locations, salaries, application links); Job Detail (by job ID); Get Resume (experience from the user's profile); Get Company Data (satisfaction, compensation, culture, management, reviews)",
+      "pre": "Not published",
+      "post": "Not documented",
+      "src": "https://docs.indeed.com/mcp/"
+    },
+    "Resources": {
+      "impl": "Unknown"
+    },
+    "Prompts": {
+      "impl": "Unknown"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "Sign-in to the Indeed account; protected resource metadata published; scopes job_seeker.jobs.search, job_seeker.company.details.read, job_seeker.profile.read, offline_access",
+      "auth_mech": "Metadata Doc",
+      "auth_server": "https://secure.indeed.com",
+      "src": "https://mcp.indeed.com/.well-known/oauth-protected-resource/claude/mcp"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Unknown"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Unknown"
+    }
+  },
+  "actions": [
+    {
+      "tool": "Job Search",
+      "desc": "Search for jobs; returns titles, companies, locations, salaries and application links",
+      "type": "Read",
+      "default": "Yes",
+      "params": "title/keywords; location; employment type (exact schema not published)",
+      "n_params": "Unknown",
+      "src": "https://docs.indeed.com/mcp/"
+    },
+    {
+      "tool": "Job Detail",
+      "desc": "Get the details of a job",
+      "type": "Read",
+      "default": "Yes",
+      "params": "job ID (exact schema not published)",
+      "n_params": "Unknown",
+      "src": "https://docs.indeed.com/mcp/"
+    },
+    {
+      "tool": "Get Resume",
+      "desc": "Get the user's own resume (experience) from the Indeed profile (scope job_seeker.profile.read)",
+      "type": "Read",
+      "default": "Yes",
+      "params": "none documented",
+      "n_params": 0,
+      "src": "https://docs.indeed.com/mcp/"
+    },
+    {
+      "tool": "Get Company Data",
+      "desc": "Get company data: satisfaction, compensation, culture, management, reviews",
+      "type": "Read",
+      "default": "Yes",
+      "params": "company (exact schema not published)",
+      "n_params": "Unknown",
+      "src": "https://docs.indeed.com/mcp/"
+    }
+  ],
+  "observations": [
+    {
+      "type": "New design option",
+      "text": "A server \"for one client\" (Claude only, its own URL path): the vendor chooses which AIs to work with.",
+      "src": "https://docs.indeed.com/mcp/"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "The user's personal data (resume) has a separate scope job_seeker.profile.read - a good example of granular rights.",
+      "src": "https://mcp.indeed.com/.well-known/oauth-protected-resource/claude/mcp"
+    },
+    {
+      "type": "Other",
+      "text": "Strictly read-only and a minimal set - the agent has no actions with consequences.",
+      "src": "https://docs.indeed.com/mcp/"
+    }
+  ]
+}

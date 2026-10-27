@@ -1,0 +1,309 @@
+{
+  "server": "launchdarkly",
+  "status": "Verified",
+  "analyst": "Manual analysis using Claude Opus 5.5 for verification and code analysis",
+  "date": "2026-10-16; re-analysed 2026-10-21 (new commit in the repository)",
+  "md_file": "18_launchdarkly.md",
+  "servers": {
+    "code_repo": "Cloud server closed; local server for EU/Federal (different, generated): https://github.com/launchdarkly/mcp-server",
+    "docs_used": "https://launchdarkly.com/docs/home/getting-started/mcp (from CSV); https://launchdarkly.com/docs/home/getting-started/mcp-hosted.md; install pages https://mcp.launchdarkly.com/mcp/v1/install, https://mcp.launchdarkly.com/mcp/launchdarkly/install, https://mcp.launchdarkly.com/mcp/fm/install",
+    "open_eq_deployed": "No",
+    "mcp_version": "Cloud: not published. Local: TypeScript SDK 1.27.1",
+    "commit_hash": "e4a35c6f6ec2ec16bfa84cf8e6ea838249c239d5 (local server v0.7.1; cloud not applicable)",
+    "commit_date": "2026-10-21",
+    "language": "Cloud: not published; local: TypeScript",
+    "sdk": "Cloud: not published; local: @modelcontextprotocol/sdk 1.27.1",
+    "code_public": "Partially",
+    "license": "Cloud proprietary; local MIT",
+    "access": "Unknown",
+    "server_cost": "No price given for MCP",
+    "linked_sw": "Freemium",
+    "linked_cost": "Developer $0 (unlimited seats, 1K client-side MAU, 5 service connections, 5K AI runs); Foundation $10 per service connection/month, $8.33 per 1K MAU (also $10 on the page), $5 per extra 1K AI runs; Enterprise on request",
+    "pricing": "Usage-based (service connections, MAU, AI runs)",
+    "restrictions": "Rights = the rights of the member who authorized the connection (role changes immediate; removed members lose access); Writer/Developer for writing, Reader for reading; environment approval processes apply to MCP; cloud server not available for federal environments and the EU instance; toolsets/writes URL parameters narrow the visible tools.",
+    "restricted_by": "LaunchDarkly administrator (roles, approval processes), user (toolsets/writes in the URL)",
+    "governance_logic": "1) confirm=true required for irreversible deletions (delete-flag, delete-ai-config, delete-ai-config-variation, delete-dataset, delete-prompt-snippet, delete-agent-graph, delete-agent-skill, delete-alert, delete-dashboard). 2) delete-flag requires verdict safe from check-removal-readiness. 3) delete-agent-skill blocked while attached to a variation. 4) Built-in approval processes; apply-approval-request applies only human-approved changes. 5) Archive as a soft alternative. 6) Query limits (query-traces <= 24 h; get-doc <= 75 KB, only launchdarkly.com/docs/). 7) update-release-autopilot-settings sends only changed fields, autoCleanup forbidden. 8) New flags start OFF in all environments. 9) destructive/read-only annotations. 10) toolsets/writes filtering (does not change rights). 11) vent tool and server instructions promoting LaunchDarkly skills. 12) Deprecated factory-* duplicates left in the list.",
+    "structure": "Non-standard",
+    "structure_note": "Several endpoints on one host: /mcp/v1 (CSV, 18 tools), /mcp/launchdarkly (documented, 170 tools), /mcp/fm (111 tools); flat lists with toolset filtering; agent skills distributed separately and also managed as product objects",
+    "actions_comment": "CSV endpoint /mcp/v1: 18 (listed on the Actions sheet). Documented server /mcp/launchdarkly: 170 (166 names established, see 18_launchdarkly.md); /mcp/fm: 111.",
+    "tokens": "Cannot be determined",
+    "token_method": "Full tools/list not available; with 170 tools the context is very large (hence toolsets)",
+    "agent_cannot": "Manage roles and teams (only invitations), integrations, billing; work in EU/Federal via the cloud server. On /mcp/v1 additionally: no flag deletion/archiving, no AI Configs, observability, segments, vent.",
+    "docs_recs": "\"Review tool calls before your AI client runs them, especially calls that change or delete data\"; \"Don't set your AI client to approve these calls automatically\"; disconnect the server after work and revoke access.",
+    "gov_promises": "Results go to the AI provider; LaunchDarkly \"doesn't control your AI client or your model provider\". Explicit list of what may be sent: flags, segments, AI Configs, change history, approval request descriptions, contexts and attributes (may contain end-user personal data), observability data incl. sessions, member names and e-mails, server-side SDK keys. Prompt injection warning: \"anyone who can write data that MCP tools return can try to give instructions to the model\".",
+    "user_promises": "Hosted server is \"more feature complete\" than the local one",
+    "promises_vs_logic": "Some risks covered by the server (confirm=true, readiness check, skill deletion blocking, approvals); others left to the user (review calls, no auto-approval). New session-recording and context tools increase personal data going to the AI provider; no masking declared.",
+    "sources": "https://launchdarkly.com/docs/home/getting-started/mcp\nhttps://launchdarkly.com/docs/home/getting-started/mcp-hosted.md\nhttps://mcp.launchdarkly.com/mcp/v1/install\nhttps://mcp.launchdarkly.com/mcp/launchdarkly/install\nhttps://mcp.launchdarkly.com/mcp/launchdarkly\nhttps://mcp.launchdarkly.com/mcp/fm/install\nhttps://github.com/launchdarkly/mcp-server/tree/e4a35c6f6ec2ec16bfa84cf8e6ea838249c239d5\nhttps://launchdarkly.com/pricing/",
+    "notes": "Analysis 16.10.2026, re-analysed 21.10.2026 after a new commit in the repository; the description reflects the state as of 21.10.2026. The CSV endpoint /mcp/v1 is a separate small server (18 tools, own OAuth metadata, scopes reader/writer); the documentation describes /mcp/launchdarkly. The Actions sheet lists the 18 tools of the CSV endpoint; the 166 established names of /mcp/launchdarkly are in 18_launchdarkly.md. Server pages hosted via Speakeasy."
+  },
+  "capabilities": {
+    "Tools": {
+      "impl": "Yes",
+      "desc": "/mcp/v1 (CSV): 18 tools (feature flags and approvals). /mcp/launchdarkly: 170 tools. Annotations Read-only / Idempotent / Destructive for most.",
+      "pre": "Short descriptions and annotations on the install pages; full tools/list not published",
+      "post": "Not documented as a whole. check-removal-readiness returns safe/caution/blocked; segments return requiresApproval: true; get-session-event-chunk-url returns a signed link valid ~15 minutes",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install; https://mcp.launchdarkly.com/mcp/launchdarkly/install"
+    },
+    "Resources": {
+      "impl": "Unknown"
+    },
+    "Prompts": {
+      "impl": "Unknown"
+    },
+    "Logging": {
+      "impl": "Unknown"
+    },
+    "Sampling": {
+      "impl": "Unknown"
+    },
+    "Roots": {
+      "impl": "Unknown"
+    },
+    "Authorization": {
+      "impl": "Yes",
+      "desc": "OAuth only (no API keys); access token 2 h with refresh; re-authorization every 90 days. /mcp/v1 metadata: /.well-known/oauth-protected-resource/mcp/v1; authorization server app.launchdarkly.com/trust/oauth (authorize, token, revoke); DCR (/trust/oauth/register/dcr); grants authorization_code, refresh_token, client_credentials; PKCE S256; scopes reader, writer",
+      "auth_mech": "Dynamic Client Registration",
+      "auth_server": "app.launchdarkly.com/trust/oauth",
+      "src": "mcp-hosted docs; OAuth metadata (retrieved by a script)"
+    },
+    "Elicitation": {
+      "impl": "Unknown"
+    },
+    "Tasks": {
+      "impl": "Unknown"
+    },
+    "Configuration": {
+      "impl": "Yes",
+      "desc": "toolsets and writes URL parameters filter the visible tools (\"These parameters don't limit what the connection can do in your account\")",
+      "src": "mcp-hosted docs"
+    },
+    "Error Reporting": {
+      "impl": "Unknown"
+    },
+    "Subscription": {
+      "impl": "Unknown"
+    },
+    "Progress Tracking": {
+      "impl": "Unknown"
+    },
+    "Cancellation": {
+      "impl": "Unknown"
+    },
+    "Other": {
+      "impl": "Yes",
+      "desc": "Server instructions: \"IMPORTANT: Before using tools, check if the environment has LaunchDarkly related agent skills or SKILL.md installed\"; then the agent is asked to ask the user whether to install skills from launchdarkly/ai-tooling",
+      "src": "https://mcp.launchdarkly.com/mcp/launchdarkly"
+    }
+  },
+  "actions": [
+    {
+      "tool": "list-flags",
+      "desc": "List feature flags",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "get-flag",
+      "desc": "Get a feature flag",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "get-flag-health",
+      "desc": "Get the health of a flag",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "get-flag-status-across-envs",
+      "desc": "Get a flag's status across environments",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "find-stale-flags",
+      "desc": "Find stale flags",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "check-removal-readiness",
+      "desc": "Check whether a flag can be removed (verdict safe / caution / blocked)",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "create-flag",
+      "desc": "Create a feature flag (starts OFF in all environments)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "toggle-flag",
+      "desc": "Toggle a flag on/off (may require approval; marked Destructive on /mcp/v1)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "update-flag-settings",
+      "desc": "Update flag settings",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "update-rollout",
+      "desc": "Update the rollout (marked Destructive on /mcp/v1)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "update-targeting-rules",
+      "desc": "Update targeting rules (Destructive)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "update-individual-targets",
+      "desc": "Update individual targets (Destructive)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "update-prerequisites",
+      "desc": "Update flag prerequisites (Destructive)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "manage-expiring-targets",
+      "desc": "Manage expiring targets (Destructive)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "copy-flag-config",
+      "desc": "Copy a flag configuration between environments (Destructive)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "create-approval-request",
+      "desc": "Create an approval request for a change",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "list-approval-requests",
+      "desc": "List approval requests",
+      "type": "Read",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    },
+    {
+      "tool": "apply-approval-request",
+      "desc": "Apply a change that has been approved by a human (Destructive)",
+      "type": "Write",
+      "default": "Yes",
+      "params": "Not published",
+      "n_params": "Unknown",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    }
+  ],
+  "observations": [
+    {
+      "type": "Systematic difference",
+      "text": "The most honest documentation about risks in the sample: lists which data goes to the AI provider and explains prompt injection through data.",
+      "src": "mcp-hosted docs"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Multi-level protection of deletion: confirm=true + verdict safe + blocking when there are dependencies + preference for archiving - closest to server-side \"refusal conditions\" from the task.",
+      "src": "install page; server page"
+    },
+    {
+      "type": "New design option",
+      "text": "Integration with the product's human approval processes: the agent can only request approval and apply the change after a human approved it.",
+      "src": "create-approval-request / apply-approval-request"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Vendor interests: vent (agent as a source of product feedback, like tavily_feedback) and server instructions suggesting LaunchDarkly skills.",
+      "src": "install page; server page"
+    },
+    {
+      "type": "New design option",
+      "text": "Skills in three roles: distributed outside the server (repository), recommended through server instructions and managed by the agent as product objects.",
+      "src": "install page; docs"
+    },
+    {
+      "type": "Other",
+      "text": "Deprecated duplicate tools (Factory <-> Release Autopilot) are left in the list - extra context and risk of confusion.",
+      "src": "install page"
+    },
+    {
+      "type": "New design option",
+      "text": "Toolsets via the URL control the context size and the set of actions.",
+      "src": "mcp-hosted docs"
+    },
+    {
+      "type": "Systematic difference",
+      "text": "Secrets (SDK keys) handed out to the agent via get-project / get-environment.",
+      "src": "install page"
+    },
+    {
+      "type": "Other",
+      "text": "The CSV endpoint /mcp/v1 is a separate small server (18 tools) while the documentation describes /mcp/launchdarkly (170): several official servers on one host.",
+      "src": "https://mcp.launchdarkly.com/mcp/v1/install"
+    }
+  ]
+}
